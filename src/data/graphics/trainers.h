@@ -561,6 +561,23 @@ static const union AnimCmd *const sBackAnims_Hoenn[] =
     sAnimCmd_Point_HGSS,
 };
 
+#if THREE_HORIZONS
+// Explorer frames are ready, held ready, release, follow-through. The upstream
+// Hoenn sheet uses frame 3 as its initial pose, which does not match this sheet.
+static const union AnimCmd sAnimCmd_THExplorer[] = {
+    ANIMCMD_FRAME(0, 24),
+    ANIMCMD_FRAME(1, 9),
+    ANIMCMD_FRAME(2, 24),
+    ANIMCMD_FRAME(3, 59),
+    ANIMCMD_END,
+};
+static const union AnimCmd *const sBackAnims_THExplorer[] = {
+    sAnim_GeneralFrame0,
+    sAnimCmd_THExplorer,
+    sAnimCmd_THExplorer,
+};
+#endif
+
 static const union AnimCmd *const sBackAnims_Kanto[] =
 {
     sAnim_GeneralFrame0,
@@ -607,7 +624,11 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_BRENDAN] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Brendan, gTrainerPalette_Brendan),
+#if THREE_HORIZONS
+        .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_Brendan, gTrainerPalette_Brendan, sBackAnims_THExplorer),
+#else
         .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_Brendan, gTrainerPalette_Brendan, sBackAnims_Hoenn),
+#endif
     },
     [TRAINER_PIC_MAY] =
     {
