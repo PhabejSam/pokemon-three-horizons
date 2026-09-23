@@ -4,6 +4,9 @@
 #include "event_data.h"
 #include "item.h"
 #include "pokemon.h"
+#include "script.h"
+#include "new_game.h"
+#include "constants/maps.h"
 
 #include "constants/three_horizons.h"
 #include "constants/items.h"
@@ -132,5 +135,34 @@ TEST("Three Horizons original partner survives party replacement")
     EXPECT_EQ(VarGet(VAR_TH_FIRST_PARTNER), SPECIES_MUDKIP);
     EXPECT_EQ(VarGet(VAR_TH_RIVAL_PARTNER), SPECIES_TREECKO);
     EXPECT(!TH_TryGiveStarter(SPECIES_CHIKORITA));
+}
+
+TEST("Three Horizons map transitions derive Robin visibility from saved progress")
+{
+    extern const u8 TH_Pallet_OnLoad[];
+    extern const u8 TH_Lab_OnLoad[];
+    ResetOpening();
+    FlagSet(FLAG_TH_HIDE_ROBIN_TOWN);
+    RunScriptImmediately(TH_Pallet_OnLoad);
+    EXPECT(!FlagGet(FLAG_TH_HIDE_ROBIN_TOWN));
+    VarSet(VAR_TH_STAGE, TH_STAGE_INVITED);
+    RunScriptImmediately(TH_Pallet_OnLoad);
+    EXPECT(FlagGet(FLAG_TH_HIDE_ROBIN_TOWN));
+    RunScriptImmediately(TH_Lab_OnLoad);
+    EXPECT(!FlagGet(FLAG_TH_HIDE_ROBIN_LAB));
+    VarSet(VAR_TH_STAGE, TH_STAGE_PARTNER);
+    RunScriptImmediately(TH_Lab_OnLoad);
+    EXPECT(FlagGet(FLAG_TH_HIDE_ROBIN_LAB));
+    EXPECT_EQ(VarGet(VAR_TH_STAGE), TH_STAGE_PARTNER);
+}
+
+TEST("Three Horizons new game starts and recovers at home")
+{
+    NewGameInitData();
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(MAP_TH_HOME_2F));
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_TH_HOME_2F));
+    EXPECT_EQ(gSaveBlock1Ptr->lastHealLocation.mapGroup, MAP_GROUP(MAP_TH_HOME_1F));
+    EXPECT_EQ(gSaveBlock1Ptr->lastHealLocation.mapNum, MAP_NUM(MAP_TH_HOME_1F));
+    EXPECT_EQ(VarGet(VAR_TH_STAGE), TH_STAGE_HOME);
 }
 #endif

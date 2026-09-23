@@ -16,4 +16,6 @@
 #define TH_SUPPLY_POTIONS      2
 #define TH_SUPPLY_DEX          4
 #define TH_SUPPLIES_COMPLETE   7
+#define FLAG_TH_HIDE_ROBIN_TOWN FLAG_TEMP_1
+#define FLAG_TH_HIDE_ROBIN_LAB  FLAG_TEMP_2
 #endif

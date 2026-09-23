@@ -1,9 +1,10 @@
-TH_Lab_OnLoad:
+TH_Lab_OnLoad::
+    clearflag FLAG_TH_HIDE_ROBIN_LAB
     goto_if_ge VAR_TH_STAGE, TH_STAGE_PARTNER, TH_Lab_HideRobin
-    return
+    end
 TH_Lab_HideRobin:
-    removeobject LOCALID_TH_ROBIN_LAB
-    return
+    setflag FLAG_TH_HIDE_ROBIN_LAB
+    end
 TH_EventScript_Oak::
     lock
     faceplayer

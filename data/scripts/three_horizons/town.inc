@@ -1,14 +1,15 @@
-TH_Pallet_OnLoad:
+TH_Pallet_OnLoad::
+    clearflag FLAG_TH_HIDE_ROBIN_TOWN
     goto_if_eq VAR_TH_STAGE, TH_STAGE_INVITED, TH_Pallet_HideRobin
     goto_if_ge VAR_TH_STAGE, TH_STAGE_BATTLE_DONE, TH_Pallet_HideRobin
     goto_if_ge VAR_TH_STAGE, TH_STAGE_PARTNER, TH_Pallet_BattlePosition
-    return
+    end
 TH_Pallet_HideRobin:
-    removeobject LOCALID_TH_ROBIN_TOWN
-    return
+    setflag FLAG_TH_HIDE_ROBIN_TOWN
+    end
 TH_Pallet_BattlePosition:
     setobjectxyperm LOCALID_TH_ROBIN_TOWN, 17, 14
-    return
+    end
 
 TH_EventScript_RobinTown::
     goto_if_eq VAR_TH_STAGE, TH_STAGE_HOME, TH_EventScript_Invitation
