@@ -1,5 +1,9 @@
-#include "three_horizons.h"
 #include "global.h"
+#include "battle.h"
+#include "trainer_pools.h"
+#include "constants/abilities.h"
+#include "constants/battle_ai.h"
+#include "three_horizons.h"
 #include "test/test.h"
 #include "event_data.h"
 #include "item.h"
@@ -24,6 +28,9 @@
 #include "constants/event_objects.h"
 
 #if THREE_HORIZONS
+static const struct Trainer sActualTrainers[DIFFICULTY_COUNT][TRAINERS_COUNT] = {
+#include "data/trainers.h"
+};
 TEST("Three Horizons assembled rival records have names pictures and correct parties")
 {
     static const u16 species[] = {SPECIES_BULBASAUR, SPECIES_CHARMANDER, SPECIES_SQUIRTLE,
@@ -37,10 +44,13 @@ TEST("Three Horizons assembled rival records have names pictures and correct par
         for (i = 0; i < ARRAY_COUNT(species); i++)
         {
             u16 id = TRAINER_TH_ROBIN_BULBASAUR + i;
-            const struct TrainerMon *party = GetTrainerPartyFromId(id);
-            EXPECT_EQ(StringCompare(GetTrainerNameFromId(id), COMPOUND_STRING("JOEY")), 0);
-            EXPECT_EQ(GetTrainerPicFromId(id), TRAINER_PIC_YOUNGSTER);
-            EXPECT_EQ(GetTrainerPartySizeFromId(id), 1);
+            const struct Trainer *trainer = &sActualTrainers[difficulty][id];
+            if (trainer->party == NULL)
+                trainer = &sActualTrainers[DIFFICULTY_NORMAL][id];
+            const struct TrainerMon *party = trainer->party;
+            EXPECT_EQ(StringCompare(trainer->trainerName, COMPOUND_STRING("JOEY")), 0);
+            EXPECT_EQ(trainer->trainerPic, TRAINER_PIC_YOUNGSTER_FRLG);
+            EXPECT_EQ(trainer->partySize, 1);
             EXPECT(party != NULL);
             if (party != NULL)
             {
@@ -54,8 +64,10 @@ TEST("Three Horizons assembled rival records have names pictures and correct par
 
 TEST("Three Horizons Oak and Mom have assembled overworld graphics")
 {
-    static const u16 ids[] = {OBJ_EVENT_GFX_PROF_OAK, OBJ_EVENT_GFX_MOM_FRLG};
+    static const u16 ids[] = {OBJ_EVENT_GFX_PROF_OAK, OBJ_EVENT_GFX_MOM_FRLG, OBJ_EVENT_GFX_YOUNGSTER_FRLG, OBJ_EVENT_GFX_TH_CLOCK};
     u32 i;
+    ResetSpriteData();
+    FreeAllSpritePalettes();
     for (i = 0; i < ARRAY_COUNT(ids); i++)
     {
         const struct ObjectEventGraphicsInfo *gfx = GetObjectEventGraphicsInfo(ids[i]);
@@ -67,7 +79,7 @@ TEST("Three Horizons Oak and Mom have assembled overworld graphics")
             if (previousPalette == 0xFF)
                 FreeSpritePaletteByTag(gfx->paletteTag);
             EXPECT_EQ(gfx->width, 16);
-            EXPECT_EQ(gfx->height, 32);
+            EXPECT_EQ(gfx->height, ids[i] == OBJ_EVENT_GFX_TH_CLOCK ? 16 : 32);
             EXPECT(gfx->images != NULL);
             EXPECT(gfx->anims != NULL);
         }
@@ -216,6 +228,9 @@ TEST("Three Horizons map transitions derive Robin visibility from saved progress
     extern const u8 TH_Pallet_OnLoad[];
     extern const u8 TH_Lab_OnLoad[];
     ResetOpening();
+    const struct MapHeader savedHeader = gMapHeader;
+    gMapHeader = *Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TH_PALLET), MAP_NUM(MAP_TH_PALLET));
+    LoadObjEventTemplatesFromHeader();
     FlagSet(FLAG_TH_HIDE_ROBIN_TOWN);
     RunScriptImmediately(TH_Pallet_OnLoad);
     EXPECT(!FlagGet(FLAG_TH_HIDE_ROBIN_TOWN));
@@ -228,6 +243,7 @@ TEST("Three Horizons map transitions derive Robin visibility from saved progress
     RunScriptImmediately(TH_Lab_OnLoad);
     EXPECT(FlagGet(FLAG_TH_HIDE_ROBIN_LAB));
     EXPECT_EQ(VarGet(VAR_TH_STAGE), TH_STAGE_PARTNER);
+    gMapHeader = savedHeader;
 }
 
 TEST("Three Horizons new game starts and recovers at home")

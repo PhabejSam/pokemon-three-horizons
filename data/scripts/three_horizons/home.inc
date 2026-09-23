@@ -60,3 +60,22 @@ TH_EventScript_Bed::
 TH_EventScript_Research::
     msgbox TH_Text_Research, MSGBOX_SIGN
     end
+
+TH_EventScript_Clock::
+    lockall
+    goto_if_set FLAG_SET_WALL_CLOCK, TH_ClockView
+    msgbox TH_Text_ClockStopped, MSGBOX_DEFAULT
+    closemessage
+    fadescreen FADE_TO_BLACK
+    special StartWallClock
+    setflag FLAG_SET_WALL_CLOCK
+    releaseall
+    end
+TH_ClockView:
+    incrementgamestat GAME_STAT_CHECKED_CLOCK
+    fadescreen FADE_TO_BLACK
+    special Special_ViewWallClock
+    releaseall
+    end
+TH_Text_ClockStopped:
+    .string "A new morning, a new adventure.\nLet's set the time before you go.$"

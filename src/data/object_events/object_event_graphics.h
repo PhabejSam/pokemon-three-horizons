@@ -1,5 +1,14 @@
+#if THREE_HORIZONS
+const u32 gObjectEventPic_BrendanNormalRunning[] = INCGFX_U32("graphics/three_horizons/player_walk_run.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u16 gObjectEventPal_Brendan[] = INCGFX_U16("graphics/three_horizons/player_walk_run.png", ".gbapal");
+const u32 gObjectEventPic_THJoey[] = INCGFX_U32("graphics/three_horizons/joey_walk.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u16 gObjectEventPal_THJoey[] = INCGFX_U16("graphics/three_horizons/joey_walk.png", ".gbapal");
+const u32 gObjectEventPic_THClock[] = INCGFX_U32("graphics/three_horizons/clock.png", ".4bpp", "-mwidth 2 -mheight 2");
+const u16 gObjectEventPal_THClock[] = INCGFX_U16("graphics/three_horizons/clock.png", ".gbapal");
+#else
 const u32 gObjectEventPic_BrendanNormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/brendan/walking.4bpp", "graphics/object_events/pics/people/brendan/running.4bpp");
 const u16 gObjectEventPal_Brendan[] = INCGFX_U16("graphics/object_events/palettes/brendan.pal", ".gbapal");
+#endif
 const u32 gObjectEventPic_RubySapphireBrendanNormal[] = INCGFX_U32("graphics/object_events/pics/people/ruby_sapphire_brendan/walking.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_RubySapphireBrendanRunning[] = INCGFX_U32("graphics/object_events/pics/people/ruby_sapphire_brendan/running.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPal_RubySapphireBrendan[] = INCGFX_U16("graphics/object_events/palettes/ruby_sapphire_brendan.pal", ".gbapal");

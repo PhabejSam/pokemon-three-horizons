@@ -22,6 +22,9 @@ endif
 
 THREE_HORIZONS ?= 0
 ifeq ($(THREE_HORIZONS),1)
+    TITLE := POKEMON 3HZ
+endif
+ifeq ($(THREE_HORIZONS),1)
   ifneq ($(GAME_VERSION),EMERALD)
     $(error THREE_HORIZONS requires GAME_VERSION=EMERALD)
   endif

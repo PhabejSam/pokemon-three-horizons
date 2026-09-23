@@ -546,6 +546,10 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_SSAnne,                OBJ_EVENT_PAL_TAG_SS_ANNE},
     {gObjectEventPal_Seagallop,             OBJ_EVENT_PAL_TAG_SEAGALLOP},
 #endif // IS_FRLG
+#if THREE_HORIZONS
+    {gObjectEventPal_THJoey, OBJ_EVENT_PAL_TAG_NPC_PINK},
+    {gObjectEventPal_THClock, OBJ_EVENT_PAL_TAG_NPC_GREEN},
+#endif
 #if IS_FRLG || THREE_HORIZONS
     {gObjectEventPal_NpcBlue,               OBJ_EVENT_PAL_TAG_NPC_BLUE},
     {gObjectEventPal_NpcWhite,              OBJ_EVENT_PAL_TAG_NPC_WHITE},

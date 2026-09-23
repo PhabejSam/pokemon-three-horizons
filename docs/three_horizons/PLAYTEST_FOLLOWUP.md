@@ -40,16 +40,21 @@ This does not establish every starter/outcome or revision save compatibility.
 - Southern forest/border appearance, furniture reachability, text clearing and
   Joey's walking routes need another emulator playthrough, including approaching
   Joey from different sides.
-- Bedroom clock: the reused Pallet bedroom does not contain one. A clock needs
-  a visible asset and interaction; it is not yet implemented.
-- Starter preview and optional shiny/nature/individual IV/EV editing: proposed
-  bounded extension to the existing choice flow. Limits: IV 0-31, EV 0-252 per
-  stat and 510 total; cancel/defaults; do not grant until final confirmation.
+- Bedroom clock: added a visible clock at (7,1), using the native set/view clock
+  interfaces without triggering Emerald's moving-in story.
+- Starter preview and optional shiny/nature/individual IV/EV editing are
+  implemented. Limits: IV 0-31, EV 0-252 per stat and 510 total. Includes
+  cancel/defaults and final confirmation. Settings stay temporary until grant.
+  Grant tests passed for all nine species, both colors, and all 25 natures.
 - Original player and Joey: user selected young explorers with distinct outfits.
-  A concept sheet is saved with the revision outputs. Walking/battle sprite
-  production and ROM integration are not complete. Current ROM art is temporary.
+  The male player's walking/running, front portrait and battle back sprite,
+  plus Joey's walking/battle sprites, now use original generated explorer art.
+  Art was packed into native dimensions and 16-color palettes. Running currently
+  reuses walking poses. Female avatar, bike/surf/fishing and other later-game
+  poses remain upstream; these are outside the present opening route.
 - Three Horizons title with Oak, Elm, Birch and nine starters: requested and
-  pending. First image generation failed; no title artwork was delivered.
+  pending. The image service rejected generation; no title artwork was delivered.
+  Intro dialogue now names Three Horizons and the ROM header says POKEMON 3HZ.
 - Pokémon art sharpness: no Pokémon sprites have been altered. Display scaling
   and filtering should be evaluated separately from any sprite replacement.
 
@@ -59,3 +64,10 @@ Local map contract checks, a new build, actual trainer/graphics/map-name engine
 tests, mode switching and save-size checks must pass before delivery. User
 acceptance of this revision is still required. Do not replace the previous ROM
 or its save. Deliver the revision in a separate folder with its exact source SHA.
+
+Test harness note: battle unit tests substitute synthetic `gTrainers`, so the
+project's trainer regression includes the real generated trainer header in a
+separate table. Graphics tests initialize sprite palette allocation, and map
+scripts receive actual object templates before changing permanent positions.
+The generator configuration stamp is shared across build modes because the
+generated trainer headers are shared too.

@@ -13,11 +13,11 @@ AUTO_GEN_TARGETS += src/data/debug_trainers.h
 .PHONY: force-trainer-config
 force-trainer-config:
 
-$(BUILD_DIR)/trainer-config.txt: force-trainer-config
-	@mkdir -p $(BUILD_DIR)
+build/trainer-config.txt: force-trainer-config
+	@mkdir -p build
 	@printf '%s\n' '$(CPPFLAGS)' > $@.tmp
 	@cmp -s $@.tmp $@ || cp $@.tmp $@
 	@rm -f $@.tmp
 
-%.h: %.party $(TRAINERPROC) $(BUILD_DIR)/trainer-config.txt
+%.h: %.party $(TRAINERPROC) build/trainer-config.txt
 	$(CPP) $(CPPFLAGS) -traditional-cpp - < $< | $(TRAINERPROC) -o $@ -i $< -

@@ -401,7 +401,15 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvi
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTree;
 
+#if THREE_HORIZONS
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THJoey;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock;
+#endif
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
+#if THREE_HORIZONS
+    [OBJ_EVENT_GFX_YOUNGSTER_FRLG] = &gObjectEventGraphicsInfo_THJoey,
+    [OBJ_EVENT_GFX_TH_CLOCK] = &gObjectEventGraphicsInfo_THClock,
+#endif
 #if IS_FRLG || THREE_HORIZONS
     [OBJ_EVENT_GFX_PROF_OAK]                 = &gObjectEventGraphicsInfo_ProfOak,
     [OBJ_EVENT_GFX_MOM_FRLG]                 = &gObjectEventGraphicsInfo_MomFrlg,

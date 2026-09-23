@@ -416,6 +416,12 @@ enum
     NUM_OBJ_EVENT_GFX,
 };
 
+// Reuse an otherwise unavailable FRLG slot in the Emerald-only demo.
+// This preserves all object IDs, follower bounds, and saved object layouts.
+#if THREE_HORIZONS
+#define OBJ_EVENT_GFX_TH_CLOCK OBJ_EVENT_GFX_POKEDEX
+#endif
+
 // FRLG equivalents
 // #define OBJ_EVENT_GFX_MEW OBJ_EVENT_GFX_NINJA_BOY
 // #define OBJ_EVENT_GFX_LUGIA OBJ_EVENT_GFX_NINJA_BOY

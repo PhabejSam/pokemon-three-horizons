@@ -1367,7 +1367,11 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
             PutWindowTilemap(0);
             CopyWindowToVram(0, COPYWIN_GFX);
             NewGameBirchSpeech_ClearWindow(0);
+#if THREE_HORIZONS
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Welcome to POKéMON\nTHREE HORIZONS!\pI'm Professor BIRCH. OAK, ELM,\nand I study POKéMON together."));
+#else
             StringExpandPlaceholders(gStringVar4, gText_Birch_Welcome);
+#endif
             AddTextPrinterForMessage(TRUE);
             gTasks[taskId].func = Task_NewGameBirchSpeech_ThisIsAPokemon;
         }
