@@ -1,7 +1,9 @@
 # Opening demo build and acceptance checks
 
-Status: implementation under validation. This document is not a claim that the
-playable opening has passed emulator acceptance.
+Status: source `461a99a737e2113efb63ca61906ec359906e889b` passed the demo build,
+8 map/path checks, 16 opening tests, 4 save-size tests and trainer-mode switching
+in [run 35821618420](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/35821618420).
+This does not establish manual emulator acceptance.
 
 ## Build
 
@@ -33,9 +35,11 @@ folder. This demo has a different ROM filename and does not migrate old saves.
 - Engine tests exercise real party grants, level/species/rival mapping, duplicate
   rejection, invalid inputs, partial inventory retries, irreversible progression,
   stored original species, map-transition visibility, and home initialization.
-  Result is pending the workflow; compilation alone is not a test pass.
-- Save-block size checks and original Emerald/FireRed/LeafGreen/release/test jobs
-  are required. Record final results before marking acceptance complete.
+  All 16 passed in the revision workflow above; compilation alone is not a test pass.
+- All four save-size checks and original Emerald/FireRed/LeafGreen/release builds
+  passed. The broad upstream test job was still running when this note was updated.
+  See [compatibility run 35821621444](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/35821621444)
+  for its final status. Manual acceptance remains open.
 
 ## Manual run
 

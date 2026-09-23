@@ -60,10 +60,15 @@ This does not establish every starter/outcome or revision save compatibility.
 
 ## Validation status
 
-Local map contract checks, a new build, actual trainer/graphics/map-name engine
-tests, mode switching and save-size checks must pass before delivery. User
-acceptance of this revision is still required. Do not replace the previous ROM
-or its save. Deliver the revision in a separate folder with its exact source SHA.
+Source `461a99a737e2113efb63ca61906ec359906e889b` passed its demo build,
+8 map/path checks, 16 opening engine tests, 4 save-size checks and trainer-mode
+switching in [run 35821618420](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/35821618420).
+The ROM SHA-256 is `2eaf6bd62098560068c703c5b8595b4f396933a51fc7d904ccef1d95e48c9dc2`.
+Direct ELF inspection confirms Joey's nine named level-5 starter records and
+required graphics. Original Emerald/FireRed/LeafGreen/release builds passed;
+the broad upstream test job was still running at this update. User acceptance
+is still required. The previous ROM/save are preserved; the new playtest copy
+has the distinct filename `pokemon-three-horizons-playtest-2.gba`.
 
 Test harness note: battle unit tests substitute synthetic `gTrainers`, so the
 project's trainer regression includes the real generated trainer header in a
