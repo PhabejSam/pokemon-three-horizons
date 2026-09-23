@@ -23,10 +23,11 @@ jobs:
       - name: Install upstream build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3
+          sudo apt-get install -y --no-install-recommends build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3 git
 
       - name: Record source and tool versions
         run: |
+          test -z "$(git status --porcelain)"
           {
             git rev-parse HEAD
             cat /etc/os-release
@@ -37,7 +38,6 @@ jobs:
             python3 --version
             dpkg-query -W build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3
           } > build-environment.txt
-          test -z "$(git status --porcelain)"
 
       - name: Build Emerald from a fresh checkout
         shell: bash
