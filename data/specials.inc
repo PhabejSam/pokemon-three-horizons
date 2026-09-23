@@ -643,4 +643,6 @@ gSpecials::
     def_special TH_ScriptGiveStarter
     def_special TH_ScriptGiveSupplies
     def_special TH_FinishRivalBattle
+    def_special TH_OpenPartnerEditor
+    def_special TH_ScriptGiveConfiguredStarter
 #endif

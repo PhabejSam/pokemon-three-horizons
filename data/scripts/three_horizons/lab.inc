@@ -88,16 +88,23 @@ TH_Lab_SelectMudkip:
     setvar VAR_0x8004, SPECIES_MUDKIP
     goto TH_Lab_Confirm
 TH_Lab_Confirm:
+    closemessage
+    special TH_OpenPartnerEditor
+    waitstate
+    goto_if_ne VAR_RESULT, TRUE, TH_Lab_Cancel
     bufferspeciesname STR_VAR_1, VAR_0x8004
     msgbox TH_Text_ConfirmPartner, MSGBOX_YESNO
     goto_if_ne VAR_RESULT, YES, TH_Lab_Cancel
-    special TH_ScriptGiveStarter
+    special TH_ScriptGiveConfiguredStarter
     goto_if_ne VAR_RESULT, TRUE, TH_Lab_GrantFailed
     playfanfare MUS_OBTAIN_ITEM
     msgbox TH_Text_ReceivedPartner
     waitfanfare
     bufferspeciesname STR_VAR_1, VAR_TH_RIVAL_PARTNER
     msgbox TH_Text_RobinChoice
+    closemessage
+    applymovement LOCALID_TH_ROBIN_LAB, TH_Movement_JoeyLeaveLab
+    waitmovement 0
     removeobject LOCALID_TH_ROBIN_LAB
     goto TH_OakSupplies
 TH_Lab_AlreadyChosen:
@@ -124,3 +131,15 @@ TH_Lab_BagFull:
     msgbox TH_Text_BagFull
     release
     end
+
+TH_Movement_JoeyLeaveLab:
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end

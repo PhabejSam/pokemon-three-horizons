@@ -15,8 +15,73 @@
 
 #include "constants/three_horizons.h"
 #include "constants/items.h"
+#include "data.h"
+#include "difficulty.h"
+#include "string_util.h"
+#include "event_object_movement.h"
+#include "region_map.h"
+#include "constants/opponents.h"
+#include "constants/event_objects.h"
 
 #if THREE_HORIZONS
+TEST("Three Horizons assembled rival records have names pictures and correct parties")
+{
+    static const u16 species[] = {SPECIES_BULBASAUR, SPECIES_CHARMANDER, SPECIES_SQUIRTLE,
+        SPECIES_CHIKORITA, SPECIES_CYNDAQUIL, SPECIES_TOTODILE,
+        SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP};
+    enum DifficultyLevel saved = GetCurrentDifficultyLevel();
+    u32 i, difficulty;
+    for (difficulty = DIFFICULTY_EASY; difficulty <= DIFFICULTY_HARD; difficulty++)
+    {
+        SetCurrentDifficultyLevel(difficulty);
+        for (i = 0; i < ARRAY_COUNT(species); i++)
+        {
+            u16 id = TRAINER_TH_ROBIN_BULBASAUR + i;
+            const struct TrainerMon *party = GetTrainerPartyFromId(id);
+            EXPECT_EQ(StringCompare(GetTrainerNameFromId(id), COMPOUND_STRING("JOEY")), 0);
+            EXPECT_EQ(GetTrainerPicFromId(id), TRAINER_PIC_YOUNGSTER);
+            EXPECT_EQ(GetTrainerPartySizeFromId(id), 1);
+            EXPECT(party != NULL);
+            if (party != NULL)
+            {
+                EXPECT_EQ(party[0].species, species[i]);
+                EXPECT_EQ(party[0].lvl, 5);
+            }
+        }
+    }
+    SetCurrentDifficultyLevel(saved);
+}
+
+TEST("Three Horizons Oak and Mom have assembled overworld graphics")
+{
+    static const u16 ids[] = {OBJ_EVENT_GFX_PROF_OAK, OBJ_EVENT_GFX_MOM_FRLG};
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(ids); i++)
+    {
+        const struct ObjectEventGraphicsInfo *gfx = GetObjectEventGraphicsInfo(ids[i]);
+        EXPECT(gfx != NULL);
+        if (gfx != NULL)
+        {
+            EXPECT_EQ(gfx->width, 16);
+            EXPECT_EQ(gfx->height, 32);
+            EXPECT(gfx->images != NULL);
+            EXPECT(gfx->anims != NULL);
+        }
+    }
+}
+
+TEST("Three Horizons home and town display Pallet Town in assembled map headers")
+{
+    u8 name[32];
+    const struct MapHeader *map;
+    map = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TH_PALLET), MAP_NUM(MAP_TH_PALLET));
+    GetMapNameGeneric(name, map->regionMapSectionId);
+    EXPECT_EQ(StringCompare(name, COMPOUND_STRING("PALLET TOWN")), 0);
+    map = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TH_HOME_2F), MAP_NUM(MAP_TH_HOME_2F));
+    GetMapNameGeneric(name, map->regionMapSectionId);
+    EXPECT_EQ(StringCompare(name, COMPOUND_STRING("PALLET TOWN")), 0);
+}
+
 static void ResetOpening(void)
 {
     InitEventData();
@@ -195,5 +260,82 @@ TEST("Three Horizons Pallet home and lab doors support opening and closing")
     }
     gBackupMapLayout = savedLayout;
     gMapHeader = savedHeader;
+}
+TEST("Three Horizons customized grants preserve all chosen values and prevent duplicates")
+{
+    static const u16 species[] = {SPECIES_BULBASAUR, SPECIES_CHARMANDER, SPECIES_SQUIRTLE,
+        SPECIES_CHIKORITA, SPECIES_CYNDAQUIL, SPECIES_TOTODILE,
+        SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP};
+    struct THPartnerOptions options = {.ivs = {31, 0, 7, 15, 23, 30}, .evs = {252, 0, 0, 6, 252, 0}};
+    u32 i, stat, shiny;
+    for (i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        for (shiny = 0; shiny <= 1; shiny++)
+        {
+            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+            ResetOpening();
+            VarSet(VAR_TH_STAGE, TH_STAGE_INVITED);
+            options.nature = i * 2 + shiny;
+            options.shiny = shiny;
+            EXPECT(TH_TryGiveConfiguredStarter(species[i], &options));
+            EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), species[i]);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 5);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_IS_SHINY), shiny);
+            EXPECT_EQ(GetNature(mon), options.nature);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_HIDDEN_NATURE), options.nature);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG), FALSE);
+            EXPECT_GT(GetMonData(mon, MON_DATA_MOVE1), MOVE_NONE);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
+            for (stat = 0; stat < 6; stat++)
+            {
+                EXPECT_EQ(GetMonData(mon, MON_DATA_HP_IV + stat), options.ivs[stat]);
+                EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV + stat), options.evs[stat]);
+            }
+            EXPECT(!TH_TryGiveConfiguredStarter(species[i], &options));
+            EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+            EXPECT_EQ(VarGet(VAR_TH_RIVAL_PARTNER), TH_GetRivalStarter(species[i]));
+        }
+    }
+}
+
+TEST("Three Horizons invalid partner settings never grant or advance the story")
+{
+    struct THPartnerOptions options = {0};
+    ResetOpening();
+    EXPECT(!TH_TryGiveConfiguredStarter(SPECIES_TOTODILE, &options));
+    VarSet(VAR_TH_STAGE, TH_STAGE_INVITED);
+    options.nature = NUM_NATURES;
+    EXPECT(!TH_TryGiveConfiguredStarter(SPECIES_TOTODILE, &options));
+    options.nature = 0;
+    options.ivs[5] = 32;
+    EXPECT(!TH_TryGiveConfiguredStarter(SPECIES_TOTODILE, &options));
+    options.ivs[5] = 31;
+    options.evs[0] = 253;
+    EXPECT(!TH_TryGiveConfiguredStarter(SPECIES_TOTODILE, &options));
+    options.evs[0] = 252;
+    options.evs[1] = 252;
+    options.evs[5] = 7;
+    EXPECT(!TH_TryGiveConfiguredStarter(SPECIES_TOTODILE, &options));
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 0);
+    EXPECT_EQ(VarGet(VAR_TH_STAGE), TH_STAGE_INVITED);
+    EXPECT_EQ(VarGet(VAR_TH_FIRST_PARTNER), SPECIES_NONE);
+    options.evs[5] = 6;
+    EXPECT(TH_TryGiveConfiguredStarter(SPECIES_TOTODILE, &options));
+}
+
+TEST("Three Horizons every nature can be selected with normal coloration")
+{
+    struct THPartnerOptions options = {0};
+    u32 nature;
+    for (nature = 0; nature < NUM_NATURES; nature++)
+    {
+        ResetOpening();
+        VarSet(VAR_TH_STAGE, TH_STAGE_INVITED);
+        options.nature = nature;
+        EXPECT(TH_TryGiveConfiguredStarter(SPECIES_CHIKORITA, &options));
+        EXPECT_EQ(GetNature(&gParties[B_TRAINER_PLAYER][0]), nature);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_SHINY), FALSE);
+    }
 }
 #endif

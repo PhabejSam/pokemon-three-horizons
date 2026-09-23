@@ -1,3 +1,6 @@
+TH_Pallet_OnTransition::
+    call TH_Pallet_CloseSouthernShore
+    goto TH_Pallet_OnLoad
 TH_Pallet_OnLoad::
     clearflag FLAG_TH_HIDE_ROBIN_TOWN
     goto_if_eq VAR_TH_STAGE, TH_STAGE_INVITED, TH_Pallet_HideRobin
@@ -19,6 +22,7 @@ TH_EventScript_RobinTown::
 TH_EventScript_Invitation::
     lockall
     msgbox TH_Text_RobinMorning
+    closemessage
     applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_RobinToLab
     waitmovement 0
     setvar VAR_TH_STAGE, TH_STAGE_INVITED
@@ -29,7 +33,19 @@ TH_Movement_RobinToLab:
     walk_right
     walk_right
     walk_right
+    walk_right
+    walk_right
     walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_up
     step_end
 
 TH_EventScript_RouteGate::
@@ -64,6 +80,15 @@ TH_EventScript_LabSign::
     end
 TH_EventScript_TownSign::
     msgbox TH_Text_TownSign, MSGBOX_SIGN
+    end
+TH_EventScript_TrainerTips::
+    msgbox TH_Text_TrainerTips, MSGBOX_SIGN
+    end
+TH_EventScript_HomeSign::
+    msgbox TH_Text_HomeSign, MSGBOX_SIGN
+    end
+TH_EventScript_JoeySign::
+    msgbox TH_Text_JoeySign, MSGBOX_SIGN
     end
 
 TH_EventScript_FirstBattle::
@@ -118,7 +143,46 @@ TH_BattleEncourage:
     msgbox TH_Text_RobinAfterLoss
 TH_BattleGoodbye:
     msgbox TH_Text_RobinRoute
+    closemessage
+    applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_JoeyToRoute
+    waitmovement 0
     removeobject LOCALID_TH_ROBIN_TOWN
 TH_BattleRelease:
     releaseall
     end
+
+TH_Movement_JoeyToRoute:
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+
+@ Close the former Route 21 inlet using native southern shoreline tiles.
+TH_Pallet_CloseSouthernShore:
+    setmetatile 7, 18, 0x131, TRUE
+    setmetatile 7, 19, 0x02E, FALSE
+    setmetatile 8, 18, 0x132, TRUE
+    setmetatile 8, 19, 0x02E, FALSE
+    setmetatile 9, 18, 0x132, TRUE
+    setmetatile 9, 19, 0x02E, FALSE
+    setmetatile 10, 18, 0x133, TRUE
+    setmetatile 10, 19, 0x02E, FALSE
+    return

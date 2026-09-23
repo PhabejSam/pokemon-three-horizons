@@ -4,6 +4,26 @@ TH_Text_MomMorning::
     .string "Go on--OAK's waiting! Come home\n"
     .string "whenever you like.$"
 
+TH_Text_BedroomSign::
+    .string "A little note for a big day:\n"
+    .string "Bag, shoes, courage.\p"
+    .string "Save from the START menu before\n"
+    .string "taking a break!$"
+TH_Text_Console::
+    .string "Your favorite adventure game is\n"
+    .string "paused. Today, yours begins.$"
+TH_Text_TrainerTips::
+    .string "TRAINER TIPS\n"
+    .string "Take your time exploring.\p"
+    .string "Talk to people and check signs.\n"
+    .string "Little discoveries add up!$"
+TH_Text_HomeSign::
+    .string "{PLAYER}'s house.\n"
+    .string "There's always a place for you.$"
+TH_Text_JoeySign::
+    .string "JOEY's house.\n"
+    .string "Probably out exploring!$"
+
 TH_Text_MomRest::
     .string "MOM: There you are! Let's give\n"
     .string "everyone a little rest.$"
@@ -24,13 +44,13 @@ TH_Text_TV::
     .string "to home.$"
 
 TH_Text_RobinMorning::
-    .string "ROBIN: You're late! ...Okay, I'm\n"
+    .string "JOEY: You're late! ...Okay, I'm\n"
     .string "early. I couldn't sleep.\p"
     .string "I kept wondering which one I'd\n"
     .string "pick. Come on! Let's go see OAK.$"
 
 TH_Text_RobinGoLab::
-    .string "ROBIN: Nine first partners! How\n"
+    .string "JOEY: Nine first partners! How\n"
     .string "am I supposed to choose?$"
 
 TH_Text_GateLab::
@@ -38,7 +58,7 @@ TH_Text_GateLab::
     .string "first partner is waiting, too!$"
 
 TH_Text_GateBattle::
-    .string "ROBIN is waiting outside the lab\n"
+    .string "JOEY is waiting outside the lab\n"
     .string "for your first friendly battle.$"
 
 TH_Text_GateSupplies::
@@ -78,7 +98,7 @@ TH_Text_ChooseDisplay::
     .string "choices.$"
 
 TH_Text_RobinThinking::
-    .string "ROBIN: I'm going to pick first!\n"
+    .string "JOEY: I'm going to pick first!\n"
     .string "...After you. I need another\p"
     .string "minute.$"
 
@@ -103,7 +123,7 @@ TH_Text_ReceivedPartner::
     .string "Your adventure begins together.$"
 
 TH_Text_RobinChoice::
-    .string "ROBIN: Then I'll choose...\n"
+    .string "JOEY: Then I'll choose...\n"
     .string "{STR_VAR_1}!\p"
     .string "I think we'll make a great team.\n"
     .string "Meet me outside when you're\p"
@@ -136,34 +156,34 @@ TH_Text_BagFull::
     .string "supplies.$"
 
 TH_Text_BeforeBattle::
-    .string "ROBIN: Our very first battle!\n"
+    .string "JOEY: Our very first battle!\n"
     .string "Right here, where it all began.\p"
     .string "Ready, {PLAYER}? Let's see what\n"
     .string "our partners can do!$"
 
 TH_Text_BattlePlayerLost::
-    .string "ROBIN: We did it! That was so\n"
+    .string "JOEY: We did it! That was so\n"
     .string "close!$"
 
 TH_Text_BattlePlayerWon::
-    .string "ROBIN: Already? You're a\n"
+    .string "JOEY: Already? You're a\n"
     .string "natural!$"
 
 TH_Text_RobinAfterWin::
-    .string "ROBIN: I really thought I'd win.\n"
+    .string "JOEY: I really thought I'd win.\n"
     .string "...But that was brilliant!\p"
     .string "Next time, I'm making you work a\n"
     .string "little harder for it.$"
 
 TH_Text_RobinAfterLoss::
-    .string "ROBIN: I won! I actually won!\n"
+    .string "JOEY: I won! I actually won!\n"
     .string "...Hey, you did well too.\p"
     .string "We'll get better together.\n"
     .string "That's what friends are for,\p"
     .string "right?$"
 
 TH_Text_RobinRoute::
-    .string "ROBIN: Everyone's feeling better\n"
+    .string "JOEY: Everyone's feeling better\n"
     .string "now. I'll meet you near\p"
     .string "VIRIDIAN!\p"
     .string "Don't rush past everything.\n"
@@ -197,7 +217,7 @@ TH_Text_HoothootRepeat::
     .string "peacefully.$"
 
 TH_Text_Ending::
-    .string "ROBIN: There you are! We made it\n"
+    .string "JOEY: There you are! We made it\n"
     .string "to VIRIDIAN.\p"
     .string "It's only one route from home...\n"
     .string "So why does everything feel new?\p"
@@ -214,7 +234,7 @@ TH_Text_DemoComplete::
     .string "More of the journey lies ahead.$"
 
 TH_Text_EndingRepeat::
-    .string "ROBIN: I'll be right here. Take\n"
+    .string "JOEY: I'll be right here. Take\n"
     .string "another look around if you like.$"
 
 TH_Text_Boundary::
@@ -249,3 +269,23 @@ TH_Text_Torchic::
 
 TH_Text_Mudkip::
     .string "MUDKIP$"
+
+TH_Text_Kitchen::
+    .string "The kitchen smells like toast.\n"
+    .string "MOM left a snack for later.$"
+
+TH_Text_Books::
+    .string "Travel journals and field guides.\n"
+    .string "Some pages are dog-eared.$"
+
+TH_Text_Fridge::
+    .string "Lunch is packed for the road.\n"
+    .string "Thanks, MOM!$"
+
+TH_Text_Bed::
+    .string "Your bed is still warm.\n"
+    .string "A new adventure is waiting!$"
+
+TH_Text_Research::
+    .string "Field notes from three regions.\n"
+    .string "OAK has been comparing habitats.$"

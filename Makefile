@@ -308,7 +308,9 @@ ifeq ($(SETUP_PREREQS),1)
     $(error Errors occurred while building tools. See error messages above for more details)
   endif
   # Oh and also generate mapjson sources before we use `SCANINC`.
-  $(foreach line, $(shell $(MAKE) MAP_VERSION=$(MAP_VERSION) generated | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+  # Parse-time submakes do not inherit command-line variables through MAKEFLAGS.
+  # Trainer preprocessing must use the same game/demo/test configuration as C.
+  $(foreach line, $(shell $(MAKE) MAP_VERSION=$(MAP_VERSION) GAME_VERSION=$(GAME_VERSION) THREE_HORIZONS=$(THREE_HORIZONS) TEST=$(TEST) RELEASE=$(RELEASE) generated | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
   ifneq ($(.SHELLSTATUS),0)
     $(error Errors occurred while generating map-related sources. See error messages above for more details)
   endif

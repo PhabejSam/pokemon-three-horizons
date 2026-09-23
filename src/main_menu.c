@@ -1761,7 +1761,8 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
         gTasks[taskId].tPlayerSpriteId = spriteId;
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
+        NewGameBirchSpeech_ClearWindow(0);
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("A familiar morning.\nA whole new adventure.\pTake your time, {PLAYER}.\nYour first partner is waiting!"));
 #else
         StringExpandPlaceholders(gStringVar4, gText_Birch_AreYouReady);

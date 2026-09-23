@@ -3,7 +3,7 @@ TH_Home2F_MapScripts::
 TH_Home1F_MapScripts::
     .byte 0
 TH_Pallet_MapScripts::
-    map_script MAP_SCRIPT_ON_TRANSITION, TH_Pallet_OnLoad
+    map_script MAP_SCRIPT_ON_TRANSITION, TH_Pallet_OnTransition
     .byte 0
 TH_OaksLab_MapScripts::
     map_script MAP_SCRIPT_ON_TRANSITION, TH_Lab_OnLoad

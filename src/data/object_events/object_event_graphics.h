@@ -553,7 +553,7 @@ const u16 gObjectEventPic_Biker[] = INCGFX_U16("graphics/object_events/pics/peop
 const u16 gObjectEventPic_GymGuy[] = INCGFX_U16("graphics/object_events/pics/people/gym_guy.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_Man[] = INCGFX_U16("graphics/object_events/pics/people/man.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_Rocker[] = INCGFX_U16("graphics/object_events/pics/people/rocker.png", ".4bpp", "-mwidth 2 -mheight 4");
-const u16 gObjectEventPic_ProfOak[] = INCGFX_U16("graphics/object_events/pics/people/prof_oak.png", ".4bpp", "-mwidth 2 -mheight 4");
+
 const u16 gObjectEventPic_Blue[] = INCGFX_U16("graphics/object_events/pics/people/blue.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_NurseFrlg[] = INCGFX_U16("graphics/object_events/pics/people/nurse_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_CableClubReceptionist[] = INCGFX_U16("graphics/object_events/pics/people/cable_club_receptionist.png", ".4bpp", "-mwidth 2 -mheight 4");
@@ -569,7 +569,7 @@ const u16 gObjectEventPic_Agatha[] = INCGFX_U16("graphics/object_events/pics/peo
 const u16 gObjectEventPic_Misty[] = INCGFX_U16("graphics/object_events/pics/people/misty.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_Lance[] = INCGFX_U16("graphics/object_events/pics/people/lance.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_GBAKid[] = INCGFX_U16("graphics/object_events/pics/people/gba_kid.png", ".4bpp", "-mwidth 2 -mheight 4");
-const u16 gObjectEventPic_MomFrlg[] = INCGFX_U16("graphics/object_events/pics/people/mom_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
+
 const u16 gObjectEventPic_Policeman[] = INCGFX_U16("graphics/object_events/pics/people/policeman.png", ".4bpp", "-mwidth 2 -mheight 4");
 
 const u16 gObjectEventPic_CuttableTreeFrlg[] = INCGFX_U16("graphics/object_events/pics/misc/cuttable_tree_frlg.png", ".4bpp", "-mwidth 2 -mheight 2");
@@ -633,3 +633,9 @@ const u16 gObjectEventPic_PidgeyOld[] = INCGFX_U16("graphics/object_events/pics/
 const u16 gObjectEventPic_ClefairyOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/clefairy.png", ".4bpp", "-mwidth 2 -mheight 2");
 
 #endif // IS_FRLG
+
+#if IS_FRLG || THREE_HORIZONS
+const u16 gObjectEventPic_ProfOak[] = INCGFX_U16("graphics/object_events/pics/people/prof_oak.png", ".4bpp", "-mwidth 2 -mheight 4");
+
+const u16 gObjectEventPic_MomFrlg[] = INCGFX_U16("graphics/object_events/pics/people/mom_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
+#endif

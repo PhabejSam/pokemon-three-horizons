@@ -16881,7 +16881,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 #if THREE_HORIZONS
 === TRAINER_TH_ROBIN_BULBASAUR ===
-Name: ROBIN
+Name: JOEY
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -16893,7 +16893,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_CHARMANDER ===
-Name: ROBIN
+Name: JOEY
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -16905,7 +16905,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_SQUIRTLE ===
-Name: ROBIN
+Name: JOEY
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -16917,7 +16917,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_CHIKORITA ===
-Name: ROBIN
+Name: JOEY
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -16929,7 +16929,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_CYNDAQUIL ===
-Name: ROBIN
+Name: JOEY
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -16941,7 +16941,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_TOTODILE ===
-Name: ROBIN
+Name: JOEY
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -16953,7 +16953,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_TREECKO ===
-Name: ROBIN
+Name: JOEY
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -16965,7 +16965,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_TORCHIC ===
-Name: ROBIN
+Name: JOEY
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -16977,7 +16977,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_MUDKIP ===
-Name: ROBIN
+Name: JOEY
 Class: Youngster
 Pic: Youngster
 Gender: Male

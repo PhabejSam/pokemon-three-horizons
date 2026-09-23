@@ -55,6 +55,55 @@ bool32 TH_TryGiveStarter(u16 species)
     return TRUE;
 }
 
+bool32 TH_PartnerOptionsValid(const struct THPartnerOptions *options)
+{
+    u32 i, total = 0;
+    if (options == NULL || options->nature >= NUM_NATURES || options->shiny > TRUE)
+        return FALSE;
+    for (i = 0; i < 6; i++)
+    {
+        if (options->ivs[i] > 31 || options->evs[i] > 252)
+            return FALSE;
+        total += options->evs[i];
+    }
+    return total <= 510;
+}
+
+bool32 TH_TryGiveConfiguredStarter(u16 species, const struct THPartnerOptions *options)
+{
+    struct Pokemon mon;
+    u32 i;
+    bool32 shiny;
+    u16 hp, rival = TH_GetRivalStarter(species);
+    if (!TH_PartnerOptionsValid(options) || rival == SPECIES_NONE
+        || VarGet(VAR_TH_STAGE) != TH_STAGE_INVITED
+        || VarGet(VAR_TH_FIRST_PARTNER) != SPECIES_NONE
+        || gPartiesCount[B_TRAINER_PLAYER] != 0)
+        return FALSE;
+
+    CreateMon(&mon, species, 5,
+        GetMonPersonality(species, MON_GENDER_RANDOM, options->nature, RANDOM_UNOWN_LETTER),
+        OTID_STRUCT_PLAYER_ID);
+    shiny = options->shiny;
+    SetMonData(&mon, MON_DATA_IS_SHINY, &shiny);
+    for (i = 0; i < 6; i++)
+    {
+        SetMonData(&mon, MON_DATA_HP_IV + i, &options->ivs[i]);
+        SetMonData(&mon, MON_DATA_HP_EV + i, &options->evs[i]);
+    }
+    GiveMonInitialMoveset(&mon);
+    CalculateMonStats(&mon);
+    hp = GetMonData(&mon, MON_DATA_MAX_HP);
+    SetMonData(&mon, MON_DATA_HP, &hp);
+    if (GiveScriptedMonToPlayer(&mon, PARTY_SIZE) != MON_GIVEN_TO_PARTY)
+        return FALSE;
+    VarSet(VAR_TH_FIRST_PARTNER, species);
+    VarSet(VAR_TH_RIVAL_PARTNER, rival);
+    VarSet(VAR_TH_STAGE, TH_STAGE_PARTNER);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    return TRUE;
+}
+
 bool32 TH_TryGiveSupplies(void)
 {
     u16 mask = VarGet(VAR_TH_SUPPLY_MASK);
