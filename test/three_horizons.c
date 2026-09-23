@@ -96,8 +96,8 @@ TEST("Three Horizons first rival battle initialization preserves every chosen pa
 
 TEST("Three Horizons outfits resolve matching native walking and battle art")
 {
-    static const u16 overworld[] = {OBJ_EVENT_GFX_RED_NORMAL, OBJ_EVENT_GFX_GREEN_NORMAL, OBJ_EVENT_GFX_BRENDAN_NORMAL, OBJ_EVENT_GFX_MAY_NORMAL};
-    static const u16 trainer[] = {TRAINER_PIC_RED, TRAINER_PIC_LEAF, TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY};
+    static const u16 overworld[] = {OBJ_EVENT_GFX_RED_NORMAL, OBJ_EVENT_GFX_GREEN_NORMAL, OBJ_EVENT_GFX_BRENDAN_NORMAL, OBJ_EVENT_GFX_MAY_NORMAL, OBJ_EVENT_GFX_TH_GOLD_NORMAL, OBJ_EVENT_GFX_TH_KRIS_NORMAL, OBJ_EVENT_GFX_TH_SILVER_NORMAL};
+    static const u16 trainer[] = {TRAINER_PIC_RED, TRAINER_PIC_LEAF, TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY, TRAINER_PIC_TH_GOLD, TRAINER_PIC_TH_KRIS, TRAINER_PIC_TH_SILVER};
     u16 savedOutfit = VarGet(VAR_TH_OUTFIT);
     u16 savedStage = VarGet(VAR_TH_STAGE);
     u32 i;

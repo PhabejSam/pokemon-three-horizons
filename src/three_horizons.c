@@ -2,6 +2,7 @@
 #include "three_horizons.h"
 #include "string_util.h"
 #include "constants/opponents.h"
+#include "constants/characters.h"
 #include "field_player_avatar.h"
 #include "event_object_movement.h"
 #include "constants/event_object_movement.h"
@@ -69,7 +70,7 @@ u16 TH_GetOutfit(void)
 
 u16 TH_GetTrainerPic(void)
 {
-    static const u16 pics[] = {TRAINER_PIC_RED, TRAINER_PIC_LEAF, TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY};
+    static const u16 pics[] = {TRAINER_PIC_RED, TRAINER_PIC_LEAF, TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY, TRAINER_PIC_TH_GOLD, TRAINER_PIC_TH_KRIS, TRAINER_PIC_TH_SILVER};
     return pics[TH_GetOutfit()];
 }
 

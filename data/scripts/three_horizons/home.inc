@@ -83,8 +83,9 @@ TH_Text_ClockStopped:
 TH_EventScript_Dresser::
     lockall
     msgbox TH_Text_Dresser
-    dynmultichoice 0, 0, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE, TH_Text_OutfitRed, TH_Text_OutfitLeaf, TH_Text_OutfitBrendan, TH_Text_OutfitMay, TH_Text_OutfitCancel
-    goto_if_ge VAR_RESULT, 4, TH_DresserDone
+    closemessage
+    dynmultichoice 0, 0, FALSE, 8, 0, DYN_MULTICHOICE_CB_NONE, TH_Text_OutfitRed, TH_Text_OutfitLeaf, TH_Text_OutfitBrendan, TH_Text_OutfitMay, TH_Text_OutfitGold, TH_Text_OutfitKris, TH_Text_OutfitSilver, TH_Text_OutfitCancel
+    goto_if_ge VAR_RESULT, TH_OUTFIT_COUNT, TH_DresserDone
     copyvar VAR_0x8004, VAR_RESULT
     closemessage
     fadescreen FADE_TO_BLACK

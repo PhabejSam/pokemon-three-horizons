@@ -643,3 +643,43 @@ const u16 gObjectEventPic_ProfOak[] = INCGFX_U16("graphics/object_events/pics/pe
 
 const u16 gObjectEventPic_MomFrlg[] = INCGFX_U16("graphics/object_events/pics/people/mom_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 #endif
+
+#if THREE_HORIZONS
+const u16 gObjectEventPal_THGoldNormal[] = INCGFX_U16("graphics/three_horizons/outfits/gold/walking.png", ".gbapal");
+const u32 gObjectEventPic_THGoldNormal[] = INCGFX_U32("graphics/three_horizons/outfits/gold/walking.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_THGoldRunning[] = INCGFX_U32("graphics/three_horizons/outfits/gold/running.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u16 gObjectEventPal_THGoldMachBike[] = INCGFX_U16("graphics/three_horizons/outfits/gold/mach_bike.png", ".gbapal");
+const u32 gObjectEventPic_THGoldMachBike[] = INCGFX_U32("graphics/three_horizons/outfits/gold/mach_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THGoldAcroBike[] = INCGFX_U16("graphics/three_horizons/outfits/gold/acro_bike.png", ".gbapal");
+const u32 gObjectEventPic_THGoldAcroBike[] = INCGFX_U32("graphics/three_horizons/outfits/gold/acro_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THGoldSurfing[] = INCGFX_U16("graphics/three_horizons/outfits/gold/surfing.png", ".gbapal");
+const u32 gObjectEventPic_THGoldSurfing[] = INCGFX_U32("graphics/three_horizons/outfits/gold/surfing.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THGoldUnderwater[] = INCGFX_U16("graphics/three_horizons/outfits/gold/underwater.png", ".gbapal");
+const u32 gObjectEventPic_THGoldUnderwater[] = INCGFX_U32("graphics/three_horizons/outfits/gold/underwater.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THGoldFieldMove[] = INCGFX_U16("graphics/three_horizons/outfits/gold/field_move.png", ".gbapal");
+const u32 gObjectEventPic_THGoldFieldMove[] = INCGFX_U32("graphics/three_horizons/outfits/gold/field_move.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THGoldFishing[] = INCGFX_U16("graphics/three_horizons/outfits/gold/fishing.png", ".gbapal");
+const u32 gObjectEventPic_THGoldFishing[] = INCGFX_U32("graphics/three_horizons/outfits/gold/fishing.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THGoldWatering[] = INCGFX_U16("graphics/three_horizons/outfits/gold/watering.png", ".gbapal");
+const u32 gObjectEventPic_THGoldWatering[] = INCGFX_U32("graphics/three_horizons/outfits/gold/watering.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THKrisNormal[] = INCGFX_U16("graphics/three_horizons/outfits/kris/walking.png", ".gbapal");
+const u32 gObjectEventPic_THKrisNormal[] = INCGFX_U32("graphics/three_horizons/outfits/kris/walking.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_THKrisRunning[] = INCGFX_U32("graphics/three_horizons/outfits/kris/running.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u16 gObjectEventPal_THKrisMachBike[] = INCGFX_U16("graphics/three_horizons/outfits/kris/mach_bike.png", ".gbapal");
+const u32 gObjectEventPic_THKrisMachBike[] = INCGFX_U32("graphics/three_horizons/outfits/kris/mach_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THKrisAcroBike[] = INCGFX_U16("graphics/three_horizons/outfits/kris/acro_bike.png", ".gbapal");
+const u32 gObjectEventPic_THKrisAcroBike[] = INCGFX_U32("graphics/three_horizons/outfits/kris/acro_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THKrisSurfing[] = INCGFX_U16("graphics/three_horizons/outfits/kris/surfing.png", ".gbapal");
+const u32 gObjectEventPic_THKrisSurfing[] = INCGFX_U32("graphics/three_horizons/outfits/kris/surfing.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THKrisUnderwater[] = INCGFX_U16("graphics/three_horizons/outfits/kris/underwater.png", ".gbapal");
+const u32 gObjectEventPic_THKrisUnderwater[] = INCGFX_U32("graphics/three_horizons/outfits/kris/underwater.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THKrisFieldMove[] = INCGFX_U16("graphics/three_horizons/outfits/kris/field_move.png", ".gbapal");
+const u32 gObjectEventPic_THKrisFieldMove[] = INCGFX_U32("graphics/three_horizons/outfits/kris/field_move.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THKrisFishing[] = INCGFX_U16("graphics/three_horizons/outfits/kris/fishing.png", ".gbapal");
+const u32 gObjectEventPic_THKrisFishing[] = INCGFX_U32("graphics/three_horizons/outfits/kris/fishing.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THKrisWatering[] = INCGFX_U16("graphics/three_horizons/outfits/kris/watering.png", ".gbapal");
+const u32 gObjectEventPic_THKrisWatering[] = INCGFX_U32("graphics/three_horizons/outfits/kris/watering.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_THSilverNormal[] = INCGFX_U16("graphics/three_horizons/outfits/silver/walking.png", ".gbapal");
+const u32 gObjectEventPic_THSilverNormal[] = INCGFX_U32("graphics/three_horizons/outfits/silver/walking.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_THSilverRunning[] = INCGFX_U32("graphics/three_horizons/outfits/silver/running.png", ".4bpp", "-mwidth 2 -mheight 4");
+#endif

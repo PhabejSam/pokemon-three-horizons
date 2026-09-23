@@ -1,3 +1,23 @@
+
+#if THREE_HORIZONS
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldUnderwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldFishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldWatering;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisUnderwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisFishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisWatering;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THSilverNormal;
+#endif
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanMachBike;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanSurfing;
@@ -405,6 +425,26 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTre
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock;
 #endif
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
+#if THREE_HORIZONS
+    [OBJ_EVENT_GFX_TH_GOLD_NORMAL] = &gObjectEventGraphicsInfo_THGoldNormal,
+    [OBJ_EVENT_GFX_TH_GOLD_MACH_BIKE] = &gObjectEventGraphicsInfo_THGoldMachBike,
+    [OBJ_EVENT_GFX_TH_GOLD_ACRO_BIKE] = &gObjectEventGraphicsInfo_THGoldAcroBike,
+    [OBJ_EVENT_GFX_TH_GOLD_SURFING] = &gObjectEventGraphicsInfo_THGoldSurfing,
+    [OBJ_EVENT_GFX_TH_GOLD_UNDERWATER] = &gObjectEventGraphicsInfo_THGoldUnderwater,
+    [OBJ_EVENT_GFX_TH_GOLD_FIELD_MOVE] = &gObjectEventGraphicsInfo_THGoldFieldMove,
+    [OBJ_EVENT_GFX_TH_GOLD_FISHING] = &gObjectEventGraphicsInfo_THGoldFishing,
+    [OBJ_EVENT_GFX_TH_GOLD_WATERING] = &gObjectEventGraphicsInfo_THGoldWatering,
+    [OBJ_EVENT_GFX_TH_KRIS_NORMAL] = &gObjectEventGraphicsInfo_THKrisNormal,
+    [OBJ_EVENT_GFX_TH_KRIS_MACH_BIKE] = &gObjectEventGraphicsInfo_THKrisMachBike,
+    [OBJ_EVENT_GFX_TH_KRIS_ACRO_BIKE] = &gObjectEventGraphicsInfo_THKrisAcroBike,
+    [OBJ_EVENT_GFX_TH_KRIS_SURFING] = &gObjectEventGraphicsInfo_THKrisSurfing,
+    [OBJ_EVENT_GFX_TH_KRIS_UNDERWATER] = &gObjectEventGraphicsInfo_THKrisUnderwater,
+    [OBJ_EVENT_GFX_TH_KRIS_FIELD_MOVE] = &gObjectEventGraphicsInfo_THKrisFieldMove,
+    [OBJ_EVENT_GFX_TH_KRIS_FISHING] = &gObjectEventGraphicsInfo_THKrisFishing,
+    [OBJ_EVENT_GFX_TH_KRIS_WATERING] = &gObjectEventGraphicsInfo_THKrisWatering,
+    [OBJ_EVENT_GFX_TH_SILVER_NORMAL] = &gObjectEventGraphicsInfo_THSilverNormal,
+#endif
+
 #if THREE_HORIZONS
     [OBJ_EVENT_GFX_TH_CLOCK] = &gObjectEventGraphicsInfo_THClock,
 #endif

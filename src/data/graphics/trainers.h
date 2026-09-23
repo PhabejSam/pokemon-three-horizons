@@ -587,8 +587,30 @@ const union AnimCmd *const sBackAnims_OldManPokedude[] = {
         .animation = anim,                                                                   \
     }}
 
+
+#if THREE_HORIZONS
+const u16 gTHGoldFrontPal[] = INCGFX_U16("graphics/three_horizons/outfits/gold/front.png", ".gbapal");
+const u16 gTHGoldBackPal[] = INCGFX_U16("graphics/three_horizons/outfits/gold/back.png", ".gbapal");
+const u32 gTHGoldFront[] = INCGFX_U32("graphics/three_horizons/outfits/gold/front.png", ".4bpp.smol");
+const u8 gTHGoldBack[] = INCGFX_U8("graphics/three_horizons/outfits/gold/back.png", ".4bpp");
+const u16 gTHKrisFrontPal[] = INCGFX_U16("graphics/three_horizons/outfits/kris/front.png", ".gbapal");
+const u16 gTHKrisBackPal[] = INCGFX_U16("graphics/three_horizons/outfits/kris/back.png", ".gbapal");
+const u32 gTHKrisFront[] = INCGFX_U32("graphics/three_horizons/outfits/kris/front.png", ".4bpp.smol");
+const u8 gTHKrisBack[] = INCGFX_U8("graphics/three_horizons/outfits/kris/back.png", ".4bpp");
+const u16 gTHSilverFrontPal[] = INCGFX_U16("graphics/three_horizons/outfits/silver/front.png", ".gbapal");
+const u16 gTHSilverBackPal[] = INCGFX_U16("graphics/three_horizons/outfits/silver/back.png", ".gbapal");
+const u32 gTHSilverFront[] = INCGFX_U32("graphics/three_horizons/outfits/silver/front.png", ".4bpp.smol");
+const u8 gTHSilverBack[] = INCGFX_U8("graphics/three_horizons/outfits/silver/back.png", ".4bpp");
+#endif
+
 const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
 {
+#if THREE_HORIZONS
+    [TRAINER_PIC_TH_GOLD] = {.frontPic = TRAINER_FRONT_PIC(gTHGoldFront, gTHGoldFrontPal), .backPic = TRAINER_BACK_PIC(4, gTHGoldBack, gTHGoldBackPal, sBackAnims_Hoenn)},
+    [TRAINER_PIC_TH_KRIS] = {.frontPic = TRAINER_FRONT_PIC(gTHKrisFront, gTHKrisFrontPal), .backPic = TRAINER_BACK_PIC(4, gTHKrisBack, gTHKrisBackPal, sBackAnims_Hoenn)},
+    [TRAINER_PIC_TH_SILVER] = {.frontPic = TRAINER_FRONT_PIC(gTHSilverFront, gTHSilverFrontPal), .backPic = TRAINER_BACK_PIC(4, gTHSilverBack, gTHSilverBackPal, sBackAnims_Hoenn)},
+#endif
+
     [TRAINER_PIC_NONE] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_None, gTrainerPalette_None),

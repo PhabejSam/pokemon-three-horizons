@@ -19,7 +19,10 @@
 #define TH_OUTFIT_LEAF         1
 #define TH_OUTFIT_BRENDAN      2
 #define TH_OUTFIT_MAY          3
-#define TH_OUTFIT_COUNT        4
+#define TH_OUTFIT_GOLD         4
+#define TH_OUTFIT_KRIS         5
+#define TH_OUTFIT_SILVER       6
+#define TH_OUTFIT_COUNT        7
 #define TH_STAGE_HOME          0
 #define TH_STAGE_INVITED       1
 #define TH_STAGE_PARTNER       2

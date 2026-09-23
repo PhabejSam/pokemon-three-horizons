@@ -497,6 +497,26 @@ const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
 #include "data/object_events/object_event_graphics_info_followers.h"
 
 static const struct SpritePalette sObjectEventSpritePalettes[] = {
+#if THREE_HORIZONS
+    {gObjectEventPal_THGoldNormal, OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL},
+    {gObjectEventPal_THGoldMachBike, OBJ_EVENT_PAL_TAG_TH_GOLD_MACHBIKE},
+    {gObjectEventPal_THGoldAcroBike, OBJ_EVENT_PAL_TAG_TH_GOLD_ACROBIKE},
+    {gObjectEventPal_THGoldSurfing, OBJ_EVENT_PAL_TAG_TH_GOLD_SURFING},
+    {gObjectEventPal_THGoldUnderwater, OBJ_EVENT_PAL_TAG_TH_GOLD_UNDERWATER},
+    {gObjectEventPal_THGoldFieldMove, OBJ_EVENT_PAL_TAG_TH_GOLD_FIELDMOVE},
+    {gObjectEventPal_THGoldFishing, OBJ_EVENT_PAL_TAG_TH_GOLD_FISHING},
+    {gObjectEventPal_THGoldWatering, OBJ_EVENT_PAL_TAG_TH_GOLD_WATERING},
+    {gObjectEventPal_THKrisNormal, OBJ_EVENT_PAL_TAG_TH_KRIS_NORMAL},
+    {gObjectEventPal_THKrisMachBike, OBJ_EVENT_PAL_TAG_TH_KRIS_MACHBIKE},
+    {gObjectEventPal_THKrisAcroBike, OBJ_EVENT_PAL_TAG_TH_KRIS_ACROBIKE},
+    {gObjectEventPal_THKrisSurfing, OBJ_EVENT_PAL_TAG_TH_KRIS_SURFING},
+    {gObjectEventPal_THKrisUnderwater, OBJ_EVENT_PAL_TAG_TH_KRIS_UNDERWATER},
+    {gObjectEventPal_THKrisFieldMove, OBJ_EVENT_PAL_TAG_TH_KRIS_FIELDMOVE},
+    {gObjectEventPal_THKrisFishing, OBJ_EVENT_PAL_TAG_TH_KRIS_FISHING},
+    {gObjectEventPal_THKrisWatering, OBJ_EVENT_PAL_TAG_TH_KRIS_WATERING},
+    {gObjectEventPal_THSilverNormal, OBJ_EVENT_PAL_TAG_TH_SILVER_NORMAL},
+#endif
+
     {gObjectEventPal_Npc1,                  OBJ_EVENT_PAL_TAG_NPC_1},
     {gObjectEventPal_Npc2,                  OBJ_EVENT_PAL_TAG_NPC_2},
     {gObjectEventPal_Npc3,                  OBJ_EVENT_PAL_TAG_NPC_3},

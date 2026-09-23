@@ -320,3 +320,10 @@ TH_Text_OutfitMay::
     .string "MAY$"
 TH_Text_OutfitCancel::
     .string "KEEP CURRENT$"
+
+TH_Text_OutfitGold::
+    .string "GOLD$"
+TH_Text_OutfitKris::
+    .string "KRIS$"
+TH_Text_OutfitSilver::
+    .string "SILVER$"
