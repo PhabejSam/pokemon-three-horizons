@@ -16879,6 +16879,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 
+#if THREE_HORIZONS
 === TRAINER_TH_ROBIN_BULBASAUR ===
 Name: ROBIN
 Class: Youngster
@@ -16986,3 +16987,5 @@ AI: Check Bad Move
 Mudkip
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+#endif

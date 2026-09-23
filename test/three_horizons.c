@@ -104,4 +104,33 @@ TEST("Three Horizons battle completion is monotonic and idempotent")
     TH_FinishRivalBattle();
     EXPECT_EQ(VarGet(VAR_TH_STAGE), TH_STAGE_COMPLETE);
 }
+
+TEST("Three Horizons retries partial supplies without duplicating balls")
+{
+    u32 i;
+    ResetOpening();
+    VarSet(VAR_TH_STAGE, TH_STAGE_INVITED);
+    EXPECT(TH_TryGiveStarter(SPECIES_TOTODILE));
+    for (i = 0; i < gBagPockets[GetItemPocket(ITEM_POTION)].capacity; i++)
+        EXPECT(AddBagItem(ITEM_POTION, MAX_BAG_ITEM_CAPACITY));
+    EXPECT(!TH_TryGiveSupplies());
+    EXPECT_EQ(VarGet(VAR_TH_SUPPLY_MASK), TH_SUPPLY_BALLS);
+    EXPECT(CheckBagHasItem(ITEM_POKE_BALL, 5));
+    EXPECT(RemoveBagItem(ITEM_POTION, 2));
+    EXPECT(TH_TryGiveSupplies());
+    EXPECT(!CheckBagHasItem(ITEM_POKE_BALL, 6));
+    EXPECT_EQ(VarGet(VAR_TH_SUPPLY_MASK), TH_SUPPLIES_COMPLETE);
+}
+
+TEST("Three Horizons original partner survives party replacement")
+{
+    ResetOpening();
+    VarSet(VAR_TH_STAGE, TH_STAGE_INVITED);
+    EXPECT(TH_TryGiveStarter(SPECIES_MUDKIP));
+    ZeroPlayerPartyMons();
+    gPartiesCount[B_TRAINER_PLAYER] = 0;
+    EXPECT_EQ(VarGet(VAR_TH_FIRST_PARTNER), SPECIES_MUDKIP);
+    EXPECT_EQ(VarGet(VAR_TH_RIVAL_PARTNER), SPECIES_TREECKO);
+    EXPECT(!TH_TryGiveStarter(SPECIES_CHIKORITA));
+}
 #endif

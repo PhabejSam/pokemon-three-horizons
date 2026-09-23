@@ -35,6 +35,7 @@ jobs:
         run: |
           set -o pipefail
           make THREE_HORIZONS=1 check TESTS="Three Horizons" -j2 2>&1 | tee demo-tests.log
+          make THREE_HORIZONS=1 check TESTS="backwards compatible" -j2 2>&1 | tee -a demo-tests.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:

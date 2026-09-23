@@ -1,4 +1,5 @@
 TH_Pallet_OnLoad:
+    goto_if_eq VAR_TH_STAGE, TH_STAGE_INVITED, TH_Pallet_HideRobin
     goto_if_ge VAR_TH_STAGE, TH_STAGE_BATTLE_DONE, TH_Pallet_HideRobin
     goto_if_ge VAR_TH_STAGE, TH_STAGE_PARTNER, TH_Pallet_BattlePosition
     return
@@ -20,6 +21,7 @@ TH_EventScript_Invitation::
     applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_RobinToLab
     waitmovement 0
     setvar VAR_TH_STAGE, TH_STAGE_INVITED
+    removeobject LOCALID_TH_ROBIN_TOWN
     releaseall
     end
 TH_Movement_RobinToLab:

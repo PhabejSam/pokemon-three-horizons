@@ -864,7 +864,20 @@
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
+#if THREE_HORIZONS
+#define TRAINER_TH_ROBIN_BULBASAUR 855
+#define TRAINER_TH_ROBIN_CHARMANDER 856
+#define TRAINER_TH_ROBIN_SQUIRTLE 857
+#define TRAINER_TH_ROBIN_CHIKORITA 858
+#define TRAINER_TH_ROBIN_CYNDAQUIL 859
+#define TRAINER_TH_ROBIN_TOTODILE 860
+#define TRAINER_TH_ROBIN_TREECKO 861
+#define TRAINER_TH_ROBIN_TORCHIC 862
+#define TRAINER_TH_ROBIN_MUDKIP 863
+#define TRAINERS_COUNT_EMERALD     864
+#else
 #define TRAINERS_COUNT_EMERALD     855
+#endif
 #define MAX_TRAINERS_COUNT_EMERALD 864
 
 #if IS_FRLG
