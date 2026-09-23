@@ -6,6 +6,11 @@
 #include "pokemon.h"
 #include "script.h"
 #include "new_game.h"
+#include "overworld.h"
+#include "fieldmap.h"
+#include "field_door.h"
+#include "task.h"
+#include "constants/metatile_labels.h"
 #include "constants/maps.h"
 
 #include "constants/three_horizons.h"
@@ -164,5 +169,31 @@ TEST("Three Horizons new game starts and recovers at home")
     EXPECT_EQ(gSaveBlock1Ptr->lastHealLocation.mapGroup, MAP_GROUP(MAP_TH_HOME_1F));
     EXPECT_EQ(gSaveBlock1Ptr->lastHealLocation.mapNum, MAP_NUM(MAP_TH_HOME_1F));
     EXPECT_EQ(VarGet(VAR_TH_STAGE), TH_STAGE_HOME);
+}
+
+TEST("Three Horizons Pallet home and lab doors support opening and closing")
+{
+    const struct MapHeader savedHeader = gMapHeader;
+    const struct BackupMapLayout savedLayout = gBackupMapLayout;
+    u16 tiles[] = { METATILE_PalletTown_Door, METATILE_PalletTown_OaksLabDoor };
+    u32 i;
+    s8 task;
+    gMapHeader = *Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TH_PALLET), MAP_NUM(MAP_TH_PALLET));
+    gBackupMapLayout.width = ARRAY_COUNT(tiles);
+    gBackupMapLayout.height = 1;
+    gBackupMapLayout.map = tiles;
+    for (i = 0; i < ARRAY_COUNT(tiles); i++)
+    {
+        task = FieldAnimateDoorOpen(i, 0);
+        EXPECT_GE(task, 0);
+        if (task >= 0)
+            DestroyTask(task);
+        task = FieldAnimateDoorClose(i, 0);
+        EXPECT_GE(task, 0);
+        if (task >= 0)
+            DestroyTask(task);
+    }
+    gBackupMapLayout = savedLayout;
+    gMapHeader = savedHeader;
 }
 #endif

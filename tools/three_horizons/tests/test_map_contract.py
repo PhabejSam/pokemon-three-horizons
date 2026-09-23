@@ -51,9 +51,18 @@ class MapContract(unittest.TestCase):
             self.assertTrue(path.exists(), f'Missing demo map: {name}')
             record = json.loads(path.read_text())
             maps[record['id']] = record
+        layouts = {x.get('id'): x for x in json.loads((ROOT / 'data/layouts/layouts.json').read_text())['layouts']}
         for record in maps.values():
+            layout = layouts[record['layout']]
+            for kind in ('object_events', 'warp_events', 'coord_events', 'bg_events'):
+                for event in record[kind]:
+                    self.assertGreaterEqual(event['x'], 0)
+                    self.assertGreaterEqual(event['y'], 0)
+                    self.assertLess(event['x'], layout['width'])
+                    self.assertLess(event['y'], layout['height'])
             for warp in record['warp_events']:
                 self.assertIn(warp['dest_map'], maps)
+                self.assertGreaterEqual(int(warp['dest_warp_id']), 0)
                 self.assertLess(int(warp['dest_warp_id']), len(maps[warp['dest_map']]['warp_events']))
             for connection in record['connections'] or []:
                 self.assertIn(connection['map'], maps)

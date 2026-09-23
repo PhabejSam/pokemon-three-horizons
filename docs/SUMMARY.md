@@ -153,3 +153,4 @@
     - [Release Schedule and Process](team_procedures/schedule.md)
     - [Merge Checklist](team_procedures/merge_checklist.md)
     - [Scope Guidelines](team_procedures/scope.md)
+- [Opening Demo Build and Acceptance](three_horizons/OPENING_DEMO_TESTS.md)

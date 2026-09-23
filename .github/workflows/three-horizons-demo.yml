@@ -17,6 +17,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3 git
+          { uname -a; gcc --version; arm-none-eabi-gcc --version; make --version; python3 --version; dpkg-query -W build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev; } > demo-environment.txt
       - name: Check map contracts
         run: |
           make -C tools/mapjson
@@ -35,7 +36,7 @@ jobs:
         run: |
           set -o pipefail
           make THREE_HORIZONS=1 check TESTS="Three Horizons" -j2 2>&1 | tee demo-tests.log
-          make THREE_HORIZONS=1 check TESTS="backwards compatible" -j2 2>&1 | tee -a demo-tests.log
+          make THREE_HORIZONS=1 check TESTS="test/save.c" -j2 2>&1 | tee -a demo-tests.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -49,3 +50,5 @@ jobs:
             demo-build.log
             demo-tests.log
             demo-source-commit.txt
+            demo-environment.txt
+            docs/three_horizons/OPENING_DEMO_TESTS.md
