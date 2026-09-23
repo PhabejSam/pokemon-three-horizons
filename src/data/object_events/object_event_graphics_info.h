@@ -1,7 +1,10 @@
 #if THREE_HORIZONS
+static const struct OamData sTHClockOam = {.affineMode = ST_OAM_AFFINE_NORMAL, .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16)};
+static const union AffineAnimCmd sTHClockScale[] = {AFFINEANIMCMD_FRAME(128, 128, 0, 0), AFFINEANIMCMD_END};
+static const union AffineAnimCmd *const sTHClockAnims[] = {sTHClockScale};
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_CLOCK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
     .width = 16,
@@ -11,34 +14,14 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock = {
     .inanimate = TRUE,
     .compressed = FALSE,
     .tracks = TRACKS_NONE,
-    .oam = &gObjectEventBaseOam_16x16,
-    .subspriteTables = sOamTables_16x16,
+    .oam = &sTHClockOam,
+    .subspriteTables = NULL,
     .anims = sAnimTable_Inanimate,
     .images = sPicTable_THClock,
-    .affineAnims = gDummySpriteAffineAnimTable,
+    .affineAnims = sTHClockAnims,
 };
 #endif
 
-#if THREE_HORIZONS
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THJoey = {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 256,
-    .width = 16,
-    .height = 32,
-    .paletteSlot = PALSLOT_NPC_2,
-    .shadowSize = SHADOW_SIZE_M,
-    .inanimate = FALSE,
-    .compressed = FALSE,
-    .tracks = TRACKS_FOOT,
-    .oam = &gObjectEventBaseOam_16x32,
-    .subspriteTables = sOamTables_16x32,
-    .anims = sAnimTable_Standard,
-    .images = sPicTable_THJoey,
-    .affineAnims = gDummySpriteAffineAnimTable,
-};
-#endif
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal = {
     .tileTag = TAG_NONE,
@@ -4509,7 +4492,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTree = {
     .images = sPicTable_ApricornTree,
 };
 
-#if IS_FRLG
+#if IS_FRLG || THREE_HORIZONS
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedNormal = {
     .tileTag = TAG_NONE,

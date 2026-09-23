@@ -640,6 +640,7 @@ gSpecials::
 	def_special CheckAddCoins
 
 #if THREE_HORIZONS
+    def_special TH_ChangeOutfit
     def_special TH_ScriptGiveStarter
     def_special TH_ScriptGiveSupplies
     def_special TH_FinishRivalBattle

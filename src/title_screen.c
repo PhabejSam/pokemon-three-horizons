@@ -1,4 +1,5 @@
 #include "global.h"
+#include "text.h"
 #include "battle.h"
 #include "config/quickstart.h"
 #include "quickstart.h"
@@ -31,7 +32,7 @@ enum {
     TAG_LOGO_SHINE,
 };
 
-#define VERSION_BANNER_RIGHT_TILEOFFSET 64
+#define VERSION_BANNER_RIGHT_TILEOFFSET (THREE_HORIZONS ? 32 : 64)
 #define VERSION_BANNER_LEFT_X 98
 #define VERSION_BANNER_RIGHT_X 162
 #define VERSION_BANNER_Y 2
@@ -114,7 +115,7 @@ static const struct OamData sVersionBannerLeftOamData =
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
-    .bpp = ST_OAM_8BPP,
+    .bpp = THREE_HORIZONS ? ST_OAM_4BPP : ST_OAM_8BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
@@ -131,7 +132,7 @@ static const struct OamData sVersionBannerRightOamData =
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
-    .bpp = ST_OAM_8BPP,
+    .bpp = THREE_HORIZONS ? ST_OAM_4BPP : ST_OAM_8BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
@@ -606,13 +607,30 @@ void CB2_InitTitleScreen(void)
         DecompressDataWithHeaderVram(gTitleScreenCloudsTilemap, (void *)(BG_SCREEN_ADDR(27)));
         ScanlineEffect_Stop();
         ResetTasks();
+#if THREE_HORIZONS
+        SetDefaultFontsPointer();
+#endif
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 9;
+#if THREE_HORIZONS
+        {
+            static const u8 blank[2048] = {0};
+            const struct SpriteSheet sheet = {blank, sizeof(blank), TAG_VERSION};
+            LoadSpriteSheet(&sheet);
+        }
+#else
         LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
+#endif
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
         LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
+#if THREE_HORIZONS
+        {
+            static const u16 titleColors[16] = {RGB_BLACK, RGB_WHITE, RGB(5, 7, 12)};
+            LoadPalette(titleColors, OBJ_PLTT_ID(0), sizeof(titleColors));
+        }
+#endif
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         gMain.state = 2;
         break;
@@ -712,11 +730,22 @@ static void Task_TitleScreenPhase1(u8 taskId)
 
         // Create left side of version banner
         spriteId = CreateSprite(&sVersionBannerLeftSpriteTemplate, VERSION_BANNER_LEFT_X, VERSION_BANNER_Y, 0);
+#if THREE_HORIZONS
+        gSprites[spriteId].oam.paletteNum = 0;
+        AddSpriteTextPrinterParameterized3(spriteId, FONT_NORMAL, 20, 7, (const u8[]){0, 1, 2}, 0, COMPOUND_STRING("THREE"));
+#endif
         gSprites[spriteId].sAlphaBlendIdx = ARRAY_COUNT(gTitleScreenAlphaBlend);
         gSprites[spriteId].sParentTaskId = taskId;
 
         // Create right side of version banner
         spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_RIGHT_X, VERSION_BANNER_Y, 0);
+#if THREE_HORIZONS
+        gSprites[spriteId].oam.paletteNum = 0;
+        StartSpriteAnim(spriteId, 0);
+        // Apply the right-half tile offset before printing; its first animation tick is later.
+        gSprites[spriteId].oam.tileNum = GetSpriteTileStartByTag(TAG_VERSION) + VERSION_BANNER_RIGHT_TILEOFFSET;
+        AddSpriteTextPrinterParameterized3(spriteId, FONT_NORMAL, 0, 7, (const u8[]){0, 1, 2}, 0, COMPOUND_STRING("HORIZONS"));
+#endif
         gSprites[spriteId].sParentTaskId = taskId;
 
         gTasks[taskId].tCounter = 144;

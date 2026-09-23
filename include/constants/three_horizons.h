@@ -7,6 +7,12 @@
 #define VAR_TH_RIVAL_PARTNER   0x40F9
 #define VAR_TH_SUPPLY_MASK     0x40FA
 #define VAR_TH_SIGHTING_SEEN   0x40FB
+#define VAR_TH_OUTFIT          0x40FC
+#define TH_OUTFIT_RED          0
+#define TH_OUTFIT_LEAF         1
+#define TH_OUTFIT_BRENDAN      2
+#define TH_OUTFIT_MAY          3
+#define TH_OUTFIT_COUNT        4
 #define TH_STAGE_HOME          0
 #define TH_STAGE_INVITED       1
 #define TH_STAGE_PARTNER       2

@@ -402,12 +402,10 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvi
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTree;
 
 #if THREE_HORIZONS
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THJoey;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock;
 #endif
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
 #if THREE_HORIZONS
-    [OBJ_EVENT_GFX_YOUNGSTER_FRLG] = &gObjectEventGraphicsInfo_THJoey,
     [OBJ_EVENT_GFX_TH_CLOCK] = &gObjectEventGraphicsInfo_THClock,
 #endif
 #if IS_FRLG || THREE_HORIZONS
@@ -657,7 +655,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_OW_MON] =                   &gObjectEventGraphicsInfo_Follower,
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
     [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,
-#if IS_FRLG
+#if IS_FRLG || THREE_HORIZONS
     [OBJ_EVENT_GFX_RED_NORMAL] =               &gObjectEventGraphicsInfo_RedNormal,
     [OBJ_EVENT_GFX_RED_BIKE] =                 &gObjectEventGraphicsInfo_RedBike,
     [OBJ_EVENT_GFX_RED_SURF] =                 &gObjectEventGraphicsInfo_RedSurf,
@@ -745,7 +743,9 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TEACHY_TV_HOST]           = &gObjectEventGraphicsInfo_TeachyTVHost,
     [OBJ_EVENT_GFX_GYM_GUY]                  = &gObjectEventGraphicsInfo_GymGuy,
     [OBJ_EVENT_GFX_TOWN_MAP]                 = &gObjectEventGraphicsInfo_TownMap,
+#if !THREE_HORIZONS
     [OBJ_EVENT_GFX_POKEDEX]                  = &gObjectEventGraphicsInfo_Pokedex,
+#endif
     [OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG]       = &gObjectEventGraphicsInfo_CuttableTreeFrlg,
     [OBJ_EVENT_GFX_BREAKABLE_ROCK_FRLG]      = &gObjectEventGraphicsInfo_BreakableRockFrlg,
     [OBJ_EVENT_GFX_PUSHABLE_BOULDER_FRLG]    = &gObjectEventGraphicsInfo_PushableBoulderFrlg,

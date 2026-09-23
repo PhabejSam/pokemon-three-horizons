@@ -17,3 +17,7 @@ TH_HoothootRepeat:
     msgbox TH_Text_HoothootRepeat
     releaseall
     end
+
+TH_EventScript_RouteSign::
+    msgbox TH_Text_RouteSign, MSGBOX_SIGN
+    end

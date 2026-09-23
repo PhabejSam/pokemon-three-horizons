@@ -531,7 +531,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
-#if IS_FRLG
+#if IS_FRLG || THREE_HORIZONS
     {gObjectEventPal_PlayerFrlg,            OBJ_EVENT_PAL_TAG_PLAYER_RED},
     {gObjectEventPal_PlayerReflectionFrlg,  OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION},
     {gObjectEventPal_PlayerFrlg,            OBJ_EVENT_PAL_TAG_PLAYER_GREEN},
@@ -547,8 +547,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Seagallop,             OBJ_EVENT_PAL_TAG_SEAGALLOP},
 #endif // IS_FRLG
 #if THREE_HORIZONS
-    {gObjectEventPal_THJoey, OBJ_EVENT_PAL_TAG_NPC_PINK},
-    {gObjectEventPal_THClock, OBJ_EVENT_PAL_TAG_NPC_GREEN},
+    {gObjectEventPal_THClock, OBJ_EVENT_PAL_TAG_TH_CLOCK},
 #endif
 #if IS_FRLG || THREE_HORIZONS
     {gObjectEventPal_NpcBlue,               OBJ_EVENT_PAL_TAG_NPC_BLUE},
@@ -1700,6 +1699,10 @@ void RemoveObjectEventByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 static void RemoveObjectEventInternal(struct ObjectEvent *objectEvent)
 {
     struct SpriteFrameImage image;
+#if THREE_HORIZONS
+    if (objectEvent->graphicsId == OBJ_EVENT_GFX_TH_CLOCK)
+        FreeSpriteOamMatrix(&gSprites[objectEvent->spriteId]);
+#endif
     image.size = GetObjectEventGraphicsInfo(objectEvent->graphicsId)->size;
     gSprites[objectEvent->spriteId].images = &image;
     // It's possible that this function is called while the sprite pointed to `== sDummySprite`, i.e during map resume;
@@ -9546,6 +9549,10 @@ static void TryEnableObjectEventAnim(struct ObjectEvent *objectEvent, struct Spr
 
 static void UpdateObjectEventVisibility(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
+#if THREE_HORIZONS
+    if (objectEvent->graphicsId == OBJ_EVENT_GFX_TH_CLOCK)
+        sprite->y2 = -8;
+#endif
     UpdateObjectEventOffscreen(objectEvent, sprite);
     UpdateObjectEventSpriteVisibility(objectEvent, sprite);
 }

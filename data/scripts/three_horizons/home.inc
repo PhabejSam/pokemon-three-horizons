@@ -79,3 +79,17 @@ TH_ClockView:
     end
 TH_Text_ClockStopped:
     .string "A new morning, a new adventure.\nLet's set the time before you go.$"
+
+TH_EventScript_Dresser::
+    lockall
+    msgbox TH_Text_Dresser
+    dynmultichoice 0, 0, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE, TH_Text_OutfitRed, TH_Text_OutfitLeaf, TH_Text_OutfitBrendan, TH_Text_OutfitMay, TH_Text_OutfitCancel
+    goto_if_ge VAR_RESULT, 4, TH_DresserDone
+    copyvar VAR_0x8004, VAR_RESULT
+    closemessage
+    fadescreen FADE_TO_BLACK
+    special TH_ChangeOutfit
+    fadescreen FADE_FROM_BLACK
+TH_DresserDone:
+    releaseall
+    end

@@ -1,7 +1,7 @@
 {
   "id": "MAP_TH_PALLET",
   "name": "TH_Pallet",
-  "layout": "LAYOUT_PALLET_TOWN",
+  "layout": "LAYOUT_TH_PALLET",
   "music": "MUS_RG_PALLET",
   "region": "REGION_KANTO",
   "region_map_section": "MAPSEC_PALLET_TOWN",

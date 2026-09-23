@@ -14,6 +14,9 @@ bool32 TH_TryGiveConfiguredStarter(u16 species, const struct THPartnerOptions *o
 void TH_OpenPartnerEditor(void);
 void TH_ScriptGiveConfiguredStarter(void);
 
+u16 TH_GetOutfit(void);
+u16 TH_GetTrainerPic(void);
+void TH_ChangeOutfit(void);
 void TH_InitNewGame(void);
 u16 TH_GetRivalStarter(u16 playerSpecies);
 bool32 TH_TryGiveStarter(u16 playerSpecies);

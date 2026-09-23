@@ -151,7 +151,8 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     BattleAI_SetupItems();
     BattleAI_SetupFlags();
 
-    if (!IS_FRLG && gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    if (!IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+        && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
         CreateWildMon(SPECIES_ZIGZAGOON, 2);
 }
 

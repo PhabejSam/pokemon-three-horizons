@@ -1,5 +1,9 @@
 #include "global.h"
 #include "three_horizons.h"
+#include "field_player_avatar.h"
+#include "event_object_movement.h"
+#include "constants/event_object_movement.h"
+#include "constants/trainers.h"
 #include "event_data.h"
 #include "item.h"
 #include "pokemon.h"
@@ -8,6 +12,27 @@
 #include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
+u16 TH_GetOutfit(void)
+{
+    u16 outfit = VarGet(VAR_TH_OUTFIT);
+    return outfit < TH_OUTFIT_COUNT ? outfit : TH_OUTFIT_RED;
+}
+
+u16 TH_GetTrainerPic(void)
+{
+    static const u16 pics[] = {TRAINER_PIC_RED, TRAINER_PIC_LEAF, TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY};
+    return pics[TH_GetOutfit()];
+}
+
+void TH_ChangeOutfit(void)
+{
+    if (gSpecialVar_0x8004 >= TH_OUTFIT_COUNT)
+        return;
+    VarSet(VAR_TH_OUTFIT, gSpecialVar_0x8004);
+    ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
+    ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], gObjectEvents[gPlayerAvatar.objectEventId].facingDirection);
+}
+
 static const u16 sStarters[][2] = {
     {SPECIES_BULBASAUR, SPECIES_CHARMANDER},
     {SPECIES_CHARMANDER, SPECIES_SQUIRTLE},
@@ -22,6 +47,7 @@ static const u16 sStarters[][2] = {
 
 void TH_InitNewGame(void)
 {
+    VarSet(VAR_TH_OUTFIT, TH_OUTFIT_RED);
     VarSet(VAR_TH_STAGE, TH_STAGE_HOME);
     VarSet(VAR_TH_FIRST_PARTNER, SPECIES_NONE);
     VarSet(VAR_TH_RIVAL_PARTNER, SPECIES_NONE);

@@ -1,4 +1,6 @@
 #include "global.h"
+#include "three_horizons.h"
+#include "constants/three_horizons.h"
 #include "main.h"
 #include "bike.h"
 #include "event_data.h"
@@ -1570,6 +1572,23 @@ u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender)
 
 u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender)
 {
+#if THREE_HORIZONS
+    static const u16 kanto[][2] = {
+        [PLAYER_AVATAR_STATE_NORMAL] = {OBJ_EVENT_GFX_RED_NORMAL, OBJ_EVENT_GFX_GREEN_NORMAL},
+        [PLAYER_AVATAR_STATE_MACH_BIKE] = {OBJ_EVENT_GFX_RED_BIKE, OBJ_EVENT_GFX_GREEN_BIKE},
+        [PLAYER_AVATAR_STATE_ACRO_BIKE] = {OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE, OBJ_EVENT_GFX_MAY_ACRO_BIKE},
+        [PLAYER_AVATAR_STATE_SURFING] = {OBJ_EVENT_GFX_RED_SURF, OBJ_EVENT_GFX_GREEN_SURF},
+        [PLAYER_AVATAR_STATE_UNDERWATER] = {OBJ_EVENT_GFX_RED_SURF, OBJ_EVENT_GFX_GREEN_SURF},
+        [PLAYER_AVATAR_STATE_FIELD_MOVE] = {OBJ_EVENT_GFX_RED_FIELD_MOVE, OBJ_EVENT_GFX_GREEN_FIELD_MOVE},
+        [PLAYER_AVATAR_STATE_FISHING] = {OBJ_EVENT_GFX_RED_FISH, OBJ_EVENT_GFX_GREEN_FISH},
+        [PLAYER_AVATAR_STATE_WATERING] = {OBJ_EVENT_GFX_BRENDAN_WATERING, OBJ_EVENT_GFX_MAY_WATERING},
+        [PLAYER_AVATAR_STATE_VSSEEKER] = {OBJ_EVENT_GFX_RED_VS_SEEKER, OBJ_EVENT_GFX_GREEN_VS_SEEKER},
+    };
+    u16 outfit = TH_GetOutfit();
+    if (outfit <= TH_OUTFIT_LEAF)
+        return kanto[state][outfit];
+    gender = outfit == TH_OUTFIT_MAY ? FEMALE : MALE;
+#endif
     return sPlayerAvatarGfxIds[state][gender];
 }
 
@@ -1664,13 +1683,21 @@ void SetPlayerAvatarStateMask(u8 flags)
     gPlayerAvatar.flags |= flags;
 }
 
-static u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
+u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
 {
     u8 i;
 
+#if THREE_HORIZONS
+    // Red/Leaf share graphics between the two bikes and Surf/Dive. Preserve
+    // the active movement mode when returning from a menu before using defaults.
+    for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
+        if ((gPlayerAvatar.flags & sPlayerAvatarGfxToStateFlag[gender][i].playerFlag)
+            && GetPlayerAvatarGraphicsIdByStateIdAndGender(i, gender) == graphicsId)
+            return sPlayerAvatarGfxToStateFlag[gender][i].playerFlag;
+#endif
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
-        if (sPlayerAvatarGfxToStateFlag[gender][i].graphicsId == graphicsId)
+        if (GetPlayerAvatarGraphicsIdByStateIdAndGender(i, gender) == graphicsId)
             return sPlayerAvatarGfxToStateFlag[gender][i].playerFlag;
     }
     return PLAYER_AVATAR_FLAG_ON_FOOT;
@@ -1684,7 +1711,7 @@ u16 GetPlayerAvatarGraphicsIdByCurrentState(void)
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
         if (sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i].playerFlag & flags)
-            return sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i].graphicsId;
+            return GetPlayerAvatarGraphicsIdByStateId(i);
     }
     return 0;
 }

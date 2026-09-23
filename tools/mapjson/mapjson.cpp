@@ -162,6 +162,8 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     vector<Json> matched;
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
+        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+            continue;
         if (map_layout_id == json_to_string(layout, "id", true))
             matched.push_back(layout);
     }
@@ -815,6 +817,8 @@ string generate_layout_headers_text(Json layouts_data) {
     text << get_generated_warning("data/layouts/layouts.json", true);
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
+        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+            continue;
         if (layout == Json::object()) continue;
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;
@@ -875,6 +879,8 @@ string generate_layouts_table_text(Json layouts_data) {
          << json_to_string(layouts_data, "layouts_table_label") << "::\n";
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
+        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+            continue;
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;
         string layout_version = json_to_string(layout, "layout_version", true);
@@ -921,6 +927,8 @@ string generate_layouts_constants_text(Json layouts_data) {
 
     int i = 1;
     for (auto &layout : layouts_data["layouts"].array_items()) {
+        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+            continue;
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;
         if (layout != Json::object())

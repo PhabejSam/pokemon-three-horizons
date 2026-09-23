@@ -1,7 +1,4 @@
 #if THREE_HORIZONS
-static const struct SpriteFrameImage sPicTable_THJoey[] = {
-    overworld_ascending_frames(gObjectEventPic_THJoey, 2, 4),
-};
 static const struct SpriteFrameImage sPicTable_THClock[] = {
     overworld_ascending_frames(gObjectEventPic_THClock, 2, 2),
 };
@@ -1364,7 +1361,7 @@ static const struct SpriteFrameImage sPicTable_ApricornTree[] = {
     overworld_frame(gObjectEventPic_ApricornTree, 2, 2, 0),
 };
 
-#if IS_FRLG
+#if IS_FRLG || THREE_HORIZONS
 
 static const struct SpriteFrameImage sPicTable_RedNormal[] = {
     overworld_frame(gObjectEventPic_RedNormal, 2, 4, 0),

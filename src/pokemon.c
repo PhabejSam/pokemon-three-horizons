@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "malloc.h"
 #include "apprentice.h"
 #include "battle.h"
@@ -5645,6 +5646,9 @@ enum TrainerPicID FacilityClassToPicIndex(u16 facilityClass)
 
 enum TrainerPicID PlayerGenderToFrontTrainerPicId(enum Gender playerGender)
 {
+#if THREE_HORIZONS
+    return TH_GetTrainerPic();
+#endif
     if (playerGender != MALE)
         return FacilityClassToPicIndex(IS_FRLG ? FACILITY_CLASS_LEAF : FACILITY_CLASS_MAY);
     else

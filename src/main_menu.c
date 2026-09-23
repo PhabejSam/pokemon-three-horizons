@@ -1368,7 +1368,7 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
             CopyWindowToVram(0, COPYWIN_GFX);
             NewGameBirchSpeech_ClearWindow(0);
 #if THREE_HORIZONS
-            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Welcome to POKéMON\nTHREE HORIZONS!\pI'm Professor BIRCH. OAK, ELM,\nand I study POKéMON together."));
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Welcome to POKéMON\nTHREE HORIZONS!\pI'm Professor BIRCH. OAK, ELM,\nand I study POKéMON together.\p"));
 #else
             StringExpandPlaceholders(gStringVar4, gText_Birch_Welcome);
 #endif
@@ -1513,7 +1513,12 @@ static void Task_NewGameBirchSpeech_WaitForPlayerFadeIn(u8 taskId)
     if (gTasks[taskId].tIsDoneFadingSprites)
     {
         gSprites[gTasks[taskId].tPlayerSpriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
+#if THREE_HORIZONS
+        gSaveBlock2Ptr->playerGender = MALE;
+        gTasks[taskId].func = Task_NewGameBirchSpeech_WhatsYourName;
+#else
         gTasks[taskId].func = Task_NewGameBirchSpeech_BoyOrGirl;
+#endif
     }
 }
 
@@ -1675,7 +1680,12 @@ static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8 taskId)
     case MENU_B_PRESSED:
     case 1:
         PlaySE(SE_SELECT);
+#if THREE_HORIZONS
+        gSaveBlock2Ptr->playerGender = MALE;
+        gTasks[taskId].func = Task_NewGameBirchSpeech_WhatsYourName;
+#else
         gTasks[taskId].func = Task_NewGameBirchSpeech_BoyOrGirl;
+#endif
     }
 }
 
@@ -1714,7 +1724,7 @@ static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8 taskId)
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
         NewGameBirchSpeech_ClearWindow(0);
         #if THREE_HORIZONS
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{PLAYER}, OAK is waiting for you\nin PALLET TOWN.\pELM and I have sent some special\nfirst partners for you to meet."));
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{PLAYER}, OAK is waiting for you\nin PALLET TOWN.\pELM and I have sent some special\nfirst partners for you to meet.\p"));
 #else
         StringExpandPlaceholders(gStringVar4, gText_Birch_YourePlayer);
 #endif
@@ -1767,7 +1777,7 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
 #if THREE_HORIZONS
         NewGameBirchSpeech_ClearWindow(0);
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("A familiar morning.\nA whole new adventure.\pTake your time, {PLAYER}.\nYour first partner is waiting!"));
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("A familiar morning.\nA whole new adventure.\pTake your time, {PLAYER}.\nYour first partner is waiting!\p"));
 #else
         StringExpandPlaceholders(gStringVar4, gText_Birch_AreYouReady);
 #endif
@@ -1939,12 +1949,12 @@ static void AddBirchSpeechObjects(u8 taskId)
     gSprites[lotadSpriteId].oam.priority = 0;
     gSprites[lotadSpriteId].invisible = TRUE;
     gTasks[taskId].tLotadSpriteId = lotadSpriteId;
-    brendanSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN), 120, 60, 0, NULL);
+    brendanSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(THREE_HORIZONS ? FACILITY_CLASS_RED : FACILITY_CLASS_BRENDAN), 120, 60, 0, NULL);
     gSprites[brendanSpriteId].callback = SpriteCB_Null;
     gSprites[brendanSpriteId].invisible = TRUE;
     gSprites[brendanSpriteId].oam.priority = 0;
     gTasks[taskId].tBrendanSpriteId = brendanSpriteId;
-    maySpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_MAY), 120, 60, 0, NULL);
+    maySpriteId = CreateTrainerSprite(FacilityClassToPicIndex(THREE_HORIZONS ? FACILITY_CLASS_LEAF : FACILITY_CLASS_MAY), 120, 60, 0, NULL);
     gSprites[maySpriteId].callback = SpriteCB_Null;
     gSprites[maySpriteId].invisible = TRUE;
     gSprites[maySpriteId].oam.priority = 0;
@@ -2284,12 +2294,8 @@ static void NewGameBirchSpeech_ClearGenderWindow(u8 windowId, bool8 copyToVram)
 static void NewGameBirchSpeech_ClearWindow(u8 windowId)
 {
     u8 bgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_BACKGROUND);
-    u8 maxCharWidth = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH);
-    u8 maxCharHeight = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
-    u8 winWidth = GetWindowAttribute(windowId, WINDOW_WIDTH);
-    u8 winHeight = GetWindowAttribute(windowId, WINDOW_HEIGHT);
 
-    FillWindowPixelRect(windowId, bgColor, 0, 0, maxCharWidth * winWidth, maxCharHeight * winHeight);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 

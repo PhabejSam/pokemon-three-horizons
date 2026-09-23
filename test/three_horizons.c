@@ -1,5 +1,12 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_setup.h"
+#include "battle_controllers.h"
+#include "battle_util2.h"
+#include "field_player_avatar.h"
+#include "constants/event_object_movement.h"
+#include "constants/trainers.h"
+#include "text.h"
 #include "battle_transition.h"
 #include "trainer_pools.h"
 #include "constants/abilities.h"
@@ -61,6 +68,77 @@ TEST("Three Horizons assembled rival records have names pictures and correct par
         }
     }
     SetCurrentDifficultyLevel(saved);
+}
+
+TEST("Three Horizons first rival battle initialization preserves every chosen partner")
+{
+    u32 i;
+    u32 savedFlags = gBattleTypeFlags;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE;
+    AllocateBattleResources();
+    TRAINER_BATTLE_PARAM.opponentA = 1; // Test runner supplies its own trainer table for AI.
+    for (i = 0; i < 9; i++)
+    {
+        const struct Trainer *trainer = &sActualTrainers[DIFFICULTY_NORMAL][TRAINER_TH_ROBIN_BULBASAUR + i];
+        CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_OPPONENT_A], trainer);
+        SetUpBattleVarsAndBirchZigzagoon();
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), trainer->party[0].species);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 5);
+    }
+    // Emerald's original wild rescue battle must still produce its Zigzagoon.
+    gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
+    SetUpBattleVarsAndBirchZigzagoon();
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 2);
+    FreeBattleResources();
+    gBattleTypeFlags = savedFlags;
+}
+
+TEST("Three Horizons outfits resolve matching native walking and battle art")
+{
+    static const u16 overworld[] = {OBJ_EVENT_GFX_RED_NORMAL, OBJ_EVENT_GFX_GREEN_NORMAL, OBJ_EVENT_GFX_BRENDAN_NORMAL, OBJ_EVENT_GFX_MAY_NORMAL};
+    static const u16 trainer[] = {TRAINER_PIC_RED, TRAINER_PIC_LEAF, TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY};
+    u16 savedOutfit = VarGet(VAR_TH_OUTFIT);
+    u16 savedStage = VarGet(VAR_TH_STAGE);
+    u32 i;
+    for (i = 0; i < TH_OUTFIT_COUNT; i++)
+    {
+        VarSet(VAR_TH_OUTFIT, i);
+        EXPECT_EQ(TH_GetTrainerPic(), trainer[i]);
+        EXPECT_EQ(GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, MALE), overworld[i]);
+        EXPECT_EQ(GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, FEMALE), overworld[i]);
+        EXPECT(GetObjectEventGraphicsInfo(overworld[i])->images != NULL);
+        EXPECT_EQ(VarGet(VAR_TH_STAGE), savedStage);
+    }
+    VarSet(VAR_TH_OUTFIT, 0xFFFF);
+    EXPECT_EQ(TH_GetOutfit(), TH_OUTFIT_RED);
+    VarSet(VAR_TH_OUTFIT, savedOutfit);
+}
+
+TEST("Three Horizons title lettering fits both native sprite halves")
+{
+    SetDefaultFontsPointer();
+    EXPECT_LE(GetStringWidth(FONT_NORMAL, COMPOUND_STRING("THREE"), 0) + 20, 64);
+    EXPECT_LE(GetStringWidth(FONT_NORMAL, COMPOUND_STRING("HORIZONS"), 0), 64);
+}
+
+TEST("Three Horizons outfits preserve movement state when returning from menus")
+{
+    u16 savedOutfit = VarGet(VAR_TH_OUTFIT);
+    u8 savedFlags = gPlayerAvatar.flags;
+    u32 outfit, state;
+    for (outfit = 0; outfit < TH_OUTFIT_COUNT; outfit++)
+    {
+        VarSet(VAR_TH_OUTFIT, outfit);
+        for (state = PLAYER_AVATAR_STATE_NORMAL; state <= PLAYER_AVATAR_STATE_UNDERWATER; state++)
+        {
+            u16 gfx = GetPlayerAvatarGraphicsIdByStateIdAndGender(state, MALE);
+            gPlayerAvatar.flags = 1 << state;
+            EXPECT_EQ(GetPlayerAvatarStateTransitionByGraphicsId(gfx, MALE), 1 << state);
+        }
+    }
+    VarSet(VAR_TH_OUTFIT, savedOutfit);
+    gPlayerAvatar.flags = savedFlags;
 }
 
 TEST("Three Horizons Oak and Mom have assembled overworld graphics")

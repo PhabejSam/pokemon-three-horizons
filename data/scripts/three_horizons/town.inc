@@ -1,5 +1,4 @@
 TH_Pallet_OnTransition::
-    call TH_Pallet_CloseSouthernShore
     goto TH_Pallet_OnLoad
 TH_Pallet_OnLoad::
     clearflag FLAG_TH_HIDE_ROBIN_TOWN
@@ -187,17 +186,6 @@ TH_Movement_JoeyToRoute:
     walk_up
     step_end
 
-@ Close the former Route 21 inlet using native southern shoreline tiles.
-TH_Pallet_CloseSouthernShore:
-    setmetatile 7, 18, 0x131, TRUE
-    setmetatile 7, 19, 0x02E, FALSE
-    setmetatile 8, 18, 0x132, TRUE
-    setmetatile 8, 19, 0x02E, FALSE
-    setmetatile 9, 18, 0x132, TRUE
-    setmetatile 9, 19, 0x02E, FALSE
-    setmetatile 10, 18, 0x133, TRUE
-    setmetatile 10, 19, 0x02E, FALSE
-    return
 
 TH_Movement_JoeyAroundPlayer:
     walk_down

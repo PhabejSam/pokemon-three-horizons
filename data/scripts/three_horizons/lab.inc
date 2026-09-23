@@ -143,3 +143,10 @@ TH_Movement_JoeyLeaveLab:
     walk_down
     walk_down
     step_end
+
+TH_EventScript_Aide1::
+    msgbox TH_Text_Aide1, MSGBOX_NPC
+    end
+TH_EventScript_Aide2::
+    msgbox TH_Text_Aide2, MSGBOX_NPC
+    end

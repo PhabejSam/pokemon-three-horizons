@@ -94,8 +94,9 @@ TH_Text_OakResearch::
 
 TH_Text_ChooseDisplay::
     .string "OAK: Which partner feels right?\n"
-    .string "Try a display to see its\p"
-    .string "choices.$"
+    .string "The POKé BALLS on the table\p"
+    .string "will let you meet each partner.\n"
+    .string "Take your time choosing!$"
 
 TH_Text_RobinThinking::
     .string "JOEY: I'm going to pick first!\n"
@@ -198,15 +199,16 @@ TH_Text_CatchHelp::
     .string "heading home.$"
 
 TH_Text_BirdLocal::
-    .string "See that HOOTHOOT by the tree? I\n"
-    .string "don't usually see them here.\p"
+    .string "See that HOOTHOOT near the\n"
+    .string "trees to our left?\p"
+    .string "I don't usually see them here.\p"
     .string "Maybe it found somewhere it\n"
     .string "likes. It certainly looks\p"
     .string "comfortable.$"
 
 TH_Text_HoothootFirst::
-    .string "A HOOTHOOT rests beside the\n"
-    .string "tree. One sleepy eye follows\p"
+    .string "A HOOTHOOT rests in the grass\n"
+    .string "near the trees. One eye follows\p"
     .string "you.\p"
     .string "It settles back down, quite at\n"
     .string "home. Something to tell OAK\p"
@@ -289,3 +291,32 @@ TH_Text_Bed::
 TH_Text_Research::
     .string "Field notes from three regions.\n"
     .string "OAK has been comparing habitats.$"
+
+TH_Text_RouteSign::
+    .string "ROUTE 1\n"
+    .string "PALLET TOWN - VIRIDIAN CITY$"
+TH_Text_Aide1::
+    .string "I help OAK care for the partners\n"
+    .string "ELM and BIRCH sent us.\p"
+    .string "They've made themselves quite\n"
+    .string "at home here!$"
+TH_Text_Aide2::
+    .string "You can check your partner's\n"
+    .string "IVs and EVs in its SUMMARY.\p"
+    .string "On the skills page, press A\n"
+    .string "to cycle through the numbers.$"
+
+TH_Text_Dresser::
+    .string "Your favorite trainer outfits\n"
+    .string "are neatly folded here.\p"
+    .string "What would you like to wear?$"
+TH_Text_OutfitRed::
+    .string "RED$"
+TH_Text_OutfitLeaf::
+    .string "LEAF$"
+TH_Text_OutfitBrendan::
+    .string "BRENDAN$"
+TH_Text_OutfitMay::
+    .string "MAY$"
+TH_Text_OutfitCancel::
+    .string "KEEP CURRENT$"

@@ -217,13 +217,9 @@ const u16 gTrainerPalette_MagmaAdmin[] = INCGFX_U16("graphics/trainers/front_pic
 const u32 gTrainerFrontPic_Wally[] = INCGFX_U32("graphics/trainers/front_pics/wally.png", ".4bpp.smol");
 const u16 gTrainerPalette_Wally[] = INCGFX_U16("graphics/trainers/palettes/wally.pal", ".gbapal");
 
-#if THREE_HORIZONS
-const u32 gTrainerFrontPic_Brendan[] = INCGFX_U32("graphics/three_horizons/player_front.png", ".4bpp.smol");
-const u16 gTrainerPalette_Brendan[] = INCGFX_U16("graphics/three_horizons/player_front.png", ".gbapal");
-#else
 const u32 gTrainerFrontPic_Brendan[] = INCGFX_U32("graphics/trainers/front_pics/brendan.png", ".4bpp.smol");
 const u16 gTrainerPalette_Brendan[] = INCGFX_U16("graphics/trainers/palettes/brendan.pal", ".gbapal");
-#endif
+
 
 const u32 gTrainerFrontPic_May[] = INCGFX_U32("graphics/trainers/front_pics/may.png", ".4bpp.smol");
 const u16 gTrainerPalette_May[] = INCGFX_U16("graphics/trainers/palettes/may.pal", ".gbapal");
@@ -288,13 +284,9 @@ const u16 gTrainerPalette_RubySapphireBrendan[] = INCGFX_U16("graphics/trainers/
 const u32 gTrainerFrontPic_RubySapphireMay[] = INCGFX_U32("graphics/trainers/front_pics/may_rs.png", ".4bpp.smol");
 const u16 gTrainerPalette_RubySapphireMay[] = INCGFX_U16("graphics/trainers/palettes/may_rs.pal", ".gbapal");
 
-#if THREE_HORIZONS
-const u32 gTrainerFrontPic_YoungsterFrlg[] = INCGFX_U32("graphics/three_horizons/joey_front.png", ".4bpp.smol");
-const u16 gTrainerPalette_YoungsterFrlg[] = INCGFX_U16("graphics/three_horizons/joey_front.png", ".gbapal");
-#else
 const u32 gTrainerFrontPic_YoungsterFrlg[] = INCGFX_U32("graphics/trainers/front_pics/youngster_frlg.png", ".4bpp.smol");
 const u16 gTrainerPalette_YoungsterFrlg[] = INCGFX_U16("graphics/trainers/palettes/youngster_frlg.pal", ".gbapal");
-#endif
+
 
 const u32 gTrainerFrontPic_BugCatcherFrlg[] = INCGFX_U32("graphics/trainers/front_pics/bug_catcher_frlg.png", ".4bpp.smol");
 const u16 gTrainerPalette_BugCatcherFrlg[] = INCGFX_U16("graphics/trainers/palettes/bug_catcher_frlg.pal", ".gbapal");
@@ -480,11 +472,8 @@ const u32 gTrainerFrontPic_PainterFrlg[] = INCGFX_U32("graphics/trainers/front_p
 const u16 gTrainerPalette_PainterFrlg[] = INCGFX_U16("graphics/trainers/palettes/painter_frlg.pal", ".gbapal");
 
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
-#if THREE_HORIZONS
-const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/three_horizons/player_back.png", ".4bpp");
-#else
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
-#endif
+
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
 const u8 gTrainerBackPic_Red[] = INCGFX_U8("graphics/trainers/back_pics/red.png", ".4bpp");
 const u8 gTrainerBackPic_Leaf[] = INCGFX_U8("graphics/trainers/back_pics/leaf.png", ".4bpp");
@@ -561,22 +550,6 @@ static const union AnimCmd *const sBackAnims_Hoenn[] =
     sAnimCmd_Point_HGSS,
 };
 
-#if THREE_HORIZONS
-// Explorer frames are ready, held ready, release, follow-through. The upstream
-// Hoenn sheet uses frame 3 as its initial pose, which does not match this sheet.
-static const union AnimCmd sAnimCmd_THExplorer[] = {
-    ANIMCMD_FRAME(0, 24),
-    ANIMCMD_FRAME(1, 9),
-    ANIMCMD_FRAME(2, 24),
-    ANIMCMD_FRAME(3, 59),
-    ANIMCMD_END,
-};
-static const union AnimCmd *const sBackAnims_THExplorer[] = {
-    sAnim_GeneralFrame0,
-    sAnimCmd_THExplorer,
-    sAnimCmd_THExplorer,
-};
-#endif
 
 static const union AnimCmd *const sBackAnims_Kanto[] =
 {
@@ -624,11 +597,8 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_BRENDAN] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Brendan, gTrainerPalette_Brendan),
-#if THREE_HORIZONS
-        .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_Brendan, gTrainerPalette_Brendan, sBackAnims_THExplorer),
-#else
         .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_Brendan, gTrainerPalette_Brendan, sBackAnims_Hoenn),
-#endif
+
     },
     [TRAINER_PIC_MAY] =
     {
