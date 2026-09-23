@@ -1,0 +1,78 @@
+name: Untouched Emerald baseline
+
+on:
+  push:
+    branches: [setup/clean-build-baseline]
+    paths: [.github/workflows/baseline-build.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  baseline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out the untouched baseline
+        uses: actions/checkout@v4
+        with:
+          ref: c93efe865f20eafd6b48751d13b14c087c330880
+          persist-credentials: false
+
+      - name: Install upstream build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3
+
+      - name: Record source and tool versions
+        run: |
+          {
+            git rev-parse HEAD
+            cat /etc/os-release
+            make --version
+            gcc --version
+            arm-none-eabi-gcc --version
+            arm-none-eabi-ld --version
+            python3 --version
+            dpkg-query -W build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3
+          } > build-environment.txt
+          test -z "$(git status --porcelain)"
+
+      - name: Build Emerald from a fresh checkout
+        shell: bash
+        run: |
+          set -o pipefail
+          make -j2 -O all 2>&1 | tee build-baseline.log
+          test -s pokeemerald.gba
+          git diff --exit-code
+          git diff --cached --exit-code
+          sha256sum pokeemerald.gba > pokeemerald.gba.sha256
+          stat --printf='%n %s bytes\n' pokeemerald.gba | tee build-output.txt
+
+      - name: Save baseline ROM and evidence
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: untouched-emerald-c93efe8
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            pokeemerald.gba
+            pokeemerald.elf
+            pokeemerald.map
+            pokeemerald.gba.sha256
+            build-environment.txt
+            build-baseline.log
+            build-output.txt
+
+      - name: Save diagnostics after failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: baseline-diagnostics
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            build-environment.txt
+            build-baseline.log
