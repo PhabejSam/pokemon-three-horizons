@@ -17,7 +17,7 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "1",
+      "local_id": "LOCALID_TH_CLOCK",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_TH_CLOCK",
       "x": 7,

@@ -51,6 +51,9 @@ class MapContract(unittest.TestCase):
             self.assertTrue(path.exists(), f'Missing demo map: {name}')
             record = json.loads(path.read_text())
             maps[record['id']] = record
+            for obj in record['object_events']:
+                if obj.get('local_id'):
+                    self.assertRegex(obj['local_id'], r'^[A-Za-z_][A-Za-z_0-9]*$')
         layouts = {x.get('id'): x for x in json.loads((ROOT / 'data/layouts/layouts.json').read_text())['layouts']}
         for record in maps.values():
             layout = layouts[record['layout']]
