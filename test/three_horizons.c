@@ -498,8 +498,11 @@ TEST("Three Horizons follower uses only the first party slot and honors the opti
     NewGameInitData();
     EXPECT(OW_FOLLOWERS_ENABLED);
     EXPECT(!GetFollowerInfo(&species, &shiny, &female));
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MUDKIP, 5, 0, OTID_STRUCT_PLAYER_ID);
-    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_TREECKO, 5, 0, OTID_STRUCT_PLAYER_ID);
+    VarSet(VAR_TH_STAGE, TH_STAGE_INVITED);
+    EXPECT(TH_TryGiveStarter(SPECIES_MUDKIP));
+    CreateRandomMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_TREECKO, 5);
+    gPartiesCount[B_TRAINER_PLAYER] = 2;
+    EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP), 0);
     EXPECT(GetFollowerInfo(&species, &shiny, &female));
     EXPECT_EQ(species, SPECIES_MUDKIP);
     VarSet(VAR_TH_FOLLOWER_OFF, 1);
