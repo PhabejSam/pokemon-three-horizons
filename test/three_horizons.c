@@ -29,7 +29,7 @@
 
 #if THREE_HORIZONS
 static const struct Trainer sActualTrainers[DIFFICULTY_COUNT][TRAINERS_COUNT] = {
-#include "data/trainers.h"
+#include "../src/data/trainers.h"
 };
 TEST("Three Horizons assembled rival records have names pictures and correct parties")
 {

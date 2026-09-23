@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 5279)
-Total output lines: 954
-
 {
   "id": "MAP_TH_VIRIDIAN_ENTRANCE",
   "name": "TH_ViridianEntrance",
@@ -250,7 +247,428 @@ Total output lines: 954
       "var_value": "0",
       "script": "TH_EventScript_DemoBoundary"
     },
-…2279 tokens truncated…ipt_Ending"
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 28,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 30,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 31,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 32,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 34,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 35,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 36,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 37,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 38,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 39,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 40,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 41,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 42,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 43,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 44,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 45,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 46,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 47,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_EventScript_DemoBoundary"
+    },
+    {
+      "type": "trigger",
+      "x": 0,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TH_STAGE",
+      "var_value": "3",
+      "script": "TH_EventScript_Ending"
     },
     {
       "type": "trigger",
