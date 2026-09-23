@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_transition.h"
 #include "trainer_pools.h"
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
@@ -50,7 +51,7 @@ TEST("Three Horizons assembled rival records have names pictures and correct par
             const struct TrainerMon *party = trainer->party;
             EXPECT_EQ(StringCompare(trainer->trainerName, COMPOUND_STRING("JOEY")), 0);
             EXPECT_EQ(trainer->trainerPic, TRAINER_PIC_YOUNGSTER_FRLG);
-            EXPECT_EQ(trainer->partySize, 1);
+            EXPECT_EQ((u32)trainer->partySize, 1);
             EXPECT(party != NULL);
             if (party != NULL)
             {

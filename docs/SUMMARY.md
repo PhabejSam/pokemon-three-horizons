@@ -154,3 +154,4 @@
     - [Merge Checklist](team_procedures/merge_checklist.md)
     - [Scope Guidelines](team_procedures/scope.md)
 - [Opening Demo Build and Acceptance](three_horizons/OPENING_DEMO_TESTS.md)
+- [Opening Playtest Follow-up](three_horizons/PLAYTEST_FOLLOWUP.md)

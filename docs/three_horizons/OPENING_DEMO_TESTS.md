@@ -6,7 +6,7 @@ playable opening has passed emulator acceptance.
 ## Build
 
 Use a fresh checkout of `feature/opening-demo` on Ubuntu 24.04. Install the
-dependencies documented in the repository's build baseline note, then run:
+dependencies documented in [BUILD_BASELINE.md](../../BUILD_BASELINE.md), then run:
 
 ```sh
 make -C tools/mapjson
