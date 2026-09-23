@@ -62,6 +62,10 @@ TEST("Three Horizons Oak and Mom have assembled overworld graphics")
         EXPECT(gfx != NULL);
         if (gfx != NULL)
         {
+            u8 previousPalette = IndexOfSpritePaletteTag(gfx->paletteTag);
+            EXPECT_LT(LoadObjectEventPalette(gfx->paletteTag), 16);
+            if (previousPalette == 0xFF)
+                FreeSpritePaletteByTag(gfx->paletteTag);
             EXPECT_EQ(gfx->width, 16);
             EXPECT_EQ(gfx->height, 32);
             EXPECT(gfx->images != NULL);

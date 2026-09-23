@@ -6,6 +6,7 @@ TH_Pallet_OnLoad::
     goto_if_eq VAR_TH_STAGE, TH_STAGE_INVITED, TH_Pallet_HideRobin
     goto_if_ge VAR_TH_STAGE, TH_STAGE_BATTLE_DONE, TH_Pallet_HideRobin
     goto_if_ge VAR_TH_STAGE, TH_STAGE_PARTNER, TH_Pallet_BattlePosition
+    setobjectxyperm LOCALID_TH_ROBIN_TOWN, 7, 9
     end
 TH_Pallet_HideRobin:
     setflag FLAG_TH_HIDE_ROBIN_TOWN
@@ -23,7 +24,13 @@ TH_EventScript_Invitation::
     lockall
     msgbox TH_Text_RobinMorning
     closemessage
+    getplayerxy VAR_0x8008, VAR_0x8009
+    goto_if_eq VAR_0x8008, 8, TH_InvitationStepAround
     applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_RobinToLab
+    goto TH_InvitationDepart
+TH_InvitationStepAround:
+    applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_JoeyAroundPlayer
+TH_InvitationDepart:
     waitmovement 0
     setvar VAR_TH_STAGE, TH_STAGE_INVITED
     removeobject LOCALID_TH_ROBIN_TOWN
@@ -35,7 +42,6 @@ TH_Movement_RobinToLab:
     walk_right
     walk_right
     walk_right
-    walk_down
     walk_down
     walk_down
     walk_down
@@ -144,7 +150,13 @@ TH_BattleEncourage:
 TH_BattleGoodbye:
     msgbox TH_Text_RobinRoute
     closemessage
+    getplayerxy VAR_0x8008, VAR_0x8009
+    goto_if_eq VAR_0x8009, 15, TH_BattleStepAround
     applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_JoeyToRoute
+    goto TH_BattleDepart
+TH_BattleStepAround:
+    applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_JoeyAroundSouth
+TH_BattleDepart:
     waitmovement 0
     removeobject LOCALID_TH_ROBIN_TOWN
 TH_BattleRelease:
@@ -186,3 +198,45 @@ TH_Pallet_CloseSouthernShore:
     setmetatile 10, 18, 0x133, TRUE
     setmetatile 10, 19, 0x02E, FALSE
     return
+
+TH_Movement_JoeyAroundPlayer:
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_up
+    step_end
+
+TH_Movement_JoeyAroundSouth:
+    walk_left
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
