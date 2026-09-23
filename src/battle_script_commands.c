@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "battle.h"
 #include "battle_hold_effects.h"
 #include "battle_message.h"
@@ -9293,6 +9294,10 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
 
         *expAmount = value + 1;
     }
+#if THREE_HORIZONS
+    if (*expAmount > 0)
+        *expAmount = TH_ApplyExpRate(*expAmount);
+#endif
 }
 
 void BS_ItemRestoreHP(void)

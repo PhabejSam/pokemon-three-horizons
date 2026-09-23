@@ -226,6 +226,13 @@ static void Task_NewGameBirchSpeech_WaitForWhatsYourNameToPrint(u8);
 static void Task_NewGameBirchSpeech_WaitPressBeforeNameChoice(u8);
 static void Task_NewGameBirchSpeech_StartNamingScreen(u8);
 static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void);
+#if THREE_HORIZONS
+static void CB2_THNameRival(void)
+{
+    StringCopy(gTHPendingRivalName, COMPOUND_STRING("BLUE"));
+    DoNamingScreen(NAMING_SCREEN_RIVAL, gTHPendingRivalName, MALE, 0, 0, CB2_NewGameBirchSpeech_ReturnFromNamingScreen);
+}
+#endif
 static void Task_NewGameBirchSpeech_CreateNameYesNo(u8);
 static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8);
 void CreateYesNoMenuParameterized(u8, u8, u16, u16, u8, u8);
@@ -1645,7 +1652,13 @@ static void Task_NewGameBirchSpeech_StartNamingScreen(u8 taskId)
         FreeAndDestroyMonPicSprite(gTasks[taskId].tLotadSpriteId);
         NewGameBirchSpeech_SetDefaultPlayerName(Random() % NUM_PRESET_NAMES);
         DestroyTask(taskId);
-        DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_NewGameBirchSpeech_ReturnFromNamingScreen);
+        DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0,
+#if THREE_HORIZONS
+            CB2_THNameRival
+#else
+            CB2_NewGameBirchSpeech_ReturnFromNamingScreen
+#endif
+        );
     }
 }
 

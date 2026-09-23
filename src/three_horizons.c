@@ -1,5 +1,7 @@
 #include "global.h"
 #include "three_horizons.h"
+#include "string_util.h"
+#include "constants/opponents.h"
 #include "field_player_avatar.h"
 #include "event_object_movement.h"
 #include "constants/event_object_movement.h"
@@ -12,6 +14,53 @@
 #include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
+EWRAM_DATA u8 gTHPendingRivalName[PLAYER_NAME_LENGTH + 1] = {0};
+static const u8 sTHDefaultRivalName[] = _("BLUE");
+static const u16 sTHRivalNameVars[] = {VAR_TH_RIVAL_NAME_0, VAR_TH_RIVAL_NAME_1, VAR_TH_RIVAL_NAME_2, VAR_TH_RIVAL_NAME_3};
+
+void TH_SetRivalName(const u8 *name)
+{
+    u8 text[PLAYER_NAME_LENGTH + 1] = {0};
+    u32 i;
+    if (name[0] == 0 || name[0] == EOS)
+        name = sTHDefaultRivalName;
+    StringCopyN(text, name, PLAYER_NAME_LENGTH);
+    text[PLAYER_NAME_LENGTH] = EOS;
+    for (i = 0; i < ARRAY_COUNT(sTHRivalNameVars); i++)
+        VarSet(sTHRivalNameVars[i], text[i * 2] | (text[i * 2 + 1] << 8));
+}
+
+const u8 *TH_GetRivalName(void)
+{
+    static u8 text[PLAYER_NAME_LENGTH + 1];
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sTHRivalNameVars); i++)
+    {
+        u16 pair = VarGet(sTHRivalNameVars[i]);
+        text[i * 2] = pair;
+        text[i * 2 + 1] = pair >> 8;
+    }
+    text[PLAYER_NAME_LENGTH] = EOS;
+    return text[0] == 0 || text[0] == EOS ? sTHDefaultRivalName : text;
+}
+
+bool32 TH_IsRivalTrainer(u16 trainerId)
+{
+    return trainerId >= TRAINER_TH_ROBIN_BULBASAUR && trainerId <= TRAINER_TH_ROBIN_MUDKIP;
+}
+
+bool32 TH_WantsToRun(u16 heldKeys)
+{
+    return !!(heldKeys & B_BUTTON) != (VarGet(VAR_TH_AUTO_RUN) == 1);
+}
+
+u32 TH_ApplyExpRate(u32 experience)
+{
+    u32 rate = VarGet(VAR_TH_EXP_RATE);
+    u32 multiplier = rate < 4 ? 1u << rate : 1;
+    return experience > 0x7FFFFFFFu / multiplier ? 0x7FFFFFFFu : experience * multiplier;
+}
+
 u16 TH_GetOutfit(void)
 {
     u16 outfit = VarGet(VAR_TH_OUTFIT);
@@ -48,6 +97,11 @@ static const u16 sStarters[][2] = {
 void TH_InitNewGame(void)
 {
     VarSet(VAR_TH_OUTFIT, TH_OUTFIT_RED);
+    VarSet(VAR_TH_AUTO_RUN, 0);
+    VarSet(VAR_TH_EXP_RATE, 0);
+    VarSet(VAR_TH_FOLLOWER_OFF, 0);
+    TH_SetRivalName(gTHPendingRivalName);
+    FlagSet(FLAG_SYS_B_DASH);
     VarSet(VAR_TH_STAGE, TH_STAGE_HOME);
     VarSet(VAR_TH_FIRST_PARTNER, SPECIES_NONE);
     VarSet(VAR_TH_RIVAL_PARTNER, SPECIES_NONE);

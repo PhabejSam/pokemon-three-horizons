@@ -9328,7 +9328,7 @@
       "id": "LAYOUT_TH_PALLET",
       "name": "TH_Pallet_Layout",
       "width": 24,
-      "height": 24,
+      "height": 20,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General_Frlg",

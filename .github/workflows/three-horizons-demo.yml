@@ -67,7 +67,7 @@ jobs:
           ! grep -q 'TRAINER_TH_ROBIN_BULBASAUR' src/data/trainers.h
           make THREE_HORIZONS=1 generated >> trainer-mode-switch.log 2>&1
           grep -q 'TRAINER_TH_ROBIN_BULBASAUR' src/data/trainers.h
-          grep -q 'JOEY' src/data/trainers.h
+          grep -q 'BLUE' src/data/trainers.h
       - uses: actions/upload-artifact@v4
         if: always()
         with:

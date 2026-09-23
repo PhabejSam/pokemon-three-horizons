@@ -19,3 +19,5 @@ TH_ViridianEntrance_MapScripts::
     .include "data/scripts/three_horizons/route.inc"
     .include "data/scripts/three_horizons/ending.inc"
     .include "data/scripts/three_horizons/text.inc"
+
+.include "data/maps/TH_Route21Shore/scripts.inc"

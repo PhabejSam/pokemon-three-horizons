@@ -910,8 +910,12 @@ static void PlayerNotOnBikeMoving(enum Direction direction, u16 heldKeys)
     }
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER)
+#if THREE_HORIZONS
+     && TH_WantsToRun(heldKeys)
+#else
      && (heldKeys & B_BUTTON)
-     && FlagGet(FLAG_SYS_B_DASH)
+#endif
+     && (THREE_HORIZONS || FlagGet(FLAG_SYS_B_DASH))
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0
      && !FollowerNPCComingThroughDoor()
      && (I_ORAS_DOWSING_FLAG == 0 || (I_ORAS_DOWSING_FLAG != 0 && !FlagGet(I_ORAS_DOWSING_FLAG))))

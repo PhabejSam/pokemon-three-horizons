@@ -21,7 +21,7 @@ TH_Text_HomeSign::
     .string "{PLAYER}'s house.\n"
     .string "There's always a place for you.$"
 TH_Text_JoeySign::
-    .string "JOEY's house.\n"
+    .string "{RIVAL}'s house.\n"
     .string "Probably out exploring!$"
 
 TH_Text_MomRest::
@@ -44,13 +44,13 @@ TH_Text_TV::
     .string "to home.$"
 
 TH_Text_RobinMorning::
-    .string "JOEY: You're late! ...Okay, I'm\n"
+    .string "{RIVAL}: You're late! ...Okay, I'm\n"
     .string "early. I couldn't sleep.\p"
     .string "I kept wondering which one I'd\n"
     .string "pick. Come on! Let's go see OAK.$"
 
 TH_Text_RobinGoLab::
-    .string "JOEY: Nine first partners! How\n"
+    .string "{RIVAL}: Nine first partners! How\n"
     .string "am I supposed to choose?$"
 
 TH_Text_GateLab::
@@ -58,7 +58,7 @@ TH_Text_GateLab::
     .string "first partner is waiting, too!$"
 
 TH_Text_GateBattle::
-    .string "JOEY is waiting outside the lab\n"
+    .string "{RIVAL} is waiting outside the lab\n"
     .string "for your first friendly battle.$"
 
 TH_Text_GateSupplies::
@@ -99,7 +99,7 @@ TH_Text_ChooseDisplay::
     .string "Take your time choosing!$"
 
 TH_Text_RobinThinking::
-    .string "JOEY: I'm going to pick first!\n"
+    .string "{RIVAL}: I'm going to pick first!\n"
     .string "...After you. I need another\p"
     .string "minute.$"
 
@@ -124,7 +124,7 @@ TH_Text_ReceivedPartner::
     .string "Your adventure begins together.$"
 
 TH_Text_RobinChoice::
-    .string "JOEY: Then I'll choose...\n"
+    .string "{RIVAL}: Then I'll choose...\n"
     .string "{STR_VAR_1}!\p"
     .string "I think we'll make a great team.\n"
     .string "Meet me outside when you're\p"
@@ -157,34 +157,34 @@ TH_Text_BagFull::
     .string "supplies.$"
 
 TH_Text_BeforeBattle::
-    .string "JOEY: Our very first battle!\n"
+    .string "{RIVAL}: Our very first battle!\n"
     .string "Right here, where it all began.\p"
     .string "Ready, {PLAYER}? Let's see what\n"
     .string "our partners can do!$"
 
 TH_Text_BattlePlayerLost::
-    .string "JOEY: We did it! That was so\n"
+    .string "{RIVAL}: We did it! That was so\n"
     .string "close!$"
 
 TH_Text_BattlePlayerWon::
-    .string "JOEY: Already? You're a\n"
+    .string "{RIVAL}: Already? You're a\n"
     .string "natural!$"
 
 TH_Text_RobinAfterWin::
-    .string "JOEY: I really thought I'd win.\n"
+    .string "{RIVAL}: I really thought I'd win.\n"
     .string "...But that was brilliant!\p"
     .string "Next time, I'm making you work a\n"
     .string "little harder for it.$"
 
 TH_Text_RobinAfterLoss::
-    .string "JOEY: I won! I actually won!\n"
+    .string "{RIVAL}: I won! I actually won!\n"
     .string "...Hey, you did well too.\p"
     .string "We'll get better together.\n"
     .string "That's what friends are for,\p"
     .string "right?$"
 
 TH_Text_RobinRoute::
-    .string "JOEY: Everyone's feeling better\n"
+    .string "{RIVAL}: Everyone's feeling better\n"
     .string "now. I'll meet you near\p"
     .string "VIRIDIAN!\p"
     .string "Don't rush past everything.\n"
@@ -219,7 +219,7 @@ TH_Text_HoothootRepeat::
     .string "peacefully.$"
 
 TH_Text_Ending::
-    .string "JOEY: There you are! We made it\n"
+    .string "{RIVAL}: There you are! We made it\n"
     .string "to VIRIDIAN.\p"
     .string "It's only one route from home...\n"
     .string "So why does everything feel new?\p"
@@ -236,7 +236,7 @@ TH_Text_DemoComplete::
     .string "More of the journey lies ahead.$"
 
 TH_Text_EndingRepeat::
-    .string "JOEY: I'll be right here. Take\n"
+    .string "{RIVAL}: I'll be right here. Take\n"
     .string "another look around if you like.$"
 
 TH_Text_Boundary::
@@ -277,8 +277,8 @@ TH_Text_Kitchen::
     .string "MOM left a snack for later.$"
 
 TH_Text_Books::
-    .string "Travel journals and field guides.\n"
-    .string "Some pages are dog-eared.$"
+    .string "Books about POKéMON line the shelf.\n"
+    .string "Your favorite has a leaf bookmark.$"
 
 TH_Text_Fridge::
     .string "Lunch is packed for the road.\n"

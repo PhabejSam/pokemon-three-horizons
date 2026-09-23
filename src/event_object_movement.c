@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/three_horizons.h"
 #include "malloc.h"
 #include "battle_anim.h"
 #include "battle_pyramid.h"
@@ -2344,7 +2345,15 @@ static bool8 GetMonInfo(struct Pokemon *mon, enum Species *species, bool32 *shin
 // Retrieve graphic information about the following Pokémon, if any
 bool8 GetFollowerInfo(enum Species *species, bool32 *shiny, bool32 *female)
 {
+#if THREE_HORIZONS
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    if (VarGet(VAR_TH_FOLLOWER_OFF) || GetMonData(mon, MON_DATA_HP) == 0
+        || GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG))
+        return FALSE;
+    return GetMonInfo(mon, species, shiny, female);
+#else
     return GetMonInfo(GetFirstLiveMon(), species, shiny, female);
+#endif
 }
 
 // Update following Pokémon if any

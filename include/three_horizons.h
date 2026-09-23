@@ -14,6 +14,12 @@ bool32 TH_TryGiveConfiguredStarter(u16 species, const struct THPartnerOptions *o
 void TH_OpenPartnerEditor(void);
 void TH_ScriptGiveConfiguredStarter(void);
 
+extern u8 gTHPendingRivalName[PLAYER_NAME_LENGTH + 1];
+const u8 *TH_GetRivalName(void);
+void TH_SetRivalName(const u8 *name);
+bool32 TH_IsRivalTrainer(u16 trainerId);
+bool32 TH_WantsToRun(u16 heldKeys);
+u32 TH_ApplyExpRate(u32 experience);
 u16 TH_GetOutfit(void);
 u16 TH_GetTrainerPic(void);
 void TH_ChangeOutfit(void);

@@ -56,8 +56,8 @@ TEST("Three Horizons assembled rival records have names pictures and correct par
             if (trainer->party == NULL)
                 trainer = &sActualTrainers[DIFFICULTY_NORMAL][id];
             const struct TrainerMon *party = trainer->party;
-            EXPECT_EQ(StringCompare(trainer->trainerName, COMPOUND_STRING("JOEY")), 0);
-            EXPECT_EQ(trainer->trainerPic, TRAINER_PIC_YOUNGSTER_FRLG);
+            EXPECT_EQ(StringCompare(trainer->trainerName, COMPOUND_STRING("BLUE")), 0);
+            EXPECT_EQ(trainer->trainerPic, TRAINER_PIC_RIVAL_EARLY_FRLG);
             EXPECT_EQ((u32)trainer->partySize, 1);
             EXPECT(party != NULL);
             if (party != NULL)
@@ -435,6 +435,96 @@ TEST("Three Horizons every nature can be selected with normal coloration")
         EXPECT(TH_TryGiveConfiguredStarter(SPECIES_CHIKORITA, &options));
         EXPECT_EQ(GetNature(&gParties[B_TRAINER_PLAYER][0]), nature);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_SHINY), FALSE);
+    }
+}
+
+extern void ApplyExperienceMultipliers(s32 *amount, u8 partyId, u8 faintedBattler);
+
+TEST("Three Horizons running shoes and optional auto-run work with B override")
+{
+    NewGameInitData();
+    EXPECT(FlagGet(FLAG_SYS_B_DASH));
+    EXPECT(!TH_WantsToRun(0));
+    EXPECT(TH_WantsToRun(B_BUTTON));
+    VarSet(VAR_TH_AUTO_RUN, 1);
+    EXPECT(TH_WantsToRun(0));
+    EXPECT(!TH_WantsToRun(B_BUTTON));
+    VarSet(VAR_TH_AUTO_RUN, 99);
+    EXPECT(!TH_WantsToRun(0));
+}
+
+TEST("Three Horizons selected experience rate multiplies the production reward")
+{
+    s32 normal = 40, boosted;
+    u32 rate;
+    NewGameInitData();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MUDKIP, 5, 0, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    gBattleMons[1].level = 5;
+    ApplyExperienceMultipliers(&normal, 0, 1);
+    EXPECT_GT(normal, 0);
+    for (rate = 0; rate < 4; rate++)
+    {
+        VarSet(VAR_TH_EXP_RATE, rate);
+        boosted = 40;
+        ApplyExperienceMultipliers(&boosted, 0, 1);
+        EXPECT_EQ(boosted, normal * (1 << rate));
+    }
+    EXPECT_EQ(TH_ApplyExpRate(0x40000000), 0x7FFFFFFF);
+    VarSet(VAR_TH_EXP_RATE, 99);
+    EXPECT_EQ(TH_ApplyExpRate(123), 123);
+}
+
+TEST("Three Horizons rival name survives new-game initialization and expands in dialogue")
+{
+    u8 expanded[32];
+    StringCopy(gTHPendingRivalName, COMPOUND_STRING("SILVER"));
+    NewGameInitData();
+    EXPECT_EQ(StringCompare(TH_GetRivalName(), COMPOUND_STRING("SILVER")), 0);
+    EXPECT_EQ(StringCompare(GetTrainerNameFromId(TRAINER_TH_ROBIN_MUDKIP), COMPOUND_STRING("SILVER")), 0);
+    StringExpandPlaceholders(expanded, COMPOUND_STRING("{RIVAL}"));
+    EXPECT_EQ(StringCompare(expanded, COMPOUND_STRING("SILVER")), 0);
+    TH_SetRivalName(COMPOUND_STRING("ABCDEFG"));
+    EXPECT_EQ(StringCompare(TH_GetRivalName(), COMPOUND_STRING("ABCDEFG")), 0);
+    TH_SetRivalName(COMPOUND_STRING(""));
+    EXPECT_EQ(StringCompare(TH_GetRivalName(), COMPOUND_STRING("BLUE")), 0);
+    gTHPendingRivalName[0] = 0;
+}
+
+TEST("Three Horizons follower uses only the first party slot and honors the option")
+{
+    enum Species species;
+    bool32 shiny, female;
+    u16 zero = 0;
+    NewGameInitData();
+    EXPECT(OW_FOLLOWERS_ENABLED);
+    EXPECT(!GetFollowerInfo(&species, &shiny, &female));
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MUDKIP, 5, 0, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_TREECKO, 5, 0, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    EXPECT(GetFollowerInfo(&species, &shiny, &female));
+    EXPECT_EQ(species, SPECIES_MUDKIP);
+    VarSet(VAR_TH_FOLLOWER_OFF, 1);
+    EXPECT(!GetFollowerInfo(&species, &shiny, &female));
+    VarSet(VAR_TH_FOLLOWER_OFF, 0);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &zero);
+    EXPECT(!GetFollowerInfo(&species, &shiny, &female));
+    gParties[B_TRAINER_PLAYER][0] = gParties[B_TRAINER_PLAYER][1];
+    EXPECT(GetFollowerInfo(&species, &shiny, &female));
+    EXPECT_EQ(species, SPECIES_TREECKO);
+}
+
+TEST("Three Horizons starters retain their normal level evolution destinations")
+{
+    static const u16 base[] = {SPECIES_BULBASAUR, SPECIES_CHARMANDER, SPECIES_SQUIRTLE, SPECIES_CHIKORITA, SPECIES_CYNDAQUIL, SPECIES_TOTODILE, SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP};
+    static const u16 evolved[] = {SPECIES_IVYSAUR, SPECIES_CHARMELEON, SPECIES_WARTORTLE, SPECIES_BAYLEEF, SPECIES_QUILAVA, SPECIES_CROCONAW, SPECIES_GROVYLE, SPECIES_COMBUSKEN, SPECIES_MARSHTOMP};
+    static const u8 levels[] = {16, 16, 16, 16, 14, 18, 16, 16, 16};
+    struct Pokemon mon;
+    u32 i;
+    bool32 canStop;
+    NewGameInitData();
+    for (i = 0; i < ARRAY_COUNT(base); i++)
+    {
+        CreateMon(&mon, base[i], levels[i], 0, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        EXPECT_EQ(GetEvolutionTargetSpecies(&mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStop, CHECK_EVO), evolved[i]);
     }
 }
 #endif

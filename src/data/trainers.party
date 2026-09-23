@@ -16881,9 +16881,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 #if THREE_HORIZONS
 === TRAINER_TH_ROBIN_BULBASAUR ===
-Name: JOEY
+Name: BLUE
 Class: Rival
-Pic: Youngster Frlg
+Pic: Rival Early Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -16893,9 +16893,9 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_CHARMANDER ===
-Name: JOEY
+Name: BLUE
 Class: Rival
-Pic: Youngster Frlg
+Pic: Rival Early Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -16905,9 +16905,9 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_SQUIRTLE ===
-Name: JOEY
+Name: BLUE
 Class: Rival
-Pic: Youngster Frlg
+Pic: Rival Early Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -16917,9 +16917,9 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_CHIKORITA ===
-Name: JOEY
+Name: BLUE
 Class: Rival
-Pic: Youngster Frlg
+Pic: Rival Early Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -16929,9 +16929,9 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_CYNDAQUIL ===
-Name: JOEY
+Name: BLUE
 Class: Rival
-Pic: Youngster Frlg
+Pic: Rival Early Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -16941,9 +16941,9 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_TOTODILE ===
-Name: JOEY
+Name: BLUE
 Class: Rival
-Pic: Youngster Frlg
+Pic: Rival Early Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -16953,9 +16953,9 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_TREECKO ===
-Name: JOEY
+Name: BLUE
 Class: Rival
-Pic: Youngster Frlg
+Pic: Rival Early Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -16965,9 +16965,9 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_TORCHIC ===
-Name: JOEY
+Name: BLUE
 Class: Rival
-Pic: Youngster Frlg
+Pic: Rival Early Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -16977,9 +16977,9 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TH_ROBIN_MUDKIP ===
-Name: JOEY
+Name: BLUE
 Class: Rival
-Pic: Youngster Frlg
+Pic: Rival Early Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move

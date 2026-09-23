@@ -8,6 +8,13 @@
 #define VAR_TH_SUPPLY_MASK     0x40FA
 #define VAR_TH_SIGHTING_SEEN   0x40FB
 #define VAR_TH_OUTFIT          0x40FC
+#define VAR_TH_EXP_RATE        0x40FD
+#define VAR_TH_AUTO_RUN        0x40FE
+#define VAR_TH_FOLLOWER_OFF    0x40FF
+#define VAR_TH_RIVAL_NAME_0    0x404E
+#define VAR_TH_RIVAL_NAME_1    0x4083
+#define VAR_TH_RIVAL_NAME_2    0x408B
+#define VAR_TH_RIVAL_NAME_3    0x4091
 #define TH_OUTFIT_RED          0
 #define TH_OUTFIT_LEAF         1
 #define TH_OUTFIT_BRENDAN      2

@@ -19,13 +19,18 @@
       "map": "MAP_TH_ROUTE1",
       "offset": 0,
       "direction": "up"
+    },
+    {
+      "map": "MAP_TH_ROUTE21_SHORE",
+      "offset": 0,
+      "direction": "down"
     }
   ],
   "object_events": [
     {
       "local_id": "LOCALID_TH_ROBIN_TOWN",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER_FRLG",
+      "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 7,
       "y": 9,
       "elevation": 3,

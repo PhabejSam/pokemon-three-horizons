@@ -80,6 +80,9 @@ static void MoveSelectionDisplayPPNumber(enum BattlerId battler);
 static void MoveSelectionDisplayPPString(enum BattlerId battler);
 static void MoveSelectionDisplayMoveType(enum BattlerId battler);
 static void MoveSelectionDisplayMoveNames(enum BattlerId battler);
+#if THREE_HORIZONS
+static void TH_ColorMoveName(enum BattlerId battler, u32 slot);
+#endif
 static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler);
 static void MoveSelectionDisplayMoveDescription(enum BattlerId battler);
 static void WaitForMonSelection(enum BattlerId battler);
@@ -1664,6 +1667,9 @@ static void MoveSelectionDisplayMoveNames(enum BattlerId battler)
             StringCopy(gDisplayedStringBattle, GetMoveName(GetMaxMove(battler, moveInfo->moves[i])));
         else
             StringCopy(gDisplayedStringBattle, GetMoveName(moveInfo->moves[i]));
+#if THREE_HORIZONS
+        TH_ColorMoveName(battler, i);
+#endif
         // Prints on windows B_WIN_MOVE_NAME_1, B_WIN_MOVE_NAME_2, B_WIN_MOVE_NAME_3, B_WIN_MOVE_NAME_4
         BattlePutTextOnWindow(gDisplayedStringBattle, i + B_WIN_MOVE_NAME_1);
         if (moveInfo->moves[i] != MOVE_NONE)
@@ -1674,6 +1680,9 @@ static void MoveSelectionDisplayMoveNames(enum BattlerId battler)
 static void MoveSelectionDisplayPPString(enum BattlerId battler)
 {
     StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
+#if THREE_HORIZONS
+    // The initial label is replaced with the selected move's effectiveness below.
+#endif
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP);
 }
 
@@ -2426,6 +2435,37 @@ static u32 CheckTargetTypeEffectiveness(enum BattlerId battler)
     return foeEffectiveness; // fallthrough for any other circumstance
 }
 
+#if THREE_HORIZONS
+// Palette entries 5..8 are unused in the upstream battle text palette.
+static u8 TH_EffectivenessColor(u32 effectiveness, bool32 status)
+{
+    if (status) return 8;
+    if (effectiveness >= EFFECTIVENESS_SUPER_EFFECTIVE) return 5;
+    if (effectiveness == EFFECTIVENESS_NOT_VERY_EFFECTIVE || effectiveness == EFFECTIVENESS_MOSTLY_INEFFECTIVE) return 6;
+    if (effectiveness == EFFECTIVENESS_NO_EFFECT) return 7;
+    return 13;
+}
+
+static void TH_ColorMoveName(enum BattlerId battler, u32 slot)
+{
+    static const u16 colors[] = {RGB(0, 16, 3), RGB(23, 12, 0), RGB(24, 2, 2), RGB(3, 9, 25)};
+    struct ChooseMoveStruct *moveInfo = (void *)&gBattleResources->bufferA[battler][4];
+    u8 savedCursor = gMoveSelectionCursor[battler];
+    u8 text[128];
+    u32 effectiveness = EFFECTIVENESS_CANNOT_VIEW;
+    gMoveSelectionCursor[battler] = slot;
+    if (moveInfo->moves[slot] != MOVE_NONE)
+        effectiveness = CheckTargetTypeEffectiveness(battler);
+    gMoveSelectionCursor[battler] = savedCursor;
+    text[0] = EXT_CTRL_CODE_BEGIN;
+    text[1] = EXT_CTRL_CODE_COLOR;
+    text[2] = TH_EffectivenessColor(effectiveness, IsBattleMoveStatus(moveInfo->moves[slot]));
+    StringCopy(text + 3, gDisplayedStringBattle);
+    StringCopy(gDisplayedStringBattle, text);
+    LoadPalette(colors, BG_PLTT_ID(5) + 5, sizeof(colors));
+}
+#endif
+
 static void MoveSelectionDisplayMoveEffectiveness(u32 foeEffectiveness, enum BattlerId battler)
 {
     static const u8 noIcon[] =  _("");
@@ -2469,5 +2509,17 @@ static void MoveSelectionDisplayMoveEffectiveness(u32 foeEffectiveness, enum Bat
         }
     }
 
+#if THREE_HORIZONS
+    {
+        static const u8 *const labels[] = {
+            COMPOUND_STRING("?"), COMPOUND_STRING("0x"), COMPOUND_STRING("1/4x"),
+            COMPOUND_STRING("1/2x"), COMPOUND_STRING("1x"), COMPOUND_STRING("2x"), COMPOUND_STRING("4x")};
+        bool32 status = IsBattleMoveStatus(moveInfo->moves[gMoveSelectionCursor[battler]]);
+        gDisplayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
+        gDisplayedStringBattle[1] = EXT_CTRL_CODE_COLOR;
+        gDisplayedStringBattle[2] = TH_EffectivenessColor(foeEffectiveness, status);
+        StringCopy(gDisplayedStringBattle + 3, status ? COMPOUND_STRING("--") : labels[foeEffectiveness]);
+    }
+#endif
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP);
 }
