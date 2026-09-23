@@ -458,7 +458,7 @@ TEST("Three Horizons selected experience rate multiplies the production reward")
     s32 normal = 40, boosted;
     u32 rate;
     NewGameInitData();
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MUDKIP, 5, 0, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MUDKIP, 5, 0, OTID_STRUCT_PLAYER_ID);
     gBattleMons[1].level = 5;
     ApplyExperienceMultipliers(&normal, 0, 1);
     EXPECT_GT(normal, 0);
@@ -498,8 +498,8 @@ TEST("Three Horizons follower uses only the first party slot and honors the opti
     NewGameInitData();
     EXPECT(OW_FOLLOWERS_ENABLED);
     EXPECT(!GetFollowerInfo(&species, &shiny, &female));
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MUDKIP, 5, 0, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_TREECKO, 5, 0, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MUDKIP, 5, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_TREECKO, 5, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT(GetFollowerInfo(&species, &shiny, &female));
     EXPECT_EQ(species, SPECIES_MUDKIP);
     VarSet(VAR_TH_FOLLOWER_OFF, 1);
@@ -523,7 +523,7 @@ TEST("Three Horizons starters retain their normal level evolution destinations")
     NewGameInitData();
     for (i = 0; i < ARRAY_COUNT(base); i++)
     {
-        CreateMon(&mon, base[i], levels[i], 0, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        CreateMon(&mon, base[i], levels[i], 0, OTID_STRUCT_PLAYER_ID);
         EXPECT_EQ(GetEvolutionTargetSpecies(&mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStop, CHECK_EVO), evolved[i]);
     }
 }
