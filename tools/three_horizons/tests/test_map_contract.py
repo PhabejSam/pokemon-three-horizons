@@ -1,0 +1,69 @@
+"""Exercise mapjson output and the closed demo map graph (stdlib only)."""
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import tempfile
+import unittest
+
+ROOT = Path(__file__).resolve().parents[3]
+EXE = ROOT / 'tools/mapjson' / ('mapjson.exe' if os.name == 'nt' else 'mapjson')
+NAMES = ('TH_Home2F', 'TH_Home1F', 'TH_Pallet', 'TH_OaksLab', 'TH_Route1', 'TH_ViridianEntrance')
+
+
+class MapContract(unittest.TestCase):
+    def generate(self, mode, version):
+        with tempfile.TemporaryDirectory(dir=ROOT, prefix='.th-') as folder:
+            out = Path(folder)
+            args = [str(EXE), mode, version]
+            if mode == 'layouts':
+                args += ['data/layouts/layouts.json']
+            else:
+                args += ['data/maps/map_groups.json']
+                for i, path in enumerate(sorted((ROOT / 'data/maps').glob('*/map.json'))):
+                    short = out / str(i)
+                    short.write_bytes(path.read_bytes())
+                    args.append(str(short.relative_to(ROOT)))
+            args += [str(out), str(out)]
+            run = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
+            self.assertEqual(run.returncode, 0, run.stderr)
+            return {p.name: p.read_text() for p in out.iterdir() if p.suffix in ('.h', '.inc')}
+
+    def test_demo_includes_native_kanto_layouts(self):
+        """Rejects a mode that omits the bedroom or emits its Emerald format."""
+        out = self.generate('layouts', 'three_horizons')
+        self.assertIn('PalletTown_PlayersHouse_2F_FRLG_Layout::', out['layouts.inc'])
+        self.assertRegex(out['layouts.inc'], r'PalletTown_PlayersHouse_2F_FRLG_Layout::[\s\S]*?\.byte TRUE')
+
+    def test_demo_group_is_selected_only_for_demo(self):
+        for version in ('emerald', 'firered', 'three_horizons'):
+            out = self.generate('groups', version)
+            for name in NAMES:
+                line = '\t.4byte ' + name + '\n'
+                self.assertEqual(line in out['groups.inc'], version == 'three_horizons', (name, version))
+
+    def test_demo_maps_form_closed_graph(self):
+        maps = {}
+        for name in NAMES:
+            path = ROOT / 'data/maps' / name / 'map.json'
+            self.assertTrue(path.exists(), f'Missing demo map: {name}')
+            record = json.loads(path.read_text())
+            maps[record['id']] = record
+        for record in maps.values():
+            for warp in record['warp_events']:
+                self.assertIn(warp['dest_map'], maps)
+                self.assertLess(int(warp['dest_warp_id']), len(maps[warp['dest_map']]['warp_events']))
+            for connection in record['connections'] or []:
+                self.assertIn(connection['map'], maps)
+
+    def test_generation_does_not_mutate_healing_source(self):
+        path = ROOT / 'src/data/heal_locations.json'
+        before = path.read_bytes()
+        for version in ('emerald', 'firered', 'three_horizons'):
+            self.generate('groups', version)
+            self.assertEqual(before, path.read_bytes())
+
+
+if __name__ == '__main__':
+    unittest.main()

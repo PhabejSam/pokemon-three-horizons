@@ -1,0 +1,44 @@
+name: Three Horizons demo
+on:
+  push:
+    branches: [feature/opening-demo]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  demo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3 git
+      - name: Check map contracts
+        run: |
+          make -C tools/mapjson
+          python3 -m unittest discover -s tools/three_horizons/tests -v
+      - name: Build demo
+        shell: bash
+        run: |
+          set -o pipefail
+          make THREE_HORIZONS=1 -j2 -O all 2>&1 | tee demo-build.log
+          test -s pokemon-three-horizons.gba
+          git diff --exit-code
+          sha256sum pokemon-three-horizons.gba > pokemon-three-horizons.gba.sha256
+          git rev-parse HEAD > demo-source-commit.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: three-horizons-opening
+          retention-days: 14
+          path: |
+            pokemon-three-horizons.gba
+            pokemon-three-horizons.elf
+            pokemon-three-horizons.map
+            pokemon-three-horizons.gba.sha256
+            demo-build.log
+            demo-source-commit.txt

@@ -20,6 +20,15 @@ ifeq (leafgreen, $(or $(BUILD), $(MAKECMDGOALS)))
 endif
 endif
 
+THREE_HORIZONS ?= 0
+ifeq ($(THREE_HORIZONS),1)
+  ifneq ($(GAME_VERSION),EMERALD)
+    $(error THREE_HORIZONS requires GAME_VERSION=EMERALD)
+  endif
+  BUILD_NAME := three-horizons
+  MAP_VERSION := three_horizons
+endif
+
 # GBA rom header
 MAKER_CODE  := 01
 REVISION    := 0
@@ -27,6 +36,9 @@ KEEP_TEMPS  ?= 0
 
 # `File name`.gba
 FILE_NAME := poke$(BUILD_NAME)
+ifeq ($(THREE_HORIZONS),1)
+  FILE_NAME := pokemon-three-horizons
+endif
 BUILD_DIR := build
 
 # Compares the ROM to a checksum of the original - only makes sense using when non-modern
@@ -156,7 +168,7 @@ O_LEVEL ?= g
 else
 O_LEVEL ?= 2
 endif
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -D$(GAME_VERSION) -std=gnu17
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -DTHREE_HORIZONS=$(THREE_HORIZONS) -D$(GAME_VERSION) -std=gnu17
 ifeq ($(RELEASE),1)
 	override CPPFLAGS += -DRELEASE
 	ifeq ($(USE_LTO_ON_RELEASE),1)
