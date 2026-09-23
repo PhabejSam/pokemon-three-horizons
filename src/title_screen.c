@@ -741,7 +741,7 @@ static void Task_TitleScreenPhase1(u8 taskId)
         spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_RIGHT_X, VERSION_BANNER_Y, 0);
 #if THREE_HORIZONS
         gSprites[spriteId].oam.paletteNum = 0;
-        StartSpriteAnim(spriteId, 0);
+        StartSpriteAnim(&gSprites[spriteId], 0);
         // Apply the right-half tile offset before printing; its first animation tick is later.
         gSprites[spriteId].oam.tileNum = GetSpriteTileStartByTag(TAG_VERSION) + VERSION_BANNER_RIGHT_TILEOFFSET;
         AddSpriteTextPrinterParameterized3(spriteId, FONT_NORMAL, 0, 7, (const u8[]){0, 1, 2}, 0, COMPOUND_STRING("HORIZONS"));
