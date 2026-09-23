@@ -162,8 +162,6 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     vector<Json> matched;
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
-        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
-            continue;
         if (map_layout_id == json_to_string(layout, "id", true))
             matched.push_back(layout);
     }

@@ -14,6 +14,26 @@ NAMES = ('TH_Home2F', 'TH_Home1F', 'TH_Pallet', 'TH_OaksLab', 'TH_Route1', 'TH_V
 
 
 class MapContract(unittest.TestCase):
+    def test_individual_project_maps_generate_in_every_build_mode(self):
+        # Make prepares every map's events before linking only selected groups.
+        constants = ROOT / 'include/constants/map_groups.h'
+        before = constants.read_bytes() if constants.exists() else None
+        try:
+            for version in ('emerald', 'firered', 'three_horizons'):
+                constants.write_text(self.generate('groups', version)['map_groups.h'])
+                for name in NAMES:
+                    with tempfile.TemporaryDirectory(dir=ROOT, prefix='.th-') as folder:
+                        run = subprocess.run([str(EXE), 'map', version,
+                            f'data/maps/{name}/map.json', 'data/layouts/layouts.json', folder],
+                            cwd=ROOT, capture_output=True, text=True)
+                        self.assertEqual(run.returncode, 0, (version, name, run.stderr))
+                        self.assertIn(name, (Path(folder) / 'header.inc').read_text())
+        finally:
+            if before is None:
+                constants.unlink(missing_ok=True)
+            else:
+                constants.write_bytes(before)
+
     def generate(self, mode, version):
         with tempfile.TemporaryDirectory(dir=ROOT, prefix='.th-') as folder:
             out = Path(folder)
