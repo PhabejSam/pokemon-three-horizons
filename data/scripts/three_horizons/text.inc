@@ -124,7 +124,7 @@ TH_Text_ReceivedPartner::
     .string "Your adventure begins together.$"
 
 TH_Text_RobinChoice::
-    .string "{RIVAL}: Then I'll choose...\n"
+    .string "{RIVAL}: I've chosen\n"
     .string "{STR_VAR_1}!\p"
     .string "I think we'll make a great team.\n"
     .string "Meet me outside when you're\p"

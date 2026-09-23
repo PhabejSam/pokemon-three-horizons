@@ -28,6 +28,7 @@ jobs:
           set -o pipefail
           make THREE_HORIZONS=1 -j2 -O all 2>&1 | tee demo-build.log
           test -s pokemon-three-horizons.gba
+          python3 tools/three_horizons/check_running_elf.py pokemon-three-horizons.elf | tee running-frames.log
           git diff --exit-code
           sha256sum pokemon-three-horizons.gba > pokemon-three-horizons.gba.sha256
           git rev-parse HEAD > demo-source-commit.txt
@@ -79,6 +80,7 @@ jobs:
             pokemon-three-horizons.map
             pokemon-three-horizons.gba.sha256
             demo-build.log
+            running-frames.log
             demo-tests.log
             demo-source-commit.txt
             demo-environment.txt

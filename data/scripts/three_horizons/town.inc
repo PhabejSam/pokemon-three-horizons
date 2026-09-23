@@ -1,4 +1,5 @@
 TH_Pallet_OnTransition::
+    setvar VAR_TEMP_3, 1
     goto TH_Pallet_OnLoad
 TH_Pallet_OnLoad::
     clearflag FLAG_TH_HIDE_ROBIN_TOWN
@@ -14,6 +15,58 @@ TH_Pallet_BattlePosition:
     setobjectxyperm LOCALID_TH_ROBIN_TOWN, 17, 14
     end
 
+@ Door exit movement does not generate an ordinary coordinate-step event.
+@ Check once after field input resumes; clear before dispatch so other positions
+@ and already-completed stages never repeatedly seize player control.
+TH_Pallet_OnFrame:
+    map_script_2 VAR_TEMP_3, 1, TH_Pallet_CheckDoorScene
+    .2byte 0
+TH_Pallet_CheckDoorScene::
+    setvar VAR_TEMP_3, 0
+    getplayerxy VAR_0x8008, VAR_0x8009
+    goto_if_eq VAR_TH_STAGE, TH_STAGE_HOME, TH_Pallet_CheckHomeDoor
+    goto_if_eq VAR_TH_STAGE, TH_STAGE_PARTNER, TH_Pallet_CheckLabDoor
+    end
+TH_Pallet_CheckHomeDoor:
+    goto_if_ne VAR_0x8008, 6, TH_Pallet_NoDoorScene
+    goto_if_eq VAR_0x8009, 8, TH_AutoInvitation
+    end
+TH_Pallet_CheckLabDoor:
+    goto_if_ne VAR_0x8008, 16, TH_Pallet_NoDoorScene
+    goto_if_eq VAR_0x8009, 14, TH_AutoFirstBattle
+TH_Pallet_NoDoorScene:
+    end
+TH_AutoInvitation:
+    lockall
+    hidefollower TRUE
+    applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_RivalGreet
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceRival
+    waitmovement 0
+    msgbox TH_Text_RobinMorning
+    closemessage
+    applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_StepSouth
+    waitmovement 0
+    goto TH_InvitationLeave
+TH_AutoFirstBattle:
+    lockall
+    hidefollower TRUE
+    applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_RivalFacePlayer
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceRival
+    waitmovement 0
+    goto TH_EventScript_FirstBattle
+TH_Movement_RivalGreet:
+    walk_up
+    face_left
+    step_end
+TH_Movement_PlayerFaceRival:
+    face_right
+    step_end
+TH_Movement_RivalFacePlayer:
+    face_left
+    step_end
+
 TH_EventScript_RobinTown::
     goto_if_eq VAR_TH_STAGE, TH_STAGE_HOME, TH_EventScript_Invitation
     goto_if_eq VAR_TH_STAGE, TH_STAGE_PARTNER, TH_EventScript_FirstBattle
@@ -21,8 +74,10 @@ TH_EventScript_RobinTown::
     end
 TH_EventScript_Invitation::
     lockall
+    goto_if_ne VAR_TH_STAGE, TH_STAGE_HOME, TH_BattleRelease
     msgbox TH_Text_RobinMorning
     closemessage
+TH_InvitationLeave:
     getplayerxy VAR_0x8008, VAR_0x8009
     goto_if_eq VAR_0x8008, 8, TH_InvitationStepAround
     applymovement LOCALID_TH_ROBIN_TOWN, TH_Movement_RobinToLab

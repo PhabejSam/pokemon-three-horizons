@@ -4508,7 +4508,11 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedNormal = {
     .tracks = TRACKS_FOOT,
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
+#if THREE_HORIZONS
+    .anims = sAnimTable_THRedLeafNormal,
+#else
     .anims = sAnimTable_BrendanMayNormal,
+#endif
     .images = sPicTable_RedNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
@@ -4698,7 +4702,11 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenNormal = {
     .tracks = TRACKS_FOOT,
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
+#if THREE_HORIZONS
+    .anims = sAnimTable_THRedLeafNormal,
+#else
     .anims = sAnimTable_BrendanMayNormal,
+#endif
     .images = sPicTable_GreenNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };

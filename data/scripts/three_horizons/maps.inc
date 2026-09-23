@@ -4,6 +4,7 @@ TH_Home1F_MapScripts::
     .byte 0
 TH_Pallet_MapScripts::
     map_script MAP_SCRIPT_ON_TRANSITION, TH_Pallet_OnTransition
+    map_script MAP_SCRIPT_ON_FRAME_TABLE, TH_Pallet_OnFrame
     .byte 0
 TH_OaksLab_MapScripts::
     map_script MAP_SCRIPT_ON_TRANSITION, TH_Lab_OnLoad
