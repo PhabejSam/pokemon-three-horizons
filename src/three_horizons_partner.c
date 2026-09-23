@@ -19,8 +19,8 @@
 static EWRAM_DATA struct THPartnerOptions sOptions = {0};
 static EWRAM_DATA struct THPartnerOptions sDefaults = {0};
 static EWRAM_DATA u16 sSpecies = 0;
-static EWRAM_DATA u16 sSprite = 0xFFFF;
-static EWRAM_DATA u8 sWindow = WINDOW_NONE;
+static EWRAM_DATA u16 sSprite = 0;
+static EWRAM_DATA u8 sWindow = 0;
 static EWRAM_DATA u8 sPage = 0;
 static EWRAM_DATA u8 sCursor = 0;
 static EWRAM_DATA bool8 sConfirmed = FALSE;
@@ -142,12 +142,12 @@ static void Task_PartnerEditor(u8 taskId)
         sPage = 0;
         changed = TRUE;
     }
-    else if (JOY_REPT(DPAD_UP))
+    else if (JOY_REPEAT(DPAD_UP))
     {
         sCursor = (sCursor + 6) % 7;
         changed = TRUE;
     }
-    else if (JOY_REPT(DPAD_DOWN))
+    else if (JOY_REPEAT(DPAD_DOWN))
     {
         sCursor = (sCursor + 1) % 7;
         changed = TRUE;
@@ -181,10 +181,10 @@ static void Task_PartnerEditor(u8 taskId)
             return;
         }
     }
-    else if (JOY_REPT(DPAD_LEFT | L_BUTTON))
-        delta = JOY_REPT(L_BUTTON) ? -10 : -1;
-    else if (JOY_REPT(DPAD_RIGHT | R_BUTTON))
-        delta = JOY_REPT(R_BUTTON) ? 10 : 1;
+    else if (JOY_REPEAT(DPAD_LEFT | L_BUTTON))
+        delta = JOY_REPEAT(L_BUTTON) ? -10 : -1;
+    else if (JOY_REPEAT(DPAD_RIGHT | R_BUTTON))
+        delta = JOY_REPEAT(R_BUTTON) ? 10 : 1;
     if (delta != 0)
     {
         changed = TRUE;
