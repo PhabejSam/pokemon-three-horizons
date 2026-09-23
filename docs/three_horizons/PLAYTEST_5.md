@@ -47,3 +47,9 @@ positions around each regional display, and existing departure paths.
 
 These checks do not substitute for viewing the scenes in an emulator. This host
 does not expose native emulator controls; manual playthrough results remain open.
+
+Verified source: `8155f62fc4bb6a256f128d627fadf7d1e6732d98`.
+[Build and tests](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/35914135874)
+passed: 26 project tests, four save-size tests, 12 host checks and all 112 running
+frame reads. Packaged as `pokemon-three-horizons-playtest-5.gba` (32 MiB), SHA-256
+`1f4de49a061558aaaa4cdcf794a60d8040affca4e60ee4024b5c332e77baf5e3`.
