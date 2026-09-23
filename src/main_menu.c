@@ -1084,6 +1084,9 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
         {
         case ACTION_NEW_GAME:
         default:
+#if THREE_HORIZONS
+            TH_StageNewGameOptions();
+#endif
             if (IS_FRLG)
             {
                 DestroyTask(taskId);

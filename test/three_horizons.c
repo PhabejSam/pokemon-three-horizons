@@ -527,4 +527,20 @@ TEST("Three Horizons starters retain their normal level evolution destinations")
         EXPECT_EQ(GetEvolutionTargetSpecies(&mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStop, CHECK_EVO), evolved[i]);
     }
 }
+TEST("Three Horizons title options survive the new-game event reset")
+{
+    NewGameInitData();
+    VarSet(VAR_TH_AUTO_RUN, 1);
+    VarSet(VAR_TH_EXP_RATE, 3);
+    VarSet(VAR_TH_FOLLOWER_OFF, 1);
+    TH_StageNewGameOptions();
+    NewGameInitData();
+    EXPECT_EQ(VarGet(VAR_TH_AUTO_RUN), 1);
+    EXPECT_EQ(VarGet(VAR_TH_EXP_RATE), 3);
+    EXPECT_EQ(VarGet(VAR_TH_FOLLOWER_OFF), 1);
+    NewGameInitData();
+    EXPECT_EQ(VarGet(VAR_TH_AUTO_RUN), 0);
+    EXPECT_EQ(VarGet(VAR_TH_EXP_RATE), 0);
+    EXPECT_EQ(VarGet(VAR_TH_FOLLOWER_OFF), 0);
+}
 #endif

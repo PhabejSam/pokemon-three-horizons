@@ -16,6 +16,8 @@
 
 #if THREE_HORIZONS
 EWRAM_DATA u8 gTHPendingRivalName[PLAYER_NAME_LENGTH + 1] = {0};
+EWRAM_DATA static u16 sPendingOptions[3] = {0};
+EWRAM_DATA static bool8 sHavePendingOptions = FALSE;
 static const u8 sTHDefaultRivalName[] = _("BLUE");
 static const u16 sTHRivalNameVars[] = {VAR_TH_RIVAL_NAME_0, VAR_TH_RIVAL_NAME_1, VAR_TH_RIVAL_NAME_2, VAR_TH_RIVAL_NAME_3};
 
@@ -25,8 +27,9 @@ void TH_SetRivalName(const u8 *name)
     u32 i;
     if (name[0] == 0 || name[0] == EOS)
         name = sTHDefaultRivalName;
-    StringCopyN(text, name, PLAYER_NAME_LENGTH);
-    text[PLAYER_NAME_LENGTH] = EOS;
+    for (i = 0; i < PLAYER_NAME_LENGTH && name[i] != EOS; i++)
+        text[i] = name[i];
+    text[i] = EOS;
     for (i = 0; i < ARRAY_COUNT(sTHRivalNameVars); i++)
         VarSet(sTHRivalNameVars[i], text[i * 2] | (text[i * 2 + 1] << 8));
 }
@@ -95,12 +98,22 @@ static const u16 sStarters[][2] = {
     {SPECIES_MUDKIP, SPECIES_TREECKO},
 };
 
+// Capture title-screen options before NewGameInitData clears event variables.
+void TH_StageNewGameOptions(void)
+{
+    sPendingOptions[0] = VarGet(VAR_TH_AUTO_RUN) == 1;
+    sPendingOptions[1] = VarGet(VAR_TH_EXP_RATE) < 4 ? VarGet(VAR_TH_EXP_RATE) : 0;
+    sPendingOptions[2] = !!VarGet(VAR_TH_FOLLOWER_OFF);
+    sHavePendingOptions = TRUE;
+}
+
 void TH_InitNewGame(void)
 {
     VarSet(VAR_TH_OUTFIT, TH_OUTFIT_RED);
-    VarSet(VAR_TH_AUTO_RUN, 0);
-    VarSet(VAR_TH_EXP_RATE, 0);
-    VarSet(VAR_TH_FOLLOWER_OFF, 0);
+    VarSet(VAR_TH_AUTO_RUN, sHavePendingOptions ? sPendingOptions[0] : 0);
+    VarSet(VAR_TH_EXP_RATE, sHavePendingOptions ? sPendingOptions[1] : 0);
+    VarSet(VAR_TH_FOLLOWER_OFF, sHavePendingOptions ? sPendingOptions[2] : 0);
+    sHavePendingOptions = FALSE;
     TH_SetRivalName(gTHPendingRivalName);
     FlagSet(FLAG_SYS_B_DASH);
     VarSet(VAR_TH_STAGE, TH_STAGE_HOME);
