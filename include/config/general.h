@@ -89,5 +89,6 @@
 
 #endif // GUARD_CONFIG_GENERAL_H
 
-#include "three_horizons.h"
-
+#ifndef THREE_HORIZONS
+#define THREE_HORIZONS 0
+#endif

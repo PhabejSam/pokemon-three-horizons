@@ -1709,7 +1709,11 @@ static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8 taskId)
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
         NewGameBirchSpeech_ClearWindow(0);
+        #if THREE_HORIZONS
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{PLAYER}, OAK is waiting for you\nin PALLET TOWN.\pELM and I have sent some special\nfirst partners for you to meet."));
+#else
         StringExpandPlaceholders(gStringVar4, gText_Birch_YourePlayer);
+#endif
         AddTextPrinterForMessage(TRUE);
         gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForSpriteFadeInAndTextPrinter;
     }
@@ -1757,7 +1761,11 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
         gTasks[taskId].tPlayerSpriteId = spriteId;
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
+        #if THREE_HORIZONS
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("A familiar morning.\nA whole new adventure.\pTake your time, {PLAYER}.\nYour first partner is waiting!"));
+#else
         StringExpandPlaceholders(gStringVar4, gText_Birch_AreYouReady);
+#endif
         AddTextPrinterForMessage(TRUE);
         gTasks[taskId].func = Task_NewGameBirchSpeech_ShrinkPlayer;
     }

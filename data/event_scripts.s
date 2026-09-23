@@ -1,4 +1,5 @@
 #include "config/general.h"
+#include "constants/three_horizons.h"
 #include "config/battle.h"
 #include "config/item.h"
 #include "constants/global.h"
@@ -1084,6 +1085,9 @@ EventScript_AfterWhiteOutHealMsg::
 	return
 
 EventScript_AfterWhiteOutMomHeal::
+#if THREE_HORIZONS
+    goto TH_EventScript_WhiteoutRecovery
+#endif
 	lockall
 	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_WalkInPlaceFasterDown

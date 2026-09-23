@@ -1,0 +1,10 @@
+{
+  "emerald": {
+    "layouts_sha256": "a56ad32c92d14d8aba96187475f7c15536e1a7e1765b2b3ffe030123c6cccdc5",
+    "map_indices_sha256": "e7e95dc4e0503c342527ae9e712ee7458a020041e945747ea974a03fcf09c2a8"
+  },
+  "firered": {
+    "layouts_sha256": "ea221b21238503a968806c24bd48780b6718e848487756c46104cbcceaf887b3",
+    "map_indices_sha256": "e7e95dc4e0503c342527ae9e712ee7458a020041e945747ea974a03fcf09c2a8"
+  }
+}

@@ -1,5 +1,6 @@
 """Exercise mapjson output and the closed demo map graph (stdlib only)."""
 import json
+import hashlib
 import os
 from pathlib import Path
 import re
@@ -63,6 +64,39 @@ class MapContract(unittest.TestCase):
         for version in ('emerald', 'firered', 'three_horizons'):
             self.generate('groups', version)
             self.assertEqual(before, path.read_bytes())
+
+    def test_original_map_indices_and_layout_tables_are_preserved(self):
+        fixture = json.loads(Path(__file__).with_name('original-map-indices.json').read_text())
+        for version, expected in fixture.items():
+            layouts = self.generate('layouts', version)['layouts_table.inc']
+            self.assertEqual(hashlib.sha256(layouts.encode()).hexdigest(), expected['layouts_sha256'])
+            constants = self.generate('groups', version)['map_groups.h']
+            indices = '\n'.join(line for line in constants.splitlines()
+                                if re.match(r'\s*MAP_\w+\s*=', line) and 'MAP_TH_' not in line)
+            self.assertEqual(hashlib.sha256(indices.encode()).hexdigest(), expected['map_indices_sha256'])
+
+    def test_project_manifest_rejects_missing_map(self):
+        path = ROOT / 'tools/mapjson/three_horizons_maps.json'
+        original = path.read_bytes()
+        try:
+            path.write_text(json.dumps({'maps': ['TH_Missing']}))
+            with tempfile.TemporaryDirectory() as out:
+                run = subprocess.run([str(EXE), 'layouts', 'three_horizons',
+                                      'data/layouts/layouts.json', out, out],
+                                     cwd=ROOT, capture_output=True, text=True)
+            self.assertNotEqual(run.returncode, 0)
+            self.assertIn('TH_Missing', run.stderr)
+        finally:
+            path.write_bytes(original)
+
+    def test_windows_line_endings_are_read_without_trailing_nuls(self):
+        path = ROOT / 'tools/mapjson/three_horizons_maps.json'
+        original = path.read_bytes()
+        try:
+            path.write_bytes(original.replace(b'\r\n', b'\n').replace(b'\n', b'\r\n'))
+            self.generate('layouts', 'three_horizons')
+        finally:
+            path.write_bytes(original)
 
 
 if __name__ == '__main__':
