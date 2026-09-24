@@ -28,7 +28,11 @@
 // Exp. Share config
 // To use this feature, replace the 0 with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
-#define I_EXP_SHARE_FLAG        (THREE_HORIZONS ? FLAG_UNUSED_0x021 : 0)           // If this flag is set, every Pokémon in the party will gain experience, regardless if they participated in the battle or not.
+#if THREE_HORIZONS
+#define I_EXP_SHARE_FLAG        FLAG_UNUSED_0x021 // Saved Emerald flag for party-wide experience.
+#else
+#define I_EXP_SHARE_FLAG        0
+#endif
 #define I_EXP_SHARE_ITEM        (THREE_HORIZONS ? GEN_6 : GEN_5)       // In Gen6+, the Exp. Share is a Key item that toggles the effect described above.
 
 // Repel/Lure config
