@@ -19,6 +19,7 @@
 #include "text_window.h"
 #include "scanline_effect.h"
 #include "battle.h"
+#include "battle_util2.h"
 #include "constants/rgb.h"
 
 #if THREE_HORIZONS
@@ -34,7 +35,7 @@ static EWRAM_DATA bool8 sConfirmed = FALSE;
 static EWRAM_DATA struct Pokemon *sCaughtMon = NULL;
 static EWRAM_DATA void (*sReturnCallback)(void) = NULL;
 static EWRAM_DATA u32 sPreviewPersonality = 0;
-static EWRAM_DATA u8 sLevel = 5;
+static EWRAM_DATA u8 sLevel = 0;
 static void CB2_InitCaughtEditor(void);
 
 static const u8 *const sStatNames[] = {
@@ -61,16 +62,19 @@ static void PrintAt(u8 x, u8 y, const u8 *text)
     AddTextPrinterParameterized(sWindow, FONT_SMALL, text, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
-static void RefreshPicture(void)
+static bool32 RefreshPicture(void)
 {
     if (sSprite != 0xFFFF)
         FreeAndDestroyMonPicSprite(sSprite);
-    sSprite = CreateMonPicSprite(sSpecies, sOptions.shiny, sPreviewPersonality, TRUE, 192, 59, 0, sSpecies);
+    sSprite = sCaughtMon
+        ? CreateMonPicSpriteUnchecked(sSpecies, sOptions.shiny, sPreviewPersonality, TRUE, 192, 59, 0, sSpecies)
+        : CreateMonPicSprite(sSpecies, sOptions.shiny, sPreviewPersonality, TRUE, 192, 59, 0, sSpecies);
     if (sSprite < MAX_SPRITES)
     {
         gSprites[sSprite].oam.priority = 0;
         gSprites[sSprite].callback = SpriteCallbackDummy;
     }
+    return sSprite < MAX_SPRITES;
 }
 
 static void DrawEditor(void)
@@ -209,7 +213,11 @@ static void Task_PartnerEditor(u8 taskId)
         else if (sCursor == 4)
         {
             sOptions = sDefaults;
-            RefreshPicture();
+            if (!RefreshPicture() && sCaughtMon)
+            {
+                CloseEditor(taskId, FALSE);
+                return;
+            }
         }
         else
         {
@@ -227,7 +235,11 @@ static void Task_PartnerEditor(u8 taskId)
         if (sPage == 0 && sCursor == 0)
         {
             sOptions.shiny ^= 1;
-            RefreshPicture();
+            if (!RefreshPicture() && sCaughtMon)
+            {
+                CloseEditor(taskId, FALSE);
+                return;
+            }
         }
         else if (sPage == 0 && sCursor == 1)
             sOptions.nature = (sOptions.nature + (delta > 0 ? 1 : NUM_NATURES - 1)) % NUM_NATURES;
@@ -330,7 +342,7 @@ static void CB2_InitCaughtEditor(void)
     gReservedSpritePaletteCount = 0;
     sWindow = WINDOW_NONE;
     u8 taskId = CreateTask(Task_PartnerEditor, 80);
-    if (!InitWindows(windows))
+    if (!InitWindowsUnchecked(windows))
     {
         CloseEditor(taskId, FALSE);
         return;
@@ -340,7 +352,11 @@ static void CB2_InitCaughtEditor(void)
     LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZEOF(8));
     LoadUserWindowBorderGfx(0, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
     SetStandardWindowBorderStyle(0, FALSE);
-    RefreshPicture();
+    if (!RefreshPicture())
+    {
+        CloseEditor(taskId, FALSE);
+        return;
+    }
     DrawEditor();
     ShowBg(0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
