@@ -11,7 +11,7 @@
   "allow_cycling": false,
   "allow_escaping": false,
   "allow_running": false,
-  "show_map_name": true,
+  "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
@@ -42,7 +42,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TH_Journey_Local",
+      "script": "TH_Local_ViridianCenter_0",
       "flag": "0",
       "local_id": "LOCALID_TH_VIRIDIANCENTER_1"
     },
@@ -57,7 +57,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TH_Journey_Local",
+      "script": "TH_Local_ViridianCenter_1",
       "flag": "0",
       "local_id": "LOCALID_TH_VIRIDIANCENTER_2"
     },
@@ -72,7 +72,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TH_Journey_Local",
+      "script": "TH_Local_ViridianCenter_2",
       "flag": "0",
       "local_id": "LOCALID_TH_VIRIDIANCENTER_3"
     }

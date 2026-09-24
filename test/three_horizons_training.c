@@ -12,7 +12,7 @@
 TEST("Three Horizons training kit delivers once and retries full storage")
 {
     static const u16 items[] = {ITEM_MACHO_BRACE, ITEM_POWER_WEIGHT, ITEM_POWER_BRACER,
-        ITEM_POWER_BELT, ITEM_POWER_LENS, ITEM_POWER_BAND, ITEM_POWER_ANKLET};
+        ITEM_POWER_BELT, ITEM_POWER_LENS, ITEM_POWER_BAND, ITEM_POWER_ANKLET, ITEM_EXP_SHARE};
     struct ItemSlot saved[PC_ITEMS_COUNT];
     u16 savedMask = VarGet(VAR_TH_TRAINING_KIT_MASK);
     memcpy(saved, gSaveBlock1Ptr->pcItems, sizeof(saved));
@@ -25,13 +25,13 @@ TEST("Three Horizons training kit delivers once and retries full storage")
     }
     EXPECT_EQ(TH_TryDeliverTrainingKit(), 3);
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(saved));
-    EXPECT_EQ(TH_TryDeliverTrainingKit(), 127);
+    EXPECT_EQ(TH_TryDeliverTrainingKit(), 255);
     EXPECT(!CheckPCHasItem(ITEM_MACHO_BRACE, 1));
     EXPECT(!CheckPCHasItem(ITEM_POWER_WEIGHT, 1));
     for (u32 i = 2; i < ARRAY_COUNT(items); i++)
         EXPECT(CheckPCHasItem(items[i], 1));
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(saved));
-    EXPECT_EQ(TH_TryDeliverTrainingKit(), 127);
+    EXPECT_EQ(TH_TryDeliverTrainingKit(), 255);
     for (u32 i = 0; i < ARRAY_COUNT(items); i++)
         EXPECT(!CheckPCHasItem(items[i], 1));
     memcpy(gSaveBlock1Ptr->pcItems, saved, sizeof(saved));

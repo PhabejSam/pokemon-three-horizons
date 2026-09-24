@@ -7,15 +7,6 @@ TH_Lab_OnLoad::
     end
 TH_Lab_HideRobin:
     setflag FLAG_TH_HIDE_ROBIN_LAB
-    goto_if_le VAR_TH_FIRST_PARTNER, SPECIES_SQUIRTLE, TH_Lab_HideKantoBall
-    goto_if_le VAR_TH_FIRST_PARTNER, SPECIES_TOTODILE, TH_Lab_HideJohtoBall
-    setflag FLAG_TEMP_5
-    end
-TH_Lab_HideKantoBall:
-    setflag FLAG_TEMP_3
-    end
-TH_Lab_HideJohtoBall:
-    setflag FLAG_TEMP_4
     end
 TH_EventScript_Oak::
     setvar VAR_TEMP_6, 0
@@ -117,7 +108,7 @@ TH_Lab_Confirm:
     call TH_Lab_OakApproach
     goto TH_OakSupplies
 TH_Lab_AlreadyChosen:
-    msgbox TH_Text_AlreadyChosen
+    msgbox TH_Text_DisplayRemaining
     release
     end
 TH_Lab_GrantFailed:
@@ -135,11 +126,13 @@ TH_OakSupplies:
 TH_OakAfterSupplies:
     msgbox TH_Text_OakSendoff
     call TH_Lab_OakReturn
+    special TH_RefreshFollower
     release
     end
 TH_Lab_BagFull:
     msgbox TH_Text_BagFull
     call TH_Lab_OakReturn
+    special TH_RefreshFollower
     release
     end
 
@@ -168,23 +161,19 @@ TH_Lab_PickKanto:
     applymovement LOCALID_TH_ROBIN_LAB, TH_Movement_RivalPickKanto
     waitmovement 0
     setvar VAR_0x800A, LOCALID_TH_DISPLAY_KANTO
-    setflag FLAG_TEMP_3
     goto TH_Lab_RivalTakeBall
 TH_Lab_PickJohto:
     applymovement LOCALID_TH_ROBIN_LAB, TH_Movement_RivalPickJohto
     waitmovement 0
     setvar VAR_0x800A, LOCALID_TH_DISPLAY_JOHTO
-    setflag FLAG_TEMP_4
     goto TH_Lab_RivalTakeBall
 TH_Lab_PickHoenn:
     applymovement LOCALID_TH_ROBIN_LAB, TH_Movement_RivalPickHoenn
     waitmovement 0
     setvar VAR_0x800A, LOCALID_TH_DISPLAY_HOENN
-    setflag FLAG_TEMP_5
     goto TH_Lab_RivalTakeBall
 TH_Lab_RivalTakeBall:
     delay 20
-    removeobject VAR_0x800A
     playfanfare MUS_OBTAIN_ITEM
     waitfanfare
     playmoncry VAR_TH_RIVAL_PARTNER, CRY_MODE_NORMAL
@@ -306,6 +295,16 @@ TH_OakCheck6:
     goto_if_ne VAR_0x8008, 11, TH_OakCheck7
     goto_if_eq VAR_0x8009, 4, TH_OakApproach7
 TH_OakCheck7:
+    goto_if_ne VAR_0x8008, 10, TH_OakCheck8
+    goto_if_eq VAR_0x8009, 3, TH_OakApproach8
+TH_OakCheck8:
+    return
+TH_OakApproach8:
+    setvar VAR_TEMP_6, 8
+    applymovement LOCALID_TH_OAK, TH_Movement_OakApproach8
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceOak8
+    waitmovement 0
     return
 TH_OakApproach1:
     setvar VAR_TEMP_6, 1
@@ -358,6 +357,7 @@ TH_OakApproach7:
     return
 TH_Lab_OakReturn:
     closemessage
+    goto_if_eq VAR_TEMP_6, 8, TH_OakReturn8
     goto_if_eq VAR_TEMP_6, 1, TH_OakReturn1
     goto_if_eq VAR_TEMP_6, 2, TH_OakReturn2
     goto_if_eq VAR_TEMP_6, 3, TH_OakReturn3
@@ -391,6 +391,24 @@ TH_OakReturnDone:
     waitmovement 0
     setvar VAR_TEMP_6, 0
     return
+TH_OakReturn8:
+    applymovement LOCALID_TH_OAK, TH_Movement_OakReturn8
+    goto TH_OakReturnDone
+TH_Movement_OakApproach8:
+    walk_right
+    walk_right
+    walk_right
+    face_right
+    step_end
+TH_Movement_OakReturn8:
+    walk_left
+    walk_left
+    walk_left
+    face_down
+    step_end
+TH_Movement_PlayerFaceOak8:
+    face_left
+    step_end
 TH_Movement_OakApproach1:
     walk_down
     face_right
@@ -506,3 +524,42 @@ TH_Movement_OakReturn7:
 TH_Movement_PlayerFaceOak7:
     face_up
     step_end
+
+TH_Text_DisplayRemaining:
+    .string "The other partners are resting here.\nOAK will help them find trainers, too.$"
+
+TH_Lab_Computer::
+    msgbox TH_Text_LabComputer, MSGBOX_SIGN
+    end
+TH_Text_LabComputer:
+    .string "The screen compares POKéMON seen\nin KANTO, JOHTO, and HOENN.$"
+
+TH_Lab_Certificate::
+    msgbox TH_Text_LabCertificate, MSGBOX_SIGN
+    end
+TH_Text_LabCertificate:
+    .string "Research awards line the wall.\nOne has a muddy footprint on it!$"
+
+TH_Lab_Books9::
+    msgbox TH_Text_LabBooks9, MSGBOX_SIGN
+    end
+TH_Text_LabBooks9:
+    .string "ELM's notes describe how POKéMON\ncare for their Eggs.$"
+
+TH_Lab_Books10::
+    msgbox TH_Text_LabBooks10, MSGBOX_SIGN
+    end
+TH_Text_LabBooks10:
+    .string "A field guide to KANTO's habitats.\nThe forest pages are well worn.$"
+
+TH_Lab_Books11::
+    msgbox TH_Text_LabBooks11, MSGBOX_SIGN
+    end
+TH_Text_LabBooks11:
+    .string "BIRCH's journal is full of sketches.\nGrass stains cover the margins.$"
+
+TH_Lab_Books12::
+    msgbox TH_Text_LabBooks12, MSGBOX_SIGN
+    end
+TH_Text_LabBooks12:
+    .string "Three bookmarks mark three regions.\nThere is still so much to discover.$"

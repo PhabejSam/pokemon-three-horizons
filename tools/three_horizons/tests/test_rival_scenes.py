@@ -62,7 +62,7 @@ class RivalScenes(unittest.TestCase):
         self.assertIn('call TH_Lab_RivalCollectPartner', confirm)
         collection = lab.split('TH_Lab_RivalCollectPartner:\n')[1]
         self.assertIn('hidefollower TRUE', collection)
-        self.assertIn('removeobject VAR_0x800A', collection)
+        self.assertNotIn('removeobject VAR_0x800A', collection)
         self.assertIn('playfanfare MUS_OBTAIN_ITEM', collection)
         self.assertIn('playmoncry VAR_TH_RIVAL_PARTNER', collection)
 

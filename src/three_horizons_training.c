@@ -10,7 +10,7 @@
 u16 TH_TryDeliverTrainingKit(void)
 {
     static const u16 items[] = {ITEM_MACHO_BRACE, ITEM_POWER_WEIGHT, ITEM_POWER_BRACER,
-        ITEM_POWER_BELT, ITEM_POWER_LENS, ITEM_POWER_BAND, ITEM_POWER_ANKLET};
+        ITEM_POWER_BELT, ITEM_POWER_LENS, ITEM_POWER_BAND, ITEM_POWER_ANKLET, ITEM_EXP_SHARE};
     u16 mask = VarGet(VAR_TH_TRAINING_KIT_MASK);
     for (u32 i = 0; i < ARRAY_COUNT(items); i++)
         if (!(mask & (1 << i)) && AddPCItem(items[i], 1))

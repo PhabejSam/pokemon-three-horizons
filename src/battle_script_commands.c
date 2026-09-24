@@ -2412,6 +2412,10 @@ static void Cmd_getexp(void)
         }
         break;
     case 5: // looper increment
+#if THREE_HORIZONS
+        if (TH_TryBattleEvolution(*expMonId))
+            return;
+#endif
         if (gBattleStruct->battlerExpReward) // there is exp to give, goto case 3 that gives exp
         {
             gBattleScripting.getexpState = 3;

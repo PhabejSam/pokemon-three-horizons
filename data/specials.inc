@@ -648,4 +648,5 @@ gSpecials::
     def_special TH_ScriptGiveConfiguredStarter
     def_special TH_ScriptDeliverTrainingKit
     def_special TH_ScriptImproveIVs
+    def_special TH_RefreshFollower
 #endif

@@ -27,7 +27,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TH_Journey_Local",
+      "script": "TH_Local_PewterMart_0",
       "flag": "0",
       "local_id": "LOCALID_TH_PEWTERMART_0"
     },
@@ -42,7 +42,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TH_Journey_Local",
+      "script": "TH_Local_PewterMart_1",
       "flag": "0",
       "local_id": "LOCALID_TH_PEWTERMART_1"
     },

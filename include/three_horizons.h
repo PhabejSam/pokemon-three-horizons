@@ -2,6 +2,9 @@
 #define GUARD_THREE_HORIZONS_H
 #include "global.h"
 struct Pokemon;
+u16 TH_GetBattleEvolution(struct Pokemon *mon, bool32 *canStop);
+bool32 TH_TryBattleEvolution(u32 partyId);
+void TH_RefreshFollower(void);
 
 u16 TH_TryDeliverTrainingKit(void);
 void TH_ScriptDeliverTrainingKit(void);

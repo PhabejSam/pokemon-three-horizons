@@ -1972,7 +1972,7 @@ static u8 TH_CreateProfessorTrio(void)
 {
     static const u16 gfx[] = {OBJ_EVENT_GFX_PROF_BIRCH, OBJ_EVENT_GFX_PROF_OAK, OBJ_EVENT_GFX_TH_ELM};
     static const u16 *const pals[] = {gObjectEventPal_Npc3, gObjectEventPal_NpcWhite, gObjectEventPal_THElm};
-    static const s16 xs[] = {184, 56, 120};
+    static const s16 xs[] = {160, 80, 120};
     u8 i, leader = MAX_SPRITES;
     for (i = 0; i < 3; i++)
     {

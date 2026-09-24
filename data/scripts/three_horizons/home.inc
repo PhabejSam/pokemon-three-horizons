@@ -101,4 +101,4 @@ TH_DresserDone:
     end
 
 TH_Text_TrainingKit:
-    .string "Your training kit is in ITEM STORAGE.\nLet your POKéMON hold these items.\pPower items help train specific stats.\nBattles still give their usual EVs.$"
+    .string "Your training kit is in ITEM STORAGE.\nPower items help train specific stats.\pThe EXP. SHARE helps your whole party.\nWithdraw it, then turn it on in the BAG.\pBattles still give their usual EVs.\nYou can turn the EXP. SHARE off anytime.$"

@@ -16,6 +16,11 @@
 #include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
+void TH_RefreshFollower(void)
+{
+    UpdateFollowingPokemon();
+}
+
 // Keep trainer rewards/penalties intact; wild defeats are free recovery.
 u32 TH_GetWhiteoutMoneyLoss(u32 money, u32 battleFlags)
 {
