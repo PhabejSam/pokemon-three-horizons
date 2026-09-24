@@ -63,7 +63,9 @@ const u8 *TH_GetRivalName(void)
 
 bool32 TH_IsRivalTrainer(u16 trainerId)
 {
-    return trainerId >= TRAINER_TH_ROBIN_BULBASAUR && trainerId <= TRAINER_TH_ROBIN_MUDKIP;
+    return (trainerId >= TRAINER_TH_ROBIN_BULBASAUR && trainerId <= TRAINER_TH_ROBIN_MUDKIP)
+        || (trainerId >= TRAINER_TH9_ROUTE22_BULBASAUR && trainerId <= TRAINER_TH9_ROUTE22_MUDKIP)
+        || (trainerId >= TRAINER_TH9_BRIDGE_BULBASAUR && trainerId <= TRAINER_TH9_BRIDGE_MUDKIP);
 }
 
 bool32 TH_WantsToRun(u16 heldKeys)

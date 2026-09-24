@@ -19,6 +19,11 @@
       "map": "MAP_TH_ROUTE2",
       "offset": 12,
       "direction": "down"
+    },
+    {
+      "map": "MAP_TH_ROUTE3",
+      "offset": 10,
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -126,6 +131,21 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "TH_Local_Pewter_5",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TH_BROCKCARETAKER",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1_FRLG",
+      "x": 13,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_BrockCaretaker",
+      "flag": "0",
+      "type": "object"
     }
   ],
   "warp_events": [
@@ -149,368 +169,396 @@
       "elevation": 0,
       "dest_map": "MAP_TH_PEWTER_CENTER",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 17,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_TH_PEWTER_MUSEUM1_F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 25,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_TH_PEWTER_MUSEUM1_F",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 33,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_TH_PEWTER_HOUSE1",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 9,
+      "y": 30,
+      "elevation": 0,
+      "dest_map": "MAP_TH_PEWTER_HOUSE2",
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 0,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 1,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 2,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 3,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 4,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 5,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 6,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 7,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 8,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 9,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 10,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 11,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 12,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 13,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 14,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 15,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 16,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 17,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 18,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 19,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 20,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 21,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 22,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 23,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 24,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 25,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 26,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 27,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 28,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 29,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 30,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 31,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 32,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 33,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 34,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 35,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 36,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 37,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 38,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     },
     {
       "type": "trigger",
-      "x": 47,
+      "x": 46,
       "y": 39,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "TH_Journey_BoundaryWest"
+      "script": "TH_Route3BadgeGate"
     }
   ],
   "bg_events": [
@@ -553,38 +601,6 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "TH_Journey_Sign"
-    },
-    {
-      "type": "sign",
-      "x": 17,
-      "y": 6,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "TH_Journey_Closed"
-    },
-    {
-      "type": "sign",
-      "x": 25,
-      "y": 4,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "TH_Journey_Closed"
-    },
-    {
-      "type": "sign",
-      "x": 33,
-      "y": 11,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "TH_Journey_Closed"
-    },
-    {
-      "type": "sign",
-      "x": 9,
-      "y": 30,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "TH_Journey_Closed"
     }
   ]
 }

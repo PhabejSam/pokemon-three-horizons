@@ -181,6 +181,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 #endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_SEAFLOOR_CAVERN_3 ===
 Name: GRUNT
 Class: Team Aqua
@@ -193,7 +194,9 @@ AI: Check Bad Move
 Zubat
 Level: 36
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GABRIELLE_1 ===
 Name: GABRIELLE
 Class: Pkmn Breeder
@@ -226,7 +229,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Taillow
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_PETALBURG_WOODS ===
 Name: GRUNT
 Class: Team Aqua
@@ -239,7 +244,9 @@ AI: Check Bad Move
 Poochyena
 Level: 9
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_MARCEL ===
 Name: MARCEL
 Class: Cooltrainer
@@ -257,7 +264,9 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 Shiftry
 Level: 29
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_ALBERTO ===
 Name: ALBERTO
 Class: Bird Keeper
@@ -274,7 +283,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Xatu
 Level: 30
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_ED ===
 Name: ED
 Class: Collector
@@ -291,7 +302,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Seviper
 Level: 30
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_SEAFLOOR_CAVERN_4 ===
 Name: GRUNT
 Class: Team Aqua
@@ -304,7 +317,9 @@ AI: Check Bad Move
 Carvanha
 Level: 36
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DECLAN ===
 Name: DECLAN
 Class: Swimmer M
@@ -317,7 +332,9 @@ AI: Check Bad Move
 Gyarados
 Level: 34
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_RUSTURF_TUNNEL ===
 Name: GRUNT
 Class: Team Aqua
@@ -330,7 +347,9 @@ AI: Check Bad Move
 Poochyena
 Level: 11
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_WEATHER_INST_1 ===
 Name: GRUNT
 Class: Team Aqua
@@ -347,7 +366,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Poochyena
 Level: 27
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_WEATHER_INST_2 ===
 Name: GRUNT
 Class: Team Aqua
@@ -364,7 +385,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Carvanha
 Level: 27
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_WEATHER_INST_3 ===
 Name: GRUNT
 Class: Team Aqua
@@ -385,7 +408,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Carvanha
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_MUSEUM_1 ===
 Name: GRUNT
 Class: Team Aqua
@@ -398,7 +423,9 @@ AI: Check Bad Move
 Carvanha
 Level: 15
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_MUSEUM_2 ===
 Name: GRUNT
 Class: Team Aqua
@@ -415,7 +442,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Carvanha
 Level: 14
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_SPACE_CENTER_1 ===
 Name: GRUNT
 Class: Team Magma
@@ -428,7 +457,9 @@ AI: Check Bad Move
 Numel
 Level: 32
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_MT_PYRE_1 ===
 Name: GRUNT
 Class: Team Aqua
@@ -441,7 +472,9 @@ AI: Check Bad Move
 Zubat
 Level: 32
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_MT_PYRE_2 ===
 Name: GRUNT
 Class: Team Aqua
@@ -454,7 +487,9 @@ AI: Check Bad Move
 Carvanha
 Level: 32
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_MT_PYRE_3 ===
 Name: GRUNT
 Class: Team Aqua
@@ -471,7 +506,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Carvanha
 Level: 30
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_WEATHER_INST_4 ===
 Name: GRUNT
 Class: Team Aqua
@@ -484,7 +521,9 @@ AI: Check Bad Move
 Carvanha
 Level: 28
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_AQUA_HIDEOUT_5 ===
 Name: GRUNT
 Class: Team Aqua
@@ -497,7 +536,9 @@ AI: Check Bad Move
 Carvanha
 Level: 32
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_AQUA_HIDEOUT_6 ===
 Name: GRUNT
 Class: Team Aqua
@@ -510,7 +551,9 @@ AI: Check Bad Move
 Zubat
 Level: 32
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_FREDRICK ===
 Name: FREDRICK
 Class: Expert
@@ -527,7 +570,9 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 Machoke
 Level: 30
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_MATT ===
 Name: MATT
 Class: Aqua Admin
@@ -545,7 +590,9 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 Golbat
 Level: 34
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_ZANDER ===
 Name: ZANDER
 Class: Black Belt
@@ -558,7 +605,9 @@ AI: Check Bad Move
 Hariyama
 Level: 31
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_SHELLY_WEATHER_INSTITUTE ===
 Name: SHELLY
 Class: Aqua Admin
@@ -575,7 +624,9 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 Mightyena
 Level: 28
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_SHELLY_SEAFLOOR_CAVERN ===
 Name: SHELLY
 Class: Aqua Admin
@@ -592,7 +643,9 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 Mightyena
 Level: 37
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_ARCHIE ===
 Name: ARCHIE
 Class: Aqua Leader
@@ -614,7 +667,9 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 Sharpedo
 Level: 43
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_LEAH ===
 Name: LEAH
 Class: Hex Maniac
@@ -627,7 +682,9 @@ AI: Check Bad Move
 Spoink
 Level: 31
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DAISY ===
 Name: DAISY
 Class: Aroma Lady
@@ -644,7 +701,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Roselia
 Level: 14
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_ROSE_1 ===
 Name: ROSE
 Class: Aroma Lady
@@ -665,7 +724,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Roselia
 Level: 14
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_FELIX ===
 Name: FELIX
 Class: Cooltrainer
@@ -686,7 +747,9 @@ Level: 43
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Skill Swap
 - Earthquake
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_VIOLET ===
 Name: VIOLET
 Class: Aroma Lady
@@ -703,7 +766,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Gloom
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_ROSE_2 ===
 Name: ROSE
 Class: Aroma Lady
@@ -720,7 +785,9 @@ IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 Roselia
 Level: 26
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_ROSE_3 ===
 Name: ROSE
 Class: Aroma Lady
@@ -741,7 +808,9 @@ IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 Roselia
 Level: 28
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_ROSE_4 ===
 Name: ROSE
 Class: Aroma Lady
@@ -762,7 +831,9 @@ IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 Roselia
 Level: 31
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_ROSE_5 ===
 Name: ROSE
 Class: Aroma Lady
@@ -783,7 +854,9 @@ IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 Roselia
 Level: 34
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DUSTY_1 ===
 Name: DUSTY
 Class: Ruin Maniac
@@ -800,7 +873,9 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 - Slash
 - Sand Attack
 - Poison Sting
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_CHIP ===
 Name: CHIP
 Class: Ruin Maniac
@@ -833,7 +908,9 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 - Slash
 - Sand Attack
 - Poison Sting
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_FOSTER ===
 Name: FOSTER
 Class: Ruin Maniac
@@ -858,7 +935,9 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Slash
 - Sand Attack
 - Poison Sting
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DUSTY_2 ===
 Name: DUSTY
 Class: Ruin Maniac
@@ -875,7 +954,9 @@ IVs: 7 HP / 7 Atk / 7 Def / 7 SpA / 7 SpD / 7 Spe
 - Slash
 - Sand Attack
 - Poison Sting
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DUSTY_3 ===
 Name: DUSTY
 Class: Ruin Maniac
@@ -892,7 +973,9 @@ IVs: 8 HP / 8 Atk / 8 Def / 8 SpA / 8 SpD / 8 Spe
 - Slash
 - Sand Attack
 - Poison Sting
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DUSTY_4 ===
 Name: DUSTY
 Class: Ruin Maniac
@@ -909,7 +992,9 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 - Slash
 - Sand Attack
 - Poison Sting
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DUSTY_5 ===
 Name: DUSTY
 Class: Ruin Maniac
@@ -926,6 +1011,7 @@ IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 - Slash
 - Sand Attack
 - Poison Sting
+#endif
 
 === TRAINER_GABBY_AND_TY_1 ===
 Name: GABBY & TY
@@ -17146,6 +17232,898 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Tackle
 - Bind
 - Rock Tomb
+
+
+#endif
+
+#if THREE_HORIZONS
+=== TRAINER_TH9_LASS_ROBIN ===
+Name: ROBIN
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Jigglypuff
+Level: 14
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_BUG_CATCHER_JAMES ===
+Name: JAMES
+Class: Bug Catcher Frlg
+Pic: Bug Catcher Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Caterpie
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Metapod
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_LASS_SALLY ===
+Name: SALLY
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Nidoran F
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_BUG_CATCHER_GREG ===
+Name: GREG
+Class: Bug Catcher Frlg
+Pic: Bug Catcher Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Weedle
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Kakuna
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Caterpie
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Metapod
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_YOUNGSTER_CALVIN ===
+Name: CALVIN
+Class: Youngster Frlg
+Pic: Youngster Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Spearow
+Level: 14
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_LASS_JANICE ===
+Name: JANICE
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Pidgey
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pidgey
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_BUG_CATCHER_COLTON ===
+Name: COLTON
+Class: Bug Catcher Frlg
+Pic: Bug Catcher Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Caterpie
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Weedle
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Caterpie
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_YOUNGSTER_BEN ===
+Name: BEN
+Class: Youngster Frlg
+Pic: Youngster Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Ekans
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_LASS_CRISSY ===
+Name: CRISSY
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Paras
+Level: 31
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Paras
+Level: 31
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Parasect
+Level: 31
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_LASS_IRIS ===
+Name: IRIS
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Clefairy
+Level: 14
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_BUG_CATCHER_ROBBY ===
+Name: ROBBY
+Class: Bug Catcher Frlg
+Pic: Bug Catcher Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Caterpie
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Metapod
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Caterpie
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_SUPER_NERD_JOVAN ===
+Name: JOVAN
+Class: Super Nerd Frlg
+Pic: Super Nerd Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Magnemite
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Voltorb
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_LASS_MIRIAM ===
+Name: MIRIAM
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Oddish
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Bellsprout
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_BUG_CATCHER_KENT ===
+Name: KENT
+Class: Bug Catcher Frlg
+Pic: Bug Catcher Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Weedle
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Kakuna
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_YOUNGSTER_JOSH ===
+Name: JOSH
+Class: Youngster Frlg
+Pic: Youngster Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Rattata
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Zubat
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_HIKER_MARCOS ===
+Name: MARCOS
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Geodude
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Geodude
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Onix
+Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_SUPER_NERD_MIGUEL ===
+Name: MIGUEL
+Class: Super Nerd Frlg
+Pic: Super Nerd Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Grimer
+Level: 12
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Voltorb
+Level: 12
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Koffing
+Level: 12
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_TEAM_ROCKET_GRUNT_4 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 13
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Sandshrew
+Level: 13
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_TEAM_ROCKET_GRUNT_1 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 13
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Zubat
+Level: 13
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_TEAM_ROCKET_GRUNT_3 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Zubat
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Ekans
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_TEAM_ROCKET_GRUNT_2 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Sandshrew
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Rattata
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Zubat
+Level: 11
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_TEAM_ROCKET_GRUNT_5 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Machop
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Drowzee
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_SWIMMER_MALE_LUIS ===
+Name: LUIS
+Class: Swimmer M Frlg
+Pic: Swimmer M Frlg
+Gender: Male
+Music: Swimmer
+Double Battle: No
+AI: Check Bad Move
+
+Horsea
+Level: 16
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Shellder
+Level: 16
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_PICNICKER_DIANA ===
+Name: DIANA
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Goldeen
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_TH9_LEADER_MISTY ===
+Name: MISTY
+Class: Leader Frlg
+Pic: Leader Misty Frlg
+Gender: Female
+Music: Female
+AI: Check Bad Move / Try To Faint
+
+Staryu
+Level: 18
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Water Pulse
+- Swift
+- Harden
+- Rapid Spin
+
+Psyduck
+Level: 18
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Water Gun
+- Confusion
+- Disable
+- Tail Whip
+
+Marill
+Level: 19
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Water Gun
+- Rollout
+- Defense Curl
+- Bubble Beam
+
+Starmie
+Level: 21
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Water Pulse
+- Swift
+- Confuse Ray
+- Rapid Spin
+
+
+
+=== TRAINER_TH9_ROUTE22_BULBASAUR ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgey
+Level: 9
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Bulbasaur
+Level: 10
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_ROUTE22_CHARMANDER ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgey
+Level: 9
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Charmander
+Level: 10
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_ROUTE22_SQUIRTLE ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgey
+Level: 9
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Squirtle
+Level: 10
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_ROUTE22_CHIKORITA ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgey
+Level: 9
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Chikorita
+Level: 10
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_ROUTE22_CYNDAQUIL ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgey
+Level: 9
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Cyndaquil
+Level: 10
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_ROUTE22_TOTODILE ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgey
+Level: 9
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Totodile
+Level: 10
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_ROUTE22_TREECKO ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgey
+Level: 9
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Treecko
+Level: 10
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_ROUTE22_TORCHIC ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgey
+Level: 9
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Torchic
+Level: 10
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_ROUTE22_MUDKIP ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgey
+Level: 9
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Mudkip
+Level: 10
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_BRIDGE_BULBASAUR ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 17
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Abra
+Level: 16
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Rattata
+Level: 15
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Ivysaur
+Level: 18
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_BRIDGE_CHARMANDER ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 17
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Abra
+Level: 16
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Rattata
+Level: 15
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Charmeleon
+Level: 18
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_BRIDGE_SQUIRTLE ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 17
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Abra
+Level: 16
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Rattata
+Level: 15
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Wartortle
+Level: 18
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_BRIDGE_CHIKORITA ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 17
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Abra
+Level: 16
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Rattata
+Level: 15
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Bayleef
+Level: 18
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_BRIDGE_CYNDAQUIL ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 17
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Abra
+Level: 16
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Rattata
+Level: 15
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Quilava
+Level: 18
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_BRIDGE_TOTODILE ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 17
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Abra
+Level: 16
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Rattata
+Level: 15
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Croconaw
+Level: 18
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_BRIDGE_TREECKO ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 17
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Abra
+Level: 16
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Rattata
+Level: 15
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Grovyle
+Level: 18
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_BRIDGE_TORCHIC ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 17
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Abra
+Level: 16
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Rattata
+Level: 15
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Combusken
+Level: 18
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+
+=== TRAINER_TH9_BRIDGE_MUDKIP ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 17
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Abra
+Level: 16
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Rattata
+Level: 15
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Marshtomp
+Level: 18
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
 
 
 #endif

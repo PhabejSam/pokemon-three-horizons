@@ -647,6 +647,7 @@ gSpecials::
     def_special TH_OpenRewardEditor
     def_special TH_ScriptGiveReward
     def_special TH_ScriptBuyMagikarp
+    def_special TH_ScriptCheckChapter
     def_special TH_ScriptRewardChoices
     def_special TH_OpenPartnerEditor
     def_special TH_ScriptGiveConfiguredStarter

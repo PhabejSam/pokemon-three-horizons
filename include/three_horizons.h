@@ -50,6 +50,9 @@ u32 TH_GetVisualTimeSeconds(void);
 void TH_SetClockMode(u8 mode);
 void TH_ResetVisualClock(void);
 u16 TH_GetWildShinyThreshold(void);
+bool32 TH_ShouldShowAreaCard(u16 previous, u16 current);
+bool32 TH_TryCompleteChapter(void);
+void TH_ScriptCheckChapter(void);
 extern bool8 gTHCreatingWildMon;
 
 extern u8 gTHPendingRivalName[PLAYER_NAME_LENGTH + 1];

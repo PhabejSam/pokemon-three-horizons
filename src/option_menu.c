@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "event_data.h"
 #include "constants/three_horizons.h"
 #include "option_menu.h"

@@ -131,7 +131,7 @@ TH_Text_BrockDefeat:
     .string "Your determination has earned\nyou the BOULDERBADGE!$"
 
 TH_Text_BrockComplete:
-    .string "The BOULDERBADGE is yours!\nTake ROCK TOMB as a reminder.\pYou have completed this playtest.\nThank you for exploring THREE HORIZONS!\pYou can keep training, catching POKéMON,\nand exploring the path back to PALLET.$"
+    .string "The BOULDERBADGE is yours!\nTake ROCK TOMB as a reminder.\pThe road east leads to MT. MOON.\nCERULEAN and MISTY are beyond it.\pThe caretaker outside has a partner\nwaiting for a patient TRAINER.$"
 
 TH_Text_BrockBagFull:
     .string "You earned the BOULDERBADGE!\nMake room in your BAG for ROCK TOMB,\lthen speak to me again.$"

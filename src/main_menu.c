@@ -229,10 +229,17 @@ static void Task_NewGameBirchSpeech_WaitPressBeforeNameChoice(u8);
 static void Task_NewGameBirchSpeech_StartNamingScreen(u8);
 static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void);
 #if THREE_HORIZONS
-static void CB2_THNameRival(void)
+static void CB2_THNameRivalScreen(void)
 {
     StringCopy(gTHPendingRivalName, COMPOUND_STRING("BLUE"));
     DoNamingScreen(NAMING_SCREEN_RIVAL, gTHPendingRivalName, MALE, 0, 0, CB2_NewGameBirchSpeech_ReturnFromNamingScreen);
+}
+#endif
+#if THREE_HORIZONS
+void TH_ShowRivalIntroduction(MainCallback next);
+static void CB2_THNameRival(void)
+{
+    TH_ShowRivalIntroduction(CB2_THNameRivalScreen);
 }
 #endif
 static void Task_NewGameBirchSpeech_CreateNameYesNo(u8);

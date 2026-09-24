@@ -454,7 +454,7 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
     const struct WildPokemonInfo *wildMonInfo;
     enum TimeOfDay timeOfDay = GetTimeOfDay();
 
-    if (!OW_TIME_OF_DAY_ENCOUNTERS)
+    if (!OW_TIME_OF_DAY_ENCOUNTERS && !THREE_HORIZONS)
         return TIME_OF_DAY_DEFAULT;
 
     if (InBattlePike() || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
