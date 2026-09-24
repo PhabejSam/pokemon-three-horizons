@@ -37,15 +37,25 @@ u16 TH_GetBattleEvolution(struct Pokemon *mon, bool32 *canStop)
     return GetEvolutionTargetSpecies(mon, EVO_MODE_BATTLE_ONLY, ITEM_NONE, NULL, canStop, CHECK_EVO);
 }
 
-static void TH_ReturnFromBattleEvolution(void)
+void TH_SyncEvolvedBattleMon(u32 partyId, struct Pokemon *before)
 {
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][sPartyId];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyId];
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    if (species != GetMonData(&sBefore, MON_DATA_SPECIES))
+    u16 oldItem = GetMonData(before, MON_DATA_HELD_ITEM);
+    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    if (item != oldItem)
+    {
+        if (gBattleStruct->itemLost[B_TRAINER_PLAYER][partyId].originalItem == oldItem)
+            gBattleStruct->itemLost[B_TRAINER_PLAYER][partyId].originalItem = item;
+        for (u32 battler = 0; battler < gBattlersCount; battler++)
+            if (GetBattlerSide(battler) == B_SIDE_PLAYER && gBattlerPartyIndexes[battler] == partyId)
+                gBattleMons[battler].item = item;
+    }
+    if (species != GetMonData(before, MON_DATA_SPECIES))
     {
         for (u32 battler = 0; battler < gBattlersCount; battler++)
         {
-            if (GetBattlerSide(battler) != B_SIDE_PLAYER || gBattlerPartyIndexes[battler] != sPartyId)
+            if (GetBattlerSide(battler) != B_SIDE_PLAYER || gBattlerPartyIndexes[battler] != partyId)
                 continue;
             struct BattlePokemon *battleMon = &gBattleMons[battler];
             if (battleMon->volatiles.transformed)
@@ -64,20 +74,28 @@ static void TH_ReturnFromBattleEvolution(void)
                 battleMon->defense = temp;
             }
             // Retain temporary type/ability changes such as Soak and Skill Swap.
-            if (battleMon->ability == GetMonAbility(&sBefore))
+            if (!battleMon->volatiles.overwrittenAbility && battleMon->ability == GetMonAbility(before))
                 battleMon->ability = GetMonAbility(mon);
-            for (u32 i = 0; i < 2; i++)
-                if (battleMon->types[i] == GetSpeciesType(oldSpecies, i))
+            if (battleMon->types[0] == GetSpeciesType(oldSpecies, 0)
+                && battleMon->types[1] == GetSpeciesType(oldSpecies, 1))
+                for (u32 i = 0; i < 2; i++)
                     battleMon->types[i] = GetSpeciesType(species, i);
             for (u32 i = 0; i < MAX_MON_MOVES; i++)
-                if (GetMonData(mon, MON_DATA_MOVE1 + i) != GetMonData(&sBefore, MON_DATA_MOVE1 + i))
+                if (MOVE_IS_PERMANENT(battler, i)
+                    && GetMonData(mon, MON_DATA_MOVE1 + i) != GetMonData(before, MON_DATA_MOVE1 + i))
                 {
                     battleMon->moves[i] = GetMonData(mon, MON_DATA_MOVE1 + i);
                     battleMon->pp[i] = GetMonData(mon, MON_DATA_PP1 + i);
+                    battleMon->ppBonuses = (battleMon->ppBonuses & ~(3 << (i * 2)))
+                        | (GetMonData(mon, MON_DATA_PP_BONUSES) & (3 << (i * 2)));
                 }
-            battleMon->ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
         }
     }
+}
+
+static void TH_ReturnFromBattleEvolution(void)
+{
+    TH_SyncEvolvedBattleMon(sPartyId, &sBefore);
     gBattleEnvironment = sEnvironment;
     memcpy(gBattleCommunication, sCommunication, sizeof(sCommunication));
     // Evolution owns and frees its sprite buffers. Rebuild the battle's buffers.

@@ -4,6 +4,7 @@
 struct Pokemon;
 u16 TH_GetBattleEvolution(struct Pokemon *mon, bool32 *canStop);
 bool32 TH_TryBattleEvolution(u32 partyId);
+void TH_SyncEvolvedBattleMon(u32 partyId, struct Pokemon *before);
 void TH_RefreshFollower(void);
 
 u16 TH_TryDeliverTrainingKit(void);
