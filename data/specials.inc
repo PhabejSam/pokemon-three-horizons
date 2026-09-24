@@ -646,4 +646,6 @@ gSpecials::
     def_special TH_FinishRivalBattle
     def_special TH_OpenPartnerEditor
     def_special TH_ScriptGiveConfiguredStarter
+    def_special TH_ScriptDeliverTrainingKit
+    def_special TH_ScriptImproveIVs
 #endif

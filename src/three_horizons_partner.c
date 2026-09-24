@@ -13,6 +13,13 @@
 #include "bg.h"
 #include "sound.h"
 #include "constants/songs.h"
+#include "palette.h"
+#include "gpu_regs.h"
+#include "menu_helpers.h"
+#include "text_window.h"
+#include "scanline_effect.h"
+#include "battle.h"
+#include "constants/rgb.h"
 
 #if THREE_HORIZONS
 // Temporary editor state only: no changes to saved party or progress until grant.
@@ -24,6 +31,11 @@ static EWRAM_DATA u8 sWindow = 0;
 static EWRAM_DATA u8 sPage = 0;
 static EWRAM_DATA u8 sCursor = 0;
 static EWRAM_DATA bool8 sConfirmed = FALSE;
+static EWRAM_DATA struct Pokemon *sCaughtMon = NULL;
+static EWRAM_DATA void (*sReturnCallback)(void) = NULL;
+static EWRAM_DATA u32 sPreviewPersonality = 0;
+static EWRAM_DATA u8 sLevel = 5;
+static void CB2_InitCaughtEditor(void);
 
 static const u8 *const sStatNames[] = {
     COMPOUND_STRING("HP"), COMPOUND_STRING("Attack"), COMPOUND_STRING("Defense"),
@@ -53,7 +65,7 @@ static void RefreshPicture(void)
 {
     if (sSprite != 0xFFFF)
         FreeAndDestroyMonPicSprite(sSprite);
-    sSprite = CreateMonPicSprite(sSpecies, sOptions.shiny, 0, TRUE, 192, 59, 0, sSpecies);
+    sSprite = CreateMonPicSprite(sSpecies, sOptions.shiny, sPreviewPersonality, TRUE, 192, 59, 0, sSpecies);
     if (sSprite < MAX_SPRITES)
     {
         gSprites[sSprite].oam.priority = 0;
@@ -67,7 +79,10 @@ static void DrawEditor(void)
     u8 line[64];
     FillWindowPixelBuffer(sWindow, PIXEL_FILL(TEXT_COLOR_WHITE));
     StringCopy(line, GetSpeciesName(sSpecies));
-    StringAppend(line, COMPOUND_STRING("  Lv.5"));
+    u8 number[4];
+    StringAppend(line, COMPOUND_STRING("  Lv."));
+    ConvertIntToDecimalStringN(number, sLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(line, number);
     PrintAt(4, 0, line);
     for (i = 0; i < 7; i++)
     {
@@ -75,7 +90,8 @@ static void DrawEditor(void)
             PrintAt(0, 18 + i * 14, COMPOUND_STRING(">"));
         if (sPage == 0)
         {
-            StringCopy(line, sMainLabels[i]);
+            StringCopy(line, sCaughtMon && i == 5 ? COMPOUND_STRING("Confirm changes")
+                : sCaughtMon && i == 6 ? COMPOUND_STRING("Keep original") : sMainLabels[i]);
             if (i == 0)
                 StringAppend(line, sOptions.shiny ? COMPOUND_STRING("Yes") : COMPOUND_STRING("No"));
             if (i == 1)
@@ -91,7 +107,7 @@ static void DrawEditor(void)
         else
             PrintAt(10, 18 + i * 14, COMPOUND_STRING("Back"));
     }
-    PrintAt(154, 90, sPage == 1 ? COMPOUND_STRING("IVs: 0-31") : sPage == 2 ? COMPOUND_STRING("EVs: 0-252") : COMPOUND_STRING("Your partner"));
+    PrintAt(154, 90, sPage == 1 ? COMPOUND_STRING("IVs: 0-31") : sPage == 2 ? COMPOUND_STRING("EVs: 0-252") : sCaughtMon ? COMPOUND_STRING("Your catch") : COMPOUND_STRING("Your partner"));
     if (sPage == 2)
     {
         u8 *end = ConvertIntToDecimalStringN(line, TotalEVs(), STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -105,8 +121,13 @@ static void DrawEditor(void)
 
 static void CloseEditor(u8 taskId, bool32 confirmed)
 {
-    sConfirmed = confirmed;
-    gSpecialVar_Result = confirmed;
+    if (sCaughtMon && confirmed)
+        TH_ApplyCaughtMonOptions(sCaughtMon, &sOptions);
+    if (!sCaughtMon)
+    {
+        sConfirmed = confirmed;
+        gSpecialVar_Result = confirmed;
+    }
     if (sSprite != 0xFFFF)
         FreeAndDestroyMonPicSprite(sSprite);
     sSprite = 0xFFFF;
@@ -114,16 +135,31 @@ static void CloseEditor(u8 taskId, bool32 confirmed)
     {
         ClearStdWindowAndFrameToTransparent(sWindow, FALSE);
         RemoveWindow(sWindow);
-        CopyWindowToVram(0, COPYWIN_GFX);
+        if (!sCaughtMon)
+            CopyWindowToVram(0, COPYWIN_GFX);
     }
     sWindow = WINDOW_NONE;
-    ScheduleBgCopyTilemapToVram(0);
     DestroyTask(taskId);
-    ScriptContext_Enable();
+    if (sCaughtMon)
+    {
+        void (*callback)(void) = sReturnCallback;
+        sCaughtMon = NULL;
+        sReturnCallback = NULL;
+        SetVBlankCallback(NULL);
+        FreeAllWindowBuffers();
+        SetMainCallback2(callback);
+    }
+    else
+    {
+        ScheduleBgCopyTilemapToVram(0);
+        ScriptContext_Enable();
+    }
 }
 
 static void Task_PartnerEditor(u8 taskId)
 {
+    if (sCaughtMon && gPaletteFade.active)
+        return;
     s32 delta = 0;
     bool32 changed = FALSE;
     if (sWindow == WINDOW_NONE)
@@ -218,6 +254,10 @@ void TH_OpenPartnerEditor(void)
     // The next dialogue redraws window 0 after this window has been removed.
     struct WindowTemplate window = CreateWindowTemplate(0, 1, 1, 28, 18, 15, 1);
     u32 i;
+    sCaughtMon = NULL;
+    sReturnCallback = NULL;
+    sPreviewPersonality = 0;
+    sLevel = 5;
     sSpecies = gSpecialVar_0x8004;
     sPage = 0;
     sCursor = 5; // Accepting defaults is one button press.
@@ -250,4 +290,82 @@ void TH_ScriptGiveConfiguredStarter(void)
         && TH_TryGiveConfiguredStarter(sSpecies, &sOptions);
     sConfirmed = FALSE;
 }
+static void CB2_CaughtEditor(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+static void VBlankCB_CaughtEditor(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+static void CB2_InitCaughtEditor(void)
+{
+    static const struct BgTemplate bg = {.bg = 0, .charBaseIndex = 0,
+        .mapBaseIndex = 31, .screenSize = 0, .paletteMode = 0, .priority = 1, .baseTile = 0};
+    static const struct WindowTemplate windows[] = {
+        {.bg = 0, .tilemapLeft = 1, .tilemapTop = 1, .width = 28, .height = 18, .paletteNum = 15, .baseBlock = 1},
+        DUMMY_WIN_TEMPLATE,
+    };
+    static const u16 color = RGB_WHITE;
+    SetVBlankCallback(NULL);
+    ResetVramOamAndBgCntRegs();
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, &bg, 1);
+    ResetAllBgsCoordinates();
+    CloseMainBattleScreen();
+    DeactivateAllTextPrinters();
+    ResetPaletteFade();
+    ScanlineEffect_Stop();
+    ResetTasks();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    gReservedSpritePaletteCount = 0;
+    sWindow = WINDOW_NONE;
+    u8 taskId = CreateTask(Task_PartnerEditor, 80);
+    if (!InitWindows(windows))
+    {
+        CloseEditor(taskId, FALSE);
+        return;
+    }
+    sWindow = 0;
+    LoadPalette(&color, BG_PLTT_ID(0), sizeof(color));
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZEOF(8));
+    LoadUserWindowBorderGfx(0, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
+    SetStandardWindowBorderStyle(0, FALSE);
+    RefreshPicture();
+    DrawEditor();
+    ShowBg(0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    SetVBlankCallback(VBlankCB_CaughtEditor);
+    SetMainCallback2(CB2_CaughtEditor);
+}
+
+bool32 TH_OpenCaughtMonEditor(struct Pokemon *mon, void (*returnCallback)(void))
+{
+    if (mon == NULL || returnCallback == NULL || !TH_IsConfigurableCapture(GetMonData(mon, MON_DATA_SPECIES)))
+        return FALSE;
+    sCaughtMon = mon;
+    sReturnCallback = returnCallback;
+    sSpecies = GetMonData(mon, MON_DATA_SPECIES);
+    sLevel = GetMonData(mon, MON_DATA_LEVEL);
+    sPreviewPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
+    TH_ReadMonOptions(mon, &sDefaults);
+    sOptions = sDefaults;
+    sPage = 0;
+    sCursor = 5;
+    sSprite = 0xFFFF;
+    sWindow = WINDOW_NONE;
+    SetMainCallback2(CB2_InitCaughtEditor);
+    return TRUE;
+}
+
 #endif

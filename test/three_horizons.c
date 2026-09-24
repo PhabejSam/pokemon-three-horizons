@@ -596,17 +596,21 @@ TEST("Three Horizons wild loss is free while trainer penalties remain intact")
     EXPECT_EQ(TH_GetWhiteoutMoneyLoss(0, BATTLE_TYPE_TRAINER), 0);
 }
 
-TEST("Three Horizons Brock has the native Geodude and Onix party")
+TEST("Three Horizons Brock has four themed partners with Onix as ace")
 {
     const struct Trainer *trainer = &sActualTrainers[DIFFICULTY_NORMAL][TRAINER_TH_BROCK];
     EXPECT_EQ(StringCompare(trainer->trainerName, COMPOUND_STRING("BROCK")), 0);
     EXPECT_EQ(trainer->trainerPic, TRAINER_PIC_LEADER_BROCK_FRLG);
-    EXPECT_EQ((u32)trainer->partySize, 2);
-    EXPECT_EQ(trainer->party[0].species, SPECIES_GEODUDE);
-    EXPECT_EQ(trainer->party[0].lvl, 12);
-    EXPECT_EQ(trainer->party[1].species, SPECIES_ONIX);
-    EXPECT_EQ(trainer->party[1].lvl, 14);
-    EXPECT_EQ(trainer->party[1].moves[2], MOVE_ROCK_TOMB);
+    static const u16 species[] = {SPECIES_GEODUDE, SPECIES_ZUBAT, SPECIES_SANDSHREW, SPECIES_ONIX};
+    EXPECT_EQ((u32)trainer->partySize, 4);
+    if (trainer->partySize != 4)
+        return;
+    for (u32 i = 0; i < 4; i++)
+    {
+        EXPECT_EQ(trainer->party[i].species, species[i]);
+        EXPECT_EQ(trainer->party[i].lvl, i == 3 ? 14 : 12);
+    }
+    EXPECT_EQ(trainer->party[3].moves[2], MOVE_ROCK_TOMB);
 }
 
 TEST("Three Horizons new Centers resolve to their own safe healing maps")

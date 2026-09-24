@@ -18,6 +18,7 @@ TH_Lab_HideJohtoBall:
     setflag FLAG_TEMP_4
     end
 TH_EventScript_Oak::
+    setvar VAR_TEMP_6, 0
     lock
     faceplayer
     goto_if_ge VAR_TH_STAGE, TH_STAGE_PARTNER, TH_OakSupplies
@@ -113,6 +114,7 @@ TH_Lab_Confirm:
     msgbox TH_Text_ReceivedPartner
     waitfanfare
     call TH_Lab_RivalCollectPartner
+    call TH_Lab_OakApproach
     goto TH_OakSupplies
 TH_Lab_AlreadyChosen:
     msgbox TH_Text_AlreadyChosen
@@ -132,10 +134,12 @@ TH_OakSupplies:
     msgbox TH_Text_Supplies
 TH_OakAfterSupplies:
     msgbox TH_Text_OakSendoff
+    call TH_Lab_OakReturn
     release
     end
 TH_Lab_BagFull:
     msgbox TH_Text_BagFull
+    call TH_Lab_OakReturn
     release
     end
 
@@ -276,3 +280,229 @@ TH_Text_Elm:
     .string "ELM: Every partnership begins with\ntrust. Take good care of each other!$"
 TH_Text_Birch:
     .string "BIRCH: There's so much to discover\nwhen you step outside together!$"
+
+TH_Lab_OakApproach:
+    closemessage
+    setvar VAR_TEMP_6, 0
+    getplayerxy VAR_0x8008, VAR_0x8009
+    goto_if_ne VAR_0x8008, 7, TH_OakCheck1
+    goto_if_eq VAR_0x8009, 4, TH_OakApproach1
+TH_OakCheck1:
+    goto_if_ne VAR_0x8008, 8, TH_OakCheck2
+    goto_if_eq VAR_0x8009, 3, TH_OakApproach2
+TH_OakCheck2:
+    goto_if_ne VAR_0x8008, 8, TH_OakCheck3
+    goto_if_eq VAR_0x8009, 6, TH_OakApproach3
+TH_OakCheck3:
+    goto_if_ne VAR_0x8008, 9, TH_OakCheck4
+    goto_if_eq VAR_0x8009, 3, TH_OakApproach4
+TH_OakCheck4:
+    goto_if_ne VAR_0x8008, 9, TH_OakCheck5
+    goto_if_eq VAR_0x8009, 6, TH_OakApproach5
+TH_OakCheck5:
+    goto_if_ne VAR_0x8008, 10, TH_OakCheck6
+    goto_if_eq VAR_0x8009, 6, TH_OakApproach6
+TH_OakCheck6:
+    goto_if_ne VAR_0x8008, 11, TH_OakCheck7
+    goto_if_eq VAR_0x8009, 4, TH_OakApproach7
+TH_OakCheck7:
+    return
+TH_OakApproach1:
+    setvar VAR_TEMP_6, 1
+    applymovement LOCALID_TH_OAK, TH_Movement_OakApproach1
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceOak1
+    waitmovement 0
+    return
+TH_OakApproach2:
+    setvar VAR_TEMP_6, 2
+    applymovement LOCALID_TH_OAK, TH_Movement_OakApproach2
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceOak2
+    waitmovement 0
+    return
+TH_OakApproach3:
+    setvar VAR_TEMP_6, 3
+    applymovement LOCALID_TH_OAK, TH_Movement_OakApproach3
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceOak3
+    waitmovement 0
+    return
+TH_OakApproach4:
+    setvar VAR_TEMP_6, 4
+    applymovement LOCALID_TH_OAK, TH_Movement_OakApproach4
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceOak4
+    waitmovement 0
+    return
+TH_OakApproach5:
+    setvar VAR_TEMP_6, 5
+    applymovement LOCALID_TH_OAK, TH_Movement_OakApproach5
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceOak5
+    waitmovement 0
+    return
+TH_OakApproach6:
+    setvar VAR_TEMP_6, 6
+    applymovement LOCALID_TH_OAK, TH_Movement_OakApproach6
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceOak6
+    waitmovement 0
+    return
+TH_OakApproach7:
+    setvar VAR_TEMP_6, 7
+    applymovement LOCALID_TH_OAK, TH_Movement_OakApproach7
+    waitmovement 0
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerFaceOak7
+    waitmovement 0
+    return
+TH_Lab_OakReturn:
+    closemessage
+    goto_if_eq VAR_TEMP_6, 1, TH_OakReturn1
+    goto_if_eq VAR_TEMP_6, 2, TH_OakReturn2
+    goto_if_eq VAR_TEMP_6, 3, TH_OakReturn3
+    goto_if_eq VAR_TEMP_6, 4, TH_OakReturn4
+    goto_if_eq VAR_TEMP_6, 5, TH_OakReturn5
+    goto_if_eq VAR_TEMP_6, 6, TH_OakReturn6
+    goto_if_eq VAR_TEMP_6, 7, TH_OakReturn7
+    return
+TH_OakReturn1:
+    applymovement LOCALID_TH_OAK, TH_Movement_OakReturn1
+    goto TH_OakReturnDone
+TH_OakReturn2:
+    applymovement LOCALID_TH_OAK, TH_Movement_OakReturn2
+    goto TH_OakReturnDone
+TH_OakReturn3:
+    applymovement LOCALID_TH_OAK, TH_Movement_OakReturn3
+    goto TH_OakReturnDone
+TH_OakReturn4:
+    applymovement LOCALID_TH_OAK, TH_Movement_OakReturn4
+    goto TH_OakReturnDone
+TH_OakReturn5:
+    applymovement LOCALID_TH_OAK, TH_Movement_OakReturn5
+    goto TH_OakReturnDone
+TH_OakReturn6:
+    applymovement LOCALID_TH_OAK, TH_Movement_OakReturn6
+    goto TH_OakReturnDone
+TH_OakReturn7:
+    applymovement LOCALID_TH_OAK, TH_Movement_OakReturn7
+    goto TH_OakReturnDone
+TH_OakReturnDone:
+    waitmovement 0
+    setvar VAR_TEMP_6, 0
+    return
+TH_Movement_OakApproach1:
+    walk_down
+    face_right
+    step_end
+TH_Movement_OakReturn1:
+    walk_up
+    face_down
+    step_end
+TH_Movement_PlayerFaceOak1:
+    face_left
+    step_end
+TH_Movement_OakApproach2:
+    walk_right
+    face_right
+    step_end
+TH_Movement_OakReturn2:
+    walk_left
+    face_down
+    step_end
+TH_Movement_PlayerFaceOak2:
+    face_left
+    step_end
+TH_Movement_OakApproach3:
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    face_right
+    step_end
+TH_Movement_OakReturn3:
+    walk_left
+    walk_up
+    walk_up
+    walk_up
+    face_down
+    step_end
+TH_Movement_PlayerFaceOak3:
+    face_left
+    step_end
+TH_Movement_OakApproach4:
+    walk_right
+    walk_right
+    face_right
+    step_end
+TH_Movement_OakReturn4:
+    walk_left
+    walk_left
+    face_down
+    step_end
+TH_Movement_PlayerFaceOak4:
+    face_left
+    step_end
+TH_Movement_OakApproach5:
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    face_right
+    step_end
+TH_Movement_OakReturn5:
+    walk_left
+    walk_left
+    walk_up
+    walk_up
+    walk_up
+    face_down
+    step_end
+TH_Movement_PlayerFaceOak5:
+    face_left
+    step_end
+TH_Movement_OakApproach6:
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    face_right
+    step_end
+TH_Movement_OakReturn6:
+    walk_left
+    walk_left
+    walk_left
+    walk_up
+    walk_up
+    walk_up
+    face_down
+    step_end
+TH_Movement_PlayerFaceOak6:
+    face_left
+    step_end
+TH_Movement_OakApproach7:
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_down
+    face_down
+    step_end
+TH_Movement_OakReturn7:
+    walk_up
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    face_down
+    step_end
+TH_Movement_PlayerFaceOak7:
+    face_up
+    step_end

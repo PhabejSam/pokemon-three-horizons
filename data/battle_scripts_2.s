@@ -192,6 +192,9 @@ BattleScript_SuccessBallThrow::
 	sethword gBattle_BG2_X, 0
 BattleScript_TryPrintCaughtMonInfo:
 	jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_GiveCaughtMonEnd
+#if THREE_HORIZONS
+	setbyte gBattleCommunication, 0
+#endif
 	trysetcaughtmondexflags BattleScript_TryNicknameCaughtMon
 	printstring STRINGID_PKMNDATAADDEDTODEX
 	waitstate

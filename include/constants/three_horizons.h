@@ -17,6 +17,7 @@
 #define VAR_TH_RIVAL_NAME_1    0x4083
 #define VAR_TH_RIVAL_NAME_2    0x408B
 #define VAR_TH_RIVAL_NAME_3    0x4091
+#define VAR_TH_TRAINING_KIT_MASK 0x409B
 #define TH_OUTFIT_RED          0
 #define TH_OUTFIT_LEAF         1
 #define TH_OUTFIT_BRENDAN      2

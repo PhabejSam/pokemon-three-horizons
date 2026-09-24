@@ -22,6 +22,7 @@ TH_Route1_MapScripts::
 .include "data/maps/TH_Route21Shore/scripts.inc"
 
 .include "data/scripts/three_horizons/journey.inc"
+.include "data/scripts/three_horizons/training.inc"
 .include "data/maps/TH_ViridianEntrance/scripts.inc"
 .include "data/maps/TH_Route2/scripts.inc"
 .include "data/maps/TH_ForestSouthGate/scripts.inc"

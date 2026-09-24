@@ -8435,6 +8435,31 @@ static void Cmd_trysetcaughtmondexflags(void)
     CMD_ARGS(const u8 *failInstr);
 
     struct Pokemon *caughtMon = GetBattlerMon(GetCatchingBattler());
+#if THREE_HORIZONS
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_RECORDED))
+        && TH_IsConfigurableCapture(GetMonData(caughtMon, MON_DATA_SPECIES)))
+    {
+        switch (gBattleCommunication[0])
+        {
+        case 0:
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gBattleCommunication[0] = 1;
+            return;
+        case 1:
+            if (gPaletteFade.active)
+                return;
+            gBattleCommunication[0] = 2;
+            if (!TH_OpenCaughtMonEditor(caughtMon, ReshowBattleScreenAfterMenu))
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            return;
+        case 2:
+            if (gPaletteFade.active || gMain.callback2 != BattleMainCB2)
+                return;
+            gBattleCommunication[0] = 3;
+            break;
+        }
+    }
+#endif
     enum Species species = GetMonData(caughtMon, MON_DATA_SPECIES);
     u32 personality = GetMonData(caughtMon, MON_DATA_PERSONALITY);
 

@@ -158,3 +158,6 @@
 - [Playtest 5 Guide](three_horizons/PLAYTEST_5.md)
 - [Playtest 5 Repair Plan](superpowers/plans/2026-09-23-playtest5.md)
 - [Playtest 6 Guide](three_horizons/PLAYTEST_6.md)
+- [Training and Capture Design](superpowers/specs/2026-09-23-training-capture-design.md)
+- [Training and Capture Implementation Plan](superpowers/plans/2026-09-23-training-capture.md)
+- [Playtest 7 Guide](three_horizons/PLAYTEST_7.md)

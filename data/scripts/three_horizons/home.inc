@@ -23,6 +23,11 @@ TH_EventScript_TV::
 
 TH_EventScript_HomePC::
     lockall
+    copyvar VAR_0x8009, VAR_TH_TRAINING_KIT_MASK
+    special TH_ScriptDeliverTrainingKit
+    goto_if_eq VAR_0x8009, VAR_TH_TRAINING_KIT_MASK, TH_HomePC_Open
+    msgbox TH_Text_TrainingKit
+TH_HomePC_Open:
     setvar VAR_0x8004, PC_LOCATION_PLAYER_HOUSE_FRLG
     special DoPCTurnOnEffect
     playse SE_PC_ON
@@ -94,3 +99,6 @@ TH_EventScript_Dresser::
 TH_DresserDone:
     releaseall
     end
+
+TH_Text_TrainingKit:
+    .string "Your training kit is in ITEM STORAGE.\nLet your POKéMON hold these items.\pPower items help train specific stats.\nBattles still give their usual EVs.$"

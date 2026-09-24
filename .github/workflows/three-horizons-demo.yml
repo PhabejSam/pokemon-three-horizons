@@ -89,6 +89,36 @@ jobs:
           cp /tmp/th-ai.c src/battle_ai_main.c
           cp /tmp/th-event-objects.h include/constants/event_objects.h
           git diff --exit-code
+      - name: Verify training and capture regression controls
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/three_horizons_training.c /tmp/th-training.c
+          cp src/three_horizons_capture.c /tmp/th-capture.c
+          trap 'cp /tmp/th-training.c src/three_horizons_training.c; cp /tmp/th-capture.c src/three_horizons_capture.c' EXIT
+          python3 - <<'PYCODE'
+          from pathlib import Path
+          p = Path('src/three_horizons_training.c')
+          s = p.read_text()
+          assert '!(mask & (1 << i))' in s
+          p.write_text(s.replace('!(mask & (1 << i))', 'TRUE'))
+          p = Path('src/three_horizons_capture.c')
+          s = p.read_text()
+          assert '!TH_PartnerOptionsValid(options)' in s
+          p.write_text(s.replace('!TH_PartnerOptionsValid(options)', 'options == NULL'))
+          PYCODE
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons training kit delivers" -j2 > kit-negative.log 2>&1; then
+            echo "Kit test did not detect duplicate delivery"; exit 1
+          fi
+          grep -q FAIL kit-negative.log
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons caught Pokemon retain" -j2 > capture-negative.log 2>&1; then
+            echo "Capture test did not detect illegal edits"; exit 1
+          fi
+          grep -q FAIL capture-negative.log
+          cp /tmp/th-training.c src/three_horizons_training.c
+          cp /tmp/th-capture.c src/three_horizons_capture.c
+          make THREE_HORIZONS=1 check TESTS="Three Horizons" -j2 > training-capture-positive.log 2>&1
+          git diff --exit-code
       - name: Check trainer regeneration when switching build modes
         shell: bash
         run: |
@@ -113,6 +143,9 @@ jobs:
             demo-tests.log
             demo-source-commit.txt
             demo-environment.txt
+            kit-negative.log
+            capture-negative.log
+            training-capture-positive.log
             trainer-mode-switch.log
             regression-negative.log
             regression-positive.log
