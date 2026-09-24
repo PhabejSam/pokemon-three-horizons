@@ -1,10 +1,27 @@
 import json
 import unittest
+import struct
+from collections import deque
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[3]
 
 class Chapter9(unittest.TestCase):
+    def test_route4_has_a_walkable_return_to_mt_moon(self):
+        raw=list(struct.unpack('<2160H',(ROOT/'data/layouts/Route4_Frlg/map.bin').read_bytes()))
+        # Apply only the two reviewed TH-local stair replacements.
+        script=(ROOT/'data/maps/TH_Route4/scripts.inc').read_text()
+        for x,tile in [(91,'0x090'),(92,'0x091')]:
+            self.assertIn(f'setmetatile {x}, 9, {tile}, FALSE',script)
+            raw[9*108+x]=int(tile,16)
+        pending=deque([(107,11)]);seen=set(pending)
+        while pending:
+            x,y=pending.popleft()
+            for xx,yy in [(x+1,y),(x-1,y),(x,y+1),(x,y-1)]:
+                if 0<=xx<108 and 0<=yy<20 and (xx,yy) not in seen and not raw[yy*108+xx]&0xc00:
+                    seen.add((xx,yy));pending.append((xx,yy))
+        self.assertIn((32,6),seen)
+
     def test_chapter_maps_are_connected_and_owned(self):
         manifest=json.loads((ROOT/'tools/three_horizons/chapter9_maps.json').read_text())
         names=json.loads((ROOT/'tools/mapjson/three_horizons_maps.json').read_text())['maps']

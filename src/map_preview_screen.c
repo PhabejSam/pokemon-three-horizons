@@ -92,7 +92,11 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     [MPS_VIRIDIAN_FOREST] = {
         .mapsec = MAPSEC_VIRIDIAN_FOREST,
         .type = MPS_TYPE_FADE_IN,
-        .flagId = THREE_HORIZONS ? FLAG_TH_SEEN_FOREST : FLAG_WORLD_MAP_VIRIDIAN_FOREST,
+#if THREE_HORIZONS
+        .flagId = FLAG_TH_SEEN_FOREST,
+#else
+        .flagId = FLAG_WORLD_MAP_VIRIDIAN_FOREST,
+#endif
         .tilesptr = sViridianForestMapPreviewTiles,
         .tilemapptr = sViridianForestMapPreviewTilemap,
         .palptr = sViridianForestMapPreviewPalette
@@ -100,7 +104,11 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     [MPS_MT_MOON] = {
         .mapsec = MAPSEC_MT_MOON,
         .type = THREE_HORIZONS ? MPS_TYPE_FADE_IN : MPS_TYPE_CAVE,
-        .flagId = THREE_HORIZONS ? FLAG_TH_SEEN_MT_MOON : FLAG_WORLD_MAP_MT_MOON_1F,
+#if THREE_HORIZONS
+        .flagId = FLAG_TH_SEEN_MT_MOON,
+#else
+        .flagId = FLAG_WORLD_MAP_MT_MOON_1F,
+#endif
         .tilesptr = sMtMoonMapPreviewTiles,
         .tilemapptr = sMtMoonMapPreviewTilemap,
         .palptr = sMtMoonMapPreviewPalette

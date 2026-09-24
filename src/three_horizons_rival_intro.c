@@ -3,6 +3,7 @@
 #include "bg.h"
 #include "window.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "text.h"
 #include "text_window.h"
 #include "palette.h"
@@ -14,7 +15,7 @@
 #include "constants/rgb.h"
 #if THREE_HORIZONS
 static EWRAM_DATA MainCallback sNext=NULL;
-static EWRAM_DATA u16 sPortrait=0xFFFF;
+static EWRAM_DATA u16 sPortrait=0;
 static void RivalIntroVBlank(void)
 {
     LoadOam();

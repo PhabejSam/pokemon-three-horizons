@@ -131,7 +131,7 @@
       "local_id": "LOCALID_TH_CERULEAN_7",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
-      "x": 22,
+      "x": 23,
       "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -1520,17 +1520,8 @@
     },
     {
       "type": "trigger",
-      "x": 21,
-      "y": 2,
-      "elevation": 0,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "TH_Rival_BridgeTrigger"
-    },
-    {
-      "type": "trigger",
       "x": 22,
-      "y": 2,
+      "y": 4,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
@@ -1539,7 +1530,16 @@
     {
       "type": "trigger",
       "x": 23,
-      "y": 2,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_Rival_BridgeTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 4,
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",

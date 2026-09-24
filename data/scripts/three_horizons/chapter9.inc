@@ -463,6 +463,9 @@ TH_Rival_BRIDGE_AfterText:
     .string "{RIVAL}: I will scout the road ahead.\nEnjoy CERULEAN while you are here!$"
 
 TH_Rival_BridgeTrigger::
+    lockall
+    applymovement OBJ_EVENT_ID_PLAYER, TH_BridgeFaceUp
+    waitmovement 0
     goto_if_set FLAG_TH_BRIDGE_RIVAL, TH_ChapterEnd
     setvar VAR_LAST_TALKED, LOCALID_TH_CERULEAN_7
     goto TH_Rival_Bridge
@@ -489,6 +492,7 @@ TH_ChapterCheck:
 TH_ChapterReturn:
     return
 TH_ChapterEnd:
+    releaseall
     end
 
 TH_MistyThanks:
@@ -631,3 +635,7 @@ TH_FossilOther:
 TH_FossilKeepSafe:
     .string "Keep your fossil safe. Reviving it\nwill require a future journey.$"
 
+
+TH_BridgeFaceUp:
+    face_up
+    step_end
