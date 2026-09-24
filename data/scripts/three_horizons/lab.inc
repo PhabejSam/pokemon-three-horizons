@@ -158,8 +158,8 @@ TH_Lab_RivalCollectPartner:
     applymovement OBJ_EVENT_ID_PLAYER, TH_Movement_PlayerMakeRoom
     waitmovement 0
 TH_Lab_RivalApproach:
-    goto_if_le VAR_TH_FIRST_PARTNER, SPECIES_SQUIRTLE, TH_Lab_PickKanto
-    goto_if_le VAR_TH_FIRST_PARTNER, SPECIES_TOTODILE, TH_Lab_PickJohto
+    goto_if_le VAR_TH_RIVAL_PARTNER, SPECIES_SQUIRTLE, TH_Lab_PickKanto
+    goto_if_le VAR_TH_RIVAL_PARTNER, SPECIES_TOTODILE, TH_Lab_PickJohto
     goto TH_Lab_PickHoenn
 TH_Lab_PickKanto:
     applymovement LOCALID_TH_ROBIN_LAB, TH_Movement_RivalPickKanto
@@ -399,19 +399,23 @@ TH_OakReturn8:
     applymovement LOCALID_TH_OAK, TH_Movement_OakReturn8
     goto TH_OakReturnDone
 TH_Movement_OakApproach8:
+    walk_up
     walk_right
     walk_right
     walk_right
-    face_right
+    walk_right
+    face_down
     step_end
 TH_Movement_OakReturn8:
     walk_left
     walk_left
     walk_left
+    walk_left
+    walk_down
     face_down
     step_end
 TH_Movement_PlayerFaceOak8:
-    face_left
+    face_up
     step_end
 TH_Movement_OakApproach1:
     walk_down
@@ -425,85 +429,93 @@ TH_Movement_PlayerFaceOak1:
     face_left
     step_end
 TH_Movement_OakApproach2:
+    walk_up
     walk_right
-    face_right
+    walk_right
+    face_down
     step_end
 TH_Movement_OakReturn2:
     walk_left
+    walk_left
+    walk_down
     face_down
     step_end
 TH_Movement_PlayerFaceOak2:
-    face_left
+    face_up
     step_end
 TH_Movement_OakApproach3:
     walk_down
-    walk_down
+    walk_right
     walk_down
     walk_right
-    face_right
+    face_down
     step_end
 TH_Movement_OakReturn3:
     walk_left
     walk_up
-    walk_up
+    walk_left
     walk_up
     face_down
     step_end
 TH_Movement_PlayerFaceOak3:
-    face_left
+    face_up
     step_end
 TH_Movement_OakApproach4:
+    walk_up
     walk_right
     walk_right
-    face_right
+    walk_right
+    face_down
     step_end
 TH_Movement_OakReturn4:
     walk_left
     walk_left
+    walk_left
+    walk_down
     face_down
     step_end
 TH_Movement_PlayerFaceOak4:
-    face_left
+    face_up
     step_end
 TH_Movement_OakApproach5:
     walk_down
-    walk_down
+    walk_right
     walk_down
     walk_right
     walk_right
-    face_right
+    face_down
     step_end
 TH_Movement_OakReturn5:
     walk_left
     walk_left
     walk_up
-    walk_up
+    walk_left
     walk_up
     face_down
     step_end
 TH_Movement_PlayerFaceOak5:
-    face_left
+    face_up
     step_end
 TH_Movement_OakApproach6:
     walk_down
+    walk_right
     walk_down
-    walk_down
     walk_right
     walk_right
     walk_right
-    face_right
+    face_down
     step_end
 TH_Movement_OakReturn6:
     walk_left
     walk_left
     walk_left
     walk_up
-    walk_up
+    walk_left
     walk_up
     face_down
     step_end
 TH_Movement_PlayerFaceOak6:
-    face_left
+    face_up
     step_end
 TH_Movement_OakApproach7:
     walk_up
