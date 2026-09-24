@@ -1065,6 +1065,9 @@ EventScript_WhiteOut::
 	end
 
 EventScript_AfterWhiteOutHeal::
+	.if THREE_HORIZONS
+	goto TH_EventScript_CenterRecovery
+	.endif
 	lockall
 	msgbox gText_FirstShouldRestoreMonsHealth
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn

@@ -1,5 +1,7 @@
 #include "global.h"
 #include "trainer_pokemon_sprites.h"
+#include "event_object_movement.h"
+#include "constants/event_objects.h"
 #include "bg.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -1420,7 +1422,7 @@ static void Task_NewGameBirchSpeechSub_InitPokeBall(u8 taskId)
     gSprites[spriteId].invisible = FALSE;
     gSprites[spriteId].data[0] = 0;
 
-    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 112, 58, 0, 0, 32, PALETTES_BG, SPECIES_LOTAD);
+    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, THREE_HORIZONS ? 120 : 112, THREE_HORIZONS ? 80 : 58, 0, 0, 32, PALETTES_BG, SPECIES_LOTAD);
     gTasks[taskId].func = Task_NewGameBirchSpeechSub_WaitForLotad;
     gTasks[sBirchSpeechMainTaskId].tTimer = 0;
 }
@@ -1732,8 +1734,8 @@ static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8 taskId)
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         spriteId = gTasks[taskId].tLotadSpriteId;
-        gSprites[spriteId].x = 100;
-        gSprites[spriteId].y = 75;
+        gSprites[spriteId].x = THREE_HORIZONS ? 120 : 100;
+        gSprites[spriteId].y = THREE_HORIZONS ? 87 : 75;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
@@ -1948,6 +1950,58 @@ static u8 NewGameBirchSpeech_CreateLotadSprite(u8 x, u8 y)
     return CreateMonPicSprite_Affine(SPECIES_LOTAD, FALSE, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
 }
 
+#if THREE_HORIZONS
+extern const u16 gObjectEventPal_NpcWhite[], gObjectEventPal_Npc3[], gObjectEventPal_THElm[];
+static struct SpriteTemplate sTHProfessorTemplates[3];
+static struct OamData sTHProfessorOam[3];
+static const union AffineAnimCmd sTHProfessorScale[] = {
+    AFFINEANIMCMD_FRAME(512, 512, 0, 0), AFFINEANIMCMD_END,
+};
+static const union AffineAnimCmd *const sTHProfessorScales[] = {sTHProfessorScale};
+
+static void TH_ProfessorSpriteCallback(struct Sprite *sprite)
+{
+    const struct Sprite *leader = &gSprites[sprite->data[0]];
+    sprite->x = sprite->data[1];
+    sprite->y = 46;
+    sprite->invisible = leader->invisible;
+    sprite->oam.objMode = leader->oam.objMode;
+}
+
+static u8 TH_CreateProfessorTrio(void)
+{
+    static const u16 gfx[] = {OBJ_EVENT_GFX_PROF_BIRCH, OBJ_EVENT_GFX_PROF_OAK, OBJ_EVENT_GFX_TH_ELM};
+    static const u16 *const pals[] = {gObjectEventPal_Npc3, gObjectEventPal_NpcWhite, gObjectEventPal_THElm};
+    static const s16 xs[] = {184, 56, 120};
+    u8 i, leader = MAX_SPRITES;
+    for (i = 0; i < 3; i++)
+    {
+        const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(gfx[i]);
+        struct SpritePalette pal = {pals[i], 0x1340 + i};
+        struct SpriteTemplate *template = &sTHProfessorTemplates[i];
+        u8 id;
+        sTHProfessorOam[i] = *info->oam;
+        sTHProfessorOam[i].affineMode = ST_OAM_AFFINE_DOUBLE;
+        sTHProfessorOam[i].priority = 0;
+        *template = (struct SpriteTemplate){.tileTag = TAG_NONE, .paletteTag = TAG_NONE,
+            .oam = &sTHProfessorOam[i], .anims = info->anims, .images = info->images,
+            .affineAnims = sTHProfessorScales, .callback = TH_ProfessorSpriteCallback};
+        // Trainer portraits use slot 0; Lotad uses 14. Reserve our own slots.
+        LoadSpritePaletteInSlot(&pal, 6 + i);
+        id = CreateSprite(template, xs[i], 46, 1);
+        if (id == MAX_SPRITES)
+            continue;
+        if (i == 0)
+            leader = id;
+        gSprites[id].oam.paletteNum = 6 + i;
+        gSprites[id].data[0] = leader;
+        gSprites[id].data[1] = xs[i];
+        gSprites[id].invisible = TRUE;
+    }
+    return leader;
+}
+#endif
+
 static void AddBirchSpeechObjects(u8 taskId)
 {
     u8 birchSpriteId;
@@ -1955,12 +2009,16 @@ static void AddBirchSpeechObjects(u8 taskId)
     u8 brendanSpriteId;
     u8 maySpriteId;
 
+    #if THREE_HORIZONS
+    birchSpriteId = TH_CreateProfessorTrio();
+    #else
     birchSpriteId = AddNewGameBirchObject(0x88, 0x3C, 1);
     gSprites[birchSpriteId].callback = SpriteCB_Null;
+    #endif
     gSprites[birchSpriteId].oam.priority = 0;
     gSprites[birchSpriteId].invisible = TRUE;
     gTasks[taskId].tBirchSpriteId = birchSpriteId;
-    lotadSpriteId = NewGameBirchSpeech_CreateLotadSprite(100, 0x4B);
+    lotadSpriteId = NewGameBirchSpeech_CreateLotadSprite(THREE_HORIZONS ? 120 : 100, THREE_HORIZONS ? 87 : 75);
     gSprites[lotadSpriteId].callback = SpriteCB_Null;
     gSprites[lotadSpriteId].oam.priority = 0;
     gSprites[lotadSpriteId].invisible = TRUE;

@@ -889,4 +889,15 @@
 #endif
 #define TRAINER_PARTNER(partner)           (MAX_TRAINERS_COUNT + partner)
 
+
+#if THREE_HORIZONS
+#define TRAINER_TH_RICK 1
+#define TRAINER_TH_DOUG 2
+#define TRAINER_TH_SAMMY 3
+#define TRAINER_TH_ANTHONY 4
+#define TRAINER_TH_CHARLIE 5
+#define TRAINER_TH_LIAM 6
+#define TRAINER_TH_BROCK 7
+#endif
+
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

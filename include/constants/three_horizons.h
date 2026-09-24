@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_THREE_HORIZONS_H
 #define GUARD_CONSTANTS_THREE_HORIZONS_H
 
+// TH-only replacements for unreachable Hoenn trainers; save flag capacity is unchanged.
+
 // Audited unused Emerald event slots; no save-block layout changes.
 #define VAR_TH_STAGE           0x40F7
 #define VAR_TH_FIRST_PARTNER   0x40F8
@@ -32,6 +34,7 @@
 #define TH_SUPPLY_POTIONS      2
 #define TH_SUPPLY_DEX          4
 #define TH_SUPPLIES_COMPLETE   7
+#define FLAG_TH_BROCK_TM FLAG_UNUSED_0x020
 #define FLAG_TH_HIDE_ROBIN_TOWN FLAG_TEMP_1
 #define FLAG_TH_HIDE_ROBIN_LAB  FLAG_TEMP_2
 #endif

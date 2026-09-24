@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "three_horizons.h"
 #include "string_util.h"
 #include "constants/opponents.h"
@@ -15,6 +16,12 @@
 #include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
+// Keep trainer rewards/penalties intact; wild defeats are free recovery.
+u32 TH_GetWhiteoutMoneyLoss(u32 money, u32 battleFlags)
+{
+    return (battleFlags & BATTLE_TYPE_TRAINER) ? money : 0;
+}
+
 EWRAM_DATA u8 gTHPendingRivalName[PLAYER_NAME_LENGTH + 1] = {0};
 EWRAM_DATA static u16 sPendingOptions[3] = {0};
 EWRAM_DATA static bool8 sHavePendingOptions = FALSE;

@@ -157,3 +157,4 @@
 - [Opening Playtest Follow-up](three_horizons/PLAYTEST_FOLLOWUP.md)
 - [Playtest 5 Guide](three_horizons/PLAYTEST_5.md)
 - [Playtest 5 Repair Plan](superpowers/plans/2026-09-23-playtest5.md)
+- [Playtest 6 Guide](three_horizons/PLAYTEST_6.md)

@@ -4087,6 +4087,9 @@ static void Cmd_getmoneyreward(void)
         }
         if (!IsEnoughMoney(&gSaveBlock1Ptr->money, money))
             money = GetMoney(&gSaveBlock1Ptr->money);
+        #if THREE_HORIZONS
+        money = TH_GetWhiteoutMoneyLoss(money, gBattleTypeFlags);
+        #endif
         RemoveMoney(&gSaveBlock1Ptr->money, money);
     }
 

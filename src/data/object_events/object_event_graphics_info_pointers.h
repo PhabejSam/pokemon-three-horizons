@@ -423,6 +423,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTre
 
 #if THREE_HORIZONS
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THElm;
 #endif
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
 #if THREE_HORIZONS
@@ -446,6 +447,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
 #endif
 
 #if THREE_HORIZONS
+    [OBJ_EVENT_GFX_TH_ELM] = &gObjectEventGraphicsInfo_THElm,
     [OBJ_EVENT_GFX_TH_CLOCK] = &gObjectEventGraphicsInfo_THClock,
 #endif
 #if IS_FRLG || THREE_HORIZONS

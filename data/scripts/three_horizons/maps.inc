@@ -11,8 +11,6 @@ TH_OaksLab_MapScripts::
     .byte 0
 TH_Route1_MapScripts::
     .byte 0
-TH_ViridianEntrance_MapScripts::
-    .byte 0
 
     .include "data/scripts/three_horizons/home.inc"
     .include "data/scripts/three_horizons/town.inc"
@@ -22,3 +20,16 @@ TH_ViridianEntrance_MapScripts::
     .include "data/scripts/three_horizons/text.inc"
 
 .include "data/maps/TH_Route21Shore/scripts.inc"
+
+.include "data/scripts/three_horizons/journey.inc"
+.include "data/maps/TH_ViridianEntrance/scripts.inc"
+.include "data/maps/TH_Route2/scripts.inc"
+.include "data/maps/TH_ForestSouthGate/scripts.inc"
+.include "data/maps/TH_ForestNorthGate/scripts.inc"
+.include "data/maps/TH_ViridianForest/scripts.inc"
+.include "data/maps/TH_Pewter/scripts.inc"
+.include "data/maps/TH_PewterGym/scripts.inc"
+.include "data/maps/TH_ViridianCenter/scripts.inc"
+.include "data/maps/TH_PewterCenter/scripts.inc"
+.include "data/maps/TH_ViridianMart/scripts.inc"
+.include "data/maps/TH_PewterMart/scripts.inc"

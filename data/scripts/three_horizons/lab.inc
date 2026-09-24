@@ -265,3 +265,14 @@ TH_Movement_RivalLeaveHoenn:
     walk_down
     walk_down
     step_end
+
+TH_Lab_Elm::
+    msgbox TH_Text_Elm, MSGBOX_NPC
+    end
+TH_Lab_Birch::
+    msgbox TH_Text_Birch, MSGBOX_NPC
+    end
+TH_Text_Elm:
+    .string "ELM: Every partnership begins with\ntrust. Take good care of each other!$"
+TH_Text_Birch:
+    .string "BIRCH: There's so much to discover\nwhen you step outside together!$"

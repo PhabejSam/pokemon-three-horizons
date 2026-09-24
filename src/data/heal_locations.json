@@ -359,6 +359,26 @@
       "respawn_npc": "LOCALID_TH_MOM",
       "respawn_x": 8,
       "respawn_y": 5
+    },
+    {
+      "id": "HEAL_LOCATION_TH_VIRIDIAN",
+      "map": "MAP_TH_VIRIDIAN_CENTER",
+      "x": 7,
+      "y": 4,
+      "respawn_map": "MAP_TH_VIRIDIAN_CENTER",
+      "respawn_npc": "LOCALID_TH_VIRIDIAN_NURSE",
+      "respawn_x": 7,
+      "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_TH_PEWTER",
+      "map": "MAP_TH_PEWTER_CENTER",
+      "x": 7,
+      "y": 4,
+      "respawn_map": "MAP_TH_PEWTER_CENTER",
+      "respawn_npc": "LOCALID_TH_PEWTER_NURSE",
+      "respawn_x": 7,
+      "respawn_y": 4
     }
   ]
 }

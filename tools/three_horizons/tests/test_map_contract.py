@@ -10,7 +10,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[3]
 EXE = ROOT / 'tools/mapjson' / ('mapjson.exe' if os.name == 'nt' else 'mapjson')
-NAMES = ('TH_Home2F', 'TH_Home1F', 'TH_Pallet', 'TH_OaksLab', 'TH_Route1', 'TH_ViridianEntrance', 'TH_Route21Shore')
+NAMES = tuple(json.loads((ROOT / 'tools/mapjson/three_horizons_maps.json').read_text())['maps'])
 
 
 class MapContract(unittest.TestCase):

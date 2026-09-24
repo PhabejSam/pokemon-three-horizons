@@ -20,6 +20,7 @@ void TH_SetRivalName(const u8 *name);
 bool32 TH_IsRivalTrainer(u16 trainerId);
 bool32 TH_WantsToRun(u16 heldKeys);
 u32 TH_ApplyExpRate(u32 experience);
+u32 TH_GetWhiteoutMoneyLoss(u32 money, u32 battleFlags);
 u16 TH_GetOutfit(void);
 u16 TH_GetTrainerPic(void);
 void TH_ChangeOutfit(void);

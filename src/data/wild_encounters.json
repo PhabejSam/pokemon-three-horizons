@@ -77,6 +77,144 @@
       ],
       "encounters": [
         {
+          "map": "MAP_TH_VIRIDIAN_FOREST",
+          "base_label": "gTH_ViridianForestWildMon",
+          "land_mons": {
+            "encounter_rate": 14,
+            "mons": [
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_CATERPIE"
+              },
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_WEEDLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_CATERPIE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_WEEDLE"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_CATERPIE"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_WEEDLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_METAPOD"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_KAKUNA"
+              },
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_KAKUNA"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_PIKACHU"
+              },
+              {
+                "min_level": 6,
+                "max_level": 6,
+                "species": "SPECIES_KAKUNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_PIKACHU"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TH_ROUTE2",
+          "base_label": "gTH_Route2WildMon",
+          "land_mons": {
+            "encounter_rate": 21,
+            "mons": [
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_CATERPIE"
+              },
+              {
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_WEEDLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_CATERPIE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_WEEDLE"
+              }
+            ]
+          }
+        },
+        {
           "map": "MAP_TH_ROUTE1",
           "base_label": "gTHRoute1",
           "land_mons": {

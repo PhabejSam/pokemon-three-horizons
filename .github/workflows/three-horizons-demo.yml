@@ -60,6 +60,35 @@ jobs:
           cp /tmp/th-battle-controllers.c src/battle_controllers.c
           make THREE_HORIZONS=1 check TESTS="Three Horizons first rival battle initialization" -j2 > regression-positive.log 2>&1
           git diff --exit-code
+      - name: Verify palette and fleeing regressions detect original defects
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/battle_ai_main.c /tmp/th-ai.c
+          cp include/constants/event_objects.h /tmp/th-event-objects.h
+          trap 'cp /tmp/th-ai.c src/battle_ai_main.c; cp /tmp/th-event-objects.h include/constants/event_objects.h' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/battle_ai_main.c')
+          s = p.read_text()
+          old = 'if (!IS_FRLG && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)\n        && gAiLogicData->hpPercents[battlerDef] <= 20)'
+          assert old in s
+          p.write_text(s.replace(old, 'if (!IS_FRLG && gAiLogicData->hpPercents[battlerDef] <= 20)'))
+          p = Path('include/constants/event_objects.h')
+          s = p.read_text()
+          p.write_text(s.replace('OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL 0x1300', 'OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL 0x1200'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons Gold and weather" -j2 > palette-negative.log 2>&1; then
+            echo "Palette regression did not detect original bug"; exit 1
+          fi
+          grep -q FAIL palette-negative.log
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons first rival can attack" -j2 > flee-negative.log 2>&1; then
+            echo "AI regression did not detect original bug"; exit 1
+          fi
+          grep -q FAIL flee-negative.log
+          cp /tmp/th-ai.c src/battle_ai_main.c
+          cp /tmp/th-event-objects.h include/constants/event_objects.h
+          git diff --exit-code
       - name: Check trainer regeneration when switching build modes
         shell: bash
         run: |
@@ -87,4 +116,6 @@ jobs:
             trainer-mode-switch.log
             regression-negative.log
             regression-positive.log
+            palette-negative.log
+            flee-negative.log
             docs/three_horizons/OPENING_DEMO_TESTS.md

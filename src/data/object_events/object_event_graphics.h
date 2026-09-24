@@ -1,4 +1,8 @@
 #if THREE_HORIZONS
+const u32 gObjectEventPic_THElm[] = INCGFX_U32("graphics/three_horizons/professors/elm.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u16 gObjectEventPal_THElm[] = INCGFX_U16("graphics/three_horizons/professors/elm.pal", ".gbapal");
+#endif
+#if THREE_HORIZONS
 const u32 gObjectEventPic_THClock[] = INCGFX_U32("graphics/three_horizons/clock.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPal_THClock[] = INCGFX_U16("graphics/three_horizons/clock.png", ".gbapal");
 #endif

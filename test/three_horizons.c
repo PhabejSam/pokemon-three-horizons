@@ -1,4 +1,9 @@
 #include "global.h"
+#include "sprite.h"
+#include "palette.h"
+#include "field_weather.h"
+#include "heal_location.h"
+#include "constants/heal_locations.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "battle_controllers.h"
@@ -545,5 +550,76 @@ TEST("Three Horizons title options survive the new-game event reset")
     EXPECT_EQ(VarGet(VAR_TH_AUTO_RUN), 0);
     EXPECT_EQ(VarGet(VAR_TH_EXP_RATE), 0);
     EXPECT_EQ(VarGet(VAR_TH_FOLLOWER_OFF), 0);
+}
+#endif
+
+#if THREE_HORIZONS
+extern const u16 gObjectEventPal_THGoldNormal[], gFogPalette[];
+TEST("Three Horizons Gold and weather palettes survive loading in either order")
+{
+    u32 order, i;
+    u8 savedReserved = gReservedSpritePaletteCount;
+    const struct SpritePalette gold = {gObjectEventPal_THGoldNormal, OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL};
+    const struct SpritePalette weather = {gFogPalette, PALTAG_WEATHER};
+    for (order = 0; order < 2; order++)
+    {
+        u32 goldSlot, weatherSlot;
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = 0;
+        if (order == 0)
+        {
+            goldSlot = LoadSpritePalette(&gold);
+            weatherSlot = LoadSpritePalette(&weather);
+        }
+        else
+        {
+            weatherSlot = LoadSpritePalette(&weather);
+            goldSlot = LoadSpritePalette(&gold);
+        }
+        EXPECT(goldSlot < 16 && weatherSlot < 16);
+        EXPECT(goldSlot != weatherSlot);
+        for (i = 0; i < 16; i++)
+        {
+            EXPECT_EQ(gPlttBufferUnfaded[OBJ_PLTT_ID(goldSlot) + i], gold.data[i]);
+            EXPECT_EQ(gPlttBufferUnfaded[OBJ_PLTT_ID(weatherSlot) + i], weather.data[i]);
+        }
+    }
+    FreeAllSpritePalettes();
+    gReservedSpritePaletteCount = savedReserved;
+}
+
+TEST("Three Horizons wild loss is free while trainer penalties remain intact")
+{
+    EXPECT_EQ(TH_GetWhiteoutMoneyLoss(320, 0), 0);
+    EXPECT_EQ(TH_GetWhiteoutMoneyLoss(3000, BATTLE_TYPE_DOUBLE), 0);
+    EXPECT_EQ(TH_GetWhiteoutMoneyLoss(320, BATTLE_TYPE_TRAINER), 320);
+    EXPECT_EQ(TH_GetWhiteoutMoneyLoss(0, BATTLE_TYPE_TRAINER), 0);
+}
+
+TEST("Three Horizons Brock has the native Geodude and Onix party")
+{
+    const struct Trainer *trainer = &sActualTrainers[DIFFICULTY_NORMAL][TRAINER_TH_BROCK];
+    EXPECT_EQ(StringCompare(trainer->trainerName, COMPOUND_STRING("BROCK")), 0);
+    EXPECT_EQ(trainer->trainerPic, TRAINER_PIC_LEADER_BROCK_FRLG);
+    EXPECT_EQ((u32)trainer->partySize, 2);
+    EXPECT_EQ(trainer->party[0].species, SPECIES_GEODUDE);
+    EXPECT_EQ(trainer->party[0].lvl, 12);
+    EXPECT_EQ(trainer->party[1].species, SPECIES_ONIX);
+    EXPECT_EQ(trainer->party[1].lvl, 14);
+    EXPECT_EQ(trainer->party[1].moves[2], MOVE_ROCK_TOMB);
+}
+
+TEST("Three Horizons new Centers resolve to their own safe healing maps")
+{
+    const struct HealLocation *viridian = GetHealLocation(HEAL_LOCATION_TH_VIRIDIAN);
+    const struct HealLocation *pewter = GetHealLocation(HEAL_LOCATION_TH_PEWTER);
+    EXPECT(viridian != NULL && pewter != NULL);
+    EXPECT_EQ(viridian->mapGroup, MAP_GROUP(MAP_TH_VIRIDIAN_CENTER));
+    EXPECT_EQ(viridian->mapNum, MAP_NUM(MAP_TH_VIRIDIAN_CENTER));
+    EXPECT_EQ(pewter->mapNum, MAP_NUM(MAP_TH_PEWTER_CENTER));
+    EXPECT_EQ(viridian->x, 7);
+    EXPECT_EQ(viridian->y, 4);
+    EXPECT_EQ(pewter->x, 7);
+    EXPECT_EQ(pewter->y, 4);
 }
 #endif
