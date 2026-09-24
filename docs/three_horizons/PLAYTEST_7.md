@@ -32,3 +32,9 @@ Future Gym Leaders will use four Pokemon early, five in the middle gyms, and six
 The packaged build report records exact source, results, output hash, warnings, and manual coverage. Engine tests and source/collision checks are distinct from a full emulator playthrough. No newly written feature should be described as manually playtested unless that run was actually performed.
 
 The original Playtest 6 files and user saves are preserved. Follow the package's save-transfer instructions when using the separately named ROM.
+
+## Continuing a save
+
+With the emulator closed, back up your old `.sav`, then copy it beside the new ROM as `pokemon-three-horizons-playtest-7.sav`. If mGBA uses a custom save folder, put the copy there. Open the new ROM and choose Continue. Keep the originals. Use a separate new game to test Oak's handoff; an already-defeated Brock stays defeated. Use in-game saves instead of older emulator save states.
+
+See [verification details](PLAYTEST_7_VERIFICATION.md) for automated results and remaining manual coverage.

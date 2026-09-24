@@ -161,3 +161,5 @@
 - [Training and Capture Design](superpowers/specs/2026-09-23-training-capture-design.md)
 - [Training and Capture Implementation Plan](superpowers/plans/2026-09-23-training-capture.md)
 - [Playtest 7 Guide](three_horizons/PLAYTEST_7.md)
+
+- [Playtest 7 Verification](three_horizons/PLAYTEST_7_VERIFICATION.md)
