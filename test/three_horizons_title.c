@@ -41,8 +41,13 @@ TEST("Three Horizons illustrated title stays stable and opens the menu")
     gMain.newKeys = key;
     gMain.callback2();
     gMain.newKeys = 0;
-    gPaletteFade.active = FALSE;
-    gMain.callback2();
+    // A fade also waits for the VBlank palette transfer; clearing only the
+    // active flag leaves that transfer pending and cannot finish the callback.
+    for (u32 frame = 0; frame < 90 && gMain.callback2 != CB2_InitMainMenu; frame++)
+    {
+        VBlankIntrWait();
+        gMain.callback2();
+    }
     EXPECT(gMain.callback2 == CB2_InitMainMenu);
     SetVBlankCallback(NULL);
     ResetTasks();
@@ -52,3 +57,4 @@ TEST("Three Horizons illustrated title stays stable and opens the menu")
     SetMainCallback2(old2);
 }
 #endif
+
