@@ -17,6 +17,7 @@ void TH_RecalculateWithoutHealing(struct Pokemon *mon, u16 oldHP, u16 oldMaxHP);
 struct THPartnerOptions
 {
     u8 nature;
+    u8 abilityNum;
     bool8 shiny;
     u8 ivs[6];
     u8 evs[6];
@@ -29,6 +30,27 @@ bool32 TH_OpenCaughtMonEditor(struct Pokemon *mon, void (*returnCallback)(void))
 bool32 TH_TryGiveConfiguredStarter(u16 species, const struct THPartnerOptions *options);
 void TH_OpenPartnerEditor(void);
 void TH_ScriptGiveConfiguredStarter(void);
+
+
+enum THReward { TH_REWARD_BROCK, TH_REWARD_MISTY, TH_REWARD_MAGIKARP };
+bool32 TH_CreateConfiguredPartner(struct Pokemon *mon, u16 species, u8 level, const struct THPartnerOptions *options);
+bool32 TH_TryGiveStarterMon(struct Pokemon *mon);
+u8 TH_TryDeliverReward(enum THReward reward, struct Pokemon *mon);
+void TH_OpenRewardEditor(void);
+void TH_ScriptGiveReward(void);
+void TH_ScriptRewardChoices(void);
+void TH_ScriptBuyMagikarp(void);
+u8 TH_GetAbilityChoices(u16 species, u8 slots[3]);
+bool32 TH_PartnerOptionsValidForSpecies(u16 species, const struct THPartnerOptions *options);
+u16 TH_GetRivalCandidate(u16 playerSpecies, u8 choice);
+u16 TH_GetBrockGift(u16 original, u8 choice);
+u16 TH_GetMistyGift(u16 original, u16 brockGift);
+u32 TH_AdvanceVisualClock(u32 anchorReal, u32 anchorVisual, u32 now, u8 mode);
+u32 TH_GetVisualTimeSeconds(void);
+void TH_SetClockMode(u8 mode);
+void TH_ResetVisualClock(void);
+u16 TH_GetWildShinyThreshold(void);
+extern bool8 gTHCreatingWildMon;
 
 extern u8 gTHPendingRivalName[PLAYER_NAME_LENGTH + 1];
 const u8 *TH_GetRivalName(void);

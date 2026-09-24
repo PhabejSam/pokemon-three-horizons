@@ -37,13 +37,13 @@ TEST("Three Horizons capture editor confirms or cancels through real input and c
     EXPECT(gMain.callback2 != ReturnFromEditor);
     gPaletteFade.active = FALSE;
     // Cursor begins at Confirm. Move to Shiny, change the preview, then close.
-    for (u32 i = 0; i < 5; i++)
+    for (u32 i = 0; i < 6; i++)
         PressEditorKey(DPAD_UP);
     PressEditorKey(DPAD_RIGHT);
     EXPECT_EQ(memcmp(&mon, &before, sizeof(mon)), 0);
     if (confirm)
     {
-        for (u32 i = 0; i < 5; i++)
+        for (u32 i = 0; i < 6; i++)
             PressEditorKey(DPAD_DOWN);
         PressEditorKey(A_BUTTON);
     }

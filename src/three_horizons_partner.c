@@ -1,4 +1,7 @@
 #include "global.h"
+#include "naming_screen.h"
+#include "overworld.h"
+#include "constants/three_horizons.h"
 #include "three_horizons.h"
 #include "pokemon.h"
 #include "trainer_pokemon_sprites.h"
@@ -37,6 +40,24 @@ static EWRAM_DATA void (*sReturnCallback)(void) = NULL;
 static EWRAM_DATA u32 sPreviewPersonality = 0;
 static EWRAM_DATA u8 sLevel = 0;
 static void CB2_InitCaughtEditor(void);
+static EWRAM_DATA struct Pokemon sNamedPartner = {0};
+static EWRAM_DATA u8 sPendingReward = 0;
+static EWRAM_DATA u8 sPartnerNickname[POKEMON_NAME_LENGTH + 1] = {0};
+static void OpenFieldEditor(u8 level);
+static void DeliverNamedPartner(void)
+{
+    SetMonData(&sNamedPartner,MON_DATA_NICKNAME,sPartnerNickname);
+    gSpecialVar_Result = sPendingReward==0 ? TH_TryGiveStarterMon(&sNamedPartner)
+        : TH_TryDeliverReward(sPendingReward-1,&sNamedPartner)!=MON_CANT_GIVE;
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+static void NamePendingPartner(void)
+{
+    GetMonData(&sNamedPartner,MON_DATA_NICKNAME,sPartnerNickname);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME,sPartnerNickname,GetMonData(&sNamedPartner,MON_DATA_SPECIES),
+        GetMonGender(&sNamedPartner),GetMonData(&sNamedPartner,MON_DATA_PERSONALITY),DeliverNamedPartner);
+}
+
 
 static const u8 *const sStatNames[] = {
     COMPOUND_STRING("HP"), COMPOUND_STRING("Attack"), COMPOUND_STRING("Defense"),
@@ -44,7 +65,7 @@ static const u8 *const sStatNames[] = {
 };
 static const u8 sStatOrder[] = {0, 1, 2, 4, 5, 3};
 static const u8 *const sMainLabels[] = {
-    COMPOUND_STRING("Shiny: "), COMPOUND_STRING("Nature: "),
+    COMPOUND_STRING("Shiny: "), COMPOUND_STRING("Nature: "), COMPOUND_STRING("Ability: "),
     COMPOUND_STRING("IVs..."), COMPOUND_STRING("EVs..."),
     COMPOUND_STRING("Restore defaults"), COMPOUND_STRING("Choose partner"), COMPOUND_STRING("Cancel"),
 };
@@ -88,28 +109,30 @@ static void DrawEditor(void)
     ConvertIntToDecimalStringN(number, sLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(line, number);
     PrintAt(4, 0, line);
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < (sPage ? 7 : 8); i++)
     {
         if (sCursor == i)
-            PrintAt(0, 18 + i * 14, COMPOUND_STRING(">"));
+            PrintAt(0, 18 + i * (sPage ? 14 : 12), COMPOUND_STRING(">"));
         if (sPage == 0)
         {
-            StringCopy(line, sCaughtMon && i == 5 ? COMPOUND_STRING("Confirm changes")
-                : sCaughtMon && i == 6 ? COMPOUND_STRING("Keep original") : sMainLabels[i]);
+            StringCopy(line, sCaughtMon && i == 6 ? COMPOUND_STRING("Confirm changes")
+                : sCaughtMon && i == 7 ? COMPOUND_STRING("Keep original") : sMainLabels[i]);
             if (i == 0)
                 StringAppend(line, sOptions.shiny ? COMPOUND_STRING("Yes") : COMPOUND_STRING("No"));
             if (i == 1)
                 StringAppend(line, gNaturesInfo[sOptions.nature].name);
-            PrintAt(10, 18 + i * 14, line);
+            if (i == 2)
+                StringAppend(line, gAbilitiesInfo[GetSpeciesAbility(sSpecies,sOptions.abilityNum)].name);
+            PrintAt(10, 18 + i * (sPage ? 14 : 12), line);
         }
         else if (i < 6)
         {
-            PrintAt(10, 18 + i * 14, sStatNames[i]);
+            PrintAt(10, 18 + i * (sPage ? 14 : 12), sStatNames[i]);
             ConvertIntToDecimalStringN(line, sPage == 1 ? sOptions.ivs[sStatOrder[i]] : sOptions.evs[sStatOrder[i]], STR_CONV_MODE_RIGHT_ALIGN, 3);
-            PrintAt(90, 18 + i * 14, line);
+            PrintAt(90, 18 + i * (sPage ? 14 : 12), line);
         }
         else
-            PrintAt(10, 18 + i * 14, COMPOUND_STRING("Back"));
+            PrintAt(10, 18 + i * (sPage ? 14 : 12), COMPOUND_STRING("Back"));
     }
     PrintAt(154, 90, sPage == 1 ? COMPOUND_STRING("IVs: 0-31") : sPage == 2 ? COMPOUND_STRING("EVs: 0-252") : sCaughtMon ? COMPOUND_STRING("Your catch") : COMPOUND_STRING("Your partner"));
     if (sPage == 2)
@@ -178,18 +201,18 @@ static void Task_PartnerEditor(u8 taskId)
             CloseEditor(taskId, FALSE);
             return;
         }
-        sCursor = sPage == 1 ? 2 : 3;
+        sCursor = sPage == 1 ? 3 : 4;
         sPage = 0;
         changed = TRUE;
     }
     else if (JOY_REPEAT(DPAD_UP))
     {
-        sCursor = (sCursor + 6) % 7;
+        sCursor = (sCursor + (sPage ? 6 : 7)) % (sPage ? 7 : 8);
         changed = TRUE;
     }
     else if (JOY_REPEAT(DPAD_DOWN))
     {
-        sCursor = (sCursor + 1) % 7;
+        sCursor = (sCursor + 1) % (sPage ? 7 : 8);
         changed = TRUE;
     }
     else if (JOY_NEW(A_BUTTON))
@@ -199,18 +222,18 @@ static void Task_PartnerEditor(u8 taskId)
         {
             if (sCursor == 6)
             {
-                sCursor = sPage == 1 ? 2 : 3;
+                sCursor = sPage == 1 ? 3 : 4;
                 sPage = 0;
             }
         }
-        else if (sCursor <= 1)
+        else if (sCursor <= 2)
             delta = 1;
-        else if (sCursor <= 3)
+        else if (sCursor <= 4)
         {
-            sPage = sCursor - 1;
+            sPage = sCursor - 2;
             sCursor = 0;
         }
-        else if (sCursor == 4)
+        else if (sCursor == 5)
         {
             sOptions = sDefaults;
             if (!RefreshPicture() && sCaughtMon)
@@ -221,7 +244,7 @@ static void Task_PartnerEditor(u8 taskId)
         }
         else
         {
-            CloseEditor(taskId, sCursor == 5);
+            CloseEditor(taskId, sCursor == 6);
             return;
         }
     }
@@ -243,6 +266,12 @@ static void Task_PartnerEditor(u8 taskId)
         }
         else if (sPage == 0 && sCursor == 1)
             sOptions.nature = (sOptions.nature + (delta > 0 ? 1 : NUM_NATURES - 1)) % NUM_NATURES;
+        else if (sPage == 0 && sCursor == 2)
+        {
+            u8 slots[3], count=TH_GetAbilityChoices(sSpecies,slots), index=0;
+            while (index<count && slots[index]!=sOptions.abilityNum) index++;
+            if (count) sOptions.abilityNum=slots[(index+(delta>0 ? 1 : count-1))%count];
+        }
         else if (sPage && sCursor < 6)
         {
             u8 stat = sStatOrder[sCursor];
@@ -258,7 +287,9 @@ static void Task_PartnerEditor(u8 taskId)
     }
 }
 
-void TH_OpenPartnerEditor(void)
+void TH_OpenPartnerEditor(void) { OpenFieldEditor(5); }
+void TH_OpenRewardEditor(void) { OpenFieldEditor(gSpecialVar_0x8006==TH_REWARD_BROCK ? 10 : 15); }
+static void OpenFieldEditor(u8 level)
 {
     struct Pokemon sample;
     // The calling script closes window 0 first. Reuse its tile range while the
@@ -269,10 +300,10 @@ void TH_OpenPartnerEditor(void)
     sCaughtMon = NULL;
     sReturnCallback = NULL;
     sPreviewPersonality = 0;
-    sLevel = 5;
+    sLevel = level;
     sSpecies = gSpecialVar_0x8004;
     sPage = 0;
-    sCursor = 5; // Accepting defaults is one button press.
+    sCursor = 6; // Accepting defaults is one button press.
     sConfirmed = FALSE;
     sSprite = 0xFFFF;
     sWindow = WINDOW_NONE;
@@ -281,6 +312,7 @@ void TH_OpenPartnerEditor(void)
         return;
     CreateRandomMon(&sample, sSpecies, 5);
     sDefaults.nature = GetNature(&sample);
+    sDefaults.abilityNum = GetMonData(&sample,MON_DATA_ABILITY_NUM);
     sDefaults.shiny = FALSE;
     for (i = 0; i < 6; i++)
     {
@@ -298,9 +330,36 @@ void TH_OpenPartnerEditor(void)
 
 void TH_ScriptGiveConfiguredStarter(void)
 {
-    gSpecialVar_Result = sConfirmed && sSpecies == gSpecialVar_0x8004
-        && TH_TryGiveConfiguredStarter(sSpecies, &sOptions);
-    sConfirmed = FALSE;
+    gSpecialVar_Result=FALSE;
+    if (sConfirmed && sSpecies==gSpecialVar_0x8004 && TH_CreateConfiguredPartner(&sNamedPartner,sSpecies,5,&sOptions))
+    {
+        sPendingReward=0;
+        NamePendingPartner();
+    }
+    else SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    sConfirmed=FALSE;
+}
+void TH_ScriptGiveReward(void)
+{
+    gSpecialVar_Result=FALSE;
+    if (sConfirmed && sSpecies==gSpecialVar_0x8004 && TH_CreateConfiguredPartner(&sNamedPartner,sSpecies,sLevel,&sOptions))
+    {
+        sPendingReward=gSpecialVar_0x8006+1;
+        NamePendingPartner();
+    }
+    else SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    sConfirmed=FALSE;
+}
+void TH_ScriptBuyMagikarp(void)
+{
+    struct THPartnerOptions options={.nature=NATURE_ADAMANT,.shiny=TRUE};
+    for (u32 i=0;i<6;i++) options.ivs[i]=31;
+    options.evs[STAT_HP]=6;
+    options.evs[STAT_ATK]=252;
+    options.evs[STAT_SPEED]=252;
+    TH_CreateConfiguredPartner(&sNamedPartner,SPECIES_MAGIKARP,5,&options);
+    sPendingReward=TH_REWARD_MAGIKARP+1;
+    NamePendingPartner();
 }
 static void CB2_CaughtEditor(void)
 {
@@ -377,7 +436,7 @@ bool32 TH_OpenCaughtMonEditor(struct Pokemon *mon, void (*returnCallback)(void))
     TH_ReadMonOptions(mon, &sDefaults);
     sOptions = sDefaults;
     sPage = 0;
-    sCursor = 5;
+    sCursor = 6;
     sSprite = 0xFFFF;
     sWindow = WINDOW_NONE;
     SetMainCallback2(CB2_InitCaughtEditor);

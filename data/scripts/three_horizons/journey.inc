@@ -143,17 +143,20 @@ TH_Journey_Nurse::
     closemessage
     applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterLeft
     waitmovement 0
+    hidefollower TRUE
     dofieldeffect FLDEFF_POKECENTER_HEAL
     waitfieldeffect FLDEFF_POKECENTER_HEAL
     applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
     waitmovement 0
     special HealPlayerParty
+    special TH_RefreshFollower
     msgbox TH_Text_NurseDone
     release
     end
 TH_EventScript_CenterRecovery::
     lockall
     special HealPlayerParty
+    special TH_RefreshFollower
     msgbox TH_Text_NurseRecovery
     fadedefaultbgm
     releaseall

@@ -1,4 +1,5 @@
 TH_Lab_OnLoad::
+    setvar VAR_TEMP_7, 1
     clearflag FLAG_TEMP_3
     clearflag FLAG_TEMP_4
     clearflag FLAG_TEMP_5
@@ -99,7 +100,10 @@ TH_Lab_Confirm:
     bufferspeciesname STR_VAR_1, VAR_0x8004
     msgbox TH_Text_ConfirmPartner, MSGBOX_YESNO
     goto_if_ne VAR_RESULT, YES, TH_Lab_Cancel
+    closemessage
+    fadescreen FADE_TO_BLACK
     special TH_ScriptGiveConfiguredStarter
+    waitstate
     goto_if_ne VAR_RESULT, TRUE, TH_Lab_GrantFailed
     playfanfare MUS_OBTAIN_ITEM
     msgbox TH_Text_ReceivedPartner
@@ -563,3 +567,38 @@ TH_Lab_Books12::
     end
 TH_Text_LabBooks12:
     .string "Three bookmarks mark three regions.\nThere is still so much to discover.$"
+
+TH_Lab_FirstEntryTable:
+    map_script_2 VAR_TEMP_7, 1, TH_Lab_FirstEntry
+    .2byte 0
+TH_Lab_FirstEntry::
+    setvar VAR_TEMP_7, 0
+    goto_if_set FLAG_TH_LAB_INTRO, TH_Lab_EntryDone
+    goto_if_ge VAR_TH_STAGE, TH_STAGE_PARTNER, TH_Lab_EntryDone
+    lockall
+    hidefollower TRUE
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Lab_IntroApproach
+    waitmovement 0
+    msgbox TH_Text_JointResearch
+    msgbox TH_Text_ElmWelcome
+    msgbox TH_Text_BirchWelcome
+    msgbox TH_Text_RivalLetsPlayerChoose
+    setflag FLAG_TH_LAB_INTRO
+    setvar VAR_TEMP_2, 1
+    setvar VAR_TH_STAGE, TH_STAGE_INVITED
+    releaseall
+TH_Lab_EntryDone:
+    end
+TH_Lab_IntroApproach:
+    walk_up
+    walk_up
+    walk_up
+    step_end
+TH_Text_JointResearch:
+    .string "OAK: Welcome! Come a little closer.\nWe have something to show you.\pPOKéMON from JOHTO and HOENN have\nbeen appearing here in KANTO.\pELM, BIRCH and I are studying how\nthese habitats are changing.$"
+TH_Text_ElmWelcome:
+    .string "ELM: A partner can help us discover\nwhat brings these POKéMON together.$"
+TH_Text_BirchWelcome:
+    .string "BIRCH: Take your time. See who\nyou would like by your side!$"
+TH_Text_RivalLetsPlayerChoose:
+    .string "{RIVAL}: I'll choose first!\nHmm... Actually, this is tough.\pYou go ahead, {PLAYER}.\nI want to meet them all first!$"

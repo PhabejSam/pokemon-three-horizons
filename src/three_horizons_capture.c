@@ -12,6 +12,7 @@ bool32 TH_IsConfigurableCapture(u16 species)
 
 void TH_ReadMonOptions(struct Pokemon *mon, struct THPartnerOptions *options)
 {
+    options->abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
     options->nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
     options->shiny = GetMonData(mon, MON_DATA_IS_SHINY);
     for (u32 i = 0; i < NUM_STATS; i++)
@@ -26,9 +27,11 @@ bool32 TH_ApplyCaughtMonOptions(struct Pokemon *mon, const struct THPartnerOptio
     struct Pokemon changed;
     bool32 shiny;
     if (mon == NULL || !TH_IsConfigurableCapture(GetMonData(mon, MON_DATA_SPECIES))
-        || GetMonData(mon, MON_DATA_IS_EGG) || !TH_PartnerOptionsValid(options))
+        || GetMonData(mon, MON_DATA_IS_EGG) || !TH_PartnerOptionsValid(options)
+        || !TH_PartnerOptionsValidForSpecies(GetMonData(mon, MON_DATA_SPECIES), options))
         return FALSE;
     changed = *mon;
+    SetMonData(&changed, MON_DATA_ABILITY_NUM, &options->abilityNum);
     shiny = options->shiny;
     SetMonData(&changed, MON_DATA_IS_SHINY, &shiny);
     // Effective nature is independent of PID, gender, form and ability.

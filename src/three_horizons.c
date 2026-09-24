@@ -1,4 +1,5 @@
 #include "global.h"
+#include "random.h"
 #include "battle.h"
 #include "three_horizons.h"
 #include "string_util.h"
@@ -28,7 +29,7 @@ u32 TH_GetWhiteoutMoneyLoss(u32 money, u32 battleFlags)
 }
 
 EWRAM_DATA u8 gTHPendingRivalName[PLAYER_NAME_LENGTH + 1] = {0};
-EWRAM_DATA static u16 sPendingOptions[3] = {0};
+EWRAM_DATA static u16 sPendingOptions[5] = {0};
 EWRAM_DATA static bool8 sHavePendingOptions = FALSE;
 static const u8 sTHDefaultRivalName[] = _("BLUE");
 static const u16 sTHRivalNameVars[] = {VAR_TH_RIVAL_NAME_0, VAR_TH_RIVAL_NAME_1, VAR_TH_RIVAL_NAME_2, VAR_TH_RIVAL_NAME_3};
@@ -116,6 +117,8 @@ void TH_StageNewGameOptions(void)
     sPendingOptions[0] = VarGet(VAR_TH_AUTO_RUN) == 1;
     sPendingOptions[1] = VarGet(VAR_TH_EXP_RATE) < 4 ? VarGet(VAR_TH_EXP_RATE) : 0;
     sPendingOptions[2] = !!VarGet(VAR_TH_FOLLOWER_OFF);
+    sPendingOptions[3] = VarGet(VAR_TH_CLOCK_MODE) == 1;
+    sPendingOptions[4] = VarGet(VAR_TH_SHINY_RATE) < 4 ? VarGet(VAR_TH_SHINY_RATE) : 0;
     sHavePendingOptions = TRUE;
 }
 
@@ -125,6 +128,8 @@ void TH_InitNewGame(void)
     VarSet(VAR_TH_AUTO_RUN, sHavePendingOptions ? sPendingOptions[0] : 0);
     VarSet(VAR_TH_EXP_RATE, sHavePendingOptions ? sPendingOptions[1] : 0);
     VarSet(VAR_TH_FOLLOWER_OFF, sHavePendingOptions ? sPendingOptions[2] : 0);
+    VarSet(VAR_TH_CLOCK_MODE, sHavePendingOptions ? sPendingOptions[3] : 0);
+    VarSet(VAR_TH_SHINY_RATE, sHavePendingOptions ? sPendingOptions[4] : 0);
     sHavePendingOptions = FALSE;
     TH_SetRivalName(gTHPendingRivalName);
     FlagSet(FLAG_SYS_B_DASH);
@@ -155,7 +160,7 @@ bool32 TH_TryGiveStarter(u16 species)
     if (ScriptGiveMon(species, 5, ITEM_NONE) != MON_GIVEN_TO_PARTY)
         return FALSE;
     VarSet(VAR_TH_FIRST_PARTNER, species);
-    VarSet(VAR_TH_RIVAL_PARTNER, rival);
+    VarSet(VAR_TH_RIVAL_PARTNER, TH_GetRivalCandidate(species, Random() % 2));
     VarSet(VAR_TH_STAGE, TH_STAGE_PARTNER);
     FlagSet(FLAG_SYS_POKEMON_GET);
     return TRUE;
@@ -175,39 +180,42 @@ bool32 TH_PartnerOptionsValid(const struct THPartnerOptions *options)
     return total <= 510;
 }
 
+bool32 TH_CreateConfiguredPartner(struct Pokemon *mon, u16 species, u8 level, const struct THPartnerOptions *options)
+{
+    if (!TH_PartnerOptionsValidForSpecies(species, options)) return FALSE;
+    CreateMon(mon, species, level,
+        GetMonPersonality(species, MON_GENDER_RANDOM, options->nature, RANDOM_UNOWN_LETTER), OTID_STRUCT_PLAYER_ID);
+    bool32 shiny=options->shiny;
+    SetMonData(mon,MON_DATA_IS_SHINY,&shiny);
+    SetMonData(mon,MON_DATA_ABILITY_NUM,&options->abilityNum);
+    for (u32 i=0;i<6;i++)
+    {
+        SetMonData(mon,MON_DATA_HP_IV+i,&options->ivs[i]);
+        SetMonData(mon,MON_DATA_HP_EV+i,&options->evs[i]);
+    }
+    GiveMonInitialMoveset(mon);
+    CalculateMonStats(mon);
+    u16 hp=GetMonData(mon,MON_DATA_MAX_HP);
+    SetMonData(mon,MON_DATA_HP,&hp);
+    return TRUE;
+}
+bool32 TH_TryGiveStarterMon(struct Pokemon *mon)
+{
+    u16 species=GetMonData(mon,MON_DATA_SPECIES);
+    if (TH_GetRivalStarter(species)==SPECIES_NONE || VarGet(VAR_TH_STAGE)!=TH_STAGE_INVITED
+        || VarGet(VAR_TH_FIRST_PARTNER)!=SPECIES_NONE || CalculatePlayerPartyCount()!=0)
+        return FALSE;
+    if (GiveScriptedMonToPlayer(mon,PARTY_SIZE)!=MON_GIVEN_TO_PARTY) return FALSE;
+    VarSet(VAR_TH_FIRST_PARTNER,species);
+    VarSet(VAR_TH_RIVAL_PARTNER,TH_GetRivalCandidate(species,Random()%2));
+    VarSet(VAR_TH_STAGE,TH_STAGE_PARTNER);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    return TRUE;
+}
 bool32 TH_TryGiveConfiguredStarter(u16 species, const struct THPartnerOptions *options)
 {
     struct Pokemon mon;
-    u32 i;
-    bool32 shiny;
-    u16 hp, rival = TH_GetRivalStarter(species);
-    if (!TH_PartnerOptionsValid(options) || rival == SPECIES_NONE
-        || VarGet(VAR_TH_STAGE) != TH_STAGE_INVITED
-        || VarGet(VAR_TH_FIRST_PARTNER) != SPECIES_NONE
-        || gPartiesCount[B_TRAINER_PLAYER] != 0)
-        return FALSE;
-
-    CreateMon(&mon, species, 5,
-        GetMonPersonality(species, MON_GENDER_RANDOM, options->nature, RANDOM_UNOWN_LETTER),
-        OTID_STRUCT_PLAYER_ID);
-    shiny = options->shiny;
-    SetMonData(&mon, MON_DATA_IS_SHINY, &shiny);
-    for (i = 0; i < 6; i++)
-    {
-        SetMonData(&mon, MON_DATA_HP_IV + i, &options->ivs[i]);
-        SetMonData(&mon, MON_DATA_HP_EV + i, &options->evs[i]);
-    }
-    GiveMonInitialMoveset(&mon);
-    CalculateMonStats(&mon);
-    hp = GetMonData(&mon, MON_DATA_MAX_HP);
-    SetMonData(&mon, MON_DATA_HP, &hp);
-    if (GiveScriptedMonToPlayer(&mon, PARTY_SIZE) != MON_GIVEN_TO_PARTY)
-        return FALSE;
-    VarSet(VAR_TH_FIRST_PARTNER, species);
-    VarSet(VAR_TH_RIVAL_PARTNER, rival);
-    VarSet(VAR_TH_STAGE, TH_STAGE_PARTNER);
-    FlagSet(FLAG_SYS_POKEMON_GET);
-    return TRUE;
+    return TH_CreateConfiguredPartner(&mon,species,5,options) && TH_TryGiveStarterMon(&mon);
 }
 
 bool32 TH_TryGiveSupplies(void)

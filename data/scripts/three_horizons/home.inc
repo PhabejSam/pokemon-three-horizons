@@ -102,3 +102,9 @@ TH_DresserDone:
 
 TH_Text_TrainingKit:
     .string "Your training kit is in ITEM STORAGE.\nPower items help train specific stats.\pThe EXP. SHARE helps your whole party.\nWithdraw it, then turn it on in the BAG.\pBattles still give their usual EVs.\nYou can turn the EXP. SHARE off anytime.$"
+
+TH_CheckClockBeforeLeaving::
+    goto_if_set FLAG_SET_WALL_CLOCK, TH_ClockAlreadySet
+    goto TH_EventScript_Clock
+TH_ClockAlreadySet:
+    end

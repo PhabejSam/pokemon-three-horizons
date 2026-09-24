@@ -29,6 +29,8 @@
 #define tTHAutoRun data[8]
 #define tTHExpRate data[9]
 #define tTHFollowerOff data[10]
+#define tTHClock data[11]
+#define tTHShiny data[12]
 #if THREE_HORIZONS
 static void TH_DrawOptions(u8 taskId);
 static bool32 TH_ProcessOptions(u8 taskId);
@@ -263,6 +265,8 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tTHAutoRun = VarGet(VAR_TH_AUTO_RUN) == 1;
         gTasks[taskId].tTHExpRate = VarGet(VAR_TH_EXP_RATE) < 4 ? VarGet(VAR_TH_EXP_RATE) : 0;
         gTasks[taskId].tTHFollowerOff = !!VarGet(VAR_TH_FOLLOWER_OFF);
+        gTasks[taskId].tTHClock = VarGet(VAR_TH_CLOCK_MODE)==1;
+        gTasks[taskId].tTHShiny = VarGet(VAR_TH_SHINY_RATE)<4 ? VarGet(VAR_TH_SHINY_RATE) : 0;
 #endif
         gTasks[taskId].tTextSpeed = gSaveBlock2Ptr->optionsTextSpeed;
         gTasks[taskId].tBattleSceneOff = gSaveBlock2Ptr->optionsBattleSceneOff;
@@ -394,6 +398,8 @@ static void Task_OptionMenuSave(u8 taskId)
     VarSet(VAR_TH_AUTO_RUN, gTasks[taskId].tTHAutoRun);
     VarSet(VAR_TH_EXP_RATE, gTasks[taskId].tTHExpRate);
     VarSet(VAR_TH_FOLLOWER_OFF, gTasks[taskId].tTHFollowerOff);
+    TH_SetClockMode(gTasks[taskId].tTHClock);
+    VarSet(VAR_TH_SHINY_RATE,gTasks[taskId].tTHShiny);
 #endif
     gSaveBlock2Ptr->optionsTextSpeed = gTasks[taskId].tTextSpeed;
     gSaveBlock2Ptr->optionsBattleSceneOff = gTasks[taskId].tBattleSceneOff;

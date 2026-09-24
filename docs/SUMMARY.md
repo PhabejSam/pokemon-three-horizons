@@ -166,3 +166,5 @@
 - [Playtest 8 Polish Plan](superpowers/plans/2026-09-23-playtest8-polish.md)
 - [Playtest 8 Guide](three_horizons/PLAYTEST_8.md)
 - [Playtest 8 Verification](three_horizons/PLAYTEST_8_VERIFICATION.md)
+- [Playtest 9 Cerulean Design](superpowers/specs/2026-09-24-playtest9-cerulean-design.md)
+- [Playtest 9 Implementation Plan](superpowers/plans/2026-09-24-playtest9-cerulean.md)

@@ -224,7 +224,7 @@ TEST("Three Horizons grants all nine partners once with correct rival and level"
         EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), choices[i][0]);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 5);
-        EXPECT_EQ(VarGet(VAR_TH_RIVAL_PARTNER), choices[i][1]);
+        EXPECT(VarGet(VAR_TH_RIVAL_PARTNER)==TH_GetRivalCandidate(choices[i][0],0) || VarGet(VAR_TH_RIVAL_PARTNER)==TH_GetRivalCandidate(choices[i][0],1));
         EXPECT_EQ(VarGet(VAR_TH_FIRST_PARTNER), choices[i][0]);
         EXPECT(!TH_TryGiveStarter(SPECIES_MUDKIP));
         EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
@@ -300,10 +300,11 @@ TEST("Three Horizons original partner survives party replacement")
     ResetOpening();
     VarSet(VAR_TH_STAGE, TH_STAGE_INVITED);
     EXPECT(TH_TryGiveStarter(SPECIES_MUDKIP));
+    u16 savedRival=VarGet(VAR_TH_RIVAL_PARTNER);
     ZeroPlayerPartyMons();
     gPartiesCount[B_TRAINER_PLAYER] = 0;
     EXPECT_EQ(VarGet(VAR_TH_FIRST_PARTNER), SPECIES_MUDKIP);
-    EXPECT_EQ(VarGet(VAR_TH_RIVAL_PARTNER), SPECIES_TREECKO);
+    EXPECT_EQ(VarGet(VAR_TH_RIVAL_PARTNER), savedRival);
     EXPECT(!TH_TryGiveStarter(SPECIES_CHIKORITA));
 }
 
@@ -398,7 +399,7 @@ TEST("Three Horizons customized grants preserve all chosen values and prevent du
             }
             EXPECT(!TH_TryGiveConfiguredStarter(species[i], &options));
             EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
-            EXPECT_EQ(VarGet(VAR_TH_RIVAL_PARTNER), TH_GetRivalStarter(species[i]));
+            EXPECT(VarGet(VAR_TH_RIVAL_PARTNER)==TH_GetRivalCandidate(species[i],0) || VarGet(VAR_TH_RIVAL_PARTNER)==TH_GetRivalCandidate(species[i],1));
         }
     }
 }

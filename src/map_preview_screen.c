@@ -97,7 +97,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_MT_MOON] = {
         .mapsec = MAPSEC_MT_MOON,
-        .type = MPS_TYPE_CAVE,
+        .type = THREE_HORIZONS ? MPS_TYPE_FADE_IN : MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_MT_MOON_1F,
         .tilesptr = sMtMoonMapPreviewTiles,
         .tilemapptr = sMtMoonMapPreviewTilemap,
@@ -341,6 +341,10 @@ static const struct BgTemplate sMapPreviewBgTemplate[1] = {
 
 bool32 ShouldRunMapPreview(void)
 {
+#if THREE_HORIZONS
+    if (gMapHeader.regionMapSectionId != MAPSEC_VIRIDIAN_FOREST && gMapHeader.regionMapSectionId != MAPSEC_MT_MOON)
+        return FALSE;
+#endif
     if (MPS_ENABLE_MAP_PREVIEWS && FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE && GetLastUsedWarpMapSectionId() != gMapHeader.regionMapSectionId)
         return TRUE;
 

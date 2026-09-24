@@ -1,0 +1,24 @@
+{
+  "variables": {
+    "VAR_TH_BROCK_GIFT": 16541,
+    "VAR_TH_MISTY_GIFT": 16545,
+    "VAR_TH_SHINY_RATE": 16552,
+    "VAR_TH_CLOCK_MODE": 16568,
+    "VAR_TH_CLOCK_REAL_LO": 16571,
+    "VAR_TH_CLOCK_REAL_HI": 16603,
+    "VAR_TH_CLOCK_DISPLAY_LO": 16604,
+    "VAR_TH_CLOCK_DISPLAY_HI": 16613
+  },
+  "flags": {
+    "FLAG_TH_LAB_INTRO": 33,
+    "FLAG_TH_MAGIKARP": 34,
+    "FLAG_TH_MISTY_TM": 35,
+    "FLAG_TH_CHAPTER_COMPLETE": 36,
+    "FLAG_TH_CLOCK_ANCHORED": 37,
+    "FLAG_TH_ROUTE22_RIVAL": 38,
+    "FLAG_TH_BRIDGE_RIVAL": 39,
+    "FLAG_TH_FOSSIL": 40
+  },
+  "baseline": "b3916b8",
+  "notes": "Audited VAR_UNUSED aliases have no references in src/data. TH-only trainer replacements start at 8; preserve 1-7 and 855-863."
+}

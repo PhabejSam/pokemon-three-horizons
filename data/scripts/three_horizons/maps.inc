@@ -8,6 +8,7 @@ TH_Pallet_MapScripts::
     .byte 0
 TH_OaksLab_MapScripts::
     map_script MAP_SCRIPT_ON_TRANSITION, TH_Lab_OnLoad
+    map_script MAP_SCRIPT_ON_FRAME_TABLE, TH_Lab_FirstEntryTable
     .byte 0
 TH_Route1_MapScripts::
     .byte 0

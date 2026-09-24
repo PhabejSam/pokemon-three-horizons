@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -1702,8 +1703,17 @@ void UpdateTimeOfDay(bool32 updateBlend)
 {
     s32 hours, minutes;
     RtcCalcLocalTime();
+#if THREE_HORIZONS
+    u32 visualTime = TH_GetVisualTimeSeconds();
+    hours = sHoursOverride ? sHoursOverride : visualTime / 3600;
+#else
     hours = sHoursOverride ? sHoursOverride : gLocalTime.hours;
+#endif
+#if THREE_HORIZONS
+    minutes = sHoursOverride ? 0 : (visualTime / 60) % 60;
+#else
     minutes = sHoursOverride ? 0 : gLocalTime.minutes;
+#endif
 
     if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
     {

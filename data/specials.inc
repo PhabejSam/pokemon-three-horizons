@@ -644,6 +644,10 @@ gSpecials::
     def_special TH_ScriptGiveStarter
     def_special TH_ScriptGiveSupplies
     def_special TH_FinishRivalBattle
+    def_special TH_OpenRewardEditor
+    def_special TH_ScriptGiveReward
+    def_special TH_ScriptBuyMagikarp
+    def_special TH_ScriptRewardChoices
     def_special TH_OpenPartnerEditor
     def_special TH_ScriptGiveConfiguredStarter
     def_special TH_ScriptDeliverTrainingKit

@@ -140,7 +140,7 @@
       "local_id": "LOCALID_TH_BIRCH",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
-      "x": 4,
+      "x": 7,
       "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",

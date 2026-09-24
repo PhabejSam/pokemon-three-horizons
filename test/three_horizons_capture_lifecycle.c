@@ -32,7 +32,7 @@ TEST("Three Horizons native nickname scene preserves battle held item state")
         gMain.callback2();
         MapMusicMain();
         VBlankIntrWait();
-        EXPECT_EQ(gBattleStruct->itemLost[B_TRAINER_OPPONENT_A][0].originalItem, ITEM_POTION);
+        EXPECT_EQ((u32)gBattleStruct->itemLost[B_TRAINER_OPPONENT_A][0].originalItem, ITEM_POTION);
     }
     EXPECT(gMain.callback2 == NamingReturned);
     FreeBattleResources();

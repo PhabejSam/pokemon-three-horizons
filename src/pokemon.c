@@ -882,6 +882,10 @@ bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
         return FALSE;
 
     u32 totalRerolls = 0;
+    u16 threshold = SHINY_ODDS;
+#if THREE_HORIZONS
+    if (gTHCreatingWildMon) threshold = TH_GetWildShinyThreshold();
+#endif
 
     if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
         totalRerolls += I_SHINY_CHARM_ADDITIONAL_ROLLS;
@@ -894,13 +898,13 @@ bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
     if (gDexNavSpecies)
         totalRerolls += CalculateDexNavShinyRolls();
 
-    while (GET_SHINY_VALUE(value, personality) >= SHINY_ODDS && totalRerolls > 0)
+    while (GET_SHINY_VALUE(value, personality) >= threshold && totalRerolls > 0)
     {
         personality = Random32();
         totalRerolls--;
     }
 
-    return GET_SHINY_VALUE(value, personality) < SHINY_ODDS;
+    return GET_SHINY_VALUE(value, personality) < threshold;
 }
 
 void SetBoxMonIVs(struct BoxPokemon *mon, u8 fixedIV)
