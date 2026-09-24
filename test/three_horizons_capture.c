@@ -6,6 +6,7 @@
 #include "constants/three_horizons.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/pokeball.h"
 
 #if THREE_HORIZONS
 TEST("Three Horizons capture rewards include legendary and mythical species only")
