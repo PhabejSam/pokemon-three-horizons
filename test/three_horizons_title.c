@@ -57,4 +57,3 @@ TEST("Three Horizons illustrated title stays stable and opens the menu")
     SetMainCallback2(old2);
 }
 #endif
-
