@@ -100,6 +100,7 @@ static void TH_ReturnFromBattleEvolution(void)
     memcpy(gBattleCommunication, sCommunication, sizeof(sCommunication));
     // Evolution owns and frees its sprite buffers. Rebuild the battle's buffers.
     AllocateMonSpritesGfx();
+    ResetMapMusic();
     PlayBGM(sMusic);
     sState = 2;
     gMain.callback1 = TH_WaitForBattleRebuild;

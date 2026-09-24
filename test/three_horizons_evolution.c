@@ -11,6 +11,7 @@
 #include "battle_util2.h"
 #include "battle_gfx_sfx_util.h"
 #include "text.h"
+#include "sound.h"
 #include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
@@ -19,8 +20,11 @@ static void BattleCallbackForEvolutionTest(void) {}
 TEST("Three Horizons native evolution scene returns safely or cancels")
 {
     bool32 cancel;
-    PARAMETRIZE(cancel = FALSE);
-    PARAMETRIZE(cancel = TRUE);
+    u32 partyId;
+    PARAMETRIZE { cancel = FALSE; partyId = 0; }
+    PARAMETRIZE { cancel = TRUE; partyId = 0; }
+    PARAMETRIZE { cancel = FALSE; partyId = 1; }
+    PARAMETRIZE { cancel = TRUE; partyId = 1; }
     MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
     u32 frames;
     gBattleTypeFlags = 0;
@@ -28,8 +32,9 @@ TEST("Three Horizons native evolution scene returns safely or cancels")
     gBattlerPositions[0] = 0;
     gBattlerPositions[1] = 1;
     gBattlerPartyIndexes[0] = gBattlerPartyIndexes[1] = 0;
-    gPartiesCount[B_TRAINER_PLAYER] = 1;
-    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_METAPOD, 10, 0, OTID_STRUCT_PLAYER_ID, 12);
+    gPartiesCount[B_TRAINER_PLAYER] = 2;
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_WOBBUFFET, 12, 0, OTID_STRUCT_PLAYER_ID, 12);
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][partyId], SPECIES_METAPOD, 10, 0, OTID_STRUCT_PLAYER_ID, 12);
     CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_RATTATA, 5, 0, OTID_STRUCT_PLAYER_ID, 12);
     PokemonToBattleMon(&gParties[B_TRAINER_PLAYER][0], &gBattleMons[0]);
     PokemonToBattleMon(&gParties[B_TRAINER_OPPONENT_A][0], &gBattleMons[1]);
@@ -37,11 +42,11 @@ TEST("Three Horizons native evolution scene returns safely or cancels")
     AllocateBattleSpritesData();
     AllocateMonSpritesGfx();
     SetDefaultFontsPointer();
-    gLeveledUpInBattle = 1;
+    gLeveledUpInBattle = 1 << partyId;
     gMain.callback1 = BattleCallbackForEvolutionTest;
-    EXPECT(TH_TryBattleEvolution(0));
+    EXPECT(TH_TryBattleEvolution(partyId));
     gPaletteFade.active = FALSE;
-    EXPECT(TH_TryBattleEvolution(0));
+    EXPECT(TH_TryBattleEvolution(partyId));
     EXPECT(gMain.callback1 == NULL);
     for (frames = 0; frames < 4000 && gMain.callback2 != BattleMainCB2; frames++)
     {
@@ -50,6 +55,7 @@ TEST("Three Horizons native evolution scene returns safely or cancels")
         if (gMain.callback1)
             gMain.callback1();
         gMain.callback2();
+        MapMusicMain();
         VBlankIntrWait();
     }
     EXPECT_LT(frames, 4000);
@@ -57,10 +63,11 @@ TEST("Three Horizons native evolution scene returns safely or cancels")
     if (gMain.callback1)
         gMain.callback1();
     EXPECT(gMain.callback1 == BattleCallbackForEvolutionTest);
-    EXPECT(!TH_TryBattleEvolution(0));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), cancel ? SPECIES_METAPOD : SPECIES_BUTTERFREE);
-    EXPECT_EQ(gBattleMons[0].species, cancel ? SPECIES_METAPOD : SPECIES_BUTTERFREE);
-    EXPECT_EQ(gLeveledUpInBattle & 1, 0);
+    EXPECT(!TH_TryBattleEvolution(partyId));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][partyId], MON_DATA_SPECIES), cancel ? SPECIES_METAPOD : SPECIES_BUTTERFREE);
+    EXPECT_EQ(gBattleMons[0].species, partyId ? SPECIES_WOBBUFFET : cancel ? SPECIES_METAPOD : SPECIES_BUTTERFREE);
+    EXPECT_EQ(gLeveledUpInBattle & (1 << partyId), 0);
+    EXPECT_EQ(GetCurrentMapMusic(), 0);
     CloseMainBattleScreen();
     FreeMonSpritesGfx();
     FreeBattleResources();
@@ -101,7 +108,7 @@ TEST("Three Horizons evolution preserves temporary effects and consumes evolutio
     EXPECT_EQ(gBattleMons[0].pp[0], 2);
     EXPECT_EQ(gBattleMons[0].ppBonuses & 3, 3);
     EXPECT_EQ(gBattleMons[0].item, ITEM_NONE);
-    EXPECT_EQ(gBattleStruct->itemLost[B_TRAINER_PLAYER][0].originalItem, ITEM_NONE);
+    EXPECT_EQ((u32)gBattleStruct->itemLost[B_TRAINER_PLAYER][0].originalItem, ITEM_NONE);
     FREE_AND_SET_NULL(gBattleStruct);
 }
 
