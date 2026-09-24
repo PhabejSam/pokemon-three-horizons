@@ -1,4 +1,4 @@
-// The six native Kanto tilesets used by the Emerald-based opening.
+// Native Kanto tilesets used by the Emerald-based Three Horizons journey.
 // Asset paths and descriptors mirror the upstream FRLG definitions.
 // Existing binaries, palette formats and animation callbacks are reused.
 
@@ -221,5 +221,227 @@ const struct Tileset gTileset_ViridianCity =
     .palettes = gTilesetPalettes_ViridianCity,
     .metatiles = gMetatiles_ViridianCity,
     .metatileAttributes = gMetatileAttributes_ViridianCity,
+    .callback = NULL,
+};
+
+const u32 gTilesetTiles_PokemonCenter_Frlg[] = INCGFX_U32("data/tilesets/secondary/pokemon_center_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_PokemonCenter_Frlg[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_center_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_PokemonCenter_Frlg[] = INCBIN_U16("data/tilesets/secondary/pokemon_center_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_PokemonCenter_Frlg[] = INCBIN_U16("data/tilesets/secondary/pokemon_center_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_PokemonCenterFrlg =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PokemonCenter_Frlg,
+    .palettes = gTilesetPalettes_PokemonCenter_Frlg,
+    .metatiles = gMetatiles_PokemonCenter_Frlg,
+    .metatileAttributes = gMetatileAttributes_PokemonCenter_Frlg,
+    .callback = NULL,
+};
+
+const u32 gTilesetTiles_Mart[] = INCGFX_U32("data/tilesets/secondary/mart_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_Mart[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/mart_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_Mart[] = INCBIN_U16("data/tilesets/secondary/mart_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_Mart[] = INCBIN_U16("data/tilesets/secondary/mart_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_Mart =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Mart,
+    .palettes = gTilesetPalettes_Mart,
+    .metatiles = gMetatiles_Mart,
+    .metatileAttributes = gMetatileAttributes_Mart,
+    .callback = NULL,
+};
+
+const u32 gTilesetTiles_PewterGym[] = INCGFX_U32("data/tilesets/secondary/pewter_gym_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_PewterGym[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_gym_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_PewterGym[] = INCBIN_U16("data/tilesets/secondary/pewter_gym_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_PewterGym[] = INCBIN_U16("data/tilesets/secondary/pewter_gym_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_PewterGym =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PewterGym,
+    .palettes = gTilesetPalettes_PewterGym,
+    .metatiles = gMetatiles_PewterGym,
+    .metatileAttributes = gMetatileAttributes_PewterGym,
+    .callback = NULL,
+};
+
+const u32 gTilesetTiles_PewterCity[] = INCGFX_U32("data/tilesets/secondary/pewter_city_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_PewterCity[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pewter_city_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_PewterCity[] = INCBIN_U16("data/tilesets/secondary/pewter_city_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_PewterCity[] = INCBIN_U16("data/tilesets/secondary/pewter_city_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_PewterCity =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PewterCity,
+    .palettes = gTilesetPalettes_PewterCity,
+    .metatiles = gMetatiles_PewterCity,
+    .metatileAttributes = gMetatileAttributes_PewterCity,
+    .callback = NULL,
+};
+
+const u32 gTilesetTiles_ViridianForest[] = INCGFX_U32("data/tilesets/secondary/viridian_forest_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_ViridianForest[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/viridian_forest_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_ViridianForest[] = INCBIN_U16("data/tilesets/secondary/viridian_forest_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_ViridianForest[] = INCBIN_U16("data/tilesets/secondary/viridian_forest_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_ViridianForest =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViridianForest,
+    .palettes = gTilesetPalettes_ViridianForest,
+    .metatiles = gMetatiles_ViridianForest,
+    .metatileAttributes = gMetatileAttributes_ViridianForest,
+    .callback = NULL,
+};
+
+const u32 gTilesetTiles_GenericBuilding2[] = INCGFX_U32("data/tilesets/secondary/generic_building_2_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_GenericBuilding2[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/generic_building_2_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_GenericBuilding2[] = INCBIN_U16("data/tilesets/secondary/generic_building_2_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_GenericBuilding2[] = INCBIN_U16("data/tilesets/secondary/generic_building_2_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_GenericBuilding2 =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_GenericBuilding2,
+    .palettes = gTilesetPalettes_GenericBuilding2,
+    .metatiles = gMetatiles_GenericBuilding2,
+    .metatileAttributes = gMetatileAttributes_GenericBuilding2,
     .callback = NULL,
 };

@@ -6,6 +6,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 
 class JourneyContract(unittest.TestCase):
+    def test_every_project_layout_has_linked_kanto_tilesets(self):
+        names=json.loads((ROOT / 'tools/mapjson/three_horizons_maps.json').read_text())['maps']
+        layouts={l['id']:l for l in json.loads((ROOT / 'data/layouts/layouts.json').read_text())['layouts']}
+        definitions=set(re.findall(r'const struct Tileset (\w+)\s*=', (ROOT / 'src/data/tilesets/three_horizons.h').read_text()))
+        for name in names:
+            m=json.loads((ROOT / 'data/maps' / name / 'map.json').read_text())
+            layout=layouts[m['layout']]
+            for field in ('primary_tileset','secondary_tileset'):
+                self.assertIn(layout[field],definitions,(name,field))
+
     def test_outfit_palette_tags_do_not_alias_weather(self):
         text = (ROOT / 'include/constants/event_objects.h').read_text()
         tags = re.findall(r'#define OBJ_EVENT_PAL_TAG_TH_\w+ (0x[0-9A-Fa-f]+)', text)
