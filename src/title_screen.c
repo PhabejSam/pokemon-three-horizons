@@ -68,6 +68,16 @@ static const u32 sTitleScreenRayquazaTilemap[] = INCGFX_U32("graphics/title_scre
 static const u32 sTitleScreenLogoShineGfx[] = INCGFX_U32("graphics/title_screen/logo_shine.png", ".4bpp.smol");
 static const u32 sTitleScreenCloudsGfx[] = INCGFX_U32("graphics/title_screen/clouds.png", ".4bpp.smol");
 
+#if THREE_HORIZONS
+// 640 8bpp tiles occupy 0x0000-0x9FFF; the 32x32 map starts at 0xF800.
+const u32 gTH_TitleLandscapeTiles[] = INCGFX_U32("graphics/three_horizons/title/landscape.png", ".8bpp");
+const u16 gTH_TitleLandscapePalette[] = INCGFX_U16("graphics/three_horizons/title/landscape.png", ".gbapal");
+const u16 gTH_TitleLandscapeMap[] = INCBIN_U16("graphics/three_horizons/title/landscape.bin");
+STATIC_ASSERT(sizeof(gTH_TitleLandscapeTiles) == 0xA000, TH_TitleTileSize);
+STATIC_ASSERT(sizeof(gTH_TitleLandscapePalette) == 512, TH_TitlePaletteSize);
+STATIC_ASSERT(sizeof(gTH_TitleLandscapeMap) == 2048, TH_TitleMapSize);
+#endif
+
 
 
 // Used to blend "Emerald Version" as it passes over over the Pokémon banner.
@@ -562,8 +572,89 @@ static void VBlankCB(void)
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 }
 
+#if THREE_HORIZONS
+static void CB2_InitThreeHorizonsTitle(void)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        SetHBlankCallback(NULL);
+        ScanlineEffect_Stop();
+        SetGpuReg(REG_OFFSET_DISPCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        SetGpuReg(REG_OFFSET_MOSAIC, 0);
+        SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+        DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
+        DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
+        ResetPaletteFade();
+        ResetTasks();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        SetDefaultFontsPointer();
+        CpuFastCopy(gTH_TitleLandscapeTiles, (void *)BG_CHAR_ADDR(0), sizeof(gTH_TitleLandscapeTiles));
+        CpuCopy16(gTH_TitleLandscapeMap, (void *)BG_SCREEN_ADDR(31), sizeof(gTH_TitleLandscapeMap));
+        LoadPalette(gTH_TitleLandscapePalette, 0, sizeof(gTH_TitleLandscapePalette));
+        gMain.state++;
+        break;
+    case 1:
+    {
+        static const u8 blank[2048] = {0};
+        static const u16 textColors[16] = {RGB_BLACK, RGB_WHITE, RGB(5, 7, 12)};
+        const struct SpriteSheet sheet = {blank, sizeof(blank), TAG_VERSION};
+        const u8 *left = COMPOUND_STRING("THREE");
+        const u8 *right = COMPOUND_STRING("HORIZONS");
+        u32 leftWidth = GetStringWidth(FONT_NORMAL, left, 0);
+        u32 rightWidth = GetStringWidth(FONT_NORMAL, right, 0);
+        s16 x = (DISPLAY_WIDTH - leftWidth - rightWidth - 6) / 2;
+        u8 spriteId;
+        gReservedSpritePaletteCount = 1;
+        LoadSpriteSheet(&sheet);
+        LoadPalette(textColors, OBJ_PLTT_ID(0), sizeof(textColors));
+        LoadCompressedSpriteSheet(sSpriteSheet_PressStart);
+        LoadSpritePalette(sSpritePalette_PressStart);
+        spriteId = CreateSprite(&sVersionBannerLeftSpriteTemplate, x + 32, 68, 0);
+        gSprites[spriteId].callback = SpriteCallbackDummy;
+        gSprites[spriteId].oam.paletteNum = 0;
+        AddSpriteTextPrinterParameterized3(spriteId, FONT_NORMAL, 0, 7, (const u8[]){0, 1, 2}, 0, left);
+        spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, x + leftWidth + 6 + 32, 68, 0);
+        gSprites[spriteId].callback = SpriteCallbackDummy;
+        gSprites[spriteId].oam.paletteNum = 0;
+        gSprites[spriteId].oam.tileNum = GetSpriteTileStartByTag(TAG_VERSION) + VERSION_BANNER_RIGHT_TILEOFFSET;
+        AddSpriteTextPrinterParameterized3(spriteId, FONT_NORMAL, 0, 7, (const u8[]){0, 1, 2}, 0, right);
+        CreatePressStartBanner(120, 136);
+        CreateCopyrightBanner(120, 152);
+        SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31) | BGCNT_256COLOR | BGCNT_TXT256x256);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_BG0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+        EnableInterrupts(INTR_FLAG_VBLANK);
+        SetVBlankCallback(VBlankCB);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        m4aSongNumStart(MUS_TITLE);
+        gMain.state++;
+        break;
+    }
+    default:
+        AnimateSprites();
+        BuildOamBuffer();
+        if (!UpdatePaletteFade())
+        {
+            CreateTask(Task_TitleScreenPhase3, 0);
+            SetMainCallback2(MainCB2);
+        }
+        break;
+    }
+}
+#endif
+
 void CB2_InitTitleScreen(void)
 {
+#if THREE_HORIZONS
+    CB2_InitThreeHorizonsTitle();
+    return;
+#endif
     if (IS_FRLG)
     {
         CB2_InitTitleScreenFrlg();
@@ -837,15 +928,18 @@ static void Task_TitleScreenPhase3(u8 taskId)
     }
     else
     {
-        SetGpuReg(REG_OFFSET_BG2Y_L, 0);
-        SetGpuReg(REG_OFFSET_BG2Y_H, 0);
-        if (++gTasks[taskId].tCounter & 1)
+        if (!THREE_HORIZONS)
         {
-            gTasks[taskId].tBg1Y++;
-            gBattle_BG1_Y = gTasks[taskId].tBg1Y / 2;
-            gBattle_BG1_X = 0;
+            SetGpuReg(REG_OFFSET_BG2Y_L, 0);
+            SetGpuReg(REG_OFFSET_BG2Y_H, 0);
+            if (++gTasks[taskId].tCounter & 1)
+            {
+                gTasks[taskId].tBg1Y++;
+                gBattle_BG1_Y = gTasks[taskId].tBg1Y / 2;
+                gBattle_BG1_X = 0;
+            }
+            UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
         }
-        UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
         if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
