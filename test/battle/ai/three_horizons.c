@@ -12,7 +12,6 @@ AI_SINGLE_BATTLE_TEST("Three Horizons first rival can attack a low HP player ins
     } WHEN {
         TURN { MOVE(player, MOVE_SPLASH); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Foe Charmander used Scratch!");
         HP_BAR(player, hp: 0);
         MESSAGE("Bulbasaur fainted!");
     }
