@@ -13,8 +13,10 @@ TEST("Three Horizons Cerulean Rocket awards Dig immediately after victory")
 {
     TrainerBattleParameter params;
     memcpy(&params, TH_Trainer9_TEAM_ROCKET_GRUNT_5 + TRAINERBATTLE_OPCODE_OFFSET, sizeof(params));
-    EXPECT(params.params.continueScript);
-    EXPECT_EQ(params.params.battleScriptRetAddrA, TH_RocketDigReward);
+    // Normal battles use gotobeatenscript and the explicit callback. The
+    // continueScript variant resumes the command stream after trainerbattle.
+    EXPECT(!params.params.continueScript);
+    EXPECT(params.params.battleScriptRetAddrA == TH_RocketDigReward);
 }
 
 TEST("Three Horizons wild Hidden Ability occupies exactly ten percent of rolls")
@@ -42,7 +44,7 @@ TEST("Three Horizons wild encounter creation includes normal and Hidden Abilitie
     for (u32 i = 0; i < 500; i++)
     {
         CreateWildMon(SPECIES_RATTATA, 5);
-        slots[GetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM)]++;
+        slots[GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM)]++;
     }
     EXPECT(slots[0] > 100);
     EXPECT(slots[1] > 100);
