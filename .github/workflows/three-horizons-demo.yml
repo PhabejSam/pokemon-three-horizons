@@ -134,7 +134,12 @@ jobs:
           p = Path('src/three_horizons_capture.c')
           s = p.read_text()
           assert '!TH_PartnerOptionsValid(options)' in s
-          p.write_text(s.replace('!TH_PartnerOptionsValid(options)', 'options == NULL'))
+          # Species-aware validation also checks the stat limits now. Remove
+          # both gates in the mutant so illegal IV/EV edits actually reach it.
+          species_gate = '!TH_PartnerOptionsValidForSpecies(GetMonData(mon, MON_DATA_SPECIES), options)'
+          assert species_gate in s
+          s = s.replace('!TH_PartnerOptionsValid(options)', 'options == NULL')
+          p.write_text(s.replace(species_gate, 'FALSE'))
           PYCODE
           if make THREE_HORIZONS=1 check TESTS="Three Horizons training kit delivers" -j2 > kit-negative.log 2>&1; then
             echo "Kit test did not detect duplicate delivery"; exit 1
