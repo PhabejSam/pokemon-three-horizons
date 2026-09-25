@@ -171,3 +171,5 @@
 - [Capture Diagnostic](three_horizons/CAPTURE_DIAGNOSTIC.md)
 - [Playtest 9 Guide](three_horizons/PLAYTEST_9.md)
 - [Playtest 9 Verification](three_horizons/PLAYTEST_9_VERIFICATION.md)
+- [Playtest 9 Repair Guide](playtest-9-repair.md)
+- [Playtest 9 Repair Plan](superpowers/plans/2026-09-24-playtest9-repairs.md)
