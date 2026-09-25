@@ -87,7 +87,8 @@ TH_TrainingStock:
     .2byte ITEM_MODEST_MINT, ITEM_MILD_MINT, ITEM_RASH_MINT, ITEM_QUIET_MINT
     .2byte ITEM_CALM_MINT, ITEM_GENTLE_MINT, ITEM_CAREFUL_MINT, ITEM_SASSY_MINT
     .2byte ITEM_TIMID_MINT, ITEM_HASTY_MINT, ITEM_JOLLY_MINT, ITEM_NAIVE_MINT
-    .2byte ITEM_SERIOUS_MINT, ITEM_BOTTLE_CAP, ITEM_GOLD_BOTTLE_CAP, ITEM_NONE
+    .2byte ITEM_SERIOUS_MINT, ITEM_BOTTLE_CAP, ITEM_GOLD_BOTTLE_CAP
+    .2byte ITEM_ABILITY_CAPSULE, ITEM_ABILITY_PATCH, ITEM_NONE
 TH_Text_TrainingWelcome:
     .string "Welcome! I help trainers shape\nany partner's potential.$"
 TH_Text_BuyTraining:
@@ -125,4 +126,4 @@ TH_Text_CapDone:
 TH_Text_CapNoChange:
     .string "No changes were made. Check your caps.\nThe IVs may already be at 31.\pEggs cannot take part in training.\nYou haven't spent any items.$"
 TH_Text_TrainingHelp:
-    .string "Wild partners start with zero EVs.\nTheir IVs and nature usually vary.\pYour home PC holds a training kit.\nGive those items to a partner to hold.\pPower items add EVs for one stat.\nThe opponent's usual EVs still count.\pThese berries reduce unwanted EVs.\nMints change the nature used for stats.\pThe summary shows that stat nature.\nYour partner's birth nature is kept.\pBring caps to me to raise IVs to 31.\nOne silver cap improves one stat.\pOne gold cap improves all six stats.\nThere is no minimum level!$"
+    .string "Wild partners start with zero EVs.\nTheir IVs and nature usually vary.\pYour home PC holds a training kit.\nGive those items to a partner to hold.\pPower items add EVs for one stat.\nThe opponent's usual EVs still count.\pThese berries reduce unwanted EVs.\nMints change the nature used for stats.\pThe summary shows that stat nature.\nYour partner's birth nature is kept.\pBring caps to me to raise IVs to 31.\nOne silver cap improves one stat.\pOne gold cap improves all six stats.\nThere is no minimum level!\pAn ABILITY CAPSULE switches between\nnormal Abilities. An ABILITY PATCH\lcan unlock a Hidden Ability.$"

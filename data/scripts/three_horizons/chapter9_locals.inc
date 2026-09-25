@@ -30,7 +30,7 @@ TH_Pickup_0::
     lock
     faceplayer
     goto_if_set FLAG_TH_PICKUP_0, TH_PickupDone
-    giveitem ITEM_ORAN_BERRY
+    giveitem ITEM_POTION
     goto_if_eq VAR_RESULT, FALSE, TH_PickupFull
     setflag FLAG_TH_PICKUP_0
     removeobject VAR_LAST_TALKED
@@ -105,7 +105,7 @@ TH_Pickup_3::
     lock
     faceplayer
     goto_if_set FLAG_TH_PICKUP_3, TH_PickupDone
-    giveitem ITEM_PERSIM_BERRY
+    giveitem ITEM_SUPER_POTION
     goto_if_eq VAR_RESULT, FALSE, TH_PickupFull
     setflag FLAG_TH_PICKUP_3
     removeobject VAR_LAST_TALKED
@@ -213,7 +213,7 @@ TH_Pickup_9::
     lock
     faceplayer
     goto_if_set FLAG_TH_PICKUP_9, TH_PickupDone
-    giveitem ITEM_ESCAPE_ROPE
+    giveitem ITEM_SUPER_REPEL
     goto_if_eq VAR_RESULT, FALSE, TH_PickupFull
     setflag FLAG_TH_PICKUP_9
     removeobject VAR_LAST_TALKED
@@ -368,14 +368,14 @@ TH_Local_Cerulean_0::
     end
 
 TH_Local_Cerulean_0_Text:
-    .string "Our streets are safe again.\nPlease respect the residents.$"
+    .string "The house was robbed. Please keep\nclear while we investigate.$"
 
 TH_Local_Cerulean_2::
     msgbox TH_Local_Cerulean_2_Text, MSGBOX_NPC
     end
 
 TH_Local_Cerulean_2_Text:
-    .string "I am leaving town. You have\nseen the last of my cave crew!$"
+    .string "I want to cross NUGGET BRIDGE!\nFirst, I need to train my team.$"
 
 TH_Local_Cerulean_3::
     msgbox TH_Local_Cerulean_3_Text, MSGBOX_NPC
@@ -385,25 +385,26 @@ TH_Local_Cerulean_3_Text:
     .string "MISTY trains in that big pool.\nHer battles make quite a splash!$"
 
 TH_Local_Cerulean_4::
+    playmoncry SPECIES_SLOWBRO, CRY_MODE_NORMAL
     msgbox TH_Local_Cerulean_4_Text, MSGBOX_NPC
     end
 
 TH_Local_Cerulean_4_Text:
-    .string "I rest here and listen to\nthe water rushing past.$"
+    .string "SLOWBRO: Brooo!$"
 
 TH_Local_Cerulean_5::
     msgbox TH_Local_Cerulean_5_Text, MSGBOX_NPC
     end
 
 TH_Local_Cerulean_5_Text:
-    .string "SLOWBRO: Brooo!$"
+    .string "SLOWBRO and I like this quiet spot.\nWe could watch the water all day.$"
 
 TH_Local_Cerulean_6::
     msgbox TH_Local_Cerulean_6_Text, MSGBOX_NPC
     end
 
 TH_Local_Cerulean_6_Text:
-    .string "SLOWBRO never seems in a hurry.\nMaybe I should learn from it.$"
+    .string "A good team needs more than power.\nI am trying different Abilities.$"
 
 TH_Local_Cerulean_10::
     msgbox TH_Local_Cerulean_10_Text, MSGBOX_NPC
@@ -505,7 +506,7 @@ TH_Local_CeruleanMart_1::
     end
 
 TH_Local_CeruleanMart_1_Text:
-    .string "Welcome!$"
+    .string "I stock up on REPELS before a\nlong trip through a cave.$"
 
 TH_Local_CeruleanMart_2::
     msgbox TH_Local_CeruleanMart_2_Text, MSGBOX_NPC
@@ -519,7 +520,7 @@ TH_Local_CeruleanCenter_1::
     end
 
 TH_Local_CeruleanCenter_1_Text:
-    .string "Welcome!$"
+    .string "Even experienced TRAINERS rest\ntheir partners after a tough battle.$"
 
 TH_Local_CeruleanCenter_2::
     msgbox TH_Local_CeruleanCenter_2_Text, MSGBOX_NPC
@@ -541,20 +542,6 @@ TH_Local_CeruleanCenter_4::
 
 TH_Local_CeruleanCenter_4_Text:
     .string "The northern bridge is famous\nfor its challenging TRAINERS.$"
-
-TH_Local_CeruleanCenter_5::
-    msgbox TH_Local_CeruleanCenter_5_Text, MSGBOX_NPC
-    end
-
-TH_Local_CeruleanCenter_5_Text:
-    .string "Welcome!$"
-
-TH_Local_CeruleanCenter_6::
-    msgbox TH_Local_CeruleanCenter_6_Text, MSGBOX_NPC
-    end
-
-TH_Local_CeruleanCenter_6_Text:
-    .string "My team needed a rest after\nclimbing through MT. MOON.$"
 
 TH_Local_CeruleanHouse1_0::
     msgbox TH_Local_CeruleanHouse1_0_Text, MSGBOX_NPC
@@ -848,11 +835,12 @@ TH_Local_PewterHouse1_1_Text:
     .string "MOON STONES are sometimes found\ninside MT. MOON.$"
 
 TH_Local_PewterHouse1_2::
+    playmoncry SPECIES_NIDORAN_M, CRY_MODE_NORMAL
     msgbox TH_Local_PewterHouse1_2_Text, MSGBOX_NPC
     end
 
 TH_Local_PewterHouse1_2_Text:
-    .string "Some POKéMON evolve with a\nstone instead of gaining levels.$"
+    .string "NIDORAN: Nido! Nido!$"
 
 TH_Local_PewterHouse2_0::
     msgbox TH_Local_PewterHouse2_0_Text, MSGBOX_NPC
@@ -873,7 +861,7 @@ TH_Local_PewterMuseum1F_0::
     end
 
 TH_Local_PewterMuseum1F_0_Text:
-    .string "Welcome to the MUSEUM!\nPlease enjoy the exhibits.$"
+    .string "Welcome to the MUSEUM! Admission\nis free. Enjoy the exhibits!$"
 
 TH_Local_PewterMuseum1F_1::
     msgbox TH_Local_PewterMuseum1F_1_Text, MSGBOX_NPC
@@ -887,63 +875,63 @@ TH_Local_PewterMuseum1F_2::
     end
 
 TH_Local_PewterMuseum1F_2_Text:
-    .string "We cannot revive fossils here.\nKeep yours safe for a future trip.$"
+    .string "Our colleagues on CINNABAR study\nhow to bring fossils back to life.$"
 
 TH_Local_PewterMuseum1F_3::
     msgbox TH_Local_PewterMuseum1F_3_Text, MSGBOX_NPC
     end
 
 TH_Local_PewterMuseum1F_3_Text:
-    .string "Welcome to the MUSEUM!\nPlease enjoy the exhibits.$"
+    .string "A tiny shape is trapped inside\nthis piece of ancient amber.$"
 
 TH_Local_PewterMuseum1F_4::
     msgbox TH_Local_PewterMuseum1F_4_Text, MSGBOX_NPC
     end
 
 TH_Local_PewterMuseum1F_4_Text:
-    .string "Fossils tell stories from\na world long before ours.$"
+    .string "We brush away rock a grain at a\ntime. Fossils are very delicate.$"
 
 TH_Local_PewterMuseum1F_5::
     msgbox TH_Local_PewterMuseum1F_5_Text, MSGBOX_NPC
     end
 
 TH_Local_PewterMuseum1F_5_Text:
-    .string "We cannot revive fossils here.\nKeep yours safe for a future trip.$"
+    .string "A fossil can reveal how an ancient\nPOKéMON moved, ate, and lived.$"
 
 TH_Sign_PewterMuseum1F_0::
     msgbox TH_Sign_PewterMuseum1F_0_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum1F_0_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "KABUTOPS FOSSIL\nAn ancient seafloor predator.$"
 
 TH_Sign_PewterMuseum1F_1::
     msgbox TH_Sign_PewterMuseum1F_1_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum1F_1_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "AERODACTYL FOSSIL\nAn ancient ruler of the skies.$"
 
 TH_Sign_PewterMuseum1F_2::
     msgbox TH_Sign_PewterMuseum1F_2_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum1F_2_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "PEWTER MUSEUM\nFossils and natural history.$"
 
 TH_Sign_PewterMuseum1F_3::
     msgbox TH_Sign_PewterMuseum1F_3_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum1F_3_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "Please do not touch the specimens.\nEven a small crack can damage them.$"
 
 TH_Local_PewterMuseum2F_0::
     msgbox TH_Local_PewterMuseum2F_0_Text, MSGBOX_NPC
     end
 
 TH_Local_PewterMuseum2F_0_Text:
-    .string "Imagine exploring the stars\nwith a POKéMON by your side.$"
+    .string "We study stones that fell from\nspace. Each one has a story.$"
 
 TH_Local_PewterMuseum2F_1::
     msgbox TH_Local_PewterMuseum2F_1_Text, MSGBOX_NPC
@@ -964,70 +952,70 @@ TH_Local_PewterMuseum2F_3::
     end
 
 TH_Local_PewterMuseum2F_3_Text:
-    .string "Imagine exploring the stars\nwith a POKéMON by your side.$"
+    .string "Dad, do you think PIKACHU could\ncome to the moon with us?$"
 
 TH_Local_PewterMuseum2F_4::
     msgbox TH_Local_PewterMuseum2F_4_Text, MSGBOX_NPC
     end
 
 TH_Local_PewterMuseum2F_4_Text:
-    .string "That model shows a spacecraft.\nIt makes KANTO seem very small.$"
+    .string "My daughter loves this exhibit.\nShe dreams bigger every visit.$"
 
 TH_Sign_PewterMuseum2F_0::
     msgbox TH_Sign_PewterMuseum2F_0_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum2F_0_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "SPACE EXHIBIT\nA journey beyond our world.$"
 
 TH_Sign_PewterMuseum2F_1::
     msgbox TH_Sign_PewterMuseum2F_1_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum2F_1_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A model of a spacecraft built\nto carry explorers into space.$"
 
 TH_Sign_PewterMuseum2F_2::
     msgbox TH_Sign_PewterMuseum2F_2_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum2F_2_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "METEORITE\nA stone that fell from the sky.$"
 
 TH_Sign_PewterMuseum2F_3::
     msgbox TH_Sign_PewterMuseum2F_3_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum2F_3_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "The moon, seen through a powerful\ntelescope on a clear night.$"
 
 TH_Sign_PewterMuseum2F_4::
     msgbox TH_Sign_PewterMuseum2F_4_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum2F_4_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A chart showing the paths\nof planets around the sun.$"
 
 TH_Sign_PewterMuseum2F_5::
     msgbox TH_Sign_PewterMuseum2F_5_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum2F_5_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A suit designed to protect\nexplorers in space.$"
 
 TH_Sign_PewterMuseum2F_6::
     msgbox TH_Sign_PewterMuseum2F_6_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum2F_6_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "Photographs taken far above\nthe clouds.$"
 
 TH_Sign_PewterMuseum2F_7::
     msgbox TH_Sign_PewterMuseum2F_7_Text, MSGBOX_NPC
     end
 
 TH_Sign_PewterMuseum2F_7_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "What might we discover beyond\nthe next horizon?$"
 
 TH_ViridianGym_Attendant::
     msgbox TH_ViridianGym_Attendant_Text, MSGBOX_NPC

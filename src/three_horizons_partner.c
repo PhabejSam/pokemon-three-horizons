@@ -47,8 +47,13 @@ static void OpenFieldEditor(u8 level);
 static void DeliverNamedPartner(void)
 {
     SetMonData(&sNamedPartner,MON_DATA_NICKNAME,sPartnerNickname);
-    gSpecialVar_Result = sPendingReward==0 ? TH_TryGiveStarterMon(&sNamedPartner)
-        : TH_TryDeliverReward(sPendingReward-1,&sNamedPartner)!=MON_CANT_GIVE;
+    if (sPendingReward == 0)
+        gSpecialVar_Result = TH_TryGiveStarterMon(&sNamedPartner);
+    else
+    {
+        gSpecialVar_0x8009 = TH_TryDeliverReward(sPendingReward - 1, &sNamedPartner);
+        gSpecialVar_Result = gSpecialVar_0x8009 != MON_CANT_GIVE;
+    }
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 static void NamePendingPartner(void)
@@ -352,12 +357,7 @@ void TH_ScriptGiveReward(void)
 }
 void TH_ScriptBuyMagikarp(void)
 {
-    struct THPartnerOptions options={.nature=NATURE_ADAMANT,.shiny=TRUE};
-    for (u32 i=0;i<6;i++) options.ivs[i]=31;
-    options.evs[STAT_HP]=6;
-    options.evs[STAT_ATK]=252;
-    options.evs[STAT_SPEED]=252;
-    TH_CreateConfiguredPartner(&sNamedPartner,SPECIES_MAGIKARP,5,&options);
+    TH_CreateGoldenMagikarp(&sNamedPartner);
     sPendingReward=TH_REWARD_MAGIKARP+1;
     NamePendingPartner();
 }

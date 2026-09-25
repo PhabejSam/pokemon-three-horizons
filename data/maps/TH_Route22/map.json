@@ -26,7 +26,7 @@
       "local_id": "LOCALID_TH_ROUTE22_0",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
-      "x": 25,
+      "x": 22,
       "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -35,7 +35,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "TH_Rival_Route22",
-      "flag": "0"
+      "flag": "FLAG_TH_HIDE_CHAPTER_RIVAL"
     }
   ],
   "warp_events": [
@@ -54,7 +54,35 @@
       "dest_warp_id": "1"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_Rival_Route22Trigger"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_Rival_Route22Trigger"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "TH_Rival_Route22Trigger"
+    }
+  ],
   "bg_events": [
     {
       "type": "sign",

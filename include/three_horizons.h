@@ -36,6 +36,8 @@ enum THReward { TH_REWARD_BROCK, TH_REWARD_MISTY, TH_REWARD_MAGIKARP };
 bool32 TH_CreateConfiguredPartner(struct Pokemon *mon, u16 species, u8 level, const struct THPartnerOptions *options);
 bool32 TH_TryGiveStarterMon(struct Pokemon *mon);
 u8 TH_TryDeliverReward(enum THReward reward, struct Pokemon *mon);
+void TH_CreateGoldenMagikarp(struct Pokemon *mon);
+void TH_ApplyWildHiddenAbility(struct Pokemon *mon, u32 roll);
 void TH_OpenRewardEditor(void);
 void TH_ScriptGiveReward(void);
 void TH_ScriptRewardChoices(void);

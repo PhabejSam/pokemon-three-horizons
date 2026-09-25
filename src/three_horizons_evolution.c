@@ -10,6 +10,7 @@
 #include "main.h"
 #include "palette.h"
 #include "sound.h"
+#include "m4a.h"
 #include "constants/rgb.h"
 
 #if THREE_HORIZONS
@@ -17,7 +18,7 @@
 static EWRAM_DATA u8 sState = 0;
 static EWRAM_DATA u8 sPartyId = 0;
 static EWRAM_DATA u8 sEnvironment = 0;
-static EWRAM_DATA u16 sMusic = 0;
+static EWRAM_DATA struct SongHeader *sMusic = NULL;
 static EWRAM_DATA u16 sTarget = 0;
 static EWRAM_DATA bool32 sCanStop = FALSE;
 static EWRAM_DATA u8 sCommunication[8] = {0};
@@ -101,7 +102,8 @@ static void TH_ReturnFromBattleEvolution(void)
     // Evolution owns and frees its sprite buffers. Rebuild the battle's buffers.
     AllocateMonSpritesGfx();
     ResetMapMusic();
-    PlayBGM(sMusic);
+    if (sMusic != NULL && !gDisableMusic)
+        MPlayStart(&gMPlayInfo_BGM, sMusic);
     sState = 2;
     gMain.callback1 = TH_WaitForBattleRebuild;
     ReshowBattleScreenAfterMenu();
@@ -123,7 +125,8 @@ bool32 TH_TryBattleEvolution(u32 partyId)
         sBefore = gParties[B_TRAINER_PLAYER][sPartyId];
         memcpy(sCommunication, gBattleCommunication, sizeof(sCommunication));
         sEnvironment = gBattleEnvironment;
-        sMusic = GetBattleBGM();
+        // Keep victory music when the final wild opponent has already fainted.
+        sMusic = gMPlayInfo_BGM.songHeader;
         // BattleMainCB1 runs independently of callback2. Suspend it throughout
         // the evolution scene so getexp and battle controllers cannot re-enter.
         sBattleCallback1 = gMain.callback1;

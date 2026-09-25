@@ -2127,6 +2127,7 @@ void CB2_ContinueSavedGame(void)
     u8 trainerHillMapId;
 
 #if THREE_HORIZONS
+    bool32 refreshChapterMap = (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK) != TH_STATE_VERSION_10;
     TH_MigrateSaveState();
 #endif
     FieldClearVBlankHBlankCallbacks();
@@ -2142,6 +2143,10 @@ void CB2_ContinueSavedGame(void)
         LoadBattlePyramidFloorObjectEventScripts();
     else if (trainerHillMapId != 0 && trainerHillMapId != TRAINER_HILL_ENTRANCE)
         LoadTrainerHillFloorObjectEventScripts();
+#if THREE_HORIZONS
+    else if (refreshChapterMap)
+        LoadObjEventTemplatesFromHeader();
+#endif
     else
         LoadSaveblockObjEventScripts();
 
@@ -2168,6 +2173,18 @@ void CB2_ContinueSavedGame(void)
         TryPutTodaysRivalTrainerOnAir();
         SetMainCallback2(CB2_LoadMap);
     }
+#if THREE_HORIZONS
+    else if (refreshChapterMap)
+    {
+        // An old build may have different object slots, coordinates and scripts.
+        // A normal same-map load rebuilds both templates and object instances.
+        SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum,
+            WARP_ID_NONE, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
+        WarpIntoMap();
+        gFieldCallback = FieldCB_FadeTryShowMapPopup;
+        SetMainCallback2(CB2_LoadMap);
+    }
+#endif
     else
     {
         TryPutTodaysRivalTrainerOnAir();

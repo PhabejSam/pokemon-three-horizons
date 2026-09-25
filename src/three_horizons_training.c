@@ -39,6 +39,10 @@ u32 TH_GetTrainingItemPrice(u16 itemId, u32 fallback)
     case ITEM_GREPA_BERRY:
     case ITEM_TAMATO_BERRY:
         return 100;
+    case ITEM_ABILITY_CAPSULE:
+        return 2000;
+    case ITEM_ABILITY_PATCH:
+        return 4000;
     case ITEM_BOTTLE_CAP:
         return 2000;
     case ITEM_GOLD_BOTTLE_CAP:

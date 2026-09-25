@@ -90,36 +90,6 @@
       "script": "TH_Local_CeruleanCenter_4",
       "flag": "0",
       "local_id": "LOCALID_TH_CERULEANCENTER_4"
-    },
-    {
-      "type": "object",
-      "graphics_id": "0",
-      "x": 2,
-      "y": 1,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "TH_Local_CeruleanCenter_5",
-      "flag": "0",
-      "local_id": "LOCALID_TH_CERULEANCENTER_5"
-    },
-    {
-      "type": "object",
-      "graphics_id": "0",
-      "x": 3,
-      "y": 1,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "TH_Local_CeruleanCenter_6",
-      "flag": "0",
-      "local_id": "LOCALID_TH_CERULEANCENTER_6"
     }
   ],
   "warp_events": [

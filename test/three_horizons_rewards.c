@@ -26,7 +26,7 @@ TEST("Three Horizons full storage preserves gift receipts and Magikarp payment")
     EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money),500);
     EXPECT(!FlagGet(FLAG_TH_MAGIKARP));
     memset(&gPokemonStoragePtr->boxes[0][0],0,sizeof(mon.box));
-    EXPECT(TH_TryDeliverReward(TH_REWARD_MAGIKARP,&mon)!=MON_CANT_GIVE);
+    EXPECT_EQ(TH_TryDeliverReward(TH_REWARD_MAGIKARP,&mon), MON_GIVEN_TO_PC);
     EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money),0);
     EXPECT(FlagGet(FLAG_TH_MAGIKARP));
     EXPECT_EQ(TH_TryDeliverReward(TH_REWARD_MAGIKARP,&mon),MON_CANT_GIVE);
@@ -37,7 +37,7 @@ TEST("Three Horizons full storage preserves gift receipts and Magikarp payment")
     EXPECT_EQ(TH_TryDeliverReward(TH_REWARD_BROCK,&mon),MON_CANT_GIVE);
     EXPECT_EQ(VarGet(VAR_TH_BROCK_GIFT),0);
     memset(&gPokemonStoragePtr->boxes[0][1],0,sizeof(mon.box));
-    EXPECT(TH_TryDeliverReward(TH_REWARD_BROCK,&mon)!=MON_CANT_GIVE);
+    EXPECT_EQ(TH_TryDeliverReward(TH_REWARD_BROCK,&mon), MON_GIVEN_TO_PC);
     EXPECT_EQ(VarGet(VAR_TH_BROCK_GIFT),SPECIES_SQUIRTLE);
     EXPECT_EQ(TH_TryDeliverReward(TH_REWARD_BROCK,&mon),MON_CANT_GIVE);
     Free(gPokemonStoragePtr);

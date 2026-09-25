@@ -188,7 +188,7 @@
       "map": "TH_Route3",
       "x": 26,
       "y": 9,
-      "item": "ITEM_ORAN_BERRY",
+      "item": "ITEM_POTION",
       "flag": "FLAG_TH_PICKUP_0"
     },
     {
@@ -209,7 +209,7 @@
       "map": "TH_Route4",
       "x": 5,
       "y": 4,
-      "item": "ITEM_PERSIM_BERRY",
+      "item": "ITEM_SUPER_POTION",
       "flag": "FLAG_TH_PICKUP_3"
     },
     {
@@ -251,7 +251,7 @@
       "map": "TH_MtMoon1F",
       "x": 44,
       "y": 21,
-      "item": "ITEM_ESCAPE_ROPE",
+      "item": "ITEM_SUPER_REPEL",
       "flag": "FLAG_TH_PICKUP_9"
     },
     {

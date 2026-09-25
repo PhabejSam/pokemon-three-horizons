@@ -14,7 +14,7 @@ static u32 Read32(u16 low, u16 high)
 static void Write32(u16 low, u16 high, u32 value)
 {
     VarSet(low,value);
-    VarSet(high,high==VAR_TH_CLOCK_DISPLAY_HI ? TH_STATE_VERSION_9 | ((value>>16)&1) : value>>16);
+    VarSet(high,high==VAR_TH_CLOCK_DISPLAY_HI ? TH_STATE_VERSION_10 | ((value>>16)&1) : value>>16);
 }
 static u32 RealSeconds(void)
 {

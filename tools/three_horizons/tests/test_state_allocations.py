@@ -21,7 +21,7 @@ class StateAllocations(unittest.TestCase):
                 self.assertEqual(value(name),expected,name)
                 self.assertNotEqual(expected,0,name)
         variables=[value(n) for n in definitions if n.startswith('VAR_TH_')]
-        flags=[value(n) for n in definitions if n.startswith('FLAG_TH_') and 'HIDE_ROBIN' not in n]
+        flags=[value(n) for n in definitions if n.startswith('FLAG_TH_') and 'HIDE_' not in n]
         self.assertEqual(len(variables),len(set(variables)))
         self.assertEqual(len(flags),len(set(flags)))
         for offset,name in enumerate(('STAGE','FIRST_PARTNER','RIVAL_PARTNER','SUPPLY_MASK',

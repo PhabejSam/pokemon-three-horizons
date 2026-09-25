@@ -43,7 +43,7 @@ TH_RewardCustomize:
     waitstate
     goto_if_eq VAR_RESULT, FALSE, TH_RewardNoSpace
     special TH_RefreshFollower
-    msgbox TH_Text_RewardDelivered
+    call TH_ReportRewardDestination
 TH_RewardExit:
     release
     end
@@ -77,6 +77,7 @@ TH_MagikarpSalesman::
     waitstate
     goto_if_eq VAR_RESULT, FALSE, TH_RewardNoSpace
     special TH_RefreshFollower
+    call TH_ReportRewardDestination
     msgbox TH_Text_MagikarpDelivered
     release
     end
@@ -84,6 +85,15 @@ TH_MagikarpNoMoney:
     msgbox TH_Text_MagikarpNoMoney
     release
     end
+TH_ReportRewardDestination:
+    goto_if_eq VAR_0x8009, MON_GIVEN_TO_PC, TH_ReportRewardPC
+    msgbox TH_Text_RewardDelivered
+    return
+TH_ReportRewardPC:
+    msgbox TH_Text_RewardPC
+    return
+TH_Text_RewardPC:
+    .string "Your party is full. Your new\npartner was sent to your PC.$"
 TH_RewardFirst:
     .string "{STR_VAR_1}$"
 TH_RewardSecond:
@@ -93,13 +103,13 @@ TH_Text_BrockCaretaker:
 TH_Text_BrockWait:
     .string "I care for partners whose TRAINERS\ncould not continue their journeys.\pEarn BROCK's badge, then visit again.\nOne of these POKéMON may join you.$"
 TH_Text_MistyCaretaker:
-    .string "You earned MISTY's badge!\n{STR_VAR_1} would love to travel with you.\pIt comes from the third region,\ncompleting your trio of partners.\lWould you like to welcome it?$"
+    .string "{STR_VAR_1}'s TRAINER left it with me\nafter giving up on the GYM challenge.\pIt still perks up whenever a\nTRAINER comes by. Would you give\lit a fresh start?$"
 TH_Text_MistyWait:
-    .string "A partner from another region\nis waiting for a caring TRAINER.\pCome back after earning\nMISTY's CASCADEBADGE.$"
+    .string "A TRAINER left their partner with\nme when their journey ended here.\pIt deserves someone who will stay\nby its side. Visit after you earn\lMISTY's badge.$"
 TH_Text_MistyNeedsBrock:
     .string "First, visit the caretaker outside\nPEWTER GYM and choose a partner.\pThen I can introduce you to one\nfrom the remaining region.$"
 TH_Text_RewardDelivered:
-    .string "Your new partner is ready!\nIt joined your party or went to your PC.\pLook after each other out there.$"
+    .string "Your new partner joined your party!\nLook after each other out there.$"
 TH_Text_RewardNoSpace:
     .string "Your party and PC have no room.\nMake space and visit me again.\lYour reward is still waiting.$"
 TH_Text_CaretakerThanks:

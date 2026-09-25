@@ -272,9 +272,25 @@ TH_Trainer9_TEAM_ROCKET_GRUNT_2_After:
     .string "I thought this job would be\neasy. Clearly I was wrong.$"
 
 TH_Trainer9_TEAM_ROCKET_GRUNT_5::
-    trainerbattle_single TRAINER_TH9_TEAM_ROCKET_GRUNT_5, TH_Trainer9_TEAM_ROCKET_GRUNT_5_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_5_Defeat
+    trainerbattle_single TRAINER_TH9_TEAM_ROCKET_GRUNT_5, TH_Trainer9_TEAM_ROCKET_GRUNT_5_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_5_Defeat, TH_RocketDigReward
+TH_RocketDigReward::
+    goto_if_set FLAG_TH_DIG_TM, TH_RocketDigDone
+    msgbox TH_RocketDigReturn
+    giveitem ITEM_TM_DIG
+    goto_if_eq VAR_RESULT, FALSE, TH_RocketDigFull
+    setflag FLAG_TH_DIG_TM
+TH_RocketDigDone:
     msgbox TH_Trainer9_TEAM_ROCKET_GRUNT_5_After, MSGBOX_AUTOCLOSE
+    releaseall
     end
+TH_RocketDigFull:
+    msgbox TH_RocketDigNoRoom
+    releaseall
+    end
+TH_RocketDigReturn:
+    .string "All right! Take the TM I stole.\nJust leave me alone!$"
+TH_RocketDigNoRoom:
+    .string "Your BAG is full! Make room\nand take this TM off my hands.$"
 TH_Trainer9_TEAM_ROCKET_GRUNT_5_Intro:
     .string "You again? ROCKET will not\nforget what happened in MT. MOON!$"
 
@@ -323,44 +339,67 @@ TH_Trainer9_LEADER_MISTY_After:
     .string "Your team earned its place\namong CERULEAN's best challengers.$"
 
 TH_Rival_ROUTE22_Bulbasaur::
-    trainerbattle_single TRAINER_TH9_ROUTE22_BULBASAUR, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
+    trainerbattle_lavaridge LOCALID_TH_ROUTE22_0, TRAINER_TH9_ROUTE22_BULBASAUR, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
     goto TH_Rival_ROUTE22_After
 
 TH_Rival_ROUTE22_Charmander::
-    trainerbattle_single TRAINER_TH9_ROUTE22_CHARMANDER, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
+    trainerbattle_lavaridge LOCALID_TH_ROUTE22_0, TRAINER_TH9_ROUTE22_CHARMANDER, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
     goto TH_Rival_ROUTE22_After
 
 TH_Rival_ROUTE22_Squirtle::
-    trainerbattle_single TRAINER_TH9_ROUTE22_SQUIRTLE, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
+    trainerbattle_lavaridge LOCALID_TH_ROUTE22_0, TRAINER_TH9_ROUTE22_SQUIRTLE, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
     goto TH_Rival_ROUTE22_After
 
 TH_Rival_ROUTE22_Chikorita::
-    trainerbattle_single TRAINER_TH9_ROUTE22_CHIKORITA, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
+    trainerbattle_lavaridge LOCALID_TH_ROUTE22_0, TRAINER_TH9_ROUTE22_CHIKORITA, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
     goto TH_Rival_ROUTE22_After
 
 TH_Rival_ROUTE22_Cyndaquil::
-    trainerbattle_single TRAINER_TH9_ROUTE22_CYNDAQUIL, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
+    trainerbattle_lavaridge LOCALID_TH_ROUTE22_0, TRAINER_TH9_ROUTE22_CYNDAQUIL, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
     goto TH_Rival_ROUTE22_After
 
 TH_Rival_ROUTE22_Totodile::
-    trainerbattle_single TRAINER_TH9_ROUTE22_TOTODILE, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
+    trainerbattle_lavaridge LOCALID_TH_ROUTE22_0, TRAINER_TH9_ROUTE22_TOTODILE, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
     goto TH_Rival_ROUTE22_After
 
 TH_Rival_ROUTE22_Treecko::
-    trainerbattle_single TRAINER_TH9_ROUTE22_TREECKO, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
+    trainerbattle_lavaridge LOCALID_TH_ROUTE22_0, TRAINER_TH9_ROUTE22_TREECKO, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
     goto TH_Rival_ROUTE22_After
 
 TH_Rival_ROUTE22_Torchic::
-    trainerbattle_single TRAINER_TH9_ROUTE22_TORCHIC, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
+    trainerbattle_lavaridge LOCALID_TH_ROUTE22_0, TRAINER_TH9_ROUTE22_TORCHIC, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
     goto TH_Rival_ROUTE22_After
 
 TH_Rival_ROUTE22_Mudkip::
-    trainerbattle_single TRAINER_TH9_ROUTE22_MUDKIP, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
+    trainerbattle_lavaridge LOCALID_TH_ROUTE22_0, TRAINER_TH9_ROUTE22_MUDKIP, TH_Rival_ROUTE22_Intro, TH_Rival_ROUTE22_Defeat, TH_Rival_ROUTE22_Victory
     goto TH_Rival_ROUTE22_After
 
+TH_Rival_Route22Trigger::
+    goto_if_set FLAG_TH_ROUTE22_RIVAL, TH_RivalTriggerEnd
+    goto_if_eq VAR_TH_RIVAL_PARTNER, SPECIES_NONE, TH_RivalTriggerEnd
+    lockall
+    getplayerxy VAR_0x8004, VAR_0x8005
+    clearflag FLAG_TH_HIDE_CHAPTER_RIVAL
+    addobject LOCALID_TH_ROUTE22_0
+    setobjectxy LOCALID_TH_ROUTE22_0, 22, VAR_0x8005
+    applymovement OBJ_EVENT_ID_PLAYER, TH_RivalFaceLeft
+    applymovement LOCALID_TH_ROUTE22_0, TH_RivalApproachFromLeague
+    waitmovement 0
+    setvar VAR_LAST_TALKED, LOCALID_TH_ROUTE22_0
+    goto TH_Rival_Route22
+TH_RivalTriggerEnd:
+    end
+TH_RivalFaceLeft:
+    face_left
+    step_end
+TH_RivalApproachFromLeague:
+    walk_right 6
+    step_end
+TH_RivalLeaveForLeague:
+    walk_left 6
+    step_end
 TH_Rival_Route22::
-    lock
-    faceplayer
+    lockall
     goto_if_set FLAG_TH_ROUTE22_RIVAL, TH_Rival_ROUTE22_After
     goto_if_eq VAR_TH_RIVAL_PARTNER, SPECIES_BULBASAUR, TH_Rival_ROUTE22_Bulbasaur
     goto_if_eq VAR_TH_RIVAL_PARTNER, SPECIES_CHARMANDER, TH_Rival_ROUTE22_Charmander
@@ -378,6 +417,11 @@ TH_Rival_ROUTE22_Victory::
     setflag FLAG_TH_ROUTE22_RIVAL
 TH_Rival_ROUTE22_After:
     msgbox TH_Rival_ROUTE22_AfterText
+    closemessage
+    applymovement LOCALID_TH_ROUTE22_0, TH_RivalLeaveForLeague
+    waitmovement 0
+    removeobject LOCALID_TH_ROUTE22_0
+    setflag FLAG_TH_HIDE_CHAPTER_RIVAL
     releaseall
     end
 
@@ -437,9 +481,20 @@ TH_Rival_BRIDGE_Victory::
     call TH_ChapterCheck
 TH_Rival_BRIDGE_After:
     msgbox TH_Rival_BRIDGE_AfterText
+    closemessage
+    applymovement LOCALID_TH_CERULEAN_7, TH_RivalBridgeDepart
+    waitmovement 0
+    removeobject LOCALID_TH_CERULEAN_7
+    setflag FLAG_TH_HIDE_CHAPTER_RIVAL
     releaseall
     end
 
+TH_RivalBridgeApproach:
+    walk_down 3
+    step_end
+TH_RivalBridgeDepart:
+    walk_up 3
+    step_end
 TH_Rival_NotReady:
     .string "Choose a partner at the lab first.\nThen we can have a proper battle!$"
 
@@ -462,16 +517,29 @@ TH_Rival_BRIDGE_AfterText:
     .string "{RIVAL}: I will scout the road ahead.\nEnjoy CERULEAN while you are here!$"
 
 TH_Rival_BridgeTrigger::
+    goto_if_set FLAG_TH_BRIDGE_RIVAL, TH_RivalTriggerEnd
+    goto_if_eq VAR_TH_RIVAL_PARTNER, SPECIES_NONE, TH_RivalTriggerEnd
     lockall
+    getplayerxy VAR_0x8004, VAR_0x8005
+    clearflag FLAG_TH_HIDE_CHAPTER_RIVAL
+    addobject LOCALID_TH_CERULEAN_7
+    setobjectxy LOCALID_TH_CERULEAN_7, VAR_0x8004, 0
+    applymovement LOCALID_TH_CERULEAN_7, TH_RivalBridgeApproach
+    waitmovement 0
     applymovement OBJ_EVENT_ID_PLAYER, TH_BridgeFaceUp
     waitmovement 0
     goto_if_set FLAG_TH_BRIDGE_RIVAL, TH_ChapterEnd
     setvar VAR_LAST_TALKED, LOCALID_TH_CERULEAN_7
     goto TH_Rival_Bridge
 TH_MistyVictory::
+    msgbox TH_MistyBadgeSpeech
     setflag FLAG_BADGE02_GET
+    playfanfare MUS_OBTAIN_BADGE
+    msgbox TH_MistyBadgeReceived
+    waitfanfare
 TH_MistyReward:
     goto_if_set FLAG_TH_MISTY_TM, TH_MistyAfterReward
+    msgbox TH_MistyTMOffer
     giveitem ITEM_TM_WATER_PULSE
     goto_if_eq VAR_RESULT, FALSE, TH_MistyBagFull
     setflag FLAG_TH_MISTY_TM
@@ -495,8 +563,14 @@ TH_ChapterEnd:
     releaseall
     end
 
+TH_MistyBadgeSpeech:
+    .string "MISTY: You and your POKéMON\nreally earned this victory!\pAs proof, take the CASCADEBADGE!$"
+TH_MistyBadgeReceived:
+    .string "{PLAYER} received the\nCASCADEBADGE!$"
+TH_MistyTMOffer:
+    .string "Here, take WATER PULSE too!\nYou can use this TM again and again.$"
 TH_MistyThanks:
-    .string "MISTY: The CASCADEBADGE is yours!\nWATER PULSE is a reusable TM.\pThe caretaker outside has news\nabout a partner from another region.$"
+    .string "MISTY: Keep growing with your team!\nThe caretaker outside would like\lto speak with you, too.$"
 
 TH_MistyFull:
     .string "Your badge is safe. Make room\nfor WATER PULSE and speak to me again.$"

@@ -171,7 +171,7 @@ TH_Journey_Mart::
     end
     .align 2
 TH_Journey_Shop:
-    .2byte ITEM_POKE_BALL, ITEM_POTION, ITEM_ANTIDOTE, ITEM_PARALYZE_HEAL, ITEM_ESCAPE_ROPE, ITEM_NONE
+    .2byte ITEM_POKE_BALL, ITEM_POTION, ITEM_ANTIDOTE, ITEM_PARALYZE_HEAL, ITEM_REPEL, ITEM_SUPER_REPEL, ITEM_ESCAPE_ROPE, ITEM_NONE
 
 TH_Text_NurseWelcome:
     .string "Welcome! Let me help your POKéMON\nrest and recover.$"

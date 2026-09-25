@@ -21,10 +21,11 @@
     "FLAG_TH_FOSSIL_DOME": "0x4a",
     "FLAG_TH_FOSSIL_HELIX": "0x4b",
     "FLAG_TH_SEEN_FOREST": "0x4c",
-    "FLAG_TH_SEEN_MT_MOON": "0x4d"
+    "FLAG_TH_SEEN_MT_MOON": "0x4d",
+    "FLAG_TH_DIG_TM": "0x4f"
   },
   "baseline": "b3916b8",
-  "notes": "Audited VAR_UNUSED aliases have no references in src/data. TH-only trainer replacements start at 8; preserve 1-7 and 855-863. CLOCK_DISPLAY_HI bit 0 stores time; bits 1-15 store version 0xA902 (mask 0xFFFE). Continue migrates newly owned state once; new game initializes it before staged options.",
+  "notes": "Audited VAR_UNUSED aliases have no references in src/data. TH-only trainer replacements start at 8; preserve 1-7 and 855-863. CLOCK_DISPLAY_HI bit 0 stores time; bits 1-15 store version 0xA902 (mask 0xFFFE). Continue migrates newly owned state once; new game initializes it before staged options. Playtest 10 adds Dig receipt 0x4F, version 0xA904; upgrade from version9 clears only this new receipt and preserves clock bit0 and all previous receipts.",
   "pickups": {
     "FLAG_TH_PICKUP_0": "0x29",
     "FLAG_TH_PICKUP_1": "0x2a",

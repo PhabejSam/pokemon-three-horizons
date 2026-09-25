@@ -25,9 +25,9 @@ class Chapter9(unittest.TestCase):
         raw=list(struct.unpack('<2160H',(ROOT/'data/layouts/Route4_Frlg/map.bin').read_bytes()))
         # Apply only the two reviewed TH-local stair replacements.
         script=(ROOT/'data/maps/TH_Route4/scripts.inc').read_text()
-        for x,tile in [(91,'0x090'),(92,'0x091')]:
-            self.assertIn(f'setmetatile {x}, 9, {tile}, FALSE',script)
-            raw[9*108+x]=int(tile,16)
+        for x,tile,blocked in [(91,'0x090',True),(92,'0x091',False),(93,'0x092',True)]:
+            self.assertIn(f'setmetatile {x}, 9, {tile}, {str(blocked).upper()}',script)
+            raw[9*108+x]=int(tile,16) | (0xc00 if blocked else 0)
         pending=deque([(107,11)]);seen=set(pending)
         while pending:
             x,y=pending.popleft()
