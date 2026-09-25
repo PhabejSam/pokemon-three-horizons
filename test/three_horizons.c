@@ -99,6 +99,41 @@ TEST("Three Horizons first rival battle initialization preserves every chosen pa
     gBattleTypeFlags = savedFlags;
 }
 
+TEST("Three Horizons chapter trainers retain the rival line and four member Misty team")
+{
+    static const u16 starters[] = {SPECIES_BULBASAUR, SPECIES_CHARMANDER, SPECIES_SQUIRTLE,
+        SPECIES_CHIKORITA, SPECIES_CYNDAQUIL, SPECIES_TOTODILE,
+        SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP};
+    static const u16 evolutions[] = {SPECIES_IVYSAUR, SPECIES_CHARMELEON, SPECIES_WARTORTLE,
+        SPECIES_BAYLEEF, SPECIES_QUILAVA, SPECIES_CROCONAW,
+        SPECIES_GROVYLE, SPECIES_COMBUSKEN, SPECIES_MARSHTOMP};
+    static const u16 misty[] = {SPECIES_STARYU, SPECIES_PSYDUCK, SPECIES_MARILL, SPECIES_STARMIE};
+    for (u32 difficulty=DIFFICULTY_EASY; difficulty<=DIFFICULTY_HARD; difficulty++)
+    {
+        for (u32 i=0;i<9;i++)
+        {
+            const struct Trainer *route=&sActualTrainers[difficulty][TRAINER_TH9_ROUTE22_BULBASAUR+i];
+            const struct Trainer *bridge=&sActualTrainers[difficulty][TRAINER_TH9_BRIDGE_BULBASAUR+i];
+            if (!route->party) route=&sActualTrainers[DIFFICULTY_NORMAL][TRAINER_TH9_ROUTE22_BULBASAUR+i];
+            if (!bridge->party) bridge=&sActualTrainers[DIFFICULTY_NORMAL][TRAINER_TH9_BRIDGE_BULBASAUR+i];
+            EXPECT_EQ((u32)route->partySize,2);
+            EXPECT_EQ((u32)bridge->partySize,4);
+            EXPECT_EQ(route->trainerPic,TRAINER_PIC_RIVAL_EARLY_FRLG);
+            EXPECT_EQ(bridge->trainerPic,TRAINER_PIC_RIVAL_EARLY_FRLG);
+            EXPECT(route->party != NULL);
+            EXPECT(bridge->party != NULL);
+            if (route->party) EXPECT_EQ(route->party[1].species,starters[i]);
+            if (bridge->party) EXPECT_EQ(bridge->party[3].species,evolutions[i]);
+        }
+        const struct Trainer *leader=&sActualTrainers[difficulty][TRAINER_TH9_LEADER_MISTY];
+        if (!leader->party) leader=&sActualTrainers[DIFFICULTY_NORMAL][TRAINER_TH9_LEADER_MISTY];
+        EXPECT_EQ((u32)leader->partySize,4);
+        EXPECT(leader->party != NULL);
+        if (leader->party)
+            for (u32 i=0;i<4;i++) EXPECT_EQ(leader->party[i].species,misty[i]);
+    }
+}
+
 TEST("Three Horizons outfits resolve matching native walking and battle art")
 {
     static const u16 overworld[] = {OBJ_EVENT_GFX_RED_NORMAL, OBJ_EVENT_GFX_GREEN_NORMAL, OBJ_EVENT_GFX_BRENDAN_NORMAL, OBJ_EVENT_GFX_MAY_NORMAL, OBJ_EVENT_GFX_TH_GOLD_NORMAL, OBJ_EVENT_GFX_TH_KRIS_NORMAL, OBJ_EVENT_GFX_TH_SILVER_NORMAL};

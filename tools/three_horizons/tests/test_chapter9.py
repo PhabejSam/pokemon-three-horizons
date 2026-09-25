@@ -7,6 +7,15 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 
 class Chapter9(unittest.TestCase):
+    def test_automatic_bridge_battle_selects_the_rival_object(self):
+        script=(ROOT/'data/scripts/three_horizons/chapter9.inc').read_text()
+        for name in ('Bulbasaur','Charmander','Squirtle','Chikorita','Cyndaquil',
+                     'Totodile','Treecko','Torchic','Mudkip'):
+            battle=script.split('TH_Rival_BRIDGE_'+name+'::')[1].split('\n\n')[0]
+            self.assertIn('trainerbattle_lavaridge LOCALID_TH_CERULEAN_7,',battle)
+        entry=script.split('TH_Rival_Bridge::')[1].split('TH_Rival_BRIDGE_Victory::')[0]
+        self.assertNotIn('faceplayer',entry)
+
     def test_route4_has_a_walkable_return_to_mt_moon(self):
         raw=list(struct.unpack('<2160H',(ROOT/'data/layouts/Route4_Frlg/map.bin').read_bytes()))
         # Apply only the two reviewed TH-local stair replacements.

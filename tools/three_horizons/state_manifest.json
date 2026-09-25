@@ -19,7 +19,9 @@
     "FLAG_TH_BRIDGE_RIVAL": 39,
     "FLAG_TH_FOSSIL": 40,
     "FLAG_TH_FOSSIL_DOME": "0x4a",
-    "FLAG_TH_FOSSIL_HELIX": "0x4b"
+    "FLAG_TH_FOSSIL_HELIX": "0x4b",
+    "FLAG_TH_SEEN_FOREST": "0x4c",
+    "FLAG_TH_SEEN_MT_MOON": "0x4d"
   },
   "baseline": "b3916b8",
   "notes": "Audited VAR_UNUSED aliases have no references in src/data. TH-only trainer replacements start at 8; preserve 1-7 and 855-863.",

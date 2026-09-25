@@ -382,44 +382,43 @@ TH_Rival_ROUTE22_After:
     end
 
 TH_Rival_BRIDGE_Bulbasaur::
-    trainerbattle_single TRAINER_TH9_BRIDGE_BULBASAUR, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
+    trainerbattle_lavaridge LOCALID_TH_CERULEAN_7, TRAINER_TH9_BRIDGE_BULBASAUR, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
     goto TH_Rival_BRIDGE_After
 
 TH_Rival_BRIDGE_Charmander::
-    trainerbattle_single TRAINER_TH9_BRIDGE_CHARMANDER, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
+    trainerbattle_lavaridge LOCALID_TH_CERULEAN_7, TRAINER_TH9_BRIDGE_CHARMANDER, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
     goto TH_Rival_BRIDGE_After
 
 TH_Rival_BRIDGE_Squirtle::
-    trainerbattle_single TRAINER_TH9_BRIDGE_SQUIRTLE, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
+    trainerbattle_lavaridge LOCALID_TH_CERULEAN_7, TRAINER_TH9_BRIDGE_SQUIRTLE, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
     goto TH_Rival_BRIDGE_After
 
 TH_Rival_BRIDGE_Chikorita::
-    trainerbattle_single TRAINER_TH9_BRIDGE_CHIKORITA, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
+    trainerbattle_lavaridge LOCALID_TH_CERULEAN_7, TRAINER_TH9_BRIDGE_CHIKORITA, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
     goto TH_Rival_BRIDGE_After
 
 TH_Rival_BRIDGE_Cyndaquil::
-    trainerbattle_single TRAINER_TH9_BRIDGE_CYNDAQUIL, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
+    trainerbattle_lavaridge LOCALID_TH_CERULEAN_7, TRAINER_TH9_BRIDGE_CYNDAQUIL, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
     goto TH_Rival_BRIDGE_After
 
 TH_Rival_BRIDGE_Totodile::
-    trainerbattle_single TRAINER_TH9_BRIDGE_TOTODILE, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
+    trainerbattle_lavaridge LOCALID_TH_CERULEAN_7, TRAINER_TH9_BRIDGE_TOTODILE, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
     goto TH_Rival_BRIDGE_After
 
 TH_Rival_BRIDGE_Treecko::
-    trainerbattle_single TRAINER_TH9_BRIDGE_TREECKO, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
+    trainerbattle_lavaridge LOCALID_TH_CERULEAN_7, TRAINER_TH9_BRIDGE_TREECKO, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
     goto TH_Rival_BRIDGE_After
 
 TH_Rival_BRIDGE_Torchic::
-    trainerbattle_single TRAINER_TH9_BRIDGE_TORCHIC, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
+    trainerbattle_lavaridge LOCALID_TH_CERULEAN_7, TRAINER_TH9_BRIDGE_TORCHIC, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
     goto TH_Rival_BRIDGE_After
 
 TH_Rival_BRIDGE_Mudkip::
-    trainerbattle_single TRAINER_TH9_BRIDGE_MUDKIP, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
+    trainerbattle_lavaridge LOCALID_TH_CERULEAN_7, TRAINER_TH9_BRIDGE_MUDKIP, TH_Rival_BRIDGE_Intro, TH_Rival_BRIDGE_Defeat, TH_Rival_BRIDGE_Victory
     goto TH_Rival_BRIDGE_After
 
 TH_Rival_Bridge::
-    lock
-    faceplayer
+    lockall
     goto_if_set FLAG_TH_BRIDGE_RIVAL, TH_Rival_BRIDGE_After
     goto_if_eq VAR_TH_RIVAL_PARTNER, SPECIES_BULBASAUR, TH_Rival_BRIDGE_Bulbasaur
     goto_if_eq VAR_TH_RIVAL_PARTNER, SPECIES_CHARMANDER, TH_Rival_BRIDGE_Charmander
