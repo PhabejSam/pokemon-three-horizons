@@ -1,5 +1,6 @@
 #include "global.h"
 #include "three_horizons.h"
+#include "constants/three_horizons.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
