@@ -4,6 +4,8 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
+#include "overworld.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
 #if THREE_HORIZONS
 extern const u8 TH_Rival_BRIDGE_Bulbasaur[];
@@ -15,6 +17,7 @@ extern const u8 TH_Rival_BRIDGE_Totodile[];
 extern const u8 TH_Rival_BRIDGE_Treecko[];
 extern const u8 TH_Rival_BRIDGE_Torchic[];
 extern const u8 TH_Rival_BRIDGE_Mudkip[];
+extern const u8 TH_Rival_Bridge[];
 TEST("Three Horizons bridge coordinate battles select Blue through native parameters")
 {
     static const u8 *const scripts[]={TH_Rival_BRIDGE_Bulbasaur,TH_Rival_BRIDGE_Charmander,
@@ -24,20 +27,29 @@ TEST("Three Horizons bridge coordinate battles select Blue through native parame
     memcpy(savedObjects,gObjectEvents,sizeof(savedObjects));
     TrainerBattleParameter savedParams=gTrainerBattleParameter;
     u8 savedSelected=gSelectedObjectEvent;
+    const struct MapHeader *map=Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TH_CERULEAN),MAP_NUM(MAP_TH_CERULEAN));
+    u8 localId=LOCALID_NONE;
+    for (u32 i=0;i<map->events->objectEventCount;i++)
+        if (map->events->objectEvents[i].script==TH_Rival_Bridge)
+        {
+            EXPECT_EQ(map->events->objectEvents[i].graphicsId,OBJ_EVENT_GFX_BLUE);
+            localId=map->events->objectEvents[i].localId;
+        }
+    EXPECT(localId!=LOCALID_NONE);
     memset(gObjectEvents,0,sizeof(savedObjects));
     u8 rival=(gPlayerAvatar.objectEventId+1)%OBJECT_EVENTS_COUNT;
     gObjectEvents[rival].active=TRUE;
-    gObjectEvents[rival].localId=7;
+    gObjectEvents[rival].localId=localId;
     gObjectEvents[rival].mapNum=gSaveBlock1Ptr->location.mapNum;
     gObjectEvents[rival].mapGroup=gSaveBlock1Ptr->location.mapGroup;
     for (u32 i=0;i<ARRAY_COUNT(scripts);i++)
     {
         memcpy(&gTrainerBattleParameter,scripts[i]+TRAINERBATTLE_OPCODE_OFFSET,sizeof(gTrainerBattleParameter));
-        EXPECT_EQ(TRAINER_BATTLE_PARAM.objEventLocalIdA,7);
+        EXPECT_EQ(TRAINER_BATTLE_PARAM.objEventLocalIdA,localId);
         gSelectedObjectEvent=gPlayerAvatar.objectEventId;
         SetMapVarsToTrainerA();
         EXPECT_EQ(gSelectedObjectEvent,rival);
-        EXPECT_EQ(gSpecialVar_LastTalked,7);
+        EXPECT_EQ(gSpecialVar_LastTalked,localId);
     }
     memcpy(gObjectEvents,savedObjects,sizeof(savedObjects));
     gTrainerBattleParameter=savedParams;
