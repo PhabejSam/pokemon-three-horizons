@@ -393,10 +393,14 @@ TH_RivalFaceLeft:
     face_left
     step_end
 TH_RivalApproachFromLeague:
-    walk_right 6
+    .rept 6
+    walk_right
+    .endr
     step_end
 TH_RivalLeaveForLeague:
-    walk_left 6
+    .rept 6
+    walk_left
+    .endr
     step_end
 TH_Rival_Route22::
     lockall
@@ -490,10 +494,14 @@ TH_Rival_BRIDGE_After:
     end
 
 TH_RivalBridgeApproach:
-    walk_down 3
+    .rept 3
+    walk_down
+    .endr
     step_end
 TH_RivalBridgeDepart:
-    walk_up 3
+    .rept 3
+    walk_up
+    .endr
     step_end
 TH_Rival_NotReady:
     .string "Choose a partner at the lab first.\nThen we can have a proper battle!$"

@@ -23,7 +23,7 @@ class Playtest10(unittest.TestCase):
         ]:
             m, width, blocks = self.blocks(name)
             body = script.split(label + ':\n')[1].split('step_end')[0]
-            self.assertEqual(int(re.search(r'walk_\w+ (\d+)', body)[1]), count)
+            self.assertEqual(int(re.search(r'\.rept (\d+)', body)[1]), count)
             occupied = {(o['x'], o['y']) for o in m['object_events'] if o['graphics_id'] != 'OBJ_EVENT_GFX_BLUE'}
             for x in xs:
                 for y in ys:
