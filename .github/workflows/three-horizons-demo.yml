@@ -60,6 +60,26 @@ jobs:
           cp /tmp/th-state.c src/three_horizons_state.c
           cp /tmp/th-clock.c src/three_horizons_clock.c
           git diff --exit-code
+      - name: Verify nickname exit regression detects a stale interrupt
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/naming_screen.c /tmp/th-naming.c
+          trap 'cp /tmp/th-naming.c src/naming_screen.c' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/naming_screen.c')
+          s = p.read_text()
+          old = 'ResetVHBlank();\n        ResetTasks();'
+          assert s.count(old) == 1
+          p.write_text(s.replace(old, 'ResetTasks(); // negative control: stale VBlank'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons native nickname" -j2 > nickname-negative.log 2>&1; then
+            echo "Nickname test did not detect the stale interrupt"; exit 1
+          fi
+          grep -q FAIL nickname-negative.log
+          cp /tmp/th-naming.c src/naming_screen.c
+          git diff --exit-code
       - name: Test opening progression
         shell: bash
         run: |
@@ -177,6 +197,7 @@ jobs:
             demo-tests.log
             revision9-tests.log
             revision9-negative.log
+            nickname-negative.log
             demo-source-commit.txt
             demo-environment.txt
             kit-negative.log

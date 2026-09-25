@@ -11,6 +11,7 @@
 #include "string_util.h"
 #include "sprite.h"
 #include "task.h"
+#include "bg.h"
 
 #if THREE_HORIZONS
 static void NamingReturned(void) {}
@@ -49,6 +50,15 @@ TEST("Three Horizons native nickname scene preserves battle held item state")
     // Caught-mon naming returns straight to the battle with party space;
     // full-party naming uses its supplied callback for PC delivery.
     EXPECT(gMain.callback2 == (fullParty ? NamingReturned : BattleMainCB2));
+    // A completed naming scene must not leave readers of its freed state alive.
+    EXPECT(gMain.vblankCallback == NULL);
+    EXPECT(gMain.hblankCallback == NULL);
+    for (u32 i = 0; i < NUM_TASKS; i++)
+        EXPECT(!gTasks[i].isActive);
+    for (u32 i = 0; i < MAX_SPRITES; i++)
+        EXPECT(!gSprites[i].inUse);
+    for (u32 bg = 1; bg <= 3; bg++)
+        EXPECT(GetBgTilemapBuffer(bg) == NULL);
     SetVBlankCallback(NULL);
     ResetTasks();
     ResetSpriteData();
