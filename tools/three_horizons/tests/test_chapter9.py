@@ -7,6 +7,11 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 
 class Chapter9(unittest.TestCase):
+    def test_misty_full_bag_still_checks_chapter_completion(self):
+        script=(ROOT/'data/scripts/three_horizons/chapter9.inc').read_text()
+        full=script.split('TH_MistyBagFull:')[1].split('TH_ChapterCheck:')[0]
+        self.assertIn('call TH_ChapterCheck',full)
+
     def test_automatic_bridge_battle_selects_the_rival_object(self):
         script=(ROOT/'data/scripts/three_horizons/chapter9.inc').read_text()
         for name in ('Bulbasaur','Charmander','Squirtle','Chikorita','Cyndaquil',

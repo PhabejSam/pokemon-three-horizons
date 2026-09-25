@@ -28,7 +28,11 @@
 #define VAR_TH_CLOCK_REAL_HI 0x40DB
 #define VAR_TH_CLOCK_DISPLAY_LO 0x40DC
 #define VAR_TH_CLOCK_DISPLAY_HI 0x40E5
-#define FLAG_TH_LAB_INTRO FLAG_UNUSED_0x021
+// Visual time is 0..86399 (17 bits). The unused upper 15 bits identify
+// initialized Playtest 9 state without taking another persistent variable.
+#define TH_STATE_VERSION_MASK 0xFFFE
+#define TH_STATE_VERSION_9 0xA902
+#define FLAG_TH_LAB_INTRO FLAG_UNUSED_0x04E
 #define FLAG_TH_MAGIKARP FLAG_UNUSED_0x022
 #define FLAG_TH_MISTY_TM FLAG_UNUSED_0x023
 #define FLAG_TH_CHAPTER_COMPLETE FLAG_UNUSED_0x024

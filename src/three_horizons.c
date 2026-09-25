@@ -126,6 +126,7 @@ void TH_StageNewGameOptions(void)
 
 void TH_InitNewGame(void)
 {
+    TH_MigrateSaveState();
     VarSet(VAR_TH_OUTFIT, TH_OUTFIT_RED);
     VarSet(VAR_TH_AUTO_RUN, sHavePendingOptions ? sPendingOptions[0] : 0);
     VarSet(VAR_TH_EXP_RATE, sHavePendingOptions ? sPendingOptions[1] : 0);

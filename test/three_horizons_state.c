@@ -12,6 +12,7 @@ TEST("Three Horizons revision9 legacy state migration preserves established prog
     VarSet(VAR_TH_TRAINING_KIT_MASK,0x7F);
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_SET_WALL_CLOCK);
+    FlagSet(I_EXP_SHARE_FLAG);
     VarSet(VAR_TH_BROCK_GIFT,0xFFFF);
     VarSet(VAR_TH_MISTY_GIFT,0xFFFF);
     VarSet(VAR_TH_SHINY_RATE,0xFFFF);
@@ -34,6 +35,7 @@ TEST("Three Horizons revision9 legacy state migration preserves established prog
     EXPECT_EQ(VarGet(VAR_TH_TRAINING_KIT_MASK),0x7F);
     EXPECT(FlagGet(FLAG_BADGE01_GET));
     EXPECT(FlagGet(FLAG_SET_WALL_CLOCK));
+    EXPECT(FlagGet(I_EXP_SHARE_FLAG));
     VarSet(VAR_TH_BROCK_GIFT,SPECIES_SQUIRTLE);
     VarSet(VAR_TH_MISTY_GIFT,SPECIES_CHIKORITA);
     FlagSet(FLAG_TH_MAGIKARP);
@@ -41,6 +43,15 @@ TEST("Three Horizons revision9 legacy state migration preserves established prog
     EXPECT_EQ(VarGet(VAR_TH_BROCK_GIFT),SPECIES_SQUIRTLE);
     EXPECT_EQ(VarGet(VAR_TH_MISTY_GIFT),SPECIES_CHIKORITA);
     EXPECT(FlagGet(FLAG_TH_MAGIKARP));
+    TH_ResetVisualClock();
+    TH_MigrateSaveState();
+    EXPECT_EQ(VarGet(VAR_TH_BROCK_GIFT),SPECIES_SQUIRTLE);
+    EXPECT_EQ(VarGet(VAR_TH_MISTY_GIFT),SPECIES_CHIKORITA);
+    EXPECT(FlagGet(FLAG_TH_MAGIKARP));
+    VarSet(VAR_TH_BROCK_GIFT,0xFFFF);
+    TH_MigrateSaveState();
+    EXPECT_EQ(VarGet(VAR_TH_BROCK_GIFT),0);
+    EXPECT_EQ(VarGet(VAR_TH_MISTY_GIFT),0);
 }
 TEST("Three Horizons revision9 invalid full-width clock mode uses real time")
 {

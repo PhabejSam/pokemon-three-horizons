@@ -482,6 +482,7 @@ TH_MistyAfterReward:
     end
 TH_MistyBagFull:
     msgbox TH_MistyFull
+    call TH_ChapterCheck
     releaseall
     end
 TH_ChapterCheck:

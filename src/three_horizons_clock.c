@@ -5,15 +5,24 @@
 #include "constants/three_horizons.h"
 #if THREE_HORIZONS
 EWRAM_DATA bool8 gTHCreatingWildMon = FALSE;
-static u32 Read32(u16 low, u16 high) { return VarGet(low) | ((u32)VarGet(high)<<16); }
-static void Write32(u16 low, u16 high, u32 value) { VarSet(low,value); VarSet(high,value>>16); }
+static u32 Read32(u16 low, u16 high)
+{
+    u32 upper=VarGet(high);
+    if (high==VAR_TH_CLOCK_DISPLAY_HI) upper &= 1;
+    return VarGet(low) | (upper<<16);
+}
+static void Write32(u16 low, u16 high, u32 value)
+{
+    VarSet(low,value);
+    VarSet(high,high==VAR_TH_CLOCK_DISPLAY_HI ? TH_STATE_VERSION_9 | ((value>>16)&1) : value>>16);
+}
 static u32 RealSeconds(void)
 {
     RtcCalcLocalTime();
     s32 time=(s32)gLocalTime.days*86400 + gLocalTime.hours*3600 + gLocalTime.minutes*60 + gLocalTime.seconds;
     return time<0 ? 0 : time;
 }
-u32 TH_AdvanceVisualClock(u32 real, u32 visual, u32 now, u8 mode)
+u32 TH_AdvanceVisualClock(u32 real, u32 visual, u32 now, u16 mode)
 {
     u32 elapsed=now>=real ? now-real : 0;
     // Reduction before multiplication avoids overflow after large RTC changes.

@@ -29,7 +29,11 @@ it is not a reproduction of the reported full capture crash.
   [diagnostic notes](CAPTURE_DIAGNOSTIC.md). No assertion is suppressed and
   no invalid held item is silently replaced.
 - Combusken's follower report is unconfirmed. No speculative graphic
-  alteration has been made.
+  alteration has been made. Both source sheets contain six 32x32 frames,
+  matching their frame tables; normal and shiny palettes have 16 entries.
+  Source inspection does not prove the reported runtime pose is correct.
+- The bedroom clock reminder currently requires completing time setup;
+  a cancel-to-bedroom option is deferred from review.
 - Native desktop app automation is unavailable in this session. Fresh-game
   traversal, a copied Playtest 8 save through the complete chapter, all
   visual transitions, and RG40XX H operation remain manual acceptance checks.

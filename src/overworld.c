@@ -2126,6 +2126,9 @@ void CB2_ContinueSavedGame(void)
 {
     u8 trainerHillMapId;
 
+#if THREE_HORIZONS
+    TH_MigrateSaveState();
+#endif
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();

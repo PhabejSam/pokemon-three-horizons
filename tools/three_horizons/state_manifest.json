@@ -10,7 +10,7 @@
     "VAR_TH_CLOCK_DISPLAY_HI": 16613
   },
   "flags": {
-    "FLAG_TH_LAB_INTRO": 33,
+    "FLAG_TH_LAB_INTRO": 78,
     "FLAG_TH_MAGIKARP": 34,
     "FLAG_TH_MISTY_TM": 35,
     "FLAG_TH_CHAPTER_COMPLETE": 36,
@@ -24,7 +24,7 @@
     "FLAG_TH_SEEN_MT_MOON": "0x4d"
   },
   "baseline": "b3916b8",
-  "notes": "Audited VAR_UNUSED aliases have no references in src/data. TH-only trainer replacements start at 8; preserve 1-7 and 855-863.",
+  "notes": "Audited VAR_UNUSED aliases have no references in src/data. TH-only trainer replacements start at 8; preserve 1-7 and 855-863. CLOCK_DISPLAY_HI bit 0 stores time; bits 1-15 store version 0xA902 (mask 0xFFFE). Continue migrates newly owned state once; new game initializes it before staged options.",
   "pickups": {
     "FLAG_TH_PICKUP_0": "0x29",
     "FLAG_TH_PICKUP_1": "0x2a",

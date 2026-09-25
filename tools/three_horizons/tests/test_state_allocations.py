@@ -37,7 +37,7 @@ class StateAllocations(unittest.TestCase):
         aliases.update(f'FLAG_UNUSED_0x{(int(v,0) if isinstance(v,str) else v):03X}'
                        for category in ('flags','pickups') for v in manifest[category].values())
         matcher=re.compile(r'\b(?:'+ '|'.join(sorted(aliases)) +r')\b')
-        for folder in ('src','data'):
+        for folder in ('src','data','include/config'):
             for path in (ROOT/folder).rglob('*'):
                 if path.suffix in ('.c','.h','.inc','.json'):
                     self.assertIsNone(matcher.search(path.read_text(encoding='utf-8')),str(path.relative_to(ROOT)))

@@ -32,6 +32,34 @@ jobs:
           git diff --exit-code
           sha256sum pokemon-three-horizons.gba > pokemon-three-horizons.gba.sha256
           git rev-parse HEAD > demo-source-commit.txt
+      - name: Verify legacy-state and clock regressions detect original defects
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/three_horizons_state.c /tmp/th-state.c
+          cp src/three_horizons_clock.c /tmp/th-clock.c
+          trap 'cp /tmp/th-state.c src/three_horizons_state.c; cp /tmp/th-clock.c src/three_horizons_clock.c' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/three_horizons_state.c')
+          s = p.read_text()
+          old = 'void TH_MigrateSaveState(void)\n{'
+          assert old in s
+          p.write_text(s.replace(old, old + '\n    return; // negative control: no migration'))
+          p = Path('src/three_horizons_clock.c')
+          s = p.read_text()
+          old = 'u32 TH_AdvanceVisualClock(u32 real, u32 visual, u32 now, u16 mode)\n{'
+          assert old in s
+          p.write_text(s.replace(old, old + '\n    mode = (u8)mode; // negative control: legacy narrowing'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons revision9" -j2 > revision9-negative.log 2>&1; then
+            echo "State regressions did not detect original defects"; exit 1
+          fi
+          grep -q 'legacy state migration.*FAIL' revision9-negative.log
+          grep -q 'invalid full-width clock.*FAIL' revision9-negative.log
+          cp /tmp/th-state.c src/three_horizons_state.c
+          cp /tmp/th-clock.c src/three_horizons_clock.c
+          git diff --exit-code
       - name: Test opening progression
         shell: bash
         run: |
@@ -143,6 +171,7 @@ jobs:
             running-frames.log
             demo-tests.log
             revision9-tests.log
+            revision9-negative.log
             demo-source-commit.txt
             demo-environment.txt
             kit-negative.log

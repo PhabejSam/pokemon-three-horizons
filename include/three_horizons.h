@@ -45,7 +45,7 @@ bool32 TH_PartnerOptionsValidForSpecies(u16 species, const struct THPartnerOptio
 u16 TH_GetRivalCandidate(u16 playerSpecies, u8 choice);
 u16 TH_GetBrockGift(u16 original, u8 choice);
 u16 TH_GetMistyGift(u16 original, u16 brockGift);
-u32 TH_AdvanceVisualClock(u32 anchorReal, u32 anchorVisual, u32 now, u8 mode);
+u32 TH_AdvanceVisualClock(u32 anchorReal, u32 anchorVisual, u32 now, u16 mode);
 u32 TH_GetVisualTimeSeconds(void);
 void TH_SetClockMode(u8 mode);
 void TH_ResetVisualClock(void);
