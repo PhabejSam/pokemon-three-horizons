@@ -43,13 +43,14 @@ TEST("Three Horizons wild encounter creation includes normal and Hidden Abilitie
     u32 slots[3] = {0};
     for (u32 i = 0; i < 500; i++)
     {
+        // Function tests rig tagged RNG; cover each production roll five times.
+        SET_RNG(RNG_TH_WILD_HIDDEN_ABILITY, i % 100);
         CreateWildMon(SPECIES_RATTATA, 5);
         slots[GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM)]++;
     }
     EXPECT(slots[0] > 100);
     EXPECT(slots[1] > 100);
-    EXPECT(slots[2] > 15);
-    EXPECT(slots[2] < 100);
+    EXPECT_EQ(slots[2], 50);
 }
 TEST("Three Horizons golden Magikarp retains Hidden Ability through evolution")
 {
