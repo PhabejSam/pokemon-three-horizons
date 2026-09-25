@@ -1,5 +1,7 @@
 #include "global.h"
 #include "trainer_pokemon_sprites.h"
+#include "event_object_movement.h"
+#include "constants/event_objects.h"
 #include "bg.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -226,6 +228,24 @@ static void Task_NewGameBirchSpeech_WaitForWhatsYourNameToPrint(u8);
 static void Task_NewGameBirchSpeech_WaitPressBeforeNameChoice(u8);
 static void Task_NewGameBirchSpeech_StartNamingScreen(u8);
 static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void);
+#if THREE_HORIZONS
+static void CB2_THNameRivalScreen(void)
+{
+    StringCopy(gTHPendingRivalName, COMPOUND_STRING("BLUE"));
+    DoNamingScreen(NAMING_SCREEN_RIVAL, gTHPendingRivalName, MALE, 0, 0, CB2_NewGameBirchSpeech_ReturnFromNamingScreen);
+}
+#endif
+#if THREE_HORIZONS
+static EWRAM_DATA bool8 sTHPresentRival = FALSE;
+static void Task_THIntroduceRival(u8 taskId);
+static void Task_THWaitRivalName(u8 taskId);
+static void Task_THStartRivalName(u8 taskId);
+static void CB2_THNameRival(void)
+{
+    sTHPresentRival = TRUE;
+    CB2_NewGameBirchSpeech_ReturnFromNamingScreen();
+}
+#endif
 static void Task_NewGameBirchSpeech_CreateNameYesNo(u8);
 static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8);
 void CreateYesNoMenuParameterized(u8, u8, u16, u16, u8, u8);
@@ -1077,6 +1097,9 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
         {
         case ACTION_NEW_GAME:
         default:
+#if THREE_HORIZONS
+            TH_StageNewGameOptions();
+#endif
             if (IS_FRLG)
             {
                 DestroyTask(taskId);
@@ -1367,7 +1390,11 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
             PutWindowTilemap(0);
             CopyWindowToVram(0, COPYWIN_GFX);
             NewGameBirchSpeech_ClearWindow(0);
+#if THREE_HORIZONS
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Welcome to POKéMON\nTHREE HORIZONS!\pI'm Professor BIRCH. OAK, ELM,\nand I study POKéMON together.\p"));
+#else
             StringExpandPlaceholders(gStringVar4, gText_Birch_Welcome);
+#endif
             AddTextPrinterForMessage(TRUE);
             gTasks[taskId].func = Task_NewGameBirchSpeech_ThisIsAPokemon;
         }
@@ -1401,12 +1428,12 @@ static void Task_NewGameBirchSpeechSub_InitPokeBall(u8 taskId)
 {
     u8 spriteId = gTasks[sBirchSpeechMainTaskId].tLotadSpriteId;
 
-    gSprites[spriteId].x = 100;
-    gSprites[spriteId].y = 75;
+    gSprites[spriteId].x = THREE_HORIZONS ? 120 : 100;
+    gSprites[spriteId].y = THREE_HORIZONS ? 91 : 75;
     gSprites[spriteId].invisible = FALSE;
     gSprites[spriteId].data[0] = 0;
 
-    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 112, 58, 0, 0, 32, PALETTES_BG, SPECIES_LOTAD);
+    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, THREE_HORIZONS ? 150 : 112, THREE_HORIZONS ? 88 : 58, 0, 0, 32, PALETTES_BG, SPECIES_LOTAD);
     gTasks[taskId].func = Task_NewGameBirchSpeechSub_WaitForLotad;
     gTasks[sBirchSpeechMainTaskId].tTimer = 0;
 }
@@ -1509,7 +1536,12 @@ static void Task_NewGameBirchSpeech_WaitForPlayerFadeIn(u8 taskId)
     if (gTasks[taskId].tIsDoneFadingSprites)
     {
         gSprites[gTasks[taskId].tPlayerSpriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
+#if THREE_HORIZONS
+        gSaveBlock2Ptr->playerGender = MALE;
+        gTasks[taskId].func = Task_NewGameBirchSpeech_WhatsYourName;
+#else
         gTasks[taskId].func = Task_NewGameBirchSpeech_BoyOrGirl;
+#endif
     }
 }
 
@@ -1636,7 +1668,13 @@ static void Task_NewGameBirchSpeech_StartNamingScreen(u8 taskId)
         FreeAndDestroyMonPicSprite(gTasks[taskId].tLotadSpriteId);
         NewGameBirchSpeech_SetDefaultPlayerName(Random() % NUM_PRESET_NAMES);
         DestroyTask(taskId);
-        DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_NewGameBirchSpeech_ReturnFromNamingScreen);
+        DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0,
+#if THREE_HORIZONS
+            CB2_THNameRival
+#else
+            CB2_NewGameBirchSpeech_ReturnFromNamingScreen
+#endif
+        );
     }
 }
 
@@ -1671,7 +1709,12 @@ static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8 taskId)
     case MENU_B_PRESSED:
     case 1:
         PlaySE(SE_SELECT);
+#if THREE_HORIZONS
+        gSaveBlock2Ptr->playerGender = MALE;
+        gTasks[taskId].func = Task_NewGameBirchSpeech_WhatsYourName;
+#else
         gTasks[taskId].func = Task_NewGameBirchSpeech_BoyOrGirl;
+#endif
     }
 }
 
@@ -1702,14 +1745,18 @@ static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8 taskId)
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         spriteId = gTasks[taskId].tLotadSpriteId;
-        gSprites[spriteId].x = 100;
-        gSprites[spriteId].y = 75;
+        gSprites[spriteId].x = THREE_HORIZONS ? 120 : 100;
+        gSprites[spriteId].y = THREE_HORIZONS ? 91 : 75;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
         NewGameBirchSpeech_ClearWindow(0);
+        #if THREE_HORIZONS
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{PLAYER}, OAK is waiting for you\nin PALLET TOWN.\pELM and I have sent some special\nfirst partners for you to meet.\p"));
+#else
         StringExpandPlaceholders(gStringVar4, gText_Birch_YourePlayer);
+#endif
         AddTextPrinterForMessage(TRUE);
         gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForSpriteFadeInAndTextPrinter;
     }
@@ -1757,7 +1804,12 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
         gTasks[taskId].tPlayerSpriteId = spriteId;
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
+#if THREE_HORIZONS
+        NewGameBirchSpeech_ClearWindow(0);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("A familiar morning.\nA whole new adventure.\pTake your time, {PLAYER}.\nYour first partner is waiting!\p"));
+#else
         StringExpandPlaceholders(gStringVar4, gText_Birch_AreYouReady);
+#endif
         AddTextPrinterForMessage(TRUE);
         gTasks[taskId].func = Task_NewGameBirchSpeech_ShrinkPlayer;
     }
@@ -1869,6 +1921,15 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     gSprites[spriteId].x = 180;
     gSprites[spriteId].y = 60;
     gSprites[spriteId].invisible = FALSE;
+#if THREE_HORIZONS
+    if (sTHPresentRival)
+    {
+        sTHPresentRival = FALSE;
+        gSprites[spriteId].invisible = TRUE;
+        spriteId = CreateTrainerPicSprite(TRAINER_PIC_RIVAL_EARLY_FRLG, TRUE, 180, 60, 0, TAG_NONE);
+        gTasks[taskId].func = Task_THIntroduceRival;
+    }
+#endif
     gTasks[taskId].tPlayerSpriteId = spriteId;
     SetGpuReg(REG_OFFSET_BG1HOFS, -60);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
@@ -1891,6 +1952,48 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
+#if THREE_HORIZONS
+// Reuse the player's introduction stage, including its platform and text frame.
+static void Task_THIntroduceRival(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+    if (gTasks[taskId].tBG1HOFS < 0)
+    {
+        gTasks[taskId].tBG1HOFS += 2;
+        gSprites[gTasks[taskId].tPlayerSpriteId].x -= 2;
+        SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].tBG1HOFS);
+        return;
+    }
+    DrawDialogFrameWithCustomTile(0, TRUE, BIRCH_DLG_BASE_TILE_NUM);
+    NewGameBirchSpeech_ClearWindow(0);
+    StringCopy(gStringVar4, COMPOUND_STRING("Your friend from PALLET is ready\nto begin his journey, too.\pWhat is his name?"));
+    AddTextPrinterForMessage(TRUE);
+    gTasks[taskId].func = Task_THWaitRivalName;
+}
+
+static void Task_THWaitRivalName(u8 taskId)
+{
+    if (!RunTextPrintersAndIsPrinter0Active() && JOY_NEW(A_BUTTON | B_BUTTON))
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_THStartRivalName;
+    }
+}
+
+static void Task_THStartRivalName(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        FreeAndDestroyTrainerPicSprite(gTasks[taskId].tPlayerSpriteId);
+        FreeAndDestroyMonPicSprite(gTasks[taskId].tLotadSpriteId);
+        FreeAllWindowBuffers();
+        DestroyTask(taskId);
+        SetMainCallback2(CB2_THNameRivalScreen);
+    }
+}
+#endif
+
 static void SpriteCB_Null(struct Sprite *sprite)
 {
 }
@@ -1909,6 +2012,58 @@ static u8 NewGameBirchSpeech_CreateLotadSprite(u8 x, u8 y)
     return CreateMonPicSprite_Affine(SPECIES_LOTAD, FALSE, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
 }
 
+#if THREE_HORIZONS
+extern const u16 gObjectEventPal_NpcWhite[], gObjectEventPal_Npc3[], gObjectEventPal_THElm[];
+static struct SpriteTemplate sTHProfessorTemplates[3];
+static struct OamData sTHProfessorOam[3];
+static const union AffineAnimCmd sTHProfessorScale[] = {
+    AFFINEANIMCMD_FRAME(512, 512, 0, 0), AFFINEANIMCMD_END,
+};
+static const union AffineAnimCmd *const sTHProfessorScales[] = {sTHProfessorScale};
+
+static void TH_ProfessorSpriteCallback(struct Sprite *sprite)
+{
+    const struct Sprite *leader = &gSprites[sprite->data[0]];
+    sprite->x = sprite->data[1];
+    sprite->y = 46;
+    sprite->invisible = leader->invisible;
+    sprite->oam.objMode = leader->oam.objMode;
+}
+
+static u8 TH_CreateProfessorTrio(void)
+{
+    static const u16 gfx[] = {OBJ_EVENT_GFX_PROF_BIRCH, OBJ_EVENT_GFX_PROF_OAK, OBJ_EVENT_GFX_TH_ELM};
+    static const u16 *const pals[] = {gObjectEventPal_Npc3, gObjectEventPal_NpcWhite, gObjectEventPal_THElm};
+    static const s16 xs[] = {160, 80, 120};
+    u8 i, leader = MAX_SPRITES;
+    for (i = 0; i < 3; i++)
+    {
+        const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(gfx[i]);
+        struct SpritePalette pal = {pals[i], 0x1340 + i};
+        struct SpriteTemplate *template = &sTHProfessorTemplates[i];
+        u8 id;
+        sTHProfessorOam[i] = *info->oam;
+        sTHProfessorOam[i].affineMode = ST_OAM_AFFINE_DOUBLE;
+        sTHProfessorOam[i].priority = 0;
+        *template = (struct SpriteTemplate){.tileTag = TAG_NONE, .paletteTag = TAG_NONE,
+            .oam = &sTHProfessorOam[i], .anims = info->anims, .images = info->images,
+            .affineAnims = sTHProfessorScales, .callback = TH_ProfessorSpriteCallback};
+        // Trainer portraits use slot 0; Lotad uses 14. Reserve our own slots.
+        LoadSpritePaletteInSlot(&pal, 6 + i);
+        id = CreateSprite(template, xs[i], 46, 1);
+        if (id == MAX_SPRITES)
+            continue;
+        if (i == 0)
+            leader = id;
+        gSprites[id].oam.paletteNum = 6 + i;
+        gSprites[id].data[0] = leader;
+        gSprites[id].data[1] = xs[i];
+        gSprites[id].invisible = TRUE;
+    }
+    return leader;
+}
+#endif
+
 static void AddBirchSpeechObjects(u8 taskId)
 {
     u8 birchSpriteId;
@@ -1916,22 +2071,26 @@ static void AddBirchSpeechObjects(u8 taskId)
     u8 brendanSpriteId;
     u8 maySpriteId;
 
+    #if THREE_HORIZONS
+    birchSpriteId = TH_CreateProfessorTrio();
+    #else
     birchSpriteId = AddNewGameBirchObject(0x88, 0x3C, 1);
     gSprites[birchSpriteId].callback = SpriteCB_Null;
+    #endif
     gSprites[birchSpriteId].oam.priority = 0;
     gSprites[birchSpriteId].invisible = TRUE;
     gTasks[taskId].tBirchSpriteId = birchSpriteId;
-    lotadSpriteId = NewGameBirchSpeech_CreateLotadSprite(100, 0x4B);
+    lotadSpriteId = NewGameBirchSpeech_CreateLotadSprite(THREE_HORIZONS ? 120 : 100, THREE_HORIZONS ? 91 : 75);
     gSprites[lotadSpriteId].callback = SpriteCB_Null;
     gSprites[lotadSpriteId].oam.priority = 0;
     gSprites[lotadSpriteId].invisible = TRUE;
     gTasks[taskId].tLotadSpriteId = lotadSpriteId;
-    brendanSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN), 120, 60, 0, NULL);
+    brendanSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(THREE_HORIZONS ? FACILITY_CLASS_RED : FACILITY_CLASS_BRENDAN), 120, 60, 0, NULL);
     gSprites[brendanSpriteId].callback = SpriteCB_Null;
     gSprites[brendanSpriteId].invisible = TRUE;
     gSprites[brendanSpriteId].oam.priority = 0;
     gTasks[taskId].tBrendanSpriteId = brendanSpriteId;
-    maySpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_MAY), 120, 60, 0, NULL);
+    maySpriteId = CreateTrainerSprite(FacilityClassToPicIndex(THREE_HORIZONS ? FACILITY_CLASS_LEAF : FACILITY_CLASS_MAY), 120, 60, 0, NULL);
     gSprites[maySpriteId].callback = SpriteCB_Null;
     gSprites[maySpriteId].invisible = TRUE;
     gSprites[maySpriteId].oam.priority = 0;
@@ -2271,12 +2430,8 @@ static void NewGameBirchSpeech_ClearGenderWindow(u8 windowId, bool8 copyToVram)
 static void NewGameBirchSpeech_ClearWindow(u8 windowId)
 {
     u8 bgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_BACKGROUND);
-    u8 maxCharWidth = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH);
-    u8 maxCharHeight = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
-    u8 winWidth = GetWindowAttribute(windowId, WINDOW_WIDTH);
-    u8 winHeight = GetWindowAttribute(windowId, WINDOW_HEIGHT);
 
-    FillWindowPixelRect(windowId, bgColor, 0, 0, maxCharWidth * winWidth, maxCharHeight * winHeight);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 

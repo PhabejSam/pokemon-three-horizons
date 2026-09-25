@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "battle.h"
 #include "battle_hold_effects.h"
 #include "battle_message.h"
@@ -2411,6 +2412,10 @@ static void Cmd_getexp(void)
         }
         break;
     case 5: // looper increment
+#if THREE_HORIZONS
+        if (TH_TryBattleEvolution(*expMonId))
+            return;
+#endif
         if (gBattleStruct->battlerExpReward) // there is exp to give, goto case 3 that gives exp
         {
             gBattleScripting.getexpState = 3;
@@ -4086,6 +4091,9 @@ static void Cmd_getmoneyreward(void)
         }
         if (!IsEnoughMoney(&gSaveBlock1Ptr->money, money))
             money = GetMoney(&gSaveBlock1Ptr->money);
+        #if THREE_HORIZONS
+        money = TH_GetWhiteoutMoneyLoss(money, gBattleTypeFlags);
+        #endif
         RemoveMoney(&gSaveBlock1Ptr->money, money);
     }
 
@@ -8431,6 +8439,31 @@ static void Cmd_trysetcaughtmondexflags(void)
     CMD_ARGS(const u8 *failInstr);
 
     struct Pokemon *caughtMon = GetBattlerMon(GetCatchingBattler());
+#if THREE_HORIZONS
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_RECORDED))
+        && TH_IsConfigurableCapture(GetMonData(caughtMon, MON_DATA_SPECIES)))
+    {
+        switch (gBattleCommunication[0])
+        {
+        case 0:
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gBattleCommunication[0] = 1;
+            return;
+        case 1:
+            if (gPaletteFade.active)
+                return;
+            gBattleCommunication[0] = 2;
+            if (!TH_OpenCaughtMonEditor(caughtMon, ReshowBattleScreenAfterMenu))
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            return;
+        case 2:
+            if (gPaletteFade.active || gMain.callback2 != BattleMainCB2)
+                return;
+            gBattleCommunication[0] = 3;
+            break;
+        }
+    }
+#endif
     enum Species species = GetMonData(caughtMon, MON_DATA_SPECIES);
     u32 personality = GetMonData(caughtMon, MON_DATA_PERSONALITY);
 
@@ -9293,6 +9326,10 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
 
         *expAmount = value + 1;
     }
+#if THREE_HORIZONS
+    if (*expAmount > 0)
+        *expAmount = TH_ApplyExpRate(*expAmount);
+#endif
 }
 
 void BS_ItemRestoreHP(void)

@@ -177,7 +177,7 @@ class WildEncounterAssembler:
             self.WriteLine(".encounterTypes =", 2)
             self.WriteLine("{", 2)
             for time in self.config.times_of_day:
-                if not self.config.time_encounters and time != self.config.time_fallback:
+                if not self.config.time_encounters and not shared_label.startswith("gTH_") and time != self.config.time_fallback:
                     continue
                 self.WriteLine(f"[{time}] =", 4)
                 self.WriteLine("{", 4)

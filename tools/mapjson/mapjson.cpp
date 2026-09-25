@@ -38,7 +38,7 @@ string version;
 string sep;
 
 string read_text_file(string filepath) {
-    ifstream in_file(filepath);
+    ifstream in_file(filepath, std::ios::binary);
 
     if (!in_file.is_open())
         FATAL_ERROR("Cannot open file %s for reading.\n", filepath.c_str());
@@ -123,6 +123,39 @@ string get_include_guard_end(const string &name) {
     return guard.str();
 }
 
+// Project maps remain opt-in; layout IDs and native FRLG format are preserved.
+vector<string> project_maps;
+vector<string> project_layouts;
+
+void load_project_maps() {
+    string err;
+    Json manifest = Json::parse(read_text_file("tools/mapjson/three_horizons_maps.json"), err);
+    if (!err.empty() || manifest["maps"].array_items().empty())
+        FATAL_ERROR("Invalid Three Horizons map manifest.\n");
+    Json layouts = Json::parse(read_text_file("data/layouts/layouts.json"), err);
+    for (auto &entry : manifest["maps"].array_items()) {
+        string name = json_to_string(entry);
+        if (name.rfind("TH_", 0) != 0 || name.find_first_of("/\\") != string::npos)
+            FATAL_ERROR("Invalid project map name: %s\n", name.c_str());
+        Json record = Json::parse(read_text_file("data/maps/" + name + "/map.json"), err);
+        if (!err.empty() || record["name"].string_value() != name)
+            FATAL_ERROR("Invalid project map: %s\n", name.c_str());
+        string id = json_to_string(record, "layout");
+        bool found = false;
+        for (auto &layout : layouts["layouts"].array_items())
+            if (layout["id"].string_value() == id) found = true;
+        if (!found) FATAL_ERROR("Missing project layout: %s\n", id.c_str());
+        project_maps.push_back(name);
+        project_layouts.push_back(id);
+    }
+}
+
+bool project_layout_selected(Json layout, string layout_version) {
+    if (version != "three_horizons") return true;
+    return layout_version == "emerald"
+        || find(project_layouts.begin(), project_layouts.end(), layout["id"].string_value()) != project_layouts.end();
+}
+
 string generate_map_header_text(Json map_data, Json layouts_data) {
     string map_layout_id = json_to_string(map_data, "layout");
 
@@ -182,7 +215,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
 
     if (version == "ruby")
         text << "\t.byte " << json_to_string(map_data, "show_map_name") << "\n";
-    else if (version == "emerald" || version == "firered")
+    else if (version == "emerald" || version == "firered" || version == "three_horizons")
     {
         text << "\tmap_header_flags "
              << "allow_cycling=" << json_to_string(map_data, "allow_cycling") << ", "
@@ -743,15 +776,18 @@ void process_groups(string groups_filepath, vector<string> &map_filepaths, strin
         string region = json_to_string(map_data, "region", true);
 
         if (region.empty()) {
-            if (version == "emerald")
+            if (version == "emerald" || version == "three_horizons")
                 region = "REGION_HOENN";
             else if (version == "firered")
                 region = "REGION_KANTO";
         }
         string map_name = json_to_string(map_data, "name");
 
-        if ((version == "emerald" && region != "REGION_HOENN")
-         || (version == "firered" && region != "REGION_KANTO")) {
+        bool project = map_name.rfind("TH_", 0) == 0;
+        bool selectedProject = find(project_maps.begin(), project_maps.end(), map_name) != project_maps.end();
+        if ((project && (version != "three_horizons" || !selectedProject))
+         || (!project && ((version == "emerald" || version == "three_horizons") && region != "REGION_HOENN"))
+         || (!project && version == "firered" && region != "REGION_KANTO")) {
             invalid_maps.push_back(map_name);
         }
     }
@@ -779,19 +815,21 @@ string generate_layout_headers_text(Json layouts_data) {
     text << get_generated_warning("data/layouts/layouts.json", true);
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
+        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+            continue;
         if (layout == Json::object()) continue;
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;
         string layout_version = json_to_string(layout, "layout_version", true);
 
         if (layout_version.empty()) {
-            if (version == "emerald")
+            if (version == "emerald" || version == "three_horizons")
                 layout_version = "emerald";
             else if (version == "firered")
                 layout_version = "frlg";
         }
         if ((version == "emerald" && layout_version != "emerald")
-         || (version == "firered" && layout_version != "frlg"))
+         || (version == "firered" && layout_version != "frlg") || !project_layout_selected(layout, layout_version))
             continue;
         string layoutName = json_to_string(layout, "name");
         string border_label = layoutName + "_Border";
@@ -839,16 +877,18 @@ string generate_layouts_table_text(Json layouts_data) {
          << json_to_string(layouts_data, "layouts_table_label") << "::\n";
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
+        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+            continue;
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;
         string layout_version = json_to_string(layout, "layout_version", true);
         if (layout_version.empty()) {
-            if (version == "emerald")
+            if (version == "emerald" || version == "three_horizons")
                 layout_version = "emerald";
             else if (version == "firered")
                 layout_version = "frlg";
         }
-        if ((version == "emerald" && layout_version != "emerald") || (version == "firered" && layout_version != "frlg")) {
+        if ((version == "emerald" && layout_version != "emerald") || (version == "firered" && layout_version != "frlg") || !project_layout_selected(layout, layout_version)) {
             text << "\t.4byte NULL\n";
         } else {
             string layout_name = json_to_string(layout, "name", true);
@@ -885,6 +925,8 @@ string generate_layouts_constants_text(Json layouts_data) {
 
     int i = 1;
     for (auto &layout : layouts_data["layouts"].array_items()) {
+        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+            continue;
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;
         if (layout != Json::object())
@@ -942,8 +984,10 @@ int main(int argc, char *argv[]) {
 
     char *version_arg = argv[2];
     version = string(version_arg);
-    if (version != "emerald" && version != "ruby" && version != "firered")
+    if (version != "emerald" && version != "ruby" && version != "firered" && version != "three_horizons")
         FATAL_ERROR("ERROR: <game-version> must be 'emerald', 'firered', or 'ruby'.\n");
+
+    if (version == "three_horizons") load_project_maps();
 
     char *mode_arg = argv[1];
     string mode(mode_arg);

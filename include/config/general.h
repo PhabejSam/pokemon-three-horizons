@@ -88,3 +88,7 @@
 #define AUTO_LOWERCASE_KEYBOARD      GEN_LATEST  // Starting in GEN_6, after entering the first uppercase character, the keyboard switches to lowercase letters.
 
 #endif // GUARD_CONFIG_GENERAL_H
+
+#ifndef THREE_HORIZONS
+#define THREE_HORIZONS 0
+#endif

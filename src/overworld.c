@@ -1,4 +1,6 @@
 #include "global.h"
+#include "three_horizons.h"
+#include "constants/three_horizons.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -1702,8 +1704,17 @@ void UpdateTimeOfDay(bool32 updateBlend)
 {
     s32 hours, minutes;
     RtcCalcLocalTime();
+#if THREE_HORIZONS
+    u32 visualTime = TH_GetVisualTimeSeconds();
+    hours = sHoursOverride ? sHoursOverride : visualTime / 3600;
+#else
     hours = sHoursOverride ? sHoursOverride : gLocalTime.hours;
+#endif
+#if THREE_HORIZONS
+    minutes = sHoursOverride ? 0 : (visualTime / 60) % 60;
+#else
     minutes = sHoursOverride ? 0 : gLocalTime.minutes;
+#endif
 
     if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
     {
@@ -1938,7 +1949,7 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
-    if (IS_FRLG)
+    if (IS_FRLG || THREE_HORIZONS)
         gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     else
         gFieldCallback = ExecuteTruckSequence;
@@ -2116,6 +2127,10 @@ void CB2_ContinueSavedGame(void)
 {
     u8 trainerHillMapId;
 
+#if THREE_HORIZONS
+    bool32 refreshChapterMap = (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK) != TH_STATE_VERSION_10;
+    TH_MigrateSaveState();
+#endif
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();
@@ -2129,6 +2144,10 @@ void CB2_ContinueSavedGame(void)
         LoadBattlePyramidFloorObjectEventScripts();
     else if (trainerHillMapId != 0 && trainerHillMapId != TRAINER_HILL_ENTRANCE)
         LoadTrainerHillFloorObjectEventScripts();
+#if THREE_HORIZONS
+    else if (refreshChapterMap)
+        LoadObjEventTemplatesFromHeader();
+#endif
     else
         LoadSaveblockObjEventScripts();
 
@@ -2155,6 +2174,18 @@ void CB2_ContinueSavedGame(void)
         TryPutTodaysRivalTrainerOnAir();
         SetMainCallback2(CB2_LoadMap);
     }
+#if THREE_HORIZONS
+    else if (refreshChapterMap)
+    {
+        // An old build may have different object slots, coordinates and scripts.
+        // A normal same-map load rebuilds both templates and object instances.
+        SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum,
+            WARP_ID_NONE, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
+        WarpIntoMap();
+        gFieldCallback = FieldCB_FadeTryShowMapPopup;
+        SetMainCallback2(CB2_LoadMap);
+    }
+#endif
     else
     {
         TryPutTodaysRivalTrainerOnAir();

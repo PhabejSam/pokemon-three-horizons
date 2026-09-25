@@ -1,0 +1,211 @@
+name: Three Horizons demo
+on:
+  push:
+    branches: [feature/opening-demo]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  demo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3 git
+          { uname -a; gcc --version; arm-none-eabi-gcc --version; make --version; python3 --version; dpkg-query -W build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev; } > demo-environment.txt
+      - name: Check map contracts
+        run: |
+          make -C tools/mapjson
+          python3 -m unittest discover -s tools/three_horizons/tests -v
+      - name: Build demo
+        shell: bash
+        run: |
+          set -o pipefail
+          make THREE_HORIZONS=1 -j2 -O all 2>&1 | tee demo-build.log
+          test -s pokemon-three-horizons.gba
+          python3 tools/three_horizons/check_running_elf.py pokemon-three-horizons.elf | tee running-frames.log
+          git diff --exit-code
+          sha256sum pokemon-three-horizons.gba > pokemon-three-horizons.gba.sha256
+          git rev-parse HEAD > demo-source-commit.txt
+      - name: Verify legacy-state and clock regressions detect original defects
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/three_horizons_state.c /tmp/th-state.c
+          cp src/three_horizons_clock.c /tmp/th-clock.c
+          trap 'cp /tmp/th-state.c src/three_horizons_state.c; cp /tmp/th-clock.c src/three_horizons_clock.c' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/three_horizons_state.c')
+          s = p.read_text()
+          old = 'void TH_MigrateSaveState(void)\n{'
+          assert old in s
+          p.write_text(s.replace(old, old + '\n    return; // negative control: no migration'))
+          p = Path('src/three_horizons_clock.c')
+          s = p.read_text()
+          old = 'u32 TH_AdvanceVisualClock(u32 real, u32 visual, u32 now, u16 mode)\n{'
+          assert old in s
+          p.write_text(s.replace(old, old + '\n    mode = (u8)mode; // negative control: legacy narrowing'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons revision9" -j2 > revision9-negative.log 2>&1; then
+            echo "State regressions did not detect original defects"; exit 1
+          fi
+          grep -q 'legacy state migration.*FAIL' revision9-negative.log
+          grep -q 'invalid full-width clock.*FAIL' revision9-negative.log
+          cp /tmp/th-state.c src/three_horizons_state.c
+          cp /tmp/th-clock.c src/three_horizons_clock.c
+          git diff --exit-code
+      - name: Verify nickname exit regression detects a stale interrupt
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/naming_screen.c /tmp/th-naming.c
+          trap 'cp /tmp/th-naming.c src/naming_screen.c' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/naming_screen.c')
+          s = p.read_text()
+          old = 'ResetVHBlank();\n        ResetTasks();'
+          assert s.count(old) == 1
+          p.write_text(s.replace(old, 'ResetTasks(); // negative control: stale VBlank'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons native nickname" -j2 > nickname-negative.log 2>&1; then
+            echo "Nickname test did not detect the stale interrupt"; exit 1
+          fi
+          grep -q FAIL nickname-negative.log
+          cp /tmp/th-naming.c src/naming_screen.c
+          git diff --exit-code
+      - name: Test opening progression
+        shell: bash
+        run: |
+          set -o pipefail
+          make THREE_HORIZONS=1 check TESTS="Three Horizons revision9" -j2 2>&1 | tee revision9-tests.log
+          make THREE_HORIZONS=1 check TESTS="Three Horizons" -j2 2>&1 | tee demo-tests.log
+          make THREE_HORIZONS=1 check TESTS="test/save.c" -j2 2>&1 | tee -a demo-tests.log
+          ! grep -q "No tests found" demo-tests.log
+      - name: Verify first-battle regression catches the original overwrite
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/battle_controllers.c /tmp/th-battle-controllers.c
+          trap 'cp /tmp/th-battle-controllers.c src/battle_controllers.c' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/battle_controllers.c')
+          s = p.read_text()
+          original = 'if (!IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)\n        && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))'
+          assert original in s
+          p.write_text(s.replace(original, 'if (!IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons first rival battle initialization" -j2 > regression-negative.log 2>&1; then
+            echo "Regression failed to detect the overwrite"; exit 1
+          fi
+          grep -q 'FAIL' regression-negative.log
+          cp /tmp/th-battle-controllers.c src/battle_controllers.c
+          make THREE_HORIZONS=1 check TESTS="Three Horizons first rival battle initialization" -j2 > regression-positive.log 2>&1
+          git diff --exit-code
+      - name: Verify palette and fleeing regressions detect original defects
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/battle_ai_main.c /tmp/th-ai.c
+          cp include/constants/event_objects.h /tmp/th-event-objects.h
+          trap 'cp /tmp/th-ai.c src/battle_ai_main.c; cp /tmp/th-event-objects.h include/constants/event_objects.h' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/battle_ai_main.c')
+          s = p.read_text()
+          old = 'if (!IS_FRLG && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)\n        && gAiLogicData->hpPercents[battlerDef] <= 20)'
+          assert old in s
+          p.write_text(s.replace(old, 'if (!IS_FRLG && gAiLogicData->hpPercents[battlerDef] <= 20)'))
+          p = Path('include/constants/event_objects.h')
+          s = p.read_text()
+          p.write_text(s.replace('OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL 0x1300', 'OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL 0x1200'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons Gold and weather" -j2 > palette-negative.log 2>&1; then
+            echo "Palette regression did not detect original bug"; exit 1
+          fi
+          grep -q FAIL palette-negative.log
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons first rival can attack" -j2 > flee-negative.log 2>&1; then
+            echo "AI regression did not detect original bug"; exit 1
+          fi
+          grep -q FAIL flee-negative.log
+          cp /tmp/th-ai.c src/battle_ai_main.c
+          cp /tmp/th-event-objects.h include/constants/event_objects.h
+          git diff --exit-code
+      - name: Verify training and capture regression controls
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/three_horizons_training.c /tmp/th-training.c
+          cp src/three_horizons_capture.c /tmp/th-capture.c
+          trap 'cp /tmp/th-training.c src/three_horizons_training.c; cp /tmp/th-capture.c src/three_horizons_capture.c' EXIT
+          python3 - <<'PYCODE'
+          from pathlib import Path
+          p = Path('src/three_horizons_training.c')
+          s = p.read_text()
+          assert '!(mask & (1 << i))' in s
+          p.write_text(s.replace('!(mask & (1 << i))', 'TRUE'))
+          p = Path('src/three_horizons_capture.c')
+          s = p.read_text()
+          assert '!TH_PartnerOptionsValid(options)' in s
+          # Species-aware validation also checks the stat limits now. Remove
+          # both gates in the mutant so illegal IV/EV edits actually reach it.
+          species_gate = '!TH_PartnerOptionsValidForSpecies(GetMonData(mon, MON_DATA_SPECIES), options)'
+          assert species_gate in s
+          s = s.replace('!TH_PartnerOptionsValid(options)', 'options == NULL')
+          p.write_text(s.replace(species_gate, 'FALSE'))
+          PYCODE
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons training kit delivers" -j2 > kit-negative.log 2>&1; then
+            echo "Kit test did not detect duplicate delivery"; exit 1
+          fi
+          grep -q FAIL kit-negative.log
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons caught Pokemon retain" -j2 > capture-negative.log 2>&1; then
+            echo "Capture test did not detect illegal edits"; exit 1
+          fi
+          grep -q FAIL capture-negative.log
+          cp /tmp/th-training.c src/three_horizons_training.c
+          cp /tmp/th-capture.c src/three_horizons_capture.c
+          make THREE_HORIZONS=1 check TESTS="Three Horizons" -j2 > training-capture-positive.log 2>&1
+          git diff --exit-code
+      - name: Check trainer regeneration when switching build modes
+        shell: bash
+        run: |
+          set -o pipefail
+          make THREE_HORIZONS=0 generated > trainer-mode-switch.log 2>&1
+          ! grep -q 'TRAINER_TH_ROBIN_BULBASAUR' src/data/trainers.h
+          make THREE_HORIZONS=1 generated >> trainer-mode-switch.log 2>&1
+          grep -q 'TRAINER_TH_ROBIN_BULBASAUR' src/data/trainers.h
+          grep -q 'BLUE' src/data/trainers.h
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: three-horizons-opening
+          retention-days: 14
+          path: |
+            pokemon-three-horizons.gba
+            pokemon-three-horizons.elf
+            pokemon-three-horizons.map
+            pokemon-three-horizons.gba.sha256
+            demo-build.log
+            running-frames.log
+            demo-tests.log
+            revision9-tests.log
+            revision9-negative.log
+            nickname-negative.log
+            demo-source-commit.txt
+            demo-environment.txt
+            kit-negative.log
+            capture-negative.log
+            training-capture-positive.log
+            trainer-mode-switch.log
+            regression-negative.log
+            regression-positive.log
+            palette-negative.log
+            flee-negative.log
+            docs/three_horizons/OPENING_DEMO_TESTS.md

@@ -122,7 +122,38 @@ static void AssignSpriteAnimsTable(bool8 isTrainer)
         sCreatingSpriteTemplate.anims = gAnims_Trainer;
 }
 
-static u16 CreatePicSprite(u16 species, bool8 isShiny, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
+// Probe the decoder's temporary allocation after the persistent sprite buffers
+// have been allocated. Decompression runs synchronously, so this exact block
+// remains available to its checked allocator immediately after the probe.
+static bool32 CanDecompressMonPic(u16 species, u32 personality, bool8 front)
+{
+    union CompressionHeader header;
+    const u32 *pic;
+    species = SanitizeSpeciesId(species);
+    if (species == SPECIES_UNOWN)
+        species = GetUnownSpeciesId(personality);
+    pic = front ? gSpeciesInfo[species].frontPic : gSpeciesInfo[species].backPic;
+#if P_GENDER_DIFFERENCES
+    const u32 *female = front ? gSpeciesInfo[species].frontPicFemale : gSpeciesInfo[species].backPicFemale;
+    if (female != NULL && IsPersonalityFemale(species, personality))
+        pic = female;
+#endif
+    if (pic == NULL)
+        pic = front ? gSpeciesInfo[SPECIES_NONE].frontPic : gSpeciesInfo[SPECIES_NONE].backPic;
+    CpuCopy32(pic, &header, sizeof(header));
+    if (header.smol.mode == MODE_LZ77 || header.smol.mode == BASE_ONLY)
+        return TRUE;
+    if (header.smol.mode < ENCODE_SYMS || header.smol.mode > ENCODE_BOTH_DELTA_SYMS)
+        return FALSE;
+    u32 size = ((header.smol.symSize + 1) & ~1) * 2 + ((header.smol.loSize + 1) & ~1);
+    void *probe = AllocUnchecked(size);
+    if (probe == NULL)
+        return FALSE;
+    Free(probe);
+    return TRUE;
+}
+
+static u16 CreatePicSprite(u16 species, bool8 isShiny, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer, bool32 recoverable)
 {
     u8 i;
     u8 *framePics;
@@ -138,19 +169,26 @@ static u16 CreatePicSprite(u16 species, bool8 isShiny, u32 personality, bool8 is
     if (i == PICS_COUNT)
         return 0xFFFF;
 
-    framePics = Alloc(PIC_SPRITE_SIZE * MAX_PIC_FRAMES);
+    framePics = recoverable ? AllocUnchecked(PIC_SPRITE_SIZE * MAX_PIC_FRAMES) : Alloc(PIC_SPRITE_SIZE * MAX_PIC_FRAMES);
     if (!framePics)
         return 0xFFFF;
 
-    images = Alloc(sizeof(struct SpriteFrameImage) * MAX_PIC_FRAMES);
+    images = recoverable ? AllocUnchecked(sizeof(struct SpriteFrameImage) * MAX_PIC_FRAMES) : Alloc(sizeof(struct SpriteFrameImage) * MAX_PIC_FRAMES);
     if (!images)
     {
         Free(framePics);
         return 0xFFFF;
     }
+    if (recoverable && !CanDecompressMonPic(species, personality, isFrontPic))
+    {
+        Free(images);
+        Free(framePics);
+        return 0xFFFF;
+    }
     if (DecompressPic(species, personality, isFrontPic, framePics, isTrainer))
     {
-        // debug trap?
+        Free(images);
+        Free(framePics);
         return 0xFFFF;
     }
     for (j = 0; j < MAX_PIC_FRAMES; j ++)
@@ -166,6 +204,14 @@ static u16 CreatePicSprite(u16 species, bool8 isShiny, u32 personality, bool8 is
     sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
     LoadPicPaletteByTagOrSlot(species, isShiny, personality, paletteSlot, paletteTag, isTrainer);
     spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
+    if (spriteId == MAX_SPRITES)
+    {
+        if (paletteTag != TAG_NONE)
+            FreeSpritePaletteByTag(paletteTag);
+        Free(images);
+        Free(framePics);
+        return 0xFFFF;
+    }
     if (paletteTag == TAG_NONE)
         gSprites[spriteId].oam.paletteNum = paletteSlot;
     sSpritePics[i].frames = framePics;
@@ -305,7 +351,12 @@ static u16 CreateTrainerCardSprite(u16 species, bool8 isShiny, u32 personality, 
 
 u16 CreateMonPicSprite(enum Species species, bool8 isShiny, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
 {
-    return CreatePicSprite(species, isShiny, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE);
+    return CreatePicSprite(species, isShiny, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE, FALSE);
+}
+
+u16 CreateMonPicSpriteUnchecked(enum Species species, bool8 isShiny, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
+{
+    return CreatePicSprite(species, isShiny, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE, TRUE);
 }
 
 u16 FreeAndDestroyMonPicSprite(u16 spriteId)
@@ -331,7 +382,7 @@ u16 CreateTrainerCardMonIconSprite(enum Species species, bool8 isShiny, u32 pers
 
 u16 CreateTrainerPicSprite(u16 species, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
 {
-    return CreatePicSprite(species, FALSE, 0, isFrontPic, x, y, paletteSlot, paletteTag, TRUE);
+    return CreatePicSprite(species, FALSE, 0, isFrontPic, x, y, paletteSlot, paletteTag, TRUE, FALSE);
 }
 
 u16 FreeAndDestroyTrainerPicSprite(u16 spriteId)

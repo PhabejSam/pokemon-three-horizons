@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/three_horizons.h"
 #include "malloc.h"
 #include "battle_anim.h"
 #include "battle_pyramid.h"
@@ -496,6 +497,7 @@ const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
 #include "data/object_events/object_event_graphics_info_followers.h"
 
 static const struct SpritePalette sObjectEventSpritePalettes[] = {
+
     {gObjectEventPal_Npc1,                  OBJ_EVENT_PAL_TAG_NPC_1},
     {gObjectEventPal_Npc2,                  OBJ_EVENT_PAL_TAG_NPC_2},
     {gObjectEventPal_Npc3,                  OBJ_EVENT_PAL_TAG_NPC_3},
@@ -531,15 +533,13 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
-#if IS_FRLG
+#if IS_FRLG || THREE_HORIZONS
     {gObjectEventPal_PlayerFrlg,            OBJ_EVENT_PAL_TAG_PLAYER_RED},
     {gObjectEventPal_PlayerReflectionFrlg,  OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION},
     {gObjectEventPal_PlayerFrlg,            OBJ_EVENT_PAL_TAG_PLAYER_GREEN},
     {gObjectEventPal_PlayerReflectionFrlg,  OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION},
-    {gObjectEventPal_NpcBlue,               OBJ_EVENT_PAL_TAG_NPC_BLUE},
     {gObjectEventPal_NpcPink,               OBJ_EVENT_PAL_TAG_NPC_PINK},
     {gObjectEventPal_NpcGreen,              OBJ_EVENT_PAL_TAG_NPC_GREEN},
-    {gObjectEventPal_NpcWhite,              OBJ_EVENT_PAL_TAG_NPC_WHITE},
     {gObjectEventPal_NpcBlueReflection,     OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION},
     {gObjectEventPal_NpcPinkReflection,     OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION},
     {gObjectEventPal_NpcGreenReflection,    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION},
@@ -548,6 +548,13 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_SSAnne,                OBJ_EVENT_PAL_TAG_SS_ANNE},
     {gObjectEventPal_Seagallop,             OBJ_EVENT_PAL_TAG_SEAGALLOP},
 #endif // IS_FRLG
+#if THREE_HORIZONS
+    {gObjectEventPal_THClock, OBJ_EVENT_PAL_TAG_TH_CLOCK},
+#endif
+#if IS_FRLG || THREE_HORIZONS
+    {gObjectEventPal_NpcBlue,               OBJ_EVENT_PAL_TAG_NPC_BLUE},
+    {gObjectEventPal_NpcWhite,              OBJ_EVENT_PAL_TAG_NPC_WHITE},
+#endif
 #if OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
     {gObjectEventPal_UltraBall,             OBJ_EVENT_PAL_TAG_BALL_ULTRA},
@@ -583,6 +590,26 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPaletteLight2,             OBJ_EVENT_PAL_TAG_LIGHT_2},
     {gObjectEventPaletteEmotes,             OBJ_EVENT_PAL_TAG_EMOTES},
     {gObjectEventPaletteNeonLight,          OBJ_EVENT_PAL_TAG_NEON_LIGHT},
+#if THREE_HORIZONS
+    {gObjectEventPal_THElm, OBJ_EVENT_PAL_TAG_TH_ELM},
+    {gObjectEventPal_THGoldNormal, OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL},
+    {gObjectEventPal_THGoldMachBike, OBJ_EVENT_PAL_TAG_TH_GOLD_MACHBIKE},
+    {gObjectEventPal_THGoldAcroBike, OBJ_EVENT_PAL_TAG_TH_GOLD_ACROBIKE},
+    {gObjectEventPal_THGoldSurfing, OBJ_EVENT_PAL_TAG_TH_GOLD_SURFING},
+    {gObjectEventPal_THGoldUnderwater, OBJ_EVENT_PAL_TAG_TH_GOLD_UNDERWATER},
+    {gObjectEventPal_THGoldFieldMove, OBJ_EVENT_PAL_TAG_TH_GOLD_FIELDMOVE},
+    {gObjectEventPal_THGoldFishing, OBJ_EVENT_PAL_TAG_TH_GOLD_FISHING},
+    {gObjectEventPal_THGoldWatering, OBJ_EVENT_PAL_TAG_TH_GOLD_WATERING},
+    {gObjectEventPal_THKrisNormal, OBJ_EVENT_PAL_TAG_TH_KRIS_NORMAL},
+    {gObjectEventPal_THKrisMachBike, OBJ_EVENT_PAL_TAG_TH_KRIS_MACHBIKE},
+    {gObjectEventPal_THKrisAcroBike, OBJ_EVENT_PAL_TAG_TH_KRIS_ACROBIKE},
+    {gObjectEventPal_THKrisSurfing, OBJ_EVENT_PAL_TAG_TH_KRIS_SURFING},
+    {gObjectEventPal_THKrisUnderwater, OBJ_EVENT_PAL_TAG_TH_KRIS_UNDERWATER},
+    {gObjectEventPal_THKrisFieldMove, OBJ_EVENT_PAL_TAG_TH_KRIS_FIELDMOVE},
+    {gObjectEventPal_THKrisFishing, OBJ_EVENT_PAL_TAG_TH_KRIS_FISHING},
+    {gObjectEventPal_THKrisWatering, OBJ_EVENT_PAL_TAG_TH_KRIS_WATERING},
+    {gObjectEventPal_THSilverNormal, OBJ_EVENT_PAL_TAG_TH_SILVER_NORMAL},
+#endif
 #ifdef BUGFIX
     {NULL,                                  OBJ_EVENT_PAL_TAG_NONE},
 #else
@@ -1694,6 +1721,10 @@ void RemoveObjectEventByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 static void RemoveObjectEventInternal(struct ObjectEvent *objectEvent)
 {
     struct SpriteFrameImage image;
+#if THREE_HORIZONS
+    if (objectEvent->graphicsId == OBJ_EVENT_GFX_TH_CLOCK)
+        FreeSpriteOamMatrix(&gSprites[objectEvent->spriteId]);
+#endif
     image.size = GetObjectEventGraphicsInfo(objectEvent->graphicsId)->size;
     gSprites[objectEvent->spriteId].images = &image;
     // It's possible that this function is called while the sprite pointed to `== sDummySprite`, i.e during map resume;
@@ -2335,7 +2366,15 @@ static bool8 GetMonInfo(struct Pokemon *mon, enum Species *species, bool32 *shin
 // Retrieve graphic information about the following Pokémon, if any
 bool8 GetFollowerInfo(enum Species *species, bool32 *shiny, bool32 *female)
 {
+#if THREE_HORIZONS
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    if (VarGet(VAR_TH_FOLLOWER_OFF) || GetMonData(mon, MON_DATA_HP) == 0
+        || GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG))
+        return FALSE;
+    return GetMonInfo(mon, species, shiny, female);
+#else
     return GetMonInfo(GetFirstLiveMon(), species, shiny, female);
+#endif
 }
 
 // Update following Pokémon if any
@@ -9540,6 +9579,10 @@ static void TryEnableObjectEventAnim(struct ObjectEvent *objectEvent, struct Spr
 
 static void UpdateObjectEventVisibility(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
+#if THREE_HORIZONS
+    if (objectEvent->graphicsId == OBJ_EVENT_GFX_TH_CLOCK)
+        sprite->y2 = -8;
+#endif
     UpdateObjectEventOffscreen(objectEvent, sprite);
     UpdateObjectEventSpriteVisibility(objectEvent, sprite);
 }

@@ -1,0 +1,221 @@
+{
+  "id": "MAP_TH_VIRIDIAN_ENTRANCE",
+  "name": "TH_ViridianEntrance",
+  "layout": "LAYOUT_VIRIDIAN_CITY",
+  "music": "MUS_RG_PEWTER",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_VIRIDIAN_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_TH_ROUTE2",
+      "offset": 12,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_TH_ROUTE1",
+      "offset": 12,
+      "direction": "down"
+    },
+    {
+      "map": "MAP_TH_ROUTE22",
+      "offset": 10,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN_FRLG",
+      "x": 8,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_Local_ViridianEntrance_0",
+      "flag": "0",
+      "local_id": "LOCALID_TH_VIRIDIANENTRANCE_0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG",
+      "x": 11,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_Journey_Tree",
+      "flag": "0",
+      "local_id": "LOCALID_TH_VIRIDIANENTRANCE_1"
+    },
+    {
+      "local_id": "LOCALID_TH_VIRIDIANENTRANCE_2",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
+      "x": 34,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_Local_ViridianEntrance_1",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TH_VIRIDIANENTRANCE_3",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_3_FRLG",
+      "x": 20,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_Local_ViridianEntrance_2",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER_FRLG",
+      "x": 33,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_Local_ViridianEntrance_3",
+      "flag": "0",
+      "local_id": "LOCALID_TH_VIRIDIANENTRANCE_4"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "x": 16,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_Local_ViridianEntrance_4",
+      "flag": "0",
+      "local_id": "LOCALID_TH_VIRIDIANENTRANCE_5"
+    },
+    {
+      "local_id": "LOCALID_TH_VIRIDIANENTRANCE_6",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG",
+      "x": 18,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_Journey_Tree",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 26,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_TH_VIRIDIAN_CENTER",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 36,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "MAP_TH_VIRIDIAN_MART",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 25,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_TH_VIRIDIAN_HOUSE",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 36,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_TH_VIRIDIAN_GYM",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 25,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_TH_VIRIDIAN_SCHOOL",
+      "dest_warp_id": "1"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 1,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_Journey_Sign"
+    },
+    {
+      "type": "sign",
+      "x": 32,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_Journey_Sign"
+    },
+    {
+      "type": "sign",
+      "x": 20,
+      "y": 31,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_Journey_Sign"
+    },
+    {
+      "type": "sign",
+      "x": 20,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_Journey_Sign"
+    },
+    {
+      "type": "sign",
+      "x": 36,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_Journey_Sign"
+    }
+  ]
+}

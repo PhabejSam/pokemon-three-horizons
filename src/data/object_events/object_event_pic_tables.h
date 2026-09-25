@@ -1,3 +1,9 @@
+#if THREE_HORIZONS
+static const struct SpriteFrameImage sPicTable_THClock[] = {
+    overworld_ascending_frames(gObjectEventPic_THClock, 2, 2),
+};
+#endif
+
 static const struct SpriteFrameImage sPicTable_BrendanNormal[] = {
     overworld_ascending_frames(gObjectEventPic_BrendanNormalRunning, 2, 4),
 };
@@ -1355,7 +1361,7 @@ static const struct SpriteFrameImage sPicTable_ApricornTree[] = {
     overworld_frame(gObjectEventPic_ApricornTree, 2, 2, 0),
 };
 
-#if IS_FRLG
+#if IS_FRLG || THREE_HORIZONS
 
 static const struct SpriteFrameImage sPicTable_RedNormal[] = {
     overworld_frame(gObjectEventPic_RedNormal, 2, 4, 0),
@@ -1687,9 +1693,7 @@ static const struct SpriteFrameImage sPicTable_NurseFrlg[] = {
     overworld_frame(gObjectEventPic_NurseFrlg, 2, 4, 3),
 };
 
-static const struct SpriteFrameImage sPicTable_ProfOak[] = {
-    overworld_ascending_frames(gObjectEventPic_ProfOak, 2, 4),
-};
+
 
 static const struct SpriteFrameImage sPicTable_Man[] = {
     overworld_ascending_frames(gObjectEventPic_Man, 2, 4),
@@ -2481,6 +2485,15 @@ static const struct SpriteFrameImage sPicTable_Kabuto[] = {
     overworld_frame(gObjectEventPic_KabutoOld, 2, 2, 2),
 };
 
+
+
+#endif // IS_FRLG
+
+#if IS_FRLG || THREE_HORIZONS
+static const struct SpriteFrameImage sPicTable_ProfOak[] = {
+    overworld_ascending_frames(gObjectEventPic_ProfOak, 2, 4),
+};
+
 static const struct SpriteFrameImage sPicTable_MomFrlg[] = {
     overworld_frame(gObjectEventPic_MomFrlg, 2, 4, 0),
     overworld_frame(gObjectEventPic_MomFrlg, 2, 4, 1),
@@ -2492,5 +2505,180 @@ static const struct SpriteFrameImage sPicTable_MomFrlg[] = {
     overworld_frame(gObjectEventPic_MomFrlg, 2, 4, 2),
     overworld_frame(gObjectEventPic_MomFrlg, 2, 4, 2),
 };
+#endif
 
-#endif // IS_FRLG
+#if THREE_HORIZONS
+static const struct SpriteFrameImage sPicTable_THGoldNormal[] = {
+    // Separate assets need explicit pointers: relativeFrames uses only images[0].
+    overworld_frame(gObjectEventPic_THGoldNormal, 2, 4, 0),
+    overworld_frame(gObjectEventPic_THGoldNormal, 2, 4, 1),
+    overworld_frame(gObjectEventPic_THGoldNormal, 2, 4, 2),
+    overworld_frame(gObjectEventPic_THGoldNormal, 2, 4, 3),
+    overworld_frame(gObjectEventPic_THGoldNormal, 2, 4, 4),
+    overworld_frame(gObjectEventPic_THGoldNormal, 2, 4, 5),
+    overworld_frame(gObjectEventPic_THGoldNormal, 2, 4, 6),
+    overworld_frame(gObjectEventPic_THGoldNormal, 2, 4, 7),
+    overworld_frame(gObjectEventPic_THGoldNormal, 2, 4, 8),
+    overworld_frame(gObjectEventPic_THGoldRunning, 2, 4, 0),
+    overworld_frame(gObjectEventPic_THGoldRunning, 2, 4, 1),
+    overworld_frame(gObjectEventPic_THGoldRunning, 2, 4, 2),
+    overworld_frame(gObjectEventPic_THGoldRunning, 2, 4, 3),
+    overworld_frame(gObjectEventPic_THGoldRunning, 2, 4, 4),
+    overworld_frame(gObjectEventPic_THGoldRunning, 2, 4, 5),
+    overworld_frame(gObjectEventPic_THGoldRunning, 2, 4, 6),
+    overworld_frame(gObjectEventPic_THGoldRunning, 2, 4, 7),
+    overworld_frame(gObjectEventPic_THGoldRunning, 2, 4, 8),
+};
+static const struct SpriteFrameImage sPicTable_THGoldMachBike[] = {
+    overworld_ascending_frames(gObjectEventPic_THGoldMachBike, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_THGoldAcroBike[] = {
+    overworld_ascending_frames(gObjectEventPic_THGoldAcroBike, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_THGoldSurfing[] = {
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 3),
+    overworld_frame(gObjectEventPic_THGoldSurfing, 4, 4, 5),
+};
+static const struct SpriteFrameImage sPicTable_THGoldUnderwater[] = {
+    overworld_frame(gObjectEventPic_THGoldUnderwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THGoldUnderwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THGoldUnderwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THGoldUnderwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THGoldUnderwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THGoldUnderwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THGoldUnderwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THGoldUnderwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THGoldUnderwater, 4, 4, 2),
+};
+static const struct SpriteFrameImage sPicTable_THGoldFieldMove[] = {
+    overworld_ascending_frames(gObjectEventPic_THGoldFieldMove, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_THGoldFishing[] = {
+    overworld_ascending_frames(gObjectEventPic_THGoldFishing, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_THGoldWatering[] = {
+    overworld_frame(gObjectEventPic_THGoldWatering, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THGoldWatering, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THGoldWatering, 4, 4, 4),
+    overworld_frame(gObjectEventPic_THGoldWatering, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THGoldWatering, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THGoldWatering, 4, 4, 3),
+    overworld_frame(gObjectEventPic_THGoldWatering, 4, 4, 3),
+    overworld_frame(gObjectEventPic_THGoldWatering, 4, 4, 5),
+    overworld_frame(gObjectEventPic_THGoldWatering, 4, 4, 5),
+};
+static const struct SpriteFrameImage sPicTable_THKrisNormal[] = {
+    // Separate assets need explicit pointers: relativeFrames uses only images[0].
+    overworld_frame(gObjectEventPic_THKrisNormal, 2, 4, 0),
+    overworld_frame(gObjectEventPic_THKrisNormal, 2, 4, 1),
+    overworld_frame(gObjectEventPic_THKrisNormal, 2, 4, 2),
+    overworld_frame(gObjectEventPic_THKrisNormal, 2, 4, 3),
+    overworld_frame(gObjectEventPic_THKrisNormal, 2, 4, 4),
+    overworld_frame(gObjectEventPic_THKrisNormal, 2, 4, 5),
+    overworld_frame(gObjectEventPic_THKrisNormal, 2, 4, 6),
+    overworld_frame(gObjectEventPic_THKrisNormal, 2, 4, 7),
+    overworld_frame(gObjectEventPic_THKrisNormal, 2, 4, 8),
+    overworld_frame(gObjectEventPic_THKrisRunning, 2, 4, 0),
+    overworld_frame(gObjectEventPic_THKrisRunning, 2, 4, 1),
+    overworld_frame(gObjectEventPic_THKrisRunning, 2, 4, 2),
+    overworld_frame(gObjectEventPic_THKrisRunning, 2, 4, 3),
+    overworld_frame(gObjectEventPic_THKrisRunning, 2, 4, 4),
+    overworld_frame(gObjectEventPic_THKrisRunning, 2, 4, 5),
+    overworld_frame(gObjectEventPic_THKrisRunning, 2, 4, 6),
+    overworld_frame(gObjectEventPic_THKrisRunning, 2, 4, 7),
+    overworld_frame(gObjectEventPic_THKrisRunning, 2, 4, 8),
+};
+static const struct SpriteFrameImage sPicTable_THKrisMachBike[] = {
+    overworld_ascending_frames(gObjectEventPic_THKrisMachBike, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_THKrisAcroBike[] = {
+    overworld_ascending_frames(gObjectEventPic_THKrisAcroBike, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_THKrisSurfing[] = {
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 3),
+    overworld_frame(gObjectEventPic_THKrisSurfing, 4, 4, 5),
+};
+static const struct SpriteFrameImage sPicTable_THKrisUnderwater[] = {
+    overworld_frame(gObjectEventPic_THKrisUnderwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THKrisUnderwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THKrisUnderwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THKrisUnderwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THKrisUnderwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THKrisUnderwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THKrisUnderwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THKrisUnderwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THKrisUnderwater, 4, 4, 2),
+};
+static const struct SpriteFrameImage sPicTable_THKrisFieldMove[] = {
+    overworld_ascending_frames(gObjectEventPic_THKrisFieldMove, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_THKrisFishing[] = {
+    overworld_ascending_frames(gObjectEventPic_THKrisFishing, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_THKrisWatering[] = {
+    overworld_frame(gObjectEventPic_THKrisWatering, 4, 4, 0),
+    overworld_frame(gObjectEventPic_THKrisWatering, 4, 4, 2),
+    overworld_frame(gObjectEventPic_THKrisWatering, 4, 4, 4),
+    overworld_frame(gObjectEventPic_THKrisWatering, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THKrisWatering, 4, 4, 1),
+    overworld_frame(gObjectEventPic_THKrisWatering, 4, 4, 3),
+    overworld_frame(gObjectEventPic_THKrisWatering, 4, 4, 3),
+    overworld_frame(gObjectEventPic_THKrisWatering, 4, 4, 5),
+    overworld_frame(gObjectEventPic_THKrisWatering, 4, 4, 5),
+};
+static const struct SpriteFrameImage sPicTable_THSilverNormal[] = {
+    // Separate assets need explicit pointers: relativeFrames uses only images[0].
+    overworld_frame(gObjectEventPic_THSilverNormal, 2, 4, 0),
+    overworld_frame(gObjectEventPic_THSilverNormal, 2, 4, 1),
+    overworld_frame(gObjectEventPic_THSilverNormal, 2, 4, 2),
+    overworld_frame(gObjectEventPic_THSilverNormal, 2, 4, 3),
+    overworld_frame(gObjectEventPic_THSilverNormal, 2, 4, 4),
+    overworld_frame(gObjectEventPic_THSilverNormal, 2, 4, 5),
+    overworld_frame(gObjectEventPic_THSilverNormal, 2, 4, 6),
+    overworld_frame(gObjectEventPic_THSilverNormal, 2, 4, 7),
+    overworld_frame(gObjectEventPic_THSilverNormal, 2, 4, 8),
+    overworld_frame(gObjectEventPic_THSilverRunning, 2, 4, 0),
+    overworld_frame(gObjectEventPic_THSilverRunning, 2, 4, 1),
+    overworld_frame(gObjectEventPic_THSilverRunning, 2, 4, 2),
+    overworld_frame(gObjectEventPic_THSilverRunning, 2, 4, 3),
+    overworld_frame(gObjectEventPic_THSilverRunning, 2, 4, 4),
+    overworld_frame(gObjectEventPic_THSilverRunning, 2, 4, 5),
+    overworld_frame(gObjectEventPic_THSilverRunning, 2, 4, 6),
+    overworld_frame(gObjectEventPic_THSilverRunning, 2, 4, 7),
+    overworld_frame(gObjectEventPic_THSilverRunning, 2, 4, 8),
+};
+#endif
+
+#if THREE_HORIZONS
+static const struct SpriteFrameImage sPicTable_THElm[] = {
+    overworld_frame(gObjectEventPic_THElm, 2, 4, 0),
+    overworld_frame(gObjectEventPic_THElm, 2, 4, 1),
+    overworld_frame(gObjectEventPic_THElm, 2, 4, 2),
+    overworld_frame(gObjectEventPic_THElm, 2, 4, 3),
+    overworld_frame(gObjectEventPic_THElm, 2, 4, 4),
+    overworld_frame(gObjectEventPic_THElm, 2, 4, 5),
+    overworld_frame(gObjectEventPic_THElm, 2, 4, 6),
+    overworld_frame(gObjectEventPic_THElm, 2, 4, 7),
+    overworld_frame(gObjectEventPic_THElm, 2, 4, 8),
+};
+#endif

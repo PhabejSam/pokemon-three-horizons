@@ -1,4 +1,5 @@
 #include "config/general.h"
+#include "constants/three_horizons.h"
 #include "config/battle.h"
 #include "config/item.h"
 #include "constants/global.h"
@@ -1064,6 +1065,9 @@ EventScript_WhiteOut::
 	end
 
 EventScript_AfterWhiteOutHeal::
+	.if THREE_HORIZONS
+	goto TH_EventScript_CenterRecovery
+	.endif
 	lockall
 	msgbox gText_FirstShouldRestoreMonsHealth
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
@@ -1084,6 +1088,9 @@ EventScript_AfterWhiteOutHealMsg::
 	return
 
 EventScript_AfterWhiteOutMomHeal::
+#if THREE_HORIZONS
+    goto TH_EventScript_WhiteoutRecovery
+#endif
 	lockall
 	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_WalkInPlaceFasterDown
@@ -1738,3 +1745,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/battle_frontier.inc"
 	.include "data/scripts/apricorn_tree.inc"
 	.include "data/scripts/wild_encounter.inc"
+
+#if THREE_HORIZONS
+    .include "data/scripts/three_horizons/maps.inc"
+#endif

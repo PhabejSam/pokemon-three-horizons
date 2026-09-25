@@ -1,0 +1,130 @@
+{
+  "id": "MAP_TH_HOME_2F",
+  "name": "TH_Home2F",
+  "layout": "LAYOUT_PALLET_TOWN_PLAYERS_HOUSE_2F_FRLG",
+  "music": "MUS_RG_PALLET",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_PALLET_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_TH_CLOCK",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_TH_CLOCK",
+      "x": 7,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_EventScript_Clock",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_TH_HOME_1F",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "TH_CheckClockBeforeLeaving"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "TH_CheckClockBeforeLeaving"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_EventScript_HomePC"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_EventScript_BedroomSign"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_EventScript_Console"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_EventScript_Books"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_EventScript_Dresser"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_EventScript_Books"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_EventScript_Books"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH_EventScript_Bed"
+    }
+  ]
+}

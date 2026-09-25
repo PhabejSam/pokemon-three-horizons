@@ -1,3 +1,23 @@
+
+#if THREE_HORIZONS
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldUnderwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldFishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldWatering;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisUnderwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisFishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisWatering;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THSilverNormal;
+#endif
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanMachBike;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanSurfing;
@@ -401,7 +421,39 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvi
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTree;
 
+#if THREE_HORIZONS
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THElm;
+#endif
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
+#if THREE_HORIZONS
+    [OBJ_EVENT_GFX_TH_GOLD_NORMAL] = &gObjectEventGraphicsInfo_THGoldNormal,
+    [OBJ_EVENT_GFX_TH_GOLD_MACH_BIKE] = &gObjectEventGraphicsInfo_THGoldMachBike,
+    [OBJ_EVENT_GFX_TH_GOLD_ACRO_BIKE] = &gObjectEventGraphicsInfo_THGoldAcroBike,
+    [OBJ_EVENT_GFX_TH_GOLD_SURFING] = &gObjectEventGraphicsInfo_THGoldSurfing,
+    [OBJ_EVENT_GFX_TH_GOLD_UNDERWATER] = &gObjectEventGraphicsInfo_THGoldUnderwater,
+    [OBJ_EVENT_GFX_TH_GOLD_FIELD_MOVE] = &gObjectEventGraphicsInfo_THGoldFieldMove,
+    [OBJ_EVENT_GFX_TH_GOLD_FISHING] = &gObjectEventGraphicsInfo_THGoldFishing,
+    [OBJ_EVENT_GFX_TH_GOLD_WATERING] = &gObjectEventGraphicsInfo_THGoldWatering,
+    [OBJ_EVENT_GFX_TH_KRIS_NORMAL] = &gObjectEventGraphicsInfo_THKrisNormal,
+    [OBJ_EVENT_GFX_TH_KRIS_MACH_BIKE] = &gObjectEventGraphicsInfo_THKrisMachBike,
+    [OBJ_EVENT_GFX_TH_KRIS_ACRO_BIKE] = &gObjectEventGraphicsInfo_THKrisAcroBike,
+    [OBJ_EVENT_GFX_TH_KRIS_SURFING] = &gObjectEventGraphicsInfo_THKrisSurfing,
+    [OBJ_EVENT_GFX_TH_KRIS_UNDERWATER] = &gObjectEventGraphicsInfo_THKrisUnderwater,
+    [OBJ_EVENT_GFX_TH_KRIS_FIELD_MOVE] = &gObjectEventGraphicsInfo_THKrisFieldMove,
+    [OBJ_EVENT_GFX_TH_KRIS_FISHING] = &gObjectEventGraphicsInfo_THKrisFishing,
+    [OBJ_EVENT_GFX_TH_KRIS_WATERING] = &gObjectEventGraphicsInfo_THKrisWatering,
+    [OBJ_EVENT_GFX_TH_SILVER_NORMAL] = &gObjectEventGraphicsInfo_THSilverNormal,
+#endif
+
+#if THREE_HORIZONS
+    [OBJ_EVENT_GFX_TH_ELM] = &gObjectEventGraphicsInfo_THElm,
+    [OBJ_EVENT_GFX_TH_CLOCK] = &gObjectEventGraphicsInfo_THClock,
+#endif
+#if IS_FRLG || THREE_HORIZONS
+    [OBJ_EVENT_GFX_PROF_OAK]                 = &gObjectEventGraphicsInfo_ProfOak,
+    [OBJ_EVENT_GFX_MOM_FRLG]                 = &gObjectEventGraphicsInfo_MomFrlg,
+#endif
     [OBJ_EVENT_GFX_BRENDAN_NORMAL] =           &gObjectEventGraphicsInfo_BrendanNormal,
     [OBJ_EVENT_GFX_BRENDAN_MACH_BIKE] =        &gObjectEventGraphicsInfo_BrendanMachBike,
     [OBJ_EVENT_GFX_BRENDAN_SURFING] =          &gObjectEventGraphicsInfo_BrendanSurfing,
@@ -645,7 +697,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_OW_MON] =                   &gObjectEventGraphicsInfo_Follower,
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
     [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,
-#if IS_FRLG
+#if IS_FRLG || THREE_HORIZONS
     [OBJ_EVENT_GFX_RED_NORMAL] =               &gObjectEventGraphicsInfo_RedNormal,
     [OBJ_EVENT_GFX_RED_BIKE] =                 &gObjectEventGraphicsInfo_RedBike,
     [OBJ_EVENT_GFX_RED_SURF] =                 &gObjectEventGraphicsInfo_RedSurf,
@@ -713,7 +765,6 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CLERK]                    = &gObjectEventGraphicsInfo_Clerk,
     [OBJ_EVENT_GFX_MG_DELIVERYMAN]           = &gObjectEventGraphicsInfo_MGDeliveryman,
     [OBJ_EVENT_GFX_TRAINER_TOWER_DUDE]       = &gObjectEventGraphicsInfo_TrainerTowerDude,
-    [OBJ_EVENT_GFX_PROF_OAK]                 = &gObjectEventGraphicsInfo_ProfOak,
     [OBJ_EVENT_GFX_BLUE]                     = &gObjectEventGraphicsInfo_Blue,
     [OBJ_EVENT_GFX_BILL]                     = &gObjectEventGraphicsInfo_Bill,
     [OBJ_EVENT_GFX_LANCE]                    = &gObjectEventGraphicsInfo_Lance,
@@ -730,12 +781,13 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SABRINA]                  = &gObjectEventGraphicsInfo_Sabrina,
     [OBJ_EVENT_GFX_BLAINE]                   = &gObjectEventGraphicsInfo_Blaine,
     [OBJ_EVENT_GFX_GIOVANNI]                 = &gObjectEventGraphicsInfo_Giovanni,
-    [OBJ_EVENT_GFX_MOM_FRLG]                 = &gObjectEventGraphicsInfo_MomFrlg,
     [OBJ_EVENT_GFX_CELIO]                    = &gObjectEventGraphicsInfo_Celio,
     [OBJ_EVENT_GFX_TEACHY_TV_HOST]           = &gObjectEventGraphicsInfo_TeachyTVHost,
     [OBJ_EVENT_GFX_GYM_GUY]                  = &gObjectEventGraphicsInfo_GymGuy,
     [OBJ_EVENT_GFX_TOWN_MAP]                 = &gObjectEventGraphicsInfo_TownMap,
+#if !THREE_HORIZONS
     [OBJ_EVENT_GFX_POKEDEX]                  = &gObjectEventGraphicsInfo_Pokedex,
+#endif
     [OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG]       = &gObjectEventGraphicsInfo_CuttableTreeFrlg,
     [OBJ_EVENT_GFX_BREAKABLE_ROCK_FRLG]      = &gObjectEventGraphicsInfo_BreakableRockFrlg,
     [OBJ_EVENT_GFX_PUSHABLE_BOULDER_FRLG]    = &gObjectEventGraphicsInfo_PushableBoulderFrlg,

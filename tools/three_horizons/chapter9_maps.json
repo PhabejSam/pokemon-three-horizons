@@ -1,0 +1,596 @@
+{
+  "maps": [
+    {
+      "source": "Route22_Frlg",
+      "name": "TH_Route22",
+      "id": "MAP_TH_ROUTE22",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_ROUTE22"
+    },
+    {
+      "source": "Route22_NorthEntrance_Frlg",
+      "name": "TH_LeagueGate",
+      "id": "MAP_TH_LEAGUE_GATE",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_ROUTE22_NORTH_ENTRANCE"
+    },
+    {
+      "source": "Route3_Frlg",
+      "name": "TH_Route3",
+      "id": "MAP_TH_ROUTE3",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_ROUTE3"
+    },
+    {
+      "source": "Route4_Frlg",
+      "name": "TH_Route4",
+      "id": "MAP_TH_ROUTE4",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_ROUTE4"
+    },
+    {
+      "source": "Route4_PokemonCenter_1F_Frlg",
+      "name": "TH_Route4Center",
+      "id": "MAP_TH_ROUTE4_CENTER",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG"
+    },
+    {
+      "source": "MtMoon_1F_Frlg",
+      "name": "TH_MtMoon1F",
+      "id": "MAP_TH_MT_MOON_1F",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_MT_MOON_1F"
+    },
+    {
+      "source": "MtMoon_B1F_Frlg",
+      "name": "TH_MtMoonB1F",
+      "id": "MAP_TH_MT_MOON_B1F",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_MT_MOON_B1F"
+    },
+    {
+      "source": "MtMoon_B2F_Frlg",
+      "name": "TH_MtMoonB2F",
+      "id": "MAP_TH_MT_MOON_B2F",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_MT_MOON_B2F"
+    },
+    {
+      "source": "CeruleanCity_Frlg",
+      "name": "TH_Cerulean",
+      "id": "MAP_TH_CERULEAN",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_CERULEAN_CITY"
+    },
+    {
+      "source": "CeruleanCity_Gym_Frlg",
+      "name": "TH_CeruleanGym",
+      "id": "MAP_TH_CERULEAN_GYM",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_CERULEAN_CITY_GYM"
+    },
+    {
+      "source": "CeruleanCity_Mart_Frlg",
+      "name": "TH_CeruleanMart",
+      "id": "MAP_TH_CERULEAN_MART",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_MART_FRLG"
+    },
+    {
+      "source": "CeruleanCity_PokemonCenter_1F_Frlg",
+      "name": "TH_CeruleanCenter",
+      "id": "MAP_TH_CERULEAN_CENTER",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG"
+    },
+    {
+      "source": "CeruleanCity_House1_Frlg",
+      "name": "TH_CeruleanHouse1",
+      "id": "MAP_TH_CERULEAN_HOUSE1",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_CERULEAN_CITY_HOUSE1"
+    },
+    {
+      "source": "CeruleanCity_House2_Frlg",
+      "name": "TH_CeruleanHouse2",
+      "id": "MAP_TH_CERULEAN_HOUSE2",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_CERULEAN_CITY_HOUSE2"
+    },
+    {
+      "source": "CeruleanCity_House3_Frlg",
+      "name": "TH_CeruleanHouse3",
+      "id": "MAP_TH_CERULEAN_HOUSE3",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_HOUSE1_FRLG"
+    },
+    {
+      "source": "CeruleanCity_House4_Frlg",
+      "name": "TH_CeruleanHouse4",
+      "id": "MAP_TH_CERULEAN_HOUSE4",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_HOUSE1_FRLG"
+    },
+    {
+      "source": "CeruleanCity_House5_Frlg",
+      "name": "TH_CeruleanHouse5",
+      "id": "MAP_TH_CERULEAN_HOUSE5",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_CERULEAN_CITY_HOUSE5"
+    },
+    {
+      "source": "CeruleanCity_BikeShop_Frlg",
+      "name": "TH_CeruleanBikeShop",
+      "id": "MAP_TH_CERULEAN_BIKE_SHOP",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_CERULEAN_CITY_BIKE_SHOP"
+    },
+    {
+      "source": "PalletTown_RivalsHouse_Frlg",
+      "name": "TH_RivalHouse",
+      "id": "MAP_TH_RIVAL_HOUSE",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_PALLET_TOWN_RIVALS_HOUSE"
+    },
+    {
+      "source": "ViridianCity_House_Frlg",
+      "name": "TH_ViridianHouse",
+      "id": "MAP_TH_VIRIDIAN_HOUSE",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_VIRIDIAN_CITY_HOUSE"
+    },
+    {
+      "source": "ViridianCity_School_Frlg",
+      "name": "TH_ViridianSchool",
+      "id": "MAP_TH_VIRIDIAN_SCHOOL",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_VIRIDIAN_CITY_SCHOOL"
+    },
+    {
+      "source": "ViridianCity_Gym_Frlg",
+      "name": "TH_ViridianGym",
+      "id": "MAP_TH_VIRIDIAN_GYM",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_VIRIDIAN_CITY_GYM"
+    },
+    {
+      "source": "PewterCity_House1_Frlg",
+      "name": "TH_PewterHouse1",
+      "id": "MAP_TH_PEWTER_HOUSE1",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_HOUSE2_FRLG"
+    },
+    {
+      "source": "PewterCity_House2_Frlg",
+      "name": "TH_PewterHouse2",
+      "id": "MAP_TH_PEWTER_HOUSE2",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_HOUSE2_FRLG"
+    },
+    {
+      "source": "PewterCity_Museum_1F_Frlg",
+      "name": "TH_PewterMuseum1F",
+      "id": "MAP_TH_PEWTER_MUSEUM1_F",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_PEWTER_CITY_MUSEUM_1F"
+    },
+    {
+      "source": "PewterCity_Museum_2F_Frlg",
+      "name": "TH_PewterMuseum2F",
+      "id": "MAP_TH_PEWTER_MUSEUM2_F",
+      "script_owner": "chapter9.inc",
+      "layout": "LAYOUT_PEWTER_CITY_MUSEUM_2F"
+    }
+  ],
+  "pickups": [
+    {
+      "map": "TH_Route3",
+      "x": 26,
+      "y": 9,
+      "item": "ITEM_POTION",
+      "flag": "FLAG_TH_PICKUP_0"
+    },
+    {
+      "map": "TH_Route4",
+      "x": 67,
+      "y": 5,
+      "item": "ITEM_TM05",
+      "flag": "FLAG_TH_PICKUP_1"
+    },
+    {
+      "map": "TH_Route4",
+      "x": 43,
+      "y": 2,
+      "item": "ITEM_GREAT_BALL",
+      "flag": "FLAG_TH_PICKUP_2"
+    },
+    {
+      "map": "TH_Route4",
+      "x": 5,
+      "y": 4,
+      "item": "ITEM_SUPER_POTION",
+      "flag": "FLAG_TH_PICKUP_3"
+    },
+    {
+      "map": "TH_Route4",
+      "x": 67,
+      "y": 17,
+      "item": "ITEM_RAZZ_BERRY",
+      "flag": "FLAG_TH_PICKUP_4"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "x": 2,
+      "y": 22,
+      "item": "ITEM_PARALYZE_HEAL",
+      "flag": "FLAG_TH_PICKUP_5"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "x": 11,
+      "y": 35,
+      "item": "ITEM_TM09",
+      "flag": "FLAG_TH_PICKUP_6"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "x": 26,
+      "y": 32,
+      "item": "ITEM_POTION",
+      "flag": "FLAG_TH_PICKUP_7"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "x": 42,
+      "y": 35,
+      "item": "ITEM_RARE_CANDY",
+      "flag": "FLAG_TH_PICKUP_8"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "x": 44,
+      "y": 21,
+      "item": "ITEM_SUPER_REPEL",
+      "flag": "FLAG_TH_PICKUP_9"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "x": 3,
+      "y": 2,
+      "item": "ITEM_MOON_STONE",
+      "flag": "FLAG_TH_PICKUP_10"
+    },
+    {
+      "map": "TH_MtMoonB1F",
+      "x": 45,
+      "y": 2,
+      "item": "ITEM_TINY_MUSHROOM",
+      "flag": "FLAG_TH_PICKUP_11"
+    },
+    {
+      "map": "TH_MtMoonB1F",
+      "x": 25,
+      "y": 2,
+      "item": "ITEM_TINY_MUSHROOM",
+      "flag": "FLAG_TH_PICKUP_12"
+    },
+    {
+      "map": "TH_MtMoonB1F",
+      "x": 39,
+      "y": 35,
+      "item": "ITEM_TINY_MUSHROOM",
+      "flag": "FLAG_TH_PICKUP_13"
+    },
+    {
+      "map": "TH_MtMoonB1F",
+      "x": 25,
+      "y": 35,
+      "item": "ITEM_BIG_MUSHROOM",
+      "flag": "FLAG_TH_PICKUP_14"
+    },
+    {
+      "map": "TH_MtMoonB1F",
+      "x": 6,
+      "y": 11,
+      "item": "ITEM_BIG_MUSHROOM",
+      "flag": "FLAG_TH_PICKUP_15"
+    },
+    {
+      "map": "TH_MtMoonB1F",
+      "x": 26,
+      "y": 34,
+      "item": "ITEM_BIG_MUSHROOM",
+      "flag": "FLAG_TH_PICKUP_16"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "x": 30,
+      "y": 26,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_TH_PICKUP_17"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "x": 35,
+      "y": 5,
+      "item": "ITEM_TM46",
+      "flag": "FLAG_TH_PICKUP_18"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "x": 24,
+      "y": 6,
+      "item": "ITEM_REVIVE",
+      "flag": "FLAG_TH_PICKUP_19"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "x": 3,
+      "y": 11,
+      "item": "ITEM_ANTIDOTE",
+      "flag": "FLAG_TH_PICKUP_20"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "x": 19,
+      "y": 16,
+      "item": "ITEM_MOON_STONE",
+      "flag": "FLAG_TH_PICKUP_21"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "x": 39,
+      "y": 10,
+      "item": "ITEM_ETHER",
+      "flag": "FLAG_TH_PICKUP_22"
+    },
+    {
+      "map": "TH_Cerulean",
+      "x": 18,
+      "y": 7,
+      "item": "ITEM_RARE_CANDY",
+      "flag": "FLAG_TH_PICKUP_23"
+    },
+    {
+      "map": "TH_ViridianGym",
+      "x": 2,
+      "y": 2,
+      "item": "ITEM_MACHO_BRACE",
+      "flag": "FLAG_TH_PICKUP_24"
+    },
+    {
+      "map": "TH_Route2",
+      "x": 17,
+      "y": 54,
+      "item": "ITEM_ETHER",
+      "flag": "FLAG_TH_PICKUP_25"
+    },
+    {
+      "map": "TH_Route2",
+      "x": 17,
+      "y": 64,
+      "item": "ITEM_PARALYZE_HEAL",
+      "flag": "FLAG_TH_PICKUP_26"
+    },
+    {
+      "map": "TH_ViridianForest",
+      "x": 3,
+      "y": 22,
+      "item": "ITEM_POTION",
+      "flag": "FLAG_TH_PICKUP_27"
+    },
+    {
+      "map": "TH_ViridianForest",
+      "x": 27,
+      "y": 57,
+      "item": "ITEM_ANTIDOTE",
+      "flag": "FLAG_TH_PICKUP_28"
+    },
+    {
+      "map": "TH_ViridianForest",
+      "x": 5,
+      "y": 41,
+      "item": "ITEM_POKE_BALL",
+      "flag": "FLAG_TH_PICKUP_29"
+    },
+    {
+      "map": "TH_ViridianForest",
+      "x": 40,
+      "y": 21,
+      "item": "ITEM_ANTIDOTE",
+      "flag": "FLAG_TH_PICKUP_30"
+    },
+    {
+      "map": "TH_ViridianForest",
+      "x": 21,
+      "y": 34,
+      "item": "ITEM_POTION",
+      "flag": "FLAG_TH_PICKUP_31"
+    },
+    {
+      "map": "TH_ViridianForest",
+      "x": 49,
+      "y": 60,
+      "item": "ITEM_POTION",
+      "flag": "FLAG_TH_PICKUP_32"
+    }
+  ],
+  "trainers": [
+    {
+      "map": "TH_Route3",
+      "source": "TRAINER_LASS_ROBIN",
+      "script": "TH_Trainer9_LASS_ROBIN",
+      "native_script": "Route3_EventScript_Robin",
+      "id": "TRAINER_TH9_LASS_ROBIN"
+    },
+    {
+      "map": "TH_Route3",
+      "source": "TRAINER_BUG_CATCHER_JAMES",
+      "script": "TH_Trainer9_BUG_CATCHER_JAMES",
+      "native_script": "Route3_EventScript_James",
+      "id": "TRAINER_TH9_BUG_CATCHER_JAMES"
+    },
+    {
+      "map": "TH_Route3",
+      "source": "TRAINER_LASS_SALLY",
+      "script": "TH_Trainer9_LASS_SALLY",
+      "native_script": "Route3_EventScript_Sally",
+      "id": "TRAINER_TH9_LASS_SALLY"
+    },
+    {
+      "map": "TH_Route3",
+      "source": "TRAINER_BUG_CATCHER_GREG",
+      "script": "TH_Trainer9_BUG_CATCHER_GREG",
+      "native_script": "Route3_EventScript_Greg",
+      "id": "TRAINER_TH9_BUG_CATCHER_GREG"
+    },
+    {
+      "map": "TH_Route3",
+      "source": "TRAINER_YOUNGSTER_CALVIN",
+      "script": "TH_Trainer9_YOUNGSTER_CALVIN",
+      "native_script": "Route3_EventScript_Calvin",
+      "id": "TRAINER_TH9_YOUNGSTER_CALVIN"
+    },
+    {
+      "map": "TH_Route3",
+      "source": "TRAINER_LASS_JANICE",
+      "script": "TH_Trainer9_LASS_JANICE",
+      "native_script": "Route3_EventScript_Janice",
+      "id": "TRAINER_TH9_LASS_JANICE"
+    },
+    {
+      "map": "TH_Route3",
+      "source": "TRAINER_BUG_CATCHER_COLTON",
+      "script": "TH_Trainer9_BUG_CATCHER_COLTON",
+      "native_script": "Route3_EventScript_Colton",
+      "id": "TRAINER_TH9_BUG_CATCHER_COLTON"
+    },
+    {
+      "map": "TH_Route3",
+      "source": "TRAINER_YOUNGSTER_BEN",
+      "script": "TH_Trainer9_YOUNGSTER_BEN",
+      "native_script": "Route3_EventScript_Ben",
+      "id": "TRAINER_TH9_YOUNGSTER_BEN"
+    },
+    {
+      "map": "TH_Route4",
+      "source": "TRAINER_LASS_CRISSY",
+      "script": "TH_Trainer9_LASS_CRISSY",
+      "native_script": "Route4_EventScript_Crissy",
+      "id": "TRAINER_TH9_LASS_CRISSY"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "source": "TRAINER_LASS_IRIS",
+      "script": "TH_Trainer9_LASS_IRIS",
+      "native_script": "MtMoon_1F_EventScript_Iris",
+      "id": "TRAINER_TH9_LASS_IRIS"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "source": "TRAINER_BUG_CATCHER_ROBBY",
+      "script": "TH_Trainer9_BUG_CATCHER_ROBBY",
+      "native_script": "MtMoon_1F_EventScript_Robby",
+      "id": "TRAINER_TH9_BUG_CATCHER_ROBBY"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "source": "TRAINER_SUPER_NERD_JOVAN",
+      "script": "TH_Trainer9_SUPER_NERD_JOVAN",
+      "native_script": "MtMoon_1F_EventScript_Jovan",
+      "id": "TRAINER_TH9_SUPER_NERD_JOVAN"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "source": "TRAINER_LASS_MIRIAM",
+      "script": "TH_Trainer9_LASS_MIRIAM",
+      "native_script": "MtMoon_1F_EventScript_Miriam",
+      "id": "TRAINER_TH9_LASS_MIRIAM"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "source": "TRAINER_BUG_CATCHER_KENT",
+      "script": "TH_Trainer9_BUG_CATCHER_KENT",
+      "native_script": "MtMoon_1F_EventScript_Kent",
+      "id": "TRAINER_TH9_BUG_CATCHER_KENT"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "source": "TRAINER_YOUNGSTER_JOSH",
+      "script": "TH_Trainer9_YOUNGSTER_JOSH",
+      "native_script": "MtMoon_1F_EventScript_Josh",
+      "id": "TRAINER_TH9_YOUNGSTER_JOSH"
+    },
+    {
+      "map": "TH_MtMoon1F",
+      "source": "TRAINER_HIKER_MARCOS",
+      "script": "TH_Trainer9_HIKER_MARCOS",
+      "native_script": "MtMoon_1F_EventScript_Marcos",
+      "id": "TRAINER_TH9_HIKER_MARCOS"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "source": "TRAINER_SUPER_NERD_MIGUEL",
+      "script": "TH_Trainer9_SUPER_NERD_MIGUEL",
+      "native_script": "MtMoon_B2F_EventScript_Miguel",
+      "id": "TRAINER_TH9_SUPER_NERD_MIGUEL"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "source": "TRAINER_TEAM_ROCKET_GRUNT_4",
+      "script": "TH_Trainer9_TEAM_ROCKET_GRUNT_4",
+      "native_script": "MtMoon_B2F_EventScript_Grunt4",
+      "id": "TRAINER_TH9_TEAM_ROCKET_GRUNT_4"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "source": "TRAINER_TEAM_ROCKET_GRUNT_1",
+      "script": "TH_Trainer9_TEAM_ROCKET_GRUNT_1",
+      "native_script": "MtMoon_B2F_EventScript_Grunt1",
+      "id": "TRAINER_TH9_TEAM_ROCKET_GRUNT_1"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "source": "TRAINER_TEAM_ROCKET_GRUNT_3",
+      "script": "TH_Trainer9_TEAM_ROCKET_GRUNT_3",
+      "native_script": "MtMoon_B2F_EventScript_Grunt3",
+      "id": "TRAINER_TH9_TEAM_ROCKET_GRUNT_3"
+    },
+    {
+      "map": "TH_MtMoonB2F",
+      "source": "TRAINER_TEAM_ROCKET_GRUNT_2",
+      "script": "TH_Trainer9_TEAM_ROCKET_GRUNT_2",
+      "native_script": "MtMoon_B2F_EventScript_Grunt2",
+      "id": "TRAINER_TH9_TEAM_ROCKET_GRUNT_2"
+    },
+    {
+      "map": "TH_Cerulean",
+      "source": "TRAINER_TEAM_ROCKET_GRUNT_5",
+      "script": "TH_Trainer9_TEAM_ROCKET_GRUNT_5",
+      "native_script": "CeruleanCity_EventScript_Grunt",
+      "id": "TRAINER_TH9_TEAM_ROCKET_GRUNT_5"
+    },
+    {
+      "map": "TH_CeruleanGym",
+      "source": "TRAINER_SWIMMER_MALE_LUIS",
+      "script": "TH_Trainer9_SWIMMER_MALE_LUIS",
+      "native_script": "CeruleanCity_Gym_EventScript_Luis",
+      "id": "TRAINER_TH9_SWIMMER_MALE_LUIS"
+    },
+    {
+      "map": "TH_CeruleanGym",
+      "source": "TRAINER_PICNICKER_DIANA",
+      "script": "TH_Trainer9_PICNICKER_DIANA",
+      "native_script": "CeruleanCity_Gym_EventScript_Diana",
+      "id": "TRAINER_TH9_PICNICKER_DIANA"
+    },
+    {
+      "map": "TH_CeruleanGym",
+      "source": "TRAINER_LEADER_MISTY",
+      "script": "TH_Trainer9_LEADER_MISTY",
+      "native_script": "CeruleanCity_Gym_EventScript_Misty",
+      "id": "TRAINER_TH9_LEADER_MISTY"
+    }
+  ]
+}

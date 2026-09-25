@@ -1,3 +1,28 @@
+#if THREE_HORIZONS
+static const struct OamData sTHClockOam = {.affineMode = ST_OAM_AFFINE_NORMAL, .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16)};
+static const union AffineAnimCmd sTHClockScale[] = {AFFINEANIMCMD_FRAME(128, 128, 0, 0), AFFINEANIMCMD_END};
+static const union AffineAnimCmd *const sTHClockAnims[] = {sTHClockScale};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_CLOCK,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_3,
+    .shadowSize = SHADOW_SIZE_NONE,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &sTHClockOam,
+    .subspriteTables = NULL,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_THClock,
+    .affineAnims = sTHClockAnims,
+};
+#endif
+
+
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
@@ -4467,7 +4492,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTree = {
     .images = sPicTable_ApricornTree,
 };
 
-#if IS_FRLG
+#if IS_FRLG || THREE_HORIZONS
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedNormal = {
     .tileTag = TAG_NONE,
@@ -4483,7 +4508,11 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedNormal = {
     .tracks = TRACKS_FOOT,
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
+#if THREE_HORIZONS
+    .anims = sAnimTable_THRedLeafNormal,
+#else
     .anims = sAnimTable_BrendanMayNormal,
+#endif
     .images = sPicTable_RedNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
@@ -4673,7 +4702,11 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenNormal = {
     .tracks = TRACKS_FOOT,
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
+#if THREE_HORIZONS
+    .anims = sAnimTable_THRedLeafNormal,
+#else
     .anims = sAnimTable_BrendanMayNormal,
+#endif
     .images = sPicTable_GreenNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
@@ -5609,24 +5642,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NurseFrlg = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ProfOak = {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 256,
-    .width = 16,
-    .height = 32,
-    .paletteSlot = PALSLOT_NPC_4,
-    .shadowSize = SHADOW_SIZE_M,
-    .inanimate = FALSE,
-    .compressed = FALSE,
-    .tracks = TRACKS_FOOT,
-    .oam = &gObjectEventBaseOam_16x32,
-    .subspriteTables = sOamTables_16x32,
-    .anims = sAnimTable_Standard,
-    .images = sPicTable_ProfOak,
-    .affineAnims = gDummySpriteAffineAnimTable,
-};
+
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man = {
     .tileTag = TAG_NONE,
@@ -7167,24 +7183,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Clefairy = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MomFrlg = {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 256,
-    .width = 16,
-    .height = 32,
-    .paletteSlot = PALSLOT_NPC_1,
-    .shadowSize = SHADOW_SIZE_M,
-    .inanimate = FALSE,
-    .compressed = FALSE,
-    .tracks = TRACKS_FOOT,
-    .oam = &gObjectEventBaseOam_16x32,
-    .subspriteTables = sOamTables_16x32,
-    .anims = sAnimTable_Standard,
-    .images = sPicTable_MomFrlg,
-    .affineAnims = gDummySpriteAffineAnimTable,
-};
+
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Seagallop = {
     .tileTag = TAG_NONE,
@@ -7225,3 +7224,356 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSAnne = {
 };
 
 #endif // IS_FRLG
+
+#if IS_FRLG || THREE_HORIZONS
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ProfOak = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_ProfOak,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MomFrlg = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_1,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_MomFrlg,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+#endif
+
+#if THREE_HORIZONS
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldNormal = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_BrendanMayNormal,
+    .images = sPicTable_THGoldNormal,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldMachBike = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_GOLD_MACHBIKE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_THGoldMachBike,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldAcroBike = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_GOLD_ACROBIKE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_AcroBike,
+    .images = sPicTable_THGoldAcroBike,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldSurfing = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_GOLD_SURFING,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Surfing,
+    .images = sPicTable_THGoldSurfing,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldUnderwater = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_GOLD_UNDERWATER,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_THGoldUnderwater,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldFieldMove = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_GOLD_FIELDMOVE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_FieldMove,
+    .images = sPicTable_THGoldFieldMove,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldFishing = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_GOLD_FISHING,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Fishing,
+    .images = sPicTable_THGoldFishing,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THGoldWatering = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_GOLD_WATERING,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_THGoldWatering,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisNormal = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_KRIS_NORMAL,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_BrendanMayNormal,
+    .images = sPicTable_THKrisNormal,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisMachBike = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_KRIS_MACHBIKE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_THKrisMachBike,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisAcroBike = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_KRIS_ACROBIKE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_AcroBike,
+    .images = sPicTable_THKrisAcroBike,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisSurfing = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_KRIS_SURFING,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Surfing,
+    .images = sPicTable_THKrisSurfing,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisUnderwater = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_KRIS_UNDERWATER,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_THKrisUnderwater,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisFieldMove = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_KRIS_FIELDMOVE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_FieldMove,
+    .images = sPicTable_THKrisFieldMove,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisFishing = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_KRIS_FISHING,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Fishing,
+    .images = sPicTable_THKrisFishing,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THKrisWatering = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_KRIS_WATERING,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_THKrisWatering,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THSilverNormal = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_SILVER_NORMAL,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_BrendanMayNormal,
+    .images = sPicTable_THSilverNormal,
+};
+#endif
+
+#if THREE_HORIZONS
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THElm = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_TH_ELM,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_THElm,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+#endif

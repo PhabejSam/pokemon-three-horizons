@@ -349,6 +349,56 @@
       "y": 12,
       "respawn_map": "MAP_SIX_ISLAND_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_SIX_ISLAND_NURSE"
+    },
+    {
+      "id": "HEAL_LOCATION_TH_HOME",
+      "map": "MAP_TH_HOME_1F",
+      "x": 8,
+      "y": 5,
+      "respawn_map": "MAP_TH_HOME_1F",
+      "respawn_npc": "LOCALID_TH_MOM",
+      "respawn_x": 8,
+      "respawn_y": 5
+    },
+    {
+      "id": "HEAL_LOCATION_TH_VIRIDIAN",
+      "map": "MAP_TH_VIRIDIAN_CENTER",
+      "x": 7,
+      "y": 4,
+      "respawn_map": "MAP_TH_VIRIDIAN_CENTER",
+      "respawn_npc": "LOCALID_TH_VIRIDIAN_NURSE",
+      "respawn_x": 7,
+      "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_TH_PEWTER",
+      "map": "MAP_TH_PEWTER_CENTER",
+      "x": 7,
+      "y": 4,
+      "respawn_map": "MAP_TH_PEWTER_CENTER",
+      "respawn_npc": "LOCALID_TH_PEWTER_NURSE",
+      "respawn_x": 7,
+      "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_TH_ROUTE4",
+      "map": "MAP_TH_ROUTE4_CENTER",
+      "x": 7,
+      "y": 4,
+      "respawn_map": "MAP_TH_ROUTE4_CENTER",
+      "respawn_npc": "LOCALID_TH_ROUTE4_NURSE",
+      "respawn_x": 7,
+      "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_TH_CERULEAN",
+      "map": "MAP_TH_CERULEAN_CENTER",
+      "x": 7,
+      "y": 4,
+      "respawn_map": "MAP_TH_CERULEAN_CENTER",
+      "respawn_npc": "LOCALID_TH_CERULEAN_NURSE",
+      "respawn_x": 7,
+      "respawn_y": 4
     }
   ]
 }
