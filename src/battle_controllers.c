@@ -2674,7 +2674,7 @@ void BtlController_HandlePrintString(enum BattlerId battler)
     // else
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
 
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+    if (IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) && GetBattlerSide(battler) == B_SIDE_OPPONENT)
     {
         switch (*stringId)
         {

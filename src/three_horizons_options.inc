@@ -26,7 +26,7 @@ static void TH_DrawOptions(u8 taskId)
         if (i < ARRAY_COUNT(values))
             AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, values[i], 136, i * 16 + 1, TEXT_SKIP_DRAW, NULL);
     }
-    AddTextPrinterParameterized(WIN_OPTIONS, FONT_SMALL, COMPOUND_STRING("LEFT/RIGHT: CHANGE\nAuto-run: hold B to walk."), 8, 105, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(WIN_OPTIONS, FONT_SMALL, COMPOUND_STRING("LEFT/RIGHT: CHANGE  B: EXIT"), 8, 97, TEXT_SKIP_DRAW, NULL);
     HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
     CopyWindowToVram(WIN_HEADER, COPYWIN_FULL);
     CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);

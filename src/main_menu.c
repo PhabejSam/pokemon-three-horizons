@@ -236,10 +236,14 @@ static void CB2_THNameRivalScreen(void)
 }
 #endif
 #if THREE_HORIZONS
-void TH_ShowRivalIntroduction(MainCallback next);
+static EWRAM_DATA bool8 sTHPresentRival = FALSE;
+static void Task_THIntroduceRival(u8 taskId);
+static void Task_THWaitRivalName(u8 taskId);
+static void Task_THStartRivalName(u8 taskId);
 static void CB2_THNameRival(void)
 {
-    TH_ShowRivalIntroduction(CB2_THNameRivalScreen);
+    sTHPresentRival = TRUE;
+    CB2_NewGameBirchSpeech_ReturnFromNamingScreen();
 }
 #endif
 static void Task_NewGameBirchSpeech_CreateNameYesNo(u8);
@@ -1917,6 +1921,15 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     gSprites[spriteId].x = 180;
     gSprites[spriteId].y = 60;
     gSprites[spriteId].invisible = FALSE;
+#if THREE_HORIZONS
+    if (sTHPresentRival)
+    {
+        sTHPresentRival = FALSE;
+        gSprites[spriteId].invisible = TRUE;
+        spriteId = CreateTrainerPicSprite(TRAINER_PIC_RIVAL_EARLY_FRLG, TRUE, 180, 60, 0, TAG_NONE);
+        gTasks[taskId].func = Task_THIntroduceRival;
+    }
+#endif
     gTasks[taskId].tPlayerSpriteId = spriteId;
     SetGpuReg(REG_OFFSET_BG1HOFS, -60);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
@@ -1938,6 +1951,48 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
+
+#if THREE_HORIZONS
+// Reuse the player's introduction stage, including its platform and text frame.
+static void Task_THIntroduceRival(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+    if (gTasks[taskId].tBG1HOFS < 0)
+    {
+        gTasks[taskId].tBG1HOFS += 2;
+        gSprites[gTasks[taskId].tPlayerSpriteId].x -= 2;
+        SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].tBG1HOFS);
+        return;
+    }
+    DrawDialogFrameWithCustomTile(0, TRUE, BIRCH_DLG_BASE_TILE_NUM);
+    NewGameBirchSpeech_ClearWindow(0);
+    StringCopy(gStringVar4, COMPOUND_STRING("Your friend from PALLET is ready\nto begin his journey, too.\pWhat is his name?"));
+    AddTextPrinterForMessage(TRUE);
+    gTasks[taskId].func = Task_THWaitRivalName;
+}
+
+static void Task_THWaitRivalName(u8 taskId)
+{
+    if (!RunTextPrintersAndIsPrinter0Active() && JOY_NEW(A_BUTTON | B_BUTTON))
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_THStartRivalName;
+    }
+}
+
+static void Task_THStartRivalName(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        FreeAndDestroyTrainerPicSprite(gTasks[taskId].tPlayerSpriteId);
+        FreeAndDestroyMonPicSprite(gTasks[taskId].tLotadSpriteId);
+        FreeAllWindowBuffers();
+        DestroyTask(taskId);
+        SetMainCallback2(CB2_THNameRivalScreen);
+    }
+}
+#endif
 
 static void SpriteCB_Null(struct Sprite *sprite)
 {

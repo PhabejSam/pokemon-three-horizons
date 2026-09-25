@@ -605,9 +605,15 @@ TH_Lab_IntroApproach:
     walk_up
     walk_up
     walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_left
+    face_up
     step_end
 TH_Text_JointResearch:
-    .string "OAK: Welcome! Come a little closer.\nWe have something to show you.\pPOKéMON from JOHTO and HOENN have\nbeen appearing here in KANTO.\pELM, BIRCH and I are studying how\nthese habitats are changing.$"
+    .string "OAK: Welcome, {PLAYER}!\nWe have something to show you.\pPOKéMON from JOHTO and HOENN have\nbeen appearing here in KANTO.\pELM, BIRCH and I are studying how\nthese habitats are changing.$"
 TH_Text_ElmWelcome:
     .string "ELM: A partner can help us discover\nwhat brings these POKéMON together.$"
 TH_Text_BirchWelcome:
