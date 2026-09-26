@@ -1,53 +1,306 @@
-# About `pokeemerald-expansion`
+# Pokémon: Three Horizons
 
-![Gif that shows debugging functionality that is unique to pokeemerald-expansion such as rerolling Trainer ID, Cheat Start, PC from Debug Menu, Debug PC Fill, Pokémon Sprite Visualizer, Debug Warp to Map, and Battle Debug Menu](https://github.com/user-attachments/assets/cf9dfbee-4c6b-4bca-8e0a-07f116ef891c) ![Gif that shows overworld functionality that is unique to pokeemerald-expansion such as indoor running, BW2 style map popups, overworld followers, DNA Splicers, Gen 1 style fishing, OW Item descriptions, Quick Run from Battle, Use Last Ball, Wild Double Battles, and Catch from EXP](https://github.com/user-attachments/assets/383af243-0904-4d41-bced-721492fbc48e) ![Gif that shows off a number of modern Pokémon battle mechanics happening in the pokeemerald-expansion engine: 2 vs 1 battles, modern Pokémon, items, moves, abilities, fully customizable opponents and partners, Trainer Slides, and generational gimmicks](https://github.com/user-attachments/assets/50c576bc-415e-4d66-a38f-ad712f3316be)
+> One trainer. Three regions. One continuous adventure.
 
-<!-- If you want to re-record or change these gifs, here are some notes that I used: https://files.catbox.moe/05001g.md -->
+**Pokémon: Three Horizons** is a story-driven Pokémon Emerald ROM hack built with
+[pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion).
 
-**`pokeemerald-expansion`** is a GBA ROM hack base that equips developers with a comprehensive toolkit for creating Pokémon ROM hacks. **`pokeemerald-expansion`** is built on top of [pret's `pokeemerald`](https://github.com/pret/pokeemerald) decompilation project. **It is not a playable Pokémon game on its own.**
+The long-term goal is to connect **Kanto, Johto, and Hoenn** into one continuous Pokémon journey rather than three separate games stitched together.
 
-# [Features](FEATURES.md)
+The project is currently in active development.
 
-**`pokeemerald-expansion`** offers hundreds of features from various [core series Pokémon games](https://bulbapedia.bulbagarden.net/wiki/Core_series), along with popular quality-of-life enhancements designed to streamline development and improve the player experience. A full list of those features can be found in [`FEATURES.md`](FEATURES.md).
+---
 
-# [Credits](CREDITS.md)
+## 🚧 Development Status
 
- [![](https://img.shields.io/github/all-contributors/rh-hideout/pokeemerald-expansion/upcoming)](CREDITS.md)
+**Current playable development content:**
 
-If you use **`pokeemerald-expansion`**, please credit **RHH (Rom Hacking Hideout)**. Optionally, include the version number for clarity.
+✅ Pallet Town  
+✅ Route 1  
+✅ Viridian area  
+✅ Pewter City & Brock  
+✅ Route 3  
+✅ Mt. Moon  
+✅ Route 4  
+✅ Cerulean City & Misty  
 
-```
-Based off RHH's pokeemerald-expansion 1.17.0 https://github.com/rh-hideout/pokeemerald-expansion/
-```
+🚧 Next: Bill, Vermilion City, and the S.S. Anne
 
-Please consider [crediting all contributors](CREDITS.md) involved in the project!
+Future development will continue through the remainder of Kanto before expanding into Johto and Hoenn.
 
-# Choosing `pokeemerald` or **`pokeemerald-expansion`**
+This is still an early development build. Features, maps, balance, dialogue, and save compatibility may change.
 
-- **`pokeemerald-expansion`** supports multiplayer functionality with other games built on **`pokeemerald-expansion`**. It is not compatible with official Pokémon games.
-- If compatibility with official games is important, use [`pokeemerald`](https://github.com/pret/pokeemerald). Otherwise, we recommend using **`pokeemerald-expansion`**.
-- **`pokeemerald-expansion`** incorporates regular updates from `pokeemerald`, including bug fixes and documentation improvements.
+---
 
-# [Getting Started](INSTALL.md)
+## 🌅 The Vision
 
-❗❗ **Important**: Do not use GitHub's "Download Zip" option as it will not include commit history. This is necessary if you want to update or merge other feature branches.
+Three Horizons is designed around one continuous adventure.
 
-If you're new to git and GitHub, [Team Aqua's Asset Repo](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/) has a [guide to forking and cloning the repository](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/wiki/The-Basics-of-GitHub). Then you can follow one of the following guides:
+### Kanto
+Human ambition, Pokémon research, Team Rocket, and the beginning of a larger mystery.
 
-## 📥 [Installing **`pokeemerald-expansion`**](INSTALL.md)
-## 🏗️ [Building **`pokeemerald-expansion`**](INSTALL.md#Building-pokeemerald-expansion)
-## 🚚 [Migrating from **`pokeemerald`**](INSTALL.md#Migrating-from-pokeemerald)
-## 🚀 [Updating **`pokeemerald-expansion`**](INSTALL.md#Updating-pokeemerald-expansion)
+### Johto
+Ancient history, Pokémon mythology, Ho-Oh, Lugia, Celebi, and the consequences of events beginning in Kanto.
 
-# [Documentation](https://rh-hideout.github.io/pokeemerald-expansion/)
+### Hoenn
+Nature itself becomes unstable as the conflict surrounding Groudon, Kyogre, and Rayquaza brings the story to its largest scale.
 
-For detailed documentation, visit the [pokeemerald-expansion documentation page](https://rh-hideout.github.io/pokeemerald-expansion/).
+The three regions are intended to feel connected narratively, geographically, and mechanically.
 
-# [Contributions](CONTRIBUTING.md)
-If you are looking to [report a bug](CONTRIBUTING.md#Bug-Report), [open a pull request](CONTRIBUTING.md#Pull-Requests), or [request a feature](CONTRIBUTING.md#Feature-Request), our [`CONTRIBUTING.md`](CONTRIBUTING.md) has guides for each.
+---
 
-# [Community](https://discord.gg/6CzjAG6GZk)
+## 🌱 Choose From Nine Starters
 
-[![](https://dcbadge.limes.pink/api/server/6CzjAG6GZk)](https://discord.gg/6CzjAG6GZk)
+At the beginning of the game, Professor Oak's research partnership with Professors Elm and Birch allows you to choose from all nine Generation I–III starters.
 
-Our community uses the [ROM Hacking Hideout (RHH) Discord server](https://discord.gg/6CzjAG6GZk) to communicate and organize. Most of our discussions take place there, and we welcome anybody to join us!
+### Kanto
+- Bulbasaur
+- Charmander
+- Squirtle
+
+### Johto
+- Chikorita
+- Cyndaquil
+- Totodile
+
+### Hoenn
+- Treecko
+- Torchic
+- Mudkip
+
+Your first partner is remembered as part of the story rather than simply becoming another Pokémon in the party.
+
+---
+
+## ✨ Current Features
+
+Current Three Horizons development includes:
+
+- Nine selectable Generation I–III starters
+- Starter nature customization
+- IV and EV customization
+- Optional shiny starter
+- Original recurring rival
+- Pokémon followers
+- Updated battle mechanics through pokeemerald-expansion
+- Physical/Special split
+- Reusable TMs
+- In-battle evolution
+- Hidden Abilities
+- Configurable shiny odds
+- Real-world or accelerated visual time system
+- Early EV-training tools
+- Modernized quality-of-life features
+- Custom Three Horizons title screen
+- Custom story progression and persistent save-state systems
+- Extensive automated regression testing
+
+Additional systems and features will continue to evolve during development.
+
+---
+
+## 📖 Story
+
+Professor Oak has begun collaborating with Professors Elm and Birch to study unusual changes in Pokémon behavior and migration across the three regions.
+
+What initially appears to be an exciting research exchange gradually reveals something much larger.
+
+Pokémon are appearing outside their normal habitats.
+
+Ancient sites are beginning to react.
+
+Events in Kanto, Johto, and Hoenn may be more connected than anyone realizes.
+
+Your journey begins quietly in Pallet Town.
+
+---
+
+## 🗺️ Planned Journey
+
+### Chapter I — Kanto
+Pallet Town → Indigo League
+
+### Chapter II — Johto
+A new expedition begins as unusual events spread west.
+
+### Chapter III — Hoenn
+The ecological crisis reaches its peak.
+
+### Postgame
+Planned concepts include:
+
+- Gym Leader rematches
+- Elite Four rematches
+- Champion battles
+- Legendary quests
+- Battle facilities
+- World Tournament
+- Mt. Silver
+- Red
+
+Plans may evolve as development continues.
+
+---
+
+## 📸 Screenshots
+
+Screenshots and gameplay previews coming soon.
+
+---
+
+## 🧪 Playtesting
+
+Three Horizons is currently under active development and should be treated as beta software.
+
+When reporting a bug, please include:
+
+- Game/build version
+- Emulator or handheld
+- Location in the game
+- What you were doing
+- What happened
+- What you expected to happen
+- Screenshot or video if possible
+- Whether you loaded an in-game save or emulator save state
+
+Please use normal in-game saves when moving between development versions whenever possible.
+
+Old emulator save states may not be compatible with newer builds.
+
+---
+
+## 🛣️ Development Roadmap
+
+### Kanto
+
+- [x] Pallet Town
+- [x] Route 1
+- [x] Viridian
+- [x] Pewter City
+- [x] Brock
+- [x] Route 3
+- [x] Mt. Moon
+- [x] Route 4
+- [x] Cerulean City
+- [x] Misty
+- [ ] Bill
+- [ ] Vermilion City
+- [ ] S.S. Anne
+- [ ] Lt. Surge
+- [ ] Celadon City
+- [ ] Erika
+- [ ] Pokémon Tower
+- [ ] Fuchsia City
+- [ ] Koga
+- [ ] Saffron City
+- [ ] Sabrina
+- [ ] Cinnabar Island
+- [ ] Blaine
+- [ ] Giovanni
+- [ ] Indigo League
+
+### Johto
+
+- [ ] Region development
+- [ ] Eight Gyms
+- [ ] Johto story
+- [ ] Legendary storyline
+- [ ] Regional League progression
+
+### Hoenn
+
+- [ ] Region development
+- [ ] Eight Gyms
+- [ ] Team Aqua / Team Magma storyline
+- [ ] Groudon / Kyogre / Rayquaza storyline
+- [ ] Hoenn League
+
+### Postgame
+
+- [ ] Multi-region quests
+- [ ] Gym rematches
+- [ ] World Tournament
+- [ ] Mt. Silver
+- [ ] Red
+
+---
+
+## 💾 Downloads
+
+There is currently no public stable release.
+
+When public builds are released, Three Horizons will be distributed as a patch.
+
+**No commercial Pokémon ROM files will be distributed through this repository.**
+
+Players will need to provide their own legally obtained compatible Pokémon Emerald ROM.
+
+---
+
+## 🐛 Bugs & Suggestions
+
+Community testing and feedback will become increasingly important as development continues.
+
+GitHub Issues will eventually be used for:
+
+- Bug reports
+- Balance feedback
+- Feature suggestions
+- Map or visual problems
+
+Please check existing reports before opening a duplicate issue.
+
+---
+
+## 🤝 Contributing
+
+Three Horizons is currently primarily a personal passion project, but community contributions may become welcome as development progresses.
+
+Areas that may eventually benefit from community help include:
+
+- Mapping
+- Pixel art
+- Sprites
+- Dialogue
+- Battle balancing
+- Playtesting
+- Bug reproduction
+
+Contributor guidelines will be added as the project grows.
+
+---
+
+## 💬 Community
+
+A dedicated Pokémon: Three Horizons Discord community is planned.
+
+The Discord will eventually provide:
+
+- Development updates
+- Screenshots and previews
+- Beta testing
+- Bug reporting
+- Suggestions
+- Mapping and sprite discussion
+- Community chat
+
+Discord link coming soon.
+
+---
+
+## 🙏 Credits
+
+Pokémon: Three Horizons is built using
+[pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion).
+
+Special thanks to:
+
+- **Rom Hacking Hideout (RHH)** and the pokeemerald-expansion contributors
+- **pret** and contributors to the original pokeemerald decompilation
+- Artists, developers, testers, and community members whose work contributes to the project
+
+Additional asset-specific credits are maintained within the repository.
+
+Pokémon and associated trademarks are owned by Nintendo, Game Freak, and The Pokémon Company.
+
+Pokémon: Three Horizons is an unofficial, non-commercial fan project and is not affiliated with or endorsed by Nintendo, Game Freak, or The Pokémon Company.
