@@ -2,6 +2,7 @@ name: Three Horizons demo
 on:
   push:
     branches: [feature/opening-demo]
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
@@ -241,3 +242,4 @@ jobs:
             playtest11-evolution-negative.log
             playtest11-catch-negative.log
             docs/three_horizons/OPENING_DEMO_TESTS.md
+
