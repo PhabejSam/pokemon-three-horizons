@@ -72,6 +72,7 @@ u16 TH_GetTrainerPic(void);
 void TH_ChangeOutfit(void);
 void TH_InitNewGame(void);
 void TH_MigrateSaveState(void);
+void TH_TryGiveChapter12Supplies(void);
 void TH_StageNewGameOptions(void);
 u16 TH_GetRivalStarter(u16 playerSpecies);
 bool32 TH_TryGiveStarter(u16 playerSpecies);

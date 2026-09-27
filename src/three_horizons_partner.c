@@ -93,8 +93,8 @@ static bool32 RefreshPicture(void)
     if (sSprite != 0xFFFF)
         FreeAndDestroyMonPicSprite(sSprite);
     sSprite = sCaughtMon
-        ? CreateMonPicSpriteUnchecked(sSpecies, sOptions.shiny, sPreviewPersonality, TRUE, 192, 59, 0, sSpecies)
-        : CreateMonPicSprite(sSpecies, sOptions.shiny, sPreviewPersonality, TRUE, 192, 59, 0, sSpecies);
+        ? CreateMonPicSpriteUnchecked(sSpecies, sOptions.shiny, sPreviewPersonality, TRUE, 192, 59, 0, sSpecies | BLEND_IMMUNE_FLAG)
+        : CreateMonPicSprite(sSpecies, sOptions.shiny, sPreviewPersonality, TRUE, 192, 59, 0, sSpecies | BLEND_IMMUNE_FLAG);
     if (sSprite < MAX_SPRITES)
     {
         gSprites[sSprite].oam.priority = 0;

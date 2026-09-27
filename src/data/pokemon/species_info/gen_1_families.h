@@ -139,7 +139,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Ivysaur,
             gShinyOverworldPalette_Ivysaur
         )
+        #if THREE_HORIZONS
+        .levelUpLearnset = sTHIvysaurLevelUpLearnset,
+#else
         .levelUpLearnset = sIvysaurLevelUpLearnset,
+#endif
         .teachableLearnset = sIvysaurTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_VENUSAUR}),
     },
@@ -160,7 +164,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 100,
         .baseSpDefense = 100,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_GRASS, TYPE_GROUND),
+#else
         .types = MON_TYPES(TYPE_GRASS, TYPE_POISON),
+#endif
         .catchRate = 45,
         .expYield = VENUSAUR_EXP_YIELD,
         .evYield_SpAttack = 2,
@@ -229,7 +237,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
+        #if THREE_HORIZONS
+        .levelUpLearnset = sTHVenusaurLevelUpLearnset,
+#else
         .levelUpLearnset = sVenusaurLevelUpLearnset,
+#endif
         .teachableLearnset = sVenusaurTeachableLearnset,
         .formSpeciesIdTable = sVenusaurFormSpeciesIdTable,
         .formChangeTable = sVenusaurFormChangeTable,
@@ -437,7 +449,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Charmander,
             gShinyOverworldPalette_Charmander
         )
+        #if THREE_HORIZONS
+        .levelUpLearnset = sTHCharmanderLevelUpLearnset,
+#else
         .levelUpLearnset = sCharmanderLevelUpLearnset,
+#endif
         .teachableLearnset = sCharmanderTeachableLearnset,
         .eggMoveLearnset = sCharmanderEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_CHARMELEON}),
@@ -507,7 +523,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Charmeleon,
             gShinyOverworldPalette_Charmeleon
         )
+        #if THREE_HORIZONS
+        .levelUpLearnset = sTHCharmeleonLevelUpLearnset,
+#else
         .levelUpLearnset = sCharmeleonLevelUpLearnset,
+#endif
         .teachableLearnset = sCharmeleonTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CHARIZARD}),
     },
@@ -530,7 +550,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 100,
         .baseSpAttack  = CHARIZARD_SP_ATK,
         .baseSpDefense = 85,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_FIRE, TYPE_DRAGON),
+#else
         .types = MON_TYPES(TYPE_FIRE, TYPE_FLYING),
+#endif
         .catchRate = 45,
         .expYield = CHARIZARD_EXP_YIELD,
         .evYield_SpAttack = 3,
@@ -584,7 +608,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Charizard,
             gShinyOverworldPalette_Charizard
         )
+        #if THREE_HORIZONS
+        .levelUpLearnset = sTHCharizardLevelUpLearnset,
+#else
         .levelUpLearnset = sCharizardLevelUpLearnset,
+#endif
         .teachableLearnset = sCharizardTeachableLearnset,
         .formSpeciesIdTable = sCharizardFormSpeciesIdTable,
         .formChangeTable = sCharizardFormChangeTable,
@@ -866,7 +894,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Squirtle,
             gShinyOverworldPalette_Squirtle
         )
+        #if THREE_HORIZONS
+        .levelUpLearnset = sTHSquirtleLevelUpLearnset,
+#else
         .levelUpLearnset = sSquirtleLevelUpLearnset,
+#endif
         .teachableLearnset = sSquirtleTeachableLearnset,
         .eggMoveLearnset = sSquirtleEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_WARTORTLE}),
@@ -936,7 +968,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Wartortle,
             gShinyOverworldPalette_Wartortle
         )
+        #if THREE_HORIZONS
+        .levelUpLearnset = sTHWartortleLevelUpLearnset,
+#else
         .levelUpLearnset = sWartortleLevelUpLearnset,
+#endif
         .teachableLearnset = sWartortleTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_BLASTOISE}),
     },
@@ -959,7 +995,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 78,
         .baseSpAttack  = 85,
         .baseSpDefense = BLASTOISE_SP_DEF,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_WATER, TYPE_STEEL),
+#else
         .types = MON_TYPES(TYPE_WATER),
+#endif
         .catchRate = 45,
         .expYield = BLASTOISE_EXP_YIELD,
         .evYield_SpDefense = 3,
@@ -1016,7 +1056,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Blastoise,
             gShinyOverworldPalette_Blastoise
         )
+        #if THREE_HORIZONS
+        .levelUpLearnset = sTHBlastoiseLevelUpLearnset,
+#else
         .levelUpLearnset = sBlastoiseLevelUpLearnset,
+#endif
         .teachableLearnset = sBlastoiseTeachableLearnset,
         .formSpeciesIdTable = sBlastoiseFormSpeciesIdTable,
         .formChangeTable = sBlastoiseFormChangeTable,

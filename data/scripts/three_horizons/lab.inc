@@ -128,6 +128,11 @@ TH_OakSupplies:
     goto_if_ne VAR_RESULT, TRUE, TH_Lab_BagFull
     msgbox TH_Text_Supplies
 TH_OakAfterSupplies:
+    goto_if_set FLAG_TH12_ULTRA_BALLS, TH_OakSendoff
+    special TH_TryGiveChapter12Supplies
+    goto_if_ne VAR_RESULT, TRUE, TH_Lab_BagFull
+    msgbox TH_Text_ExtraSupplies
+TH_OakSendoff:
     msgbox TH_Text_OakSendoff
     call TH_Lab_OakReturn
     special TH_RefreshFollower
@@ -139,6 +144,9 @@ TH_Lab_BagFull:
     special TH_RefreshFollower
     release
     end
+
+TH_Text_ExtraSupplies:
+    .string "OAK: Here are two ULTRA BALLS\nand 2,000 for your journey!\pUse them to investigate the unusual\nPOKéMON appearing in KANTO.$"
 
 TH_EventScript_Aide1::
     msgbox TH_Text_Aide1, MSGBOX_NPC
