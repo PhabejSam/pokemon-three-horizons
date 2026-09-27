@@ -1,12 +1,12 @@
 # Playtest 12 encounter checklist
 
-Source revision: `ad610938b6a840aca597d371942be730491dba41`.
+Source revision: `5c324f07cd554ca29a0b3bd3bae02f06cbce6d4e`.
 
 Rates below are shares of encounters, not chances per step. Repels, lead abilities and time settings can affect encounters. Wild starters have ordinary random stats and the same Hidden Ability rules as other wild Pokémon.
 
 Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock Smash, Good Rod and Super Rod tables are listed as future access only. Visible research-scene Pokémon do not trigger captures.
 
-## Route24 — all times — grass / cave
+## Route 24 — all times — grass / cave
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -19,19 +19,19 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Kakuna | 4% | 8 | |
 | Metapod | 1% | 8 | |
 
-## Route24 — all times — Surf — future access
+## Route 24 — all times — Surf — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Tentacool | 100% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 | |
 
-## Route24 — all times — Old Rod
+## Route 24 — all times — Old Rod
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Magikarp | 100% | 5 | |
 
-## Route24 — all times — Good Rod — future access
+## Route 24 — all times — Good Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -39,7 +39,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Krabby | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 | Magikarp | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 
-## Route24 — all times — Super Rod — future access
+## Route 24 — all times — Super Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -47,7 +47,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Gyarados | 15% | 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 | |
 | Psyduck | 1% | 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 | |
 
-## Route25 — all times — grass / cave
+## Route 25 — all times — grass / cave
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -60,19 +60,19 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Kakuna | 4% | 9 | |
 | Metapod | 1% | 9 | |
 
-## Route25 — all times — Surf — future access
+## Route 25 — all times — Surf — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Psyduck | 100% | 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 | |
 
-## Route25 — all times — Old Rod
+## Route 25 — all times — Old Rod
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Magikarp | 100% | 5 | |
 
-## Route25 — all times — Good Rod — future access
+## Route 25 — all times — Good Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -80,7 +80,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Goldeen | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 | Magikarp | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 
-## Route25 — all times — Super Rod — future access
+## Route 25 — all times — Super Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -89,7 +89,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Gyarados | 15% | 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 | |
 | Psyduck | 5% | 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 | |
 
-## Route5 — all times — grass / cave
+## Route 5 — all times — grass / cave
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -98,7 +98,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Oddish | 15% | 13, 16 | |
 | Bellsprout | 10% | 15 | |
 
-## Route6 — all times — grass / cave
+## Route 6 — all times — grass / cave
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -107,19 +107,19 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Oddish | 15% | 13, 16 | |
 | Bellsprout | 10% | 15 | |
 
-## Route6 — all times — Surf — future access
+## Route 6 — all times — Surf — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Psyduck | 100% | 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 | |
 
-## Route6 — all times — Old Rod
+## Route 6 — all times — Old Rod
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Magikarp | 100% | 5 | |
 
-## Route6 — all times — Good Rod — future access
+## Route 6 — all times — Good Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -127,7 +127,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Goldeen | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 | Magikarp | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 
-## Route6 — all times — Super Rod — future access
+## Route 6 — all times — Super Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -192,14 +192,14 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Clefairy | 5% | 10 | |
 | Makuhita | 1% | 9, 10, 11 | |
 
-## Route1 — all times — grass / cave
+## Route 1 — all times — grass / cave
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Pidgey | 50% | 2, 3, 4 | |
 | Rattata | 50% | 2, 3, 4 | |
 
-## Route2 — all times — grass / cave
+## Route 2 — all times — grass / cave
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -209,7 +209,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Caterpie | 5% | 4, 5 | |
 | Weedle | 5% | 4, 5 | |
 
-## Route22 — all times — grass / cave
+## Route 22 — all times — grass / cave
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -221,19 +221,19 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Meowth | 6% | 3, 4, 5 | |
 | Mudkip | 5% | 5 | |
 
-## Route22 — all times — Surf — future access
+## Route 22 — all times — Surf — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Psyduck | 100% | 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 | |
 
-## Route22 — all times — Old Rod
+## Route 22 — all times — Old Rod
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Magikarp | 100% | 5 | |
 
-## Route22 — all times — Good Rod — future access
+## Route 22 — all times — Good Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -241,7 +241,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Goldeen | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 | Magikarp | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 
-## Route22 — all times — Super Rod — future access
+## Route 22 — all times — Super Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -250,7 +250,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Gyarados | 15% | 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 | |
 | Psyduck | 5% | 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 | |
 
-## Route3 — all times — grass / cave
+## Route 3 — all times — grass / cave
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -262,7 +262,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Charmander | 5% | 8 | |
 | Nidoran F | 1% | 6 | |
 
-## Route4 — all times — grass / cave
+## Route 4 — all times — grass / cave
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -272,19 +272,19 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Mankey | 5% | 10, 12 | |
 | Torchic | 5% | 8 | |
 
-## Route4 — all times — Surf — future access
+## Route 4 — all times — Surf — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Tentacool | 100% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 | |
 
-## Route4 — all times — Old Rod
+## Route 4 — all times — Old Rod
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
 | Magikarp | 100% | 5 | |
 
-## Route4 — all times — Good Rod — future access
+## Route 4 — all times — Good Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|
@@ -292,7 +292,7 @@ Grass/cave encounters and the Old Rod are available in this chapter. Surf, Rock 
 | Krabby | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 | Magikarp | 20% | 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 | |
 
-## Route4 — all times — Super Rod — future access
+## Route 4 — all times — Super Rod — future access
 
 | Pokémon | Rate | Levels | Seen / caught |
 |---|---:|---|---|

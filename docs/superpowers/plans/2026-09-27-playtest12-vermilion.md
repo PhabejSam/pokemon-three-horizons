@@ -10,7 +10,7 @@
 
 **Spec:** [Approved chapter design](../specs/2026-09-27-playtest12-vermilion-design.md) and [exact starter move requirements](../specs/2026-09-27-playtest12-starter-moves.md).
 
-**Status:** Ready for plan review; no product implementation performed by this document. Product baseline `881bf5c492c91698b198bdb9c2590e7e678d3beb`; design commit `4a918c10c1`.
+**Status (2026-09-27):** Approved and implemented as a playable candidate through Surge at feature revision `a1df5843`. Final project CI passed 67 host, 126 native and 4 save tests. The independent final review's two findings were resolved. Task 5's replacement artwork remains blocked, and broad manual acceptance combinations remain unchecked; this plan is not declared fully complete. See [verification and open items](../../three_horizons/PLAYTEST_12_VERIFICATION.md) for actual evidence, build identity and coverage limits. Original product baseline `881bf5c492c91698b198bdb9c2590e7e678d3beb`; design commit `4a918c10c1`.
 
 ## Global Constraints
 
@@ -76,19 +76,19 @@ Store separate receipts for the two Ultra Balls and 2,000 money so a failed bag
 delivery cannot duplicate money. New `TH_STATE_VERSION_12 = 0xA908` preserves
 clock bit 0. All chapter state names/values go into the audited manifest before use.
 
-- [ ] Add migration tests for versions 9, 10, 11 and 12: retain party/box hashes,
+- [x] Add migration tests for versions 9, 10, 11 and 12: retain party/box hashes,
   badges, gift species, trainer victories, fossil flags, clock low/high bit and
   settings; initialize only new chapter flags. A second migration changes nothing.
-- [ ] Add supply tests: new opening, upgraded completed opening, full ball pocket,
+- [x] Add supply tests: new opening, upgraded completed opening, full ball pocket,
   money cap, partial delivery, retry and repeat visit. Two balls and 2,000 money
   are awarded at most once; cap behavior follows the native money limit.
-- [ ] Audit unused flags/vars and trainer ranges. Allocate distinct Bill, ship
+- [x] Audit unused flags/vars and trainer ranges. Allocate distinct Bill, ship
   rival, captain, voucher, rod, Surge TM, chapter-end, sighting and receipt state.
   Update version recognition in every earlier migration branch; a version-12
   Continue must not enter the legacy reset branches.
-- [ ] Implement receipts and opening special; expose the same special to the
+- [x] Implement receipts and opening special; expose the same special to the
   Cerulean aide added in Task 10. Register special in `data/specials.inc`.
-- [ ] Run allocation, migration and supply checks; save/reload a copied legacy
+- [x] Run allocation, migration and supply checks; save/reload a copied legacy
   fixture twice and compare retained data. Commit the state/supply change.
 
 ## Task 2: First-catch Pokédex lifecycle repair
@@ -424,10 +424,10 @@ encounter tables, starter reference, verification evidence and known limitations
 - [ ] Inspect exact-ROM screenshots for all repaired visuals and new scenes.
   Keep unique output names to avoid stale image previews. Reuse no emulator
   state from an older ROM; use normal save files for upgrade testing.
-- [ ] Perform one independent final review using the preserved native-execution
+- [x] Perform one independent final review using the preserved native-execution
   workflow. Resolve actionable defects and rerun affected checks only; no
   subagent-per-task expansion unless the user changes the execution method.
-- [ ] Generate final encounters from the actual packaged source and validate
+- [x] Generate final encounters from the actual packaged source and validate
   totals. Write continuation-first beta steps and optional fresh-game checks.
   Explain Power-item EVs, duplicate nicknames, story vs wild sightings and the
   new types without claiming an unperformed RG40XX H hardware test.

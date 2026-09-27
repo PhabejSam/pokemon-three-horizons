@@ -1,6 +1,6 @@
 # Playtest 12 — continuation and repair checks
 
-Build status: verification in progress. Use the final release package only after its verification report identifies the tested ROM and checksum.
+Build status: playable candidate through Lt. Surge. See PLAYTEST_12_VERIFICATION.md for the exact tested ROM, evidence and remaining limitations. Jessie and James still use the earlier grunt artwork: the replacement sprite request was blocked by the image service and is not complete.
 
 ## Continue your Cerulean save
 
@@ -23,6 +23,14 @@ Back up your original ROM and battery save. Put a copy of the in-game `.sav` bes
 - Observe Treecko and Shroomish in the forest, and the three Clefairy with Makuhita in the side chamber reached from Mt. Moon’s first ladder along the entry route. Keep the ladder and item route accessible with a follower.
 - Challenge Jessie and James with two usable Pokémon, then on a separate save try one usable Pokémon. The latter should require consecutive Ekans and Koffing battles, with no free healing. Lose to James and retry: both battles must restart. Meowth speaks but does not fight.
 - Check the two opponents’ ball groups, trainer approach facing, reusable TMs, six Power items and evolution returning to the current battle music.
+
+## Training and names
+
+Duplicate nicknames are allowed; two Rattata can have the same name without sharing their stats or identity. A maximum-length nickname is also valid.
+
+Power items add 8 EVs in their associated stat after an eligible battle, in addition to the defeated species' normal EV yield. For example, Rattata gives 1 Speed EV, while a held Power Lens adds 8 Special Attack EVs. Power Bracer adds Attack, Belt Defense, Lens Special Attack, Band Special Defense, Anklet Speed and Weight HP. The stat cap is 252 and the total cap is 510. Experience speed does not multiply the Power item's base bonus; other configured EV multipliers still apply.
+
+The starter typings and move changes apply throughout the game, including existing teams, rivals and wild catches. The supplied starter reference lists the changes. Wild starters have ordinary capture stats; the three regional gifts remain available. Visible research-scene Pokémon are story characters, separate from the rare wild encounters.
 
 ## Report a problem
 
