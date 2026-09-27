@@ -18145,6 +18145,7 @@ Pic: Rocket Grunt F Frlg
 Gender: Female
 Music: Suspicious
 Double Battle: Yes
+Multi Party: Half
 AI: Check Bad Move / Try To Faint
 
 Ekans
@@ -18163,6 +18164,7 @@ Pic: Rocket Grunt M Frlg
 Gender: Male
 Music: Suspicious
 Double Battle: Yes
+Multi Party: Half
 AI: Check Bad Move / Try To Faint
 
 Koffing

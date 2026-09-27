@@ -14,3 +14,9 @@ class TrainerAllocation(unittest.TestCase):
                 name=line.split()[1]
                 if ids.get(name) in new and not name.startswith('TRAINER_TH'):
                     self.assertIn('#if !THREE_HORIZONS',stack,name)
+
+    def test_rocket_duo_uses_half_parties_for_three_slot_groups(self):
+        source=(ROOT/'src/data/trainers.party').read_text()
+        for name in ('JESSIE','JAMES'):
+            block=source.split('=== TRAINER_TH11_'+name+' ===',1)[1].split('===',1)[0]
+            self.assertIn('Multi Party: Half',block,name)
