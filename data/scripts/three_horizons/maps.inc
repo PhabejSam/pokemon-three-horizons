@@ -118,3 +118,5 @@ TH_Route1_MapScripts::
 .include "data/scripts/three_horizons/chapter12_vermilion.inc"
 .include "data/scripts/three_horizons/chapter12_ship.inc"
 .include "data/scripts/three_horizons/chapter12_gym.inc"
+
+.include "data/scripts/three_horizons/chapter12_sightings.inc"

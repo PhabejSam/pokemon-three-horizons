@@ -4,9 +4,29 @@
 #include "item.h"
 #include "money.h"
 #include "random.h"
+#include "constants/trainers.h"
 #include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
+// A partial win is not a completed encounter. Restart both opponents after
+// blackout or a save made between attempts; never heal the party here.
+void TH12_BeginRocketPair(void)
+{
+    if (!FlagGet(FLAG_TH_ROCKET_DUO))
+    {
+        FlagClear(TRAINER_FLAGS_START + TRAINER_TH11_JESSIE);
+        FlagClear(TRAINER_FLAGS_START + TRAINER_TH11_JAMES);
+    }
+}
+
+void TH12_CompleteRocketPair(void)
+{
+    gSpecialVar_Result = FlagGet(TRAINER_FLAGS_START + TRAINER_TH11_JESSIE)
+        && FlagGet(TRAINER_FLAGS_START + TRAINER_TH11_JAMES);
+    if (gSpecialVar_Result)
+        FlagSet(FLAG_TH_ROCKET_DUO);
+}
+
 // Trash cans 1..15 occupy five columns and three rows in the imported gym.
 bool32 TH12_AreSwitchesAdjacent(u8 first, u8 second)
 {

@@ -109,7 +109,7 @@ TH12_Cerulean_CatchUpSupplies::
     release
     end
 TH12_CatchUpText:
-    .string "OAK sent two ULTRA BALLS and\n{CURRENCY}2,000 for your field work.\pIf you already collected them,\nyou are all set! BILL lives north.\pHis reports may explain why\nPOKéMON are crossing the regions.$"
+    .string "OAK sent two ULTRA BALLS and\n¥2,000 for your field work.\pIf you already collected them,\nyou are all set! BILL lives north.\pHis reports may explain why\nPOKéMON are crossing the regions.$"
 
 TH12_Vermilion_Mart::
     lock

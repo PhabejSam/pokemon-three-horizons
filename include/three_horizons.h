@@ -79,6 +79,8 @@ void TH_InitNewGame(void);
 void TH_MigrateSaveState(void);
 void TH_TryGiveChapter12Supplies(void);
 bool32 TH12_AreSwitchesAdjacent(u8 first, u8 second);
+void TH12_BeginRocketPair(void);
+void TH12_CompleteRocketPair(void);
 void TH12_InitSurgeSwitches(void);
 void TH12_CheckSurgeSwitch(void);
 void TH_StageNewGameOptions(void);

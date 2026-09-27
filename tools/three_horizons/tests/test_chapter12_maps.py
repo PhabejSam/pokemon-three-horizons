@@ -29,6 +29,16 @@ class Chapter12Maps(unittest.TestCase):
             self.assertIn(mid,outward)
             self.assertIn('MAP_TH_CERULEAN',reachable(mid))
 
+    def test_ship_rival_stands_on_floor_and_covers_captain_approaches(self):
+        import struct
+        m=read('data/maps/TH12_SSAnne_2F_Corridor/map.json')
+        layout=next(l for l in read('data/layouts/layouts.json')['layouts'] if l['id']==m['layout'])
+        w=layout['width']; data=struct.unpack('<'+'H'*(w*layout['height']),(ROOT/layout['blockdata_filepath']).read_bytes())
+        rival=m['object_events'][0]
+        self.assertEqual(data[rival['y']*w+rival['x']] & 0xC00,0)
+        triggers={(e['x'],e['y']) for e in m['coord_events'] if e['script']=='TH12_Ship_RivalTrigger'}
+        self.assertTrue({(30,6),(31,6),(32,6)} <= triggers)
+
     def test_old_map_numbers_and_new_map_ownership(self):
         baseline=read('tools/three_horizons/tests/playtest11-map-indices.json')
         names=read('tools/mapjson/three_horizons_maps.json')['maps']

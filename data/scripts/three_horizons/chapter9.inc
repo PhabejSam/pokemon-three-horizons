@@ -269,7 +269,7 @@ TH_Trainer9_TEAM_ROCKET_GRUNT_2_Defeat:
     .string "I picked the wrong TRAINER!$"
 
 TH_Trainer9_TEAM_ROCKET_GRUNT_2_After:
-    .string "I thought this job would be\neasy. Clearly I was wrong.$"
+    .string "The boss wants reports on POKéMON\nappearing far from their home regions.\pThat MAKUHITA has joined the\nCLEFAIRY! I was sent to watch them.\pDon't tell the boss I lost to you.$"
 
 TH_Trainer9_TEAM_ROCKET_GRUNT_5::
     trainerbattle_single TRAINER_TH9_TEAM_ROCKET_GRUNT_5, TH_Trainer9_TEAM_ROCKET_GRUNT_5_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_5_Defeat, TH_RocketDigReward

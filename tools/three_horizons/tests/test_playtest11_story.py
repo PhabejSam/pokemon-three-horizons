@@ -26,16 +26,16 @@ class Playtest11Story(unittest.TestCase):
         guarded = {(e['x'], e['y']) for e in m['coord_events'] if e['script'] == 'TH_FossilResearcherTrigger'}
         self.assertTrue({(13, 12), (14, 12)} <= guarded)
 
-    def test_duo_encounter_keeps_exit_open_for_one_pokemon(self):
-        p = ROOT / 'data/scripts/three_horizons/playtest11_story.inc'
-        self.assertTrue(p.exists(), 'Duo event not installed')
-        s = p.read_text(encoding='utf-8')
-        guard = s.split('TH_RocketDuoTrigger::')[1].split('TH_RocketDuoBattle::')[0]
-        self.assertIn('CountPartyAliveNonEggMons', guard)
-        self.assertIn('TH_RocketDuoNeedTwo', guard)
-        decline = s.split('TH_RocketDuoNeedTwo:')[1].split('TH_RocketDuoMeowth::')[0]
-        self.assertNotIn('applymovement', decline)
-        self.assertIn('releaseall', decline)
+    def test_duo_has_single_fallback_and_requires_both_wins(self):
+        s = (ROOT / 'data/scripts/three_horizons/playtest11_story.inc').read_text()
+        self.assertIn('TH12_BeginRocketPair', s)
+        self.assertIn('TH12_CompleteRocketPair', s)
+        self.assertIn('trainerbattle_no_intro TRAINER_TH11_JESSIE', s)
+        self.assertIn('trainerbattle_no_intro TRAINER_TH11_JAMES', s)
+        self.assertNotIn('goto_if_defeated TRAINER_TH11_JESSIE, TH_RocketDuoVictory', s)
+        singles = s.split('TH12_RocketSingles:')[1].split('TH_RocketDuoVictory::')[0]
+        self.assertNotIn('HealPlayerParty', singles)
+        self.assertNotIn('setflag FLAG_TH_ROCKET_DUO', singles)
 
     def test_tutors_are_repeatable_and_use_real_move_selection(self):
         m = json.loads((ROOT / 'data/maps/TH_Route4/map.json').read_text())

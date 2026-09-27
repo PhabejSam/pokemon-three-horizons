@@ -15,45 +15,64 @@ TH_Story11End:
 
 TH_RocketDuoTrigger::
     goto_if_set FLAG_TH_ROCKET_DUO, TH_Story11End
-    goto_if_defeated TRAINER_TH11_JESSIE, TH_RocketDuoVictory
     lockall
     goto_if_defeated TRAINER_TH9_SUPER_NERD_MIGUEL, TH_RocketDuoReady
     msgbox TH_RocketDuoWaiting
     releaseall
     end
 TH_RocketDuoReady:
+    hidefollower TRUE
+    special TH12_BeginRocketPair
+    applymovement LOCALID_TH_JESSIE, Common_Movement_FacePlayer
+    applymovement LOCALID_TH_JAMES, Common_Movement_FacePlayer
+    applymovement LOCALID_TH_ROCKET_MEOWTH, Common_Movement_FacePlayer
+    waitmovement 0
     specialvar VAR_RESULT, CountPartyAliveNonEggMons
-    goto_if_lt VAR_RESULT, 2, TH_RocketDuoNeedTwo
+    goto_if_lt VAR_RESULT, 2, TH12_RocketSingles
     msgbox TH_RocketDuoIntro
     setvar VAR_LAST_TALKED, LOCALID_TH_JESSIE
     closemessage
 TH_RocketDuoBattle::
     trainerbattle LOCALID_TH_JESSIE, TRAINER_TH11_JESSIE, NULL, TH_JessieDefeat, TH_RocketDuoVictory, LOCALID_TH_JAMES, TRAINER_TH11_JAMES, NULL, TH_JamesDefeat, NULL, NULL, TH_RocketDuoTooFew, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
     goto TH_RocketDuoVictory
+TH12_RocketSingles:
+    msgbox TH12_RocketSingleIntro
+    closemessage
+    trainerbattle_no_intro TRAINER_TH11_JESSIE, TH_JessieDefeat
+    msgbox TH12_RocketSingleSecond
+    closemessage
+    trainerbattle_no_intro TRAINER_TH11_JAMES, TH_JamesDefeat
+    goto TH_RocketDuoVictory
 TH_RocketDuoVictory::
     lockall
+    special TH12_CompleteRocketPair
+    goto_if_eq VAR_RESULT, FALSE, TH12_RocketRelease
     msgbox TH_RocketDuoExit
     closemessage
-    @ Meowth leaves one tile behind James, without becoming the player's follower.
-    applymovement LOCALID_TH_JESSIE, TH_RocketDuoWalkAway
-    applymovement LOCALID_TH_JAMES, TH_RocketDuoWalkAway
-    applymovement LOCALID_TH_ROCKET_MEOWTH, TH_RocketDuoWalkAway
+    playse SE_M_JUMP_KICK
+    applymovement LOCALID_TH_JESSIE, TH12_RocketBlastOff
+    applymovement LOCALID_TH_JAMES, TH12_RocketBlastOff
+    applymovement LOCALID_TH_ROCKET_MEOWTH, TH12_RocketBlastOff
     waitmovement 0
     removeobject LOCALID_TH_JESSIE
     removeobject LOCALID_TH_JAMES
     removeobject LOCALID_TH_ROCKET_MEOWTH
-    setflag FLAG_TH_ROCKET_DUO
+TH12_RocketRelease:
+    special TH_RefreshFollower
     releaseall
     end
-TH_RocketDuoWalkAway:
-    .rept 3
-    walk_left
-    .endr
+TH12_RocketBlastOff:
+    jump_in_place_up
+    set_invisible
+    delay_4
+    set_visible
+    delay_4
+    set_invisible
     step_end
-TH_RocketDuoNeedTwo:
-    msgbox TH_RocketDuoTooFew
-    releaseall
-    end
+TH12_RocketSingleIntro:
+    .string "JESSIE: Only one partner ready?\nThen you face us one at a time!\pMEOWTH: No breaks between battles!$"
+TH12_RocketSingleSecond:
+    .string "JAMES: My turn!\nKOFFING, let's finish this!$"
 TH_RocketDuoMeowth::
     lock
     faceplayer
@@ -69,7 +88,7 @@ TH_JessieDefeat:
 TH_JamesDefeat:
     .string "Perhaps we should try a new plan!$"
 TH_RocketDuoExit:
-    .string "JESSIE: We will meet again!\nJAMES: Come on, MEOWTH!\pMEOWTH: All that work, and not\na single fossil to show for it!$"
+    .string "JESSIE: Not again!\nJAMES: Hold on, MEOWTH!\pTEAM ROCKET's blasting off again!$"
 TH_RocketDuoTooFew:
     .string "JAMES: Bring two POKéMON that\ncan battle. We fight as a team!\pMEOWTH: Go on, get ready.\nWe will be waiting right here!$"
 TH_MeowthTalk:
