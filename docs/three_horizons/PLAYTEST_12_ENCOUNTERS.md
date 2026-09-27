@@ -1,6 +1,6 @@
 # Playtest 12 encounter checklist
 
-Source revision: `WORKING-TREE`.
+Source revision: `ad610938b6a840aca597d371942be730491dba41`.
 
 Rates below are shares of encounters, not chances per step. Repels, lead abilities and time settings can affect encounters. Wild starters have ordinary random stats and the same Hidden Ability rules as other wild Pokémon.
 

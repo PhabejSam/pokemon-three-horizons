@@ -54,6 +54,35 @@ class Chapter12Maps(unittest.TestCase):
                 self.assertNotEqual((x,y),(4,6))
         self.assertEqual((x,y),(7,5))
 
+    def test_surge_remains_reachable_after_trainer_approaches(self):
+        from itertools import product
+        from tools.three_horizons.tests.test_playtest11_maps import tiles,reachable
+        m=read('data/maps/TH12_VermilionCity_Gym/map.json')
+        w,h,data=tiles(m['name'])
+        floor={(i%w,i//w) for i,v in enumerate(data) if not v&0xC00}
+        floor.update((x,y) for x in (4,5,6) for y in (6,7))
+        options=[]
+        directions={'MOVEMENT_TYPE_FACE_LEFT':[(-1,0)],'MOVEMENT_TYPE_LOOK_AROUND':[(1,0),(-1,0),(0,1),(0,-1)]}
+        for o in m['object_events']:
+            pos=(o['x'],o['y']);ends={pos:[]}
+            if o['trainer_type']=='TRAINER_TYPE_NORMAL':
+                for dx,dy in directions[o['movement_type']]:
+                    for distance in range(1,int(o['trainer_sight_or_berry_tree_id'])+1):
+                        player=(pos[0]+dx*distance,pos[1]+dy*distance)
+                        if all((pos[0]+dx*i,pos[1]+dy*i) in floor for i in range(1,distance+1)):
+                            ends.setdefault((player[0]-dx,player[1]-dy),[]).append(player)
+            options.append(ends)
+        entry=(m['warp_events'][0]['x'],m['warp_events'][0]['y']-1)
+        for state in product(*options):
+            obstacles=set(state)
+            if len(obstacles)!=len(state):continue
+            starts=[entry]+[p for options_,end in zip(options,state) for p in options_[end]]
+            for start in starts:
+                if start in obstacles:continue
+                reached=reachable(start,floor,obstacles)
+                self.assertIn((5,3),reached,(start,state))
+                self.assertIn(entry,reached,(start,state))
+
     def test_old_map_numbers_and_new_map_ownership(self):
         baseline=read('tools/three_horizons/tests/playtest11-map-indices.json')
         names=read('tools/mapjson/three_horizons_maps.json')['maps']

@@ -55,4 +55,34 @@ TEST("Three Horizons playtest12 opponents show separate three ball groups on one
     FreeBattleSpritesData(); ResetSpriteData(); FreeAllSpritePalettes();
     gBattleTypeFlags = savedFlags;
 }
+TEST("Three Horizons playtest12 single opponents keep all six party slots")
+{
+    struct HpAndStatus party[PARTY_SIZE];
+    u32 savedFlags = gBattleTypeFlags;
+    SetVBlankCallback(NULL);
+    ResetTasks(); ResetSpriteData(); FreeAllSpritePalettes();
+    AllocateBattleSpritesData();
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    gBattlersCount = 2;
+    gBattlerPositions[0] = 0; gBattlerPositions[1] = 1;
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        party[i].hp = i < 4 ? 20 : HP_EMPTY_SLOT;
+        party[i].status = 0;
+    }
+    u8 task = CreatePartyStatusSummarySprites(1, party, FALSE, TRUE);
+    for (u32 frame = 0; frame < 180; frame++) AnimateSprites();
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Sprite *ball = &gSprites[gTasks[task].data[3+i]];
+        EXPECT(!ball->invisible);
+        EXPECT_EQ(ball->x2, 0);
+        if (i > 0) EXPECT_EQ(ball->x - gSprites[gTasks[task].data[2+i]].x, 10);
+    }
+    Task_HidePartyStatusSummary(task);
+    for (u32 frame = 0; frame < 100; frame++) { RunTasks(); AnimateSprites(); }
+    EXPECT(!gTasks[task].isActive);
+    FreeBattleSpritesData(); ResetSpriteData(); FreeAllSpritePalettes();
+    gBattleTypeFlags = savedFlags;
+}
 #endif

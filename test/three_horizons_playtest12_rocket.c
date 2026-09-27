@@ -9,7 +9,7 @@
 TEST("Three Horizons playtest12 Rocket retry requires both wins without a free heal")
 {
     FlagClear(FLAG_TH_ROCKET_DUO);
-    CreateMon(&gPlayerParty[0], SPECIES_PIKACHU, 20, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gPlayerParty[0], SPECIES_PIKACHU, 20, 0, OTID_STRUCT_PLAYER_ID);
     u16 hp = 1;
     SetMonData(&gPlayerParty[0], MON_DATA_HP, &hp);
     for (u32 wins = 0; wins < 4; wins++)

@@ -89,6 +89,12 @@ jobs:
           make THREE_HORIZONS=1 check TESTS="Three Horizons" -j2 2>&1 | tee demo-tests.log
           make THREE_HORIZONS=1 check TESTS="test/save.c" -j2 2>&1 | tee -a demo-tests.log
           ! grep -q "No tests found" demo-tests.log
+      - name: Verify Playtest 12 negative controls
+        run: |
+          python3 tools/three_horizons/check_playtest12_controls.py
+          git diff --exit-code
+      - name: Export source-matched playtest guide
+        run: python3 tools/three_horizons/export_encounters.py --revision "$(git rev-parse HEAD)" --output PLAYTEST_12_ENCOUNTERS.md
       - name: Verify Playtest 11 scene regressions detect the previous behavior
         shell: bash
         run: |
@@ -223,6 +229,10 @@ jobs:
             pokemon-three-horizons.elf
             pokemon-three-horizons.map
             pokemon-three-horizons.gba.sha256
+            PLAYTEST_12_ENCOUNTERS.md
+            docs/three_horizons/PLAYTEST_12.md
+            docs/superpowers/specs/2026-09-27-playtest12-starter-moves.md
+            playtest12-*-negative.log
             demo-build.log
             running-frames.log
             demo-tests.log

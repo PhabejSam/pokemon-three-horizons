@@ -1,6 +1,7 @@
 """Export the compiled-table inputs; never maintain encounter percentages by hand."""
 import argparse
 import json
+import re
 from collections import defaultdict
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
@@ -15,6 +16,7 @@ def render(revision):
     entries=[e for e in group['encounters'] if e['map'].startswith(('MAP_TH_','MAP_TH12_'))]
     for e in sorted(entries,key=lambda e:(e['map'],e['base_label'])):
       name=e['map'].removeprefix('MAP_TH12_').removeprefix('MAP_TH_').replace('_',' ').title()
+      name=re.sub(r'Route(?=\d)', 'Route ', name)
       timing='night' if e['base_label'].endswith('_Night') else 'day / fallback' if any(o['map']==e['map'] and o['base_label'].endswith('_Night') for o in entries) else 'all times'
       for kind,label in [('land_mons','grass / cave'),('water_mons','Surf — future access'),('rock_smash_mons','Rock Smash — future access'),('fishing_mons','fishing')]:
         if kind not in e:continue
