@@ -1,23 +1,61 @@
 TH12_Forest_Treecko::
     lockall
+    hidefollower TRUE
+    applymovement LOCALID_TH12_SIGHT_TREECKO, TH12_Forest_HopRight
+    applymovement LOCALID_TH12_SIGHT_WEEDLE, TH12_Forest_HopLeft
+    waitmovement 0
     playmoncry SPECIES_TREECKO, CRY_MODE_NORMAL
+    waitmoncry
+    playmoncry SPECIES_WEEDLE, CRY_MODE_NORMAL
     msgbox TH12_Forest_TreeckoText
     waitmoncry
     setflag FLAG_TH12_FOREST_SEEN
+    special TH_RefreshFollower
     releaseall
     end
 TH12_Forest_Shroomish::
     lockall
+    hidefollower TRUE
+    applymovement LOCALID_TH12_SIGHT_SHROOMISH, TH12_Forest_HopRight
+    applymovement LOCALID_TH12_SIGHT_CATERPIE, TH12_Forest_HopLeft
+    waitmovement 0
     playmoncry SPECIES_SHROOMISH, CRY_MODE_NORMAL
+    waitmoncry
+    playmoncry SPECIES_CATERPIE, CRY_MODE_NORMAL
     msgbox TH12_Forest_ShroomishText
     waitmoncry
     setflag FLAG_TH12_FOREST_SEEN
+    special TH_RefreshFollower
     releaseall
     end
+TH12_Forest_HopRight:
+    face_right
+    jump_in_place_right
+    step_end
+TH12_Forest_HopLeft:
+    face_left
+    jump_in_place_left
+    step_end
 TH12_Forest_TreeckoText:
-    .string "TREECKO watches from the trees.\nIt seems at home in this forest!\pBIRCH studies TREECKO in HOENN.\nWhat brought this one to KANTO?$"
+    .string "TREECKO and WEEDLE greet each other!\nThey seem curious about one another.\pBIRCH studies TREECKO in HOENN.\nWhat brought this one to KANTO?$"
 TH12_Forest_ShroomishText:
-    .string "SHROOMISH sniffs the damp leaves.\nA visitor from HOENN!\pIt is busy exploring its new home.\nYou watch without disturbing it.$"
+    .string "SHROOMISH and CATERPIE bounce\nin greeting among the damp leaves.\pA visitor from HOENN, making\na friend in VIRIDIAN FOREST!$"
+TH12_Forest_Aide::
+    lock
+    faceplayer
+    goto_if_set FLAG_TH12_FOREST_SEEN, TH12_Forest_Report
+    msgbox TH12_Forest_AideText
+    release
+    end
+TH12_Forest_Report:
+    msgbox TH12_Forest_ReportText
+    release
+    end
+TH12_Forest_AideText:
+    .string "I'm recording unusual sightings\nfor OAK, ELM and BIRCH.\pLook in the forest clearings!\nSome visitors have made new friends.$"
+TH12_Forest_ReportText:
+    .string "A visitor from HOENN making friends?\nI'll add your sighting to our notes.\pBILL is comparing reports too.\nWe're still investigating the cause.$"
+
 TH12_Moon_Trigger::
     goto_if_set FLAG_TH12_CAVE_SEEN, TH12_SightingEnd
 TH12_Moon_Gathering::

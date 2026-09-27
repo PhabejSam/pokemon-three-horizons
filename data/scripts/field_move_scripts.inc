@@ -52,8 +52,12 @@ Text_MonUsedFieldMove:
 	.string "{STR_VAR_1} used {STR_VAR_2}!$"
 
 Text_CantCut:
-	.string "This tree looks like it can be\n"
-	.string "CUT down!$"
+#if THREE_HORIZONS
+    .string "This tree can be CUT down.\pYou need HM01, the CASCADEBADGE,\nand a conscious, compatible POKéMON.\pIt does not need to learn CUT.\nAn EGG cannot help.$"
+#else
+    .string "This tree looks like it can be\n"
+    .string "CUT down!$"
+#endif
 
 @ Use rock smash from party menu
 EventScript_UseRockSmash::
