@@ -67,7 +67,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Chikorita,
             gShinyOverworldPalette_Chikorita
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHChikoritaLevelUpLearnset,
 #else
         .levelUpLearnset = sChikoritaLevelUpLearnset,
@@ -144,7 +144,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Bayleef,
             gShinyOverworldPalette_Bayleef
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHBayleefLevelUpLearnset,
 #else
         .levelUpLearnset = sBayleefLevelUpLearnset,
@@ -239,7 +239,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHMeganiumLevelUpLearnset,
 #else
         .levelUpLearnset = sMeganiumLevelUpLearnset,
@@ -375,7 +375,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Cyndaquil,
             gShinyOverworldPalette_Cyndaquil
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHCyndaquilLevelUpLearnset,
 #else
         .levelUpLearnset = sCyndaquilLevelUpLearnset,
@@ -452,7 +452,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Quilava,
             gShinyOverworldPalette_Quilava
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHQuilavaLevelUpLearnset,
 #else
         .levelUpLearnset = sQuilavaLevelUpLearnset,
@@ -538,7 +538,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Typhlosion,
             gShinyOverworldPalette_Typhlosion
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHTyphlosionLevelUpLearnset,
 #else
         .levelUpLearnset = sTyphlosionLevelUpLearnset,
@@ -682,7 +682,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Totodile,
             gShinyOverworldPalette_Totodile
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHTotodileLevelUpLearnset,
 #else
         .levelUpLearnset = sTotodileLevelUpLearnset,
@@ -760,7 +760,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Croconaw,
             gShinyOverworldPalette_Croconaw
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHCroconawLevelUpLearnset,
 #else
         .levelUpLearnset = sCroconawLevelUpLearnset,
@@ -845,7 +845,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Feraligatr,
             gShinyOverworldPalette_Feraligatr
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHFeraligatrLevelUpLearnset,
 #else
         .levelUpLearnset = sFeraligatrLevelUpLearnset,

@@ -144,7 +144,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gOverworldPalette_Grovyle,
             gShinyOverworldPalette_Grovyle
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHGrovyleLevelUpLearnset,
 #else
         .levelUpLearnset = sGrovyleLevelUpLearnset,
@@ -226,7 +226,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gOverworldPalette_Sceptile,
             gShinyOverworldPalette_Sceptile
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHSceptileLevelUpLearnset,
 #else
         .levelUpLearnset = sSceptileLevelUpLearnset,
@@ -473,7 +473,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHCombuskenLevelUpLearnset,
 #else
         .levelUpLearnset = sCombuskenLevelUpLearnset,
@@ -566,7 +566,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHBlazikenLevelUpLearnset,
 #else
         .levelUpLearnset = sBlazikenLevelUpLearnset,
@@ -792,7 +792,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gOverworldPalette_Marshtomp,
             gShinyOverworldPalette_Marshtomp
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHMarshtompLevelUpLearnset,
 #else
         .levelUpLearnset = sMarshtompLevelUpLearnset,
@@ -872,7 +872,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gOverworldPalette_Swampert,
             gShinyOverworldPalette_Swampert
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHSwampertLevelUpLearnset,
 #else
         .levelUpLearnset = sSwampertLevelUpLearnset,

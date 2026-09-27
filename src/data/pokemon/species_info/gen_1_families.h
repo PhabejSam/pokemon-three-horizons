@@ -139,7 +139,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Ivysaur,
             gShinyOverworldPalette_Ivysaur
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHIvysaurLevelUpLearnset,
 #else
         .levelUpLearnset = sIvysaurLevelUpLearnset,
@@ -237,7 +237,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHVenusaurLevelUpLearnset,
 #else
         .levelUpLearnset = sVenusaurLevelUpLearnset,
@@ -449,7 +449,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Charmander,
             gShinyOverworldPalette_Charmander
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHCharmanderLevelUpLearnset,
 #else
         .levelUpLearnset = sCharmanderLevelUpLearnset,
@@ -523,7 +523,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Charmeleon,
             gShinyOverworldPalette_Charmeleon
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHCharmeleonLevelUpLearnset,
 #else
         .levelUpLearnset = sCharmeleonLevelUpLearnset,
@@ -608,7 +608,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Charizard,
             gShinyOverworldPalette_Charizard
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHCharizardLevelUpLearnset,
 #else
         .levelUpLearnset = sCharizardLevelUpLearnset,
@@ -894,7 +894,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Squirtle,
             gShinyOverworldPalette_Squirtle
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHSquirtleLevelUpLearnset,
 #else
         .levelUpLearnset = sSquirtleLevelUpLearnset,
@@ -968,7 +968,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Wartortle,
             gShinyOverworldPalette_Wartortle
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHWartortleLevelUpLearnset,
 #else
         .levelUpLearnset = sWartortleLevelUpLearnset,
@@ -1056,7 +1056,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Blastoise,
             gShinyOverworldPalette_Blastoise
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHBlastoiseLevelUpLearnset,
 #else
         .levelUpLearnset = sBlastoiseLevelUpLearnset,

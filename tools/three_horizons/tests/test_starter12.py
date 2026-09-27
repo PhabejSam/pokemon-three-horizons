@@ -2,6 +2,8 @@
 import json
 import re
 import unittest
+import importlib.util
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -13,6 +15,27 @@ def learnset(text, species):
     return [(int(level), move) for level, move in re.findall(r'LEVEL_UP_MOVE\(\s*(\d+),\s*(MOVE_\w+)\)', match[1])]
 
 class Starter12(unittest.TestCase):
+    def test_teachable_generator_keeps_balanced_family_guards(self):
+        spec = importlib.util.spec_from_file_location('teaching_types', ROOT/'tools/learnset_helpers/make_teaching_types.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        previous = os.getcwd()
+        try:
+            os.chdir(ROOT)
+            entries = module.extract_repo_species_data()
+        finally:
+            os.chdir(previous)
+        depth = 0
+        for entry in entries:
+            if not isinstance(entry, str):
+                continue
+            if entry.startswith('#if'):
+                depth += 1
+            elif entry.startswith('#endif'):
+                depth -= 1
+                self.assertGreaterEqual(depth, 0, entry)
+        self.assertEqual(depth, 0)
+
     def test_requested_moves_and_unrelated_moves_are_available(self):
         requirements = json.loads((ROOT/'tools/three_horizons/starter12_requirements.json').read_text())
         original = (ROOT/'src/data/pokemon/level_up_learnsets/gen_9.h').read_text()
