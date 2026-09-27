@@ -6,8 +6,7 @@ TH_Text_JourneyLocal:
     .string "The path north leads through the forest.\nPEWTER CITY is on the other side.$"
 
 TH_Journey_Tree::
-    msgbox TH_Text_JourneyTree, MSGBOX_NPC
-    end
+    goto EventScript_CutTree
 
 TH_Text_JourneyTree:
     .string "This small tree blocks the path.\nA POKéMON may be able to CUT it.$"
@@ -110,8 +109,12 @@ TH_Trainer_BROCK::
     goto TH_BrockReward
 TH_BrockVictory::
     setflag FLAG_BADGE01_GET
+    playfanfare MUS_OBTAIN_BADGE
+    msgbox TH_Text_BrockBadge
+    waitfanfare
 TH_BrockReward:
     goto_if_set FLAG_TH_BROCK_TM, TH_BrockFinished
+    msgbox TH_Text_BrockTM
     giveitem ITEM_TM39
     goto_if_eq VAR_RESULT, FALSE, TH_BrockBagFull
     setflag FLAG_TH_BROCK_TM
@@ -131,7 +134,11 @@ TH_Text_BrockDefeat:
     .string "Your determination has earned\nyou the BOULDERBADGE!$"
 
 TH_Text_BrockComplete:
-    .string "The BOULDERBADGE is yours!\nTake ROCK TOMB as a reminder.\pThe road east leads to MT. MOON.\nCERULEAN and MISTY are beyond it.\pThe caretaker outside has a partner\nwaiting for a patient TRAINER.$"
+    .string "The road east leads to MT. MOON.\nCERULEAN and MISTY are beyond it.\pThe caretaker outside has a partner\nwaiting for a patient TRAINER.$"
+TH_Text_BrockBadge:
+    .string "{PLAYER} received the BOULDERBADGE\nfrom BROCK!$"
+TH_Text_BrockTM:
+    .string "Take this TM for ROCK TOMB, too.\nYou can use it again and again!$"
 
 TH_Text_BrockBagFull:
     .string "You earned the BOULDERBADGE!\nMake room in your BAG for ROCK TOMB,\lthen speak to me again.$"

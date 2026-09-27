@@ -688,14 +688,13 @@ TH_Local_RivalHouse_0::
     end
 
 TH_Local_RivalHouse_0_Text:
-    .string "Your rival is always rushing off!\nI hope you two look after each other.$"
+    .string "My brother is always rushing off!\nI hope you two look after each other.$"
 
 TH_Local_RivalHouse_1::
-    msgbox TH_Local_RivalHouse_1_Text, MSGBOX_NPC
+    lockall
+    special FieldShowRegionMap
+    releaseall
     end
-
-TH_Local_RivalHouse_1_Text:
-    .string "Your rival is always rushing off!\nI hope you two look after each other.$"
 
 TH_Sign_RivalHouse_0::
     msgbox TH_Sign_RivalHouse_0_Text, MSGBOX_NPC

@@ -3,6 +3,9 @@
 TH_GymLuis_Approach::
     goto_if_defeated TRAINER_TH9_SWIMMER_MALE_LUIS, TH_Playtest11_MapEnd
     lockall
+    applymovement LOCALID_TH_CERULEANGYM_0, Common_Movement_ExclamationMark
+    waitmovement 0
+    waitfieldeffect FLDEFF_EXCLAMATION_MARK_ICON
     applymovement OBJ_EVENT_ID_PLAYER, TH_Playtest11_FaceRight
     applymovement LOCALID_TH_CERULEANGYM_0, TH_GymLuis_SwimLeft
     waitmovement 0
@@ -43,10 +46,26 @@ TH_Playtest11_StepLeft:
     step_end
 
 TH_MuseumWelcome::
+    setvar VAR_TEMP_1, 1
+    goto_if_set FLAG_TH12_MUSEUM_VISIT, TH_Playtest11_MapEnd
+    setflag FLAG_TH12_MUSEUM_VISIT
     lockall
     applymovement OBJ_EVENT_ID_PLAYER, TH_Playtest11_FaceRight
     waitmovement 0
     msgbox TH_Local_PewterMuseum1F_0_Text, MSGBOX_DEFAULT
-    setvar VAR_TEMP_1, 1
     releaseall
     end
+
+TH_PewterBadgeGuide::
+    lock
+    faceplayer
+    goto_if_set FLAG_BADGE01_GET, TH_PewterBadgeGuide_Open
+    msgbox TH_Route3BadgeGate_Text
+    release
+    end
+TH_PewterBadgeGuide_Open:
+    msgbox TH_PewterBadgeGuide_OpenText
+    release
+    end
+TH_PewterBadgeGuide_OpenText:
+    .string "That BOULDERBADGE shows you're ready!\nROUTE 3 leads east toward MT. MOON.$"

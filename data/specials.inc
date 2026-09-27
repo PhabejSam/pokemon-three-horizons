@@ -644,6 +644,8 @@ gSpecials::
     def_special TH_ScriptGiveStarter
     def_special TH_ScriptGiveSupplies
     def_special TH_TryGiveChapter12Supplies
+    def_special TH12_InitSurgeSwitches
+    def_special TH12_CheckSurgeSwitch
     def_special TH_FinishRivalBattle
     def_special TH_OpenRewardEditor
     def_special TH_ScriptGiveReward

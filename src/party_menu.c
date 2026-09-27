@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -185,7 +186,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[THREE_HORIZONS ? 9 : 8];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -2955,10 +2956,19 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
 
     // Add field moves to action list
+#if THREE_HORIZONS
+    for (j = 0; j < FIELD_MOVES_COUNT; j++)
+        if (TH_IsHMFieldMove(j) && TH_CanUseFieldMove(&mons[slotId], j))
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + MENU_FIELD_MOVES);
+#endif
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         for (j = 0; j != FIELD_MOVES_COUNT; j++)
         {
+#if THREE_HORIZONS
+            if (TH_IsHMFieldMove(j))
+                continue;
+#endif
             if (!FieldMove_IsVisible(j))
                 continue;
 

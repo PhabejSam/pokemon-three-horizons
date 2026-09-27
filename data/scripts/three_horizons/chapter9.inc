@@ -214,7 +214,7 @@ TH_Trainer9_SUPER_NERD_MIGUEL_Intro:
     .string "I found these fossils first!\nShow me you can protect them.$"
 
 TH_Trainer9_SUPER_NERD_MIGUEL_Defeat:
-    .string "All right! We can share the fossils!$"
+    .string "You won! Both fossils are yours.$"
 
 TH_Trainer9_SUPER_NERD_MIGUEL_After:
     .string "Take both fossils! My colleague in\nCERULEAN can restore them after\lyou earn the CASCADEBADGE.$"

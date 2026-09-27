@@ -602,7 +602,11 @@ TH_Lab_FirstEntry::
     msgbox TH_Text_JointResearch
     msgbox TH_Text_ElmWelcome
     msgbox TH_Text_BirchWelcome
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Lab_FaceRival
+    waitmovement 0
     msgbox TH_Text_RivalLetsPlayerChoose
+    applymovement OBJ_EVENT_ID_PLAYER, TH_Lab_FaceProfessors
+    waitmovement 0
     setflag FLAG_TH_LAB_INTRO
     setvar VAR_TEMP_2, 1
     setvar VAR_TH_STAGE, TH_STAGE_INVITED
@@ -618,6 +622,12 @@ TH_Lab_IntroApproach:
     walk_up
     walk_up
     walk_left
+    face_up
+    step_end
+TH_Lab_FaceRival:
+    face_left
+    step_end
+TH_Lab_FaceProfessors:
     face_up
     step_end
 TH_Text_JointResearch:

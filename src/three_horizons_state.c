@@ -1,6 +1,8 @@
 #include "global.h"
 #include "three_horizons.h"
 #include "event_data.h"
+#include "pokedex.h"
+#include "constants/pokedex.h"
 #include "constants/three_horizons.h"
 #include "constants/trainers.h"
 #if THREE_HORIZONS
@@ -35,6 +37,14 @@ void TH_MigrateSaveState(void)
     {
         for (u32 flag = TH12_FLAGS_START; flag <= TH12_FLAGS_END; flag++)
             FlagClear(flag);
+        for (u32 trainer = TH12_TRAINERS_START; trainer <= TH12_TRAINERS_END; trainer++)
+            FlagClear(TRAINER_FLAGS_START + trainer);
+        // Older releases did not store revival receipts. In those releases,
+        // these species could only be obtained by restoring the collected fossil.
+        if (FlagGet(FLAG_TH_FOSSIL_DOME) && GetSetPokedexFlag(NATIONAL_DEX_KABUTO, FLAG_GET_CAUGHT))
+            FlagSet(FLAG_TH12_REVIVED_DOME);
+        if (FlagGet(FLAG_TH_FOSSIL_HELIX) && GetSetPokedexFlag(NATIONAL_DEX_OMANYTE, FLAG_GET_CAUGHT))
+            FlagSet(FLAG_TH12_REVIVED_HELIX);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_12 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
     if (VarGet(VAR_TH_CLOCK_MODE)>1) VarSet(VAR_TH_CLOCK_MODE,0);

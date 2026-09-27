@@ -1655,6 +1655,9 @@ enum Gender GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
 
 bool8 PartyHasMonWithSurf(void)
 {
+#if THREE_HORIZONS
+    return !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && TH_FindFieldMoveUser(FIELD_MOVE_SURF) < PARTY_SIZE;
+#else
     u8 i;
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
@@ -1668,6 +1671,7 @@ bool8 PartyHasMonWithSurf(void)
         }
     }
     return FALSE;
+#endif
 }
 
 bool8 IsPlayerSurfingNorth(void)

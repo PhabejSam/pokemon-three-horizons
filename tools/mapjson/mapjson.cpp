@@ -135,7 +135,7 @@ void load_project_maps() {
     Json layouts = Json::parse(read_text_file("data/layouts/layouts.json"), err);
     for (auto &entry : manifest["maps"].array_items()) {
         string name = json_to_string(entry);
-        if (name.rfind("TH_", 0) != 0 || name.find_first_of("/\\") != string::npos)
+        if ((name.rfind("TH_", 0) != 0 && name.rfind("TH12_", 0) != 0) || name.find_first_of("/\\") != string::npos)
             FATAL_ERROR("Invalid project map name: %s\n", name.c_str());
         Json record = Json::parse(read_text_file("data/maps/" + name + "/map.json"), err);
         if (!err.empty() || record["name"].string_value() != name)
@@ -783,7 +783,7 @@ void process_groups(string groups_filepath, vector<string> &map_filepaths, strin
         }
         string map_name = json_to_string(map_data, "name");
 
-        bool project = map_name.rfind("TH_", 0) == 0;
+        bool project = map_name.rfind("TH_", 0) == 0 || map_name.rfind("TH12_", 0) == 0;
         bool selectedProject = find(project_maps.begin(), project_maps.end(), map_name) != project_maps.end();
         if ((project && (version != "three_horizons" || !selectedProject))
          || (!project && ((version == "emerald" || version == "three_horizons") && region != "REGION_HOENN"))

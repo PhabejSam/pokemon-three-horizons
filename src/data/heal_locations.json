@@ -399,6 +399,16 @@
       "respawn_npc": "LOCALID_TH_CERULEAN_NURSE",
       "respawn_x": 7,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_TH12_VERMILION",
+      "map": "MAP_TH12_VERMILION_CITY_POKEMON_CENTER_1F",
+      "x": 7,
+      "y": 4,
+      "respawn_map": "MAP_TH12_VERMILION_CITY_POKEMON_CENTER_1F",
+      "respawn_npc": "LOCALID_TH12_VERMILIONCITY_POKEMONCENTER_1F_0",
+      "respawn_x": 7,
+      "respawn_y": 4
     }
   ]
 }

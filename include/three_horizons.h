@@ -1,7 +1,12 @@
 #ifndef GUARD_THREE_HORIZONS_H
 #define GUARD_THREE_HORIZONS_H
 #include "global.h"
+#include "constants/field_move.h"
 struct Pokemon;
+bool32 TH_IsHMFieldMove(enum FieldMove move);
+bool32 TH_FieldMoveUnlocked(enum FieldMove move);
+bool32 TH_CanUseFieldMove(struct Pokemon *mon, enum FieldMove move);
+u8 TH_FindFieldMoveUser(enum FieldMove move);
 u16 TH_GetBattleEvolution(struct Pokemon *mon, bool32 *canStop);
 bool32 TH_TryBattleEvolution(u32 partyId);
 bool32 TH_ResumeBattleEvolutionMusic(void);
@@ -73,6 +78,9 @@ void TH_ChangeOutfit(void);
 void TH_InitNewGame(void);
 void TH_MigrateSaveState(void);
 void TH_TryGiveChapter12Supplies(void);
+bool32 TH12_AreSwitchesAdjacent(u8 first, u8 second);
+void TH12_InitSurgeSwitches(void);
+void TH12_CheckSurgeSwitch(void);
 void TH_StageNewGameOptions(void);
 u16 TH_GetRivalStarter(u16 playerSpecies);
 bool32 TH_TryGiveStarter(u16 playerSpecies);

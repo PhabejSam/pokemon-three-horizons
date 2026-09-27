@@ -3,6 +3,7 @@
 #include "pokemon.h"
 #include "event_data.h"
 #include "item.h"
+#include "constants/three_horizons.h"
 #if THREE_HORIZONS
 u8 TH_TryReviveFossil(u16 item)
 {
@@ -19,7 +20,10 @@ u8 TH_TryReviveFossil(u16 item)
     CreateRandomMon(&mon, species, 20);
     u8 result = GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
     if (result != MON_CANT_GIVE)
+    {
         RemoveBagItem(item, 1);
+        FlagSet(item == ITEM_DOME_FOSSIL ? FLAG_TH12_REVIVED_DOME : FLAG_TH12_REVIVED_HELIX);
+    }
     return result;
 }
 

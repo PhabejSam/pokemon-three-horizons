@@ -6979,7 +6979,16 @@ static void FaceDirection(struct ObjectEvent *objectEvent, struct Sprite *sprite
 {
     SetObjectEventDirection(objectEvent, direction);
     ShiftStillObjectEventCoords(objectEvent);
-    SetStepAnim(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
+    if (THREE_HORIZONS && objectEvent->isPlayer && !objectEvent->inanimate)
+    {
+        // A scripted turn must finish a walking/running frame before pausing.
+        StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
+        SeekSpriteAnim(sprite, 0);
+    }
+    else
+    {
+        SetStepAnim(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
+    }
     sprite->animPaused = TRUE;
     sprite->sActionFuncId = 1;
 }

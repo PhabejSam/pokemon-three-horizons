@@ -28,6 +28,8 @@ TEST("Three Horizons fossil revival requires badge and consumes only a delivered
     memset(gPlayerParty, 0, sizeof(savedParty));
     CalculatePlayerPartyCount();
     FlagClear(FLAG_BADGE02_GET);
+    FlagClear(FLAG_TH12_REVIVED_DOME);
+    FlagClear(FLAG_TH12_REVIVED_HELIX);
     EXPECT_EQ(TH_TryReviveFossil(ITEM_DOME_FOSSIL), MON_CANT_GIVE);
     EXPECT(CheckBagHasItem(ITEM_DOME_FOSSIL, 1));
     FlagSet(FLAG_BADGE02_GET);
@@ -36,6 +38,8 @@ TEST("Three Horizons fossil revival requires badge and consumes only a delivered
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_KABUTO);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL), 20);
     EXPECT(!CheckBagHasItem(ITEM_DOME_FOSSIL, 1));
+    EXPECT(FlagGet(FLAG_TH12_REVIVED_DOME));
+    EXPECT(!FlagGet(FLAG_TH12_REVIVED_HELIX));
     EXPECT_EQ(TH_TryReviveFossil(ITEM_DOME_FOSSIL), MON_CANT_GIVE);
     mon = gPlayerParty[0];
     for (u32 i = 0; i < PARTY_SIZE; i++) gPlayerParty[i] = mon;
@@ -47,6 +51,13 @@ TEST("Three Horizons fossil revival requires badge and consumes only a delivered
     EXPECT_EQ(TH_TryReviveFossil(ITEM_HELIX_FOSSIL), MON_GIVEN_TO_PC);
     EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPECIES), SPECIES_OMANYTE);
     EXPECT(!CheckBagHasItem(ITEM_HELIX_FOSSIL, 1));
+    EXPECT(FlagGet(FLAG_TH12_REVIVED_HELIX));
+    FlagSet(FLAG_TH_FOSSIL_DOME);
+    FlagSet(FLAG_TH_FOSSIL_HELIX);
+    VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_11);
+    TH_MigrateSaveState();
+    EXPECT(FlagGet(FLAG_TH12_REVIVED_DOME));
+    EXPECT(FlagGet(FLAG_TH12_REVIVED_HELIX));
     Free(gPokemonStoragePtr);
     gPokemonStoragePtr = savedStorage;
     memcpy(gPlayerParty, savedParty, sizeof(savedParty));

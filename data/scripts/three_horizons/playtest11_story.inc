@@ -142,7 +142,17 @@ TH_FossilReviveWait:
     release
     end
 TH_FossilReviveNoFossil:
+    goto_if_set FLAG_TH12_REVIVED_DOME, TH12_Fossil_DomeRestored
+    goto_if_set FLAG_TH12_REVIVED_HELIX, TH12_Fossil_OneRestored
     msgbox TH_FossilReviveNoFossilText
+    goto TH_FossilReviveEnd
+TH12_Fossil_DomeRestored:
+    goto_if_set FLAG_TH12_REVIVED_HELIX, TH12_Fossil_BothRestored
+TH12_Fossil_OneRestored:
+    msgbox TH12_Fossil_OneText
+    goto TH_FossilReviveEnd
+TH12_Fossil_BothRestored:
+    msgbox TH12_Fossil_BothText
 TH_FossilReviveEnd:
     release
     end
@@ -158,3 +168,7 @@ TH_FossilReviveWaitText:
     .string "I restore ancient POKéMON\nfrom the fossils of MT. MOON.\pEarn MISTY's CASCADEBADGE, then\nbring me your DOME or HELIX FOSSIL.\lI can restore both, free of charge!$"
 TH_FossilReviveNoFossilText:
     .string "Bring a DOME or HELIX FOSSIL\nfrom MT. MOON for restoration.\pMy colleague there can help you\nfind both after you battle him.$"
+TH12_Fossil_OneText:
+    .string "One ancient partner has a new life!\nBring the other fossil when you find it.$"
+TH12_Fossil_BothText:
+    .string "Both fossils have been restored!\nKABUTO and OMANYTE live again.\pThank you for giving these ancient\nPOKéMON a place on your journey.$"

@@ -1,0 +1,65 @@
+import json
+import re
+import unittest
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[3]
+def read(path): return json.loads((ROOT/path).read_text())
+
+class Chapter12Maps(unittest.TestCase):
+    def test_vermilion_and_every_ship_room_are_connected_to_cerulean(self):
+        names=read('tools/mapjson/three_horizons_maps.json')['maps']
+        expected=['TH12_Route5','TH12_Route6','TH12_UndergroundPath_NorthSouthTunnel','TH12_VermilionCity']
+        expected += ['TH12_'+p.name.removesuffix('_Frlg') for p in (ROOT/'data/maps').glob('SSAnne_*_Frlg')]
+        expected += ['TH12_VermilionCity_Gym']
+        for name in expected: self.assertIn(name,names)
+        maps={read(f'data/maps/{n}/map.json')['id']:read(f'data/maps/{n}/map.json') for n in names}
+        def reachable(start):
+            seen=set(); pending=[start]
+            while pending:
+                node=pending.pop()
+                if node in seen: continue
+                seen.add(node)
+                m=maps[node]
+                pending.extend([c['map'] for c in m['connections'] or []]+[w['dest_map'] for w in m['warp_events']])
+            return seen
+        outward=reachable('MAP_TH_CERULEAN')
+        for name in expected:
+            mid=read(f'data/maps/{name}/map.json')['id']
+            self.assertIn(mid,outward)
+            self.assertIn('MAP_TH_CERULEAN',reachable(mid))
+
+    def test_old_map_numbers_and_new_map_ownership(self):
+        baseline=read('tools/three_horizons/tests/playtest11-map-indices.json')
+        names=read('tools/mapjson/three_horizons_maps.json')['maps']
+        self.assertEqual(names[:len(baseline)],baseline)
+        entries=read('tools/three_horizons/chapter12_maps.json')['maps']
+        self.assertGreaterEqual(len(entries),3)
+        self.assertEqual(len(names),len(set(names)))
+        maps={read(f'data/maps/{n}/map.json')['id']:read(f'data/maps/{n}/map.json') for n in names}
+        scripts='\n'.join(p.read_text() for p in (ROOT/'data/scripts/three_horizons').glob('*.inc'))
+        scripts+='\n'+'\n'.join(p.read_text() for n in names if (p:=ROOT/f'data/maps/{n}/scripts.inc').exists())
+        labels=set(re.findall(r'^(\w+)::?',scripts,re.M))
+        for entry in entries:
+            m=maps[entry['id']]
+            self.assertEqual(m['layout'],entry['layout'])
+            self.assertIn(m['name'],names)
+            for obj in m['object_events']+m['coord_events']+m['bg_events']:
+                if 'script' in obj:
+                    self.assertIn(obj['script'], labels, (m['name'],obj['script']))
+            for warp in m['warp_events']:
+                self.assertIn(warp['dest_map'],maps,m['name'])
+                self.assertLess(int(warp['dest_warp_id']),len(maps[warp['dest_map']]['warp_events']))
+            for connection in m['connections'] or []:
+                self.assertIn(connection['map'],maps)
+
+    def test_cerulean_bridge_and_bill_have_two_way_connections(self):
+        names=['TH_Cerulean','TH12_Route24','TH12_Route25','TH12_Route25_SeaCottage']
+        maps={n:read(f'data/maps/{n}/map.json') for n in names}
+        for first,second in zip(names,names[1:]):
+            for a,b in ((first,second),(second,first)):
+                exits={c['map'] for c in maps[a]['connections'] or []}|{w['dest_map'] for w in maps[a]['warp_events']}
+                self.assertIn(maps[b]['id'],exits)
+        self.assertFalse(any(e['script']=='TH_ChapterNorthBoundary' for e in maps['TH_Cerulean']['coord_events']))
+
+if __name__=='__main__': unittest.main()

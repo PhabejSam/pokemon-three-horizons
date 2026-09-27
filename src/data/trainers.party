@@ -18171,3 +18171,990 @@ IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 - Smokescreen
 - Assurance
 #endif
+
+#if THREE_HORIZONS
+=== TRAINER_TH12_CAMPER_ETHAN ===
+Name: ETHAN
+Class: Camper Frlg
+Pic: Camper Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Mankey
+Level: 18
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_LASS_RELI ===
+Name: RELI
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Nidoran M
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Nidoran F
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_YOUNGSTER_TIMMY ===
+Name: TIMMY
+Class: Youngster Frlg
+Pic: Youngster Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Sandshrew
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Ekans
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_LASS_ALI ===
+Name: ALI
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Pidgey
+Level: 16
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Oddish
+Level: 16
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Bellsprout
+Level: 16
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_BUG_CATCHER_CALE ===
+Name: CALE
+Class: Bug Catcher Frlg
+Pic: Bug Catcher Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Caterpie
+Level: 16
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Weedle
+Level: 16
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Metapod
+Level: 16
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Kakuna
+Level: 16
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_CAMPER_SHANE ===
+Name: SHANE
+Class: Camper Frlg
+Pic: Camper Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 18
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Ekans
+Level: 18
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_HIKER_FRANKLIN ===
+Name: FRANKLIN
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Machop
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Geodude
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_YOUNGSTER_JOEY ===
+Name: JOEY
+Class: Youngster Frlg
+Pic: Youngster Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Spearow
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_HIKER_WAYNE ===
+Name: WAYNE
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Onix
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_YOUNGSTER_DAN ===
+Name: DAN
+Class: Youngster Frlg
+Pic: Youngster Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Slowpoke
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_PICNICKER_KELSEY ===
+Name: KELSEY
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Nidoran M
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Nidoran F
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_HIKER_NOB ===
+Name: NOB
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Geodude
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Geodude
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Machop
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Geodude
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_CAMPER_FLINT ===
+Name: FLINT
+Class: Camper Frlg
+Pic: Camper Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Ekans
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_YOUNGSTER_CHAD ===
+Name: CHAD
+Class: Youngster Frlg
+Pic: Youngster Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Ekans
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Sandshrew
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_LASS_HALEY ===
+Name: HALEY
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Oddish
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pidgey
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Oddish
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_BRIDGE_RECRUITER ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Ekans
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Zubat
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+#endif
+
+#if THREE_HORIZONS
+=== TRAINER_TH12_BUG_CATCHER_KEIGO ===
+Name: KEIGO
+Class: Bug Catcher Frlg
+Pic: Bug Catcher Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Weedle
+Level: 18
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Caterpie
+Level: 18
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Weedle
+Level: 18
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_CAMPER_RICKY ===
+Name: RICKY
+Class: Camper Frlg
+Pic: Camper Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Squirtle
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_PICNICKER_NANCY ===
+Name: NANCY
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pikachu
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_BUG_CATCHER_ELIJAH ===
+Name: ELIJAH
+Class: Bug Catcher Frlg
+Pic: Bug Catcher Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Butterfree
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_PICNICKER_ISABELLE ===
+Name: ISABELLE
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Pidgey
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pidgey
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pidgey
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_CAMPER_JEFF ===
+Name: JEFF
+Class: Camper Frlg
+Pic: Camper Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Spearow
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Raticate
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_LASS_ANN ===
+Name: ANN
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Pidgey
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Nidoran F
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_YOUNGSTER_TYLER ===
+Name: TYLER
+Class: Youngster Frlg
+Pic: Youngster Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Nidoran M
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_GENTLEMAN_ARTHUR ===
+Name: ARTHUR
+Class: Gentleman Frlg
+Pic: Gentleman Frlg
+Gender: Male
+Music: Rich
+Double Battle: No
+AI: Check Bad Move
+
+Nidoran M
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Nidoran F
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_GENTLEMAN_THOMAS ===
+Name: THOMAS
+Class: Gentleman Frlg
+Pic: Gentleman Frlg
+Gender: Male
+Music: Rich
+Double Battle: No
+AI: Check Bad Move
+
+Growlithe
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Growlithe
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_FISHERMAN_DALE ===
+Name: DALE
+Class: Fisherman Frlg
+Pic: Fisherman Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Goldeen
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Tentacool
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Goldeen
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_GENTLEMAN_BROOKS ===
+Name: BROOKS
+Class: Gentleman Frlg
+Pic: Gentleman Frlg
+Gender: Male
+Music: Rich
+Double Battle: No
+AI: Check Bad Move
+
+Pikachu
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_GENTLEMAN_LAMAR ===
+Name: LAMAR
+Class: Gentleman Frlg
+Pic: Gentleman Frlg
+Gender: Male
+Music: Rich
+Double Battle: No
+AI: Check Bad Move
+
+Growlithe
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Ponyta
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_LASS_DAWN ===
+Name: DAWN
+Class: Lass Frlg
+Pic: Lass Frlg
+Gender: Male
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pikachu
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_FISHERMAN_BARNY ===
+Name: BARNY
+Class: Fisherman Frlg
+Pic: Fisherman Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Tentacool
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Staryu
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Shellder
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_SAILOR_PHILLIP ===
+Name: PHILLIP
+Class: Sailor Frlg
+Pic: Sailor Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Machop
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_SAILOR_HUEY ===
+Name: HUEY
+Class: Sailor Frlg
+Pic: Sailor Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Tentacool
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Staryu
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_SAILOR_DYLAN ===
+Name: DYLAN
+Class: Sailor Frlg
+Pic: Sailor Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Horsea
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Horsea
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Horsea
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_SAILOR_DUNCAN ===
+Name: DUNCAN
+Class: Sailor Frlg
+Pic: Sailor Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Horsea
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Shellder
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Tentacool
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_SAILOR_LEONARD ===
+Name: LEONARD
+Class: Sailor Frlg
+Pic: Sailor Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Shellder
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_SAILOR_TREVOR ===
+Name: TREVOR
+Class: Sailor Frlg
+Pic: Sailor Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Machop
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Tentacool
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_SAILOR_EDMOND ===
+Name: EDMOND
+Class: Sailor Frlg
+Pic: Sailor Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Machop
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Shellder
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_ENGINEER_BAILY ===
+Name: BAILY
+Class: Engineer Frlg
+Pic: Engineer Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Voltorb
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Magnemite
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_SAILOR_DWAYNE ===
+Name: DWAYNE
+Class: Sailor Frlg
+Pic: Sailor Frlg
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move
+
+Pikachu
+Level: 24
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pikachu
+Level: 24
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH12_GENTLEMAN_TUCKER ===
+Name: TUCKER
+Class: Gentleman Frlg
+Pic: Gentleman Frlg
+Gender: Male
+Music: Rich
+Double Battle: No
+AI: Check Bad Move
+
+Pikachu
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+#endif
+
+#if THREE_HORIZONS
+=== TRAINER_TH12_SHIP_BULBASAUR ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 22
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Kadabra
+Level: 21
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Raticate
+Level: 20
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Ivysaur
+Level: 25
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+=== TRAINER_TH12_SHIP_CHARMANDER ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 22
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Kadabra
+Level: 21
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Raticate
+Level: 20
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Charmeleon
+Level: 25
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+=== TRAINER_TH12_SHIP_SQUIRTLE ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 22
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Kadabra
+Level: 21
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Raticate
+Level: 20
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Wartortle
+Level: 25
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+=== TRAINER_TH12_SHIP_CHIKORITA ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 22
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Kadabra
+Level: 21
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Raticate
+Level: 20
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Bayleef
+Level: 25
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+=== TRAINER_TH12_SHIP_CYNDAQUIL ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 22
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Kadabra
+Level: 21
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Raticate
+Level: 20
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Quilava
+Level: 25
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+=== TRAINER_TH12_SHIP_TOTODILE ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 22
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Kadabra
+Level: 21
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Raticate
+Level: 20
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Croconaw
+Level: 25
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+=== TRAINER_TH12_SHIP_TREECKO ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 22
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Kadabra
+Level: 21
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Raticate
+Level: 20
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Grovyle
+Level: 25
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+- Mega Drain
+- Quick Attack
+- Dragon Breath
+- Pursuit
+
+=== TRAINER_TH12_SHIP_TORCHIC ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 22
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Kadabra
+Level: 21
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Raticate
+Level: 20
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Combusken
+Level: 25
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+=== TRAINER_TH12_SHIP_MUDKIP ===
+Name: BLUE
+Class: Rival
+Pic: Rival Early Frlg
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Pidgeotto
+Level: 22
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Kadabra
+Level: 21
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Raticate
+Level: 20
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+Marshtomp
+Level: 25
+IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
+
+
+#endif
+
+#if THREE_HORIZONS
+
+=== TRAINER_TH12_LEADER_SURGE ===
+Name: LT. SURGE
+Class: Leader
+Pic: Lt Surge
+Gender: Male
+Music: Male
+AI: Check Bad Move / Try To Faint
+
+Voltorb
+Level: 24
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Spark
+- Swift
+- Light Screen
+- Rollout
+
+Pikachu
+Level: 24
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Electro Ball
+- Quick Attack
+- Thunder Wave
+- Double Team
+
+Magnemite
+Level: 25
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Spark
+- Mirror Shot
+- Thunder Wave
+- Supersonic
+
+Electrike
+Level: 25
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Spark
+- Bite
+- Quick Attack
+- Howl
+
+Raichu
+Level: 27
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Shock Wave
+- Quick Attack
+- Thunder Wave
+- Brick Break
+
+#endif
