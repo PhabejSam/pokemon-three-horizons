@@ -7,6 +7,15 @@ ROOT=Path(__file__).resolve().parents[3]
 def read(path): return json.loads((ROOT/path).read_text())
 
 class Chapter12Maps(unittest.TestCase):
+    def test_bill_human_is_hidden_until_teleporter_release(self):
+        m=read('data/maps/TH12_Route25_SeaCottage/map.json')
+        self.assertEqual(m['object_events'][0]['flag'], 'FLAG_TEMP_3')
+        text=(ROOT/'data/scripts/three_horizons/chapter12_bill.inc').read_text()
+        entry=text.split('TH12_Bill_OnEntry::')[1].split('TH12_Bill_Rescue::')[0]
+        self.assertIn('setflag FLAG_TEMP_3',entry)
+        self.assertIn('TH12_Bill_EntryDone:\n    clearflag FLAG_TEMP_3',entry)
+        self.assertIn('clearflag FLAG_TEMP_3\n    addobject LOCALID_TH12_ROUTE25_SEACOTTAGE_0',text)
+
     def test_vermilion_and_every_ship_room_are_connected_to_cerulean(self):
         names=read('tools/mapjson/three_horizons_maps.json')['maps']
         expected=['TH12_Route5','TH12_Route6','TH12_UndergroundPath_NorthSouthTunnel','TH12_VermilionCity']

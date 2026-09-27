@@ -41,11 +41,11 @@ TH12_Bridge_NotReadyText:
 
 TH12_Bill_OnEntry::
     goto_if_set FLAG_TH12_BILL_RESCUED, TH12_Bill_EntryDone
-    removeobject LOCALID_TH12_ROUTE25_SEACOTTAGE_0
+    setflag FLAG_TEMP_3
     setobjectxyperm LOCALID_TH12_ROUTE25_SEACOTTAGE_0, 3, 3
     return
 TH12_Bill_EntryDone:
-    removeobject LOCALID_TH12_ROUTE25_SEACOTTAGE_1
+    clearflag FLAG_TEMP_3
     return
 
 TH12_Bill_Rescue::
@@ -93,6 +93,7 @@ TH12_Bill_Computer::
     delay 60
     opendoor 3, 3
     waitdooranim
+    clearflag FLAG_TEMP_3
     addobject LOCALID_TH12_ROUTE25_SEACOTTAGE_0
     applymovement LOCALID_TH12_ROUTE25_SEACOTTAGE_0, TH12_Bill_FromMachine
     waitmovement 0
