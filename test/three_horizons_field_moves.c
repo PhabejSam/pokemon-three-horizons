@@ -13,7 +13,7 @@ TEST("Three Horizons playtest12 Cut needs HM01 badge compatibility and a conscio
     struct Pokemon mon, before;
     ClearBag();
     FlagClear(FLAG_BADGE02_GET);
-    CreateMon(&mon, SPECIES_BULBASAUR, 5, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMonWithIVs(&mon, SPECIES_BULBASAUR, 5, 0, OTID_STRUCT_PLAYER_ID, 31);
     SetMonMoveSlot(&mon, MOVE_TACKLE, 0);
     SetMonMoveSlot(&mon, MOVE_NONE, 1);
     SetMonMoveSlot(&mon, MOVE_NONE, 2);
@@ -33,7 +33,7 @@ TEST("Three Horizons playtest12 Cut needs HM01 badge compatibility and a conscio
     value = TRUE;
     SetMonData(&mon, MON_DATA_IS_EGG, &value);
     EXPECT(!TH_CanUseFieldMove(&mon, FIELD_MOVE_CUT));
-    CreateMon(&mon, SPECIES_MAGIKARP, 5, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMonWithIVs(&mon, SPECIES_MAGIKARP, 5, 0, OTID_STRUCT_PLAYER_ID, 31);
     SetMonMoveSlot(&mon, MOVE_CUT, 0);
     EXPECT(!TH_CanUseFieldMove(&mon, FIELD_MOVE_CUT));
     mon = before;
@@ -51,9 +51,9 @@ TEST("Three Horizons playtest12 field lookup selects the first eligible party me
     ClearBag();
     AddBagItem(ITEM_HM01, 1);
     FlagSet(FLAG_BADGE02_GET);
-    CreateMon(&gPlayerParty[0], SPECIES_MAGIKARP, 5, 0, OTID_STRUCT_PLAYER_ID);
-    CreateMon(&gPlayerParty[1], SPECIES_BULBASAUR, 5, 0, OTID_STRUCT_PLAYER_ID);
-    CreateMon(&gPlayerParty[2], SPECIES_CHARMANDER, 5, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMonWithIVs(&gPlayerParty[0], SPECIES_MAGIKARP, 5, 0, OTID_STRUCT_PLAYER_ID, 31);
+    CreateMonWithIVs(&gPlayerParty[1], SPECIES_BULBASAUR, 5, 0, OTID_STRUCT_PLAYER_ID, 31);
+    CreateMonWithIVs(&gPlayerParty[2], SPECIES_CHARMANDER, 5, 0, OTID_STRUCT_PLAYER_ID, 31);
     u32 hp = 0;
     SetMonData(&gPlayerParty[1], MON_DATA_HP, &hp);
     EXPECT_EQ(TH_FindFieldMoveUser(FIELD_MOVE_CUT), 2);
@@ -70,7 +70,7 @@ TEST("Three Horizons playtest12 field lookup selects the first eligible party me
 TEST("Three Horizons playtest12 HM moves can be replaced while other move slots remain intact")
 {
     struct Pokemon mon;
-    CreateMon(&mon, SPECIES_CHARMANDER, 10, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMonWithIVs(&mon, SPECIES_CHARMANDER, 10, 0, OTID_STRUCT_PLAYER_ID, 31);
     SetMonMoveSlot(&mon, MOVE_ROCK_SMASH, 0);
     SetMonMoveSlot(&mon, MOVE_CUT, 1);
     EXPECT(!CannotForgetMove(MOVE_ROCK_SMASH));
