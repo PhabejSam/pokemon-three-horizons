@@ -34,7 +34,7 @@ TEST("Three Horizons playtest12 scripted facing ends in a standing pose for ever
             StartSpriteAnim(sprite, GetMoveDirectionAnimNum(direction));
             SeekSpriteAnim(sprite, 1);
             face[direction - DIR_SOUTH](&player, sprite);
-            EXPECT_EQ(player.facingDirection, direction);
+            EXPECT_EQ((u32)player.facingDirection, direction);
             EXPECT_EQ(sprite->animNum, GetFaceDirectionAnimNum(direction));
             EXPECT_EQ(sprite->animCmdIndex, 0);
             EXPECT(sprite->animPaused);

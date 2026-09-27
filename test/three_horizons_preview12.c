@@ -18,7 +18,7 @@ TEST("Three Horizons playtest12 preview owns a weather immune palette")
     EXPECT_LT(sprite, MAX_SPRITES);
     u8 slot = IndexOfSpritePaletteTag(tag);
     EXPECT_LT(slot, 16);
-    EXPECT_EQ(gSprites[sprite].oam.paletteNum, slot);
+    EXPECT_EQ((u32)gSprites[sprite].oam.paletteNum, slot);
     struct BlendSettings night = {.blendColor = RGB_BLACK, .coeff = 8};
     BeginTimeOfDayPaletteFade(PALETTES_ALL, 0, 0, 0, &night, &night, 128, RGB_BLACK);
     for (u32 frame = 0; frame < 90; frame++)

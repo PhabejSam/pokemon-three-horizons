@@ -895,19 +895,19 @@ TEST("Three Horizons playtest12 Feraligatr global types")
 }
 TEST("Three Horizons playtest12 BLAZE_KICK approved balance")
 {
-    EXPECT_EQ(gMovesInfo[MOVE_BLAZE_KICK].power, 95);
+    EXPECT_EQ((u32)gMovesInfo[MOVE_BLAZE_KICK].power, 95);
 }
 TEST("Three Horizons playtest12 LEAF_BLADE approved balance")
 {
-    EXPECT_EQ(gMovesInfo[MOVE_LEAF_BLADE].power, 95);
+    EXPECT_EQ((u32)gMovesInfo[MOVE_LEAF_BLADE].power, 95);
 }
 TEST("Three Horizons playtest12 MUDDY_WATER approved balance")
 {
-    EXPECT_EQ(gMovesInfo[MOVE_MUDDY_WATER].power, 95);
-    EXPECT_EQ(gMovesInfo[MOVE_MUDDY_WATER].accuracy, 100);
+    EXPECT_EQ((u32)gMovesInfo[MOVE_MUDDY_WATER].power, 95);
+    EXPECT_EQ((u32)gMovesInfo[MOVE_MUDDY_WATER].accuracy, 100);
 }
 TEST("Three Horizons playtest12 SKY_UPPERCUT approved balance")
 {
-    EXPECT_EQ(gMovesInfo[MOVE_SKY_UPPERCUT].accuracy, 100);
+    EXPECT_EQ((u32)gMovesInfo[MOVE_SKY_UPPERCUT].accuracy, 100);
 }
 #endif
