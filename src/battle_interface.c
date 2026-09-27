@@ -1299,6 +1299,8 @@ void SwapHpBarsWithHpText(void)
 u8 CreatePartyStatusSummarySprites(enum BattlerId battler, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart)
 {
     bool8 isOpponent;
+    bool32 splitOpponentRow = THREE_HORIZONS && !IsOnPlayerSide(battler)
+        && BattleSideHasTwoTrainers(B_SIDE_OPPONENT) && !AreMultiPartiesFullTeams();
     s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
     s32 i, j, var;
     u8 summaryBarSpriteId;
@@ -1351,6 +1353,9 @@ u8 CreatePartyStatusSummarySprites(enum BattlerId battler, struct HpAndStatus *p
         bar_data0 = 5;
     }
 
+    if (splitOpponentRow)
+        bar_Y = 24;
+
     LoadCompressedSpriteSheetUsingHeap(&sStatusSummaryBarSpriteSheet);
     LoadSpriteSheet(&sStatusSummaryBallsSpriteSheet);
     LoadSpritePalette(&sStatusSummaryBarSpritePal);
@@ -1360,6 +1365,8 @@ u8 CreatePartyStatusSummarySprites(enum BattlerId battler, struct HpAndStatus *p
     SetSubspriteTables(&gSprites[summaryBarSpriteId], sStatusSummaryBar_SubspriteTable_Enter);
     gSprites[summaryBarSpriteId].x2 = bar_pos2_X;
     gSprites[summaryBarSpriteId].data[0] = bar_data0;
+    if (splitOpponentRow && GetBattlerPosition(battler) == B_POSITION_OPPONENT_RIGHT)
+        gSprites[summaryBarSpriteId].invisible = TRUE;
 
     if (isOpponent)
     {
@@ -1400,6 +1407,17 @@ u8 CreatePartyStatusSummarySprites(enum BattlerId battler, struct HpAndStatus *p
         }
 
         gSprites[ballIconSpritesIds[i]].data[2] = isOpponent;
+        if (splitOpponentRow)
+        {
+            // The native reversed ordering puts the first three party members
+            // in sprites 5,4,3. Keep the six-sprite lifetime contract for cleanup.
+            gSprites[ballIconSpritesIds[i]].x += GetBattlerPosition(battler) == B_POSITION_OPPONENT_LEFT ? -40 : 4;
+            if (i < 3)
+            {
+                gSprites[ballIconSpritesIds[i]].invisible = TRUE;
+                gSprites[ballIconSpritesIds[i]].callback = SpriteCallbackDummy;
+            }
+        }
     }
 
     if (IsOnPlayerSide(battler))

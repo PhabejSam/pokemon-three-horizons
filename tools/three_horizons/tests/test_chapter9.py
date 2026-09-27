@@ -51,7 +51,7 @@ class Chapter9(unittest.TestCase):
         for entry in manifest['maps']:
             m=json.loads((ROOT/'data/maps'/entry['name']/'map.json').read_text())
             for o in m['object_events']:
-                self.assertTrue(o['script'].startswith('TH_'),(entry['name'],o))
+                self.assertTrue(o['script'].startswith(('TH_', 'TH12_')),(entry['name'],o))
                 self.assertTrue(o['flag']=='0' or o['flag'].startswith('FLAG_TH_'),o)
             self.assertFalse(any(e['type']=='hidden_item' for e in m['bg_events']))
 

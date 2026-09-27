@@ -21,6 +21,7 @@
 #include "overworld.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
+#include "gpu_regs.h"
 
 #if THREE_HORIZONS
 extern void Test_TH_HandleBattleLost(void);
@@ -154,6 +155,12 @@ TEST("Three Horizons new catch restores the battle backdrop before the nickname 
         gMain.heldKeys = gMain.newKeys;
         gBattleScriptingCommandsTable[B_SCR_OP_DISPLAYDEXINFO]();
         gMain.callback2();
+        if (gBattleCommunication[0] == 6 && gMain.callback2 != BattleMainCB2)
+        {
+            // No partially reloaded OBJ tiles may show after the Dex's BG-only fade.
+            EXPECT_EQ(GetGpuReg(REG_OFFSET_BLDY), 16);
+            EXPECT_EQ(GetGpuReg(REG_OFFSET_BLDCNT), BLDCNT_TGT1_ALL | BLDCNT_EFFECT_DARKEN);
+        }
         VBlankIntrWait();
     }
     EXPECT_LT(frames, 1200);
