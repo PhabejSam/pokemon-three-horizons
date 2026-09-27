@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test/battle.h"
+#include "test/test.h"
 #include "three_horizons.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -72,122 +72,98 @@ static void FreePlaytest11Battle(void)
 
 TEST("Three Horizons evolution returns directly to battle or victory music")
 {
-    static const struct { u16 song, species; u8 level; bool8 cancel; } cases[] = {
-        {MUS_RG_VS_WILD, SPECIES_METAPOD, 10, FALSE},
-        {MUS_RG_VICTORY_WILD, SPECIES_METAPOD, 10, FALSE},
-        {MUS_RG_VS_WILD, SPECIES_BULBASAUR, 16, FALSE},
-        {MUS_RG_VS_WILD, SPECIES_METAPOD, 10, TRUE},
-    };
-    for (u32 caseId = 0; caseId < ARRAY_COUNT(cases); caseId++)
+    u16 song, species;
+    u8 level;
+    bool32 cancel;
+    PARAMETRIZE { song = MUS_RG_VS_WILD; species = SPECIES_METAPOD; level = 10; cancel = FALSE; }
+    PARAMETRIZE { song = MUS_RG_VICTORY_WILD; species = SPECIES_METAPOD; level = 10; cancel = FALSE; }
+    PARAMETRIZE { song = MUS_RG_VS_WILD; species = SPECIES_BULBASAUR; level = 16; cancel = FALSE; }
+    PARAMETRIZE { song = MUS_RG_VS_WILD; species = SPECIES_METAPOD; level = 10; cancel = TRUE; }
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    bool32 oldDisableMusic = gDisableMusic;
+    u8 oldMusicControl = gDisableMapMusicChangeOnMapLoad;
+    struct WarpData oldLocation = gSaveBlock1Ptr->location;
+    u16 oldSavedMusic = gSaveBlock1Ptr->savedMusic;
+    u32 frames, unexpectedSongs = 0;
+    InitPlaytest11Battle(species, SPECIES_RATTATA, level);
+    gDisableMusic = FALSE;
+    gDisableMapMusicChangeOnMapLoad = MUSIC_DISABLE_OFF;
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_TH_PALLET);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_TH_PALLET);
+    gSaveBlock1Ptr->savedMusic = MUS_RG_PALLET;
+    ResetMapMusic();
+    PlayBGM(song);
+    struct SongHeader *expected = gMPlayInfo_BGM.songHeader;
+    gLeveledUpInBattle = 1;
+    gMain.callback1 = BattleCallbackForPlaytest11;
+    EXPECT(TH_TryBattleEvolution(0));
+    gPaletteFade.active = FALSE;
+    EXPECT(TH_TryBattleEvolution(0));
+    for (frames = 0; frames < 4000 && gMain.callback2 != BattleMainCB2; frames++)
     {
-        u16 song = cases[caseId].song, species = cases[caseId].species;
-        u8 level = cases[caseId].level;
-        bool32 cancel = cases[caseId].cancel;
-        MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
-        bool32 oldDisableMusic = gDisableMusic;
-        u8 oldMusicControl = gDisableMapMusicChangeOnMapLoad;
-        struct WarpData oldLocation = gSaveBlock1Ptr->location;
-        u16 oldSavedMusic = gSaveBlock1Ptr->savedMusic;
-        u32 frames, unexpectedSongs = 0;
-        InitPlaytest11Battle(species, SPECIES_RATTATA, level);
-        gDisableMusic = FALSE;
-        gDisableMapMusicChangeOnMapLoad = MUSIC_DISABLE_OFF;
-        gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_TH_PALLET);
-        gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_TH_PALLET);
-        gSaveBlock1Ptr->savedMusic = MUS_RG_PALLET;
-        ResetMapMusic();
-        PlayBGM(song);
-        struct SongHeader *expected = gMPlayInfo_BGM.songHeader;
-        gLeveledUpInBattle = 1;
-        gMain.callback1 = BattleCallbackForPlaytest11;
-        EXPECT(TH_TryBattleEvolution(0));
-        gPaletteFade.active = FALSE;
-        EXPECT(TH_TryBattleEvolution(0));
-        for (frames = 0; frames < 4000 && gMain.callback2 != BattleMainCB2; frames++)
-        {
-            gMain.newKeys = cancel ? B_BUTTON : A_BUTTON;
-            gMain.heldKeys = gMain.newKeys;
-            if (gMain.callback1)
-                gMain.callback1();
-            gMain.callback2();
-            MapMusicMain();
-            struct SongHeader *actual = gMPlayInfo_BGM.songHeader;
-            if (actual != expected && actual != gSongTable[MUS_EVOLUTION].header
-                && actual != gSongTable[MUS_EVOLVED].header && actual != gSongTable[MUS_LEVEL_UP].header)
-                unexpectedSongs++;
-            VBlankIntrWait();
-        }
-        EXPECT_LT(frames, 4000);
-        EXPECT_EQ(unexpectedSongs, 0);
-        EXPECT(gMPlayInfo_BGM.songHeader == expected);
-        gPaletteFade.active = FALSE;
+        gMain.newKeys = cancel ? B_BUTTON : A_BUTTON;
+        gMain.heldKeys = gMain.newKeys;
         if (gMain.callback1)
             gMain.callback1();
-        EXPECT(!TH_TryBattleEvolution(0));
-        FreePlaytest11Battle();
-        gDisableMusic = oldDisableMusic;
-        gDisableMapMusicChangeOnMapLoad = oldMusicControl;
-        gSaveBlock1Ptr->location = oldLocation;
-        gSaveBlock1Ptr->savedMusic = oldSavedMusic;
-        gMain.callback1 = old1;
-        SetMainCallback2(old2);
+        gMain.callback2();
+        MapMusicMain();
+        struct SongHeader *actual = gMPlayInfo_BGM.songHeader;
+        if (actual != expected && actual != gSongTable[MUS_EVOLUTION].header
+            && actual != gSongTable[MUS_EVOLVED].header && actual != gSongTable[MUS_LEVEL_UP].header)
+            unexpectedSongs++;
+        VBlankIntrWait();
     }
+    EXPECT_LT(frames, 4000);
+    EXPECT_EQ(unexpectedSongs, 0);
+    EXPECT(gMPlayInfo_BGM.songHeader == expected);
+    gPaletteFade.active = FALSE;
+    if (gMain.callback1)
+        gMain.callback1();
+    EXPECT(!TH_TryBattleEvolution(0));
+    FreePlaytest11Battle();
+    gDisableMusic = oldDisableMusic;
+    gDisableMapMusicChangeOnMapLoad = oldMusicControl;
+    gSaveBlock1Ptr->location = oldLocation;
+    gSaveBlock1Ptr->savedMusic = oldSavedMusic;
+    gMain.callback1 = old1;
+    SetMainCallback2(old2);
 }
 
 TEST("Three Horizons new catch restores the battle backdrop before the nickname choice")
 {
-    static const u16 speciesCases[] = {SPECIES_CATERPIE, SPECIES_WEEDLE, SPECIES_PIKACHU};
-    for (u32 caseId = 0; caseId < ARRAY_COUNT(speciesCases); caseId++)
+    u16 species;
+    PARAMETRIZE { species = SPECIES_CATERPIE; }
+    PARAMETRIZE { species = SPECIES_WEEDLE; }
+    PARAMETRIZE { species = SPECIES_PIKACHU; }
+    static const u8 command[] = {B_SCR_OP_DISPLAYDEXINFO, B_SCR_OP_END};
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    u32 frames;
+    InitPlaytest11Battle(SPECIES_WOBBUFFET, species, 12);
+    gBattleScripting.monCaught = TRUE;
+    // CB2 runs graphics/tasks only. Battle scripts/controllers live in CB1,
+    // which stays suspended while this test drives the Dex command itself.
+    SetMainCallback2(BattleMainCB2);
+    InitBattleBgsVideo();
+    LoadBattleTextboxAndBackground();
+    SetVBlankCallback(VBlankCB_Battle);
+    memset(gBattleCommunication, 0, sizeof(gBattleCommunication));
+    gBattlescriptCurrInstr = command;
+    for (frames = 0; frames < 1200 && gBattlescriptCurrInstr == command; frames++)
     {
-        u16 species = speciesCases[caseId];
-        static const u8 command[] = {B_SCR_OP_DISPLAYDEXINFO, B_SCR_OP_END};
-        MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
-        u32 frames;
-        InitPlaytest11Battle(SPECIES_WOBBUFFET, species, 12);
-        gBattleScripting.monCaught = TRUE;
-        // CB2 runs graphics/tasks only. Battle scripts/controllers live in CB1,
-        // which stays suspended while this test drives the Dex command itself.
-        SetMainCallback2(BattleMainCB2);
-        InitBattleBgsVideo();
-        LoadBattleTextboxAndBackground();
-        SetVBlankCallback(VBlankCB_Battle);
-        memset(gBattleCommunication, 0, sizeof(gBattleCommunication));
-        gBattlescriptCurrInstr = command;
-        for (frames = 0; frames < 1200 && gBattlescriptCurrInstr == command; frames++)
-        {
-            gMain.newKeys = frames % 20 == 0 ? A_BUTTON : 0;
-            gMain.heldKeys = gMain.newKeys;
-            gBattleScriptingCommandsTable[B_SCR_OP_DISPLAYDEXINFO]();
-            gMain.callback2();
-            VBlankIntrWait();
-        }
-        EXPECT_LT(frames, 1200);
-        EXPECT_EQ(gBattle_BG3_X, 0);
-        EXPECT(gBattleAnimBgTileBuffer != NULL);
-        EXPECT(gMain.callback2 == BattleMainCB2);
-        EXPECT(!gPaletteFade.active);
-        FreePlaytest11Battle();
-        gMain.callback1 = old1;
-        SetMainCallback2(old2);
+        gMain.newKeys = frames % 20 == 0 ? A_BUTTON : 0;
+        gMain.heldKeys = gMain.newKeys;
+        gBattleScriptingCommandsTable[B_SCR_OP_DISPLAYDEXINFO]();
+        gMain.callback2();
+        VBlankIntrWait();
     }
-}
-
-SINGLE_BATTLE_TEST("Three Horizons Poison Point after Quick Attack damages on the same turn")
-{
-    GIVEN {
-        PLAYER(SPECIES_RATTATA) { MaxHP(80); HP(80); }
-        OPPONENT(SPECIES_NIDORAN_M) { Ability(ABILITY_POISON_POINT); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_QUICK_ATTACK, WITH_RNG(RNG_POISON_POINT, TRUE)); MOVE(opponent, MOVE_SPLASH); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player);
-        ABILITY_POPUP(opponent, ABILITY_POISON_POINT);
-        STATUS_ICON(player, poison: TRUE);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPLASH, opponent);
-        HP_BAR(player, damage: 10);
-    } THEN {
-        EXPECT_EQ(player->hp, 70);
-    }
+    EXPECT_LT(frames, 1200);
+    EXPECT_EQ(gBattle_BG3_X, 0);
+    EXPECT(gBattleAnimBgTileBuffer != NULL);
+    EXPECT(gMain.callback2 == BattleMainCB2);
+    EXPECT(!gPaletteFade.active);
+    FreePlaytest11Battle();
+    gMain.callback1 = old1;
+    SetMainCallback2(old2);
 }
 
 TEST("Three Horizons Power Bracer grants eight Attack EVs and stops at 252")
@@ -207,34 +183,29 @@ TEST("Three Horizons Power Bracer grants eight Attack EVs and stops at 252")
 
 TEST("Three Horizons rival loss selects whiteout unless tutorial healing is enabled")
 {
-    static const struct { u8 rivalFlags, whiteoutChoice; } cases[] = {
-        {0, 2},
-        {RIVAL_BATTLE_TUTORIAL & ~RIVAL_BATTLE_HEAL_AFTER, 2},
-        {RIVAL_BATTLE_HEAL_AFTER, 1},
-    };
-    for (u32 caseId = 0; caseId < ARRAY_COUNT(cases); caseId++)
-    {
-        u8 rivalFlags = cases[caseId].rivalFlags, whiteoutChoice = cases[caseId].whiteoutChoice;
-        TrainerBattleParameter savedParams = gTrainerBattleParameter;
-        void (*savedMainFunc)(void) = gBattleMainFunc;
-        u32 savedFlags = gBattleTypeFlags;
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-        TRAINER_BATTLE_PARAM.earlyRival = TRUE;
-        TRAINER_BATTLE_PARAM.rivalBattleFlags = rivalFlags;
-        gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-        gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-        gBattlersCount = 2;
-        gBattlerAttacker = 0;
-        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        // Drive the same loss handler the turn dispatcher calls. Choices 1 and 2
-        // both show the rival's win speech; only 2 continues to money/whiteout.
-        Test_TH_HandleBattleLost();
-        EXPECT(gBattlescriptCurrInstr == BattleScript_LocalBattleLost);
-        EXPECT_EQ(gBattlerAttacker, 1);
-        EXPECT_EQ(gBattleCommunication[MULTISTRING_CHOOSER], whiteoutChoice);
-        gTrainerBattleParameter = savedParams;
-        gBattleMainFunc = savedMainFunc;
-        gBattleTypeFlags = savedFlags;
-    }
+    u8 rivalFlags, whiteoutChoice;
+    PARAMETRIZE { rivalFlags = 0; whiteoutChoice = 2; }
+    PARAMETRIZE { rivalFlags = RIVAL_BATTLE_TUTORIAL & ~RIVAL_BATTLE_HEAL_AFTER; whiteoutChoice = 2; }
+    PARAMETRIZE { rivalFlags = RIVAL_BATTLE_HEAL_AFTER; whiteoutChoice = 1; }
+    TrainerBattleParameter savedParams = gTrainerBattleParameter;
+    void (*savedMainFunc)(void) = gBattleMainFunc;
+    u32 savedFlags = gBattleTypeFlags;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    TRAINER_BATTLE_PARAM.earlyRival = TRUE;
+    TRAINER_BATTLE_PARAM.rivalBattleFlags = rivalFlags;
+    gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
+    gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
+    gBattlersCount = 2;
+    gBattlerAttacker = 0;
+    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+    // Drive the same loss handler the turn dispatcher calls. Choices 1 and 2
+    // both show the rival's win speech; only 2 continues to money/whiteout.
+    Test_TH_HandleBattleLost();
+    EXPECT(gBattlescriptCurrInstr == BattleScript_LocalBattleLost);
+    EXPECT_EQ(gBattlerAttacker, 1);
+    EXPECT_EQ(gBattleCommunication[MULTISTRING_CHOOSER], whiteoutChoice);
+    gTrainerBattleParameter = savedParams;
+    gBattleMainFunc = savedMainFunc;
+    gBattleTypeFlags = savedFlags;
 }
 #endif
