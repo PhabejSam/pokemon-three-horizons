@@ -7,6 +7,16 @@ ROOT=Path(__file__).resolve().parents[3]
 def read(path): return json.loads((ROOT/path).read_text())
 
 class Chapter12Maps(unittest.TestCase):
+    def test_hiding_bill_clefairy_does_not_complete_rescue(self):
+        m=read('data/maps/TH12_Route25_SeaCottage/map.json')
+        self.assertEqual(m['object_events'][1]['flag'],'FLAG_TEMP_4')
+        text=(ROOT/'data/scripts/three_horizons/chapter12_bill.inc').read_text()
+        entry=text.split('TH12_Bill_OnEntry::')[1].split('TH12_Bill_Rescue::')[0]
+        self.assertIn('clearflag FLAG_TEMP_4',entry)
+        self.assertIn('setflag FLAG_TEMP_4',entry)
+        rescue=text.split('TH12_Bill_Rescue::')[1].split('TH12_Bill_Computer::')[0]
+        self.assertNotIn('setflag FLAG_TH12_BILL_RESCUED',rescue)
+
     def test_bill_human_is_hidden_until_teleporter_release(self):
         m=read('data/maps/TH12_Route25_SeaCottage/map.json')
         self.assertEqual(m['object_events'][0]['flag'], 'FLAG_TEMP_3')

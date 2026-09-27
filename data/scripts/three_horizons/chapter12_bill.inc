@@ -42,10 +42,14 @@ TH12_Bridge_NotReadyText:
 TH12_Bill_OnEntry::
     goto_if_set FLAG_TH12_BILL_RESCUED, TH12_Bill_EntryDone
     setflag FLAG_TEMP_3
+    clearflag FLAG_TEMP_4
+    clearflag FLAG_TEMP_2
     setobjectxyperm LOCALID_TH12_ROUTE25_SEACOTTAGE_0, 3, 3
     return
 TH12_Bill_EntryDone:
     clearflag FLAG_TEMP_3
+    setflag FLAG_TEMP_4
+    setobjectxyperm LOCALID_TH12_ROUTE25_SEACOTTAGE_0, 7, 5
     return
 
 TH12_Bill_Rescue::
