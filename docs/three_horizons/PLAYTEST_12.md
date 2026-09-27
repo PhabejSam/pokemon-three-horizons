@@ -1,6 +1,6 @@
 # Playtest 12 — continuation and repair checks
 
-Build status: playable candidate through Lt. Surge. See PLAYTEST_12_VERIFICATION.md for the exact tested ROM, evidence and remaining limitations. Jessie and James still use the earlier grunt artwork: the replacement sprite request was blocked by the image service and is not complete.
+Build status: playable candidate through Lt. Surge, with Jessie and James walking sprites and battle portraits by monicaccina. See PLAYTEST_12_VERIFICATION.md for the exact tested ROM, evidence and remaining limitations. Artwork source and reuse permission are recorded in graphics/three_horizons/rocket/README.md.
 
 ## Continue your Cerulean save
 
@@ -21,7 +21,7 @@ Back up your original ROM and battery save. Put a copy of the in-game `.sav` bes
 - Change shiny gift previews through Nature, Ability, IV and EV pages. Check that their colors remain stable, then inspect the received Pokémon.
 - Visit the museum, go upstairs and back, leave and re-enter. Check the greeting and Brock’s badge-before-TM presentation.
 - Observe Treecko and Shroomish in the forest, and the three Clefairy with Makuhita in the side chamber reached from Mt. Moon’s first ladder along the entry route. Keep the ladder and item route accessible with a follower.
-- Challenge Jessie and James with two usable Pokémon, then on a separate save try one usable Pokémon. The latter should require consecutive Ekans and Koffing battles, with no free healing. Lose to James and retry: both battles must restart. Meowth speaks but does not fight.
+- Challenge Jessie and James with two usable Pokémon, then on a separate save try one usable Pokémon. Check their white uniforms, Jessie's magenta hair, James's purple hair, and their individual battle portraits. The one-Pokémon version should require consecutive Ekans and Koffing battles, with no free healing. Lose to James and retry: both battles must restart. Meowth speaks but does not fight. Check their departure and follower return; ordinary Rocket grunts keep their original artwork. A completed encounter stays completed after upgrading, so use a pre-encounter save or New Game to replay it.
 - Check the two opponents’ ball groups, trainer approach facing, reusable TMs, six Power items and evolution returning to the current battle music.
 
 ## Training and names

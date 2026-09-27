@@ -1,8 +1,24 @@
 # Playtest 12 candidate — verification record
 
-Date: 2026-09-27. This is a playable candidate, not completion of every approved acceptance item. Replacement Jessie/James graphics remain blocked; the earlier grunt sprites are still visible.
+Date: 2026-09-27. This is a playable candidate, not completion of every approved acceptance item. The Rocket artwork update below supersedes the original candidate's missing-art limitation.
 
-## Build identity
+## Rocket artwork update — current package
+
+Jessie and James now use monicaccina's user-approved walking sprites and separate battle portraits. The artist's public reuse permission, original sheet, current credit and source URL are preserved in `graphics/three_horizons/rocket/README.md` and `CREDITS.md`. The source sheet was mechanically cropped, arranged and converted to the GBA's palette limits. Ordinary Rocket grunt graphics remain unchanged.
+
+- Feature revision: `f6dc5b36c0ed9ea71b10a93a69af2e0f68d4bcd0`.
+- Exact compiled PR-test revision: `d8da3c365b74a0bd87099fb4e983e32f8d0e0c03`.
+- ROM SHA-256: `2191ebf684fb829cc86d4bc8638a11ee5aa535a9c88dbd47f8b3e96ce38f312d`.
+- Successful project workflow: https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/36352162902 ; artifact `10943410299`.
+- Downloaded artifact ZIP SHA-256: `d5757237bcea216935d05d5f9bb88673b609a83a52491ebaca9b714f8364fc6e`. ZIP and ROM hashes were recomputed and matched the published values.
+- All **70 host checks**, **126/126 Three Horizons native tests**, **4 save-layout tests**, negative controls and trainer regeneration checks passed. The three new asset checks were observed failing before the import and passing afterward.
+- Emerald, FireRed, LeafGreen, release and documentation jobs passed at https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/36352163041 . Its full upstream test job was still running when this update was recorded; the historical upstream results below belong to the original candidate.
+
+Focused desktop mGBA checks used this exact new ROM: cold Continue from the original P11 battery save preserved the party's 600 bytes, the six inspected PC slots, bag and money. The trio appeared with the new walking art, turned toward the player, and hid the follower for conversation. Both new portraits appeared in the double-battle introduction. With one usable Pokémon, the Jessie/Ekans and James/Koffing introductions displayed their separate portraits; both singles were won, the trio departed, control returned, and the follower resumed walking. Screenshot evidence is in the package's `evidence/qa12-art-*.png` files. Focused scene tests used disposable map/party fixtures; none were written into the original save or distributed ROM.
+
+An independent, scoped artwork review found no actionable issues in transparency, frame order, palette registration, source attribution or stable graphics IDs. The two unused doll slots are aliased only for this project, so existing object/follower identifiers are not renumbered. General story testing from the earlier candidate remains historical evidence, not a claim of replaying the entire chapter for this art-only update. RG40XX H hardware is still untested here.
+
+## Original candidate build identity — historical evidence
 
 - Feature revision: `a1df584321ba6cd319d7fdb8c694e3bb7f3116e8`.
 - Exact compiled revision: `5c324f07cd554ca29a0b3bd3bae02f06cbce6d4e` (GitHub's temporary PR test merge, not a merge of the user's draft PR).
@@ -49,7 +65,7 @@ One independent final review examined the implementation and ran 13 focused host
 
 ## Open items and test limits
 
-- **Jessie/James artwork is unfinished.** The image service rejected generation with `moderation_blocked` (request `3793f4d7-9db3-4c49-9696-6bd459cc15cb`). No replacement image was produced or integrated. The old grunt artwork is not represented as fulfilling this requirement. A source-asset question remains pending.
+- **Original artwork blocker resolved.** The failed image-generation attempt produced no asset; the subsequent user-approved monicaccina import supplies the walking sprites and portraits in the current package above.
 - **RG40XX H is untested here.** Its emulator/core, real-time clock and flash-save behavior need the user's device run.
 - Exhaustive manual testing of every first-catch species, full-party capture/evolution combination, all outfits/follower settings, every shiny-editor row at both gifts/day/night, all nine ship rival branches, reverse Rocket approaches and all loss/bag-full paths was not completed. The native/source tests cover portions of these cases; those checks are not substituted for missing visual evidence.
 - This candidate ends after Surge and the Vermilion aide. Later routes and later Jessie/James teams are not part of this chapter.

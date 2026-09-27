@@ -10,7 +10,7 @@
 
 **Spec:** [Approved chapter design](../specs/2026-09-27-playtest12-vermilion-design.md) and [exact starter move requirements](../specs/2026-09-27-playtest12-starter-moves.md).
 
-**Status (2026-09-27):** Approved and implemented as a playable candidate through Surge at feature revision `a1df5843`. Final project CI passed 67 host, 126 native and 4 save tests. The independent final review's two findings were resolved. Task 5's replacement artwork was subsequently sourced from user-approved artist monicaccina; integration verification is in progress, and broad manual acceptance combinations remain unchecked; this plan is not declared fully complete. See [verification and open items](../../three_horizons/PLAYTEST_12_VERIFICATION.md) for actual evidence, build identity and coverage limits. Original product baseline `881bf5c492c91698b198bdb9c2590e7e678d3beb`; design commit `4a918c10c1`.
+**Status (2026-09-27):** Approved and implemented as a playable candidate through Surge at feature revision `a1df5843`. Final project CI passed 67 host, 126 native and 4 save tests. The independent final review's two findings were resolved. Task 5's replacement artwork was subsequently sourced from user-approved artist monicaccina; the import passed 70 host, 126 native and 4 save tests plus focused emulator checks of both battle formats. Broad manual acceptance combinations remain unchecked; this plan is not declared fully complete. See [verification and open items](../../three_horizons/PLAYTEST_12_VERIFICATION.md) for actual evidence, build identity and coverage limits. Original product baseline `881bf5c492c91698b198bdb9c2590e7e678d3beb`; design commit `4a918c10c1`.
 
 ## Global Constraints
 
