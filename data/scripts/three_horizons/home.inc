@@ -108,3 +108,9 @@ TH_CheckClockBeforeLeaving::
     goto TH_EventScript_Clock
 TH_ClockAlreadySet:
     end
+
+TH_EventScript_Desk::
+    msgbox TH_Text_Desk, MSGBOX_SIGN
+    end
+TH_Text_Desk:
+    .string "Your laptop is ready for a new day.\nAdventure can wait a moment for e-mail.$"

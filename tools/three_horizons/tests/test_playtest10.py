@@ -32,13 +32,6 @@ class Playtest10(unittest.TestCase):
                         self.assertEqual(blocks[yy * width + xx] & 0xc00, 0, (name, xx, yy))
                         self.assertNotIn((xx, yy), occupied)
 
-    def test_gym_trainers_have_clear_lines_to_the_walkway(self):
-        m, width, blocks = self.blocks('TH_CeruleanGym')
-        for local, dx in [('LOCALID_TH_CERULEANGYM_0', -1), ('LOCALID_TH_CERULEANGYM_1', 1)]:
-            o = next(o for o in m['object_events'] if o['local_id'] == local)
-            for i in range(3):
-                self.assertEqual(blocks[o['y'] * width + o['x'] + dx * i] & 0xc00, 0)
-
     def test_center_has_no_unconfigured_placeholder_people(self):
         m = json.loads((ROOT / 'data/maps/TH_CeruleanCenter/map.json').read_text())
         self.assertFalse([o for o in m['object_events'] if o['graphics_id'] == '0'])

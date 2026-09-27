@@ -94,6 +94,18 @@ void TH_SyncEvolvedBattleMon(u32 partyId, struct Pokemon *before)
     }
 }
 
+bool32 TH_ResumeBattleEvolutionMusic(void)
+{
+    if (sState != 1)
+        return FALSE;
+    // Evolution normally queues field music before learning moves or exiting.
+    // Clear that queue and restore the exact pre-scene battle/victory track.
+    ResetMapMusic();
+    if (sMusic != NULL && !gDisableMusic && gMPlayInfo_BGM.songHeader != sMusic)
+        MPlayStart(&gMPlayInfo_BGM, sMusic);
+    return TRUE;
+}
+
 static void TH_ReturnFromBattleEvolution(void)
 {
     TH_SyncEvolvedBattleMon(sPartyId, &sBefore);
@@ -101,9 +113,7 @@ static void TH_ReturnFromBattleEvolution(void)
     memcpy(gBattleCommunication, sCommunication, sizeof(sCommunication));
     // Evolution owns and frees its sprite buffers. Rebuild the battle's buffers.
     AllocateMonSpritesGfx();
-    ResetMapMusic();
-    if (sMusic != NULL && !gDisableMusic)
-        MPlayStart(&gMPlayInfo_BGM, sMusic);
+    TH_ResumeBattleEvolutionMusic();
     sState = 2;
     gMain.callback1 = TH_WaitForBattleRebuild;
     ReshowBattleScreenAfterMenu();

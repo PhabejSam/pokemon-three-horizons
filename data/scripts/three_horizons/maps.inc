@@ -65,3 +65,6 @@ TH_Route1_MapScripts::
 .include "data/maps/TH_PewterHouse2/scripts.inc"
 .include "data/maps/TH_PewterMuseum1F/scripts.inc"
 .include "data/maps/TH_PewterMuseum2F/scripts.inc"
+
+.include "data/scripts/three_horizons/playtest11_story.inc"
+.include "data/scripts/three_horizons/playtest11_maps.inc"

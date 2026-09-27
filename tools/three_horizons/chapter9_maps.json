@@ -353,13 +353,6 @@
       "flag": "FLAG_TH_PICKUP_23"
     },
     {
-      "map": "TH_ViridianGym",
-      "x": 2,
-      "y": 2,
-      "item": "ITEM_MACHO_BRACE",
-      "flag": "FLAG_TH_PICKUP_24"
-    },
-    {
       "map": "TH_Route2",
       "x": 17,
       "y": 54,

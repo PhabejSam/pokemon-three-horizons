@@ -10,7 +10,7 @@ TH_Journey_Tree::
     end
 
 TH_Text_JourneyTree:
-    .string "This small tree blocks the path.\nThe main trail is still clear.$"
+    .string "This small tree blocks the path.\nA POKéMON may be able to CUT it.$"
 
 TH_Journey_Sign::
     msgbox TH_Text_JourneySign, MSGBOX_NPC
@@ -406,3 +406,125 @@ TH_Text_LIAMDefeat:
     .string "You found a way through!$"
 TH_Text_LIAMAfter:
     .string "BROCK's team has a few surprises.\nDon't judge it by the first POKéMON!$"
+
+@ Signs matched to their local landmarks and visible objects.
+
+TH_Sign_ViridianForest_Local0::
+    msgbox TH_Sign_ViridianForest_Local0_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianForest_Local0_Text:
+    .string "TRAINER TIPS\nIf your team is tired, avoid tall\lgrass on the way to a CENTER.$"
+
+TH_Sign_ViridianForest_Local1::
+    msgbox TH_Sign_ViridianForest_Local1_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianForest_Local1_Text:
+    .string "TRAINER TIPS\nExplore different patches of grass.\lYou may meet a new POKéMON!$"
+
+TH_Sign_ViridianForest_Local2::
+    msgbox TH_Sign_ViridianForest_Local2_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianForest_Local2_Text:
+    .string "TRAINER TIPS\nYou can only catch wild POKéMON.\lOther TRAINERS care for their own.$"
+
+TH_Sign_ViridianForest_Local3::
+    msgbox TH_Sign_ViridianForest_Local3_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianForest_Local3_Text:
+    .string "VIRIDIAN FOREST - NORTH EXIT\nPEWTER CITY is just ahead.$"
+
+TH_Sign_ViridianForest_Local4::
+    msgbox TH_Sign_ViridianForest_Local4_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianForest_Local4_Text:
+    .string "TRAINER TIPS\nCarry ANTIDOTES. Some BUG POKéMON\lcan leave your partners poisoned.$"
+
+TH_Sign_ViridianForest_Local5::
+    msgbox TH_Sign_ViridianForest_Local5_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianForest_Local5_Text:
+    .string "TRAINER TIPS\nWeaken a wild POKéMON before\lthrowing a POKé BALL.$"
+
+TH_Sign_Pewter_Local0::
+    msgbox TH_Sign_Pewter_Local0_Text, MSGBOX_SIGN
+    end
+TH_Sign_Pewter_Local0_Text:
+    .string "PEWTER MUSEUM OF SCIENCE\nFossils downstairs. Space upstairs.\lAdmission is free!$"
+
+TH_Sign_Pewter_Local1::
+    msgbox TH_Sign_Pewter_Local1_Text, MSGBOX_SIGN
+    end
+TH_Sign_Pewter_Local1_Text:
+    .string "PUBLIC NOTICE\nWatch for loose rocks on ROUTE 3.\lTravel carefully near MT. MOON.$"
+
+TH_Sign_Pewter_Local2::
+    msgbox TH_Sign_Pewter_Local2_Text, MSGBOX_SIGN
+    end
+TH_Sign_Pewter_Local2_Text:
+    .string "PEWTER POKéMON GYM\nLEADER: BROCK\lThe rock-solid POKéMON TRAINER!$"
+
+TH_Sign_Pewter_Local3::
+    msgbox TH_Sign_Pewter_Local3_Text, MSGBOX_SIGN
+    end
+TH_Sign_Pewter_Local3_Text:
+    .string "TRAINER TIPS\nA balanced team can handle more\lchallenges than one strong partner.$"
+
+TH_Sign_Pewter_Local4::
+    msgbox TH_Sign_Pewter_Local4_Text, MSGBOX_SIGN
+    end
+TH_Sign_Pewter_Local4_Text:
+    .string "PEWTER CITY\nA quiet city of stone and history.$"
+
+TH_Sign_PewterGym_Local0::
+    msgbox TH_Sign_PewterGym_Local0_Text, MSGBOX_SIGN
+    end
+TH_Sign_PewterGym_Local0_Text:
+    .string "PEWTER POKéMON GYM\nLEADER: BROCK\lA test of strength and determination.$"
+
+TH_Sign_PewterGym_Local1::
+    msgbox TH_Sign_PewterGym_Local1_Text, MSGBOX_SIGN
+    end
+TH_Sign_PewterGym_Local1_Text:
+    .string "PEWTER POKéMON GYM\nChallengers: Bring a rested team\land learn from every battle!$"
+
+TH_Sign_Route2_Local0::
+    msgbox TH_Sign_Route2_Local0_Text, MSGBOX_SIGN
+    end
+TH_Sign_Route2_Local0_Text:
+    .string "DIGLETT'S CAVE\nThe passage is closed for now.$"
+
+TH_Sign_Route2_Local1::
+    msgbox TH_Sign_Route2_Local1_Text, MSGBOX_SIGN
+    end
+TH_Sign_Route2_Local1_Text:
+    .string "ROUTE 2\nVIRIDIAN CITY - PEWTER CITY$"
+
+TH_Sign_ViridianEntrance_Local0::
+    msgbox TH_Sign_ViridianEntrance_Local0_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianEntrance_Local0_Text:
+    .string "TRAINER TIPS\nVisit a POKéMON CENTER to heal\lyour whole team for free.$"
+
+TH_Sign_ViridianEntrance_Local1::
+    msgbox TH_Sign_ViridianEntrance_Local1_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianEntrance_Local1_Text:
+    .string "VIRIDIAN POKéMON GYM\nThe LEADER is away.\lChallenges are closed for now.$"
+
+TH_Sign_ViridianEntrance_Local2::
+    msgbox TH_Sign_ViridianEntrance_Local2_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianEntrance_Local2_Text:
+    .string "TRAINER TIPS\nStock up on POKé BALLS at the MART\lbefore exploring the forest.$"
+
+TH_Sign_ViridianEntrance_Local3::
+    msgbox TH_Sign_ViridianEntrance_Local3_Text, MSGBOX_SIGN
+    end
+TH_Sign_ViridianEntrance_Local3_Text:
+    .string "VIRIDIAN CITY\nThe eternally green paradise.$"
+
+TH_ViridianGym_Locked::
+    msgbox TH_ViridianGym_Locked_Text, MSGBOX_SIGN
+    end
+TH_ViridianGym_Locked_Text:
+    .string "The GYM doors are locked.\nThe LEADER is away.\pReturn later in your journey.$"

@@ -23,9 +23,9 @@ class Chapter9(unittest.TestCase):
 
     def test_route4_has_a_walkable_return_to_mt_moon(self):
         raw=list(struct.unpack('<2160H',(ROOT/'data/layouts/Route4_Frlg/map.bin').read_bytes()))
-        # Apply only the two reviewed TH-local stair replacements.
+        # Apply the TH-local low-ledge opening.
         script=(ROOT/'data/maps/TH_Route4/scripts.inc').read_text()
-        for x,tile,blocked in [(91,'0x090',True),(92,'0x091',False),(93,'0x092',True)]:
+        for x,tile,blocked in [(91,'0x0b1',True),(92,'0x008',False),(93,'0x0b0',True)]:
             self.assertIn(f'setmetatile {x}, 9, {tile}, {str(blocked).upper()}',script)
             raw[9*108+x]=int(tile,16) | (0xc00 if blocked else 0)
         pending=deque([(107,11)]);seen=set(pending)

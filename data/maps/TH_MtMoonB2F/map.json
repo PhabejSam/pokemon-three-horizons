@@ -67,7 +67,7 @@
       "x": 37,
       "y": 21,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -210,6 +210,51 @@
       "script": "TH_Pickup_22",
       "flag": "FLAG_TH_PICKUP_22",
       "type": "object"
+    },
+    {
+      "type": "object",
+      "local_id": "LOCALID_TH_JESSIE",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_F",
+      "x": 8,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_RocketDuoTrigger",
+      "flag": "FLAG_TH_ROCKET_DUO"
+    },
+    {
+      "type": "object",
+      "local_id": "LOCALID_TH_JAMES",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 8,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_RocketDuoTrigger",
+      "flag": "FLAG_TH_ROCKET_DUO"
+    },
+    {
+      "type": "object",
+      "local_id": "LOCALID_TH_ROCKET_MEOWTH",
+      "graphics_id": "OBJ_EVENT_GFX_MEOWTH",
+      "x": 9,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH_RocketDuoMeowth",
+      "flag": "FLAG_TH_ROCKET_DUO"
     }
   ],
   "warp_events": [
@@ -242,6 +287,52 @@
       "dest_warp_id": "6"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "TH_FossilResearcherTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "TH_FossilResearcherTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "TH_RocketDuoTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "TH_RocketDuoTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "TH_RocketDuoTrigger"
+    }
+  ],
   "bg_events": []
 }

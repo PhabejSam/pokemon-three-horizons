@@ -8509,8 +8509,16 @@ static void Cmd_displaydexinfo(void)
             && gMain.callback2 == BattleMainCB2
             && !gTasks[gBattleCommunication[TASK_ID]].isActive)
         {
+#if THREE_HORIZONS
+            // A first catch visits the Dex, which frees the battle windows and
+            // graphics. Rebuild the same visible battle used by repeat catches
+            // before accepting the nickname choice.
+            ReshowBattleScreenAfterMenu();
+            gBattleCommunication[0] = 6;
+#else
             SetVBlankCallback(VBlankCB_Battle);
             gBattleCommunication[0]++;
+#endif
         }
         break;
     case 3:
@@ -8534,6 +8542,12 @@ static void Cmd_displaydexinfo(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
         }
         break;
+#if THREE_HORIZONS
+    case 6:
+        if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        break;
+#endif
     }
 }
 

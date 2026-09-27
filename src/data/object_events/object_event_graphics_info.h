@@ -1,6 +1,6 @@
 #if THREE_HORIZONS
 static const struct OamData sTHClockOam = {.affineMode = ST_OAM_AFFINE_NORMAL, .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16)};
-static const union AffineAnimCmd sTHClockScale[] = {AFFINEANIMCMD_FRAME(128, 128, 0, 0), AFFINEANIMCMD_END};
+static const union AffineAnimCmd sTHClockScale[] = {AFFINEANIMCMD_FRAME(256, 256, 0, 0), AFFINEANIMCMD_END};
 static const union AffineAnimCmd *const sTHClockAnims[] = {sTHClockScale};
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock = {
     .tileTag = TAG_NONE,

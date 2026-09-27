@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_message.h"
@@ -802,8 +803,13 @@ static void Task_EvolutionScene(u8 taskId)
                 u8 nickname[POKEMON_NAME_BUFFER_SIZE];
                 if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
                 {
-                    StopMapMusic();
-                    Overworld_PlaySpecialMapMusic();
+#if THREE_HORIZONS
+                    if (!TH_ResumeBattleEvolutionMusic())
+#endif
+                    {
+                        StopMapMusic();
+                        Overworld_PlaySpecialMapMusic();
+                    }
                 }
 
                 gTasks[taskId].tBits |= TASK_BIT_LEARN_MOVE;
@@ -831,9 +837,13 @@ static void Task_EvolutionScene(u8 taskId)
         {
             if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
             {
-                StopMapMusic();
-                Overworld_PlaySpecialMapMusic();
-
+#if THREE_HORIZONS
+                if (!TH_ResumeBattleEvolutionMusic())
+#endif
+                {
+                    StopMapMusic();
+                    Overworld_PlaySpecialMapMusic();
+                }
             }
 
             if (!gTasks[taskId].tEvoWasStopped)

@@ -1013,6 +1013,7 @@ IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 - Poison Sting
 #endif
 
+#if !THREE_HORIZONS
 === TRAINER_GABBY_AND_TY_1 ===
 Name: GABBY & TY
 Class: Interviewer
@@ -1030,6 +1031,9 @@ Whismur
 Level: 17
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
+#endif
+
+#if !THREE_HORIZONS
 === TRAINER_GABBY_AND_TY_2 ===
 Name: GABBY & TY
 Class: Interviewer
@@ -1046,6 +1050,8 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 Loudred
 Level: 27
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+#endif
 
 === TRAINER_GABBY_AND_TY_3 ===
 Name: GABBY & TY
@@ -17438,7 +17444,7 @@ Metapod
 Level: 10
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Caterpie
+Butterfree
 Level: 10
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -18126,4 +18132,42 @@ Level: 18
 IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
 
 
+#endif
+
+#if THREE_HORIZONS
+=== TRAINER_TH11_JESSIE ===
+Name: JESSIE
+Class: Team Rocket Frlg
+Pic: Rocket Grunt F Frlg
+Gender: Female
+Music: Suspicious
+Double Battle: Yes
+AI: Check Bad Move / Try To Faint
+
+Ekans
+Level: 14
+Ability: Intimidate
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Bite
+- Poison Sting
+- Wrap
+- Glare
+
+=== TRAINER_TH11_JAMES ===
+Name: JAMES
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: Yes
+AI: Check Bad Move / Try To Faint
+
+Koffing
+Level: 14
+Ability: Levitate
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Tackle
+- Smog
+- Smokescreen
+- Assurance
 #endif

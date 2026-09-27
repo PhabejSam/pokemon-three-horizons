@@ -77,7 +77,7 @@ TH_Sign_Route4_1::
     end
 
 TH_Sign_Route4_1_Text:
-    .string "ROUTE 4 - MT. MOON$"
+    .string "MT. MOON POKéMON CENTER\nRest your team before the climb.$"
 
 TH_Pickup_1::
     lock
@@ -128,14 +128,14 @@ TH_Local_Route4Center_2::
     end
 
 TH_Local_Route4Center_2_Text:
-    .string "Take a moment to rest.\nThe next route can wait.$"
+    .string "I have crossed MT. MOON for years.\nA rested team makes all the difference.$"
 
 TH_Local_Route4Center_3::
     msgbox TH_Local_Route4Center_3_Text, MSGBOX_NPC
     end
 
 TH_Local_Route4Center_3_Text:
-    .string "Take a moment to rest.\nThe next route can wait.$"
+    .string "I heard CLEFAIRY live in the cave!\nDo you think I will see one?$"
 
 TH_Local_Route4Center_4::
     msgbox TH_Local_Route4Center_4_Text, MSGBOX_NPC
@@ -149,7 +149,7 @@ TH_Local_Route4Center_5::
     end
 
 TH_Local_Route4Center_5_Text:
-    .string "ROCKET uniforms in a cave?\nThat cannot be a good sign.$"
+    .string "A hiker left a checklist:\nPOTIONS, REPELS, ESCAPE ROPE.\pAt the bottom: Rest your POKéMON\nbefore entering MT. MOON!$"
 
 TH_Local_MtMoon1F_13::
     msgbox TH_Local_MtMoon1F_13_Text, MSGBOX_NPC
@@ -432,42 +432,42 @@ TH_Sign_Cerulean_1::
     end
 
 TH_Sign_Cerulean_1_Text:
-    .string "CERULEAN CITY - Flowing with life$"
+    .string "CERULEAN POKéMON GYM\nLEADER: MISTY\pThe tomboyish mermaid!$"
 
 TH_Sign_Cerulean_2::
     msgbox TH_Sign_Cerulean_2_Text, MSGBOX_NPC
     end
 
 TH_Sign_Cerulean_2_Text:
-    .string "CERULEAN CITY - Flowing with life$"
+    .string "BIKE SHOP\nBicycles for every kind of journey.$"
 
 TH_Sign_Cerulean_3::
     msgbox TH_Sign_Cerulean_3_Text, MSGBOX_NPC
     end
 
 TH_Sign_Cerulean_3_Text:
-    .string "CERULEAN CITY - Flowing with life$"
+    .string "TRAINER TIPS\nTry different moves and partners\lwhen a tough battle stops you.$"
 
 TH_Sign_Cerulean_5::
     msgbox TH_Sign_Cerulean_5_Text, MSGBOX_NPC
     end
 
 TH_Sign_Cerulean_5_Text:
-    .string "CERULEAN CITY - Flowing with life$"
+    .string "A shiny bicycle on display.\nIts tires look ready for the road.$"
 
 TH_Sign_Cerulean_6::
     msgbox TH_Sign_Cerulean_6_Text, MSGBOX_NPC
     end
 
 TH_Sign_Cerulean_6_Text:
-    .string "CERULEAN CITY - Flowing with life$"
+    .string "A sturdy bicycle with a wide saddle.\nIt looks comfortable for a long ride.$"
 
 TH_Sign_Cerulean_7::
     msgbox TH_Sign_Cerulean_7_Text, MSGBOX_NPC
     end
 
 TH_Sign_Cerulean_7_Text:
-    .string "CERULEAN CITY - Flowing with life$"
+    .string "A lightweight bicycle.\nThe frame gleams in the sunlight.$"
 
 TH_Pickup_23::
     lock
@@ -569,7 +569,7 @@ TH_Sign_CeruleanHouse2_0::
     end
 
 TH_Sign_CeruleanHouse2_0_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A hole has been smashed through\nthe wall. Footprints lead outside.$"
 
 TH_Local_CeruleanHouse3_0::
     msgbox TH_Local_CeruleanHouse3_0_Text, MSGBOX_NPC
@@ -604,7 +604,7 @@ TH_Sign_CeruleanHouse5_0::
     end
 
 TH_Sign_CeruleanHouse5_0_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "BERRY CRUSH RECORDS\nA chart of the workshop's best scores.$"
 
 TH_Local_CeruleanBikeShop_0::
     msgbox TH_Local_CeruleanBikeShop_0_Text, MSGBOX_NPC
@@ -632,56 +632,56 @@ TH_Sign_CeruleanBikeShop_0::
     end
 
 TH_Sign_CeruleanBikeShop_0_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A red bicycle with polished spokes.\nA tag says: Awaiting inspection.$"
 
 TH_Sign_CeruleanBikeShop_1::
     msgbox TH_Sign_CeruleanBikeShop_1_Text, MSGBOX_NPC
     end
 
 TH_Sign_CeruleanBikeShop_1_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A blue bicycle with slim tires.\nIt looks quick and light.$"
 
 TH_Sign_CeruleanBikeShop_2::
     msgbox TH_Sign_CeruleanBikeShop_2_Text, MSGBOX_NPC
     end
 
 TH_Sign_CeruleanBikeShop_2_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A bicycle with a padded saddle.\nMade for a comfortable ride.$"
 
 TH_Sign_CeruleanBikeShop_3::
     msgbox TH_Sign_CeruleanBikeShop_3_Text, MSGBOX_NPC
     end
 
 TH_Sign_CeruleanBikeShop_3_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A sturdy bicycle with thick tires.\nGood for bumpy roads.$"
 
 TH_Sign_CeruleanBikeShop_4::
     msgbox TH_Sign_CeruleanBikeShop_4_Text, MSGBOX_NPC
     end
 
 TH_Sign_CeruleanBikeShop_4_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A small bicycle with low handlebars.\nThe paint is spotless.$"
 
 TH_Sign_CeruleanBikeShop_5::
     msgbox TH_Sign_CeruleanBikeShop_5_Text, MSGBOX_NPC
     end
 
 TH_Sign_CeruleanBikeShop_5_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A bicycle with a bell on the handlebar.\nRing-ring!$"
 
 TH_Sign_CeruleanBikeShop_6::
     msgbox TH_Sign_CeruleanBikeShop_6_Text, MSGBOX_NPC
     end
 
 TH_Sign_CeruleanBikeShop_6_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A touring bicycle with a rear rack.\nThere is room for a travel bag.$"
 
 TH_Sign_CeruleanBikeShop_7::
     msgbox TH_Sign_CeruleanBikeShop_7_Text, MSGBOX_NPC
     end
 
 TH_Sign_CeruleanBikeShop_7_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A freshly serviced bicycle.\nThe chain has just been oiled.$"
 
 TH_Local_RivalHouse_0::
     msgbox TH_Local_RivalHouse_0_Text, MSGBOX_NPC
@@ -702,21 +702,21 @@ TH_Sign_RivalHouse_0::
     end
 
 TH_Sign_RivalHouse_0_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A field guide to KANTO POKéMON.\nThe pages are full of notes.$"
 
 TH_Sign_RivalHouse_1::
     msgbox TH_Sign_RivalHouse_1_Text, MSGBOX_NPC
     end
 
 TH_Sign_RivalHouse_1_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A book about caring for POKéMON.\nSomeone marked the chapter on trust.$"
 
 TH_Sign_RivalHouse_2::
     msgbox TH_Sign_RivalHouse_2_Text, MSGBOX_NPC
     end
 
 TH_Sign_RivalHouse_2_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A family photograph.\nEveryone is smiling at the camera.$"
 
 TH_Local_ViridianHouse_0::
     msgbox TH_Local_ViridianHouse_0_Text, MSGBOX_NPC
@@ -733,18 +733,24 @@ TH_Local_ViridianHouse_1_Text:
     .string "Different regions mean different\nhabitats. What have you spotted?$"
 
 TH_Local_ViridianHouse_2::
-    msgbox TH_Local_ViridianHouse_2_Text, MSGBOX_NPC
+    lock
+    faceplayer
+    waitse
+    playmoncry SPECIES_SPEAROW, CRY_MODE_NORMAL
+    msgbox TH_Local_ViridianHouse_2_Text
+    waitmoncry
+    release
     end
 
 TH_Local_ViridianHouse_2_Text:
-    .string "I like quiet mornings in\nVIRIDIAN CITY.$"
+    .string "SPEAROW: Kreee! Kree!$"
 
 TH_Sign_ViridianHouse_0::
     msgbox TH_Sign_ViridianHouse_0_Text, MSGBOX_NPC
     end
 
 TH_Sign_ViridianHouse_0_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "SPEAROW\nNickname: SPEARY$"
 
 TH_Local_ViridianSchool_0::
     msgbox TH_Local_ViridianSchool_0_Text, MSGBOX_NPC
@@ -765,49 +771,49 @@ TH_Sign_ViridianSchool_0::
     end
 
 TH_Sign_ViridianSchool_0_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "A student's notebook:\nSave before a long journey.\pCarry POKé BALLS and healing items.\nRest your team at a POKéMON CENTER.$"
 
 TH_Sign_ViridianSchool_1::
     msgbox TH_Sign_ViridianSchool_1_Text, MSGBOX_NPC
     end
 
 TH_Sign_ViridianSchool_1_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "BLACKBOARD: STATUS CONDITIONS\nANTIDOTES cure poison.\pA PARALYZE HEAL cures paralysis.\nA POKéMON CENTER treats both.$"
 
 TH_Sign_ViridianSchool_2::
     msgbox TH_Sign_ViridianSchool_2_Text, MSGBOX_NPC
     end
 
 TH_Sign_ViridianSchool_2_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "BLACKBOARD: TYPE MATCHUPS\nWater is strong against Fire.\pFire is strong against Grass.\nGrass is strong against Water.$"
 
 TH_Sign_ViridianSchool_3::
     msgbox TH_Sign_ViridianSchool_3_Text, MSGBOX_NPC
     end
 
 TH_Sign_ViridianSchool_3_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "POKéMON JOURNAL\nTraining builds a partner's strengths.\pCheck SUMMARY to see its stats,\nAbility, moves, IVs, and EVs.$"
 
 TH_Sign_ViridianSchool_4::
     msgbox TH_Sign_ViridianSchool_4_Text, MSGBOX_NPC
     end
 
 TH_Sign_ViridianSchool_4_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "POKéMON JOURNAL\nSome POKéMON evolve as they grow.\pOthers need a special item\nor a strong bond with their TRAINER.$"
 
 TH_Sign_ViridianGym_0::
     msgbox TH_Sign_ViridianGym_0_Text, MSGBOX_NPC
     end
 
 TH_Sign_ViridianGym_0_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "VIRIDIAN POKéMON GYM\nOfficial challenges are suspended.$"
 
 TH_Sign_ViridianGym_1::
     msgbox TH_Sign_ViridianGym_1_Text, MSGBOX_NPC
     end
 
 TH_Sign_ViridianGym_1_Text:
-    .string "Please respect this home\nand its residents.$"
+    .string "VIRIDIAN POKéMON GYM\nThe LEADER is currently away.$"
 
 TH_Pickup_24::
     lock
@@ -1022,7 +1028,7 @@ TH_ViridianGym_Attendant::
     end
 
 TH_ViridianGym_Attendant_Text:
-    .string "The GYM LEADER is away.\nOfficial challenges are closed.$"
+    .string "The LEADER is away, so this GYM\nis closed to challengers.\pVisit the other KANTO GYMS\nand return later in your journey.$"
 
 TH_RegionalAide::
     msgbox TH_RegionalAide_Text, MSGBOX_NPC

@@ -2193,7 +2193,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_REPEL] =
     {
         .name = ITEM_NAME("Repel"),
-        .price = (I_PRICE >= GEN_7) ? 400 : 350,
+        .price = THREE_HORIZONS ? 10 : ((I_PRICE >= GEN_7) ? 400 : 350),
         .holdEffectParam = 100,
         .description = COMPOUND_STRING(
             "Repels weak wild\n"

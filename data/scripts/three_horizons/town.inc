@@ -166,31 +166,31 @@ TH_EventScript_FirstBattle::
     goto_if_eq VAR_TH_RIVAL_PARTNER, SPECIES_MUDKIP, TH_BattleMudkip
     goto TH_BattleRelease
 TH_BattleBulbasaur:
-    trainerbattle_earlyrival TRAINER_TH_ROBIN_BULBASAUR, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerLost, TH_Text_BattlePlayerWon
+    trainerbattle_earlyrival TRAINER_TH_ROBIN_BULBASAUR, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerWon, TH_Text_BattlePlayerLost
     goto TH_BattleFinished
 TH_BattleCharmander:
-    trainerbattle_earlyrival TRAINER_TH_ROBIN_CHARMANDER, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerLost, TH_Text_BattlePlayerWon
+    trainerbattle_earlyrival TRAINER_TH_ROBIN_CHARMANDER, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerWon, TH_Text_BattlePlayerLost
     goto TH_BattleFinished
 TH_BattleSquirtle:
-    trainerbattle_earlyrival TRAINER_TH_ROBIN_SQUIRTLE, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerLost, TH_Text_BattlePlayerWon
+    trainerbattle_earlyrival TRAINER_TH_ROBIN_SQUIRTLE, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerWon, TH_Text_BattlePlayerLost
     goto TH_BattleFinished
 TH_BattleChikorita:
-    trainerbattle_earlyrival TRAINER_TH_ROBIN_CHIKORITA, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerLost, TH_Text_BattlePlayerWon
+    trainerbattle_earlyrival TRAINER_TH_ROBIN_CHIKORITA, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerWon, TH_Text_BattlePlayerLost
     goto TH_BattleFinished
 TH_BattleCyndaquil:
-    trainerbattle_earlyrival TRAINER_TH_ROBIN_CYNDAQUIL, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerLost, TH_Text_BattlePlayerWon
+    trainerbattle_earlyrival TRAINER_TH_ROBIN_CYNDAQUIL, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerWon, TH_Text_BattlePlayerLost
     goto TH_BattleFinished
 TH_BattleTotodile:
-    trainerbattle_earlyrival TRAINER_TH_ROBIN_TOTODILE, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerLost, TH_Text_BattlePlayerWon
+    trainerbattle_earlyrival TRAINER_TH_ROBIN_TOTODILE, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerWon, TH_Text_BattlePlayerLost
     goto TH_BattleFinished
 TH_BattleTreecko:
-    trainerbattle_earlyrival TRAINER_TH_ROBIN_TREECKO, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerLost, TH_Text_BattlePlayerWon
+    trainerbattle_earlyrival TRAINER_TH_ROBIN_TREECKO, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerWon, TH_Text_BattlePlayerLost
     goto TH_BattleFinished
 TH_BattleTorchic:
-    trainerbattle_earlyrival TRAINER_TH_ROBIN_TORCHIC, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerLost, TH_Text_BattlePlayerWon
+    trainerbattle_earlyrival TRAINER_TH_ROBIN_TORCHIC, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerWon, TH_Text_BattlePlayerLost
     goto TH_BattleFinished
 TH_BattleMudkip:
-    trainerbattle_earlyrival TRAINER_TH_ROBIN_MUDKIP, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerLost, TH_Text_BattlePlayerWon
+    trainerbattle_earlyrival TRAINER_TH_ROBIN_MUDKIP, RIVAL_BATTLE_HEAL_AFTER, TH_Text_BattlePlayerWon, TH_Text_BattlePlayerLost
     goto TH_BattleFinished
 TH_BattleFinished:
     copyvar VAR_0x8008, VAR_RESULT

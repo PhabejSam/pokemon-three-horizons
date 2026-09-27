@@ -1,0 +1,160 @@
+TH_FossilResearcherTrigger::
+    goto_if_defeated TRAINER_TH9_SUPER_NERD_MIGUEL, TH_Story11End
+    lockall
+    setvar VAR_LAST_TALKED, LOCALID_TH_MTMOONB2F_2
+    faceplayer
+    trainerbattle_lavaridge LOCALID_TH_MTMOONB2F_2, TRAINER_TH9_SUPER_NERD_MIGUEL, TH_Trainer9_SUPER_NERD_MIGUEL_Intro, TH_Trainer9_SUPER_NERD_MIGUEL_Defeat, TH_FossilResearcherVictory
+    releaseall
+    end
+TH_FossilResearcherVictory:
+    msgbox TH_Trainer9_SUPER_NERD_MIGUEL_After
+    releaseall
+    end
+TH_Story11End:
+    end
+
+TH_RocketDuoTrigger::
+    goto_if_set FLAG_TH_ROCKET_DUO, TH_Story11End
+    goto_if_defeated TRAINER_TH11_JESSIE, TH_RocketDuoVictory
+    lockall
+    goto_if_defeated TRAINER_TH9_SUPER_NERD_MIGUEL, TH_RocketDuoReady
+    msgbox TH_RocketDuoWaiting
+    releaseall
+    end
+TH_RocketDuoReady:
+    specialvar VAR_RESULT, CountPartyAliveNonEggMons
+    goto_if_lt VAR_RESULT, 2, TH_RocketDuoNeedTwo
+    msgbox TH_RocketDuoIntro
+    setvar VAR_LAST_TALKED, LOCALID_TH_JESSIE
+    closemessage
+TH_RocketDuoBattle::
+    trainerbattle LOCALID_TH_JESSIE, TRAINER_TH11_JESSIE, NULL, TH_JessieDefeat, TH_RocketDuoVictory, LOCALID_TH_JAMES, TRAINER_TH11_JAMES, NULL, TH_JamesDefeat, NULL, NULL, TH_RocketDuoTooFew, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
+    goto TH_RocketDuoVictory
+TH_RocketDuoVictory::
+    lockall
+    msgbox TH_RocketDuoExit
+    closemessage
+    @ Meowth leaves one tile behind James, without becoming the player's follower.
+    applymovement LOCALID_TH_JESSIE, TH_RocketDuoWalkAway
+    applymovement LOCALID_TH_JAMES, TH_RocketDuoWalkAway
+    applymovement LOCALID_TH_ROCKET_MEOWTH, TH_RocketDuoWalkAway
+    waitmovement 0
+    removeobject LOCALID_TH_JESSIE
+    removeobject LOCALID_TH_JAMES
+    removeobject LOCALID_TH_ROCKET_MEOWTH
+    setflag FLAG_TH_ROCKET_DUO
+    releaseall
+    end
+TH_RocketDuoWalkAway:
+    .rept 3
+    walk_left
+    .endr
+    step_end
+TH_RocketDuoNeedTwo:
+    msgbox TH_RocketDuoTooFew
+    releaseall
+    end
+TH_RocketDuoMeowth::
+    lock
+    faceplayer
+    msgbox TH_MeowthTalk
+    release
+    end
+TH_RocketDuoWaiting:
+    .string "JESSIE: That researcher is guarding\nsomething valuable.\pJAMES: We are simply waiting for\nan opportunity!$"
+TH_RocketDuoIntro:
+    .string "JESSIE: Hold it! Those fossils\nwould make quite a prize!\pJAMES: Two of us, two of your\nPOKéMON. A double battle!\pMEOWTH: And I will supervise!\nWhat? Never heard a MEOWTH talk?$"
+TH_JessieDefeat:
+    .string "Our perfect plan fell apart!$"
+TH_JamesDefeat:
+    .string "Perhaps we should try a new plan!$"
+TH_RocketDuoExit:
+    .string "JESSIE: We will meet again!\nJAMES: Come on, MEOWTH!\pMEOWTH: All that work, and not\na single fossil to show for it!$"
+TH_RocketDuoTooFew:
+    .string "JAMES: Bring two POKéMON that\ncan battle. We fight as a team!\pMEOWTH: Go on, get ready.\nWe will be waiting right here!$"
+TH_MeowthTalk:
+    .string "MEOWTH: Yep, I can talk!\nTry not to look so surprised.\pJESSIE and JAMES handle the battles.\nI handle the brilliant ideas!$"
+
+TH_MegaPunchTutor::
+    lock
+    faceplayer
+    setvar VAR_0x8005, MOVE_MEGA_PUNCH
+    msgbox TH_MegaPunchOffer, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH_Tutor11Done
+    goto TH_Tutor11Teach
+    end
+TH_MegaKickTutor::
+    lock
+    faceplayer
+    setvar VAR_0x8005, MOVE_MEGA_KICK
+    msgbox TH_MegaKickOffer, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH_Tutor11Done
+TH_Tutor11Teach:
+    msgbox TH_Tutor11Choose
+    special ChooseMonForMoveTutor
+    lock
+    faceplayer
+    msgbox TH_Tutor11Return
+TH_Tutor11Done:
+    release
+    end
+TH_MegaPunchOffer:
+    .string "A focused fist can break through!\nShall I teach MEGA PUNCH?\pMy lessons are free. Bring any\ncompatible partner, any time.$"
+TH_MegaKickOffer:
+    .string "Put your whole spirit into a kick!\nShall I teach MEGA KICK?\pNo fee, and no limit on lessons.\nEvery partner deserves to learn.$"
+TH_Tutor11Choose:
+    .string "Choose a POKéMON for the lesson.$"
+TH_Tutor11Return:
+    .string "Come back whenever another\npartner is ready to train!$"
+
+TH_FossilReviver::
+    lock
+    faceplayer
+    goto_if_unset FLAG_BADGE02_GET, TH_FossilReviveWait
+    checkitem ITEM_DOME_FOSSIL, 1
+    goto_if_eq VAR_RESULT, FALSE, TH_FossilReviveTryHelix
+    msgbox TH_ReviveDomeOffer, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH_FossilReviveTryHelix
+    setvar VAR_0x8004, ITEM_DOME_FOSSIL
+    bufferspeciesname STR_VAR_1, SPECIES_KABUTO
+    goto TH_FossilReviveGive
+TH_FossilReviveTryHelix:
+    checkitem ITEM_HELIX_FOSSIL, 1
+    goto_if_eq VAR_RESULT, FALSE, TH_FossilReviveNoFossil
+    msgbox TH_ReviveHelixOffer, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH_FossilReviveEnd
+    setvar VAR_0x8004, ITEM_HELIX_FOSSIL
+    bufferspeciesname STR_VAR_1, SPECIES_OMANYTE
+TH_FossilReviveGive:
+    special TH_ScriptReviveFossil
+    goto_if_eq VAR_RESULT, MON_CANT_GIVE, TH_FossilReviveFull
+    msgbox TH_FossilReviveSuccess
+    special TH_RefreshFollower
+    call TH_ReportRewardDestination
+    release
+    end
+TH_FossilReviveFull:
+    msgbox TH_FossilReviveFullText
+    release
+    end
+TH_FossilReviveWait:
+    msgbox TH_FossilReviveWaitText
+    release
+    end
+TH_FossilReviveNoFossil:
+    msgbox TH_FossilReviveNoFossilText
+TH_FossilReviveEnd:
+    release
+    end
+TH_ReviveDomeOffer:
+    .string "Your DOME FOSSIL contains KABUTO!\nShall I restore it for you?\pRestoration is free. Your revived\npartner will be Lv. 20.$"
+TH_ReviveHelixOffer:
+    .string "Your HELIX FOSSIL contains OMANYTE!\nShall I restore it for you?\pRestoration is free. Your revived\npartner will be Lv. 20.$"
+TH_FossilReviveSuccess:
+    .string "Restoration is complete!\n{STR_VAR_1} is alive again!$"
+TH_FossilReviveFullText:
+    .string "Please make room in your party\nor PC. Your fossil is still safe.$"
+TH_FossilReviveWaitText:
+    .string "I restore ancient POKéMON\nfrom the fossils of MT. MOON.\pEarn MISTY's CASCADEBADGE, then\nbring me your DOME or HELIX FOSSIL.\lI can restore both, free of charge!$"
+TH_FossilReviveNoFossilText:
+    .string "Bring a DOME or HELIX FOSSIL\nfrom MT. MOON for restoration.\pMy colleague there can help you\nfind both after you battle him.$"

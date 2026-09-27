@@ -2128,7 +2128,7 @@ void CB2_ContinueSavedGame(void)
     u8 trainerHillMapId;
 
 #if THREE_HORIZONS
-    bool32 refreshChapterMap = (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK) != TH_STATE_VERSION_10;
+    bool32 refreshChapterMap = (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK) != TH_STATE_VERSION_11;
     TH_MigrateSaveState();
 #endif
     FieldClearVBlankHBlankCallbacks();

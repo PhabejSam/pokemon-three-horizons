@@ -4,6 +4,7 @@
 struct Pokemon;
 u16 TH_GetBattleEvolution(struct Pokemon *mon, bool32 *canStop);
 bool32 TH_TryBattleEvolution(u32 partyId);
+bool32 TH_ResumeBattleEvolutionMusic(void);
 void TH_SyncEvolvedBattleMon(u32 partyId, struct Pokemon *before);
 void TH_RefreshFollower(void);
 
@@ -41,6 +42,8 @@ void TH_ApplyWildHiddenAbility(struct Pokemon *mon, u32 roll);
 void TH_OpenRewardEditor(void);
 void TH_ScriptGiveReward(void);
 void TH_ScriptRewardChoices(void);
+u8 TH_TryReviveFossil(u16 item);
+void TH_ScriptReviveFossil(void);
 void TH_ScriptBuyMagikarp(void);
 u8 TH_GetAbilityChoices(u16 species, u8 slots[3]);
 bool32 TH_PartnerOptionsValidForSpecies(u16 species, const struct THPartnerOptions *options);
