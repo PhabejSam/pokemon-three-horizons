@@ -18141,7 +18141,7 @@ IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
 === TRAINER_TH11_JESSIE ===
 Name: JESSIE
 Class: Team Rocket Frlg
-Pic: Rocket Grunt F Frlg
+Pic: TH Jessie
 Gender: Female
 Music: Suspicious
 Double Battle: Yes
@@ -18160,7 +18160,7 @@ IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 === TRAINER_TH11_JAMES ===
 Name: JAMES
 Class: Team Rocket Frlg
-Pic: Rocket Grunt M Frlg
+Pic: TH James
 Gender: Male
 Music: Suspicious
 Double Battle: Yes

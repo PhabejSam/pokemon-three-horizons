@@ -424,6 +424,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTre
 #if THREE_HORIZONS
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THClock;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THElm;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THJessie;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_THJames;
 #endif
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
 #if THREE_HORIZONS
@@ -530,8 +532,13 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SPENSER] =                  &gObjectEventGraphicsInfo_Spenser,
     [OBJ_EVENT_GFX_NOLAND] =                   &gObjectEventGraphicsInfo_Noland,
     [OBJ_EVENT_GFX_LUCY] =                     &gObjectEventGraphicsInfo_Lucy,
+#if THREE_HORIZONS
+    [OBJ_EVENT_GFX_TH_JESSIE] =               &gObjectEventGraphicsInfo_THJessie,
+    [OBJ_EVENT_GFX_TH_JAMES] =                &gObjectEventGraphicsInfo_THJames,
+#else
     [OBJ_EVENT_GFX_UNUSED_NATU_DOLL] =         &gObjectEventGraphicsInfo_UnusedNatuDoll,
     [OBJ_EVENT_GFX_UNUSED_MAGNEMITE_DOLL] =    &gObjectEventGraphicsInfo_UnusedMagnemiteDoll,
+#endif
     [OBJ_EVENT_GFX_UNUSED_SQUIRTLE_DOLL] =     &gObjectEventGraphicsInfo_UnusedSquirtleDoll,
     [OBJ_EVENT_GFX_UNUSED_WOOPER_DOLL] =       &gObjectEventGraphicsInfo_UnusedWooperDoll,
     [OBJ_EVENT_GFX_UNUSED_PIKACHU_DOLL] =      &gObjectEventGraphicsInfo_UnusedPikachuDoll,

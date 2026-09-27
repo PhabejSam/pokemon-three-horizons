@@ -441,6 +441,9 @@ enum
 // This preserves all object IDs, follower bounds, and saved object layouts.
 #if THREE_HORIZONS
 #define OBJ_EVENT_GFX_TH_CLOCK OBJ_EVENT_GFX_POKEDEX
+// Reuse unused slots so saved dynamic/follower graphics IDs do not shift.
+#define OBJ_EVENT_GFX_TH_JESSIE OBJ_EVENT_GFX_UNUSED_NATU_DOLL
+#define OBJ_EVENT_GFX_TH_JAMES OBJ_EVENT_GFX_UNUSED_MAGNEMITE_DOLL
 #endif
 
 // FRLG equivalents
@@ -660,6 +663,8 @@ enum
 #define OBJ_EVENT_PAL_TAG_TH_KRIS_WATERING 0x1317
 #define OBJ_EVENT_PAL_TAG_TH_SILVER_NORMAL 0x1320
 #define OBJ_EVENT_PAL_TAG_TH_ELM 0x1330
+#define OBJ_EVENT_PAL_TAG_TH_JESSIE 0x1331
+#define OBJ_EVENT_PAL_TAG_TH_JAMES 0x1332
 #endif
 #define OBJ_EVENT_PAL_TAG_TH_CLOCK                0x11F0
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF

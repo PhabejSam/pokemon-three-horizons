@@ -214,7 +214,7 @@
     {
       "type": "object",
       "local_id": "LOCALID_TH_JESSIE",
-      "graphics_id": "OBJ_EVENT_GFX_ROCKET_F",
+      "graphics_id": "OBJ_EVENT_GFX_TH_JESSIE",
       "x": 8,
       "y": 4,
       "elevation": 3,
@@ -229,7 +229,7 @@
     {
       "type": "object",
       "local_id": "LOCALID_TH_JAMES",
-      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_TH_JAMES",
       "x": 8,
       "y": 6,
       "elevation": 3,

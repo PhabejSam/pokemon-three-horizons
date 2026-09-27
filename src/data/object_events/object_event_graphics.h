@@ -687,3 +687,10 @@ const u16 gObjectEventPal_THSilverNormal[] = INCGFX_U16("graphics/three_horizons
 const u32 gObjectEventPic_THSilverNormal[] = INCGFX_U32("graphics/three_horizons/outfits/silver/walking.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_THSilverRunning[] = INCGFX_U32("graphics/three_horizons/outfits/silver/running.png", ".4bpp", "-mwidth 2 -mheight 4");
 #endif
+
+#if THREE_HORIZONS
+const u16 gObjectEventPal_THJessie[] = INCGFX_U16("graphics/three_horizons/rocket/jessie/walking.png", ".gbapal");
+const u16 gObjectEventPic_THJessie[] = INCGFX_U16("graphics/three_horizons/rocket/jessie/walking.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u16 gObjectEventPal_THJames[] = INCGFX_U16("graphics/three_horizons/rocket/james/walking.png", ".gbapal");
+const u16 gObjectEventPic_THJames[] = INCGFX_U16("graphics/three_horizons/rocket/james/walking.png", ".4bpp", "-mwidth 2 -mheight 4");
+#endif

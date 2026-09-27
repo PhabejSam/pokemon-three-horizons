@@ -2682,3 +2682,12 @@ static const struct SpriteFrameImage sPicTable_THElm[] = {
     overworld_frame(gObjectEventPic_THElm, 2, 4, 8),
 };
 #endif
+
+#if THREE_HORIZONS
+static const struct SpriteFrameImage sPicTable_THJessie[] = {
+    overworld_ascending_frames(gObjectEventPic_THJessie, 2, 4),
+};
+static const struct SpriteFrameImage sPicTable_THJames[] = {
+    overworld_ascending_frames(gObjectEventPic_THJames, 2, 4),
+};
+#endif

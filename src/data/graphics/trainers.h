@@ -590,6 +590,10 @@ const union AnimCmd *const sBackAnims_OldManPokedude[] = {
 
 #if THREE_HORIZONS
 const u16 gTHGoldFrontPal[] = INCGFX_U16("graphics/three_horizons/outfits/gold/front.png", ".gbapal");
+const u16 gTHJessieFrontPal[] = INCGFX_U16("graphics/three_horizons/rocket/jessie/front.png", ".gbapal");
+const u32 gTHJessieFront[] = INCGFX_U32("graphics/three_horizons/rocket/jessie/front.png", ".4bpp.smol");
+const u16 gTHJamesFrontPal[] = INCGFX_U16("graphics/three_horizons/rocket/james/front.png", ".gbapal");
+const u32 gTHJamesFront[] = INCGFX_U32("graphics/three_horizons/rocket/james/front.png", ".4bpp.smol");
 const u16 gTHGoldBackPal[] = INCGFX_U16("graphics/three_horizons/outfits/gold/back.png", ".gbapal");
 const u32 gTHGoldFront[] = INCGFX_U32("graphics/three_horizons/outfits/gold/front.png", ".4bpp.smol");
 const u8 gTHGoldBack[] = INCGFX_U8("graphics/three_horizons/outfits/gold/back.png", ".4bpp");
@@ -607,6 +611,8 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
 {
 #if THREE_HORIZONS
     [TRAINER_PIC_TH_GOLD] = {.frontPic = TRAINER_FRONT_PIC(gTHGoldFront, gTHGoldFrontPal), .backPic = TRAINER_BACK_PIC(4, gTHGoldBack, gTHGoldBackPal, sBackAnims_Hoenn)},
+    [TRAINER_PIC_TH_JESSIE] = {.frontPic = TRAINER_FRONT_PIC(gTHJessieFront, gTHJessieFrontPal)},
+    [TRAINER_PIC_TH_JAMES] = {.frontPic = TRAINER_FRONT_PIC(gTHJamesFront, gTHJamesFrontPal)},
     [TRAINER_PIC_TH_KRIS] = {.frontPic = TRAINER_FRONT_PIC(gTHKrisFront, gTHKrisFrontPal), .backPic = TRAINER_BACK_PIC(4, gTHKrisBack, gTHKrisBackPal, sBackAnims_Hoenn)},
     [TRAINER_PIC_TH_SILVER] = {.frontPic = TRAINER_FRONT_PIC(gTHSilverFront, gTHSilverFrontPal), .backPic = TRAINER_BACK_PIC(4, gTHSilverBack, gTHSilverBackPal, sBackAnims_Hoenn)},
 #endif

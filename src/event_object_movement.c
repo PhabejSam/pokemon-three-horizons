@@ -592,6 +592,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPaletteNeonLight,          OBJ_EVENT_PAL_TAG_NEON_LIGHT},
 #if THREE_HORIZONS
     {gObjectEventPal_THElm, OBJ_EVENT_PAL_TAG_TH_ELM},
+    {gObjectEventPal_THJessie, OBJ_EVENT_PAL_TAG_TH_JESSIE},
+    {gObjectEventPal_THJames, OBJ_EVENT_PAL_TAG_TH_JAMES},
     {gObjectEventPal_THGoldNormal, OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL},
     {gObjectEventPal_THGoldMachBike, OBJ_EVENT_PAL_TAG_TH_GOLD_MACHBIKE},
     {gObjectEventPal_THGoldAcroBike, OBJ_EVENT_PAL_TAG_TH_GOLD_ACROBIKE},

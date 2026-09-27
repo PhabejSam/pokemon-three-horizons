@@ -10,7 +10,7 @@
 
 **Spec:** [Approved chapter design](../specs/2026-09-27-playtest12-vermilion-design.md) and [exact starter move requirements](../specs/2026-09-27-playtest12-starter-moves.md).
 
-**Status (2026-09-27):** Approved and implemented as a playable candidate through Surge at feature revision `a1df5843`. Final project CI passed 67 host, 126 native and 4 save tests. The independent final review's two findings were resolved. Task 5's replacement artwork remains blocked, and broad manual acceptance combinations remain unchecked; this plan is not declared fully complete. See [verification and open items](../../three_horizons/PLAYTEST_12_VERIFICATION.md) for actual evidence, build identity and coverage limits. Original product baseline `881bf5c492c91698b198bdb9c2590e7e678d3beb`; design commit `4a918c10c1`.
+**Status (2026-09-27):** Approved and implemented as a playable candidate through Surge at feature revision `a1df5843`. Final project CI passed 67 host, 126 native and 4 save tests. The independent final review's two findings were resolved. Task 5's replacement artwork was subsequently sourced from user-approved artist monicaccina; integration verification is in progress, and broad manual acceptance combinations remain unchecked; this plan is not declared fully complete. See [verification and open items](../../three_horizons/PLAYTEST_12_VERIFICATION.md) for actual evidence, build identity and coverage limits. Original product baseline `881bf5c492c91698b198bdb9c2590e7e678d3beb`; design commit `4a918c10c1`.
 
 ## Global Constraints
 
@@ -180,10 +180,10 @@ first-win state must not let a loss to James skip either fight on retry.
 - [ ] Add event tests: one/two usable members, losing first/second single,
   double loss, reverse arrival, already defeated and reload. Assert both
   victories are required, no free heal, no pass-through, follower restoration.
-- [ ] Use the imagegen skill/tool for new bitmap character art, inspect the
-  results, then convert to engine dimensions/palettes. Provide recognizable
-  characters, all required walking facings and distinct battle fronts; do not
-  ship generic grunts as the replacement. Document asset provenance.
+- [x] Import user-approved monicaccina artwork after the generation service block.
+  Verify public reuse permission, preserve the source sheet and artist credit,
+  convert all walking facings and separate battle fronts to native palettes.
+  Runtime verification follows below.
 - [ ] Stage Jessie–Meowth–James in clear tiles facing the player. Temporarily
   hide the follower while staging. Implement double battle for two usable
   party members; back-to-back Ekans/Koffing singles for one.
