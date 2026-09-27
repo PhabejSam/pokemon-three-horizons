@@ -5172,6 +5172,15 @@ static void HandleEndTurn_BattleLost(void)
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
+#if TESTING && THREE_HORIZONS
+// Expose the real handler only to the native regression ROM. Its dispatch
+// table remains private, and release builds gain no test entry point.
+void Test_TH_HandleBattleLost(void)
+{
+    HandleEndTurn_BattleLost();
+}
+#endif
+
 static void HandleEndTurn_RanFromBattle(void)
 {
     gCurrentActionFuncId = 0;

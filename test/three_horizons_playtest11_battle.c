@@ -23,7 +23,7 @@
 #include "constants/songs.h"
 
 #if THREE_HORIZONS
-extern void (* const sEndTurnFuncsTable[])(void);
+extern void Test_TH_HandleBattleLost(void);
 static void BattleCallbackForPlaytest11(void) {}
 
 static void InitPlaytest11Battle(u16 playerSpecies, u16 opponentSpecies, u8 level)
@@ -228,7 +228,7 @@ TEST("Three Horizons rival loss selects whiteout unless tutorial healing is enab
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         // Drive the same loss handler the turn dispatcher calls. Choices 1 and 2
         // both show the rival's win speech; only 2 continues to money/whiteout.
-        sEndTurnFuncsTable[B_OUTCOME_LOST]();
+        Test_TH_HandleBattleLost();
         EXPECT(gBattlescriptCurrInstr == BattleScript_LocalBattleLost);
         EXPECT_EQ(gBattlerAttacker, 1);
         EXPECT_EQ(gBattleCommunication[MULTISTRING_CHOOSER], whiteoutChoice);
