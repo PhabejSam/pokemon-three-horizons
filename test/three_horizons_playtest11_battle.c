@@ -188,6 +188,28 @@ TEST("Three Horizons Power Bracer grants eight Attack EVs and stops at 252")
     EXPECT_EQ(GetMonData(&mon, MON_DATA_SPEED_EV), 32);
 }
 
+TEST("Three Horizons playtest12 all Power items add eight EVs and obey both caps")
+{
+    struct Pokemon mon;
+    u16 item;
+    u32 stat;
+    PARAMETRIZE { item = ITEM_POWER_WEIGHT; stat = MON_DATA_HP_EV; }
+    PARAMETRIZE { item = ITEM_POWER_BRACER; stat = MON_DATA_ATK_EV; }
+    PARAMETRIZE { item = ITEM_POWER_BELT; stat = MON_DATA_DEF_EV; }
+    PARAMETRIZE { item = ITEM_POWER_LENS; stat = MON_DATA_SPATK_EV; }
+    PARAMETRIZE { item = ITEM_POWER_BAND; stat = MON_DATA_SPDEF_EV; }
+    PARAMETRIZE { item = ITEM_POWER_ANKLET; stat = MON_DATA_SPEED_EV; }
+    CreateMonWithIVs(&mon, SPECIES_RATTATA, 5, 0, OTID_STRUCT_PLAYER_ID, 12);
+    SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
+    MonGainEVs(&mon, SPECIES_RATTATA);
+    EXPECT_EQ(GetMonData(&mon, stat), 8 + (stat == MON_DATA_SPEED_EV));
+    for (u32 i = 0; i < 80; i++) MonGainEVs(&mon, SPECIES_RATTATA);
+    EXPECT_EQ(GetMonData(&mon, stat), 252);
+    u32 total = 0;
+    for (u32 ev = MON_DATA_HP_EV; ev <= MON_DATA_SPDEF_EV; ev++) total += GetMonData(&mon, ev);
+    EXPECT_LE(total, MAX_TOTAL_EVS);
+}
+
 TEST("Three Horizons rival loss selects whiteout unless tutorial healing is enabled")
 {
     u8 rivalFlags, whiteoutChoice;

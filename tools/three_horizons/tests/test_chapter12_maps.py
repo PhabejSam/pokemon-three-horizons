@@ -39,6 +39,21 @@ class Chapter12Maps(unittest.TestCase):
         triggers={(e['x'],e['y']) for e in m['coord_events'] if e['script']=='TH12_Ship_RivalTrigger'}
         self.assertTrue({(30,6),(31,6),(32,6)} <= triggers)
 
+    def test_bill_exit_does_not_walk_through_desk_or_computer_user(self):
+        import struct
+        m=read('data/maps/TH12_Route25_SeaCottage/map.json')
+        l=next(l for l in read('data/layouts/layouts.json')['layouts'] if l['id']==m['layout'])
+        w=l['width'];d=struct.unpack('<'+'H'*(w*l['height']),(ROOT/l['blockdata_filepath']).read_bytes())
+        text=(ROOT/'data/scripts/three_horizons/chapter12_bill.inc').read_text()
+        x,y=3,3
+        for label in ['TH12_Bill_FromMachine','TH12_Bill_ToRoom']:
+            body=text.split(label+':\n')[1].split('    step_end')[0]
+            for step in re.findall(r'walk_(\w+)',body):
+                dx,dy={'up':(0,-1),'down':(0,1),'left':(-1,0),'right':(1,0)}[step];x+=dx;y+=dy
+                self.assertEqual(d[y*w+x]&0xC00,0,(x,y))
+                self.assertNotEqual((x,y),(4,6))
+        self.assertEqual((x,y),(7,5))
+
     def test_old_map_numbers_and_new_map_ownership(self):
         baseline=read('tools/three_horizons/tests/playtest11-map-indices.json')
         names=read('tools/mapjson/three_horizons_maps.json')['maps']

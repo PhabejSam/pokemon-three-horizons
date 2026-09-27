@@ -153,13 +153,13 @@ TH12_Bill_OneUp:
     step_end
 TH12_Bill_FromMachine:
     walk_down
-    walk_down
     step_end
 TH12_Bill_ToRoom:
     walk_right
     walk_right
     walk_right
     walk_right
+    walk_down
     face_down
     step_end
 TH12_Bill_HelpText:

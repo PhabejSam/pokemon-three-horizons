@@ -1053,6 +1053,7 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 #endif
 
+#if !THREE_HORIZONS
 === TRAINER_GABBY_AND_TY_3 ===
 Name: GABBY & TY
 Class: Interviewer
@@ -2038,6 +2039,8 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 Roselia
 Level: 32
 IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+
+#endif
 
 === TRAINER_BROOKE_5 ===
 Name: BROOKE
@@ -19112,7 +19115,7 @@ IVs: 5 HP / 5 Atk / 5 Def / 5 SpA / 5 SpD / 5 Spe
 === TRAINER_TH12_LEADER_SURGE ===
 Name: LT. SURGE
 Class: Leader
-Pic: Lt Surge
+Pic: Leader Lt Surge Frlg
 Gender: Male
 Music: Male
 AI: Check Bad Move / Try To Faint

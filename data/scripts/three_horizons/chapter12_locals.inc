@@ -504,7 +504,7 @@ TH12_SSAnne_1F_Room5_Object0_After:
 	.string "Get out!$"
 
 TH12_SSAnne_1F_Room6_Object0::
-    msgbox TH12_SSAnne_1F_Room6_Object0_Text, MSGBOX_NPC
+    goto TH12_Ship_Heal
     end
 TH12_SSAnne_1F_Room6_Object0_Text:
 	.string "You look tired. Would you like to\n"
@@ -882,8 +882,7 @@ TH12_SSAnne_Deck_Object4::
     msgbox TH12_SSAnne_Deck_Object4_Text, MSGBOX_NPC
     end
 TH12_SSAnne_Deck_Object4_Text:
-	.string "The party's over.\n"
-	.string "The ship will be departing soon.$"
+    .string "Enjoy the sea air! We are staying\nin port while the crew investigates\lour unusual cargo stowaways.$"
 
 TH12_Ship_Sailor::
     msgbox TH12_Ship_Sailor_Text, MSGBOX_NPC
@@ -917,9 +916,7 @@ TH12_SSAnne_Kitchen_Object3::
     msgbox TH12_SSAnne_Kitchen_Object3_Text, MSGBOX_NPC
     end
 TH12_SSAnne_Kitchen_Object3_Text:
-	.string "Er-hem!\n"
-	.string "Indeed I am le CHEF!\p"
-	.string "Le main course is$"
+    .string "I am le CHEF! Tonight we serve\nfresh vegetables and BERRY tart.\pRecipes from KANTO, JOHTO, and\nHOENN, all at one table!$"
 
 TH12_SSAnne_Kitchen_Object4::
     msgbox TH12_SSAnne_Kitchen_Object4_Text, MSGBOX_NPC
