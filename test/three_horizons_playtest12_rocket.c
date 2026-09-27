@@ -3,6 +3,7 @@
 #include "three_horizons.h"
 #include "event_data.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "constants/trainers.h"
 #include "constants/three_horizons.h"
 #if THREE_HORIZONS
@@ -28,5 +29,24 @@ TEST("Three Horizons playtest12 Rocket retry requires both wins without a free h
     }
     FlagClear(FLAG_TH_ROCKET_DUO);
     TH12_BeginRocketPair();
+}
+TEST("Three Horizons playtest12 Rocket party count ignores boxed and fainted Pokemon")
+{
+    struct Pokemon saved[PARTY_SIZE];
+    struct BoxPokemon boxed = *GetBoxedMonPtr(0, 0);
+    memcpy(saved, gPlayerParty, sizeof(saved));
+    memset(gPlayerParty, 0, sizeof(saved));
+    CreateMonWithIVs(&gPlayerParty[0], SPECIES_BLASTOISE, 36, 0, OTID_STRUCT_PLAYER_ID, 31);
+    SetBoxMonAt(0, 0, &gPlayerParty[0].box);
+    gSpecialVar_0x8004 = PARTY_SIZE;
+    EXPECT_EQ(CountPartyAliveNonEggMons_IgnoreVar0x8004Slot(), 1);
+    CreateMonWithIVs(&gPlayerParty[1], SPECIES_NIDOKING, 30, 0, OTID_STRUCT_PLAYER_ID, 31);
+    EXPECT_EQ(CountPartyAliveNonEggMons_IgnoreVar0x8004Slot(), 2);
+    u16 hp = 0;
+    SetMonData(&gPlayerParty[1], MON_DATA_HP, &hp);
+    EXPECT_EQ(CountPartyAliveNonEggMons_IgnoreVar0x8004Slot(), 1);
+    memcpy(gPlayerParty, saved, sizeof(saved));
+    SetBoxMonAt(0, 0, &boxed);
+    CalculatePlayerPartyCount();
 }
 #endif

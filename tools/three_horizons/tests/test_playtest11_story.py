@@ -28,6 +28,7 @@ class Playtest11Story(unittest.TestCase):
 
     def test_duo_has_single_fallback_and_requires_both_wins(self):
         s = (ROOT / 'data/scripts/three_horizons/playtest11_story.inc').read_text()
+        self.assertIn('setvar VAR_0x8004, PARTY_SIZE\n    specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot', s)
         self.assertIn('TH12_BeginRocketPair', s)
         self.assertIn('TH12_CompleteRocketPair', s)
         self.assertIn('trainerbattle_no_intro TRAINER_TH11_JESSIE', s)

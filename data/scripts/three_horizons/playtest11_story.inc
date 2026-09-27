@@ -27,7 +27,8 @@ TH_RocketDuoReady:
     applymovement LOCALID_TH_JAMES, Common_Movement_FacePlayer
     applymovement LOCALID_TH_ROCKET_MEOWTH, Common_Movement_FacePlayer
     waitmovement 0
-    specialvar VAR_RESULT, CountPartyAliveNonEggMons
+    setvar VAR_0x8004, PARTY_SIZE
+    specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
     goto_if_lt VAR_RESULT, 2, TH12_RocketSingles
     msgbox TH_RocketDuoIntro
     setvar VAR_LAST_TALKED, LOCALID_TH_JESSIE
