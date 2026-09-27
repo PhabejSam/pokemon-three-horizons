@@ -5150,7 +5150,13 @@ static void HandleEndTurn_BattleLost(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && TRAINER_BATTLE_PARAM.earlyRival)
         {
+#if THREE_HORIZONS
+            // Later rivals use their win speech too, but only the opening
+            // battle's explicit healing flag suppresses money loss/whiteout.
+            if (GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER)
+#else
             if (TRAINER_BATTLE_PARAM.earlyRival)
+#endif
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1; // Dont do white out text
             else
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2; // Do white out text

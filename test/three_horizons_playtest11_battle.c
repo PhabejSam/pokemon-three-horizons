@@ -5,6 +5,8 @@
 #include "battle_anim.h"
 #include "battle_bg.h"
 #include "battle_script_commands.h"
+#include "battle_setup.h"
+#include "battle_scripts.h"
 #include "battle_util2.h"
 #include "battle_gfx_sfx_util.h"
 #include "pokemon.h"
@@ -21,6 +23,7 @@
 #include "constants/songs.h"
 
 #if THREE_HORIZONS
+extern void (* const sEndTurnFuncsTable[])(void);
 static void BattleCallbackForPlaytest11(void) {}
 
 static void InitPlaytest11Battle(u16 playerSpecies, u16 opponentSpecies, u8 level)
@@ -194,5 +197,33 @@ TEST("Three Horizons Power Bracer grants eight Attack EVs and stops at 252")
         MonGainEVs(&mon, SPECIES_RATTATA);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK_EV), 252);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_SPEED_EV), 32);
+}
+
+TEST("Three Horizons rival loss selects whiteout unless tutorial healing is enabled")
+{
+    u8 rivalFlags, whiteoutChoice;
+    PARAMETRIZE { rivalFlags = 0; whiteoutChoice = 2; }
+    PARAMETRIZE { rivalFlags = RIVAL_BATTLE_TUTORIAL & ~RIVAL_BATTLE_HEAL_AFTER; whiteoutChoice = 2; }
+    PARAMETRIZE { rivalFlags = RIVAL_BATTLE_HEAL_AFTER; whiteoutChoice = 1; }
+    TrainerBattleParameter savedParams = gTrainerBattleParameter;
+    void (*savedMainFunc)(void) = gBattleMainFunc;
+    u32 savedFlags = gBattleTypeFlags;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    TRAINER_BATTLE_PARAM.earlyRival = TRUE;
+    TRAINER_BATTLE_PARAM.rivalBattleFlags = rivalFlags;
+    gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
+    gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
+    gBattlersCount = 2;
+    gBattlerAttacker = 0;
+    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+    // Drive the same loss handler the turn dispatcher calls. Choices 1 and 2
+    // both show the rival's win speech; only 2 continues to money/whiteout.
+    sEndTurnFuncsTable[B_OUTCOME_LOST]();
+    EXPECT(gBattlescriptCurrInstr == BattleScript_LocalBattleLost);
+    EXPECT_EQ(gBattlerAttacker, 1);
+    EXPECT_EQ(gBattleCommunication[MULTISTRING_CHOOSER], whiteoutChoice);
+    gTrainerBattleParameter = savedParams;
+    gBattleMainFunc = savedMainFunc;
+    gBattleTypeFlags = savedFlags;
 }
 #endif
