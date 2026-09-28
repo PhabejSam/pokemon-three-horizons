@@ -19,11 +19,42 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3 git
           { uname -a; gcc --version; arm-none-eabi-gcc --version; make --version; python3 --version; dpkg-query -W build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev; } > demo-environment.txt
+      - name: Select verification phase
+        id: phase
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path('.github/three-horizons-stage.json')
+          stage = json.loads(p.read_text()) if p.exists() else {'mode': 'integration'}
+          assert stage['mode'] in ('focused', 'integration')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              for key, value in stage.items():
+                  assert '\n' not in value
+                  f.write(f'{key}={value}\n')
+          PY
+      - name: Focused Playtest 13 tests
+        if: steps.phase.outputs.mode == 'focused'
+        env:
+          NATIVE_FILTER: ${{ steps.phase.outputs.native_filter }}
+          HOST_FILTER: ${{ steps.phase.outputs.host_filter }}
+        shell: bash
+        run: |
+          set -o pipefail
+          test -n "$NATIVE_FILTER"
+          test -n "$HOST_FILTER"
+          make -C tools/mapjson
+          python3 -m unittest discover -s tools/three_horizons/tests -p "$HOST_FILTER" -v 2>&1 | tee focused-host.log
+          make THREE_HORIZONS=1 check TESTS="$NATIVE_FILTER" -j2 2>&1 | tee focused-native.log
+          ! grep -q "No tests found" focused-native.log
+          git rev-parse HEAD > demo-source-commit.txt
       - name: Check map contracts
+        if: steps.phase.outputs.mode == 'integration'
         run: |
           make -C tools/mapjson
           python3 -m unittest discover -s tools/three_horizons/tests -v
       - name: Build demo
+        if: steps.phase.outputs.mode == 'integration'
         shell: bash
         run: |
           set -o pipefail
@@ -34,6 +65,7 @@ jobs:
           sha256sum pokemon-three-horizons.gba > pokemon-three-horizons.gba.sha256
           git rev-parse HEAD > demo-source-commit.txt
       - name: Verify legacy-state and clock regressions detect original defects
+        if: steps.phase.outputs.mode == 'integration'
         shell: bash
         run: |
           set -o pipefail
@@ -62,6 +94,7 @@ jobs:
           cp /tmp/th-clock.c src/three_horizons_clock.c
           git diff --exit-code
       - name: Verify nickname exit regression detects a stale interrupt
+        if: steps.phase.outputs.mode == 'integration'
         shell: bash
         run: |
           set -o pipefail
@@ -82,6 +115,7 @@ jobs:
           cp /tmp/th-naming.c src/naming_screen.c
           git diff --exit-code
       - name: Test opening progression
+        if: steps.phase.outputs.mode == 'integration'
         shell: bash
         run: |
           set -o pipefail
@@ -90,12 +124,15 @@ jobs:
           make THREE_HORIZONS=1 check TESTS="test/save.c" -j2 2>&1 | tee -a demo-tests.log
           ! grep -q "No tests found" demo-tests.log
       - name: Verify Playtest 12 negative controls
+        if: steps.phase.outputs.mode == 'integration'
         run: |
           python3 tools/three_horizons/check_playtest12_controls.py
           git diff --exit-code
       - name: Export source-matched playtest guide
+        if: steps.phase.outputs.mode == 'integration'
         run: python3 tools/three_horizons/export_encounters.py --revision "$(git rev-parse HEAD)" --output PLAYTEST_12_ENCOUNTERS.md
       - name: Verify Playtest 11 scene regressions detect the previous behavior
+        if: steps.phase.outputs.mode == 'integration'
         shell: bash
         run: |
           set -o pipefail
@@ -126,6 +163,7 @@ jobs:
           cp /tmp/th11-catch.c src/battle_script_commands.c
           git diff --exit-code
       - name: Verify first-battle regression catches the original overwrite
+        if: steps.phase.outputs.mode == 'integration'
         shell: bash
         run: |
           set -o pipefail
@@ -147,6 +185,7 @@ jobs:
           make THREE_HORIZONS=1 check TESTS="Three Horizons first rival battle initialization" -j2 > regression-positive.log 2>&1
           git diff --exit-code
       - name: Verify palette and fleeing regressions detect original defects
+        if: steps.phase.outputs.mode == 'integration'
         shell: bash
         run: |
           set -o pipefail
@@ -176,6 +215,7 @@ jobs:
           cp /tmp/th-event-objects.h include/constants/event_objects.h
           git diff --exit-code
       - name: Verify training and capture regression controls
+        if: steps.phase.outputs.mode == 'integration'
         shell: bash
         run: |
           set -o pipefail
@@ -211,6 +251,7 @@ jobs:
           make THREE_HORIZONS=1 check TESTS="Three Horizons" -j2 > training-capture-positive.log 2>&1
           git diff --exit-code
       - name: Check trainer regeneration when switching build modes
+        if: steps.phase.outputs.mode == 'integration'
         shell: bash
         run: |
           set -o pipefail
@@ -235,6 +276,8 @@ jobs:
             playtest12-*-negative.log
             demo-build.log
             running-frames.log
+            focused-host.log
+            focused-native.log
             demo-tests.log
             revision9-tests.log
             revision9-negative.log
