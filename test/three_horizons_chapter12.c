@@ -31,7 +31,7 @@ TEST("Three Horizons playtest12 repeated Continue preserves completed earlier ch
     for (u32 pass = 0; pass < 2; pass++)
     {
         TH_MigrateSaveState();
-        EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), 0xA909);
+        EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), 0xA90B);
         EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_LO), 12345);
         EXPECT_EQ(VarGet(VAR_TH_CLOCK_MODE), 1);
         EXPECT_EQ(VarGet(VAR_TH_SHINY_RATE), 3);
@@ -69,7 +69,7 @@ TEST("Three Horizons playtest12 upgrade initializes only new receipts and keeps 
     FlagSet(FLAG_TH_FOSSIL_HELIX);
     FlagSet(TRAINER_FLAGS_START + TRAINER_TH9_LEADER_MISTY);
     TH_MigrateSaveState();
-    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_12 | 1);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_13 | 1);
     EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_LO), 12345);
     EXPECT_EQ(FlagGet(FLAG_TH12_START_MONEY), version == TH_STATE_VERSION_12);
     EXPECT_EQ(FlagGet(FLAG_TH12_ULTRA_BALLS), version == TH_STATE_VERSION_12);

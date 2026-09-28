@@ -21,7 +21,7 @@ class StateAllocations(unittest.TestCase):
                 self.assertEqual(value(name),expected,name)
                 self.assertNotEqual(expected,0,name)
         variables=[value(n) for n in definitions if n.startswith('VAR_TH_')]
-        flags=[value(n) for n in definitions if n.startswith('FLAG_TH_') and 'HIDE_' not in n]
+        flags=[value(n) for n in definitions if re.match(r'FLAG_TH(?:\d+)?_', n) and 'HIDE_' not in n]
         self.assertEqual(len(variables),len(set(variables)))
         self.assertEqual(len(flags),len(set(flags)))
         for offset,name in enumerate(('STAGE','FIRST_PARTNER','RIVAL_PARTNER','SUPPLY_MASK',
@@ -30,6 +30,26 @@ class StateAllocations(unittest.TestCase):
         trainers=list(manifest['trainers'].values())
         self.assertEqual(len(trainers),len(set(trainers)))
         self.assertTrue(all(8<=i<855 for i in trainers))
+
+    def test_playtest13_state_has_audited_owned_slots(self):
+        manifest = json.loads((ROOT/'tools/three_horizons/state_manifest.json').read_text())
+        flags = {name: value for name, value in manifest['flags'].items()
+                 if name.startswith('FLAG_TH13_')}
+        self.assertGreaterEqual(len(flags), 48, 'chapter state, research and call receipts must be allocated')
+        native = (ROOT/'include/constants/flags.h').read_text()
+        for name, value in flags.items():
+            value = int(value, 0) if isinstance(value, str) else value
+            self.assertRegex(native, rf'#define FLAG_UNUSED_0x{value:03X}\s+0x{value:X}\b', name)
+            self.assertFalse(0x2BC <= value <= 0x492, name)
+            self.assertLess(value, 0x500, 'avoid trainer/system/daily flag ranges')
+
+    def test_playtest12_map_indices_are_unchanged(self):
+        baseline = json.loads((ROOT/'tools/three_horizons/tests/playtest12-map-indices.json').read_text())
+        groups = json.loads((ROOT/'data/maps/map_groups.json').read_text())
+        actual = {name: [gi, mi] for gi, group in enumerate(groups['group_order'])
+                  for mi, name in enumerate(groups[group])}
+        for name, index in baseline.items():
+            self.assertEqual(actual.get(name), index, name)
 
     def test_allocated_native_aliases_have_no_other_runtime_users(self):
         manifest=json.loads((ROOT/'tools/three_horizons/state_manifest.json').read_text())

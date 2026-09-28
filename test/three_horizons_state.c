@@ -3,6 +3,10 @@
 #include "three_horizons.h"
 #include "event_data.h"
 #include "malloc.h"
+#include "item.h"
+#include "money.h"
+#include "pokedex.h"
+#include "constants/pokedex.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "constants/trainers.h"
@@ -79,7 +83,28 @@ TEST("Three Horizons playtest13 state migration preserves P12 payload")
     struct PokemonStorage *boxes = Alloc(sizeof(*boxes));
     struct Pokemon party[PARTY_SIZE];
     EXPECT(before != NULL && before2 != NULL && boxes != NULL);
+    InitEventData();
+    ClearBag();
+    u8 attackEv = 252;
+    u16 heldItem = ITEM_POWER_BRACER;
+    CreateMonWithIVs(&gPlayerParty[0], first, 35, 0x3FFFFFFF, OTID_STRUCT_PLAYER_ID, 123);
+    SetMonData(&gPlayerParty[0], MON_DATA_ATK_EV, &attackEv);
+    SetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM, &heldItem);
+    SetMonData(&gPlayerParty[0], MON_DATA_NICKNAME, _("Lavender"));
+    gPokemonStoragePtr->boxes[0][0] = gPlayerParty[0].box;
+    SetMoney(&gSaveBlock1Ptr->money, 54321);
+    EXPECT(AddBagItem(ITEM_HM01, 1));
+    EXPECT(AddBagItem(ITEM_OLD_ROD, 1));
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_BADGE02_GET);
+    FlagSet(FLAG_BADGE03_GET);
+    FlagSet(FLAG_TH_ROCKET_DUO);
+    FlagSet(FLAG_TH_FOSSIL_DOME);
+    FlagSet(FLAG_TH_FOSSIL_HELIX);
+    VarSet(VAR_TH_TRAINING_KIT_MASK, 0x7F);
+    GetSetPokedexFlag(NATIONAL_DEX_PIKACHU, FLAG_SET_CAUGHT);
     VarSet(VAR_TH_FIRST_PARTNER, first);
+    VarSet(VAR_TH_RIVAL_PARTNER, first);
     VarSet(VAR_TH_BROCK_GIFT, TH_GetBrockGift(first, 0));
     VarSet(VAR_TH_MISTY_GIFT, TH_GetMistyGift(first, VarGet(VAR_TH_BROCK_GIFT)));
     VarSet(VAR_TH_CLOCK_MODE, 1);
@@ -98,7 +123,17 @@ TEST("Three Horizons playtest13 state migration preserves P12 payload")
     TH_MigrateSaveState();
     EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), 0xA90B);
     EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_LO), 12345);
-    // New state is checked separately; old flags/vars and all other bytes survive.
+    // Normalize only the explicitly newly owned bits and version, then compare
+    // every byte. This catches accidental changes to money, items, Dex, flags,
+    // settings, existing trainer wins, saved party and reserved old fields.
+    for (u32 flag = TH13_FLAGS_START; flag <= TH13_FLAGS_END; flag++)
+    {
+        u8 bit = 1 << (flag % 8);
+        before->flags[flag / 8] = (before->flags[flag / 8] & ~bit)
+            | (gSaveBlock1Ptr->flags[flag / 8] & bit);
+    }
+    before->vars[VAR_TH_CLOCK_DISPLAY_HI - VARS_START] = 0xA90B;
+    EXPECT_EQ(memcmp(before, gSaveBlock1Ptr, sizeof(*before)), 0);
     EXPECT_EQ(memcmp(before2, gSaveBlock2Ptr, sizeof(*before2)), 0);
     EXPECT_EQ(memcmp(boxes, gPokemonStoragePtr, sizeof(*boxes)), 0);
     EXPECT_EQ(memcmp(party, gPlayerParty, sizeof(party)), 0);
@@ -121,5 +156,51 @@ TEST("Three Horizons playtest13 state remains version13 after clock update")
     EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 0xFFFE, 0xA90A);
     TH_GetVisualTimeSeconds();
     EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 0xFFFE, 0xA90A);
+}
+TEST("Three Horizons playtest13 state initializes dirty slots only on upgrade")
+{
+    u16 version;
+    PARAMETRIZE { version = 0; }
+    PARAMETRIZE { version = TH_STATE_VERSION_9; }
+    PARAMETRIZE { version = TH_STATE_VERSION_10; }
+    PARAMETRIZE { version = TH_STATE_VERSION_11; }
+    PARAMETRIZE { version = TH_STATE_VERSION_12; }
+    PARAMETRIZE { version = TH_STATE_VERSION_13; }
+    InitEventData();
+    ClearBag();
+    VarSet(VAR_TH_CLOCK_DISPLAY_HI, version | 1);
+    for (u32 flag = TH13_FLAGS_START; flag <= TH13_FLAGS_END; flag++)
+        FlagSet(flag);
+    TH_MigrateSaveState();
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 0xFFFE, 0xA90A);
+    for (u32 flag = TH13_FLAGS_START; flag <= TH13_FLAGS_END; flag++)
+        EXPECT_EQ(FlagGet(flag), version == TH_STATE_VERSION_13);
+    FlagSet(FLAG_TH13_PHOTO_LAVENDER);
+    TH_MigrateSaveState();
+    EXPECT(FlagGet(FLAG_TH13_PHOTO_LAVENDER));
+}
+
+TEST("Three Horizons playtest13 state imports witnessed reports without inventing photos")
+{
+    InitEventData();
+    ClearBag();
+    VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_12);
+    VarSet(VAR_TH_SIGHTING_SEEN, 1);
+    FlagSet(FLAG_TH12_FOREST_SEEN);
+    FlagSet(FLAG_TH12_CAVE_SEEN);
+    EXPECT(AddBagItem(ITEM_HM05, 1));
+    TH_MigrateSaveState();
+    EXPECT(FlagGet(FLAG_TH13_OBS_HOOTHOOT));
+    EXPECT(FlagGet(FLAG_TH13_OBS_FOREST_LEGACY));
+    EXPECT(!FlagGet(FLAG_TH13_OBS_FOREST_TREECKO));
+    EXPECT(!FlagGet(FLAG_TH13_OBS_FOREST_SHROOMISH));
+    EXPECT(FlagGet(FLAG_TH13_OBS_MT_MOON));
+    EXPECT(!FlagGet(FLAG_TH13_OBS_SHIP));
+    EXPECT(!FlagGet(FLAG_TH13_SHIP_DEPARTED));
+    EXPECT(!FlagGet(FLAG_TH13_GEAR));
+    EXPECT(FlagGet(FLAG_TH13_FLASH));
+    EXPECT(CheckBagHasItem(ITEM_HM05, 1));
+    for (u32 flag = FLAG_TH13_PHOTO_HOOTHOOT; flag <= FLAG_TH13_PHOTO_LAVENDER; flag++)
+        EXPECT(!FlagGet(flag));
 }
 #endif

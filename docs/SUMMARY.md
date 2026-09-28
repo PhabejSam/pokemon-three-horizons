@@ -181,3 +181,6 @@
 - [Playtest 12 — continuation and repair checks](three_horizons/PLAYTEST_12.md)
 - [Playtest 12 encounter checklist](three_horizons/PLAYTEST_12_ENCOUNTERS.md)
 - [Playtest 12 Verification](three_horizons/PLAYTEST_12_VERIFICATION.md)
+- [Playtest 13 approved design](superpowers/specs/2026-09-28-playtest13-lavender-design.md)
+- [Playtest 13 implementation plan](superpowers/plans/2026-09-28-playtest13-lavender.md)
+- [Playtest 13 verification](three_horizons/PLAYTEST_13_VERIFICATION.md)

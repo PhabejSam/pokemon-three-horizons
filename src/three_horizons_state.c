@@ -2,6 +2,7 @@
 #include "three_horizons.h"
 #include "event_data.h"
 #include "pokedex.h"
+#include "item.h"
 #include "constants/pokedex.h"
 #include "constants/three_horizons.h"
 #include "constants/trainers.h"
@@ -12,7 +13,7 @@ void TH_MigrateSaveState(void)
         VAR_TH_SHINY_RATE, VAR_TH_CLOCK_MODE, VAR_TH_CLOCK_REAL_LO,
         VAR_TH_CLOCK_REAL_HI, VAR_TH_CLOCK_DISPLAY_LO};
     u16 version = VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK;
-    if (version != TH_STATE_VERSION_9 && version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12)
+    if (version != TH_STATE_VERSION_9 && version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13)
     {
         // Only this chapter's newly owned state is cleared. Never touch the
         // original partner, rival, trainer flags, badges, clock setup or kit.
@@ -21,19 +22,19 @@ void TH_MigrateSaveState(void)
         for (u32 flag=FLAG_TH_MAGIKARP;flag<=FLAG_TH_LAB_INTRO;flag++) FlagClear(flag);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI,TH_STATE_VERSION_9);
     }
-    if (version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12)
+    if (version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13)
     {
         FlagClear(FLAG_TH_DIG_TM);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_10 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
-    if (version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12)
+    if (version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13)
     {
         FlagClear(FLAG_TH_ROCKET_DUO);
         FlagClear(TRAINER_FLAGS_START + TRAINER_TH11_JESSIE);
         FlagClear(TRAINER_FLAGS_START + TRAINER_TH11_JAMES);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_11 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
-    if (version != TH_STATE_VERSION_12)
+    if (version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13)
     {
         for (u32 flag = TH12_FLAGS_START; flag <= TH12_FLAGS_END; flag++)
             FlagClear(flag);
@@ -46,6 +47,31 @@ void TH_MigrateSaveState(void)
         if (FlagGet(FLAG_TH_FOSSIL_HELIX) && GetSetPokedexFlag(NATIONAL_DEX_OMANYTE, FLAG_GET_CAUGHT))
             FlagSet(FLAG_TH12_REVIVED_HELIX);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_12 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
+    }
+    if (version != TH_STATE_VERSION_13)
+    {
+        // These audited unused slots belong only to P13. Old versions may
+        // contain arbitrary bits here; initialize them once, never on Continue.
+        for (u32 flag = TH13_FLAGS_START; flag <= TH13_FLAGS_END; flag++)
+            FlagClear(flag);
+        if (VarGet(VAR_TH_SIGHTING_SEEN) == 1)
+            FlagSet(FLAG_TH13_OBS_HOOTHOOT);
+        // P12 shared one receipt between two forest scenes. It proves a
+        // report, not either particular scene and certainly not a photo.
+        if (FlagGet(FLAG_TH12_FOREST_SEEN))
+            FlagSet(FLAG_TH13_OBS_FOREST_LEGACY);
+        if (FlagGet(FLAG_TH12_CAVE_SEEN))
+            FlagSet(FLAG_TH13_OBS_MT_MOON);
+        if (FlagGet(FLAG_TH12_SHIP_STORY))
+            FlagSet(FLAG_TH13_OBS_SHIP);
+        if (CheckBagHasItem(ITEM_HM05, 1))
+            FlagSet(FLAG_TH13_FLASH);
+        if (CheckBagHasItem(ITEM_ACRO_BIKE, 1))
+            FlagSet(FLAG_TH13_ACRO);
+        if (CheckBagHasItem(ITEM_VS_SEEKER, 1))
+            FlagSet(FLAG_TH13_VS_SEEKER);
+        // Gear, photos and ship departure require witnessed P13 events.
+        VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_13 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
     if (VarGet(VAR_TH_CLOCK_MODE)>1) VarSet(VAR_TH_CLOCK_MODE,0);
     if (VarGet(VAR_TH_SHINY_RATE)>3) VarSet(VAR_TH_SHINY_RATE,0);

@@ -80,7 +80,7 @@ TEST("Three Horizons Playtest 9 upgrade preserves receipts and initializes Dig o
     EXPECT(FlagGet(FLAG_TH_MAGIKARP));
     EXPECT(FlagGet(FLAG_TH_PICKUP_1));
     EXPECT(!FlagGet(FLAG_TH_DIG_TM));
-    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_12 | 1);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_13 | 1);
     FlagSet(FLAG_TH_DIG_TM);
     TH_ResetVisualClock();
     TH_MigrateSaveState();
