@@ -587,19 +587,23 @@ TH_ChapterComplete:
     .string "You have completed this chapter!\nTwo badges and a reunion with {RIVAL}.\pKeep exploring, catching, and training.\nThe road beyond the bridge comes next!$"
 
 TH_Route3BadgeGate::
-goto_if_set FLAG_BADGE01_GET, TH_ChapterEnd
+    goto_if_set FLAG_BADGE01_GET, TH_Route3BadgeGate_End
+    specialvar VAR_RESULT, GetPlayerFacingDirection
+    goto_if_ne VAR_RESULT, DIR_EAST, TH_Route3BadgeGate_End
     lockall
+    turnobject LOCALID_TH12_BADGE_GUIDE, DIR_EAST
     msgbox TH_Route3BadgeGate_Text
     applymovement OBJ_EVENT_ID_PLAYER, TH_Route3BadgeGate_Step
     waitmovement 0
     releaseall
+TH_Route3BadgeGate_End:
     end
 TH_Route3BadgeGate_Step:
     walk_left
     step_end
 
 TH_Route3BadgeGate_Text:
-    .string "Earn the BOULDERBADGE from BROCK\nbefore continuing to MT. MOON.$"
+    .string "GUIDE: Earn the BOULDERBADGE from\nBROCK before heading to MT. MOON.$"
 
 TH_ChapterNorthBoundary::
     lockall

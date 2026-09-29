@@ -22,7 +22,8 @@ TEST("Three Horizons playtest13 Pewter guide cannot be bypassed before Brock")
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TH_PEWTER), MAP_NUM(MAP_TH_PEWTER));
     gPlayerAvatar.objectEventId = 0;
     gObjectEvents[0].facingDirection = DIR_EAST;
-    // TH_MuseumWelcome sets this while the player stays in Pewter.
+    // Include stale temporary state from a continued fixture. Normal museum
+    // exit clears TEMP_1; it is not a demonstrated ordinary-play bypass.
     VarSet(VAR_TEMP_1, museum);
     u32 lanes = 0;
     for (u32 i = 0; i < gMapHeader.events->coordEventCount; i++)
