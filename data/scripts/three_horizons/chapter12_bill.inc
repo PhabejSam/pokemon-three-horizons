@@ -42,13 +42,20 @@ TH12_Bridge_NotReadyText:
 TH12_Bill_OnEntry::
     goto_if_set FLAG_TH12_BILL_RESCUED, TH12_Bill_EntryDone
     setflag FLAG_TEMP_3
+    setobjectxyperm LOCALID_TH12_ROUTE25_SEACOTTAGE_0, 3, 3
+    goto_if_set FLAG_TH13_BILL_IN_MACHINE, TH13_Bill_EntryWaiting
     clearflag FLAG_TEMP_4
     clearflag FLAG_TEMP_2
-    setobjectxyperm LOCALID_TH12_ROUTE25_SEACOTTAGE_0, 3, 3
+    return
+TH13_Bill_EntryWaiting:
+    setflag FLAG_TEMP_2
+    setflag FLAG_TEMP_4
     return
 TH12_Bill_EntryDone:
     clearflag FLAG_TEMP_3
     setflag FLAG_TEMP_4
+    clearflag FLAG_TEMP_2
+    clearflag FLAG_TH13_BILL_IN_MACHINE
     setobjectxyperm LOCALID_TH12_ROUTE25_SEACOTTAGE_0, 7, 5
     return
 
@@ -74,6 +81,7 @@ TH12_Bill_EnterMachine:
     removeobject LOCALID_TH12_ROUTE25_SEACOTTAGE_1
     closedoor 10, 3
     waitdooranim
+    setflag FLAG_TH13_BILL_IN_MACHINE
     setflag FLAG_TEMP_2
     special TH_RefreshFollower
     releaseall
@@ -81,7 +89,7 @@ TH12_Bill_EnterMachine:
 TH12_Bill_Computer::
     lockall
     goto_if_set FLAG_TH12_BILL_RESCUED, TH12_Bill_PCNotes
-    goto_if_unset FLAG_TEMP_2, TH12_Bill_PCIdle
+    goto_if_unset FLAG_TH13_BILL_IN_MACHINE, TH12_Bill_PCIdle
     msgbox TH12_Bill_StartText
     closemessage
     hidefollower TRUE
@@ -108,6 +116,7 @@ TH12_Bill_Computer::
     setobjectxyperm LOCALID_TH12_ROUTE25_SEACOTTAGE_0, 7, 5
     clearflag FLAG_TEMP_2
     setflag FLAG_TH12_BILL_RESCUED
+    clearflag FLAG_TH13_BILL_IN_MACHINE
     special TH_RefreshFollower
     msgbox TH12_Bill_ThanksText
     releaseall

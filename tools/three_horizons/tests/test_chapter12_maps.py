@@ -12,8 +12,10 @@ class Chapter12Maps(unittest.TestCase):
         self.assertEqual(m['object_events'][1]['flag'],'FLAG_TEMP_4')
         text=(ROOT/'data/scripts/three_horizons/chapter12_bill.inc').read_text()
         entry=text.split('TH12_Bill_OnEntry::')[1].split('TH12_Bill_Rescue::')[0]
-        self.assertIn('clearflag FLAG_TEMP_4',entry)
-        self.assertIn('setflag FLAG_TEMP_4',entry)
+        before_waiting, waiting = entry.split('TH13_Bill_EntryWaiting:')
+        self.assertIn('goto_if_set FLAG_TH13_BILL_IN_MACHINE, TH13_Bill_EntryWaiting',before_waiting)
+        self.assertIn('clearflag FLAG_TEMP_4',before_waiting)
+        self.assertIn('setflag FLAG_TEMP_4',waiting)
         rescue=text.split('TH12_Bill_Rescue::')[1].split('TH12_Bill_Computer::')[0]
         self.assertNotIn('setflag FLAG_TH12_BILL_RESCUED',rescue)
 
