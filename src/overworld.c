@@ -1,6 +1,7 @@
 #include "global.h"
 #include "three_horizons.h"
 #include "three_horizons_rematches.h"
+#include "three_horizons_research.h"
 #include "constants/three_horizons.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
@@ -1711,6 +1712,12 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
             LockPlayerFieldControls();
             HideMapNamePopUpWindow();
         }
+#if THREE_HORIZONS
+        else if (TH_ResearchTryStartPendingCall())
+        {
+            HideMapNamePopUpWindow();
+        }
+#endif
         else
         {
             PlayerStep(inputStruct.dpadDirection, newKeys, heldKeys);

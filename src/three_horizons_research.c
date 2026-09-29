@@ -1,11 +1,50 @@
 #include "global.h"
 #include "event_data.h"
+#include "overworld.h"
+#include "palette.h"
+#include "script.h"
 #include "three_horizons_research.h"
 #include "constants/three_horizons.h"
 #include "constants/event_objects.h"
+#include "constants/maps.h"
 
 #if THREE_HORIZONS
 #include "data/three_horizons_research.h"
+
+extern const u8 TH13_ResearchCall_Activation[];
+extern const u8 TH13_ResearchCall_Route10[];
+extern const u8 TH13_ResearchCall_Lavender[];
+static const u8 *const sResearchCallScripts[TH_RESEARCH_CALL_COUNT] = {
+    [TH_CALL_ACTIVATION] = TH13_ResearchCall_Activation,
+    [TH_CALL_ROUTE10] = TH13_ResearchCall_Route10,
+    [TH_CALL_LAVENDER] = TH13_ResearchCall_Lavender,
+};
+
+bool32 TH_ResearchTryStartPendingCall(void)
+{
+    u16 call;
+    // The hook runs after priority field input. Never replace an interaction,
+    // menu, warp, field move, moving avatar or the script of another scene.
+    if (gMain.callback2 != CB2_Overworld || gMain.inBattle
+        || gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_TH12_ROUTE25_SEA_COTTAGE)
+        || !FlagGet(FLAG_TH13_GEAR) || ArePlayerFieldControlsLocked()
+        || ScriptContext_IsEnabled() || gPaletteFade.active
+        || gPlayerAvatar.preventStep || gPlayerAvatar.transitionFlags
+        || gPlayerAvatar.tileTransitionState != T_NOT_MOVING
+        || gPlayerAvatar.runningState != NOT_MOVING
+        || gMain.newKeys || gMain.heldKeys)
+        return FALSE;
+    call = TH_ResearchNextPendingCall();
+    if (call >= ARRAY_COUNT(sResearchCallScripts))
+        return FALSE;
+    ScriptContext_SetupScript(sResearchCallScripts[call]);
+    return TRUE;
+}
+
+void TH_ScriptResearchCompleteCall(void)
+{
+    TH_ResearchCompleteCall(gSpecialVar_0x8004);
+}
 
 const struct THResearchEntry *TH_ResearchGetEntry(u16 entryId)
 {

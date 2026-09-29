@@ -18,9 +18,12 @@ static void SafeField(void)
     ScriptContext_Init(); UnlockPlayerFieldControls();
     gMain.callback2 = CB2_Overworld;
     gMain.newKeys = gMain.heldKeys = 0;
+    gMain.inBattle = FALSE;
     gPaletteFade.active = FALSE;
     gPlayerAvatar.preventStep = FALSE;
     gPlayerAvatar.tileTransitionState = T_NOT_MOVING;
+    gPlayerAvatar.runningState = NOT_MOVING;
+    gPlayerAvatar.transitionFlags = 0;
     gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_TH12_ROUTE25_SEA_COTTAGE);
 }
 
@@ -42,6 +45,12 @@ TEST("Three Horizons playtest13 professor call waits for safe field")
     SafeField(); LockPlayerFieldControls();
     EXPECT(!TH_ResearchTryStartPendingCall()); // field move/cutscene lock
     SafeField(); gPlayerAvatar.preventStep = TRUE;
+    EXPECT(!TH_ResearchTryStartPendingCall());
+    SafeField(); gMain.inBattle = TRUE;
+    EXPECT(!TH_ResearchTryStartPendingCall());
+    SafeField(); gPlayerAvatar.runningState = MOVING;
+    EXPECT(!TH_ResearchTryStartPendingCall());
+    SafeField(); gPlayerAvatar.transitionFlags = 1;
     EXPECT(!TH_ResearchTryStartPendingCall());
     SafeField(); gPaletteFade.active = TRUE;
     EXPECT(!TH_ResearchTryStartPendingCall());

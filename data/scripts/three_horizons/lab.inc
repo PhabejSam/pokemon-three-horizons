@@ -631,9 +631,9 @@ TH_Lab_FaceProfessors:
     face_up
     step_end
 TH_Text_JointResearch:
-    .string "OAK: Welcome, {PLAYER}!\nWe have something to show you.\pPOKéMON from JOHTO and HOENN have\nbeen appearing here in KANTO.\pELM, BIRCH and I are studying how\nthese habitats are changing.$"
+    .string "OAK: Welcome, {PLAYER}!\nWe have something to show you.\pPOKéMON from JOHTO and HOENN have\nbeen appearing here in KANTO.\pELM sees unusual visitors in JOHTO.\nBIRCH has similar reports in HOENN.\pWe don't yet know why. As you and\n{RIVAL} travel and earn badges,\pwatch how these visitors live\nwith the local POKéMON.\pTell us what you notice! Your\njourney can help our field research.$"
 TH_Text_ElmWelcome:
-    .string "ELM: A partner can help us discover\nwhat brings these POKéMON together.$"
+    .string "ELM: KANTO species are appearing\nin unexpected places in JOHTO, too.\pA partner can help you observe\nhow these POKéMON live together.$"
 TH_Text_BirchWelcome:
     .string "BIRCH: Take your time. See who\nyou would like by your side!$"
 TH_Text_RivalLetsPlayerChoose:

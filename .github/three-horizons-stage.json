@@ -1,1 +1,1 @@
-{"mode":"focused","native_filter":"test/three_horizons_research_calls.c","host_filter":"test_state_allocations.py"}
+{"mode":"focused","native_filter":"test/three_horizons_research_calls.c","host_filter":"test_playtest13_research.py","visual_gate":"research"}

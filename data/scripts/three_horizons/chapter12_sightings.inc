@@ -10,6 +10,10 @@ TH12_Forest_Treecko::
     msgbox TH12_Forest_TreeckoText
     waitmoncry
     setflag FLAG_TH12_FOREST_SEEN
+    setvar VAR_0x8004, TH_RESEARCH_FOREST_TREECKO
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_FOREST_TREECKO
+    call TH13_ResearchPhoto
     special TH_RefreshFollower
     releaseall
     end
@@ -25,6 +29,10 @@ TH12_Forest_Shroomish::
     msgbox TH12_Forest_ShroomishText
     waitmoncry
     setflag FLAG_TH12_FOREST_SEEN
+    setvar VAR_0x8004, TH_RESEARCH_FOREST_SHROOMISH
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_FOREST_SHROOMISH
+    call TH13_ResearchPhoto
     special TH_RefreshFollower
     releaseall
     end
@@ -83,6 +91,7 @@ TH12_Moon_Watch:
     msgbox TH12_Moon_FirstText
     waitmoncry
     setflag FLAG_TH12_CAVE_SEEN
+    call TH13_MoonRecord
     special TH_RefreshFollower
     releaseall
     end
@@ -92,9 +101,16 @@ TH12_Moon_Repeat:
     playmoncry SPECIES_MAKUHITA, CRY_MODE_NORMAL
     msgbox TH12_Moon_RepeatText
     waitmoncry
+    call TH13_MoonRecord
     releaseall
 TH12_SightingEnd:
     end
+TH13_MoonRecord:
+    setvar VAR_0x8004, TH_RESEARCH_MT_MOON
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_MT_MOON
+    call TH13_ResearchPhoto
+    return
 TH12_Moon_FirstText:
     .string "Three CLEFAIRY dance around\na cheerful MAKUHITA!\pA visitor from HOENN, welcomed\nby MT. MOON's own POKéMON.$"
 TH12_Moon_RepeatText:

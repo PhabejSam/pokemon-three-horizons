@@ -405,3 +405,35 @@ Eleven stable authored entry IDs, ten photo IDs, and three ordered milestone cal
 Invalid entry IDs through 65,535 cannot write state; photo/call boundaries are rejected; repeat observations, captures and calls are idempotent. Calls retain authored priority through saved flag restoration. P12 Hoothoot imports only from the audited scalar value 1. The shared old forest receipt imports a general historical report, not a guessed specific pair. No migration invents a photo or delivered call. These fixtures do not replace the user's exact post-Surge RG40XX H personal-save acceptance.
 
 Task 31's menu, actual photo presentation and native save/Continue validation remain the next gate.
+
+## Task 31: Research Gear native menu gate
+
+Feature `8be5e892d8bf33fa25eebb4b1b163e7df1cd34a0`; compiled/test revision
+`b6cd755ced02eb27ed003f0e190b3686270af197`. ROM SHA-256
+`dd4f8e8970ba53526abcc4b101c2a7ebd2e7453a32415f94d63b93ae25f1ff2b`.
+Run 36602206498/job 109522120044 passed five menu, five research and six
+migration/state native groups and four host ownership checks. Artifact
+11049997319 ZIP SHA-256 `ed0c042d4b44e9563e3154f78de5d30eb7206992ed89f15aa3df4d2ceffac52d`.
+Missing-interface RED was observed at `3b855a6ffd938a7baa64dcb593ef15e6388627f6`.
+
+All ten photo cards were rendered by this exact ROM and inspected at 240×160,
+including Pinsir/Heracross, Mareep/Nidoran, Aron/Geodude and Misdreavus. Native
+sprite poses share terrain; paired subjects remain visible and face the shared
+interaction. Each card has location/species/observation and a second-page professor
+note with region/origin. The Moon card shows all four participants. Existing
+32×32 overworld assets require at most 2 KiB of OBJ tiles and four palettes.
+Only persistent flags identify earned cards; compositions remain in ROM.
+
+Empty modules, all photos and pagination, ordinary save/Continue, and native
+menu return after an actual trainer rematch and Cut passed in mGBA. Native tests
+cover locked Gear, zero/one/all records, held input, B at each menu level,
+sprite/window cleanup, own-state allocation failure, duplicate photo rejection,
+and read-only replay of all three professors' three milestone reports. The
+movement driver initially tried walking into a tree after closing the menu;
+checking an open adjacent tile demonstrated normal controls without a game fix.
+
+Field Yes/No photo-script integration, milestone-call delivery and ship additions
+are tested together in Task 32 before the 30–32 group is closed. State-only tests
+are not evidence of a completed field photo interaction. Screens and replay
+harnesses are retained in the plan workspace's research-after and emulator folders.
+These are focused development checks, not final hardware/personal-save acceptance.

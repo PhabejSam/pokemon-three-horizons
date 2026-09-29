@@ -11,10 +11,14 @@ TH_EventScript_Hoothoot::
     msgbox TH_Text_HoothootFirst
     waitmoncry
     setvar VAR_TH_SIGHTING_SEEN, 1
-    releaseall
-    end
+    goto TH13_HoothootRecord
 TH_HoothootRepeat:
     msgbox TH_Text_HoothootRepeat
+TH13_HoothootRecord:
+    setvar VAR_0x8004, TH_RESEARCH_HOOTHOOT
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_HOOTHOOT
+    call TH13_ResearchPhoto
     releaseall
     end
 
