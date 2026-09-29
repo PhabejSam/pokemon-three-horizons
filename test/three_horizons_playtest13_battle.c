@@ -19,6 +19,9 @@
 #include "task.h"
 #include "text.h"
 #include "scanline_effect.h"
+#include "pokedex.h"
+#include "battle_script_commands.h"
+#include "sound.h"
 
 #if THREE_HORIZONS
 extern bool32 Test_TH_ChooseRunAction(void);
@@ -318,5 +321,113 @@ TEST("Three Horizons playtest13 SELECT preserves native entry restrictions")
     MoveProbeKey(0, SELECT_BUTTON);
     EXPECT(gBattlerControllerFuncs[0] == HandleInputChooseMove);
     FreeMoveProbe();
+}
+
+extern void Task_HandleCaughtMonPageInput(u8 taskId);
+
+static const u8 sDexProbeCommand[] = {B_SCR_OP_DISPLAYDEXINFO, B_SCR_OP_END};
+static const u8 sNicknameProbeCommand[] = {B_SCR_OP_TRYGIVECAUGHTMONNICK, B_SCR_OP_END};
+
+static void CatchProbeFrame(const u8 *command, u16 newKeys, u16 heldKeys)
+{
+    gMain.newKeys = gMain.newAndRepeatedKeys = newKeys;
+    gMain.heldKeys = heldKeys;
+    if (gBattlescriptCurrInstr == command)
+        gBattleScriptingCommandsTable[command[0]]();
+    gMain.callback2();
+    MapMusicMain();
+    VBlankIntrWait();
+}
+
+static u8 InitDexProbe(enum Species species)
+{
+    InitMoveProbe(0, FALSE, FALSE);
+    CreateMonWithIVs(GetBattlerMon(1), species, 5, 9876, OTID_STRUCT_PLAYER_ID, 12);
+    PokemonToBattleMon(GetBattlerMon(1), &gBattleMons[1]);
+    gBattlerAttacker = 0;
+    gBattlerTarget = 1;
+    gBattleScripting.monCaught = TRUE;
+    memset(gBattleCommunication, 0, sizeof(gBattleCommunication));
+    SetMainCallback2(BattleMainCB2);
+    SetVBlankCallback(VBlankCB_Battle);
+    gBattlescriptCurrInstr = sDexProbeCommand;
+    u32 frame;
+    for (frame = 0; frame < 1200; frame++)
+    {
+        CatchProbeFrame(sDexProbeCommand, 0, 0);
+        if (FindTaskIdByFunc(Task_HandleCaughtMonPageInput) != TASK_NONE)
+            break;
+    }
+    EXPECT_LT(frame, 1200);
+    EXPECT(!gPaletteFade.active);
+    EXPECT(GetBgTilemapBuffer(2) != NULL);
+    EXPECT(GetBgTilemapBuffer(3) != NULL);
+    EXPECT(IsCryPlaying());
+    return FindTaskIdByFunc(Task_HandleCaughtMonPageInput);
+}
+
+TEST("Three Horizons playtest13 first catch finishes Dex before nickname")
+{
+    enum Species species;
+    bool32 rapid;
+    PARAMETRIZE { species = SPECIES_CATERPIE; rapid = TRUE; }
+    PARAMETRIZE { species = SPECIES_WEEDLE; rapid = TRUE; }
+    PARAMETRIZE { species = SPECIES_PIKACHU; rapid = TRUE; }
+    PARAMETRIZE { species = SPECIES_CATERPIE; rapid = FALSE; }
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    u8 dexTask = InitDexProbe(species);
+    u32 frame;
+    // A new input during the actual cry must not skip the presentation.
+    for (frame = 0; frame < 1200 && IsCryPlaying(); frame++)
+    {
+        u16 key = rapid && !(frame % 2) ? A_BUTTON : 0;
+        CatchProbeFrame(sDexProbeCommand, key, key);
+        EXPECT(gTasks[dexTask].func == Task_HandleCaughtMonPageInput);
+        EXPECT(gBattlescriptCurrInstr == sDexProbeCommand);
+    }
+    EXPECT_LT(frame, 1200);
+    CatchProbeFrame(sDexProbeCommand, 0, 0);
+    CatchProbeFrame(sDexProbeCommand, A_BUTTON, A_BUTTON);
+    for (frame = 0; frame < 1200 && gBattlescriptCurrInstr == sDexProbeCommand; frame++)
+        CatchProbeFrame(sDexProbeCommand, 0, 0);
+    EXPECT_LT(frame, 1200);
+    EXPECT(gMain.callback2 == BattleMainCB2);
+    EXPECT(!gPaletteFade.active);
+    EXPECT(gBattleAnimBgTileBuffer != NULL);
+    EXPECT_EQ(gBattle_BG3_X, 0);
+    // The returned scene accepts one fresh nickname choice, with no A leakage.
+    memset(gBattleCommunication, 0, sizeof(gBattleCommunication));
+    gBattlescriptCurrInstr = sNicknameProbeCommand;
+    CatchProbeFrame(sNicknameProbeCommand, 0, 0);
+    CatchProbeFrame(sNicknameProbeCommand, 0, A_BUTTON);
+    EXPECT_EQ(gBattleCommunication[MULTIUSE_STATE], 1);
+    EXPECT(gBattlescriptCurrInstr == sNicknameProbeCommand);
+    CatchProbeFrame(sNicknameProbeCommand, B_BUTTON, B_BUTTON);
+    CatchProbeFrame(sNicknameProbeCommand, 0, 0);
+    EXPECT(gBattlescriptCurrInstr == sNicknameProbeCommand + 1);
+    FreeMoveProbe();
+    gMain.callback1 = old1;
+    SetMainCallback2(old2);
+}
+
+TEST("Three Horizons playtest13 first catch requires fresh input after presentation")
+{
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    u8 dexTask = InitDexProbe(SPECIES_CATERPIE);
+    u32 frame;
+    for (frame = 0; frame < 1200 && IsCryPlaying(); frame++)
+        CatchProbeFrame(sDexProbeCommand, 0, A_BUTTON);
+    EXPECT_LT(frame, 1200);
+    // Even a new press on the completion boundary must wait for a release.
+    CatchProbeFrame(sDexProbeCommand, A_BUTTON, A_BUTTON);
+    EXPECT(gTasks[dexTask].func == Task_HandleCaughtMonPageInput);
+    CatchProbeFrame(sDexProbeCommand, 0, 0);
+    CatchProbeFrame(sDexProbeCommand, A_BUTTON, A_BUTTON);
+    for (frame = 0; frame < 1200 && gBattlescriptCurrInstr == sDexProbeCommand; frame++)
+        CatchProbeFrame(sDexProbeCommand, 0, 0);
+    EXPECT_LT(frame, 1200);
+    FreeMoveProbe();
+    gMain.callback1 = old1;
+    SetMainCallback2(old2);
 }
 #endif

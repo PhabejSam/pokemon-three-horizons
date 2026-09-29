@@ -138,3 +138,10 @@ Pending: full project regression, final save-layout recheck, three upstream game
 - [CI run 36507024347](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/36507024347): two new native tests pass across five trainer and two wild cases; prior rival loss and Rocket retry tests also pass. The preceding test checkpoint fails the trainer response assertion while wild controls pass.
 - Exact prior-ROM mGBA reproduction: selecting RUN and confirming quit in Rick's trainer battle reduced money from 17320 to 15808 and warped to Cerulean Center. The TH-only setting now selects the native cannot-run script and returns to action selection, preserving money, HP, bag, flags, location and callback. Actual defeat behavior is unchanged.
 - Focused compilation uses the native runner and root TH suites; full upstream sources remain required at integration. No complete ROM was built for this config-only task.
+
+## Task 23 SELECT native checkpoint
+
+- Feature `423d35337626b0ac574bcf984a1e2694142742aa`; compiled/test `c3c04b50ca34d65900f4f3827b0612d8c97c9076`.
+- [CI run 36508937808](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/36508937808): six new native groups pass, including repeated swaps, PP/PP Ups, zero PP, duplicate moves, trailing-empty-slot bounds, doubles, transformed party protection, cancel, native entry restrictions and slot-dependent effects. The old implementation fails SELECT entry, Mimic, Encore and Last Resort assertions; cancellation/restriction controls pass before and after.
+- Related upstream suites pass: Encore 18, Disable 1, Mimic 3, Last Resort 11, Choice Band/Specs/Scarf 3 each (42 total), no selected skips. These are focused TH-mode battle tests; they are not the final upstream-game build matrix.
+- Exact old-ROM SELECT captures and deterministic reproduction are retained. Repaired visual/cursor/description/attack-selection and end-of-battle battery Save/Continue acceptance remain pending the grouped battle/capture ROM gate. Task 23 is not fully accepted yet.
