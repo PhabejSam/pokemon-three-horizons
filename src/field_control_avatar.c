@@ -491,6 +491,12 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 
     if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
     {
+#if THREE_HORIZONS
+        extern const u8 TH_EventScript_KantoTV[];
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_HOME_2F)
+            && gMapHeader.mapLayout->isFrlg)
+            return TH_EventScript_KantoTV;
+#endif
         if (IS_FRLG)
             return EventScript_PlayerFacingTVScreen;
         else

@@ -21,6 +21,14 @@ TH_EventScript_TV::
     msgbox TH_Text_TV, MSGBOX_SIGN
     end
 
+TH_EventScript_KantoTV::
+    msgbox TH_Text_KantoTV, MSGBOX_SIGN
+    end
+
+TH_Text_KantoTV:
+    .string "There's a POKéMON on TV!\n"
+    .string "It looks like it's having fun.$"
+
 TH_EventScript_HomePC::
     lockall
     copyvar VAR_0x8009, VAR_TH_TRAINING_KIT_MASK

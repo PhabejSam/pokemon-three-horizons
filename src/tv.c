@@ -43,6 +43,7 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/lilycove_lady.h"
+#include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"
@@ -784,6 +785,13 @@ static void SetTVMetatilesOnMap(int width, int height, u16 metatileId)
 {
     int x;
     int y;
+
+#if THREE_HORIZONS
+    // Imported Kanto layouts do not use Emerald's animated TV tile IDs.
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_HOME_2F)
+        && gMapHeader.mapLayout->isFrlg)
+        return;
+#endif
 
     for (y = 0; y < height; y++)
     {
