@@ -1,6 +1,6 @@
 {
   "mode": "focused",
-  "native_filter": "test/three_horizons_flash.c",
-  "host_filter": "test_playtest13_rock_tunnel.py",
+  "native_filter": "test/three_horizons_research.c",
+  "host_filter": "test_playtest13_lavender.py",
   "visual_gate": "routes"
 }

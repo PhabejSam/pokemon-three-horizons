@@ -158,3 +158,19 @@ TH_Route1_MapScripts::
 
     .include "data/scripts/three_horizons/chapter13_rock_tunnel.inc"
     .include "data/scripts/three_horizons/chapter13_centers.inc"
+
+    .include "data/maps/TH13_LavenderTown/scripts.inc"
+
+    .include "data/maps/TH13_LavenderTown_PokemonCenter_1F/scripts.inc"
+
+    .include "data/maps/TH13_LavenderTown_Mart/scripts.inc"
+
+    .include "data/maps/TH13_LavenderTown_House1/scripts.inc"
+
+    .include "data/maps/TH13_LavenderTown_House2/scripts.inc"
+
+    .include "data/maps/TH13_LavenderTown_VolunteerPokemonHouse/scripts.inc"
+
+    .include "data/maps/TH13_LavenderTown_PokemonCenter_2F/scripts.inc"
+
+    .include "data/scripts/three_horizons/chapter13_lavender.inc"

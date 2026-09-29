@@ -125,6 +125,55 @@
       "id": "MAP_TH13_ROUTE10_POKEMON_CENTER_2F",
       "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
       "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "LavenderTown_Frlg",
+      "name": "TH13_LavenderTown",
+      "id": "MAP_TH13_LAVENDER_TOWN",
+      "layout": "LAYOUT_LAVENDER_TOWN",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_PokemonCenter_1F_Frlg",
+      "name": "TH13_LavenderTown_PokemonCenter_1F",
+      "id": "MAP_TH13_LAVENDER_TOWN_POKEMON_CENTER_1F",
+      "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_Mart_Frlg",
+      "name": "TH13_LavenderTown_Mart",
+      "id": "MAP_TH13_LAVENDER_TOWN_MART",
+      "layout": "LAYOUT_MART_FRLG",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_House1_Frlg",
+      "name": "TH13_LavenderTown_House1",
+      "id": "MAP_TH13_LAVENDER_TOWN_HOUSE1",
+      "layout": "LAYOUT_HOUSE5_FRLG",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_House2_Frlg",
+      "name": "TH13_LavenderTown_House2",
+      "id": "MAP_TH13_LAVENDER_TOWN_HOUSE2",
+      "layout": "LAYOUT_HOUSE5_FRLG",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_VolunteerPokemonHouse_Frlg",
+      "name": "TH13_LavenderTown_VolunteerPokemonHouse",
+      "id": "MAP_TH13_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE",
+      "layout": "LAYOUT_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_PokemonCenter_2F_Frlg",
+      "name": "TH13_LavenderTown_PokemonCenter_2F",
+      "id": "MAP_TH13_LAVENDER_TOWN_POKEMON_CENTER_2F",
+      "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG",
+      "script_owner": "chapter13_centers.inc"
     }
   ]
 }

@@ -158,7 +158,7 @@ TH13_Route9_FirstText:
 TH13_Route9_RepeatText:
     .string "MAREEP and NIDORAN exchange\nsoft cries, then return to grazing.$"
 TH13_Route9_StudentText:
-    .string "I'm checking OAK's encounter data.\nThese numbers don't match the usual\lseasonal distributions.\pMAREEP normally live in JOHTO.\nI'll record what I see before\ltrying to explain it.$"
+    .string "I'm checking OAK's encounter data.\pThese numbers don't match the usual\nseasonal distributions.\pMAREEP normally live in JOHTO.\pI'll record what I see before\ntrying to explain it.$"
 
 TH13_RockTunnel_Pair::
     lockall

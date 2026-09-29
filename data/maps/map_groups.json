@@ -1267,6 +1267,13 @@
     "TH13_CeruleanCenter2F",
     "TH13_Route4Center2F",
     "TH13_VermilionCenter2F",
-    "TH13_Route10_PokemonCenter_2F"
+    "TH13_Route10_PokemonCenter_2F",
+    "TH13_LavenderTown",
+    "TH13_LavenderTown_PokemonCenter_1F",
+    "TH13_LavenderTown_Mart",
+    "TH13_LavenderTown_House1",
+    "TH13_LavenderTown_House2",
+    "TH13_LavenderTown_VolunteerPokemonHouse",
+    "TH13_LavenderTown_PokemonCenter_2F"
   ]
 }

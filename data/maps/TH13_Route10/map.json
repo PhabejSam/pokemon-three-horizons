@@ -19,6 +19,11 @@
       "map": "MAP_TH13_ROUTE9",
       "offset": 0,
       "direction": "left"
+    },
+    {
+      "map": "MAP_TH13_LAVENDER_TOWN",
+      "offset": 0,
+      "direction": "down"
     }
   ],
   "object_events": [

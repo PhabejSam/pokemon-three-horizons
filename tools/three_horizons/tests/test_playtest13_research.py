@@ -20,6 +20,7 @@ class Scene:
         self.gear, self.answer = gear, answer
         self.vars, self.flags, self.entries, self.photos = {}, set(), set(), set()
         self.messages, self.flashes, self.completed = [], 0, []
+        self.removed, self.queued = [], []
 
     def value(self, key):
         if key in ('NO', 'FALSE'): return 0
@@ -50,6 +51,7 @@ class Scene:
                     pc = self.labels[args[1]]
             elif op == 'setvar': self.vars[args[0]] = self.value(args[1])
             elif op == 'setflag': self.flags.add(args[0])
+            elif op == 'removeobject': self.removed.append(args[0])
             elif op == 'getplayerxy':
                 self.vars[args[0]], self.vars[args[1]] = 0, 0
             elif op == 'msgbox':
@@ -65,6 +67,7 @@ class Scene:
                     self.photos.add(value)
                 elif args[0] == 'TH_ScriptResearchCompleteCall':
                     self.completed.append((value, len(self.messages)))
+                elif args[0] == 'TH_ScriptResearchQueueCall': self.queued.append(value)
                 elif args[0] != 'TH_RefreshFollower': raise AssertionError(line)
             elif op == 'fadescreen' and args[0] == 'FADE_TO_WHITE': self.flashes += 1
             elif op in ('lock', 'lockall', 'release', 'releaseall', 'closemessage', 'hidefollower',
