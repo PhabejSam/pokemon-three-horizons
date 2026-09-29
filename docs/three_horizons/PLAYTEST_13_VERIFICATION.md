@@ -114,9 +114,20 @@ The exact assignments below are existing unused Emerald event slots. They are no
 - Native initial RED checkpoint: `7b80ad6bc87546d1b79f43587f314f29d4e0ba50`; two expected clock-version failures observed.
 - Expanded negative controls: all four state regressions failed against exact baseline `f49d3bd17a604d4593ad589b330018f5e911ecbc` in run 36501183839.
 - Task 1 GREEN: feature `c862c43e2053c634735f3273fc5a52ab69fe00aa`; compiled/test `2bad584adb4570df243a6c20dff6f784c9a021ad`; [CI evidence](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/36501183839). Four host ownership/index contracts, four new native state tests (nine starter cases and six versions), four legacy checks and four save-layout checks passed. Two unrelated native discovery ASSUME exclusions in `change_type_on_item.c` are retained in the log; no selected test failed.
-- Task 18 baseline: exact P12 ROM/ELF, copied synthetic post-Surge save, 18 mGBA cases (Viridian/Route 2/Vermilion × compatible/incompatible/off follower × interaction/party-menu Cut). The correct local tree ID survives animation and is removed; Viridian and Route 2 respawn on camera refresh with flag ID 0, whereas Vermilion's native temporary hide flag prevents respawn. A one-tile step reproduces the player overlapping the reappeared tree. Repair and after evidence pending.
+- Task 18 baseline: exact P12 ROM/ELF, copied synthetic post-Surge save, 18 mGBA cases (Viridian/Route 2/Vermilion × compatible/incompatible/off follower × interaction/party-menu Cut). The correct local tree ID survives animation and is removed; Viridian and Route 2 respawn on camera refresh with flag ID 0, whereas Vermilion's native temporary hide flag prevents respawn. A one-tile step reproduces the player overlapping the reappeared tree. Cycling repeats the same defect. Correcting the shared template owner and current-version Continue removes both cases.
 - Documentation-index failure was corrected by adding the approved plan and Bible to `docs/SUMMARY.md`.
 
 ## Integration and acceptance
 
 Pending: full project regression, final save-layout recheck, three upstream game builds, personal-save migration/Continue, mGBA visual acceptance, release packaging and user RG40XX H acceptance. A focused run does not substitute for these gates.
+
+## Task 18 Cut verification checkpoint
+
+- Feature: `78b476ba8095a4845f42ba0285dcd31acce23b2e`; compiled/test: `37ac9acb99e5a928760dcc62e566bfbce3eff709`.
+- ROM SHA-256: `4ae63001d15ce23140b4e16878575b542afe415211878ba4e5eb56439fda7063` (development verification candidate, not the final Playtest 13 release).
+- [CI run 36503585012](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/36503585012): three native regressions fail against the preceding object lifecycle and pass with the repair; three existing field-move tests and three host ownership/capacity checks pass. Two unrelated discovery ASSUME exclusions remain visible.
+- Exact-ROM mGBA core evidence: 36 cases, three locations × two Cut entry methods × three follower modes × walking/cycling. Every trace observes the original target removed, and no target respawns on camera refresh. Six additional Gyarados walking/cycling cases traverse the opened tile successfully.
+- All three locations pass native party-menu lead switching after Cut, genuine door exit/re-entry regrowth and repeat Cut, and a complete in-game Save followed by cold Continue on the cleared tile. A P12 battery save on Vermilion's cleared tree tile also migrates without an overlapping tree.
+- Reproduction inputs use a copied post-Surge fixture and task-owned QA party/position setup. No emulator state is transferred between ROM revisions; battery Continue creates each revision's base state. This is focused emulator evidence, not whole-chapter desktop or RG40XX H acceptance.
+- Local reproducible captures, traces and harness: `outputs/playtest-13-development/task18-cut-evidence.zip` in the task workspace. CI artifact `11007126589` contains the exact candidate ROM/ELF and native logs.
+- Upstream code paths remain guarded out of this TH-only repair; complete Emerald/FireRed/LeafGreen compilation is reserved for the approved integration gate.
