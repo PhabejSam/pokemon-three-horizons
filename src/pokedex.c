@@ -3895,6 +3895,7 @@ static void Task_SwitchScreensFromSizeScreen(u8 taskId)
 #undef tBgLoaded
 #undef tSkipCry
 #undef tMonSpriteId
+#undef tCaughtInputReady
 #undef tTrainerSpriteId
 
 static void LoadScreenSelectBarMain(u16 unused)
@@ -3966,6 +3967,7 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 #define tSpecies        data[1]
 #define tPalTimer      data[2]
 #define tMonSpriteId   data[3]
+#define tCaughtInputReady data[4]
 #define tIsShiny       data[13]
 #define tPersonalityLo 14
 #define tPersonalityHi 15
@@ -3980,6 +3982,9 @@ u8 DisplayCaughtMonDexPage(enum Species species, bool32 isShiny, u32 personality
 
     gTasks[taskId].tState = 0;
     gTasks[taskId].tSpecies = species;
+#if THREE_HORIZONS
+    gTasks[taskId].tCaughtInputReady = FALSE;
+#endif
     gTasks[taskId].tIsShiny = isShiny;
     gTasks[taskId].data[tPersonalityLo] = personality;
     gTasks[taskId].data[tPersonalityHi] = personality >> 16;
@@ -4082,7 +4087,24 @@ static void Task_DisplayCaughtMonDexPage(u8 taskId)
 
 void Task_HandleCaughtMonPageInput(u8 taskId)
 {
-    if (JOY_NEW(A_BUTTON | B_BUTTON))
+    bool32 acceptInput = JOY_NEW(A_BUTTON | B_BUTTON);
+#if THREE_HORIZONS
+    // The cry owner also covers the interval before its audio channel starts.
+    // Keep the entry visible until presentation completes, then require a
+    // release and fresh press so repeated A cannot carry through the entry.
+    if (FuncIsActiveTask(Task_DuckBGMForPokemonCry) || IsCryPlaying())
+    {
+        gTasks[taskId].tCaughtInputReady = FALSE;
+        acceptInput = FALSE;
+    }
+    else if (!gTasks[taskId].tCaughtInputReady)
+    {
+        if (!JOY_HELD(A_BUTTON | B_BUTTON) && !JOY_NEW(A_BUTTON | B_BUTTON))
+            gTasks[taskId].tCaughtInputReady = TRUE;
+        acceptInput = FALSE;
+    }
+#endif
+    if (acceptInput)
     {
         BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
         gSprites[gTasks[taskId].tMonSpriteId].callback = SpriteCB_SlideCaughtMonToCenter;
@@ -4150,6 +4172,7 @@ static void SpriteCB_SlideCaughtMonToCenter(struct Sprite *sprite)
 #undef tSpecies
 #undef tPalTimer
 #undef tMonSpriteId
+#undef tCaughtInputReady
 #undef tOtIdLo
 #undef tOtIdHi
 #undef tPersonalityLo

@@ -342,7 +342,7 @@ static void CatchProbeFrame(const u8 *command, u16 newKeys, u16 heldKeys)
 
 static u8 InitDexProbe(enum Species species)
 {
-    Test_MgbaPrintf("Dex offsets seen=%u caught=%u bytes=%u", (u32)__builtin_offsetof(struct SaveBlock1, dexSeen), (u32)__builtin_offsetof(struct SaveBlock1, dexCaught), (u32)NUM_DEX_FLAG_BYTES);
+    Test_MgbaPrintf("Dex offsets seen=%d caught=%d bytes=%d", (u32)__builtin_offsetof(struct SaveBlock1, dexSeen), (u32)__builtin_offsetof(struct SaveBlock1, dexCaught), (u32)NUM_DEX_FLAG_BYTES);
     InitMoveProbe(0, FALSE, FALSE);
     CreateMonWithIVs(GetBattlerMon(1), species, 5, 9876, OTID_STRUCT_PLAYER_ID, 12);
     PokemonToBattleMon(GetBattlerMon(1), &gBattleMons[1]);
@@ -384,7 +384,7 @@ TEST("Three Horizons playtest13 first catch finishes Dex before nickname")
     u8 dexTask = InitDexProbe(species);
     u32 frame;
     // A new input during the actual cry must not skip the presentation.
-    for (frame = 0; frame < 1200 && IsCryPlaying(); frame++)
+    for (frame = 0; frame < 1200 && FuncIsActiveTask(Task_DuckBGMForPokemonCry); frame++)
     {
         u16 key = rapid && !(frame % 2) ? A_BUTTON : 0;
         CatchProbeFrame(sDexProbeCommand, key, key);
@@ -421,7 +421,7 @@ TEST("Three Horizons playtest13 first catch requires fresh input after presentat
     MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
     u8 dexTask = InitDexProbe(SPECIES_CATERPIE);
     u32 frame;
-    for (frame = 0; frame < 1200 && IsCryPlaying(); frame++)
+    for (frame = 0; frame < 1200 && FuncIsActiveTask(Task_DuckBGMForPokemonCry); frame++)
         CatchProbeFrame(sDexProbeCommand, 0, A_BUTTON);
     EXPECT_LT(frame, 1200);
     // Even a new press on the completion boundary must wait for a release.
@@ -517,6 +517,60 @@ TEST("Three Horizons playtest13 first catch nickname accepts max name with party
     GetMonData(GetBattlerMon(1), MON_DATA_NICKNAME, nickname);
     EXPECT_EQ(StringCompare(nickname, COMPOUND_STRING("ABCDEFGHIJKL")), 0);
     EXPECT_EQ(CalculatePlayerPartyCount(), fullParty ? PARTY_SIZE : 1);
+    FreeMoveProbe();
+    gMain.callback1 = old1;
+    SetMainCallback2(old2);
+}
+
+TEST("Three Horizons playtest13 first catch editor returns before registering")
+{
+    bool32 confirm;
+    PARAMETRIZE { confirm = FALSE; }
+    PARAMETRIZE { confirm = TRUE; }
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    InitMoveProbe(0, FALSE, FALSE);
+    CreateMonWithIVs(GetBattlerMon(1), SPECIES_ARTICUNO, 35, 9876, OTID_STRUCT_PLAYER_ID, 12);
+    PokemonToBattleMon(GetBattlerMon(1), &gBattleMons[1]);
+    gBattleScripting.monCaught = TRUE;
+    gBattlerTarget = 1;
+    u32 dex = SpeciesToNationalPokedexNum(SPECIES_ARTICUNO), offset = (dex - 1) / 8;
+    u8 oldCaught = gSaveBlock1Ptr->dexCaught[offset];
+    u8 oldSeen = gSaveBlock1Ptr->dexSeen[offset];
+    gSaveBlock1Ptr->dexCaught[offset] &= ~(1 << ((dex - 1) % 8));
+    u32 before = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+    struct Pokemon original = *GetBattlerMon(1);
+    u8 command[6] = {B_SCR_OP_TRYSETCAUGHTMONDEXFLAGS};
+    const u8 *repeat = sNicknameProbeCommand;
+    memcpy(command + 1, &repeat, sizeof(repeat));
+    memset(gBattleCommunication, 0, sizeof(gBattleCommunication));
+    SetMainCallback2(BattleMainCB2);
+    SetVBlankCallback(VBlankCB_Battle);
+    gBattlescriptCurrInstr = command;
+    u32 frame;
+    for (frame = 0; frame < 1200; frame++)
+    {
+        CatchProbeFrame(command, 0, 0);
+        EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_CAUGHT), before);
+        if (gBattleCommunication[0] == 2 && !gPaletteFade.active)
+            break;
+    }
+    EXPECT_LT(frame, 1200);
+    EXPECT(gMain.callback2 != BattleMainCB2);
+    EXPECT(gBattlescriptCurrInstr == command);
+    // Confirm defaults or cancel: both must return to the battle before registration.
+    CatchProbeFrame(command, confirm ? A_BUTTON : B_BUTTON, confirm ? A_BUTTON : B_BUTTON);
+    for (frame = 0; frame < 1200 && gBattlescriptCurrInstr == command; frame++)
+        CatchProbeFrame(command, 0, 0);
+    EXPECT_LT(frame, 1200);
+    EXPECT(gMain.callback2 == BattleMainCB2);
+    EXPECT(!gPaletteFade.active);
+    EXPECT(gBattlescriptCurrInstr == command + 5);
+    EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_CAUGHT), before + 1);
+    EXPECT_EQ(GetMonData(GetBattlerMon(1), MON_DATA_PERSONALITY), GetMonData(&original, MON_DATA_PERSONALITY));
+    EXPECT_EQ(GetMonData(GetBattlerMon(1), MON_DATA_SPECIES), SPECIES_ARTICUNO);
+    EXPECT_EQ(GetMonData(GetBattlerMon(1), MON_DATA_LEVEL), 35);
+    gSaveBlock1Ptr->dexCaught[offset] = oldCaught;
+    gSaveBlock1Ptr->dexSeen[offset] = oldSeen;
     FreeMoveProbe();
     gMain.callback1 = old1;
     SetMainCallback2(old2);
