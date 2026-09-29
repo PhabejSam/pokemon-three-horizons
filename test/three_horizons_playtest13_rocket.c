@@ -26,7 +26,7 @@ TEST("Three Horizons playtest13 Rocket usable party selects approved format")
     memcpy(saved, gPlayerParty, sizeof(saved));
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
-        CreateMon(&gPlayerParty[i], SPECIES_PIKACHU, 20, 0, OTID_STRUCT_PLAYER_ID);
+        CreateMonWithIVs(&gPlayerParty[i], SPECIES_PIKACHU, 20, 0, OTID_STRUCT_PLAYER_ID, 31);
         if (i >= usable)
         {
             if (i & 1)
