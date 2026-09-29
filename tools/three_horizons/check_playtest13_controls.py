@@ -7,7 +7,8 @@ CONTROLS = (
     ('cut', 'src/overworld.c', (
         ('    PrepareThreeHorizonsCutTemplates();', '    ; // P12: no temporary Cut receipts'),
     ), 'Three Horizons playtest13 Cut', (
-        'Cut removal stays visually collision consistent',
+        # The overlap guard independently protects the player's current tile.
+        # This mutant must fail the adjacent-tile refresh owner instead.
         'Cut target remains removed while another tree is unaffected',
     )),
     ('version', 'src/three_horizons_clock.c', (
