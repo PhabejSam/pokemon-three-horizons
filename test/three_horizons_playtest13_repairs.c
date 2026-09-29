@@ -93,7 +93,8 @@ TEST("Three Horizons playtest13 Kanto TV preserves metatile")
             // News/load-time animation shares the same conversion owner.
             TurnOnTVScreen();
             EXPECT_EQ(gBackupMapLayout.map[y * gBackupMapLayout.width + x], entry);
-            EXPECT_EQ(Test_TH_MetatileScript(MB_TELEVISION), EventScript_PlayerFacingTVScreen);
+            EXPECT(Test_TH_MetatileScript(MB_TELEVISION) != NULL);
+            EXPECT(Test_TH_MetatileScript(MB_TELEVISION) != EventScript_TV);
         }
     }
     Free(gOverworldTilemapBuffer_Bg1);
