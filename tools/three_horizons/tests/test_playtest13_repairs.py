@@ -8,6 +8,25 @@ ROOT = Path(__file__).resolve().parents[3]
 
 
 class Playtest13Repairs(unittest.TestCase):
+    def test_saffron_guards_cover_walkable_lanes_and_safe_retreats(self):
+        for name, retreat_y, allowed_map in (
+                ('TH12_Route5_SouthEntrance', 4, 'MAP_TH12_ROUTE5'),
+                ('TH12_Route6_NorthEntrance', 6, 'MAP_TH12_ROUTE6')):
+            data = map_data(name)
+            width, _, grid = tiles(name)
+            occupied = {(e['x'], e['y']) for e in data['object_events']}
+            # Native guardhouse corridor; counter/background tiles elsewhere
+            # cannot be classified from their collision bits alone.
+            lanes = [3, 4, 5]
+            self.assertEqual(sorted((e['x'], e['y']) for e in data['coord_events']),
+                             [(x, 5) for x in lanes])
+            for x in lanes:
+                self.assertEqual(grid[5 * width + x] & 0xC00, 0)
+                self.assertEqual(grid[retreat_y * width + x] & 0xC00, 0)
+                self.assertNotIn((x, retreat_y), occupied)
+            self.assertIn(allowed_map, [w['dest_map'] for w in data['warp_events']])
+            self.assertFalse(any(w['dest_map'] == 'MAP_SAFFRON_CITY' for w in data['warp_events']))
+
     def test_daycare_warps_are_reciprocal(self):
         outside = map_data('TH12_Route5')
         doorway = outside['warp_events'][1]
