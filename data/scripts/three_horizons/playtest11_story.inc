@@ -38,6 +38,7 @@ TH_RocketDuoReady:
     applymovement LOCALID_TH_JAMES, Common_Movement_FacePlayer
     applymovement LOCALID_TH_ROCKET_MEOWTH, Common_Movement_FacePlayer
     waitmovement 0
+TH12_RocketSelectFormat::
     setvar VAR_0x8004, PARTY_SIZE
     specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
     goto_if_lt VAR_RESULT, 2, TH12_RocketSingles
@@ -81,7 +82,7 @@ TH12_RocketBlastOff:
     delay_4
     set_invisible
     step_end
-TH12_RocketSingleIntro:
+TH12_RocketSingleIntro::
     .string "JESSIE: Only one partner ready?\nThen you face us one at a time!\pMEOWTH: No breaks between battles!$"
 TH12_RocketSingleSecond:
     .string "JAMES: My turn!\nKOFFING, let's finish this!$"
@@ -93,7 +94,7 @@ TH_RocketDuoMeowth::
     end
 TH_RocketDuoWaiting:
     .string "JESSIE: That researcher is guarding\nsomething valuable.\pJAMES: We are simply waiting for\nan opportunity!$"
-TH_RocketDuoIntro:
+TH_RocketDuoIntro::
     .string "JESSIE: Hold it! Those fossils\nwould make quite a prize!\pJAMES: Two of us, two of your\nPOKéMON. A double battle!\pMEOWTH: And I will supervise!\nWhat? Never heard a MEOWTH talk?$"
 TH_JessieDefeat:
     .string "Our perfect plan fell apart!$"

@@ -24,7 +24,8 @@ class Playtest11Story(unittest.TestCase):
     def test_researcher_cannot_be_bypassed_on_either_stair(self):
         m = json.loads((ROOT / 'data/maps/TH_MtMoonB2F/map.json').read_text())
         guarded = {(e['x'], e['y']) for e in m['coord_events'] if e['script'] == 'TH_FossilResearcherTrigger'}
-        self.assertTrue({(13, 12), (14, 12)} <= guarded)
+        # P13 stages both stair lanes on the open floor above the steps.
+        self.assertTrue({(13, 10), (14, 10)} <= guarded)
 
     def test_duo_has_single_fallback_and_requires_both_wins(self):
         s = (ROOT / 'data/scripts/three_horizons/playtest11_story.inc').read_text()
