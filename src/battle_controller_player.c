@@ -993,6 +993,30 @@ static u32 UNUSED HandleMoveInputUnused(enum BattlerId battler)
     return var;
 }
 
+#if THREE_HORIZONS
+static u32 SwapMoveSlotBits(u32 bits, u32 first, u32 second)
+{
+    if (((bits >> first) ^ (bits >> second)) & 1)
+        bits ^= (1u << first) | (1u << second);
+    return bits;
+}
+
+static void SwapMoveSlotEffects(enum BattlerId battler, u32 first, u32 second)
+{
+    struct Volatiles *volatiles = &gBattleMons[battler].volatiles;
+    volatiles->mimickedMoves = SwapMoveSlotBits(volatiles->mimickedMoves, first, second);
+    volatiles->usedMoves = SwapMoveSlotBits(volatiles->usedMoves, first, second);
+    if (volatiles->encoredMove != MOVE_NONE)
+    {
+        if (volatiles->encoredMovePos == first)
+            volatiles->encoredMovePos = second;
+        else if (volatiles->encoredMovePos == second)
+            volatiles->encoredMovePos = first;
+    }
+    // Disable and Choice track a move ID, not a slot, and remain unchanged.
+}
+#endif
+
 void HandleMoveSwitching(enum BattlerId battler)
 {
     u8 perMovePPBonuses[MAX_MON_MOVES];
@@ -1022,11 +1046,15 @@ void HandleMoveSwitching(enum BattlerId battler)
             moveInfo->maxPP[gMoveSelectionCursor[battler]] = moveInfo->maxPP[gMultiUsePlayerCursor];
             moveInfo->maxPP[gMultiUsePlayerCursor] = i;
 
+#if THREE_HORIZONS
+            SwapMoveSlotEffects(battler, gMoveSelectionCursor[battler], gMultiUsePlayerCursor);
+#else
             if (gBattleMons[battler].volatiles.mimickedMoves & (1u << gMoveSelectionCursor[battler]))
             {
                 gBattleMons[battler].volatiles.mimickedMoves &= ~(1u << gMoveSelectionCursor[battler]);
                 gBattleMons[battler].volatiles.mimickedMoves |= 1u << gMultiUsePlayerCursor;
             }
+#endif
 
             MoveSelectionDisplayMoveNames(battler);
 

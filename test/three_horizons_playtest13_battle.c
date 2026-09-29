@@ -251,6 +251,15 @@ TEST("Three Horizons playtest13 SELECT swap preserves disabled and choice slots"
     EXPECT_EQ((u32)gBattleMons[0].volatiles.encoredMove, MOVE_GROWL);
     EXPECT_EQ((u32)gBattleMons[0].volatiles.encoredMovePos, 0);
     EXPECT_EQ((u32)gBattleMons[0].volatiles.usedMoves, (1 << 0) | (1 << 2));
+    gMoveSelectionCursor[0] = 0;
+    gMultiUsePlayerCursor = 1;
+    gBattlerControllerFuncs[0] = HandleMoveSwitching;
+    MoveProbeKey(0, A_BUTTON);
+    EXPECT_EQ((u32)gBattleMons[0].volatiles.mimickedMoves, 1 << 1);
+    EXPECT_EQ((u32)gBattleMons[0].volatiles.encoredMovePos, 1);
+    EXPECT_EQ((u32)gBattleMons[0].volatiles.usedMoves, (1 << 1) | (1 << 2));
+    EXPECT_EQ((u32)gBattleMons[0].volatiles.disabledMove, MOVE_GROWL);
+    EXPECT_EQ(gBattleStruct->choicedMove[0], MOVE_TACKLE);
     FreeMoveProbe();
 }
 
