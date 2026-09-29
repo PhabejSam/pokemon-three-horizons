@@ -52,6 +52,13 @@ TH_Text_JourneyEdge:
 
 TH_Trainer_RICK::
     trainerbattle_single TRAINER_TH_RICK, TH_Text_RICKIntro, TH_Text_RICKDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer_RICK_Rematch
+    msgbox TH_Text_RICKAfter, MSGBOX_AUTOCLOSE
+    end
+
+TH_Trainer_RICK_Rematch::
+    trainerbattle_rematch TRAINER_TH_RICK, TH_Text_RICKIntro, TH_Text_RICKDefeat
     msgbox TH_Text_RICKAfter, MSGBOX_AUTOCLOSE
     end
 
@@ -60,6 +67,13 @@ TH_Text_RICKIntro:
 
 TH_Trainer_DOUG::
     trainerbattle_single TRAINER_TH_DOUG, TH_Text_DOUGIntro, TH_Text_DOUGDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer_DOUG_Rematch
+    msgbox TH_Text_DOUGAfter, MSGBOX_AUTOCLOSE
+    end
+
+TH_Trainer_DOUG_Rematch::
+    trainerbattle_rematch TRAINER_TH_DOUG, TH_Text_DOUGIntro, TH_Text_DOUGDefeat
     msgbox TH_Text_DOUGAfter, MSGBOX_AUTOCLOSE
     end
 
@@ -68,6 +82,13 @@ TH_Text_DOUGIntro:
 
 TH_Trainer_SAMMY::
     trainerbattle_single TRAINER_TH_SAMMY, TH_Text_SAMMYIntro, TH_Text_SAMMYDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer_SAMMY_Rematch
+    msgbox TH_Text_SAMMYAfter, MSGBOX_AUTOCLOSE
+    end
+
+TH_Trainer_SAMMY_Rematch::
+    trainerbattle_rematch TRAINER_TH_SAMMY, TH_Text_SAMMYIntro, TH_Text_SAMMYDefeat
     msgbox TH_Text_SAMMYAfter, MSGBOX_AUTOCLOSE
     end
 
@@ -76,6 +97,13 @@ TH_Text_SAMMYIntro:
 
 TH_Trainer_ANTHONY::
     trainerbattle_single TRAINER_TH_ANTHONY, TH_Text_ANTHONYIntro, TH_Text_ANTHONYDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer_ANTHONY_Rematch
+    msgbox TH_Text_ANTHONYAfter, MSGBOX_AUTOCLOSE
+    end
+
+TH_Trainer_ANTHONY_Rematch::
+    trainerbattle_rematch TRAINER_TH_ANTHONY, TH_Text_ANTHONYIntro, TH_Text_ANTHONYDefeat
     msgbox TH_Text_ANTHONYAfter, MSGBOX_AUTOCLOSE
     end
 
@@ -84,6 +112,13 @@ TH_Text_ANTHONYIntro:
 
 TH_Trainer_CHARLIE::
     trainerbattle_single TRAINER_TH_CHARLIE, TH_Text_CHARLIEIntro, TH_Text_CHARLIEDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer_CHARLIE_Rematch
+    msgbox TH_Text_CHARLIEAfter, MSGBOX_AUTOCLOSE
+    end
+
+TH_Trainer_CHARLIE_Rematch::
+    trainerbattle_rematch TRAINER_TH_CHARLIE, TH_Text_CHARLIEIntro, TH_Text_CHARLIEDefeat
     msgbox TH_Text_CHARLIEAfter, MSGBOX_AUTOCLOSE
     end
 
@@ -92,6 +127,13 @@ TH_Text_CHARLIEIntro:
 
 TH_Trainer_LIAM::
     trainerbattle_single TRAINER_TH_LIAM, TH_Text_LIAMIntro, TH_Text_LIAMDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer_LIAM_Rematch
+    msgbox TH_Text_LIAMAfter, MSGBOX_AUTOCLOSE
+    end
+
+TH_Trainer_LIAM_Rematch::
+    trainerbattle_rematch TRAINER_TH_LIAM, TH_Text_LIAMIntro, TH_Text_LIAMDefeat
     msgbox TH_Text_LIAMAfter, MSGBOX_AUTOCLOSE
     end
 

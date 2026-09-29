@@ -12,8 +12,12 @@ TH_GymLuis_Approach::
     setvar VAR_LAST_TALKED, LOCALID_TH_CERULEANGYM_0
     goto TH_GymLuis_Battle
 TH_GymLuis_Talk::
+    vsseeker_rematchid TRAINER_TH9_SWIMMER_MALE_LUIS
     lockall
     faceplayer
+    setvar VAR_0x8004, TRAINER_TH9_SWIMMER_MALE_LUIS
+    callnative TH13_ScriptCheckRematch
+    goto_if_eq VAR_RESULT, TRUE, TH_GymLuis_Rematch
     goto_if_defeated TRAINER_TH9_SWIMMER_MALE_LUIS, TH_GymLuis_After
 TH_GymLuis_Battle:
     trainerbattle_lavaridge LOCALID_TH_CERULEANGYM_0, TRAINER_TH9_SWIMMER_MALE_LUIS, TH_Trainer9_SWIMMER_MALE_LUIS_Intro, TH_Trainer9_SWIMMER_MALE_LUIS_Defeat, TH_GymLuis_After
@@ -26,6 +30,11 @@ TH_GymLuis_After:
 TH_GymLuis_SwimLeft:
     walk_left
     step_end
+TH_GymLuis_Rematch::
+    trainerbattle_rematch TRAINER_TH9_SWIMMER_MALE_LUIS, TH_Trainer9_SWIMMER_MALE_LUIS_Intro, TH_Trainer9_SWIMMER_MALE_LUIS_Defeat
+    msgbox TH_Trainer9_SWIMMER_MALE_LUIS_After, MSGBOX_DEFAULT
+    releaseall
+    end
 TH_Playtest11_FaceRight:
     face_right
     step_end

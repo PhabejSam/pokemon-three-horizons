@@ -1,7 +1,15 @@
 TH_Trainer9_LASS_ROBIN::
     trainerbattle_single TRAINER_TH9_LASS_ROBIN, TH_Trainer9_LASS_ROBIN_Intro, TH_Trainer9_LASS_ROBIN_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_LASS_ROBIN_Rematch
     msgbox TH_Trainer9_LASS_ROBIN_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_LASS_ROBIN_Rematch::
+    trainerbattle_rematch TRAINER_TH9_LASS_ROBIN, TH_Trainer9_LASS_ROBIN_Intro, TH_Trainer9_LASS_ROBIN_Defeat
+    msgbox TH_Trainer9_LASS_ROBIN_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_LASS_ROBIN_Intro:
     .string "My JIGGLYPUFF loves an audience.\nLet us put on a show!$"
 
@@ -13,8 +21,16 @@ TH_Trainer9_LASS_ROBIN_After:
 
 TH_Trainer9_BUG_CATCHER_JAMES::
     trainerbattle_single TRAINER_TH9_BUG_CATCHER_JAMES, TH_Trainer9_BUG_CATCHER_JAMES_Intro, TH_Trainer9_BUG_CATCHER_JAMES_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_BUG_CATCHER_JAMES_Rematch
     msgbox TH_Trainer9_BUG_CATCHER_JAMES_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_BUG_CATCHER_JAMES_Rematch::
+    trainerbattle_rematch TRAINER_TH9_BUG_CATCHER_JAMES, TH_Trainer9_BUG_CATCHER_JAMES_Intro, TH_Trainer9_BUG_CATCHER_JAMES_Defeat
+    msgbox TH_Trainer9_BUG_CATCHER_JAMES_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_BUG_CATCHER_JAMES_Intro:
     .string "Bugs grow stronger surprisingly\nfast. Watch my team!$"
 
@@ -26,8 +42,16 @@ TH_Trainer9_BUG_CATCHER_JAMES_After:
 
 TH_Trainer9_LASS_SALLY::
     trainerbattle_single TRAINER_TH9_LASS_SALLY, TH_Trainer9_LASS_SALLY_Intro, TH_Trainer9_LASS_SALLY_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_LASS_SALLY_Rematch
     msgbox TH_Trainer9_LASS_SALLY_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_LASS_SALLY_Rematch::
+    trainerbattle_rematch TRAINER_TH9_LASS_SALLY, TH_Trainer9_LASS_SALLY_Intro, TH_Trainer9_LASS_SALLY_Defeat
+    msgbox TH_Trainer9_LASS_SALLY_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_LASS_SALLY_Intro:
     .string "I train on these sunny rocks.\nCare to join me for a battle?$"
 
@@ -39,8 +63,16 @@ TH_Trainer9_LASS_SALLY_After:
 
 TH_Trainer9_BUG_CATCHER_GREG::
     trainerbattle_single TRAINER_TH9_BUG_CATCHER_GREG, TH_Trainer9_BUG_CATCHER_GREG_Intro, TH_Trainer9_BUG_CATCHER_GREG_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_BUG_CATCHER_GREG_Rematch
     msgbox TH_Trainer9_BUG_CATCHER_GREG_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_BUG_CATCHER_GREG_Rematch::
+    trainerbattle_rematch TRAINER_TH9_BUG_CATCHER_GREG, TH_Trainer9_BUG_CATCHER_GREG_Intro, TH_Trainer9_BUG_CATCHER_GREG_Defeat
+    msgbox TH_Trainer9_BUG_CATCHER_GREG_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_BUG_CATCHER_GREG_Intro:
     .string "The forest was only the start.\nMy bugs are ready for more!$"
 
@@ -52,8 +84,16 @@ TH_Trainer9_BUG_CATCHER_GREG_After:
 
 TH_Trainer9_YOUNGSTER_CALVIN::
     trainerbattle_single TRAINER_TH9_YOUNGSTER_CALVIN, TH_Trainer9_YOUNGSTER_CALVIN_Intro, TH_Trainer9_YOUNGSTER_CALVIN_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_YOUNGSTER_CALVIN_Rematch
     msgbox TH_Trainer9_YOUNGSTER_CALVIN_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_YOUNGSTER_CALVIN_Rematch::
+    trainerbattle_rematch TRAINER_TH9_YOUNGSTER_CALVIN, TH_Trainer9_YOUNGSTER_CALVIN_Intro, TH_Trainer9_YOUNGSTER_CALVIN_Defeat
+    msgbox TH_Trainer9_YOUNGSTER_CALVIN_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_YOUNGSTER_CALVIN_Intro:
     .string "SPEAROW never backs down.\nNeither do I!$"
 
@@ -65,8 +105,16 @@ TH_Trainer9_YOUNGSTER_CALVIN_After:
 
 TH_Trainer9_LASS_JANICE::
     trainerbattle_single TRAINER_TH9_LASS_JANICE, TH_Trainer9_LASS_JANICE_Intro, TH_Trainer9_LASS_JANICE_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_LASS_JANICE_Rematch
     msgbox TH_Trainer9_LASS_JANICE_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_LASS_JANICE_Rematch::
+    trainerbattle_rematch TRAINER_TH9_LASS_JANICE, TH_Trainer9_LASS_JANICE_Intro, TH_Trainer9_LASS_JANICE_Defeat
+    msgbox TH_Trainer9_LASS_JANICE_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_LASS_JANICE_Intro:
     .string "A long route needs a good rival.\nHow about a quick match?$"
 
@@ -78,8 +126,16 @@ TH_Trainer9_LASS_JANICE_After:
 
 TH_Trainer9_BUG_CATCHER_COLTON::
     trainerbattle_single TRAINER_TH9_BUG_CATCHER_COLTON, TH_Trainer9_BUG_CATCHER_COLTON_Intro, TH_Trainer9_BUG_CATCHER_COLTON_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_BUG_CATCHER_COLTON_Rematch
     msgbox TH_Trainer9_BUG_CATCHER_COLTON_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_BUG_CATCHER_COLTON_Rematch::
+    trainerbattle_rematch TRAINER_TH9_BUG_CATCHER_COLTON, TH_Trainer9_BUG_CATCHER_COLTON_Intro, TH_Trainer9_BUG_CATCHER_COLTON_Defeat
+    msgbox TH_Trainer9_BUG_CATCHER_COLTON_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_BUG_CATCHER_COLTON_Intro:
     .string "I brought my forest partners\nall the way to this mountain.$"
 
@@ -91,8 +147,16 @@ TH_Trainer9_BUG_CATCHER_COLTON_After:
 
 TH_Trainer9_YOUNGSTER_BEN::
     trainerbattle_single TRAINER_TH9_YOUNGSTER_BEN, TH_Trainer9_YOUNGSTER_BEN_Intro, TH_Trainer9_YOUNGSTER_BEN_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_YOUNGSTER_BEN_Rematch
     msgbox TH_Trainer9_YOUNGSTER_BEN_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_YOUNGSTER_BEN_Rematch::
+    trainerbattle_rematch TRAINER_TH9_YOUNGSTER_BEN, TH_Trainer9_YOUNGSTER_BEN_Intro, TH_Trainer9_YOUNGSTER_BEN_Defeat
+    msgbox TH_Trainer9_YOUNGSTER_BEN_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_YOUNGSTER_BEN_Intro:
     .string "Good shoes, fresh air, and a\nPOKéMON battle. Perfect!$"
 
@@ -104,8 +168,16 @@ TH_Trainer9_YOUNGSTER_BEN_After:
 
 TH_Trainer9_LASS_CRISSY::
     trainerbattle_single TRAINER_TH9_LASS_CRISSY, TH_Trainer9_LASS_CRISSY_Intro, TH_Trainer9_LASS_CRISSY_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_LASS_CRISSY_Rematch
     msgbox TH_Trainer9_LASS_CRISSY_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_LASS_CRISSY_Rematch::
+    trainerbattle_rematch TRAINER_TH9_LASS_CRISSY, TH_Trainer9_LASS_CRISSY_Intro, TH_Trainer9_LASS_CRISSY_Defeat
+    msgbox TH_Trainer9_LASS_CRISSY_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_LASS_CRISSY_Intro:
     .string "The view is nice, but I came\nhere to train my team.$"
 
@@ -117,8 +189,16 @@ TH_Trainer9_LASS_CRISSY_After:
 
 TH_Trainer9_LASS_IRIS::
     trainerbattle_single TRAINER_TH9_LASS_IRIS, TH_Trainer9_LASS_IRIS_Intro, TH_Trainer9_LASS_IRIS_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_LASS_IRIS_Rematch
     msgbox TH_Trainer9_LASS_IRIS_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_LASS_IRIS_Rematch::
+    trainerbattle_rematch TRAINER_TH9_LASS_IRIS, TH_Trainer9_LASS_IRIS_Intro, TH_Trainer9_LASS_IRIS_Defeat
+    msgbox TH_Trainer9_LASS_IRIS_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_LASS_IRIS_Intro:
     .string "I can hear wings in the dark.\nIs your team ready for this cave?$"
 
@@ -130,8 +210,16 @@ TH_Trainer9_LASS_IRIS_After:
 
 TH_Trainer9_BUG_CATCHER_ROBBY::
     trainerbattle_single TRAINER_TH9_BUG_CATCHER_ROBBY, TH_Trainer9_BUG_CATCHER_ROBBY_Intro, TH_Trainer9_BUG_CATCHER_ROBBY_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_BUG_CATCHER_ROBBY_Rematch
     msgbox TH_Trainer9_BUG_CATCHER_ROBBY_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_BUG_CATCHER_ROBBY_Rematch::
+    trainerbattle_rematch TRAINER_TH9_BUG_CATCHER_ROBBY, TH_Trainer9_BUG_CATCHER_ROBBY_Intro, TH_Trainer9_BUG_CATCHER_ROBBY_Defeat
+    msgbox TH_Trainer9_BUG_CATCHER_ROBBY_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_BUG_CATCHER_ROBBY_Intro:
     .string "Even underground, my bug team\ncan find its way to victory!$"
 
@@ -143,8 +231,16 @@ TH_Trainer9_BUG_CATCHER_ROBBY_After:
 
 TH_Trainer9_SUPER_NERD_JOVAN::
     trainerbattle_single TRAINER_TH9_SUPER_NERD_JOVAN, TH_Trainer9_SUPER_NERD_JOVAN_Intro, TH_Trainer9_SUPER_NERD_JOVAN_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_SUPER_NERD_JOVAN_Rematch
     msgbox TH_Trainer9_SUPER_NERD_JOVAN_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_SUPER_NERD_JOVAN_Rematch::
+    trainerbattle_rematch TRAINER_TH9_SUPER_NERD_JOVAN, TH_Trainer9_SUPER_NERD_JOVAN_Intro, TH_Trainer9_SUPER_NERD_JOVAN_Defeat
+    msgbox TH_Trainer9_SUPER_NERD_JOVAN_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_SUPER_NERD_JOVAN_Intro:
     .string "I study how different types\nmatch up. Let us test a theory.$"
 
@@ -156,8 +252,16 @@ TH_Trainer9_SUPER_NERD_JOVAN_After:
 
 TH_Trainer9_LASS_MIRIAM::
     trainerbattle_single TRAINER_TH9_LASS_MIRIAM, TH_Trainer9_LASS_MIRIAM_Intro, TH_Trainer9_LASS_MIRIAM_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_LASS_MIRIAM_Rematch
     msgbox TH_Trainer9_LASS_MIRIAM_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_LASS_MIRIAM_Rematch::
+    trainerbattle_rematch TRAINER_TH9_LASS_MIRIAM, TH_Trainer9_LASS_MIRIAM_Intro, TH_Trainer9_LASS_MIRIAM_Defeat
+    msgbox TH_Trainer9_LASS_MIRIAM_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_LASS_MIRIAM_Intro:
     .string "I took the long path to train.\nShow me what you have learned!$"
 
@@ -169,8 +273,16 @@ TH_Trainer9_LASS_MIRIAM_After:
 
 TH_Trainer9_BUG_CATCHER_KENT::
     trainerbattle_single TRAINER_TH9_BUG_CATCHER_KENT, TH_Trainer9_BUG_CATCHER_KENT_Intro, TH_Trainer9_BUG_CATCHER_KENT_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_BUG_CATCHER_KENT_Rematch
     msgbox TH_Trainer9_BUG_CATCHER_KENT_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_BUG_CATCHER_KENT_Rematch::
+    trainerbattle_rematch TRAINER_TH9_BUG_CATCHER_KENT, TH_Trainer9_BUG_CATCHER_KENT_Intro, TH_Trainer9_BUG_CATCHER_KENT_Defeat
+    msgbox TH_Trainer9_BUG_CATCHER_KENT_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_BUG_CATCHER_KENT_Intro:
     .string "Do not underestimate a small\nPOKéMON with a big heart!$"
 
@@ -182,8 +294,16 @@ TH_Trainer9_BUG_CATCHER_KENT_After:
 
 TH_Trainer9_YOUNGSTER_JOSH::
     trainerbattle_single TRAINER_TH9_YOUNGSTER_JOSH, TH_Trainer9_YOUNGSTER_JOSH_Intro, TH_Trainer9_YOUNGSTER_JOSH_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_YOUNGSTER_JOSH_Rematch
     msgbox TH_Trainer9_YOUNGSTER_JOSH_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_YOUNGSTER_JOSH_Rematch::
+    trainerbattle_rematch TRAINER_TH9_YOUNGSTER_JOSH, TH_Trainer9_YOUNGSTER_JOSH_Intro, TH_Trainer9_YOUNGSTER_JOSH_Defeat
+    msgbox TH_Trainer9_YOUNGSTER_JOSH_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_YOUNGSTER_JOSH_Intro:
     .string "These tunnels are confusing.\nA battle will clear my head!$"
 
@@ -195,8 +315,16 @@ TH_Trainer9_YOUNGSTER_JOSH_After:
 
 TH_Trainer9_HIKER_MARCOS::
     trainerbattle_single TRAINER_TH9_HIKER_MARCOS, TH_Trainer9_HIKER_MARCOS_Intro, TH_Trainer9_HIKER_MARCOS_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_HIKER_MARCOS_Rematch
     msgbox TH_Trainer9_HIKER_MARCOS_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_HIKER_MARCOS_Rematch::
+    trainerbattle_rematch TRAINER_TH9_HIKER_MARCOS, TH_Trainer9_HIKER_MARCOS_Intro, TH_Trainer9_HIKER_MARCOS_Defeat
+    msgbox TH_Trainer9_HIKER_MARCOS_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_HIKER_MARCOS_Intro:
     .string "Rocky ground is my specialty.\nPrepare for a sturdy team!$"
 
@@ -221,8 +349,16 @@ TH_Trainer9_SUPER_NERD_MIGUEL_After:
 
 TH_Trainer9_TEAM_ROCKET_GRUNT_4::
     trainerbattle_single TRAINER_TH9_TEAM_ROCKET_GRUNT_4, TH_Trainer9_TEAM_ROCKET_GRUNT_4_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_4_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_TEAM_ROCKET_GRUNT_4_Rematch
     msgbox TH_Trainer9_TEAM_ROCKET_GRUNT_4_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_TEAM_ROCKET_GRUNT_4_Rematch::
+    trainerbattle_rematch TRAINER_TH9_TEAM_ROCKET_GRUNT_4, TH_Trainer9_TEAM_ROCKET_GRUNT_4_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_4_Defeat
+    msgbox TH_Trainer9_TEAM_ROCKET_GRUNT_4_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_TEAM_ROCKET_GRUNT_4_Intro:
     .string "These fossils belong to ROCKET!\nYou picked the wrong tunnel.$"
 
@@ -234,8 +370,16 @@ TH_Trainer9_TEAM_ROCKET_GRUNT_4_After:
 
 TH_Trainer9_TEAM_ROCKET_GRUNT_1::
     trainerbattle_single TRAINER_TH9_TEAM_ROCKET_GRUNT_1, TH_Trainer9_TEAM_ROCKET_GRUNT_1_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_TEAM_ROCKET_GRUNT_1_Rematch
     msgbox TH_Trainer9_TEAM_ROCKET_GRUNT_1_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_TEAM_ROCKET_GRUNT_1_Rematch::
+    trainerbattle_rematch TRAINER_TH9_TEAM_ROCKET_GRUNT_1, TH_Trainer9_TEAM_ROCKET_GRUNT_1_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_1_Defeat
+    msgbox TH_Trainer9_TEAM_ROCKET_GRUNT_1_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_TEAM_ROCKET_GRUNT_1_Intro:
     .string "Keep out of ROCKET business!\nWe are searching this cavern.$"
 
@@ -247,8 +391,16 @@ TH_Trainer9_TEAM_ROCKET_GRUNT_1_After:
 
 TH_Trainer9_TEAM_ROCKET_GRUNT_3::
     trainerbattle_single TRAINER_TH9_TEAM_ROCKET_GRUNT_3, TH_Trainer9_TEAM_ROCKET_GRUNT_3_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_3_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_TEAM_ROCKET_GRUNT_3_Rematch
     msgbox TH_Trainer9_TEAM_ROCKET_GRUNT_3_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_TEAM_ROCKET_GRUNT_3_Rematch::
+    trainerbattle_rematch TRAINER_TH9_TEAM_ROCKET_GRUNT_3, TH_Trainer9_TEAM_ROCKET_GRUNT_3_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_3_Defeat
+    msgbox TH_Trainer9_TEAM_ROCKET_GRUNT_3_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_TEAM_ROCKET_GRUNT_3_Intro:
     .string "You got past the others?\nThen I will stop you here!$"
 
@@ -260,8 +412,16 @@ TH_Trainer9_TEAM_ROCKET_GRUNT_3_After:
 
 TH_Trainer9_TEAM_ROCKET_GRUNT_2::
     trainerbattle_single TRAINER_TH9_TEAM_ROCKET_GRUNT_2, TH_Trainer9_TEAM_ROCKET_GRUNT_2_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_2_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_TEAM_ROCKET_GRUNT_2_Rematch
     msgbox TH_Trainer9_TEAM_ROCKET_GRUNT_2_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_TEAM_ROCKET_GRUNT_2_Rematch::
+    trainerbattle_rematch TRAINER_TH9_TEAM_ROCKET_GRUNT_2, TH_Trainer9_TEAM_ROCKET_GRUNT_2_Intro, TH_Trainer9_TEAM_ROCKET_GRUNT_2_Defeat
+    msgbox TH_Trainer9_TEAM_ROCKET_GRUNT_2_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_TEAM_ROCKET_GRUNT_2_Intro:
     .string "A little TRAINER in our way?\nMy team can handle this.$"
 
@@ -315,8 +475,16 @@ TH_Trainer9_SWIMMER_MALE_LUIS_After:
 
 TH_Trainer9_PICNICKER_DIANA::
     trainerbattle_single TRAINER_TH9_PICNICKER_DIANA, TH_Trainer9_PICNICKER_DIANA_Intro, TH_Trainer9_PICNICKER_DIANA_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH_Trainer9_PICNICKER_DIANA_Rematch
     msgbox TH_Trainer9_PICNICKER_DIANA_After, MSGBOX_AUTOCLOSE
     end
+
+TH_Trainer9_PICNICKER_DIANA_Rematch::
+    trainerbattle_rematch TRAINER_TH9_PICNICKER_DIANA, TH_Trainer9_PICNICKER_DIANA_Intro, TH_Trainer9_PICNICKER_DIANA_Defeat
+    msgbox TH_Trainer9_PICNICKER_DIANA_After, MSGBOX_AUTOCLOSE
+    end
+
 TH_Trainer9_PICNICKER_DIANA_Intro:
     .string "MISTY taught me to stay calm\neven when the battle gets rough.$"
 

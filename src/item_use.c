@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons_rematches.h"
 #include "item_use.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -1452,6 +1453,11 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId)
 
 static bool32 IsValidLocationForVsSeeker(void)
 {
+#if THREE_HORIZONS
+    // Allow authored caves/gyms/cabins as well as routes. Empty scans use the
+    // native useful no-trainers message instead of the generic item refusal.
+    return TRUE;
+#endif
     u16 mapGroup = gSaveBlock1Ptr->location.mapGroup;
     u16 mapNum = gSaveBlock1Ptr->location.mapNum;
     enum MapType mapType = gMapHeader.mapType;
@@ -1511,6 +1517,9 @@ void FieldUseFunc_VsSeeker(u8 taskId)
 
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId)
 {
+#if THREE_HORIZONS
+    TH13_ResetRematches();
+#endif
     Task_CloseCantUseKeyItemMessage(taskId);
 }
 

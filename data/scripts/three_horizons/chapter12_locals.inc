@@ -7,6 +7,13 @@ TH12_Route5_Sign0_Text:
 
 TH12_Route6_Object0::
     trainerbattle_single TRAINER_TH12_BUG_CATCHER_KEIGO, TH12_Route6_Object0_Intro, TH12_Route6_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route6_Object0_Rematch
+    msgbox TH12_Route6_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route6_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_BUG_CATCHER_KEIGO, TH12_Route6_Object0_Intro, TH12_Route6_Object0_Defeat
     msgbox TH12_Route6_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -23,6 +30,13 @@ TH12_Route6_Object0_After:
 
 TH12_Route6_Object1::
     trainerbattle_single TRAINER_TH12_CAMPER_RICKY, TH12_Route6_Object1_Intro, TH12_Route6_Object1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route6_Object1_Rematch
+    msgbox TH12_Route6_Object1_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route6_Object1_Rematch::
+    trainerbattle_rematch TRAINER_TH12_CAMPER_RICKY, TH12_Route6_Object1_Intro, TH12_Route6_Object1_Defeat
     msgbox TH12_Route6_Object1_After, MSGBOX_AUTOCLOSE
     end
 
@@ -39,6 +53,13 @@ TH12_Route6_Object1_After:
 
 TH12_Route6_Object2::
     trainerbattle_single TRAINER_TH12_PICNICKER_NANCY, TH12_Route6_Object2_Intro, TH12_Route6_Object2_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route6_Object2_Rematch
+    msgbox TH12_Route6_Object2_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route6_Object2_Rematch::
+    trainerbattle_rematch TRAINER_TH12_PICNICKER_NANCY, TH12_Route6_Object2_Intro, TH12_Route6_Object2_Defeat
     msgbox TH12_Route6_Object2_After, MSGBOX_AUTOCLOSE
     end
 
@@ -56,6 +77,13 @@ TH12_Route6_Object2_After:
 
 TH12_Route6_Object3::
     trainerbattle_single TRAINER_TH12_BUG_CATCHER_ELIJAH, TH12_Route6_Object3_Intro, TH12_Route6_Object3_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route6_Object3_Rematch
+    msgbox TH12_Route6_Object3_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route6_Object3_Rematch::
+    trainerbattle_rematch TRAINER_TH12_BUG_CATCHER_ELIJAH, TH12_Route6_Object3_Intro, TH12_Route6_Object3_Defeat
     msgbox TH12_Route6_Object3_After, MSGBOX_AUTOCLOSE
     end
 
@@ -73,6 +101,13 @@ TH12_Route6_Object3_After:
 
 TH12_Route6_Object4::
     trainerbattle_single TRAINER_TH12_PICNICKER_ISABELLE, TH12_Route6_Object4_Intro, TH12_Route6_Object4_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route6_Object4_Rematch
+    msgbox TH12_Route6_Object4_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route6_Object4_Rematch::
+    trainerbattle_rematch TRAINER_TH12_PICNICKER_ISABELLE, TH12_Route6_Object4_Intro, TH12_Route6_Object4_Defeat
     msgbox TH12_Route6_Object4_After, MSGBOX_AUTOCLOSE
     end
 
@@ -89,6 +124,13 @@ TH12_Route6_Object4_After:
 
 TH12_Route6_Object5::
     trainerbattle_single TRAINER_TH12_CAMPER_JEFF, TH12_Route6_Object5_Intro, TH12_Route6_Object5_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route6_Object5_Rematch
+    msgbox TH12_Route6_Object5_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route6_Object5_Rematch::
+    trainerbattle_rematch TRAINER_TH12_CAMPER_JEFF, TH12_Route6_Object5_Intro, TH12_Route6_Object5_Defeat
     msgbox TH12_Route6_Object5_After, MSGBOX_AUTOCLOSE
     end
 
@@ -422,6 +464,13 @@ TH12_SSAnne_1F_Room1_Object0_Text:
 
 TH12_SSAnne_1F_Room2_Object0::
     trainerbattle_single TRAINER_TH12_LASS_ANN, TH12_SSAnne_1F_Room2_Object0_Intro, TH12_SSAnne_1F_Room2_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_1F_Room2_Object0_Rematch
+    msgbox TH12_SSAnne_1F_Room2_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_1F_Room2_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_LASS_ANN, TH12_SSAnne_1F_Room2_Object0_Intro, TH12_SSAnne_1F_Room2_Object0_Defeat
     msgbox TH12_SSAnne_1F_Room2_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -440,6 +489,13 @@ TH12_SSAnne_1F_Room2_Object0_After:
 
 TH12_SSAnne_1F_Room2_Object1::
     trainerbattle_single TRAINER_TH12_YOUNGSTER_TYLER, TH12_SSAnne_1F_Room2_Object1_Intro, TH12_SSAnne_1F_Room2_Object1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_1F_Room2_Object1_Rematch
+    msgbox TH12_SSAnne_1F_Room2_Object1_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_1F_Room2_Object1_Rematch::
+    trainerbattle_rematch TRAINER_TH12_YOUNGSTER_TYLER, TH12_SSAnne_1F_Room2_Object1_Intro, TH12_SSAnne_1F_Room2_Object1_Defeat
     msgbox TH12_SSAnne_1F_Room2_Object1_After, MSGBOX_AUTOCLOSE
     end
 
@@ -500,6 +556,13 @@ TH12_SSAnne_1F_Room3_Object2_Text:
 
 TH12_SSAnne_1F_Room5_Object0::
     trainerbattle_single TRAINER_TH12_GENTLEMAN_ARTHUR, TH12_SSAnne_1F_Room5_Object0_Intro, TH12_SSAnne_1F_Room5_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_1F_Room5_Object0_Rematch
+    msgbox TH12_SSAnne_1F_Room5_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_1F_Room5_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_GENTLEMAN_ARTHUR, TH12_SSAnne_1F_Room5_Object0_Intro, TH12_SSAnne_1F_Room5_Object0_Defeat
     msgbox TH12_SSAnne_1F_Room5_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -524,6 +587,13 @@ TH12_SSAnne_1F_Room6_Object0_Text:
 
 TH12_SSAnne_1F_Room7_Object0::
     trainerbattle_single TRAINER_TH12_GENTLEMAN_THOMAS, TH12_SSAnne_1F_Room7_Object0_Intro, TH12_SSAnne_1F_Room7_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_1F_Room7_Object0_Rematch
+    msgbox TH12_SSAnne_1F_Room7_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_1F_Room7_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_GENTLEMAN_THOMAS, TH12_SSAnne_1F_Room7_Object0_Intro, TH12_SSAnne_1F_Room7_Object0_Defeat
     msgbox TH12_SSAnne_1F_Room7_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -549,6 +619,13 @@ TH12_SSAnne_2F_Corridor_Object1_Text:
 
 TH12_SSAnne_2F_Room2_Object0::
     trainerbattle_single TRAINER_TH12_FISHERMAN_DALE, TH12_SSAnne_2F_Room2_Object0_Intro, TH12_SSAnne_2F_Room2_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_2F_Room2_Object0_Rematch
+    msgbox TH12_SSAnne_2F_Room2_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_2F_Room2_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_FISHERMAN_DALE, TH12_SSAnne_2F_Room2_Object0_Intro, TH12_SSAnne_2F_Room2_Object0_Defeat
     msgbox TH12_SSAnne_2F_Room2_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -565,6 +642,13 @@ TH12_SSAnne_2F_Room2_Object0_After:
 
 TH12_SSAnne_2F_Room2_Object1::
     trainerbattle_single TRAINER_TH12_GENTLEMAN_BROOKS, TH12_SSAnne_2F_Room2_Object1_Intro, TH12_SSAnne_2F_Room2_Object1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_2F_Room2_Object1_Rematch
+    msgbox TH12_SSAnne_2F_Room2_Object1_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_2F_Room2_Object1_Rematch::
+    trainerbattle_rematch TRAINER_TH12_GENTLEMAN_BROOKS, TH12_SSAnne_2F_Room2_Object1_Intro, TH12_SSAnne_2F_Room2_Object1_Defeat
     msgbox TH12_SSAnne_2F_Room2_Object1_After, MSGBOX_AUTOCLOSE
     end
 
@@ -598,6 +682,13 @@ TH12_SSAnne_2F_Room3_Object0_Text:
 
 TH12_SSAnne_2F_Room4_Object0::
     trainerbattle_single TRAINER_TH12_GENTLEMAN_LAMAR, TH12_SSAnne_2F_Room4_Object0_Intro, TH12_SSAnne_2F_Room4_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_2F_Room4_Object0_Rematch
+    msgbox TH12_SSAnne_2F_Room4_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_2F_Room4_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_GENTLEMAN_LAMAR, TH12_SSAnne_2F_Room4_Object0_Intro, TH12_SSAnne_2F_Room4_Object0_Defeat
     msgbox TH12_SSAnne_2F_Room4_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -614,6 +705,13 @@ TH12_SSAnne_2F_Room4_Object0_After:
 
 TH12_SSAnne_2F_Room4_Object1::
     trainerbattle_single TRAINER_TH12_LASS_DAWN, TH12_SSAnne_2F_Room4_Object1_Intro, TH12_SSAnne_2F_Room4_Object1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_2F_Room4_Object1_Rematch
+    msgbox TH12_SSAnne_2F_Room4_Object1_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_2F_Room4_Object1_Rematch::
+    trainerbattle_rematch TRAINER_TH12_LASS_DAWN, TH12_SSAnne_2F_Room4_Object1_Intro, TH12_SSAnne_2F_Room4_Object1_Defeat
     msgbox TH12_SSAnne_2F_Room4_Object1_After, MSGBOX_AUTOCLOSE
     end
 
@@ -678,6 +776,13 @@ TH12_SSAnne_3F_Corridor_Object0_Text:
 
 TH12_SSAnne_B1F_Room1_Object0::
     trainerbattle_single TRAINER_TH12_FISHERMAN_BARNY, TH12_SSAnne_B1F_Room1_Object0_Intro, TH12_SSAnne_B1F_Room1_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_B1F_Room1_Object0_Rematch
+    msgbox TH12_SSAnne_B1F_Room1_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_B1F_Room1_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_FISHERMAN_BARNY, TH12_SSAnne_B1F_Room1_Object0_Intro, TH12_SSAnne_B1F_Room1_Object0_Defeat
     msgbox TH12_SSAnne_B1F_Room1_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -697,6 +802,13 @@ TH12_SSAnne_B1F_Room1_Object0_After:
 
 TH12_SSAnne_B1F_Room1_Object1::
     trainerbattle_single TRAINER_TH12_SAILOR_PHILLIP, TH12_SSAnne_B1F_Room1_Object1_Intro, TH12_SSAnne_B1F_Room1_Object1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_B1F_Room1_Object1_Rematch
+    msgbox TH12_SSAnne_B1F_Room1_Object1_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_B1F_Room1_Object1_Rematch::
+    trainerbattle_rematch TRAINER_TH12_SAILOR_PHILLIP, TH12_SSAnne_B1F_Room1_Object1_Intro, TH12_SSAnne_B1F_Room1_Object1_Defeat
     msgbox TH12_SSAnne_B1F_Room1_Object1_After, MSGBOX_AUTOCLOSE
     end
 
@@ -714,6 +826,13 @@ TH12_SSAnne_B1F_Room1_Object1_After:
 
 TH12_SSAnne_B1F_Room2_Object0::
     trainerbattle_single TRAINER_TH12_SAILOR_HUEY, TH12_SSAnne_B1F_Room2_Object0_Intro, TH12_SSAnne_B1F_Room2_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_B1F_Room2_Object0_Rematch
+    msgbox TH12_SSAnne_B1F_Room2_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_B1F_Room2_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_SAILOR_HUEY, TH12_SSAnne_B1F_Room2_Object0_Intro, TH12_SSAnne_B1F_Room2_Object0_Defeat
     msgbox TH12_SSAnne_B1F_Room2_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -738,6 +857,13 @@ TH12_SSAnne_B1F_Room2_Object1::
 
 TH12_SSAnne_B1F_Room3_Object0::
     trainerbattle_single TRAINER_TH12_SAILOR_DYLAN, TH12_SSAnne_B1F_Room3_Object0_Intro, TH12_SSAnne_B1F_Room3_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_B1F_Room3_Object0_Rematch
+    msgbox TH12_SSAnne_B1F_Room3_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_B1F_Room3_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_SAILOR_DYLAN, TH12_SSAnne_B1F_Room3_Object0_Intro, TH12_SSAnne_B1F_Room3_Object0_Defeat
     msgbox TH12_SSAnne_B1F_Room3_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -763,6 +889,13 @@ TH12_SSAnne_B1F_Room3_Object1::
 
 TH12_SSAnne_B1F_Room4_Object0::
     trainerbattle_single TRAINER_TH12_SAILOR_DUNCAN, TH12_SSAnne_B1F_Room4_Object0_Intro, TH12_SSAnne_B1F_Room4_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_B1F_Room4_Object0_Rematch
+    msgbox TH12_SSAnne_B1F_Room4_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_B1F_Room4_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_SAILOR_DUNCAN, TH12_SSAnne_B1F_Room4_Object0_Intro, TH12_SSAnne_B1F_Room4_Object0_Defeat
     msgbox TH12_SSAnne_B1F_Room4_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -779,6 +912,13 @@ TH12_SSAnne_B1F_Room4_Object0_After:
 
 TH12_SSAnne_B1F_Room4_Object1::
     trainerbattle_single TRAINER_TH12_SAILOR_LEONARD, TH12_SSAnne_B1F_Room4_Object1_Intro, TH12_SSAnne_B1F_Room4_Object1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_B1F_Room4_Object1_Rematch
+    msgbox TH12_SSAnne_B1F_Room4_Object1_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_B1F_Room4_Object1_Rematch::
+    trainerbattle_rematch TRAINER_TH12_SAILOR_LEONARD, TH12_SSAnne_B1F_Room4_Object1_Intro, TH12_SSAnne_B1F_Room4_Object1_Defeat
     msgbox TH12_SSAnne_B1F_Room4_Object1_After, MSGBOX_AUTOCLOSE
     end
 
@@ -845,6 +985,13 @@ TH12_SSAnne_CaptainsOffice_Sign2_Text:
 
 TH12_SSAnne_Deck_Object0::
     trainerbattle_single TRAINER_TH12_SAILOR_TREVOR, TH12_SSAnne_Deck_Object0_Intro, TH12_SSAnne_Deck_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_Deck_Object0_Rematch
+    msgbox TH12_SSAnne_Deck_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_Deck_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_SAILOR_TREVOR, TH12_SSAnne_Deck_Object0_Intro, TH12_SSAnne_Deck_Object0_Defeat
     msgbox TH12_SSAnne_Deck_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -876,6 +1023,13 @@ TH12_SSAnne_Deck_Object2_Text:
 
 TH12_SSAnne_Deck_Object3::
     trainerbattle_single TRAINER_TH12_SAILOR_EDMOND, TH12_SSAnne_Deck_Object3_Intro, TH12_SSAnne_Deck_Object3_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_SSAnne_Deck_Object3_Rematch
+    msgbox TH12_SSAnne_Deck_Object3_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_SSAnne_Deck_Object3_Rematch::
+    trainerbattle_rematch TRAINER_TH12_SAILOR_EDMOND, TH12_SSAnne_Deck_Object3_Intro, TH12_SSAnne_Deck_Object3_Defeat
     msgbox TH12_SSAnne_Deck_Object3_After, MSGBOX_AUTOCLOSE
     end
 
@@ -959,6 +1113,13 @@ TH12_SSAnne_Kitchen_Object7::
 
 TH12_VermilionCity_Gym_Object1::
     trainerbattle_single TRAINER_TH12_ENGINEER_BAILY, TH12_VermilionCity_Gym_Object1_Intro, TH12_VermilionCity_Gym_Object1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_VermilionCity_Gym_Object1_Rematch
+    msgbox TH12_VermilionCity_Gym_Object1_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_VermilionCity_Gym_Object1_Rematch::
+    trainerbattle_rematch TRAINER_TH12_ENGINEER_BAILY, TH12_VermilionCity_Gym_Object1_Intro, TH12_VermilionCity_Gym_Object1_Defeat
     msgbox TH12_VermilionCity_Gym_Object1_After, MSGBOX_AUTOCLOSE
     end
 
@@ -977,6 +1138,13 @@ TH12_VermilionCity_Gym_Object1_After:
 
 TH12_VermilionCity_Gym_Object2::
     trainerbattle_single TRAINER_TH12_SAILOR_DWAYNE, TH12_VermilionCity_Gym_Object2_Intro, TH12_VermilionCity_Gym_Object2_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_VermilionCity_Gym_Object2_Rematch
+    msgbox TH12_VermilionCity_Gym_Object2_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_VermilionCity_Gym_Object2_Rematch::
+    trainerbattle_rematch TRAINER_TH12_SAILOR_DWAYNE, TH12_VermilionCity_Gym_Object2_Intro, TH12_VermilionCity_Gym_Object2_Defeat
     msgbox TH12_VermilionCity_Gym_Object2_After, MSGBOX_AUTOCLOSE
     end
 
@@ -998,6 +1166,13 @@ TH12_VermilionCity_Gym_Object2_After:
 
 TH12_VermilionCity_Gym_Object4::
     trainerbattle_single TRAINER_TH12_GENTLEMAN_TUCKER, TH12_VermilionCity_Gym_Object4_Intro, TH12_VermilionCity_Gym_Object4_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_VermilionCity_Gym_Object4_Rematch
+    msgbox TH12_VermilionCity_Gym_Object4_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_VermilionCity_Gym_Object4_Rematch::
+    trainerbattle_rematch TRAINER_TH12_GENTLEMAN_TUCKER, TH12_VermilionCity_Gym_Object4_Intro, TH12_VermilionCity_Gym_Object4_Defeat
     msgbox TH12_VermilionCity_Gym_Object4_After, MSGBOX_AUTOCLOSE
     end
 

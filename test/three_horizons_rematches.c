@@ -12,6 +12,32 @@
 #include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
+#include "../src/data/three_horizons_rematches.h"
+
+TEST("Three Horizons all registered rematch parties remain legal at chapter limits")
+{
+    struct Pokemon party[PARTY_SIZE];
+    for (u32 i = 0; i < ARRAY_COUNT(sRematchEntries); i++)
+    {
+        const struct Trainer *trainer = TH_TestGetActualTrainer(sRematchEntries[i].trainerId);
+        EXPECT_EQ(sizeof(sRematchEntries[i].trainerId), 2);
+        for (u32 badges = 0; badges <= 8; badges += 4)
+        {
+            EXPECT(TH13_CreateRematchPartyFromTrainer(party, trainer, 100, badges));
+            for (u32 member = 0; member < trainer->partySize; member++)
+            {
+                u32 species = GetMonData(&party[member], MON_DATA_SPECIES);
+                u32 level = GetMonData(&party[member], MON_DATA_LEVEL);
+                u32 ability = GetMonAbility(&party[member]);
+                EXPECT_GE(level, trainer->party[member].lvl);
+                EXPECT_LE(level, 100);
+                EXPECT(ability == gSpeciesInfo[species].abilities[0] || ability == gSpeciesInfo[species].abilities[1]);
+                EXPECT(GetMonData(&party[member], MON_DATA_MOVE1) != MOVE_NONE);
+            }
+        }
+    }
+}
+
 TEST("Three Horizons rematch slots preserve full trainer IDs and reject collisions")
 {
     const struct TH13RematchEntry valid[] = {{1, 12, 1}, {257, 12, 2}, {513, 13, 1}};

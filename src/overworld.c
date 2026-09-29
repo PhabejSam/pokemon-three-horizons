@@ -1,5 +1,6 @@
 #include "global.h"
 #include "three_horizons.h"
+#include "three_horizons_rematches.h"
 #include "constants/three_horizons.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
@@ -461,6 +462,9 @@ void Overworld_ResetBattleFlagsAndVars(void)
 
 static void Overworld_ResetStateAfterWhiteOut(void)
 {
+#if THREE_HORIZONS
+    TH13_ResetRematches();
+#endif
     ResetInitialPlayerAvatarState();
     FlagClear(FLAG_SYS_CYCLING_ROAD);
     FlagClear(FLAG_SYS_CRUISE_MODE);
@@ -2169,6 +2173,7 @@ void CB2_ContinueSavedGame(void)
     bool32 refreshChapterMap = (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK) != TH_STATE_VERSION_13;
     const struct WarpData savedChapterLocation = gSaveBlock1Ptr->location;
     TH_MigrateSaveState();
+    TH13_ResetRematches();
     // A recovery relocation also needs new templates and a fresh map view.
     refreshChapterMap |= savedChapterLocation.mapGroup != gSaveBlock1Ptr->location.mapGroup
         || savedChapterLocation.mapNum != gSaveBlock1Ptr->location.mapNum;

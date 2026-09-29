@@ -19,6 +19,7 @@ bool32 TH13_SetRematchReady(u16 trainerId);
 bool32 TH13_IsRematchReady(u16 trainerId);
 bool32 TH13_BeginRematch(u16 trainerId);
 void TH13_ResetRematches(void);
+void TH13_ScriptCheckRematch(void);
 bool32 TH13_TryCreateRematchParty(struct Pokemon *party, u16 trainerId);
 bool32 TH13_CreateRematchPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, u8 highestLevel, u8 badges);
 u8 TH13_HighestNonEggPartyLevel(void);

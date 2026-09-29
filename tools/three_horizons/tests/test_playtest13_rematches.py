@@ -1,9 +1,25 @@
 import re
 import json
 import unittest
-from tools.three_horizons.tests.test_playtest11_maps import ROOT
+from tools.three_horizons.tests.test_playtest11_maps import ROOT, tiles, reachable
 
 class Playtest13Rematches(unittest.TestCase):
+    def test_vermilion_receipt_is_retryable_and_not_badge_gated(self):
+        data = json.loads((ROOT/'data/maps/TH12_VermilionCity_PokemonCenter_1F/map.json').read_text())
+        self.assertEqual(sum(o['script'] == 'TH13_VsSeekerResearcher' for o in data['object_events']), 1)
+        w, h, cells = tiles('TH12_VermilionCity_PokemonCenter_1F')
+        floor = {(i%w,i//w) for i,v in enumerate(cells) if v >> 12 == 3 and not v & 0xc00}
+        obstacles = {(o['x'],o['y']) for o in data['object_events']}
+        area = reachable((7,8), floor, obstacles)
+        self.assertIn((5,7), area)
+        self.assertIn((7,4), area)  # Reach the nurse across her counter at y=3.
+        source = (ROOT/'data/scripts/three_horizons/chapter12_vermilion.inc').read_text()
+        section = source.split('TH13_VsSeekerResearcher::', 1)[1]
+        self.assertNotIn('FLAG_BADGE', section)
+        self.assertIn('giveitem ITEM_VS_SEEKER', section)
+        self.assertIn('goto_if_eq VAR_RESULT, FALSE, TH12_RewardBagFull', section)
+        self.assertLess(section.index('goto_if_eq VAR_RESULT, FALSE'), section.index('setflag FLAG_TH13_VS_SEEKER'))
+
     def test_map_local_registry_covers_all_shipped_ordinary_trainers(self):
         text = (ROOT/'src/data/three_horizons_rematches.h').read_text()
         entries = re.findall(r'\{(TRAINER_TH\w+), (MAP_TH\w+), (\d+)\}', text)
@@ -23,6 +39,17 @@ class Playtest13Rematches(unittest.TestCase):
             block = re.search(r'^'+re.escape(objects[0]['script'])+r':+\n(.*?)(?=^\w+:|\Z)', sources, re.M|re.S)
             self.assertIsNotNone(block)
             self.assertIn(trainer, block.group(1))
+
+    def test_every_registered_trainer_has_rematch_script_without_story_rewards(self):
+        entries = re.findall(r'\{(TRAINER_TH\w+), (MAP_TH\w+), (\d+)\}', (ROOT/'src/data/three_horizons_rematches.h').read_text())
+        sources = '\n'.join(p.read_text() for p in (ROOT/'data/scripts/three_horizons').glob('*.inc'))
+        for trainer, _, _ in entries:
+            self.assertRegex(sources, r'trainerbattle_rematch '+trainer+r',')
+        blocks = re.findall(r'^TH\w+_Rematch:+\n(.*?)(?=^\w+:|\Z)', sources, re.M|re.S)
+        self.assertEqual(len(blocks), 68)
+        for block in blocks:
+            for one_time_command in ('giveitem', 'givemon', 'setflag', 'setvar', 'addmoney'):
+                self.assertNotIn(one_time_command, block)
 
     def test_keigo_progressed_roster_fits_route(self):
         text = (ROOT/'src/data/trainers.party').read_text()

@@ -45,6 +45,38 @@ are supported. Locations without an eligible target must return useful dialogue.
 
 This supports every planned ordinary trainer without growing save blocks or
 silently dropping trainers. It changes the plan's assumed one-global-slot-per-
-trainer storage arrangement, so implementation of this part is waiting for the
-explicit capacity decision. Keigo's approved first-fight roster and pure level
-tuning do not depend on this storage choice.
+trainer storage arrangement. The user explicitly approved this capacity decision.
+Temporary readiness resets on Continue without erasing permanent defeat history.
+
+## Implementation contract
+
+The ROM registry stores `u16` trainer and map IDs plus the map object's local ID.
+A readiness slot is `localId - 1`, only after verifying the ID is in 1–100 and
+unique on that map. Duplicate trainer identities or duplicate local slots are
+rejected. The save byte contains only 0 or 1. A RAM map identity prevents stale
+bytes from resolving to a trainer on another map, in addition to explicit reset
+hooks at map load and cold Continue.
+
+All 68 shipped ordinary trainers are registered, including Luis's swimming script,
+ordinary Mt. Moon grunts, Gym trainers, and ship cabin/deck trainers. The remaining
+53 planned trainers must be registered when their approved maps are authored.
+Bosses, scripted rivals, Jessie/James, the fossil researcher, the robbed-house
+grunt, and the Nugget Bridge recruiter remain excluded.
+
+The native scan and response emote are retained. Three Horizons resumes authored
+idle movement afterwards, without persisting rematch-only NPC coordinates or
+movement into a battery save. A new scan replaces readiness immediately; there
+is no charge or five-badge check. Caves and buildings support eligible trainers.
+An empty scan uses the native no-trainers message.
+
+Balance: strongest team member targets highest non-Egg party level minus ten,
+with the original strongest level as the floor. Badge caps are 24 before Surge,
+35 with three badges, then 45/55/65/75/100. A cap cannot be below the original
+floor. Other members preserve their original level offsets, minimum level one.
+Evolution improvements use explicit ROM-authored species tiers, never arbitrary
+branch selection. First fights continue to use their original records; Keigo's
+separately approved first-fight roster is Kakuna/Beedrill/Butterfree at level 18.
+
+The user's exact post-Surge RG40XX H Playtest 12 battery save remains required
+for the final personal-save acceptance gate. The older Cerulean/Playtest-11-marked
+save is not evidence of that acceptance.

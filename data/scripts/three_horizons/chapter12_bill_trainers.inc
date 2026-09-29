@@ -1,5 +1,12 @@
 TH12_Route24_Object1::
     trainerbattle_single TRAINER_TH12_CAMPER_ETHAN, TH12_Route24_Object1_Intro, TH12_Route24_Object1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route24_Object1_Rematch
+    msgbox TH12_Route24_Object1_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route24_Object1_Rematch::
+    trainerbattle_rematch TRAINER_TH12_CAMPER_ETHAN, TH12_Route24_Object1_Intro, TH12_Route24_Object1_Defeat
     msgbox TH12_Route24_Object1_After, MSGBOX_AUTOCLOSE
     end
 
@@ -16,6 +23,13 @@ TH12_Route24_Object1_After:
 
 TH12_Route24_Object2::
     trainerbattle_single TRAINER_TH12_LASS_RELI, TH12_Route24_Object2_Intro, TH12_Route24_Object2_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route24_Object2_Rematch
+    msgbox TH12_Route24_Object2_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route24_Object2_Rematch::
+    trainerbattle_rematch TRAINER_TH12_LASS_RELI, TH12_Route24_Object2_Intro, TH12_Route24_Object2_Defeat
     msgbox TH12_Route24_Object2_After, MSGBOX_AUTOCLOSE
     end
 
@@ -31,6 +45,13 @@ TH12_Route24_Object2_After:
 
 TH12_Route24_Object3::
     trainerbattle_single TRAINER_TH12_YOUNGSTER_TIMMY, TH12_Route24_Object3_Intro, TH12_Route24_Object3_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route24_Object3_Rematch
+    msgbox TH12_Route24_Object3_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route24_Object3_Rematch::
+    trainerbattle_rematch TRAINER_TH12_YOUNGSTER_TIMMY, TH12_Route24_Object3_Intro, TH12_Route24_Object3_Defeat
     msgbox TH12_Route24_Object3_After, MSGBOX_AUTOCLOSE
     end
 
@@ -47,6 +68,13 @@ TH12_Route24_Object3_After:
 
 TH12_Route24_Object4::
     trainerbattle_single TRAINER_TH12_LASS_ALI, TH12_Route24_Object4_Intro, TH12_Route24_Object4_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route24_Object4_Rematch
+    msgbox TH12_Route24_Object4_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route24_Object4_Rematch::
+    trainerbattle_rematch TRAINER_TH12_LASS_ALI, TH12_Route24_Object4_Intro, TH12_Route24_Object4_Defeat
     msgbox TH12_Route24_Object4_After, MSGBOX_AUTOCLOSE
     end
 
@@ -62,6 +90,13 @@ TH12_Route24_Object4_After:
 
 TH12_Route24_Object5::
     trainerbattle_single TRAINER_TH12_BUG_CATCHER_CALE, TH12_Route24_Object5_Intro, TH12_Route24_Object5_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route24_Object5_Rematch
+    msgbox TH12_Route24_Object5_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route24_Object5_Rematch::
+    trainerbattle_rematch TRAINER_TH12_BUG_CATCHER_CALE, TH12_Route24_Object5_Intro, TH12_Route24_Object5_Defeat
     msgbox TH12_Route24_Object5_After, MSGBOX_AUTOCLOSE
     end
 
@@ -81,6 +116,13 @@ TH12_Route24_Object5_After:
 
 TH12_Route24_Object6::
     trainerbattle_single TRAINER_TH12_CAMPER_SHANE, TH12_Route24_Object6_Intro, TH12_Route24_Object6_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route24_Object6_Rematch
+    msgbox TH12_Route24_Object6_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route24_Object6_Rematch::
+    trainerbattle_rematch TRAINER_TH12_CAMPER_SHANE, TH12_Route24_Object6_Intro, TH12_Route24_Object6_Defeat
     msgbox TH12_Route24_Object6_After, MSGBOX_AUTOCLOSE
     end
 
@@ -105,6 +147,13 @@ TH12_Route24_Object7::
 
 TH12_Route25_Object0::
     trainerbattle_single TRAINER_TH12_HIKER_FRANKLIN, TH12_Route25_Object0_Intro, TH12_Route25_Object0_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route25_Object0_Rematch
+    msgbox TH12_Route25_Object0_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route25_Object0_Rematch::
+    trainerbattle_rematch TRAINER_TH12_HIKER_FRANKLIN, TH12_Route25_Object0_Intro, TH12_Route25_Object0_Defeat
     msgbox TH12_Route25_Object0_After, MSGBOX_AUTOCLOSE
     end
 
@@ -121,6 +170,13 @@ TH12_Route25_Object0_After:
 
 TH12_Route25_Object1::
     trainerbattle_single TRAINER_TH12_YOUNGSTER_JOEY, TH12_Route25_Object1_Intro, TH12_Route25_Object1_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route25_Object1_Rematch
+    msgbox TH12_Route25_Object1_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route25_Object1_Rematch::
+    trainerbattle_rematch TRAINER_TH12_YOUNGSTER_JOEY, TH12_Route25_Object1_Intro, TH12_Route25_Object1_Defeat
     msgbox TH12_Route25_Object1_After, MSGBOX_AUTOCLOSE
     end
 
@@ -139,6 +195,13 @@ TH12_Route25_Object1_After:
 
 TH12_Route25_Object2::
     trainerbattle_single TRAINER_TH12_HIKER_WAYNE, TH12_Route25_Object2_Intro, TH12_Route25_Object2_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route25_Object2_Rematch
+    msgbox TH12_Route25_Object2_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route25_Object2_Rematch::
+    trainerbattle_rematch TRAINER_TH12_HIKER_WAYNE, TH12_Route25_Object2_Intro, TH12_Route25_Object2_Defeat
     msgbox TH12_Route25_Object2_After, MSGBOX_AUTOCLOSE
     end
 
@@ -155,6 +218,13 @@ TH12_Route25_Object2_After:
 
 TH12_Route25_Object3::
     trainerbattle_single TRAINER_TH12_YOUNGSTER_DAN, TH12_Route25_Object3_Intro, TH12_Route25_Object3_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route25_Object3_Rematch
+    msgbox TH12_Route25_Object3_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route25_Object3_Rematch::
+    trainerbattle_rematch TRAINER_TH12_YOUNGSTER_DAN, TH12_Route25_Object3_Intro, TH12_Route25_Object3_Defeat
     msgbox TH12_Route25_Object3_After, MSGBOX_AUTOCLOSE
     end
 
@@ -171,6 +241,13 @@ TH12_Route25_Object3_After:
 
 TH12_Route25_Object4::
     trainerbattle_single TRAINER_TH12_PICNICKER_KELSEY, TH12_Route25_Object4_Intro, TH12_Route25_Object4_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route25_Object4_Rematch
+    msgbox TH12_Route25_Object4_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route25_Object4_Rematch::
+    trainerbattle_rematch TRAINER_TH12_PICNICKER_KELSEY, TH12_Route25_Object4_Intro, TH12_Route25_Object4_Defeat
     msgbox TH12_Route25_Object4_After, MSGBOX_AUTOCLOSE
     end
 
@@ -187,6 +264,13 @@ TH12_Route25_Object4_After:
 
 TH12_Route25_Object5::
     trainerbattle_single TRAINER_TH12_HIKER_NOB, TH12_Route25_Object5_Intro, TH12_Route25_Object5_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route25_Object5_Rematch
+    msgbox TH12_Route25_Object5_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route25_Object5_Rematch::
+    trainerbattle_rematch TRAINER_TH12_HIKER_NOB, TH12_Route25_Object5_Intro, TH12_Route25_Object5_Defeat
     msgbox TH12_Route25_Object5_After, MSGBOX_AUTOCLOSE
     end
 
@@ -206,6 +290,13 @@ TH12_Route25_Object5_After:
 
 TH12_Route25_Object6::
     trainerbattle_single TRAINER_TH12_CAMPER_FLINT, TH12_Route25_Object6_Intro, TH12_Route25_Object6_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route25_Object6_Rematch
+    msgbox TH12_Route25_Object6_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route25_Object6_Rematch::
+    trainerbattle_rematch TRAINER_TH12_CAMPER_FLINT, TH12_Route25_Object6_Intro, TH12_Route25_Object6_Defeat
     msgbox TH12_Route25_Object6_After, MSGBOX_AUTOCLOSE
     end
 
@@ -222,6 +313,13 @@ TH12_Route25_Object6_After:
 
 TH12_Route25_Object7::
     trainerbattle_single TRAINER_TH12_YOUNGSTER_CHAD, TH12_Route25_Object7_Intro, TH12_Route25_Object7_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route25_Object7_Rematch
+    msgbox TH12_Route25_Object7_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route25_Object7_Rematch::
+    trainerbattle_rematch TRAINER_TH12_YOUNGSTER_CHAD, TH12_Route25_Object7_Intro, TH12_Route25_Object7_Defeat
     msgbox TH12_Route25_Object7_After, MSGBOX_AUTOCLOSE
     end
 
@@ -239,6 +337,13 @@ TH12_Route25_Object7_After:
 
 TH12_Route25_Object8::
     trainerbattle_single TRAINER_TH12_LASS_HALEY, TH12_Route25_Object8_Intro, TH12_Route25_Object8_Defeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH12_Route25_Object8_Rematch
+    msgbox TH12_Route25_Object8_After, MSGBOX_AUTOCLOSE
+    end
+
+TH12_Route25_Object8_Rematch::
+    trainerbattle_rematch TRAINER_TH12_LASS_HALEY, TH12_Route25_Object8_Intro, TH12_Route25_Object8_Defeat
     msgbox TH12_Route25_Object8_After, MSGBOX_AUTOCLOSE
     end
 

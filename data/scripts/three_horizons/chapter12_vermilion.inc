@@ -190,3 +190,23 @@ TH12_CenterLocal4::
     end
 TH12_CenterText4:
     .string "The harbor is full of stories.\nI wonder which ones BILL can prove!$"
+
+TH13_VsSeekerResearcher::
+    lock
+    faceplayer
+    goto_if_set FLAG_TH13_VS_SEEKER, TH13_VsSeekerAdvice
+    checkitem ITEM_VS_SEEKER
+    goto_if_eq VAR_RESULT, TRUE, TH13_VsSeekerReceived
+    msgbox TH13_VsSeekerGiftText
+    giveitem ITEM_VS_SEEKER
+    goto_if_eq VAR_RESULT, FALSE, TH12_RewardBagFull
+TH13_VsSeekerReceived:
+    setflag FLAG_TH13_VS_SEEKER
+TH13_VsSeekerAdvice:
+    msgbox TH13_VsSeekerAdviceText
+    release
+    end
+TH13_VsSeekerGiftText:
+    .string "Training together helps everyone!\nTake this VS. SEEKER.\pUse it near Trainers you have beaten\nto invite them to another battle.$"
+TH13_VsSeekerAdviceText:
+    .string "The VS. SEEKER never needs charging.\nUse it again whenever you like!\pNearby Trainers signal when ready.\nTalk to them for a rematch.\pIt works in caves and buildings too.\nTheir teams grow along with yours.\pGym Leaders and story opponents\nhave their own plans. They will not\lanswer an ordinary rematch call.$"
