@@ -475,6 +475,14 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     return bgEvent->bgUnion.script;
 }
 
+#if TESTING && THREE_HORIZONS
+const u8 *Test_TH_MetatileScript(u8 behavior)
+{
+    struct MapPosition position = {0};
+    return GetInteractedMetatileScript(&position, behavior, DIR_NORTH);
+}
+#endif
+
 static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatileBehavior, enum Direction direction)
 {
     s8 elevation;
