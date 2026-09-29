@@ -8768,9 +8768,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .levelUpLearnset = sKadabraLevelUpLearnset,
         .teachableLearnset = sKadabraTeachableLearnset,
         .evolutions = EVOLUTION(
-                            #if THREE_HORIZONS
+#if THREE_HORIZONS
                                 {EVO_LEVEL, 36, SPECIES_ALAKAZAM},
-                            #endif
+#endif
                                 {EVO_TRADE, 0, SPECIES_ALAKAZAM},
                                 {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_ALAKAZAM}),
     },
@@ -9116,9 +9116,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .levelUpLearnset = sMachokeLevelUpLearnset,
         .teachableLearnset = sMachokeTeachableLearnset,
         .evolutions = EVOLUTION(
-                            #if THREE_HORIZONS
+#if THREE_HORIZONS
                                 {EVO_LEVEL, 36, SPECIES_MACHAMP},
-                            #endif
+#endif
                                 {EVO_TRADE, 0, SPECIES_MACHAMP},
                                 {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_MACHAMP}),
     },
@@ -9862,9 +9862,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sGravelerTeachableLearnset,
         .formSpeciesIdTable = sGravelerFormSpeciesIdTable,
         .evolutions = EVOLUTION(
-                            #if THREE_HORIZONS
+#if THREE_HORIZONS
                                 {EVO_LEVEL, 36, SPECIES_GOLEM},
-                            #endif
+#endif
                                 {EVO_TRADE, 0, SPECIES_GOLEM},
                                 {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GOLEM}),
     },
@@ -12318,9 +12318,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .levelUpLearnset = sHaunterLevelUpLearnset,
         .teachableLearnset = sHaunterTeachableLearnset,
         .evolutions = EVOLUTION(
-                            #if THREE_HORIZONS
+#if THREE_HORIZONS
                                 {EVO_LEVEL, 36, SPECIES_GENGAR},
-                            #endif
+#endif
                                 {EVO_TRADE, 0, SPECIES_GENGAR},
                                 {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GENGAR}),
     },
@@ -17820,7 +17820,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 81,
         .baseSpAttack  = P_UPDATED_STATS >= GEN_2 ? 60 : 100,
         .baseSpDefense = 100,
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .types = MON_TYPES(TYPE_WATER, TYPE_DRAGON),
 #else
         .types = MON_TYPES(TYPE_WATER, TYPE_FLYING),
@@ -17892,7 +17892,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             TRACKS_SLITHER,
             sAnimTable_Following
         )
-        #if THREE_HORIZONS
+#if THREE_HORIZONS
         .levelUpLearnset = sTHGyaradosLevelUpLearnset,
 #else
         .levelUpLearnset = sGyaradosLevelUpLearnset,

@@ -6,6 +6,18 @@ from tools.three_horizons.tests.test_playtest11_maps import ROOT
 
 
 class Playtest13Species(unittest.TestCase):
+    def test_generated_teachable_conditionals_are_balanced(self):
+        from tools.learnset_helpers.make_teaching_types import extract_repo_species_data
+        depth = 0
+        for entry in extract_repo_species_data():
+            if isinstance(entry, str):
+                if entry.startswith('#if'):
+                    depth += 1
+                elif entry.startswith('#endif'):
+                    depth -= 1
+                    self.assertGreaterEqual(depth, 0, 'Unmatched generated #endif')
+        self.assertEqual(depth, 0)
+
     def test_release_generation_and_species_identity_configuration_is_unchanged(self):
         expected = {
             'include/config/species_enabled.h': '86a829d83a344bf23440a586706bf3c91ccef9a02c145afa0d1844c8824374eb',
