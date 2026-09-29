@@ -41,6 +41,7 @@ TH_RocketDuoReady:
 TH12_RocketSelectFormat::
     setvar VAR_0x8004, PARTY_SIZE
     specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
+    goto_if_eq VAR_RESULT, 0, TH13_RocketNoUsable
     goto_if_lt VAR_RESULT, 2, TH12_RocketSingles
     msgbox TH_RocketDuoIntro
     setvar VAR_LAST_TALKED, LOCALID_TH_JESSIE
@@ -51,7 +52,7 @@ TH_RocketDuoBattle::
 TH12_RocketSingles:
     msgbox TH12_RocketSingleIntro
     closemessage
-    trainerbattle_no_intro TRAINER_TH11_JESSIE, TH_JessieDefeat
+    trainerbattle_no_intro TRAINER_TH11_JESSIE, TH13_JessieSingleDefeat
     msgbox TH12_RocketSingleSecond
     closemessage
     trainerbattle_no_intro TRAINER_TH11_JAMES, TH_JamesDefeat
@@ -74,6 +75,11 @@ TH12_RocketRelease:
     special TH_RefreshFollower
     releaseall
     end
+TH13_RocketNoUsable:
+    msgbox TH13_RocketNoUsableText
+    goto TH12_RocketRelease
+TH13_RocketNoUsableText:
+    .string "JAMES: No partner can battle?\nCome back when one is ready!$"
 TH12_RocketBlastOff:
     jump_in_place_up
     set_invisible
@@ -83,9 +89,11 @@ TH12_RocketBlastOff:
     set_invisible
     step_end
 TH12_RocketSingleIntro::
-    .string "JESSIE: Only one partner ready?\nThen you face us one at a time!\pMEOWTH: No breaks between battles!$"
+    .string "JESSIE: Prepare for trouble!\nThose fossils are coming with us!\pJAMES: Make it double! Only one\npartner? We'll take turns, then!\pMEOWTH: No breaks between battles!\nI'll keep an eye on those fossils!$"
+TH13_JessieSingleDefeat:
+    .string "JAMES! Pick up where I left off!$"
 TH12_RocketSingleSecond:
-    .string "JAMES: My turn!\nKOFFING, let's finish this!$"
+    .string "JAMES: Leave it to me, JESSIE!\nKOFFING, the fossils are at stake!$"
 TH_RocketDuoMeowth::
     lock
     faceplayer
