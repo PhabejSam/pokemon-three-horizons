@@ -13,9 +13,16 @@ bool32 TH_IsHMFieldMove(enum FieldMove move)
 
 bool32 TH_FieldMoveUnlocked(enum FieldMove move)
 {
-    // The remaining Kanto HMs are deliberately unavailable in this chapter.
-    // Cut is a Cascade Badge action, rather than Emerald's Boulder Badge gate.
-    return move == FIELD_MOVE_CUT && FlagGet(FLAG_BADGE02_GET) && CheckBagHasItem(ITEM_HM01, 1);
+    // Chapter field actions use Kanto badges and HM ownership.
+    switch (move)
+    {
+    case FIELD_MOVE_CUT:
+        return FlagGet(FLAG_BADGE02_GET) && CheckBagHasItem(ITEM_HM01, 1);
+    case FIELD_MOVE_FLASH:
+        return FlagGet(FLAG_BADGE03_GET) && CheckBagHasItem(ITEM_HM05, 1);
+    default:
+        return FALSE;
+    }
 }
 
 bool32 TH_CanUseFieldMove(struct Pokemon *mon, enum FieldMove move)

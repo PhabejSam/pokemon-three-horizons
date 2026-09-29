@@ -223,9 +223,15 @@ TH13_VsSeekerReceived:
     setflag FLAG_TH13_VS_SEEKER
 TH13_VsSeekerAdvice:
     msgbox TH13_VsSeekerAdviceText
+    goto_if_unset FLAG_BADGE03_GET, TH13_VsSeekerAdviceEnd
+    msgbox TH13_VermilionFlashLeadText
+TH13_VsSeekerAdviceEnd:
     release
     end
 TH13_VsSeekerGiftText:
     .string "Training together helps everyone!\nTake this VS. SEEKER.\pUse it near Trainers you have beaten\nto invite them to another battle.$"
 TH13_VsSeekerAdviceText:
     .string "The VS. SEEKER never needs charging.\nUse it again whenever you like!\pNearby Trainers signal when ready.\nTalk to them for a rematch.\pIt works in caves and buildings too.\nTheir teams grow along with yours.\pGym Leaders and story opponents\nhave their own plans. They will not\lanswer an ordinary rematch call.$"
+
+TH13_VermilionFlashLeadText:
+    .string "OAK asked another aide to meet you\non ROUTE 2, beyond DIGLETT'S CAVE.\pHead east to ROUTE 11 for the cave.\nThe aide has supplies for your work.$"

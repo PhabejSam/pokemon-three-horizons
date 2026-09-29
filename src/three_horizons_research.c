@@ -41,6 +41,11 @@ bool32 TH_ResearchTryStartPendingCall(void)
     return TRUE;
 }
 
+void TH_ScriptResearchQueueCall(void)
+{
+    gSpecialVar_Result = TH_ResearchQueueCall(gSpecialVar_0x8004);
+}
+
 void TH_ScriptResearchCompleteCall(void)
 {
     TH_ResearchCompleteCall(gSpecialVar_0x8004);

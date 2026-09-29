@@ -128,3 +128,6 @@ TH_Route1_MapScripts::
 .include "data/maps/TH13_DiglettsCave_SouthEntrance/scripts.inc"
 .include "data/maps/TH13_DiglettsCave_B1F/scripts.inc"
 .include "data/maps/TH13_DiglettsCave_NorthEntrance/scripts.inc"
+
+.include "data/maps/TH13_Route2_EastBuilding/scripts.inc"
+.include "data/scripts/three_horizons/chapter13_route2.inc"

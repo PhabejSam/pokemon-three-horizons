@@ -1,6 +1,6 @@
 {
   "mode": "focused",
   "native_filter": "test/three_horizons_flash.c",
-  "host_filter": "",
-  "visual_gate": ""
+  "host_filter": "test_playtest13_route2.py",
+  "visual_gate": "routes"
 }

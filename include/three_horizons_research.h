@@ -20,6 +20,7 @@ bool32 TH_ResearchTakePhoto(u16 photoId);
 bool32 TH_ResearchQueueCall(u16 callId);
 bool32 TH_ResearchTryStartPendingCall(void);
 void TH_ScriptResearchCompleteCall(void);
+void TH_ScriptResearchQueueCall(void);
 bool32 TH_ResearchHasEntry(u16 entryId);
 bool32 TH_ResearchHasPhoto(u16 photoId);
 u16 TH_ResearchNextPendingCall(void);

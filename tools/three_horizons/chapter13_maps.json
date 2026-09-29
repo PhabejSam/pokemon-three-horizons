@@ -34,6 +34,13 @@
       "id": "MAP_TH13_DIGLETTS_CAVE_NORTH_ENTRANCE",
       "layout": "LAYOUT_DIGLETTS_CAVE_NORTH_ENTRANCE",
       "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "Route2_EastBuilding_Frlg",
+      "name": "TH13_Route2_EastBuilding",
+      "id": "MAP_TH13_ROUTE2_EAST_BUILDING",
+      "layout": "LAYOUT_ROUTE2_ENTRANCE",
+      "script_owner": "chapter13_route2.inc"
     }
   ]
 }

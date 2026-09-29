@@ -663,5 +663,6 @@ gSpecials::
     def_special TH_ScriptResearchPhotoStatus
     def_special TH_ScriptTakeResearchPhoto
     def_special TH_ScriptResearchObserve
+    def_special TH_ScriptResearchQueueCall
     def_special TH_ScriptResearchCompleteCall
 #endif
