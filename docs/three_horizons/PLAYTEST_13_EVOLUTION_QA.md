@@ -48,7 +48,7 @@ Outrage tutor or TM.
 | Kadabra → Alakazam | Level 36; existing Linking Cord alternative retained | Yes, train an available Abra |
 | Machoke → Machamp | Level 36; Linking Cord retained | Yes, once Machop is encountered in the approved route/cave content |
 | Graveler → Golem | Level 36; Linking Cord retained | Yes, Mt. Moon Geodude |
-| Haunter → Gengar | Level 36; Linking Cord retained | Yes, after the approved Tower encounters |
+| Haunter → Gengar | Level 36; Linking Cord retained | Method verified; Tower ghosts cannot be caught without the unavailable Scope, so Tower alone is not an obtainable source in P13 |
 | Scyther → Scizor | Use Metal Coat | Later; no new early item reward |
 | Onix → Steelix | Use Metal Coat | Later; no new early item reward |
 | Poliwhirl → Politoed | Use King's Rock | Later; Water Stone still gives Poliwrath |

@@ -198,6 +198,8 @@
 #define TH12_FLAGS_END 0x2BB
 #define TH12_TRAINERS_START 53
 #define TH12_TRAINERS_END 103
+#define TH13_TRAINERS_START 104
+#define TH13_TRAINERS_END 156
 
 // Playtest 13: audited unused Emerald flags; preserve all saved IDs and sizes.
 #define FLAG_TH13_BILL_IN_MACHINE FLAG_UNUSED_0x493

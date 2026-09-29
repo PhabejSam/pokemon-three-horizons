@@ -278,7 +278,8 @@ jobs:
         if: steps.phase.outputs.mode == 'integration'
         run: |
           make -C tools/mapjson
-          python3 -m unittest discover -s tools/three_horizons/tests -v
+          set -o pipefail
+          python3 -m unittest discover -s tools/three_horizons/tests -v 2>&1 | tee integration-host.log
       - name: Build demo
         if: steps.phase.outputs.mode == 'integration'
         shell: bash
@@ -291,7 +292,7 @@ jobs:
           sha256sum pokemon-three-horizons.gba > pokemon-three-horizons.gba.sha256
           git rev-parse HEAD > demo-source-commit.txt
       - name: Verify legacy-state and clock regressions detect original defects
-        if: steps.phase.outputs.mode == 'integration'
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
         shell: bash
         run: |
           set -o pipefail
@@ -320,7 +321,7 @@ jobs:
           cp /tmp/th-clock.c src/three_horizons_clock.c
           git diff --exit-code
       - name: Verify nickname exit regression detects a stale interrupt
-        if: steps.phase.outputs.mode == 'integration'
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
         shell: bash
         run: |
           set -o pipefail
@@ -350,15 +351,20 @@ jobs:
           make THREE_HORIZONS=1 check TESTS="test/save.c" -j2 2>&1 | tee -a demo-tests.log
           ! grep -q "No tests found" demo-tests.log
       - name: Verify Playtest 12 negative controls
-        if: steps.phase.outputs.mode == 'integration'
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
         run: |
           python3 tools/three_horizons/check_playtest12_controls.py
           git diff --exit-code
+      - name: Verify focused Playtest 13 negative controls
+        if: steps.phase.outputs.mode == 'integration'
+        run: |
+          python3 tools/three_horizons/check_playtest13_controls.py
+          git diff --exit-code
       - name: Export source-matched playtest guide
         if: steps.phase.outputs.mode == 'integration'
-        run: python3 tools/three_horizons/export_encounters.py --revision "$(git rev-parse HEAD)" --output PLAYTEST_12_ENCOUNTERS.md
+        run: python3 tools/three_horizons/export_encounters.py --revision "$(git rev-parse HEAD)" --playtest 13 --output PLAYTEST_13_ENCOUNTERS.md
       - name: Verify Playtest 11 scene regressions detect the previous behavior
-        if: steps.phase.outputs.mode == 'integration'
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
         shell: bash
         run: |
           set -o pipefail
@@ -389,7 +395,7 @@ jobs:
           cp /tmp/th11-catch.c src/battle_script_commands.c
           git diff --exit-code
       - name: Verify first-battle regression catches the original overwrite
-        if: steps.phase.outputs.mode == 'integration'
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
         shell: bash
         run: |
           set -o pipefail
@@ -411,7 +417,7 @@ jobs:
           make THREE_HORIZONS=1 check TESTS="Three Horizons first rival battle initialization" -j2 > regression-positive.log 2>&1
           git diff --exit-code
       - name: Verify palette and fleeing regressions detect original defects
-        if: steps.phase.outputs.mode == 'integration'
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
         shell: bash
         run: |
           set -o pipefail
@@ -441,7 +447,7 @@ jobs:
           cp /tmp/th-event-objects.h include/constants/event_objects.h
           git diff --exit-code
       - name: Verify training and capture regression controls
-        if: steps.phase.outputs.mode == 'integration'
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
         shell: bash
         run: |
           set -o pipefail
@@ -496,7 +502,9 @@ jobs:
             pokemon-three-horizons.elf
             pokemon-three-horizons.map
             pokemon-three-horizons.gba.sha256
-            PLAYTEST_12_ENCOUNTERS.md
+            PLAYTEST_13_ENCOUNTERS.md
+            integration-host.log
+            playtest13-*.log
             docs/three_horizons/PLAYTEST_12.md
             docs/superpowers/specs/2026-09-27-playtest12-starter-moves.md
             playtest12-*-negative.log

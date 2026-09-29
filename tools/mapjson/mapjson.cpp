@@ -150,6 +150,13 @@ void load_project_maps() {
     }
 }
 
+bool is_project_layout(Json layout) {
+    const string id = layout["id"].string_value();
+    return id.rfind("LAYOUT_TH_", 0) == 0
+        || id.rfind("LAYOUT_TH12_", 0) == 0
+        || id.rfind("LAYOUT_TH13_", 0) == 0;
+}
+
 bool project_layout_selected(Json layout, string layout_version) {
     if (version != "three_horizons") return true;
     return layout_version == "emerald"
@@ -815,7 +822,7 @@ string generate_layout_headers_text(Json layouts_data) {
     text << get_generated_warning("data/layouts/layouts.json", true);
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
-        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+        if (version != "three_horizons" && is_project_layout(layout))
             continue;
         if (layout == Json::object()) continue;
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
@@ -877,7 +884,7 @@ string generate_layouts_table_text(Json layouts_data) {
          << json_to_string(layouts_data, "layouts_table_label") << "::\n";
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
-        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+        if (version != "three_horizons" && is_project_layout(layout))
             continue;
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;
@@ -925,7 +932,7 @@ string generate_layouts_constants_text(Json layouts_data) {
 
     int i = 1;
     for (auto &layout : layouts_data["layouts"].array_items()) {
-        if (version != "three_horizons" && layout["id"].string_value().rfind("LAYOUT_TH_", 0) == 0)
+        if (version != "three_horizons" && is_project_layout(layout))
             continue;
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;

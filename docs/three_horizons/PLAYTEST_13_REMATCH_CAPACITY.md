@@ -1,6 +1,6 @@
 # Playtest 13 rematch capacity decision
 
-Status: approved by the user on 2026-09-29; implementation and verification in progress.
+Status: approved by the user on 2026-09-29; all 121 ordinary trainers are implemented. Focused checks pass; final integration and hardware acceptance are tracked separately.
 
 The existing save contains 100 one-byte `trainerRematches` entries. Its size and
 offset must remain unchanged for Playtest 12 battery saves. A trainer ID must not
@@ -59,7 +59,7 @@ hooks at map load and cold Continue.
 
 All 68 shipped ordinary trainers are registered, including Luis's swimming script,
 ordinary Mt. Moon grunts, Gym trainers, and ship cabin/deck trainers. The remaining
-53 planned trainers must be registered when their approved maps are authored.
+53 planned trainers are now also registered on their authored maps.
 Bosses, scripted rivals, Jessie/James, the fossil researcher, the robbed-house
 grunt, and the Nugget Bridge recruiter remain excluded.
 
@@ -89,8 +89,9 @@ first-battle preservation, defeat flags, unchanged save sizes and legal parties.
 Exact-ROM mGBA checks also cover rematch win/loss, immediate reuse, map change,
 cold Continue, indoor/cave/ship readiness, Luis's clear postbattle path, and
 boss/unseen exclusions. See PLAYTEST_13_VERIFICATION.md for revisions and limits.
-The remaining 53 trainers are added with their maps; the final coverage audit
-and non-TH runtime controls remain integration requirements.
+The remaining 53 trainers have been added with their maps; Task40's nine native
+rematch groups pass with all 121 records. The final coverage audit and non-TH
+runtime controls remain integration requirements.
 
 
 ## Route 11 addition (Task 33)

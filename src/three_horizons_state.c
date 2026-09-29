@@ -58,6 +58,10 @@ void TH_MigrateSaveState(void)
         // contain arbitrary bits here; initialize them once, never on Continue.
         for (u32 flag = TH13_FLAGS_START; flag <= TH13_FLAGS_END; flag++)
             FlagClear(flag);
+        // P12 did not own these trainer IDs. Initialize only their newly
+        // allocated defeat bits; subsequent P13 Continues preserve every win.
+        for (u32 trainer = TH13_TRAINERS_START; trainer <= TH13_TRAINERS_END; trainer++)
+            FlagClear(TRAINER_FLAGS_START + trainer);
         // P12 allowed an in-game save after Bill entered his machine. Import
         // that witnessed scene before Continue clears the map's temp flags.
         // Identical temp bits in another room do not prove Bill's progress.

@@ -1,5 +1,15 @@
 # Playtest 12 candidate — verification record
 
+## User-reported hardware addendum — 2026-09-29
+
+Full Playtest 12 chapter completed on RG40XX H using VBA-Next by the project
+owner/tester. The user will supply that exact post-Surge battery save for
+Playtest 13 migration acceptance. This is user-reported
+P12 hardware history, not a P13 hardware pass. The currently identified backup
+is an older Cerulean save with a Playtest 11 version marker and is not proof of
+the final post-Surge migration gate. Historical automated evidence below is
+preserved unchanged.
+
 Date: 2026-09-27. This is a playable candidate, not completion of every approved acceptance item. The Rocket artwork update below supersedes the original candidate's missing-art limitation.
 
 ## Rocket artwork update — current package

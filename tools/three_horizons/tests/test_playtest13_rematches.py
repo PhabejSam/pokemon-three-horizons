@@ -25,9 +25,9 @@ class Playtest13Rematches(unittest.TestCase):
         text = (ROOT/'src/data/three_horizons_rematches.h').read_text()
         entries = re.findall(r'\{(TRAINER_TH\w+), (MAP_TH\w+), (\d+)\}', text)
         ids = dict(re.findall(r'#define (TRAINER_TH\w+) (\d+)', (ROOT/'include/constants/opponents.h').read_text()))
-        expected = (set(range(1, 32)) - {7, 24, 29}) | (set(range(53, 94)) - {68}) | set(range(104,144))
+        expected = (set(range(1, 32)) - {7, 24, 29}) | (set(range(53, 94)) - {68}) | set(range(104,157))
         self.assertEqual({int(ids[t]) for t, m, l in entries}, expected)
-        self.assertEqual(len(entries), 108)
+        self.assertEqual(len(entries), 121)
         maps = {d['id']: d for p in (ROOT/'data/maps').glob('TH*/map.json') for d in [json.loads(p.read_text())]}
         sources = '\n'.join(p.read_text() for p in (ROOT/'data/scripts/three_horizons').glob('*.inc'))
         seen = set()
@@ -47,7 +47,7 @@ class Playtest13Rematches(unittest.TestCase):
         for trainer, _, _ in entries:
             self.assertRegex(sources, r'trainerbattle_rematch '+trainer+r',')
         blocks = re.findall(r'^TH\w+_Rematch:+\n(.*?)(?=^\w+:|\Z)', sources, re.M|re.S)
-        self.assertEqual(len(blocks), 108)
+        self.assertEqual(len(blocks), 121)
         for block in blocks:
             for one_time_command in ('giveitem', 'givemon', 'setflag', 'setvar', 'addmoney'):
                 self.assertNotIn(one_time_command, block)

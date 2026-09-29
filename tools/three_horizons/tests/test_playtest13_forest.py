@@ -59,7 +59,9 @@ class ForestClearing(unittest.TestCase):
     self.assertIn('TH_RESEARCH_FOREST_PAIR',s.entries)
     self.assertEqual(s.photos,{'TH_PHOTO_FOREST_PAIR'} if gear and answer else set())
     self.assertLessEqual(legacy,s.flags)
-    self.assertEqual(s.flags-legacy,{'FLAG_TH13_SCENE_FOREST_PAIR'})
+    expected={'FLAG_TH13_SCENE_FOREST_PAIR'}
+    if gear and answer:expected.add('FLAG_TH13_PHOTO_FOREST_PAIR')
+    self.assertEqual(s.flags-legacy,expected)
     s.run('TH13_Forest_Pair')
     self.assertEqual(s.messages.count('TH13_Forest_FirstText'),1)
     self.assertIn('TH13_Forest_RepeatText',s.messages)

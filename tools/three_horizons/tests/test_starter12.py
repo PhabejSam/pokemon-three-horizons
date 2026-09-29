@@ -42,11 +42,18 @@ class Starter12(unittest.TestCase):
         new = ROOT/'src/data/pokemon/level_up_learnsets/three_horizons.h'
         active = new.read_text() if new.exists() else original
         for species, entries in requirements.items():
+            # Approved P13 Task29 explicitly replaces only Typhlosion's L40
+            # Earthquake. Keep the historical P12 requirements file intact.
+            replaced = set()
+            if new.exists() and species == 'Typhlosion':
+                self.assertIn([40, 'MOVE_EARTHQUAKE'], entries)
+                entries = [[40, 'MOVE_EARTH_POWER'] if e == [40, 'MOVE_EARTHQUAKE'] else e for e in entries]
+                replaced.add('MOVE_EARTHQUAKE')
             actual = learnset(active, ('TH' if new.exists() else '')+species)
             with self.subTest(species=species):
                 for entry in entries:
                     self.assertIn(tuple(entry), actual)
-                moved = {move for level, move in entries}
+                moved = {move for level, move in entries} | replaced
                 for old in learnset(original, species):
                     if old[1] not in moved:
                         self.assertIn(old, actual)
