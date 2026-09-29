@@ -75,4 +75,14 @@ class Lavender(unittest.TestCase):
   self.assertFalse(any('Fuji' in o['script'] or o['graphics_id']=='OBJ_EVENT_GFX_MR_FUJI' for o in house['object_events']))
   self.assertEqual(sum(o['script']=='TH_TrainingClerk' for o in map_data('TH13_LavenderTown_Mart')['object_events']),1)
 
+ def test_interior_residents_never_overlap_training_clerk(self):
+  for suffix in ['House1','House2','Mart','VolunteerPokemonHouse','PokemonCenter_1F','PokemonCenter_2F']:
+   m=map_data('TH13_LavenderTown_'+suffix)
+   positions=[(o['x'],o['y']) for o in m['object_events']]
+   self.assertEqual(len(positions),len(set(positions)),m['name'])
+   if suffix=='Mart':
+    clerk=next(o for o in m['object_events'] if o['script']=='TH_TrainingClerk')
+    w,h,c=tiles(m['name']);self.assertFalse(c[clerk['y']*w+clerk['x']]&0xc00)
+    self.assertEqual(clerk['elevation'],c[clerk['y']*w+clerk['x']]>>12)
+
 if __name__=='__main__':unittest.main()
