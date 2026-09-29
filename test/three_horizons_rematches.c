@@ -76,6 +76,56 @@ TEST("Three Horizons rematch level clamps safely")
         EXPECT_EQ(TH13_GetRematchLevel(cases[i].highest, cases[i].original, cases[i].badges), cases[i].expected);
 }
 
+TEST("Three Horizons rematch party excludes Eggs and leaves first battles untouched")
+{
+    struct Pokemon saved[PARTY_SIZE], output[PARTY_SIZE], untouched[PARTY_SIZE];
+    memcpy(saved, gPlayerParty, sizeof(saved));
+    memset(gPlayerParty, 0, sizeof(saved));
+    CreateMonWithIVs(&gPlayerParty[0], SPECIES_PIKACHU, 17, 0, OTID_STRUCT_PLAYER_ID, 31);
+    CreateMonWithIVs(&gPlayerParty[1], SPECIES_PIKACHU, 100, 0, OTID_STRUCT_PLAYER_ID, 31);
+    u32 egg = TRUE;
+    SetMonData(&gPlayerParty[1], MON_DATA_IS_EGG, &egg);
+    EXPECT_EQ(TH13_HighestNonEggPartyLevel(), 17);
+    memset(output, 0x5a, sizeof(output));
+    memcpy(untouched, output, sizeof(output));
+    TH13_ResetRematches();
+    EXPECT(!TH13_TryCreateRematchParty(output, TRAINER_TH_RICK));
+    EXPECT_EQ(memcmp(output, untouched, sizeof(output)), 0);
+    EXPECT(!TH13_TryCreateRematchParty(output, TRAINER_TH_BROCK));
+    EXPECT_EQ(memcmp(output, untouched, sizeof(output)), 0);
+    memcpy(gPlayerParty, saved, sizeof(saved));
+    CalculatePlayerPartyCount();
+}
+
+TEST("Three Horizons authored rematch tiers retain level offsets and legal abilities")
+{
+    static const struct TrainerMon baseline[] = {
+        {.species = SPECIES_CATERPIE, .lvl = 5, .ability = ABILITY_SHIELD_DUST},
+        {.species = SPECIES_RATTATA, .lvl = 7, .ability = ABILITY_RUN_AWAY},
+        {.species = SPECIES_EEVEE, .lvl = 3, .ability = ABILITY_RUN_AWAY},
+    };
+    struct Trainer trainer = *TH_TestGetActualTrainer(TRAINER_TH_RICK);
+    trainer.party = baseline;
+    trainer.partySize = ARRAY_COUNT(baseline);
+    struct Pokemon party[PARTY_SIZE];
+    EXPECT(TH13_CreateRematchPartyFromTrainer(party, &trainer, 100, 0));
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 22);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 24);
+    EXPECT_EQ(GetMonData(&party[2], MON_DATA_LEVEL), 20);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_SPECIES), SPECIES_BUTTERFREE);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_SPECIES), SPECIES_RATICATE);
+    EXPECT_EQ(GetMonData(&party[2], MON_DATA_SPECIES), SPECIES_EEVEE);
+    for (u32 i = 0; i < ARRAY_COUNT(baseline); i++)
+    {
+        u32 species = GetMonData(&party[i], MON_DATA_SPECIES);
+        u32 ability = GetMonAbility(&party[i]);
+        EXPECT(ability == gSpeciesInfo[species].abilities[0] || ability == gSpeciesInfo[species].abilities[1]);
+        EXPECT(GetMonData(&party[i], MON_DATA_MOVE1) != MOVE_NONE);
+    }
+    EXPECT_EQ(baseline[0].species, SPECIES_CATERPIE);
+    EXPECT_EQ(baseline[0].lvl, 5);
+}
+
 TEST("Three Horizons rematch level is monotonic and preserves original floor")
 {
     static const u8 caps[] = {24, 24, 24, 35, 45, 55, 65, 75, 100};

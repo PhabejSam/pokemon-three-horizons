@@ -1,6 +1,8 @@
 #ifndef GUARD_THREE_HORIZONS_REMATCHES_H
 #define GUARD_THREE_HORIZONS_REMATCHES_H
 #include "global.h"
+struct Pokemon;
+struct Trainer;
 
 struct TH13RematchEntry
 {
@@ -18,4 +20,6 @@ bool32 TH13_IsRematchReady(u16 trainerId);
 bool32 TH13_BeginRematch(u16 trainerId);
 void TH13_ResetRematches(void);
 bool32 TH13_TryCreateRematchParty(struct Pokemon *party, u16 trainerId);
+bool32 TH13_CreateRematchPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, u8 highestLevel, u8 badges);
+u8 TH13_HighestNonEggPartyLevel(void);
 #endif
