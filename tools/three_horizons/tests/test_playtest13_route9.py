@@ -58,10 +58,11 @@ class Route9(unittest.TestCase):
   additions=m['object_events'][12:];self.assertEqual(len(additions),3)
   occupied={(o['x'],o['y']) for o in m['object_events']}
   self.assertEqual(len(occupied),len(m['object_events']))
-  seen=reachable((42,6),floor,occupied)
+  seen=reachable((16,6),floor,occupied)
   for o in additions:
    self.assertIn((o['x'],o['y']),floor)
    self.assertTrue(seen.intersection([(o['x']-1,o['y']),(o['x']+1,o['y']),(o['x'],o['y']-1),(o['x'],o['y']+1)]))
+  for o in additions[:2]:self.assertEqual(a[o['y']*w+o['x']]&0x3ff,0x00d,'Grazing subjects must stand in the native grass patch')
   self.assertEqual(m['object_events'][9]['script'],'TH_Journey_Tree')
   items=m['object_events'][10:12]+[o for o in m['bg_events'] if o['type']=='hidden_item']
   self.assertEqual(len(items),5);flags=[o['flag'] for o in items]
