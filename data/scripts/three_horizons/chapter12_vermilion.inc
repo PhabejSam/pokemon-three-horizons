@@ -17,6 +17,38 @@ TH12_SaffronClosed::
 TH12_SaffronClosedText:
     .string "SAFFRON is closed to visitors.\nThe UNDERGROUND PATH is open.\pFollow it to travel between\nCERULEAN and VERMILION.$"
 
+@ The inherited door barriers remain in place. Intercept only travel toward
+@ SAFFRON, so a player returning from the far half can always leave safely.
+TH13_SaffronGuardNorth::
+    specialvar VAR_RESULT, GetPlayerFacingDirection
+    goto_if_ne VAR_RESULT, DIR_SOUTH, TH13_SaffronGuardEnd
+    lockall
+    msgbox TH12_SaffronClosedText
+    closemessage
+    applymovement OBJ_EVENT_ID_PLAYER, TH13_SaffronGuardStepUp
+    waitmovement 0
+    releaseall
+    end
+
+TH13_SaffronGuardSouth::
+    specialvar VAR_RESULT, GetPlayerFacingDirection
+    goto_if_ne VAR_RESULT, DIR_NORTH, TH13_SaffronGuardEnd
+    lockall
+    msgbox TH12_SaffronClosedText
+    closemessage
+    applymovement OBJ_EVENT_ID_PLAYER, TH13_SaffronGuardStepDown
+    waitmovement 0
+    releaseall
+TH13_SaffronGuardEnd:
+    end
+
+TH13_SaffronGuardStepUp:
+    walk_up
+    step_end
+TH13_SaffronGuardStepDown:
+    walk_down
+    step_end
+
 TH12_EastBoundary::
     lockall
     msgbox TH12_EastBoundaryText
