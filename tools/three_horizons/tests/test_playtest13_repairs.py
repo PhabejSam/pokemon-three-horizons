@@ -2,12 +2,31 @@ import json
 import unittest
 from pathlib import Path
 
-from tools.three_horizons.tests.test_playtest11_maps import map_data, tiles
+from tools.three_horizons.tests.test_playtest11_maps import map_data, tiles, reachable
 
 ROOT = Path(__file__).resolve().parents[3]
 
 
 class Playtest13Repairs(unittest.TestCase):
+    def test_pewter_guide_is_outside_connection_camera_and_gate_covers_route(self):
+        data = map_data('TH_Pewter')
+        width, height, grid = tiles('TH_Pewter')
+        guide = next(o for o in data['object_events'] if o['script'] == 'TH_PewterBadgeGuide')
+        # The adjacent-map objects load at the connection. Keep the guide
+        # beyond the visible half-screen then, rather than teleporting him.
+        self.assertGreater((width - 1) - guide['x'], 8)
+        floor = {(i % width, i // width) for i, value in enumerate(grid)
+                 if value >> 12 == 3 and not value & 0xC00}
+        self.assertIn((guide['x'], guide['y']), floor)
+        objects = {(o['x'], o['y']) for o in data['object_events']}
+        gate = {(e['x'], e['y']) for e in data['coord_events'] if e['script'] == 'TH_Route3BadgeGate'}
+        exits = {(width - 1, y) for y in range(height)} & floor
+        self.assertTrue(exits)
+        self.assertFalse(reachable((37, 21), floor, objects | gate) & exits)
+        self.assertTrue(exits <= reachable((37, 21), floor, objects))
+        for x, y in gate & floor:
+            self.assertLessEqual(abs(x-guide['x']) + abs(y-guide['y']), 5)
+
     def test_saffron_guards_cover_walkable_lanes_and_safe_retreats(self):
         for name, retreat_y, allowed_map in (
                 ('TH12_Route5_SouthEntrance', 4, 'MAP_TH12_ROUTE5'),
