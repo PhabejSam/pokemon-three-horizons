@@ -29,6 +29,7 @@ class CaveRoute(unittest.TestCase):
         self.assertEqual(len(route['warp_events']),1)
         self.assertEqual(map_data(NAMES[-1])['warp_events'][1]['dest_warp_id'],'4')
         self.assertNotIn('setmetatile 17, 11, 169, TRUE',(ROOT/'data/maps/TH_Route2/scripts.inc').read_text())
+        self.assertFalse(any((o['x'],o['y'])==(17,11) and o['script']=='TH_Journey_Closed' for o in map_data('TH_Route2')['bg_events']))
         # Research partners cannot disconnect the long native cave corridor.
         w,h,a=tiles(NAMES[2]);floor={(i%w,i//w) for i,v in enumerate(a) if not v&0xc00}
         objects={(o['x'],o['y']) for o in map_data(NAMES[2])['object_events']}
