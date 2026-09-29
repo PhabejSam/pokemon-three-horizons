@@ -6,6 +6,7 @@
 #include "constants/pokedex.h"
 #include "constants/three_horizons.h"
 #include "constants/trainers.h"
+#include "constants/maps.h"
 #if THREE_HORIZONS
 void TH_MigrateSaveState(void)
 {
@@ -54,6 +55,15 @@ void TH_MigrateSaveState(void)
         // contain arbitrary bits here; initialize them once, never on Continue.
         for (u32 flag = TH13_FLAGS_START; flag <= TH13_FLAGS_END; flag++)
             FlagClear(flag);
+        // P12 allowed an in-game save after Bill entered his machine. Import
+        // that witnessed scene before Continue clears the map's temp flags.
+        // Identical temp bits in another room do not prove Bill's progress.
+        if (version == TH_STATE_VERSION_12
+            && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH12_ROUTE25_SEA_COTTAGE)
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TH12_ROUTE25_SEA_COTTAGE)
+            && FlagGet(FLAG_TEMP_2) && FlagGet(FLAG_TEMP_3) && FlagGet(FLAG_TEMP_4)
+            && !FlagGet(FLAG_TH12_BILL_RESCUED))
+            FlagSet(FLAG_TH13_BILL_IN_MACHINE);
         if (VarGet(VAR_TH_SIGHTING_SEEN) == 1)
             FlagSet(FLAG_TH13_OBS_HOOTHOOT);
         // P12 shared one receipt between two forest scenes. It proves a
