@@ -1,6 +1,6 @@
 {
   "mode": "focused",
-  "native_filter": "test/three_horizons_rematches.c",
-  "host_filter": "test_playtest13_cave_route.py",
-  "visual_gate": "routes"
+  "native_filter": "test/three_horizons_flash.c",
+  "host_filter": "",
+  "visual_gate": ""
 }
