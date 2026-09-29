@@ -67,6 +67,10 @@ jobs:
           focused_sources=$(find test -maxdepth 1 -name '*.c' ! -name '*.inc.c' -print | sort | tr '\n' ' ')
           test -n "$focused_sources"
           related_sources=""
+          if [ "$NATIVE_FILTER" = "test/three_horizons_tower.c" ]; then
+            related_sources="test/battle/ghost.c"
+            focused_sources="$focused_sources $related_sources"
+          fi
           if [ "$NATIVE_FILTER" = "Three Horizons playtest13 SELECT" ]; then
             related_sources="test/battle/move_effect/encore.c test/battle/move_effect/disable.c test/battle/move_effect/mimic.c test/battle/move_effect/last_resort.c test/battle/hold_effect/choice_band.c test/battle/hold_effect/choice_specs.c test/battle/hold_effect/choice_scarf.c"
             focused_sources="$focused_sources $related_sources"

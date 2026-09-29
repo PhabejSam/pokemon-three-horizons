@@ -335,6 +335,13 @@ static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
         return FALSE;
 }
 
+#ifdef TESTING
+bool8 TH_TestTowerGhostCheck(u16 mapGroup, u16 mapNum)
+{
+    return CheckSilphScopeInPokemonTower(mapGroup, mapNum);
+}
+#endif
+
 void BattleSetup_StartWildBattle(void)
 {
     if (GetSafariZoneFlag())
