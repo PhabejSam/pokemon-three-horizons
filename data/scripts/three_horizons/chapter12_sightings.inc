@@ -65,7 +65,7 @@ TH12_Moon_Gathering::
     @ If directly approached inside their circle, avoid walking into the player.
     getplayerxy VAR_0x8004, VAR_0x8005
     goto_if_lt VAR_0x8004, 24, TH12_Moon_Dance
-    goto_if_gt VAR_0x8004, 26, TH12_Moon_Dance
+    goto_if_gt VAR_0x8004, 27, TH12_Moon_Dance
     goto_if_lt VAR_0x8005, 29, TH12_Moon_Dance
     goto_if_gt VAR_0x8005, 31, TH12_Moon_Dance
     goto TH12_Moon_Watch
@@ -87,6 +87,8 @@ TH12_Moon_Watch:
     releaseall
     end
 TH12_Moon_Repeat:
+    applymovement LOCALID_TH12_SIGHT_MAKUHITA, TH12_Moon_Clap
+    waitmovement 0
     playmoncry SPECIES_MAKUHITA, CRY_MODE_NORMAL
     msgbox TH12_Moon_RepeatText
     waitmoncry
@@ -103,8 +105,10 @@ TH12_Moon_Clap:
 TH12_Moon_Circle1:
     walk_right
     walk_right
+    walk_right
     walk_down
     walk_down
+    walk_left
     walk_left
     walk_left
     walk_up
@@ -114,8 +118,10 @@ TH12_Moon_Circle2:
     walk_down
     walk_left
     walk_left
+    walk_left
     walk_up
     walk_up
+    walk_right
     walk_right
     walk_right
     walk_down
@@ -125,8 +131,10 @@ TH12_Moon_Circle3:
     walk_up
     walk_right
     walk_right
+    walk_right
     walk_down
     walk_down
+    walk_left
     walk_left
     walk_left
     step_end
