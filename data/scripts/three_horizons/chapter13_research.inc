@@ -78,3 +78,53 @@ TH13_ResearchCall_LavenderElm:
     .string "ELM: MISDREAVUS is known in JOHTO.\nBut that doesn't tell us why one\pis watching POKéMON TOWER.\nPlease be careful, {PLAYER}.$"
 TH13_ResearchCall_LavenderBirch:
     .string "BIRCH: Keep your earlier notes.\nThose observations still matter.\pWe don't have enough evidence\nto explain this. Stay careful.$"
+
+TH13_Forest_Pair::
+    lockall
+    hidefollower
+    applymovement 21, TH13_Forest_FaceRight
+    applymovement 22, TH13_Forest_FaceLeft
+    waitmovement 0
+    playmoncry SPECIES_PINSIR, CRY_MODE_NORMAL
+    waitmoncry
+    playmoncry SPECIES_HERACROSS, CRY_MODE_NORMAL
+    waitmoncry
+    goto_if_set FLAG_TH13_SCENE_FOREST_PAIR, TH13_Forest_Repeat
+    msgbox TH13_Forest_FirstText
+    setflag FLAG_TH13_SCENE_FOREST_PAIR
+    goto TH13_Forest_Record
+TH13_Forest_Repeat:
+    msgbox TH13_Forest_RepeatText
+TH13_Forest_Record:
+    setvar VAR_0x8004, TH_RESEARCH_FOREST_PAIR
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_FOREST_PAIR
+    call TH13_ResearchPhoto
+    special TH_RefreshFollower
+    releaseall
+    end
+TH13_Forest_Researcher::
+    msgbox TH13_Forest_ResearcherText, MSGBOX_NPC
+    end
+TH13_Forest_Cap::
+    lockall
+    goto_if_set FLAG_TH13_FOREST_RESEARCH_REWARD, TH13_Forest_CapEnd
+    giveitem ITEM_BOTTLE_CAP, 1
+    goto_if_eq VAR_RESULT, FALSE, TH13_Forest_CapEnd
+    setflag FLAG_TH13_FOREST_RESEARCH_REWARD
+    removeobject VAR_LAST_TALKED
+TH13_Forest_CapEnd:
+    releaseall
+    end
+TH13_Forest_FaceRight:
+    face_right
+    step_end
+TH13_Forest_FaceLeft:
+    face_left
+    step_end
+TH13_Forest_FirstText:
+    .string "PINSIR pauses beside HERACROSS.\nNeither tries to drive the other away.\pThey quietly share the clearing\nunder the forest canopy.$"
+TH13_Forest_RepeatText:
+    .string "PINSIR and HERACROSS exchange\nquiet cries. Both seem at ease.$"
+TH13_Forest_ResearcherText:
+    .string "PINSIR is native to KANTO.\nHERACROSS is known in JOHTO.\pI expected a territorial dispute.\nInstead, they share this clearing.\pA careful observation is worth more\nthan an early guess about why.$"

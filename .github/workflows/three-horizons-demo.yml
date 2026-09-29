@@ -229,7 +229,7 @@ jobs:
             arm-none-eabi-gcc -E -dM -Iinclude -DMODERN=1 -DTESTING=0 -DTHREE_HORIZONS=1 -DEMERALD -x c include/global.h > focused-release-macros.log
             grep -E '^#define (P_GEN_[1-9]_POKEMON|P_CROSS_GENERATION_EVOS|P_LVL_UP_LEARNSETS|TESTING|THREE_HORIZONS) ' focused-release-macros.log
           fi
-          if [ "$NATIVE_FILTER" = "test/three_horizons_flash.c" ]; then
+          if [ "$NATIVE_FILTER" = "test/three_horizons_flash.c" ] || [ "$NATIVE_FILTER" = "test/three_horizons_forest.c" ]; then
             make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_field_moves.c" -j2 2>&1 | tee focused-cut-compatibility.log
           fi
           if [ "$NATIVE_FILTER" = "test/three_horizons_research.c" ]; then

@@ -9,6 +9,7 @@
 #include "constants/three_horizons.h"
 #include "constants/trainers.h"
 #include "constants/maps.h"
+#include "constants/layouts.h"
 #if THREE_HORIZONS
 void TH_MigrateSaveState(void)
 {
@@ -84,6 +85,16 @@ void TH_MigrateSaveState(void)
             FlagSet(FLAG_TH13_VS_SEEKER);
         // Gear, photos and ship departure require witnessed P13 events.
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_13 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
+    }
+    // Continue restores the saved layout ID. Replace only the obsolete forest
+    // layout, retaining all old paths/coordinates and every progress receipt.
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_VIRIDIAN_FOREST)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TH_VIRIDIAN_FOREST)
+        && gSaveBlock1Ptr->mapLayoutId == LAYOUT_VIRIDIAN_FOREST)
+    {
+        gSaveBlock1Ptr->mapLayoutId = Overworld_GetMapHeaderByGroupAndId(
+            MAP_GROUP(MAP_TH_VIRIDIAN_FOREST), MAP_NUM(MAP_TH_VIRIDIAN_FOREST))->mapLayoutId;
+        memset(gSaveBlock1Ptr->mapView, 0, sizeof(gSaveBlock1Ptr->mapView));
     }
     if (VarGet(VAR_TH_CLOCK_MODE)>1) VarSet(VAR_TH_CLOCK_MODE,0);
     if (VarGet(VAR_TH_SHINY_RATE)>3) VarSet(VAR_TH_SHINY_RATE,0);
