@@ -1,15 +1,26 @@
 TH_FossilResearcherTrigger::
     goto_if_defeated TRAINER_TH9_SUPER_NERD_MIGUEL, TH_Story11End
     lockall
+    hidefollower TRUE
     setvar VAR_LAST_TALKED, LOCALID_TH_MTMOONB2F_2
+    getplayerxy VAR_0x8004, VAR_0x8005
+    goto_if_eq VAR_0x8004, 13, TH13_FossilResearcherFacing
+    applymovement LOCALID_TH_MTMOONB2F_2, TH13_FossilResearcherRight
+    waitmovement 0
+TH13_FossilResearcherFacing:
+    turnobject LOCALID_PLAYER, DIR_NORTH
     faceplayer
     trainerbattle_lavaridge LOCALID_TH_MTMOONB2F_2, TRAINER_TH9_SUPER_NERD_MIGUEL, TH_Trainer9_SUPER_NERD_MIGUEL_Intro, TH_Trainer9_SUPER_NERD_MIGUEL_Defeat, TH_FossilResearcherVictory
     releaseall
     end
 TH_FossilResearcherVictory:
     msgbox TH_Trainer9_SUPER_NERD_MIGUEL_After
+    special TH_RefreshFollower
     releaseall
     end
+TH13_FossilResearcherRight:
+    walk_right
+    step_end
 TH_Story11End:
     end
 
