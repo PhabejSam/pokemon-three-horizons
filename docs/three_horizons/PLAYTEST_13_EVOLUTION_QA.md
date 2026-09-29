@@ -46,7 +46,7 @@ Outrage tutor or TM.
 | Family | Single-player trigger | Availability by Lavender |
 |---|---|---|
 | Kadabra → Alakazam | Level 36; existing Linking Cord alternative retained | Yes, train an available Abra |
-| Machoke → Machamp | Level 36; Linking Cord retained | Yes, once Machop is encountered in the approved route/cave content |
+| Machoke → Machamp | Level 36; Linking Cord retained | Yes, Rock Tunnel Machop |
 | Graveler → Golem | Level 36; Linking Cord retained | Yes, Mt. Moon Geodude |
 | Haunter → Gengar | Level 36; Linking Cord retained | Method verified; Tower ghosts cannot be caught without the unavailable Scope, so Tower alone is not an obtainable source in P13 |
 | Scyther → Scizor | Use Metal Coat | Later; no new early item reward |
@@ -77,43 +77,75 @@ means the necessary species/item/location is not promised in this chapter.
 | Family extension | Existing method | Chapter status |
 |---|---|---|
 | Golbat → Crobat | Level with sufficient friendship (release threshold 160) | Early training possible |
-| Gloom → Bellossom | Sun Stone | Later item |
+| Gloom → Bellossom | Sun Stone | Later item/species access |
 | Chansey → Blissey | Friendship level-up | Later species access |
 | Eevee → Espeon / Umbreon | Friendship level-up by day / night | Later species access |
 | Eevee → Sylveon | Friendship level-up while knowing a Fairy move; evaluated before Espeon/Umbreon | Later species access |
 | Eevee → Leafeon / Glaceon | Leaf Stone / Ice Stone; native Hoenn location alternatives retained | Later species/item access |
 | Lickitung → Lickilicky | Level while knowing Rollout | Later species access |
 | Tangela → Tangrowth | Level while knowing Ancient Power | Later species access |
-| Togetic → Togekiss | Shiny Stone | Later item |
+| Togetic → Togekiss | Shiny Stone | Later item/species access |
 | Aipom → Ambipom | Level while knowing Double Hit | Later species access |
 | Yanma → Yanmega | Level while knowing Ancient Power | Later species access |
-| Murkrow → Honchkrow | Dusk Stone | Later item |
-| Misdreavus → Mismagius | Dusk Stone | Later item |
-| Gligar → Gliscor | Razor Fang at night, held on level-up or directly used | Later item |
-| Sneasel → Weavile | Razor Claw at night, held on level-up or directly used | Later item |
+| Murkrow → Honchkrow | Dusk Stone | Later item/species access |
+| Misdreavus → Mismagius | Dusk Stone | Later item/species access |
+| Gligar → Gliscor | Razor Fang at night, held on level-up or directly used | Later item/species access |
+| Sneasel → Weavile | Razor Claw at night, held on level-up or directly used | Later item/species access |
 | Piloswine → Mamoswine | Level while knowing Ancient Power | Later species access |
-| Kirlia → Gallade | Male Kirlia + Dawn Stone; Gardevoir branch retained | Later item |
+| Kirlia → Gallade | Male Kirlia + Dawn Stone; Gardevoir branch retained | Later item/species access |
 | Nosepass → Probopass | Thunder Stone; native New Mauville level condition retained | Later species/item access |
-| Roselia → Roserade | Shiny Stone | Later item |
+| Roselia → Roserade | Shiny Stone | Later item/species access |
 | Snorunt → Froslass | Female Snorunt + Dawn Stone; Glalie branch retained | Later species/item access |
-| Scyther → Kleavor | Black Augurite | Later item |
+| Scyther → Kleavor | Black Augurite | Later item/species access |
 | Girafarig → Farigiraf | Level knowing Twin Beam (learned at 32) | Later species access |
-| Dunsparce → Dudunsparce | Level knowing Hyper Drill (32); native personality-based segment branch | Planned Rock Tunnel encounter makes training possible |
+| Dunsparce → Dudunsparce | Level knowing Hyper Drill (32); native personality-based segment branch | Rock Tunnel encounter makes training possible |
 | Stantler → Wyrdeer | 20 Psyshield Bash uses, then level | Later: current Stantler level list lacks Psyshield Bash; no chapter claim of reachability |
 | Ursaring → Ursaluna | Peat Block at night in Hisui | Later: Kanto does not satisfy the region condition |
 
-Regional-form extensions (Perrserker, Sirfetch'd, Mr. Rime, Cursola, Obstagoon,
-Sneasler, Overqwil, Clodsire) remain compiled but their prerequisite regional
-forms are not added as Playtest 13 encounters. Ursaluna Bloodmoon's `EVO_NONE`
-entry is not a player evolution. No new regional form or special evolution
-engine is introduced to bypass these restrictions.
+## Regional branches and baby stages audited
 
-Baby stages remain native: Pichu/Cleffa/Igglybuff/Azurill use friendship;
-Togepi uses friendship; Tyrogue uses level 20 and Attack/Defense comparison;
-Smoochum/Elekid/Magby use level 30; Wynaut uses level 15. Budew uses daytime
-friendship, Chingling nighttime friendship, Bonsly and Mime Jr. a level with
-Mimic, Happiny Oval Stone by day, and Mantyke a level with Remoraid in the party.
-Their presence in engine data does not add breeding or early baby gifts.
+These rows record the actual compiled conditions. None adds a new encounter,
+regional unlock, breeding service or evolution item to the chapter.
+
+| Regional extension | Existing trigger | Available by Lavender |
+|---|---|---|
+| Galarian Meowth → Perrserker | Level 28 | No prerequisite form source |
+| Galarian Farfetch'd → Sirfetch'd | Battle ends after at least 3 critical hits by that Pokémon in that battle | No prerequisite form source |
+| Galarian Mr. Mime → Mr. Rime | Level 42 | No prerequisite form source |
+| Galarian Corsola → Cursola | Level 38 | No prerequisite form source |
+| Galarian Linoone → Obstagoon | Level 35 at night | No prerequisite form source |
+| Hisuian Sneasel → Sneasler | Razor Claw held on level-up or used, outside night | No prerequisite form/item source |
+| Hisuian Qwilfish → Overqwil | Level knowing Barb Barrage | No prerequisite form source; no invented Strong Style counter |
+| Paldean Wooper → Clodsire | Level 20 | No prerequisite form source |
+| Mime Jr. → Galarian Mr. Mime | Level knowing Mimic in Galar | No baby source and Kanto fails regional condition |
+| Ursaluna Bloodmoon | `EVO_NONE` data marker | Not a player evolution |
+
+| Baby / branch | Existing trigger | Availability limitation |
+|---|---|---|
+| Pichu → Pikachu | Friendship level-up | No baby gift/breeding source added; Pikachu itself is catchable |
+| Cleffa → Clefairy | Friendship level-up | No baby source; Clefairy itself is catchable |
+| Igglybuff → Jigglypuff | Friendship level-up | No baby source; Jigglypuff itself is catchable |
+| Togepi → Togetic | Friendship level-up | No chapter source |
+| Tyrogue → Hitmonlee / Hitmonchan / Hitmontop | Level 20, Attack greater than / less than / equal to Defense | No chapter source; all three stat branches retained |
+| Smoochum → Jynx | Level 30 | No chapter source |
+| Elekid → Electabuzz | Level 30 | No chapter source |
+| Magby → Magmar | Level 30 | No chapter source |
+| Azurill → Marill | Friendship level-up | No baby source added |
+| Wynaut → Wobbuffet | Level 15 | No chapter source |
+| Budew → Roselia | Friendship level-up outside night | No chapter source |
+| Chingling → Chimecho | Friendship level-up at night | No chapter source |
+| Bonsly → Sudowoodo | Level knowing Mimic | No chapter source |
+| Mime Jr. → Mr. Mime | Level knowing Mimic outside Galar | No baby source added |
+| Happiny → Chansey | Oval Stone held on level-up or used, outside night | No chapter species/item source |
+| Mantyke → Mantine | Level with Remoraid in party | No chapter source |
+
+Friendship means the unchanged release threshold of 160. These conditions were
+read from `src/data/pokemon/species_info/gen_1_families.h` through
+`gen_3_families.h`; source audit is not an emulator acceptance claim for every
+later species. Regional evolutions, Wyrdeer and Ursaluna remain documented
+future limitations rather than silently replacing their conditions. Ghosts in
+Pokémon Tower cannot supply an early Gastly/Haunter capture without the Scope.
+Visible Misdreavus and the other research partners are observations only.
 
 ## Battle and persistence acceptance
 
@@ -169,8 +201,9 @@ The same emulator pass exposed that the inherited release configuration disabled
 using evolution-held items from the Bag, despite valid native evolution tables.
 The Metal Coat attempt displayed the cannot-use message. A separate regression
 now checks the Bag type and evolution callback for all twelve thematic items.
-Item-use acceptance remains pending its repair and exact-ROM retest; the earlier
-target-species tests alone were not proof of usable single-player evolution.
+At that checkpoint item-use acceptance was pending; the subsequent repair and
+exact-ROM retest below resolved it. Target-species tests alone were not proof
+of usable single-player evolution.
 
 The subsequent item repair is accepted on compiled `04fb4b295acbd07e82aeb195ec6e078663027e8e`:
 all twelve thematic Bag callbacks pass natively, Onix evolves with one Metal Coat,

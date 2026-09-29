@@ -34,9 +34,9 @@ TEST("Three Horizons playtest13 ghost scope lookup does not modify progress")
     u8 flags[sizeof(gSaveBlock1Ptr->flags)];
     struct Pokemon party[PARTY_SIZE];
     memcpy(flags,gSaveBlock1Ptr->flags,sizeof(flags));
-    memcpy(party,gPlayerParty,sizeof(party));
+    memcpy(party,gParties[B_TRAINER_PLAYER],sizeof(party));
     for (u16 group=74;group<=76;group++)
         for (u16 map=104;map<=119;map++) TH_TestTowerGhostCheck(group,map);
     EXPECT_EQ(memcmp(flags,gSaveBlock1Ptr->flags,sizeof(flags)),0);
-    EXPECT_EQ(memcmp(party,gPlayerParty,sizeof(party)),0);
+    EXPECT_EQ(memcmp(party,gParties[B_TRAINER_PLAYER],sizeof(party)),0);
 }

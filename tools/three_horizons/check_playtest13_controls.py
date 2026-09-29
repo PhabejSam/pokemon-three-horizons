@@ -25,9 +25,18 @@ CONTROLS = (
 
 def run(test, log):
     with log.open('w') as stream:
-        result = subprocess.run(['make', 'THREE_HORIZONS=1', 'check',
+        # The battle file also owns cry/presentation assertions: use the same
+        # audio-enabled runner as the full integration gate, never skip them.
+        result = subprocess.run(['make', 'THREE_HORIZONS=1',
+                                 'pokemon-three-horizons-test.elf',
                                  'TESTS=' + test, '-j2'],
                                 stdout=stream, stderr=subprocess.STDOUT)
+        if result.returncode == 0:
+            result = subprocess.run([
+                'tools/mgba-rom-test-hydra/mgba-rom-test-hydra',
+                'tools/mgba/mgba-rom-test', 'arm-none-eabi-objcopy',
+                'pokemon-three-horizons-test.elf'],
+                stdout=stream, stderr=subprocess.STDOUT)
     text = re.sub(r'\x1b\[[0-9;]*m', '', log.read_text())
     assert 'No tests found' not in text, log
     return result.returncode, text

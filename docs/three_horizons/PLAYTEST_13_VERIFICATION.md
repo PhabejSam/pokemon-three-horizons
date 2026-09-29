@@ -542,3 +542,67 @@ The purified zone restores HP/status/PP and works again after leaving/reentering
 The classifier first failed on cloned TH floors; the repair adds only those floors under THREE_HORIZONS and retains the native seven-floor predicate. Emulator-driver corrections were not game fixes: directional stairs trigger sideways from their actual warp tile; floors alternate stair indices; navigation must avoid scripted barrier coordinates; one-member battle fixtures avoid the native switch prompt; the hidden item must be approached from walkable (8,3), not a gravestone. Initial failing driver logs are retained and are not represented as passing cases.
 
 Evidence archive `task40-tower-evidence.zip`, SHA-256 `bbdce2deb8229685ab61d12acf917f8c8a6ecd0e0091adcdff4bfd18b0bc644a`. Remaining whole-chapter, save-layout, upstream, exact personal-save and RG40XX H gates belong to Task41.
+
+## Task 41 integration gate — 2026-09-29 (in progress)
+
+Feature under integration: `3a7726c7ac5b808e5a79c1ee735f4b61bc319c93`.
+Three Horizons CI: 36644694634; upstream CI: 36644694716. These are
+integration candidates, not a packaged accepted release.
+
+The first full local host run ran 152 tests and reported five failures. One
+was a real upstream-layout leak: the new `LAYOUT_TH13_` forest layout was not
+excluded by the generator's older `LAYOUT_TH_` check. All three generator
+paths now share a project-layout predicate. The historical native-layout and
+map-index hashes were retained. The CI host gate passes with the freshly
+compiled generator. The other failures were expectations explicitly superseded
+by approved completed work: the full 121 rematches through trainer156, a photo
+receipt after accepting the forest scene, and Earth Power40 replacing
+Typhlosion's Earthquake40. All unrelated assertions remain.
+
+A new native migration test first failed on the prior implementation:
+CI36643484371/job109660956042, `three_horizons_state.c:221`, EXPECT_EQ(1,0).
+Old unused defeat bits for newly assigned trainer IDs104–156 could look like
+completed first battles. Migration now clears exactly this new range only
+when upgrading to P13. Every pre-existing trainer win remains authoritative;
+subsequent P13 loads preserve the entire history. This uses existing flag
+storage and does not expand a save block or put trainer IDs in rematch bytes.
+Native GREEN evidence is still pending the integration run.
+
+The upstream strict compiler also caught deprecated party-array access in the
+new cross-mode Tower test. The test now uses `gParties[B_TRAINER_PLAYER]`.
+No warning policy, assertion or failing test was disabled.
+
+The final mutation gate runs the three required P13 owners: old Cut temporary
+receipt behavior, the old clock version write, and the old trainer RUN/SELECT
+configuration. It restores original bytes in `finally`, requires each owning
+assertion to fail (a compiler error is not accepted), then requires a passing
+restored test. Older mutation recipes remain available through the explicit
+`legacy_controls` option; positive regressions from every release remain in
+the full run. This follows the approved instruction not to repeat every
+historical mutation unnecessarily.
+
+### Bible §35 acceptance accounting
+
+| Required area | Evidence already recorded | Final gate status |
+|---|---|---|
+| 24 P12 repairs | Tasks1–26 exact-ROM before/after and focused tests; A–X checklist in guide | Final whole-route repeat pending |
+| Exact P12 battery migration | Native payload preservation; synthetic P12 batteries | Owner's exact post-Surge file pending; older Cerulean/P11 backup excluded |
+| Gear/log/photos/calls persistence and no duplicates | Tasks30–32,36–39 scenes/menu/cold Continue/No/Yes/retry | Final candidate repeat pending |
+| Flash/Diglett connection/Skarmory/Forest clearing | Tasks33–36 doors, full-moveset eligibility, trade and scene evidence | Final candidate route pending |
+| Route9/Route10/Rock Tunnel | Tasks37–38 first battles/ladder traversal/Flash/scene/items/blackout | Final candidate route pending |
+| Lavender/Misdreavus/rival/Rocket cameo | Task39 one-time dialogue, photo decline/revisit and six doors | Final candidate route pending |
+| Tower unresolved endpoint | Task40 all six floors, 13 first battles, both ghost lanes, failure/capture/Run/cold/item checks | Final candidate route pending |
+| Vs. Seeker | Task27 focused runtime/native; Task40 total121 trainer records | Full native gate pending; readiness resets never alter established defeat flags |
+| SELECT/Run | Task22–23 native and actual battle checks | Full native/negative controls pending |
+| Cut follower/non-follower/reload | Tasks18,34,36 exact-ROM matrix | Full native/negative controls pending |
+| Ship departure/old inside-save recovery | Task25 exact-ROM and P12 battery fixtures | Final candidate migration matrix pending |
+| Gyarados/Typhlosion/evolutions | Task29 native tests, actual learning/evolution/Bag item/cold Continue | Effective release macros/save sizes rechecked at integration |
+| Native Emerald/FireRed/LeafGreen | Isolated CI builds, immutable native map hashes | Matrix in progress; strict Tower-test compile issue recorded above |
+| Full Three Horizons/save regression | All focused gates complete | Integration in progress |
+| Full mGBA playthrough | Focused fixtures are not a full uninterrupted new game | Both final routes pending |
+| RG40XX H/VBA-Next P13 | No acceptance claim | Separate owner hardware pass |
+| Exact revisions/ROM/checksum/export | Each development archive records its own revision/hash | Final packaging waits for all release gates |
+
+The release package must not be marked accepted while any required row above
+is pending. A real hardware battery, synthetic fixtures, emulator states and
+user-reported P12 hardware success are distinct evidence classes.
