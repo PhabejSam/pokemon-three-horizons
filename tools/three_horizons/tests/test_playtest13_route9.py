@@ -4,6 +4,13 @@ from tools.three_horizons.tests.test_playtest11_maps import ROOT,map_data,tiles,
 from tools.three_horizons.tests.test_playtest13_research import Scene
 
 class Route9(unittest.TestCase):
+ def test_every_object_graphics_constant_exists(self):
+  constants=(ROOT/'include/constants/event_objects.h').read_text()
+  defined=set(re.findall(r'^(?:#define |\s+)(OBJ_EVENT_GFX_\w+)',constants,re.M))
+  for obj in map_data('TH13_Route9')['object_events']:
+   gfx=obj['graphics_id'].split('(')[0]
+   self.assertIn(gfx,defined,obj['script'])
+
  def test_route9_links_and_mareep_rate(self):
   m=map_data('TH13_Route9');city=map_data('TH_Cerulean')
   self.assertEqual(m['layout'],'LAYOUT_ROUTE9')
