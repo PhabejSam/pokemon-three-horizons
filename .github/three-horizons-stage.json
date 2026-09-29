@@ -1,1 +1,1 @@
-{"mode":"focused","native_filter":"test/three_horizons_playtest13_species.c","host_filter":"test_playtest13_species.py","visual_gate":"systems"}
+{"mode":"focused","native_filter":"test/three_horizons_playtest13_species.c","host_filter":"test_playtest13_species.py","visual_gate":"systems","fixture_control":"species-counter"}

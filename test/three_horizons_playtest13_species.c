@@ -28,6 +28,7 @@ TEST("Three Horizons playtest13 Gyarados Water Dragon applies to existing mons")
     EXPECT(!CanLearnTeachableMove(SPECIES_GYARADOS, MOVE_DRAGON_CLAW));
     // Outrage is level-up/relearn coverage; there is no authored Outrage tutor.
     CreateMonWithIVs(&mon, SPECIES_GYARADOS, 48, 123, OTID_STRUCT_PLAYER_ID, 23);
+    GiveMonInitialMoveset(&mon);
     bool32 hasOutrage = FALSE;
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         if (GetMonData(&mon, MON_DATA_MOVE1 + i) == MOVE_OUTRAGE)
@@ -135,10 +136,13 @@ WILD_BATTLE_TEST("Three Horizons playtest13 Rage Fist attempted uses count throu
 WILD_BATTLE_TEST("Three Horizons playtest13 Rage Fist prevented by sleep does not count")
 {
     GIVEN {
-        PLAYER(SPECIES_PRIMEAPE) { Status1(STATUS1_SLEEP_TURN(3)); }
+        PLAYER(SPECIES_PRIMEAPE) { Ability(ABILITY_ANGER_POINT); Status1(STATUS1_SLEEP_TURN(3)); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_RAGE_FIST); }
+    } SCENE {
+        MESSAGE("Primeape is fast asleep.");
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EVOLUTION_TRACKER), 0);
     }
