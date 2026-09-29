@@ -16,7 +16,7 @@ class Lavender(unittest.TestCase):
     self.assertIn(w['dest_map'],maps)
     back=maps[w['dest_map']]['warp_events'][int(w['dest_warp_id'])]
     self.assertEqual(back['dest_map'],m['id'],(n,w))
-  self.assertEqual(len(town['warp_events']),5) # Tower door opens with Task40.
+  self.assertEqual(len(town['warp_events']),6) # Task40 connects the native Tower door.
   center=map_data('TH13_LavenderTown_PokemonCenter_1F');up=map_data('TH13_LavenderTown_PokemonCenter_2F')
   self.assertEqual(center['warp_events'][3]['dest_map'],up['id'])
   self.assertEqual(len(up['object_events']),3);self.assertEqual(len(up['warp_events']),1)

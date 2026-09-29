@@ -1117,3 +1117,40 @@ const struct Tileset gTileset_RockTunnel =
     .metatileAttributes = gMetatileAttributes_RockTunnel,
     .callback = NULL,
 };
+
+const u32 gTilesetTiles_PokemonTower[] = INCGFX_U32("data/tilesets/secondary/pokemon_tower_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_PokemonTower[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokemon_tower_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_PokemonTower[] = INCBIN_U16("data/tilesets/secondary/pokemon_tower_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_PokemonTower[] = INCBIN_U16("data/tilesets/secondary/pokemon_tower_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_PokemonTower =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PokemonTower,
+    .palettes = gTilesetPalettes_PokemonTower,
+    .metatiles = gMetatiles_PokemonTower,
+    .metatileAttributes = gMetatileAttributes_PokemonTower,
+    .callback = NULL,
+};

@@ -321,6 +321,18 @@ static void CreateBattleStartTask_Debug(u8 transition, u16 song)
 
 static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
 {
+#if THREE_HORIZONS
+    // Cloned chapter floors retain native unidentified-ghost rules.
+    if (mapGroup == MAP_GROUP(MAP_TH13_POKEMON_TOWER_1F)
+        && (mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_1F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_2F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_3F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_4F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_5F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_6F)))
+        return !CheckBagHasItem(ITEM_SILPH_SCOPE, 1);
+#endif
+
     if (mapGroup == MAP_GROUP(MAP_POKEMON_TOWER_1F)
      && (mapNum == MAP_NUM(MAP_POKEMON_TOWER_1F)
       || mapNum == MAP_NUM(MAP_POKEMON_TOWER_2F)

@@ -1,6 +1,6 @@
 {
   "mode": "focused",
   "native_filter": "test/three_horizons_tower.c",
-  "host_filter": "",
-  "visual_gate": "none"
+  "host_filter": "test_playtest13_tower.py",
+  "visual_gate": "routes"
 }

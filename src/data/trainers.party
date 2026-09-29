@@ -2798,6 +2798,7 @@ Level: 19
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 #endif
 
+#if !THREE_HORIZONS
 === TRAINER_THALIA_1 ===
 Name: THALIA
 Class: Beauty
@@ -2815,6 +2816,9 @@ Horsea
 Level: 25
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+#if !THREE_HORIZONS
+#endif
+
 === TRAINER_MARK ===
 Name: MARK
 Class: Pokemaniac
@@ -2827,7 +2831,9 @@ AI: Check Bad Move
 Rhyhorn
 Level: 31
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GRUNT_MT_CHIMNEY_1 ===
 Name: GRUNT
 Class: Team Magma
@@ -2840,7 +2846,9 @@ AI: Check Bad Move
 Numel
 Level: 20
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_STEVE_2 ===
 Name: STEVE
 Class: Pokemaniac
@@ -2853,7 +2861,9 @@ AI: Check Bad Move
 Lairon
 Level: 27
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_STEVE_3 ===
 Name: STEVE
 Class: Pokemaniac
@@ -2870,7 +2880,9 @@ IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 Rhyhorn
 Level: 29
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_STEVE_4 ===
 Name: STEVE
 Class: Pokemaniac
@@ -2887,7 +2899,9 @@ IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 Rhyhorn
 Level: 32
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_STEVE_5 ===
 Name: STEVE
 Class: Pokemaniac
@@ -2904,7 +2918,9 @@ IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 Rhydon
 Level: 35
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_LUIS ===
 Name: LUIS
 Class: Swimmer M
@@ -2917,7 +2933,9 @@ AI: Check Bad Move
 Carvanha
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DOMINIK ===
 Name: DOMINIK
 Class: Swimmer M
@@ -2930,7 +2948,9 @@ AI: Check Bad Move
 Tentacool
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DOUGLAS ===
 Name: DOUGLAS
 Class: Swimmer M
@@ -2947,7 +2967,9 @@ IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 Tentacool
 Level: 24
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_DARRIN ===
 Name: DARRIN
 Class: Swimmer M
@@ -2968,7 +2990,9 @@ IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 Tentacool
 Level: 24
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_TONY_1 ===
 Name: TONY
 Class: Swimmer M
@@ -2981,7 +3005,9 @@ AI: Check Bad Move
 Carvanha
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_JEROME ===
 Name: JEROME
 Class: Swimmer M
@@ -2994,6 +3020,7 @@ AI: Check Bad Move
 Tentacruel
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
 === TRAINER_MATTHEW ===
 Name: MATTHEW
@@ -19999,5 +20026,189 @@ AI: Check Bad Move
 Slowpoke
 Level: 25
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+#endif
+
+#if THREE_HORIZONS
+=== TRAINER_TH13_POKEMONTOWER_3F_PATRICIA ===
+Name: PATRICIA
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_3F_CARLY ===
+Name: CARLY
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 24
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_3F_HOPE ===
+Name: HOPE
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_4F_LAUREL ===
+Name: LAUREL
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Gastly
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_4F_JODY ===
+Name: JODY
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_4F_PAULA ===
+Name: PAULA
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 24
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_5F_RUTH ===
+Name: RUTH
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_5F_TAMMY ===
+Name: TAMMY
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Haunter
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_5F_KARINA ===
+Name: KARINA
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 24
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_5F_JANAE ===
+Name: JANAE
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_6F_ANGELICA ===
+Name: ANGELICA
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Gastly
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Gastly
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_6F_JENNIFER ===
+Name: JENNIFER
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 24
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_POKEMONTOWER_6F_EMILIA ===
+Name: EMILIA
+Class: Channeler Frlg
+Pic: Channeler Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Gastly
+Level: 24
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 #endif

@@ -174,3 +174,17 @@ TH_Route1_MapScripts::
     .include "data/maps/TH13_LavenderTown_PokemonCenter_2F/scripts.inc"
 
     .include "data/scripts/three_horizons/chapter13_lavender.inc"
+
+    .include "data/maps/TH13_PokemonTower_1F/scripts.inc"
+
+    .include "data/maps/TH13_PokemonTower_2F/scripts.inc"
+
+    .include "data/maps/TH13_PokemonTower_3F/scripts.inc"
+
+    .include "data/maps/TH13_PokemonTower_4F/scripts.inc"
+
+    .include "data/maps/TH13_PokemonTower_5F/scripts.inc"
+
+    .include "data/maps/TH13_PokemonTower_6F/scripts.inc"
+
+    .include "data/scripts/three_horizons/chapter13_tower.inc"

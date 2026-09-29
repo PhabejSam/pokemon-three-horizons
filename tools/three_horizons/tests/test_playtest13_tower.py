@@ -1,5 +1,6 @@
 import json,re,unittest
 from tools.three_horizons.tests.test_playtest11_maps import ROOT,map_data,tiles,reachable
+from tools.three_horizons.tests.test_playtest13_research import Scene
 class Tower(unittest.TestCase):
  def test_append_only_registry_and_reciprocal_graph(self):
   names=[f'TH13_PokemonTower_{i}F' for i in range(1,7)]
@@ -56,4 +57,36 @@ class Tower(unittest.TestCase):
   source=(ROOT/'data/scripts/three_horizons/chapter13_tower.inc').read_text()
   self.assertIn('special HealPlayerParty',source)
   self.assertIn('SILPH SCOPE',source);self.assertIn('CELADON',source)
+ def test_endpoint_receipt_is_once_and_debug_scope_never_resolves(self):
+  for scope in (False,True):
+   s=Scene();s.flags={'FLAG_BADGE03_GET','FLAG_TH12_BILL_RESCUED'}
+   if scope:s.items.add('ITEM_SILPH_SCOPE')
+   before=set(s.flags)
+   for visit in range(3):
+    s.run('TH13_Tower_GhostBarrier')
+    self.assertEqual(s.flags,before|{'FLAG_TH13_ENDPOINT'})
+    self.assertEqual(s.items,{'ITEM_SILPH_SCOPE'} if scope else set())
+    self.assertEqual(s.movements[-1],['LOCALID_PLAYER','TH13_Tower_ForceUp'])
+   self.assertEqual(s.messages.count('TH13_Tower_EndpointText'),1)
+   self.assertEqual(s.messages.count('TH13_Tower_RepeatText'),2)
+   self.assertEqual(len(s.battles),0 if scope else 3)
+ def test_native_first_parties_and_encounters_are_preserved(self):
+  old=(ROOT/'src/data/trainers_frlg.party').read_text();new=(ROOT/'src/data/trainers.party').read_text()
+  rematches=(ROOT/'src/data/three_horizons_rematches.h').read_text()
+  self.assertEqual(len(re.findall(r'^    \{TRAINER_',rematches,re.M)),121)
+  for i in range(3,7):
+   m=map_data(f'TH13_PokemonTower_{i}F')
+   for o in m['object_events']:
+    if o['trainer_type']!='TRAINER_TYPE_NORMAL':continue
+    name=o['script'].split('_')[-1].upper();tid=f'TRAINER_TH13_POKEMONTOWER_{i}F_'+name
+    source=re.findall(r'=== TRAINER_[A-Z_]*'+name+r' ===\n(.*?)(?=\n===|\Z)',old,re.S)
+    self.assertEqual(len(source),1)
+    target=re.search(r'=== '+tid+r' ===\n(.*?)(?=\n===|\n#endif|\Z)',new,re.S)[1]
+    self.assertEqual(target.strip(),source[0].strip())
+    self.assertIn('{'+tid+', '+m['id']+', ',rematches)
+  rows=json.loads((ROOT/'src/data/wild_encounters.json').read_text())['wild_encounter_groups'][0]['encounters']
+  for i in range(3,7):
+   native=next(e for e in rows if e.get('base_label')==f'sPokemonTower{i}F_FireRed')
+   added=[e for e in rows if e.get('map')==f'MAP_TH13_POKEMON_TOWER_{i}F']
+   self.assertEqual(len(added),1);self.assertEqual(added[0]['land_mons'],native['land_mons'])
 if __name__=='__main__':unittest.main()

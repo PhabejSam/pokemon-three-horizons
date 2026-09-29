@@ -22,6 +22,7 @@ class Scene:
         self.messages, self.flashes, self.completed = [], 0, []
         self.removed, self.queued = [], []
         self.object_flags = {}
+        self.items, self.battles, self.movements = set(), [], []
 
     def value(self, key):
         if key in ('NO', 'FALSE'): return 0
@@ -56,6 +57,10 @@ class Scene:
             elif op == 'removeobject':
                 self.removed.append(args[0])
                 if args[0] in self.object_flags: self.flags.add(self.object_flags[args[0]])
+            elif op == 'checkitem': self.vars['VAR_RESULT'] = int(args[0] in self.items)
+            elif op == 'setwildbattle': self.wild = args
+            elif op == 'waitstate': pass
+            elif op == 'applymovement': self.movements.append(args)
             elif op == 'getplayerxy':
                 self.vars[args[0]], self.vars[args[1]] = 0, 0
             elif op == 'msgbox':
@@ -73,6 +78,7 @@ class Scene:
                 elif args[0] == 'TH_ScriptResearchCompleteCall':
                     self.completed.append((value, len(self.messages)))
                 elif args[0] == 'TH_ScriptResearchQueueCall': self.queued.append(value)
+                elif args[0] == 'StartMarowakBattle': self.battles.append(self.wild)
                 elif args[0] != 'TH_RefreshFollower': raise AssertionError(line)
             elif op == 'fadescreen' and args[0] == 'FADE_TO_WHITE': self.flashes += 1
             elif op in ('lock', 'lockall', 'release', 'releaseall', 'closemessage', 'hidefollower',

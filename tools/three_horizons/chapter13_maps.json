@@ -174,6 +174,48 @@
       "id": "MAP_TH13_LAVENDER_TOWN_POKEMON_CENTER_2F",
       "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG",
       "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "PokemonTower_1F_Frlg",
+      "name": "TH13_PokemonTower_1F",
+      "id": "MAP_TH13_POKEMON_TOWER_1F",
+      "layout": "LAYOUT_POKEMON_TOWER_1F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_2F_Frlg",
+      "name": "TH13_PokemonTower_2F",
+      "id": "MAP_TH13_POKEMON_TOWER_2F",
+      "layout": "LAYOUT_POKEMON_TOWER_2F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_3F_Frlg",
+      "name": "TH13_PokemonTower_3F",
+      "id": "MAP_TH13_POKEMON_TOWER_3F",
+      "layout": "LAYOUT_POKEMON_TOWER_3F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_4F_Frlg",
+      "name": "TH13_PokemonTower_4F",
+      "id": "MAP_TH13_POKEMON_TOWER_4F",
+      "layout": "LAYOUT_POKEMON_TOWER_4F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_5F_Frlg",
+      "name": "TH13_PokemonTower_5F",
+      "id": "MAP_TH13_POKEMON_TOWER_5F",
+      "layout": "LAYOUT_POKEMON_TOWER_5F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_6F_Frlg",
+      "name": "TH13_PokemonTower_6F",
+      "id": "MAP_TH13_POKEMON_TOWER_6F",
+      "layout": "LAYOUT_POKEMON_TOWER_6F",
+      "script_owner": "chapter13_tower.inc"
     }
   ]
 }
