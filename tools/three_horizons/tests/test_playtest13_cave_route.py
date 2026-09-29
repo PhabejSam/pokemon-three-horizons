@@ -15,6 +15,23 @@ class CaveRoute(unittest.TestCase):
         for name,value in ids:
             if name.startswith('TRAINER_TH13_ROUTE11_'):self.assertGreater(int(value),103)
 
+    def test_trainer_table_replacements_are_exclusive_to_th(self):
+        header=(ROOT/'include/constants/opponents.h').read_text()
+        ids=dict(re.findall(r'#define (TRAINER_\w+) +(\d+)',header))
+        source=(ROOT/'src/data/trainers.party').read_text()
+        for enabled in (False,True):
+            active=[True]; names=[]
+            for line in source.splitlines():
+                if line.startswith('#if '):
+                    expression=line[4:].strip();self.assertIn(expression,('THREE_HORIZONS','!THREE_HORIZONS'))
+                    active.append(active[-1] and (enabled if expression=='THREE_HORIZONS' else not enabled))
+                elif line.startswith('#endif'):active.pop()
+                elif line.startswith('=== ') and active[-1]:names.append(line.split()[1])
+            self.assertEqual(len(active),1)
+            values=[ids[n] for n in names]
+            self.assertEqual(len(values),len(set(values)),enabled)
+            self.assertEqual(sum(n.startswith('TRAINER_TH13_ROUTE11_') for n in names),10 if enabled else 0)
+
     def test_diglett_cave_connects_vermilion_to_route2(self):
         registry = json.loads((ROOT/'data/maps/map_groups.json').read_text())['gMapGroup_ThreeHorizons']
         for name in NAMES: self.assertIn(name, registry)

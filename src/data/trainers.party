@@ -2042,6 +2042,7 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 
 #endif
 
+#if !THREE_HORIZONS
 === TRAINER_BROOKE_5 ===
 Name: BROOKE
 Class: Cooltrainer
@@ -2212,6 +2213,8 @@ IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 Grumpig
 Level: 42
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+
+#endif
 
 === TRAINER_CINDY_1 ===
 Name: CINDY
