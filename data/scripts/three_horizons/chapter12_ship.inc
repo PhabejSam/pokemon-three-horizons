@@ -99,7 +99,7 @@ TH12_Captain_Sick:
 TH12_Captain_Thanks:
     .string "Thank you! I feel much better!\nLet me share my CUT technique.$"
 TH12_Captain_Use:
-    .string "Carry HM01 and your CASCADE BADGE.\nA healthy, compatible POKéMON can\lCUT small trees without learning it.\pOur ship is staying in port.\nYou are welcome aboard any time!$"
+    .string "Carry HM01 and your CASCADE BADGE.\nA healthy, compatible POKéMON can\lCUT small trees without learning it.\pEGGS cannot help with field moves.\pOur ship is staying in port.\nYou are welcome aboard any time!$"
 
 TH12_Ship_Snorlax::
     lock

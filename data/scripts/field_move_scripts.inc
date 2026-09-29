@@ -53,7 +53,7 @@ Text_MonUsedFieldMove:
 
 Text_CantCut:
 #if THREE_HORIZONS
-    .string "This tree can be CUT down.\pYou need HM01, the CASCADEBADGE,\nand a conscious, compatible POKéMON.\pIt does not need to learn CUT.\nAn EGG cannot help.$"
+    .string "This tree blocks the path.\nA POKéMON may be able to CUT it.$"
 #else
     .string "This tree looks like it can be\n"
     .string "CUT down!$"
