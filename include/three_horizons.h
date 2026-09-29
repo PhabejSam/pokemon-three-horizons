@@ -77,6 +77,7 @@ u16 TH_GetTrainerPic(void);
 void TH_ChangeOutfit(void);
 void TH_InitNewGame(void);
 void TH_MigrateSaveState(void);
+u8 TH13_GetRematchLevel(u8 highestLevel, u8 originalHighest, u8 badges);
 void TH_TryGiveChapter12Supplies(void);
 bool32 TH12_AreSwitchesAdjacent(u8 first, u8 second);
 void TH12_BeginRocketPair(void);

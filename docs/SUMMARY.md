@@ -185,3 +185,4 @@
 - [Playtest 13 implementation plan](superpowers/plans/2026-09-28-playtest13-lavender.md)
 - [Playtest 13 verification](three_horizons/PLAYTEST_13_VERIFICATION.md)
 - [Playtest 13 walkthrough and checks](three_horizons/PLAYTEST_13.md)
+- [Playtest 13 rematch capacity decision](three_horizons/PLAYTEST_13_REMATCH_CAPACITY.md)
