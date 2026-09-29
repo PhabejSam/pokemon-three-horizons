@@ -1,1 +1,1 @@
-{"mode":"focused","native_filter":"Three Horizons playtest13 ship","host_filter":"test_playtest13_ship.py","visual_gate":"ship"}
+{"mode":"focused","native_filter":"Three Horizons playtest13 local gym","host_filter":"test_playtest13_locals.py","visual_gate":""}
