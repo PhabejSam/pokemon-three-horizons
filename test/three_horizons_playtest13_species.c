@@ -1,10 +1,27 @@
 #include "global.h"
 #include "test/battle.h"
 #include "pokemon.h"
+#include "party_menu.h"
 #include "three_horizons.h"
 #include "string_util.h"
 
 #if THREE_HORIZONS
+TEST("Three Horizons playtest13 learned move resumes candy evolution without another candy")
+{
+    s16 state, move;
+    PARAMETRIZE { state = 1; move = MOVE_DUAL_CHOP; }
+    PARAMETRIZE { state = 1; move = MOVE_RAGE_FIST; }
+    PARAMETRIZE { state = 0; move = MOVE_POUND; }
+    PARAMETRIZE { state = 0; move = MOVE_KARATE_CHOP; }
+    PARAMETRIZE { state = 2; move = MOVE_DUAL_CHOP; }
+    struct PartyMenu saved = gPartyMenu;
+    gPartyMenu.data1 = move;
+    gPartyMenu.learnMoveState = state;
+    s16 actual = Test_GetLearnedMoveContinuationState();
+    gPartyMenu = saved;
+    EXPECT_EQ(actual, state);
+}
+
 static bool32 LearnsAt(u16 species, u16 move, u32 level)
 {
     const struct LevelUpMove *moves = gSpeciesInfo[species].levelUpLearnset;

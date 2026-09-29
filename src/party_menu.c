@@ -5634,17 +5634,22 @@ static void Task_DoLearnedMoveFanfareAfterText(u8 taskId)
     }
 }
 
+static s16 GetLearnedMoveContinuationState(void)
+{
+    return gPartyMenu.data1;
+}
+
 static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
 {
     if (IsFanfareTaskInactive() && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
-        if (gPartyMenu.data1 == 1)
+        if (GetLearnedMoveContinuationState() == 1)
         {
             Task_TryLearningNextMove(taskId);
         }
         else
         {
-            if (gPartyMenu.data1 == 2) // never occurs
+            if (GetLearnedMoveContinuationState() == 2) // never occurs
                 gSpecialVar_Result = TRUE;
             Task_ClosePartyMenu(taskId);
         }
@@ -8613,6 +8618,11 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler)
 }
 
 #if TESTING
+s16 Test_GetLearnedMoveContinuationState(void)
+{
+    return GetLearnedMoveContinuationState();
+}
+
 s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 chooseHalf, u8 lastSelectedSlot)
 {
     struct PartyMenuInternal internal = {0};
