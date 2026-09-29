@@ -204,4 +204,28 @@ TEST("Three Horizons playtest13 state imports witnessed reports without inventin
     for (u32 flag = FLAG_TH13_PHOTO_HOOTHOOT; flag <= FLAG_TH13_PHOTO_LAVENDER; flag++)
         EXPECT(!FlagGet(flag));
 }
+TEST("Three Horizons playtest13 migration initializes new trainer wins once and preserves old wins")
+{
+    u16 version;
+    PARAMETRIZE { version = TH_STATE_VERSION_12; }
+    PARAMETRIZE { version = TH_STATE_VERSION_13; }
+    InitEventData();
+    ClearBag();
+    VarSet(VAR_TH_CLOCK_DISPLAY_HI, version | 1);
+    // Audited P13-only first-battle IDs: Route11 through Tower Emilia.
+    // Fill every trainer bit to simulate arbitrary old unused storage.
+    for (u32 trainer = 1; trainer < TRAINERS_COUNT; trainer++)
+        FlagSet(TRAINER_FLAGS_START + trainer);
+    TH_MigrateSaveState();
+    for (u32 trainer = 1; trainer < TRAINERS_COUNT; trainer++)
+        EXPECT_EQ(FlagGet(TRAINER_FLAGS_START + trainer),
+            version == TH_STATE_VERSION_13 || trainer < 104 || trainer > 156);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_13 | 1);
+    // Actual P13 wins survive every subsequent Continue/migration call.
+    for (u32 trainer = 104; trainer <= 156; trainer++)
+        FlagSet(TRAINER_FLAGS_START + trainer);
+    TH_MigrateSaveState();
+    for (u32 trainer = 1; trainer < TRAINERS_COUNT; trainer++)
+        EXPECT(FlagGet(TRAINER_FLAGS_START + trainer));
+}
 #endif
