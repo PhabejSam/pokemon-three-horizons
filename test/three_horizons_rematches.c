@@ -5,8 +5,63 @@
 #include "trainer_util.h"
 #include "constants/opponents.h"
 #include "three_horizons_helpers.h"
+#include "three_horizons_rematches.h"
+#include "event_data.h"
+#include "battle_setup.h"
+#include "constants/maps.h"
+#include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
+TEST("Three Horizons rematch slots preserve full trainer IDs and reject collisions")
+{
+    const struct TH13RematchEntry valid[] = {{1, 12, 1}, {257, 12, 2}, {513, 13, 1}};
+    const struct TH13RematchEntry collision[] = {{1, 12, 1}, {257, 12, 1}};
+    const struct TH13RematchEntry duplicate[] = {{257, 12, 1}, {257, 12, 2}};
+    const struct TH13RematchEntry bounds[] = {{1, 12, 0}, {257, 12, MAX_REMATCH_ENTRIES + 1}};
+    EXPECT_EQ(TH13_ResolveRematchSlot(valid, 3, 12, 1), 0);
+    EXPECT_EQ(TH13_ResolveRematchSlot(valid, 3, 12, 257), 1);
+    EXPECT_EQ(TH13_ResolveRematchSlot(valid, 3, 13, 513), 0);
+    EXPECT_EQ(TH13_ResolveRematchSlot(valid, 3, 13, 257), -1);
+    EXPECT_EQ(TH13_ResolveRematchSlot(collision, 2, 12, 1), -1);
+    EXPECT_EQ(TH13_ResolveRematchSlot(collision, 2, 12, 257), -1);
+    EXPECT_EQ(TH13_ResolveRematchSlot(duplicate, 2, 12, 257), -1);
+    EXPECT_EQ(TH13_ResolveRematchSlot(bounds, 2, 12, 1), -1);
+    EXPECT_EQ(TH13_ResolveRematchSlot(bounds, 2, 12, 257), -1);
+}
+
+TEST("Three Horizons rematch readiness is temporary map local and preserves defeat history")
+{
+    InitEventData();
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_TH_VIRIDIAN_FOREST);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_TH_VIRIDIAN_FOREST);
+    TH13_ResetRematches();
+    EXPECT(!TH13_SetRematchReady(TRAINER_TH_RICK));
+    SetTrainerFlag(TRAINER_TH_RICK);
+    SetTrainerFlag(TRAINER_TH_LIAM);
+    u8 flags[sizeof(gSaveBlock1Ptr->flags)];
+    memcpy(flags, gSaveBlock1Ptr->flags, sizeof(flags));
+    EXPECT(TH13_SetRematchReady(TRAINER_TH_RICK));
+    EXPECT(TH13_IsRematchReady(TRAINER_TH_RICK));
+    EXPECT(!TH13_IsRematchReady(TRAINER_TH_LIAM));
+    EXPECT(!TH13_SetRematchReady(TRAINER_TH_BROCK));
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_TH_PEWTER_GYM);
+    EXPECT(!TH13_IsRematchReady(TRAINER_TH_LIAM));
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_TH_VIRIDIAN_FOREST);
+    EXPECT(!TH13_IsRematchReady(TRAINER_TH_RICK));
+    // Immediate repeated use has no charge or badge dependency.
+    for (u32 i = 0; i < 3; i++)
+    {
+        EXPECT(TH13_SetRematchReady(TRAINER_TH_RICK));
+        EXPECT(TH13_BeginRematch(TRAINER_TH_RICK));
+        TH13_ResetRematches();
+        EXPECT(!TH13_IsRematchReady(TRAINER_TH_RICK));
+        EXPECT_EQ(memcmp(flags, gSaveBlock1Ptr->flags, sizeof(flags)), 0);
+    }
+    EXPECT_EQ(sizeof(gSaveBlock1Ptr->trainerRematches), 100);
+    EXPECT_EQ(sizeof(struct SaveBlock1), 15568);
+    EXPECT_EQ(sizeof(struct SaveBlock2), 3884);
+}
+
 TEST("Three Horizons rematch level clamps safely")
 {
     static const struct { u8 highest, original, badges, expected; } cases[] = {

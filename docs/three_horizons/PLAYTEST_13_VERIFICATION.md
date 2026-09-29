@@ -251,3 +251,12 @@ Evidence: `task21-rocket-evidence.zip`, SHA-256 `21de471f2f228b695aef76ca64d89e0
 
 Feature 76d34e19d2e97fcfbb298f813194e3720fde7417; compiled/test af8f14945867e819a35a4ec6ea98f3894a81a700. CI run 36538120657/job 109306820300 passed five native groups and three host checks. Native coverage includes all six EV berries at EV 0, 1, 9, 10, 11 and 252, other stats unchanged, recalculation, friendship-only use, cap behavior, prices and once-only kit delivery. Host checks cover exact separated stocks, four city vendors and the live Cerulean workshop/referral. Purchase and consumption UI, persistence, and Lavender placement remain pending the scheduled later map/integration work; this is not complete Task 26 acceptance.
 
+
+## Task 27 independent roster and level checks
+
+Feature 64974dd502f4b1ad5335bead55366bf0d0aeb407; compiled/test 124d0bb5681baf096db15ccfbf631f31600a759d. CI run 36542246743/job 109320188030 passed the real generated Keigo roster test and two level-policy groups (18 explicit cases plus 90,900 highest-level/original-floor/badge combinations). Keigo uses Kakuna, Beedrill and Butterfree at level 18; native generation supplies valid moves/abilities and level-appropriate stored experience. Ricky and Elijah controls remain unchanged. Actual battle experience awards and full route acceptance remain pending.
+
+Fixture corrections were explicit: a bit-field comparison needed a cast; the engine macro is lowercase max; and native gTrainers is a test-runner dummy table. A shared test-only accessor now reads the existing separately assembled real records. The previous Rocket record-only assertion was insufficient, although its separate host and exact-ROM checks were valid. The strengthened native assertion failed after temporarily restoring forced-double records (1 versus 0), then passed after restoration. No assertion was removed or suppressed.
+
+The pure level helper has no battle hook yet. Unlimited Vs. Seeker, readiness storage, scaled rosters, cleanup, acquisition and full Task 27 acceptance remain pending the required capacity decision documented in PLAYTEST_13_REMATCH_CAPACITY.md. These checks do not constitute a release candidate or hardware acceptance.
+

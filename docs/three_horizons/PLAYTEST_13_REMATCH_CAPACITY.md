@@ -1,6 +1,6 @@
 # Playtest 13 rematch capacity decision
 
-Status: awaiting the user's decision required by implementation-plan conflict 3.
+Status: approved by the user on 2026-09-29; implementation and verification in progress.
 
 The existing save contains 100 one-byte `trainerRematches` entries. Its size and
 offset must remain unchanged for Playtest 12 battery saves. A trainer ID must not
@@ -27,7 +27,7 @@ rematches. Ordinary Mt. Moon grunts and Tower Channelers are not excluded merely
 because they belong to those classes. New-map counts must be checked against the
 final authored maps during integration.
 
-## Recommended solution
+## Approved solution
 
 Use the existing bytes only for temporary readiness on the currently loaded map.
 Keep full-width trainer IDs and authored roster tiers in ROM data. Store readiness
