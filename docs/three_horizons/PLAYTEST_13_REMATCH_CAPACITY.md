@@ -91,3 +91,8 @@ cold Continue, indoor/cave/ship readiness, Luis's clear postbattle path, and
 boss/unseen exclusions. See PLAYTEST_13_VERIFICATION.md for revisions and limits.
 The remaining 53 trainers are added with their maps; the final coverage audit
 and non-TH runtime controls remain integration requirements.
+
+
+## Route 11 addition (Task 33)
+
+Ten native Route 11 ordinary trainers use new full-width ROM IDs 104–113 and local readiness slots 0–9. The roster now contains 78 ordinary trainers; 43 approved trainers remain for Route 9, Route 10, Rock Tunnel and Pokémon Tower. Existing ship-rival IDs 94–102 and Surge ID 103 remain unchanged and excluded. A cross-table uniqueness check verifies both TH and upstream configurations; no saved trainer IDs or save structures were resized. Final 121-trainer coverage remains an integration gate.

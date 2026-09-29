@@ -8,6 +8,12 @@ from tools.three_horizons.tests.test_playtest13_research import Scene
 NAMES = ['TH13_Route11', 'TH13_DiglettsCave_SouthEntrance', 'TH13_DiglettsCave_B1F', 'TH13_DiglettsCave_NorthEntrance']
 
 class CaveRoute(unittest.TestCase):
+    def test_build_selects_every_registered_project_map_in_order(self):
+        registry = json.loads((ROOT/'data/maps/map_groups.json').read_text())['gMapGroup_ThreeHorizons']
+        selected = json.loads((ROOT/'tools/mapjson/three_horizons_maps.json').read_text())['maps']
+        self.assertEqual(selected, registry)
+        self.assertEqual(len(selected), len(set(selected)))
+
     def test_new_trainer_ids_do_not_alias_any_existing_th_identity(self):
         ids=re.findall(r'#define (TRAINER_TH\w+) (\d+)',(ROOT/'include/constants/opponents.h').read_text())
         values=[int(n) for _,n in ids]
