@@ -1577,6 +1577,21 @@ static bool8 TemplateIsObstacleAndVisibleFromConnectingMap(const struct ObjectEv
 
 static bool8 ShouldInitObjectEventStateFromTemplate(const struct ObjectEventTemplate *template, bool8 isClone, s16 x, s16 y)
 {
+#if THREE_HORIZONS
+    // An old battery save can put the player on a previously cut tile. During
+    // its one-time map rebuild, retain an open path for this visit rather than
+    // spawning a solid tree inside the player. Normal map changes clear it.
+    if (!isClone
+     && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_HOME_2F)
+     && (template->graphicsId == OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG
+      || template->graphicsId == OBJ_EVENT_GFX_CUTTABLE_TREE)
+     && template->x == gSaveBlock1Ptr->pos.x
+     && template->y == gSaveBlock1Ptr->pos.y)
+    {
+        SetHideObstacleFlag(template);
+        return FALSE;
+    }
+#endif
     if (isClone && !TemplateIsObstacleAndWithinView(template, x, y))
         return FALSE;
 

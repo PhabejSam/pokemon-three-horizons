@@ -12,6 +12,8 @@
 static void LoadCutMap(u16 map)
 {
     InitEventData();
+    gSaveBlock1Ptr->pos.x = 5;
+    gSaveBlock1Ptr->pos.y = 5;
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetObjectEvents();
@@ -54,6 +56,8 @@ TEST("Three Horizons playtest13 Cut removal stays visually collision consistent"
     EXPECT_EQ(GetObjectEventIdByXY(tree.x + MAP_OFFSET, tree.y + MAP_OFFSET), OBJECT_EVENTS_COUNT);
     // Native map reload may regrow the tree, but sprite and occupancy agree.
     ClearTempFieldEventData();
+    gSaveBlock1Ptr->pos.x = tree.x - 1;
+    gSaveBlock1Ptr->pos.y = tree.y;
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetObjectEvents();
@@ -79,12 +83,36 @@ TEST("Three Horizons playtest13 Cut target remains removed while another tree is
     u8 id = TrySpawnObjectEventTemplate(&first, MAP_NUM(map), MAP_GROUP(map), 0, 0);
     EXPECT_LT(id, OBJECT_EVENTS_COUNT);
     RemoveObjectEventByLocalIdAndMap(first.localId, MAP_NUM(map), MAP_GROUP(map));
-    // Direct template spawning is used by field refresh as well as camera scans.
-    EXPECT_EQ(TrySpawnObjectEventTemplate(&first, MAP_NUM(map), MAP_GROUP(map), 0, 0), OBJECT_EVENTS_COUNT);
-    id = TrySpawnObjectEventTemplate(&other, MAP_NUM(map), MAP_GROUP(map), 0, 0);
+    // Exercise the camera refresh owner; explicit addobject intentionally forces a spawn.
+    gSaveBlock1Ptr->pos.x = first.x - 1;
+    gSaveBlock1Ptr->pos.y = first.y;
+    TrySpawnObjectEvents(0, 0);
+    bool8 absent = TryGetObjectEventIdByLocalIdAndMap(first.localId, MAP_NUM(map), MAP_GROUP(map), &id);
+    EXPECT(absent);
+    if (TryGetObjectEventIdByLocalIdAndMap(other.localId, MAP_NUM(map), MAP_GROUP(map), &id))
+        id = TrySpawnObjectEventTemplate(&other, MAP_NUM(map), MAP_GROUP(map), 0, 0);
     EXPECT_LT(id, OBJECT_EVENTS_COUNT);
     EXPECT(gObjectEvents[id].active);
     EXPECT(gSprites[gObjectEvents[id].spriteId].inUse);
+    gMapHeader = savedHeader;
+    gBackupMapLayout = savedLayout;
+}
+TEST("Three Horizons playtest13 Cut cold reload cannot overlap the player")
+{
+    const struct MapHeader savedHeader = gMapHeader;
+    const struct BackupMapLayout savedLayout = gBackupMapLayout;
+    const u16 map = MAP_TH12_VERMILION_CITY;
+    LoadCutMap(map);
+    gSaveBlock1Ptr->pos.x = 19;
+    gSaveBlock1Ptr->pos.y = 24;
+    TrySpawnObjectEvents(0, 0);
+    u8 id = GetObjectEventIdByXY(19 + MAP_OFFSET, 24 + MAP_OFFSET);
+    EXPECT_EQ(id, OBJECT_EVENTS_COUNT);
+    // Moving away must not reveal a tree that was hidden at the old save position.
+    gSaveBlock1Ptr->pos.x++;
+    TrySpawnObjectEvents(0, 0);
+    id = GetObjectEventIdByXY(19 + MAP_OFFSET, 24 + MAP_OFFSET);
+    EXPECT_EQ(id, OBJECT_EVENTS_COUNT);
     gMapHeader = savedHeader;
     gBackupMapLayout = savedLayout;
 }

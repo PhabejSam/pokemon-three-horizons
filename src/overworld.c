@@ -534,6 +534,41 @@ void ApplyNewEncryptionKeyToGameStats(u32 newKey)
         ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->gameStats[i], newKey);
 }
 
+#if THREE_HORIZONS
+static void PrepareThreeHorizonsCutTemplates(void)
+{
+    u32 used = 0;
+    u32 i, flag;
+
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_TH_HOME_2F))
+        return;
+
+    // Early Kanto clones omitted obstacle hide flags. Use the engine's existing
+    // map-session flags, so removal, camera refresh and saved templates agree.
+    // Keep authored assignments (including the shipped Vermilion tree).
+    for (i = 0; i < gMapHeader.events->objectEventCount; i++)
+    {
+        flag = gSaveBlock1Ptr->objectEventTemplates[i].flagId;
+        if (flag >= FLAG_TEMP_11 && flag <= FLAG_TEMP_1F)
+            used |= 1u << flag;
+    }
+    for (i = 0; i < gMapHeader.events->objectEventCount; i++)
+    {
+        struct ObjectEventTemplate *tree = &gSaveBlock1Ptr->objectEventTemplates[i];
+        if (tree->flagId != 0 || (tree->graphicsId != OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG
+                             && tree->graphicsId != OBJ_EVENT_GFX_CUTTABLE_TREE))
+            continue;
+        for (flag = FLAG_TEMP_11; flag <= FLAG_TEMP_1F; flag++)
+            if (!(used & (1u << flag)))
+                break;
+        // The map-contract test rejects a chapter map that exhausts this pool.
+        fatal_assertf(flag <= FLAG_TEMP_1F);
+        tree->flagId = flag;
+        used |= 1u << flag;
+    }
+}
+#endif
+
 void LoadObjEventTemplatesFromHeader(void)
 {
     // Clear map object templates
@@ -563,6 +598,9 @@ void LoadObjEventTemplatesFromHeader(void)
             gSaveBlock1Ptr->objectEventTemplates[i] = gMapHeader.events->objectEvents[i];
         }
     }
+#if THREE_HORIZONS
+    PrepareThreeHorizonsCutTemplates();
+#endif
 }
 
 void LoadSaveblockObjEventScripts(void)
@@ -2128,7 +2166,7 @@ void CB2_ContinueSavedGame(void)
     u8 trainerHillMapId;
 
 #if THREE_HORIZONS
-    bool32 refreshChapterMap = (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK) != TH_STATE_VERSION_11;
+    bool32 refreshChapterMap = (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK) != TH_STATE_VERSION_13;
     TH_MigrateSaveState();
 #endif
     FieldClearVBlankHBlankCallbacks();

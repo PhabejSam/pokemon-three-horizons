@@ -83,7 +83,27 @@ jobs:
             cp /tmp/th13-state-fixed.c src/three_horizons_state.c
             cp /tmp/th13-clock-fixed.c src/three_horizons_clock.c
           fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 Cut" ]; then
+            cp src/overworld.c /tmp/th13-overworld-fixed.c
+            cp src/event_object_movement.c /tmp/th13-objects-fixed.c
+            trap 'cp /tmp/th13-overworld-fixed.c src/overworld.c; cp /tmp/th13-objects-fixed.c src/event_object_movement.c' EXIT
+            git fetch --depth=1 origin c862c43e2053c634735f3273fc5a52ab69fe00aa
+            git show c862c43e2053c634735f3273fc5a52ab69fe00aa:src/overworld.c > src/overworld.c
+            git show c862c43e2053c634735f3273fc5a52ab69fe00aa:src/event_object_movement.c > src/event_object_movement.c
+            if make THREE_HORIZONS=1 check TESTS="$NATIVE_FILTER" -j2 > focused-cut-negative.log 2>&1; then
+              echo "Cut regressions missed the P12 object lifecycle"; exit 1
+            fi
+            tail -n 100 focused-cut-negative.log
+            grep -q 'Cut removal stays visually collision consistent.*FAIL' focused-cut-negative.log
+            grep -q 'Cut target remains removed while another tree is unaffected.*FAIL' focused-cut-negative.log
+            grep -q 'Cut cold reload cannot overlap the player.*FAIL' focused-cut-negative.log
+            cp /tmp/th13-overworld-fixed.c src/overworld.c
+            cp /tmp/th13-objects-fixed.c src/event_object_movement.c
+          fi
           make THREE_HORIZONS=1 check TESTS="$NATIVE_FILTER" -j2 2>&1 | tee focused-native.log
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 Cut" ]; then
+            make THREE_HORIZONS=1 check TESTS="test/three_horizons_field_moves.c" -j2 2>&1 | tee focused-field-moves.log
+          fi
           if [ "$NATIVE_FILTER" = "Three Horizons playtest13 state" ]; then
             make THREE_HORIZONS=1 check TESTS="Three Horizons revision9" -j2 2>&1 | tee focused-legacy-state.log
             make THREE_HORIZONS=1 check TESTS="Three Horizons playtest12 repeated Continue" -j2 2>&1 | tee -a focused-legacy-state.log
@@ -93,6 +113,16 @@ jobs:
           git diff --exit-code
           ! grep -q "No tests found" focused-native.log
           git rev-parse HEAD > demo-source-commit.txt
+      - name: Cut lifecycle visual integration candidate
+        if: steps.phase.outputs.mode == 'focused' && steps.phase.outputs.visual_gate == 'cut'
+        shell: bash
+        run: |
+          set -o pipefail
+          make THREE_HORIZONS=1 -j2 -O all 2>&1 | tee demo-build.log
+          test -s pokemon-three-horizons.gba
+          sha256sum pokemon-three-horizons.gba > pokemon-three-horizons.gba.sha256
+          git rev-parse HEAD > demo-source-commit.txt
+          git diff --exit-code
       - name: Check map contracts
         if: steps.phase.outputs.mode == 'integration'
         run: |
@@ -322,6 +352,8 @@ jobs:
             demo-build.log
             running-frames.log
             focused-state-negative.log
+            focused-cut-negative.log
+            focused-field-moves.log
             focused-legacy-state.log
             focused-save-layout.log
             focused-host.log

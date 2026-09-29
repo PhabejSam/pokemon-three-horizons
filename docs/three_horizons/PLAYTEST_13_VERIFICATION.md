@@ -8,8 +8,8 @@ No release or hardware acceptance is claimed by this working record.
 - P12 compiled/test: `d8da3c365b74a0bd87099fb4e983e32f8d0e0c03`.
 - P12 ROM SHA-256: `2191ebf684fb829cc86d4bc8638a11ee5aa535a9c88dbd47f8b3e96ce38f312d`.
 - P13 implementation starts from `f49d3bd17a604d4593ad589b330018f5e911ecbc`.
-- Personal battery-save backup: `ThreeHorizons_PT12_RG40XXH_FINAL_BACKUP.sav`, 131088 bytes, SHA-256 `2bac4d587f965215c6a008d06825bfd46ca8ec5a77a247d7b53211111ecf8c8c`. Original preserved; testing uses a copy. Migration acceptance is pending.
-- Existing native layout expectations: SaveBlock1 15568, SaveBlock2 3884, SaveBlock3 4, PokemonStorage 34144 bytes. Runtime revalidation pending.
+- Personal battery-save backup: `ThreeHorizons_PT12_RG40XXH_FINAL_BACKUP.sav`, 131088 bytes, SHA-256 `2bac4d587f965215c6a008d06825bfd46ca8ec5a77a247d7b53211111ecf8c8c`. Original preserved; testing uses a copy. Its actual state marker is Playtest 11 (0xA907), in Cerulean, despite its filename. The actual post-Surge P12 save has been requested; personal P12 migration acceptance is pending.
+- Existing native layout expectations: SaveBlock1 15568, SaveBlock2 3884, SaveBlock3 4, PokemonStorage 34144 bytes. All four native size checks passed at the Task 1 gate; they will run again at final integration.
 - P12 map index snapshot: `tools/three_horizons/tests/playtest12-map-indices.json`.
 
 ## State ownership audit
@@ -111,9 +111,12 @@ The exact assignments below are existing unused Emerald event slots. They are no
 ## Task evidence
 
 - Allocation RED: new ownership test failed with 0 P13 receipts; unchanged P12 indices and previous allocation checks passed.
-- Native RED checkpoint: `7b80ad6bc87546d1b79f43587f314f29d4e0ba50`; CI pending.
+- Native initial RED checkpoint: `7b80ad6bc87546d1b79f43587f314f29d4e0ba50`; two expected clock-version failures observed.
+- Expanded negative controls: all four state regressions failed against exact baseline `f49d3bd17a604d4593ad589b330018f5e911ecbc` in run 36501183839.
+- Task 1 GREEN: feature `c862c43e2053c634735f3273fc5a52ab69fe00aa`; compiled/test `2bad584adb4570df243a6c20dff6f784c9a021ad`; [CI evidence](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/36501183839). Four host ownership/index contracts, four new native state tests (nine starter cases and six versions), four legacy checks and four save-layout checks passed. Two unrelated native discovery ASSUME exclusions in `change_type_on_item.c` are retained in the log; no selected test failed.
+- Task 18 baseline: exact P12 ROM/ELF, copied synthetic post-Surge save, 18 mGBA cases (Viridian/Route 2/Vermilion × compatible/incompatible/off follower × interaction/party-menu Cut). The correct local tree ID survives animation and is removed; Viridian and Route 2 respawn on camera refresh with flag ID 0, whereas Vermilion's native temporary hide flag prevents respawn. A one-tile step reproduces the player overlapping the reappeared tree. Repair and after evidence pending.
 - Documentation-index failure was corrected by adding the approved plan and Bible to `docs/SUMMARY.md`.
 
 ## Integration and acceptance
 
-Pending: full project regression, save-layout execution, three upstream game builds, personal-save migration/Continue, mGBA visual acceptance, release packaging and user RG40XX H acceptance. A focused run does not substitute for these gates.
+Pending: full project regression, final save-layout recheck, three upstream game builds, personal-save migration/Continue, mGBA visual acceptance, release packaging and user RG40XX H acceptance. A focused run does not substitute for these gates.
