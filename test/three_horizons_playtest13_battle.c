@@ -341,6 +341,7 @@ static void CatchProbeFrame(const u8 *command, u16 newKeys, u16 heldKeys)
 
 static u8 InitDexProbe(enum Species species)
 {
+    Test_MgbaPrintf("Dex offsets seen=%u caught=%u bytes=%u", (u32)__builtin_offsetof(struct SaveBlock1, dexSeen), (u32)__builtin_offsetof(struct SaveBlock1, dexCaught), (u32)NUM_DEX_FLAG_BYTES);
     InitMoveProbe(0, FALSE, FALSE);
     CreateMonWithIVs(GetBattlerMon(1), species, 5, 9876, OTID_STRUCT_PLAYER_ID, 12);
     PokemonToBattleMon(GetBattlerMon(1), &gBattleMons[1]);
@@ -362,6 +363,10 @@ static u8 InitDexProbe(enum Species species)
     EXPECT(!gPaletteFade.active);
     EXPECT(GetBgTilemapBuffer(2) != NULL);
     EXPECT(GetBgTilemapBuffer(3) != NULL);
+    // The cry channel can start on the VBlank after the task switches input owner.
+    for (frame = 0; frame < 60 && !IsCryPlaying(); frame++)
+        CatchProbeFrame(sDexProbeCommand, 0, 0);
+    EXPECT_LT(frame, 60);
     EXPECT(IsCryPlaying());
     return FindTaskIdByFunc(Task_HandleCaughtMonPageInput);
 }
