@@ -41,6 +41,13 @@
       "id": "MAP_TH13_ROUTE2_EAST_BUILDING",
       "layout": "LAYOUT_ROUTE2_ENTRANCE",
       "script_owner": "chapter13_route2.inc"
+    },
+    {
+      "source": "Route2_House_Frlg",
+      "name": "TH13_Route2_House",
+      "id": "MAP_TH13_ROUTE2_HOUSE",
+      "layout": "LAYOUT_HOUSE2_FRLG",
+      "script_owner": "chapter13_route2.inc"
     }
   ]
 }

@@ -496,6 +496,7 @@ jobs:
             running-frames.log
             focused-state-negative.log
             focused-cut-negative.log
+            focused-cut-compatibility.log
             focused-field-moves.log
             focused-legacy-state.log
             focused-save-layout.log
