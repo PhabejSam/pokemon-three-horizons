@@ -309,3 +309,22 @@ TH12_Ship_RivalDefeat:
     .string "You have really improved!$"
 TH12_Ship_RivalAfter:
     .string "{RIVAL}: I heard the captain knows\nCUT. That should help you reach\lLT. SURGE's GYM.\pI will keep training my partner.\nYou had better keep up!$"
+
+TH13_Ship_Marill::
+    lockall
+    playmoncry SPECIES_MARILL, CRY_MODE_NORMAL
+    goto TH13_Ship_Partners
+TH13_Ship_Wingull::
+    lockall
+    playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
+TH13_Ship_Partners:
+    msgbox TH13_Ship_PartnersText
+    waitmoncry
+    setvar VAR_0x8004, TH_RESEARCH_SHIP
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_SHIP
+    call TH13_ResearchPhoto
+    releaseall
+    end
+TH13_Ship_PartnersText:
+    .string "MARILL and WINGULL enjoy the breeze.\nTheir trainers met on this voyage.\pTravel brings POKéMON from\ndifferent regions together.$"

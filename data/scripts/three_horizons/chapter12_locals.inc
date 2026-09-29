@@ -1048,7 +1048,7 @@ TH12_SSAnne_Deck_Object4::
     msgbox TH12_SSAnne_Deck_Object4_Text, MSGBOX_NPC
     end
 TH12_SSAnne_Deck_Object4_Text:
-    .string "Enjoy the sea air! We are staying\nin port while the crew investigates\lour unusual cargo stowaways.$"
+    .string "My MARILL came with me from JOHTO.\nThat WINGULL belongs to a visitor\lfrom HOENN. They love the sea air!\pShips bring us together, but I've\nheard of unusual sightings far\lfrom any port, too.$"
 
 TH12_Ship_Sailor::
     msgbox TH12_Ship_Sailor_Text, MSGBOX_NPC
