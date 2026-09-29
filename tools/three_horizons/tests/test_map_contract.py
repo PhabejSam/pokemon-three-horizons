@@ -104,7 +104,7 @@ class MapContract(unittest.TestCase):
             self.assertEqual(hashlib.sha256(layouts.encode()).hexdigest(), expected['layouts_sha256'])
             constants = self.generate('groups', version)['map_groups.h']
             indices = '\n'.join(line for line in constants.splitlines()
-                                if re.match(r'\s*MAP_\w+\s*=', line) and 'MAP_TH_' not in line and 'MAP_TH12_' not in line)
+                                if re.match(r'\s*MAP_\w+\s*=', line) and not any(prefix in line for prefix in ('MAP_TH_', 'MAP_TH12_', 'MAP_TH13_')))
             self.assertEqual(hashlib.sha256(indices.encode()).hexdigest(), expected['map_indices_sha256'])
 
     def test_project_manifest_rejects_missing_map(self):

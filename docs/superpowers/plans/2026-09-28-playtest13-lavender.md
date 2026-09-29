@@ -173,6 +173,8 @@ Tasks are independently reviewable units. Repair letters A–X below map one-to-
 
 **Interface:** Outdoor Day Care warp index 1 remains index 1; it targets the new TH interior. Each interior exit returns to Route 5's Day Care landing, not warp 0.
 
+**Implementation conflict (verified during execution):** Native Route 5 single-Pokémon scripts and specials are FRLG-only; their `SaveBlock1.route5DayCareMon` field does not exist in TH's Emerald-compatible save. Enabling that field would break approved P12 compatibility. Reuse the existing serialized `daycare.mons[0]` through TH-only branches of the five Route 5 specials, and clone only the single-Pokémon script/text into TH ownership. Keep native party safeguards, growth, cost and return behavior; preserve other stored payload and use the existing step increment exactly once. No save expansion or breeding redesign. The outdoor on-load door replacement and closed-facility sign must also be removed along with the self-warp.
+
 - [ ] Add `test_daycare_warps_are_reciprocal`, asserting every door tile/destination index and walkable return location. Confirm current self-warp fails.
 - [ ] Clone only the required interior and give it valid TH scripts. Decide no additional Day Care feature redesign; retain native intended facility behavior and test its dialogue without importing unrelated Hoenn progression.
 - [ ] Test entering, all exit tiles, cold Continue inside, and immediate re-entry with follower. Commit `fix: connect Route 5 Day Care doors correctly`.

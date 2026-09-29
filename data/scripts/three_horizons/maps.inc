@@ -120,3 +120,6 @@ TH_Route1_MapScripts::
 .include "data/scripts/three_horizons/chapter12_gym.inc"
 
 .include "data/scripts/three_horizons/chapter12_sightings.inc"
+
+.include "data/maps/TH13_Route5_PokemonDayCare/scripts.inc"
+.include "data/scripts/three_horizons/chapter13_routes.inc"

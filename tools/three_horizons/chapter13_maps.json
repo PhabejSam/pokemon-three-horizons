@@ -1,0 +1,11 @@
+{
+  "maps": [
+    {
+      "source": "Route5_PokemonDayCare_Frlg",
+      "name": "TH13_Route5_PokemonDayCare",
+      "id": "MAP_TH13_ROUTE5_POKEMON_DAY_CARE",
+      "layout": "LAYOUT_ROUTE5_POKEMON_DAY_CARE",
+      "script_owner": "chapter13_routes.inc"
+    }
+  ]
+}

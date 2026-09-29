@@ -1511,18 +1511,31 @@ static u8 ModifyBreedingScoreForOvalCharm(u8 score)
 
 // Route 5 Daycare
 
+#if IS_FRLG || THREE_HORIZONS
+static struct DaycareMon *GetRoute5DaycareStorage(void)
+{
+#if THREE_HORIZONS
+    // Keep the P12 save layout and use its existing serialized Day Care slot.
+    // IncrementDaycareSteps already advances this slot once per step.
+    return &gSaveBlock1Ptr->daycare.mons[0];
+#else
+    return &gSaveBlock1Ptr->route5DayCareMon;
+#endif
+}
+#endif
+
 void PutMonInRoute5Daycare(void)
 {
-#if IS_FRLG
+#if IS_FRLG || THREE_HORIZONS
     u8 monIdx = GetCursorSelectionMonId();
-    StorePokemonInDaycare(&gParties[B_TRAINER_PLAYER][monIdx], &gSaveBlock1Ptr->route5DayCareMon);
+    StorePokemonInDaycare(&gParties[B_TRAINER_PLAYER][monIdx], GetRoute5DaycareStorage());
 #endif
 }
 
 void GetCostToWithdrawRoute5DaycareMon(void)
 {
-#if IS_FRLG
-    u16 cost = PrepareDaycareCostStringForSelectedMon(&gSaveBlock1Ptr->route5DayCareMon);
+#if IS_FRLG || THREE_HORIZONS
+    u16 cost = PrepareDaycareCostStringForSelectedMon(GetRoute5DaycareStorage());
 #else
     u16 cost = 100;
 #endif
@@ -1531,8 +1544,8 @@ void GetCostToWithdrawRoute5DaycareMon(void)
 
 bool8 IsThereMonInRoute5Daycare(void)
 {
-#if IS_FRLG
-    if (GetBoxMonData(&gSaveBlock1Ptr->route5DayCareMon.mon, MON_DATA_SPECIES) != SPECIES_NONE)
+#if IS_FRLG || THREE_HORIZONS
+    if (GetBoxMonData(&GetRoute5DaycareStorage()->mon, MON_DATA_SPECIES) != SPECIES_NONE)
         return TRUE;
 #endif
 
@@ -1541,8 +1554,8 @@ bool8 IsThereMonInRoute5Daycare(void)
 
 u8 GetNumLevelsGainedForRoute5DaycareMon(void)
 {
-#if IS_FRLG
-    return GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->route5DayCareMon);
+#if IS_FRLG || THREE_HORIZONS
+    return GetNumLevelsGainedForDaycareMon(GetRoute5DaycareStorage());
 #else
     return 0;
 #endif
@@ -1550,8 +1563,8 @@ u8 GetNumLevelsGainedForRoute5DaycareMon(void)
 
 u16 TakePokemonFromRoute5Daycare(void)
 {
-#if IS_FRLG
-    return TakeSelectedPokemonFromDaycare(&gSaveBlock1Ptr->route5DayCareMon);
+#if IS_FRLG || THREE_HORIZONS
+    return TakeSelectedPokemonFromDaycare(GetRoute5DaycareStorage());
 #else
     return SPECIES_NONE;
 #endif

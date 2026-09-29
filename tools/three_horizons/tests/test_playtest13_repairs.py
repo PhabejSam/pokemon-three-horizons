@@ -39,6 +39,14 @@ class Playtest13Repairs(unittest.TestCase):
         self.assertEqual(names[:len(old_th)], old_th)
         self.assertIn('TH13_Route5_PokemonDayCare', names[len(old_th):])
 
+    def test_daycare_map_is_selected_only_for_th(self):
+        from tools.three_horizons.tests.test_map_contract import MapContract
+        generator = MapContract()
+        for version in ('emerald', 'firered', 'three_horizons'):
+            result = generator.generate('groups', version)
+            self.assertEqual('\t.4byte TH13_Route5_PokemonDayCare\n' in result['groups.inc'],
+                             version == 'three_horizons', version)
+
 
 if __name__ == '__main__':
     unittest.main()
