@@ -133,3 +133,5 @@ TH_Route1_MapScripts::
 .include "data/scripts/three_horizons/chapter13_route2.inc"
 
 .include "data/maps/TH13_Route2_House/scripts.inc"
+
+    .include "data/maps/TH13_Route9/scripts.inc"

@@ -15,7 +15,8 @@ class Playtest13Rematches(unittest.TestCase):
         self.assertIn((7,4), area)  # Reach the nurse across her counter at y=3.
         source = (ROOT/'data/scripts/three_horizons/chapter12_vermilion.inc').read_text()
         section = source.split('TH13_VsSeekerResearcher::', 1)[1]
-        self.assertNotIn('FLAG_BADGE', section)
+        # Task34 adds a post-gift Surge/Flash lead; the gift itself stays ungated.
+        self.assertNotIn('FLAG_BADGE', section.split('TH13_VsSeekerReceived:', 1)[0])
         self.assertIn('giveitem ITEM_VS_SEEKER', section)
         self.assertIn('goto_if_eq VAR_RESULT, FALSE, TH12_RewardBagFull', section)
         self.assertLess(section.index('goto_if_eq VAR_RESULT, FALSE'), section.index('setflag FLAG_TH13_VS_SEEKER'))
@@ -24,9 +25,9 @@ class Playtest13Rematches(unittest.TestCase):
         text = (ROOT/'src/data/three_horizons_rematches.h').read_text()
         entries = re.findall(r'\{(TRAINER_TH\w+), (MAP_TH\w+), (\d+)\}', text)
         ids = dict(re.findall(r'#define (TRAINER_TH\w+) (\d+)', (ROOT/'include/constants/opponents.h').read_text()))
-        expected = (set(range(1, 32)) - {7, 24, 29}) | (set(range(53, 94)) - {68}) | set(range(104,114))
+        expected = (set(range(1, 32)) - {7, 24, 29}) | (set(range(53, 94)) - {68}) | set(range(104,123))
         self.assertEqual({int(ids[t]) for t, m, l in entries}, expected)
-        self.assertEqual(len(entries), 78)
+        self.assertEqual(len(entries), 87)
         maps = {d['id']: d for p in (ROOT/'data/maps').glob('TH*/map.json') for d in [json.loads(p.read_text())]}
         sources = '\n'.join(p.read_text() for p in (ROOT/'data/scripts/three_horizons').glob('*.inc'))
         seen = set()
@@ -46,7 +47,7 @@ class Playtest13Rematches(unittest.TestCase):
         for trainer, _, _ in entries:
             self.assertRegex(sources, r'trainerbattle_rematch '+trainer+r',')
         blocks = re.findall(r'^TH\w+_Rematch:+\n(.*?)(?=^\w+:|\Z)', sources, re.M|re.S)
-        self.assertEqual(len(blocks), 78)
+        self.assertEqual(len(blocks), 87)
         for block in blocks:
             for one_time_command in ('giveitem', 'givemon', 'setflag', 'setvar', 'addmoney'):
                 self.assertNotIn(one_time_command, block)

@@ -128,3 +128,34 @@ TH13_Forest_RepeatText:
     .string "PINSIR and HERACROSS exchange\nquiet cries. Both seem at ease.$"
 TH13_Forest_ResearcherText:
     .string "PINSIR is native to KANTO.\nHERACROSS is known in JOHTO.\pI expected a territorial dispute.\nInstead, they share this clearing.\pA careful observation is worth more\nthan an early guess about why.$"
+
+TH13_Route9_Pair::
+    lockall
+    hidefollower
+    playmoncry SPECIES_MAREEP, CRY_MODE_NORMAL
+    waitmoncry
+    playmoncry SPECIES_NIDORAN_F, CRY_MODE_NORMAL
+    waitmoncry
+    goto_if_set FLAG_TH13_SCENE_ROUTE9, TH13_Route9_Repeat
+    msgbox TH13_Route9_FirstText
+    setflag FLAG_TH13_SCENE_ROUTE9
+    goto TH13_Route9_Record
+TH13_Route9_Repeat:
+    msgbox TH13_Route9_RepeatText
+TH13_Route9_Record:
+    setvar VAR_0x8004, TH_RESEARCH_ROUTE9
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_ROUTE9
+    call TH13_ResearchPhoto
+    special TH_RefreshFollower
+    releaseall
+    end
+TH13_Route9_Student::
+    msgbox TH13_Route9_StudentText, MSGBOX_NPC
+    end
+TH13_Route9_FirstText:
+    .string "MAREEP grazes beside NIDORAN.\nThe two quietly share the grass.\pNIDORAN seems comfortable with\nits unfamiliar neighbor.$"
+TH13_Route9_RepeatText:
+    .string "MAREEP and NIDORAN exchange\nsoft cries, then return to grazing.$"
+TH13_Route9_StudentText:
+    .string "I'm checking OAK's encounter data.\nThese numbers don't match the usual\lseasonal distributions.\pMAREEP normally live in JOHTO.\nI'll record what I see before\ltrying to explain it.$"

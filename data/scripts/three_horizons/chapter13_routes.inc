@@ -429,3 +429,213 @@ TH13_Cave_Pair::
     end
 TH13_Cave_PairText:
     .string "PHANPY taps the tunnel floor.\nWHISMUR listens to the echoes.\pNeither seems ready to leave\nthis unfamiliar cave.$"
+
+@ Route 9 retains native Kanto first battles and trainer sight lines.
+TH13_Route9_Alicia::
+    trainerbattle_single TRAINER_TH13_ROUTE9_ALICIA, TH13_Route9_Text_AliciaIntro, TH13_Route9_Text_AliciaDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route9_Alicia_Rematch
+    msgbox TH13_Route9_Text_AliciaPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Alicia_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE9_ALICIA, TH13_Route9_Text_AliciaIntro, TH13_Route9_Text_AliciaDefeat
+    msgbox TH13_Route9_Text_AliciaPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Jeremy::
+    trainerbattle_single TRAINER_TH13_ROUTE9_JEREMY, TH13_Route9_Text_JeremyIntro, TH13_Route9_Text_JeremyDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route9_Jeremy_Rematch
+    msgbox TH13_Route9_Text_JeremyPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Jeremy_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE9_JEREMY, TH13_Route9_Text_JeremyIntro, TH13_Route9_Text_JeremyDefeat
+    msgbox TH13_Route9_Text_JeremyPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Alan::
+    trainerbattle_single TRAINER_TH13_ROUTE9_ALAN, TH13_Route9_Text_AlanIntro, TH13_Route9_Text_AlanDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route9_Alan_Rematch
+    msgbox TH13_Route9_Text_AlanPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Alan_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE9_ALAN, TH13_Route9_Text_AlanIntro, TH13_Route9_Text_AlanDefeat
+    msgbox TH13_Route9_Text_AlanPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Chris::
+    trainerbattle_single TRAINER_TH13_ROUTE9_CHRIS, TH13_Route9_Text_ChrisIntro, TH13_Route9_Text_ChrisDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route9_Chris_Rematch
+    msgbox TH13_Route9_Text_ChrisPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Chris_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE9_CHRIS, TH13_Route9_Text_ChrisIntro, TH13_Route9_Text_ChrisDefeat
+    msgbox TH13_Route9_Text_ChrisPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Brent::
+    trainerbattle_single TRAINER_TH13_ROUTE9_BRENT, TH13_Route9_Text_BrentIntro, TH13_Route9_Text_BrentDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route9_Brent_Rematch
+    msgbox TH13_Route9_Text_BrentPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Brent_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE9_BRENT, TH13_Route9_Text_BrentIntro, TH13_Route9_Text_BrentDefeat
+    msgbox TH13_Route9_Text_BrentPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Conner::
+    trainerbattle_single TRAINER_TH13_ROUTE9_CONNER, TH13_Route9_Text_ConnerIntro, TH13_Route9_Text_ConnerDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route9_Conner_Rematch
+    msgbox TH13_Route9_Text_ConnerPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Conner_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE9_CONNER, TH13_Route9_Text_ConnerIntro, TH13_Route9_Text_ConnerDefeat
+    msgbox TH13_Route9_Text_ConnerPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Brice::
+    trainerbattle_single TRAINER_TH13_ROUTE9_BRICE, TH13_Route9_Text_BriceIntro, TH13_Route9_Text_BriceDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route9_Brice_Rematch
+    msgbox TH13_Route9_Text_BricePostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Brice_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE9_BRICE, TH13_Route9_Text_BriceIntro, TH13_Route9_Text_BriceDefeat
+    msgbox TH13_Route9_Text_BricePostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Caitlin::
+    trainerbattle_single TRAINER_TH13_ROUTE9_CAITLIN, TH13_Route9_Text_CaitlinIntro, TH13_Route9_Text_CaitlinDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route9_Caitlin_Rematch
+    msgbox TH13_Route9_Text_CaitlinPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Caitlin_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE9_CAITLIN, TH13_Route9_Text_CaitlinIntro, TH13_Route9_Text_CaitlinDefeat
+    msgbox TH13_Route9_Text_CaitlinPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Drew::
+    trainerbattle_single TRAINER_TH13_ROUTE9_DREW, TH13_Route9_Text_DrewIntro, TH13_Route9_Text_DrewDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route9_Drew_Rematch
+    msgbox TH13_Route9_Text_DrewPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Drew_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE9_DREW, TH13_Route9_Text_DrewIntro, TH13_Route9_Text_DrewDefeat
+    msgbox TH13_Route9_Text_DrewPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route9_Item4::
+    finditem ITEM_TM40
+    end
+TH13_Route9_Item5::
+    finditem ITEM_BURN_HEAL
+    end
+
+
+TH13_Route9_EventScript_RouteSign::
+	msgbox TH13_Route9_Text_RouteSign, MSGBOX_SIGN
+	end
+
+TH13_Route9_Text_AliciaIntro::
+	.string "You have POKéMON with you!\n"
+	.string "You're mine!$"
+
+TH13_Route9_Text_AliciaDefeat::
+	.string "You deceived me…$"
+
+TH13_Route9_Text_AliciaPostBattle::
+	.string "The tunnel coming up is pitch-black\n"
+	.string "inside.\p"
+	.string "You'll need FLASH to get through\n"
+	.string "there.$"
+
+TH13_Route9_Text_ChrisIntro::
+	.string "Who's that walking there with those\n"
+	.string "good-looking POKéMON?$"
+
+TH13_Route9_Text_ChrisDefeat::
+	.string "Out like a light!$"
+
+TH13_Route9_Text_ChrisPostBattle::
+	.string "Keep walking!$"
+
+TH13_Route9_Text_DrewIntro::
+	.string "I'm taking the ROCK TUNNEL to\n"
+	.string "go to LAVENDER…$"
+
+TH13_Route9_Text_DrewDefeat::
+	.string "Can't measure up…$"
+
+TH13_Route9_Text_DrewPostBattle::
+	.string "Are you off to ROCK TUNNEL, too?$"
+
+TH13_Route9_Text_CaitlinIntro::
+	.string "Don't you dare patronize me!$"
+
+TH13_Route9_Text_CaitlinDefeat::
+	.string "No!\n"
+	.string "You're too much.$"
+
+TH13_Route9_Text_CaitlinPostBattle::
+	.string "You're obviously talented.\n"
+	.string "Good luck to you!$"
+
+TH13_Route9_Text_JeremyIntro::
+	.string "Bwahaha!\n"
+	.string "Great! I was bored, eh!$"
+
+TH13_Route9_Text_JeremyDefeat::
+	.string "Keep it coming, eh!\p"
+	.string "Oh wait.\n"
+	.string "I'm out of POKéMON!$"
+
+TH13_Route9_Text_JeremyPostBattle::
+	.string "You sure had guts standing up to\n"
+	.string "me there, eh?$"
+
+TH13_Route9_Text_BriceIntro::
+	.string "Hahaha!\n"
+	.string "Aren't you a little toughie!$"
+
+TH13_Route9_Text_BriceDefeat::
+	.string "What's that?$"
+
+TH13_Route9_Text_BricePostBattle::
+	.string "Hahaha!\n"
+	.string "Kids should be tough!$"
+
+TH13_Route9_Text_BrentIntro::
+	.string "I got up early every day to raise\n"
+	.string "my POKéMON from cocoons!$"
+
+TH13_Route9_Text_BrentDefeat::
+	.string "WHAT?\p"
+	.string "What a total waste of time!$"
+
+TH13_Route9_Text_BrentPostBattle::
+	.string "I have to collect more than bugs\n"
+	.string "to get stronger…$"
+
+TH13_Route9_Text_AlanIntro::
+	.string "Hahahaha!\n"
+	.string "Bring it on!$"
+
+TH13_Route9_Text_AlanDefeat::
+	.string "Hahahaha!\n"
+	.string "You beat me fair!$"
+
+TH13_Route9_Text_AlanPostBattle::
+	.string "Hahahaha!\n"
+	.string "Us hearty guys always laugh!$"
+
+TH13_Route9_Text_ConnerIntro::
+	.string "Go, my super BUG POKéMON!$"
+
+TH13_Route9_Text_ConnerDefeat::
+	.string "My bugs…$"
+
+TH13_Route9_Text_ConnerPostBattle::
+	.string "If you don't like BUG POKéMON,\n"
+	.string "you bug me!$"
+
+TH13_Route9_Text_RouteSign::
+	.string "ROUTE 9\n"
+	.string "CERULEAN CITY - ROCK TUNNEL$"
+

@@ -48,6 +48,13 @@
       "id": "MAP_TH13_ROUTE2_HOUSE",
       "layout": "LAYOUT_HOUSE2_FRLG",
       "script_owner": "chapter13_route2.inc"
+    },
+    {
+      "source": "Route9_Frlg",
+      "name": "TH13_Route9",
+      "id": "MAP_TH13_ROUTE9",
+      "layout": "LAYOUT_ROUTE9",
+      "script_owner": "chapter13_routes.inc"
     }
   ]
 }
