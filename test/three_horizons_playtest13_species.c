@@ -26,7 +26,13 @@ TEST("Three Horizons playtest13 Gyarados Water Dragon applies to existing mons")
     EXPECT(LearnsAt(SPECIES_GYARADOS, MOVE_DRAGON_TAIL, 26));
     EXPECT(LearnsAt(SPECIES_GYARADOS, MOVE_OUTRAGE, 48));
     EXPECT(!CanLearnTeachableMove(SPECIES_GYARADOS, MOVE_DRAGON_CLAW));
-    EXPECT(CanLearnTeachableMove(SPECIES_GYARADOS, MOVE_OUTRAGE));
+    // Outrage is level-up/relearn coverage; there is no authored Outrage tutor.
+    CreateMonWithIVs(&mon, SPECIES_GYARADOS, 48, 123, OTID_STRUCT_PLAYER_ID, 23);
+    bool32 hasOutrage = FALSE;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        if (GetMonData(&mon, MON_DATA_MOVE1 + i) == MOVE_OUTRAGE)
+            hasOutrage = TRUE;
+    EXPECT(hasOutrage);
 }
 
 TEST("Three Horizons playtest13 Typhlosion learns Earth Power at forty")

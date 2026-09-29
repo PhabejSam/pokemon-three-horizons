@@ -36,6 +36,13 @@ other Gen 9 level moves. Typhlosion replaces only its level-40 Earthquake entry
 with Earth Power. These choices are recorded before the production checkpoint.
 Existing direct-item methods below are retained rather than duplicated.
 
+The native counter regression reproduced a selected Rage Fist being counted
+while the Pokémon remained asleep. Three Horizons now excludes actions the
+engine marks unable to execute; actual attempts that miss or meet Protect
+still count. The upstream condition remains unchanged in non-TH builds.
+Outrage coverage comes from the level-48 learnset and relearning, not a new
+Outrage tutor or TM.
+
 | Family | Single-player trigger | Availability by Lavender |
 |---|---|---|
 | Kadabra → Alakazam | Level 36; existing Linking Cord alternative retained | Yes, train an available Abra |
