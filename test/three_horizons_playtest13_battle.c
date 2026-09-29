@@ -12,7 +12,7 @@
 #include "constants/trainers.h"
 
 #if THREE_HORIZONS
-extern void Test_TH_ChooseRunAction(void);
+extern bool32 Test_TH_ChooseRunAction(void);
 
 static void InitRunProbe(u32 flags)
 {
@@ -34,7 +34,7 @@ static void InitRunProbe(u32 flags)
         gBattleMons[i].hp = 30;
         gBattleMons[i].maxHP = 40;
         gBattleMons[i].speed = 20;
-        gBattleMons[i].type1 = gBattleMons[i].type2 = TYPE_NORMAL;
+        gBattleMons[i].types[0] = gBattleMons[i].types[1] = TYPE_NORMAL;
     }
     AllocateBattleResources();
 }
@@ -65,7 +65,8 @@ TEST("Three Horizons playtest13 trainer RUN cannot whiteout")
     memcpy(flags, gSaveBlock1Ptr->flags, sizeof(flags));
     memcpy(party, gParties[B_TRAINER_PLAYER], sizeof(party));
     memcpy(battlers, gBattleMons, sizeof(battlers));
-    Test_TH_ChooseRunAction();
+    bool32 returnedToActionSelection = Test_TH_ChooseRunAction();
+    EXPECT(returnedToActionSelection);
     EXPECT(gBattlescriptCurrInstr == BattleScript_PrintCantRunFromTrainer);
     EXPECT(gSelectionBattleScripts[0] == NULL);
     EXPECT(!CanPlayerForfeitNormalTrainerBattle());
