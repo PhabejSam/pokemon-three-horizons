@@ -336,6 +336,18 @@ TH12_VermilionCity_House2_Object0::
 TH12_VermilionCity_House2_Object0_Text:
     .string "My FARFETCH'D carries its leek\neverywhere. A trusty travel partner!$"
 
+TH13_Vermilion_Farfetchd::
+    lock
+    faceplayer
+    playmoncry SPECIES_FARFETCHD, CRY_MODE_NORMAL
+    msgbox TH13_Vermilion_FarfetchdText
+    waitmoncry
+    release
+    end
+
+TH13_Vermilion_FarfetchdText:
+    .string "FARFETCH'D: Kwaa!$"
+
 TH12_VermilionCity_House3_Object0::
     msgbox TH12_VermilionCity_House3_Object0_Text, MSGBOX_NPC
     end

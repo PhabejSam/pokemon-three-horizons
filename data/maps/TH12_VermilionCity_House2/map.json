@@ -30,6 +30,21 @@
       "script": "TH12_VermilionCity_House2_Object0",
       "flag": "0",
       "local_id": "LOCALID_TH12_VERMILIONCITY_HOUSE2_0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(FARFETCHD)",
+      "x": 3,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH13_Vermilion_Farfetchd",
+      "flag": "0",
+      "local_id": "LOCALID_TH13_VERMILION_FARFETCHD"
     }
   ],
   "warp_events": [
