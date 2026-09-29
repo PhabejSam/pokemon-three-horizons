@@ -180,11 +180,61 @@ TH12_Ship_RivalVictory:
     setflag FLAG_TH12_SHIP_RIVAL
     msgbox TH12_Ship_RivalAfter
     closemessage
+    getplayerxy VAR_0x8004, VAR_0x8005
+    goto_if_eq VAR_0x8004, 32, TH13_Ship_RivalExitLeft
+    applymovement LOCALID_TH12_SSANNE_2F_CORRIDOR_0, TH13_Ship_RivalWalkRight
+    goto TH13_Ship_RivalExitWait
+TH13_Ship_RivalExitLeft:
+    applymovement LOCALID_TH12_SSANNE_2F_CORRIDOR_0, TH13_Ship_RivalWalkLeft
+TH13_Ship_RivalExitWait:
+    waitmovement 0
     removeobject LOCALID_TH12_SSANNE_2F_CORRIDOR_0
 TH12_Ship_RivalDone:
     special TH_RefreshFollower
     releaseall
     end
+TH13_Ship_RivalWalkRight:
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    step_end
+TH13_Ship_RivalWalkLeft:
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    step_end
 TH12_Ship_RivalIntro:
     .string "{RIVAL}: You made it aboard!\nMy partner and I have been training.\pShow me what your team can do!$"
 TH12_Ship_RivalDefeat:
