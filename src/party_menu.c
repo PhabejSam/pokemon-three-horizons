@@ -5636,7 +5636,13 @@ static void Task_DoLearnedMoveFanfareAfterText(u8 taskId)
 
 static s16 GetLearnedMoveContinuationState(void)
 {
+#if THREE_HORIZONS
+    // data1 holds the learned move ID. Keep the level-up/tutor context separate
+    // so Rare Candy move learning still reaches the evolution check.
+    return gPartyMenu.learnMoveState;
+#else
     return gPartyMenu.data1;
+#endif
 }
 
 static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
