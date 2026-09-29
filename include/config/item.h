@@ -42,7 +42,8 @@
 
 // Vs. Seeker
 #if THREE_HORIZONS
-#define I_VS_SEEKER_CHARGING FLAG_UNUSED_0x497 // TH readiness receipt; no charging.
+#include "constants/three_horizons.h"
+#define I_VS_SEEKER_CHARGING FLAG_TH13_VS_SEEKER_ACTIVE // TH readiness receipt; no charging.
 #else
 #define I_VS_SEEKER_CHARGING        0 // Native default remains disabled.
 #endif
