@@ -230,9 +230,13 @@ static void PrintRegionMapSecName(void)
 
 static const u8 *GetFieldRegionMapTitle(void)
 {
+#if THREE_HORIZONS
+    return GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_HOENN ? gText_Hoenn : gText_Kanto;
+#else
     if (IS_FRLG)
         return gText_Kanto;
     return gText_Hoenn;
+#endif
 }
 
 #if TESTING && THREE_HORIZONS

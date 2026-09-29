@@ -691,10 +691,18 @@ TH_Local_RivalHouse_0_Text:
     .string "My brother is always rushing off!\nI hope you two look after each other.$"
 
 TH_Local_RivalHouse_1::
+    goto TH_EventScript_KantoRegionMap
+
+TH_EventScript_KantoRegionMap::
     lockall
+    msgbox TH_Text_KantoRegionMap, MSGBOX_DEFAULT
+    fadescreen FADE_TO_BLACK
     special FieldShowRegionMap
     releaseall
     end
+
+TH_Text_KantoRegionMap:
+    .string "{PLAYER} took a closer look at the\nKANTO region map.$"
 
 TH_Sign_RivalHouse_0::
     msgbox TH_Sign_RivalHouse_0_Text, MSGBOX_NPC
