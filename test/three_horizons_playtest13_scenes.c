@@ -8,11 +8,28 @@
 #include "money.h"
 #include "constants/maps.h"
 #include "constants/script_commands.h"
+#include "constants/event_object_movement.h"
 #include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
 extern const u8 TH12_Bill_OnEntry[];
 extern const u8 TH12_Cerulean_CatchUpSupplies[];
+extern const u8 TH12_Moon_Gathering[];
+
+TEST("Three Horizons playtest13 Moon sighting repeat keeps formation")
+{
+    struct ScriptContext ctx;
+    const u8 *movement;
+    InitEventData();
+    FlagSet(FLAG_TH12_CAVE_SEEN);
+    EXPECT_EQ(TH12_Moon_Gathering[0], SCR_OP_LOCKALL);
+    EXPECT(RunScriptImmediatelyUntilEffect(SCREFF_V1 | SCREFF_ANY, TH12_Moon_Gathering + 1, &ctx));
+    EXPECT_EQ(*ctx.scriptPtr, SCR_OP_APPLYMOVEMENT);
+    memcpy(&movement, ctx.scriptPtr + 3, sizeof(movement));
+    EXPECT_EQ(movement[0], MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN);
+    EXPECT_EQ(movement[1], MOVEMENT_ACTION_STEP_END);
+    EXPECT(FlagGet(FLAG_TH12_CAVE_SEEN));
+}
 
 TEST("Three Horizons playtest13 Bill migration retains a witnessed machine entry")
 {
