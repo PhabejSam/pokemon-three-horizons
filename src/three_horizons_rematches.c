@@ -14,7 +14,9 @@
 #if THREE_HORIZONS
 #include "data/three_horizons_rematches.h"
 
-static EWRAM_DATA u16 sReadinessMap = MAP_UNDEFINED;
+// EWRAM_DATA is the zero-initialized .sbss section. TH maps are in group 75;
+// the zero startup key cannot inherit their saved readiness.
+static EWRAM_DATA u16 sReadinessMap = 0;
 static EWRAM_DATA u16 sActiveTrainer = TRAINER_NONE;
 
 static u16 CurrentMap(void)
