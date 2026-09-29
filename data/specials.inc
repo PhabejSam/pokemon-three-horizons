@@ -660,4 +660,7 @@ gSpecials::
     def_special TH_ScriptDeliverTrainingKit
     def_special TH_ScriptImproveIVs
     def_special TH_RefreshFollower
+    def_special TH_ScriptResearchPhotoStatus
+    def_special TH_ScriptTakeResearchPhoto
+    def_special TH_ScriptResearchObserve
 #endif

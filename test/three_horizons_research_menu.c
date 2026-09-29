@@ -127,4 +127,32 @@ TEST("Three Horizons playtest13 photo prompt cannot duplicate")
     EXPECT(!TH_ResearchConfirmPhoto(0xFFFF, TRUE));
     EXPECT(TH_ResearchHasPhoto(TH_PHOTO_FOREST_PAIR));
 }
+
+TEST("Three Horizons playtest13 research contacts replay without changing progress")
+{
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    IntrCallback oldVBlank = gMain.vblankCallback;
+    u8 saved[NUM_FLAG_BYTES];
+    InitEventData(); SetDefaultFontsPointer(); gMain.callback1 = NULL;
+    FlagSet(FLAG_TH13_GEAR);
+    for (u32 call = 0; call < TH_RESEARCH_CALL_COUNT; call++)
+    {
+        TH_ResearchQueueCall(call); TH_ResearchCompleteCall(call);
+        memcpy(saved, gSaveBlock1Ptr->flags, sizeof(saved));
+        TH_OpenResearchGear(ResearchReturn); ResearchFrames(0, 40); Press(A_BUTTON);
+        for (u32 contact = 0; contact < 3; contact++)
+        {
+            EXPECT(TH_ResearchContactReport(contact, call) != NULL);
+            EXPECT_LE(GetStringWidth(FONT_SMALL, TH_ResearchContactReport(contact, call), 0), 216);
+            Press(A_BUTTON); EXPECT_EQ(TH_TestResearchMenuLevel(), 2);
+            EXPECT_EQ(TH_TestResearchMenuRecord(), contact);
+            Press(B_BUTTON); Press(DPAD_DOWN);
+        }
+        Press(B_BUTTON); Press(B_BUTTON); ResearchFrames(0, 40);
+        EXPECT_EQ(memcmp(saved, gSaveBlock1Ptr->flags, sizeof(saved)), 0);
+    }
+    EXPECT(TH_ResearchContactReport(3, 0) == NULL);
+    EXPECT(TH_ResearchContactReport(0, 3) == NULL);
+    SetVBlankCallback(oldVBlank); gMain.callback1 = old1; SetMainCallback2(old2);
+}
 #endif

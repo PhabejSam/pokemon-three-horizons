@@ -2,35 +2,7 @@
 #define GUARD_THREE_HORIZONS_RESEARCH_H
 #include "main.h"
 
-// Append only: IDs are part of the authored scene/UI contract.
-enum THResearchEntryId {
-    TH_RESEARCH_HOOTHOOT = 0,
-    TH_RESEARCH_FOREST_TREECKO = 1,
-    TH_RESEARCH_FOREST_SHROOMISH = 2,
-    TH_RESEARCH_MT_MOON = 3,
-    TH_RESEARCH_SHIP = 4,
-    TH_RESEARCH_FOREST_PAIR = 5,
-    TH_RESEARCH_CAVE = 6,
-    TH_RESEARCH_ROUTE9 = 7,
-    TH_RESEARCH_ROCK_TUNNEL = 8,
-    TH_RESEARCH_LAVENDER = 9,
-    TH_RESEARCH_FOREST_LEGACY = 10,
-    TH_RESEARCH_ENTRY_COUNT = 11,
-};
-enum THResearchPhotoId {
-    TH_PHOTO_HOOTHOOT = 0, TH_PHOTO_FOREST_TREECKO = 1,
-    TH_PHOTO_FOREST_SHROOMISH = 2, TH_PHOTO_MT_MOON = 3,
-    TH_PHOTO_SHIP = 4, TH_PHOTO_FOREST_PAIR = 5,
-    TH_PHOTO_CAVE = 6, TH_PHOTO_ROUTE9 = 7,
-    TH_PHOTO_ROCK_TUNNEL = 8, TH_PHOTO_LAVENDER = 9,
-    TH_RESEARCH_PHOTO_COUNT = 10, TH_RESEARCH_PHOTO_NONE = 0xFFFF,
-};
-enum THResearchCallId {
-    TH_CALL_ACTIVATION = 0, TH_CALL_ROUTE10 = 1, TH_CALL_LAVENDER = 2,
-    TH_RESEARCH_CALL_COUNT = 3, TH_RESEARCH_CALL_NONE = 0xFFFF,
-};
-enum THResearchBackdrop { TH_BACKDROP_GRASS, TH_BACKDROP_CAVE, TH_BACKDROP_SHIP, TH_BACKDROP_TOWER };
-#define TH_RESEARCH_MAX_SUBJECTS 4
+#include "constants/three_horizons_research.h"
 struct THResearchSubject { u16 species; s16 x, y; u8 direction; };
 struct THResearchPhoto {
     u16 entryId;
@@ -58,6 +30,10 @@ const u8 *TH_ResearchProfessorNote(u16 entryId);
 void TH_OpenResearchGear(MainCallback returnCallback);
 bool32 TH_ResearchGearUnlocked(void);
 bool32 TH_ResearchConfirmPhoto(u16 photoId, bool32 accepted);
+const u8 *TH_ResearchContactReport(u16 contact, u16 callId);
+void TH_ScriptResearchPhotoStatus(void);
+void TH_ScriptTakeResearchPhoto(void);
+void TH_ScriptResearchObserve(void);
 #if TESTING
 u16 TH_TestResearchMenuLevel(void);
 u16 TH_TestResearchMenuRecord(void);

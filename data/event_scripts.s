@@ -1,5 +1,6 @@
 #include "config/general.h"
 #include "constants/three_horizons.h"
+#include "constants/three_horizons_research.h"
 #include "config/battle.h"
 #include "config/item.h"
 #include "constants/global.h"

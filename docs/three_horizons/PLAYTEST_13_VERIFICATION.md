@@ -395,3 +395,13 @@ cover actual Rage Fist attempts and Laser Focus's one-attack critical scope.
 Evidence: `task29-evolution-evidence.zip`, SHA-256 `921a583af9b7c6d7f0c86ccda40389257e1c979f5d1f67b0a4d4d1b358866e2b`.
 Archive metadata distinguishes test-driver diagnostics from accepted results.
 Full non-TH controls and final save/hardware gates remain integration work.
+
+## Task 30: Research Gear persistent model
+
+Feature `6d217845d6fd11428235435efcb2e9fc5635223a`; compiled/test revision `4d7af602063ffdc668600ac5117a22af3a4b3c89`. CI run 36599528167 / job 109513012392 passed five native research groups, six native migration/state groups, and four host ownership/map-index checks. The preceding interface test at `efb43b871310ac5ce4c3bc321a166f9f11bcdb88` failed on the missing research functions before implementation.
+
+Eleven stable authored entry IDs, ten photo IDs, and three ordered milestone calls use the reserved Task 1 flags. The compiled ROM tables occupy 396 bytes for entries, 360 for visual compositions, 20 for photo-flag mapping and 12 for call-flag mapping, plus text and executable code. SaveBlock1 remains 15,568 bytes and SaveBlock2 3,884 bytes; there are no saved pixel buffers or new save fields. Final release ROM size is measured at the integration gate.
+
+Invalid entry IDs through 65,535 cannot write state; photo/call boundaries are rejected; repeat observations, captures and calls are idempotent. Calls retain authored priority through saved flag restoration. P12 Hoothoot imports only from the audited scalar value 1. The shared old forest receipt imports a general historical report, not a guessed specific pair. No migration invents a photo or delivered call. These fixtures do not replace the user's exact post-Surge RG40XX H personal-save acceptance.
+
+Task 31's menu, actual photo presentation and native save/Continue validation remain the next gate.
