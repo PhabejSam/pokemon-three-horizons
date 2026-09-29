@@ -18,6 +18,7 @@
 #include "constants/battle_ai.h"
 #include "three_horizons.h"
 #include "test/test.h"
+#include "three_horizons_helpers.h"
 #include "event_data.h"
 #include "item.h"
 #include "pokemon.h"
@@ -44,6 +45,11 @@
 static const struct Trainer sActualTrainers[DIFFICULTY_COUNT][TRAINERS_COUNT] = {
 #include "../src/data/trainers.h"
 };
+const struct Trainer *TH_TestGetActualTrainer(u16 trainerId)
+{
+    return &sActualTrainers[DIFFICULTY_NORMAL][trainerId];
+}
+
 TEST("Three Horizons assembled rival records have names pictures and correct parties")
 {
     static const u16 species[] = {SPECIES_BULBASAUR, SPECIES_CHARMANDER, SPECIES_SQUIRTLE,

@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "trainer_util.h"
 #include "constants/opponents.h"
+#include "three_horizons_helpers.h"
 
 #if THREE_HORIZONS
 TEST("Three Horizons rematch level clamps safely")
@@ -33,7 +34,7 @@ TEST("Three Horizons rematch level is monotonic and preserves original floor")
                 u32 actual = TH13_GetRematchLevel(highest, floor, badges);
                 EXPECT_GE(actual, previous);
                 EXPECT_GE(actual, floor);
-                EXPECT_LE(actual, MAX(caps[badges], floor));
+                EXPECT_LE(actual, max(caps[badges], floor));
                 EXPECT_LE(actual, MAX_LEVEL);
                 previous = actual;
             }
@@ -44,7 +45,7 @@ TEST("Three Horizons rematch level is monotonic and preserves original floor")
 TEST("Three Horizons Keigo progressed roster fits route")
 {
     static const u16 species[] = {SPECIES_KAKUNA, SPECIES_BEEDRILL, SPECIES_BUTTERFREE};
-    const struct Trainer *trainer = GetTrainerStructFromId(TRAINER_TH12_BUG_CATCHER_KEIGO);
+    const struct Trainer *trainer = TH_TestGetActualTrainer(TRAINER_TH12_BUG_CATCHER_KEIGO);
     struct TrainerGenerator generator = {0};
     struct Pokemon mon;
     MakeTrainerGenerator(&generator, trainer);
@@ -63,8 +64,8 @@ TEST("Three Horizons Keigo progressed roster fits route")
             || ability == gSpeciesInfo[species[i]].abilities[1]);
     }
     // Adjacent route trainers keep their shipped first-fight levels/species.
-    const struct TrainerMon *ricky = GetTrainerPartyFromId(TRAINER_TH12_CAMPER_RICKY);
-    const struct TrainerMon *elijah = GetTrainerPartyFromId(TRAINER_TH12_BUG_CATCHER_ELIJAH);
+    const struct TrainerMon *ricky = TH_TestGetActualTrainer(TRAINER_TH12_CAMPER_RICKY)->party;
+    const struct TrainerMon *elijah = TH_TestGetActualTrainer(TRAINER_TH12_BUG_CATCHER_ELIJAH)->party;
     EXPECT_EQ(ricky[0].species, SPECIES_SQUIRTLE);
     EXPECT_EQ(ricky[0].lvl, 19);
     EXPECT_EQ(elijah[0].species, SPECIES_BUTTERFREE);

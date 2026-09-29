@@ -9,6 +9,7 @@
 #include "constants/script_commands.h"
 #include "constants/trainers.h"
 #include "constants/three_horizons.h"
+#include "three_horizons_helpers.h"
 
 #if THREE_HORIZONS
 extern const u8 TH12_RocketSelectFormat[];
@@ -17,8 +18,12 @@ extern const u8 TH_RocketDuoIntro[];
 
 TEST("Three Horizons playtest13 Rocket individual records permit singles")
 {
-    EXPECT_EQ(GetTrainerBattleType(TRAINER_TH11_JESSIE), TRAINER_BATTLE_TYPE_SINGLES);
-    EXPECT_EQ(GetTrainerBattleType(TRAINER_TH11_JAMES), TRAINER_BATTLE_TYPE_SINGLES);
+    const struct Trainer *jessie = TH_TestGetActualTrainer(TRAINER_TH11_JESSIE);
+    const struct Trainer *james = TH_TestGetActualTrainer(TRAINER_TH11_JAMES);
+    EXPECT_EQ((u32)jessie->partySize, 1);
+    EXPECT_EQ((u32)james->partySize, 1);
+    EXPECT_EQ((u32)jessie->battleType, TRAINER_BATTLE_TYPE_SINGLES);
+    EXPECT_EQ((u32)james->battleType, TRAINER_BATTLE_TYPE_SINGLES);
 }
 
 TEST("Three Horizons playtest13 Rocket usable party selects approved format")

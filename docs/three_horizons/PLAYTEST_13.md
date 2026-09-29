@@ -15,3 +15,11 @@ Follow the route beyond Nugget Bridge to Bill's cottage. Further Playtest 13 che
 Decline Bill's request once, then agree. After he enters the machine, save normally, close and reopen the ROM, and choose Continue. Leave the cottage and return before using the PC. Bill should still be inside the machine. Activate the PC, finish the rescue, and talk to the restored human Bill for the S.S. Ticket. Repeating the conversation or using the PC again must not duplicate Bill or the ticket. A full Key Items pocket must leave the ticket available for a later retry.
 
 The scientist in Cerulean's Pokémon Center supplies ₽2,000 and two Ultra Balls once. If both were delivered earlier, the next visit explicitly acknowledges that. If a full pocket interrupted delivery, make room and return: only the missing component should be delivered.
+
+## Keigo's approved first battle
+
+Bug Catcher Keigo on Route 6 now uses Kakuna, Beedrill and Butterfree, all level 18.
+This is his first-fight roster, separate from the later Vs. Seeker scaling feature.
+Check normal experience awards, battle dialogue and the defeated-trainer receipt.
+Neighboring trainers retain their previous first-fight teams. Native generation
+verification is being completed; the full new-game emulator route remains pending.
