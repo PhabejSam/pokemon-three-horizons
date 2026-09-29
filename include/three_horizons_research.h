@@ -55,5 +55,13 @@ u16 TH_ResearchEntryCount(void);
 const struct THResearchEntry *TH_ResearchGetEntry(u16 entryId);
 const struct THResearchPhoto *TH_ResearchGetPhoto(u16 photoId);
 const u8 *TH_ResearchProfessorNote(u16 entryId);
+void TH_OpenResearchGear(MainCallback returnCallback);
+bool32 TH_ResearchGearUnlocked(void);
+bool32 TH_ResearchConfirmPhoto(u16 photoId, bool32 accepted);
+#if TESTING
+u16 TH_TestResearchMenuLevel(void);
+u16 TH_TestResearchMenuRecord(void);
+u16 TH_TestResearchMenuSubjects(void);
+#endif
 #endif
 #endif

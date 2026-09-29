@@ -492,6 +492,8 @@ jobs:
             focused-systems-regression.log
             focused-systems-host.log
             focused-release-macros.log
+            focused-research-migration.log
+            focused-research-footprint.log
             focused-rocket-record-negative.log
             focused-rocket-record-positive.log
             focused-capture-regression.log
