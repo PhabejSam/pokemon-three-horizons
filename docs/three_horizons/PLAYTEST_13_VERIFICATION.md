@@ -460,3 +460,15 @@ Eight unforced no-Repel cave samples were Diglett at levels 15–21, including o
 Two actual integration defects were reproduced and repaired: omitted map-builder registry entries caused an invalid native transition; adding them exposed missing compiled script includes and cave tileset linkage. Whole-registry, recursive script-closure, and selected-tileset regressions failed before their repairs and passed afterward. Earlier failed candidates are diagnostic evidence only. Capture/release and corrected blackout/Rope component sequences passed; the final combined convenience drivers were not all rerun end-to-end.
 
 Evidence archive: `task33-cave-route-evidence.zip`, SHA-256 `45572c150929461fb00314e7a81ef2ed269a9f5609b53707399a1280d37efad3`. This is focused emulator acceptance, not the final personal-save or RG40XX H gate.
+
+### Task 34: Route 2 aide and Flash focused acceptance
+
+Feature `8daabab28d15ec5f6fc741173d2e78386a903cb9`; compiled `844747e4b0d97570518b6267d3469aba862861c2`; ROM SHA-256 `4c10dd72c3936353bcdd95132495af0348db9e20debeac522d67c8fbacada985`. CI 36616767397/job 109571661915 passed three Flash groups, three existing Cut groups, and three Route 2 host groups. Ten focused cave/registry/graph/tileset checks also passed locally. All 93 compiled project-map pointers matched the exact ELF.
+
+The new native tests first failed at the old Flash unlock/party lookup. After the TH-only unlock, tests cover HM ownership, Thunder Badge, conscious compatible non-Egg user, learned versus unlearned HM, full versus partial move sets, unchanged moves/PP/PP Ups, shared scripted eligibility, and other HMs staying locked. Existing Cut tests remain passing.
+
+Actual mGBA acceptance: both exterior door lanes and both passage directions; aide quota nine rejected, ten/eleven accepted; an obtainable regional species counted as the tenth; pre-Surge denial; full HM pocket giving Gear independently then retrying HM05; previously owned HM05; repeated visits; activation call; ordinary battery Continue retaining both receipts and inventory. Native Flash with four unrelated moves expands the radius from level 7 to 1, retains all party bytes, remains lit after cold Continue/on another dark floor, and returns to normal outdoor lighting. Actual party-menu Cut with four unrelated moves removes the tree with all party bytes unchanged. Before/after screenshots were visually inspected.
+
+The dark-map fixture uses the existing native Granite Cave maps through a QA-only relocation; no Hoenn connection is added to the game. Authored Rock Tunnel traversal is still Task 38. One initial save-driver attempt had not closed the aide's final text and therefore did not save; the driver now waits for dialogue and activation to finish. The complete aide matrix was rerun successfully, including cold Continue. The older diagnostic captures are retained and are not accepted evidence.
+
+Archive `task34-route2-flash-evidence.zip`, SHA-256 `8aa3434798639705f0cf78675d21d388e1fbf6db7c32bf376a01d5deed32f3bc`. No personal battery-save or RG40XX H acceptance is claimed.

@@ -5115,3 +5115,28 @@ static void CB2_SaveAndEndWirelessTrade(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
+
+#if defined(TESTING) && THREE_HORIZONS
+u16 TH_TestFindSkarmoryTrade(void)
+{
+    for(u32 i=0;i<ARRAY_COUNT(sIngameTrades);i++)
+        if(sIngameTrades[i].species==SPECIES_SKARMORY && sIngameTrades[i].requestedSpecies==SPECIES_ZUBAT)
+            return i;
+    return 0xffff;
+}
+
+void TH_TestFinishInGameTrade(u8 slot)
+{
+    typeof(*sTradeAnim) temp={0};
+    typeof(sTradeAnim) old=sTradeAnim;
+    sTradeAnim=&temp;
+    TradeMons(slot,0);
+    sTradeAnim=old;
+}
+
+void TH_TestBufferInGameTradeMonName(void)
+{
+    BufferInGameTradeMonName();
+}
+#endif
+
