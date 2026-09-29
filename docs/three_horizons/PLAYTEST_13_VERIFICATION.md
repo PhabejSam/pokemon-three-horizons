@@ -367,3 +367,31 @@ host checks. Exact-ROM evolution UI acceptance is recorded separately after
 completion; this automated result alone does not assert it.
 
 Tasks 26–28 evidence archive: `tasks26-28-systems-evidence.zip`, SHA-256 `25aa6f889dadebe3afd6ce92554e5be06fd31af791d011b881f3f3f629c83982`. Archive metadata distinguishes earlier diagnostic failures from passing acceptance captures.
+
+## Task 29 completed focused evolution acceptance
+
+The Bag regression failed with native item type 4 versus required type 1 on
+feature `ab5e18bf002cebeea6c586ef642d8f73e57ee1e1`, run 36595798768/job
+109500253020. Feature `1aa074c9ef4ab73f90dcec9cf2e098e7e1270e25` enables the
+existing item-use configuration only for Three Horizons. Compiled/test revision
+`04fb4b295acbd07e82aeb195ec6e078663027e8e`, ROM SHA-256
+`0ea5927a03d258807e775189b44d242fa0a6884f09d564fe42ffe4fa21608400`.
+Run 36596594503/job 109502979296 passed ten species, 38 starter, four evolution,
+five training and nine rematch groups, plus 13 host checks. Native coverage
+checks all twelve thematic items' Bag type/callback and sixteen species branches.
+The exact ROM evolved Onix to Steelix, consumed one Metal Coat, preserved identity
+and showed the evolved follower; cold Continue passed. Incompatible Magikarp
+consumed nothing. No later item was added to an early shop or reward.
+
+The preceding exact `3c48c6e3` ROM separately passed all four level-36 evolutions
+with one candy, nickname/personality/ability/nature/IV/EV/held-item preservation,
+follower and cold Continue. Gyarados Water/Dragon was visually checked. Native
+learning prompts taught Dragon Tail 26, Outrage 48 and Earth Power 40; Summary
+Relearn taught Earth Power, and Typhlosion's reusable Earthquake TM still worked.
+Primeape at 19 uses did not evolve on level-up; at 20, cancellation and next-level
+retry worked, including Annihilape follower and cold Continue. Native battle tests
+cover actual Rage Fist attempts and Laser Focus's one-attack critical scope.
+
+Evidence: `task29-evolution-evidence.zip`, SHA-256 `921a583af9b7c6d7f0c86ccda40389257e1c979f5d1f67b0a4d4d1b358866e2b`.
+Archive metadata distinguishes test-driver diagnostics from accepted results.
+Full non-TH controls and final save/hardware gates remain integration work.

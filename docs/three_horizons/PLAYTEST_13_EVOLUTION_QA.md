@@ -171,3 +171,9 @@ The Metal Coat attempt displayed the cannot-use message. A separate regression
 now checks the Bag type and evolution callback for all twelve thematic items.
 Item-use acceptance remains pending its repair and exact-ROM retest; the earlier
 target-species tests alone were not proof of usable single-player evolution.
+
+The subsequent item repair is accepted on compiled `04fb4b295acbd07e82aeb195ec6e078663027e8e`:
+all twelve thematic Bag callbacks pass natively, Onix evolves with one Metal Coat,
+incompatible Magikarp consumes none, and Steelix persists through cold Continue.
+`I_USE_EVO_HELD_ITEMS_FROM_BAG` is enabled only when THREE_HORIZONS is enabled.
+See the verification report and Task29 archive for exact hashes and evidence.
