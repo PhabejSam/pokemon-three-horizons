@@ -14,6 +14,41 @@
 extern const u8 TH12_Bill_OnEntry[];
 extern const u8 TH12_Cerulean_CatchUpSupplies[];
 
+TEST("Three Horizons playtest13 Bill migration retains a witnessed machine entry")
+{
+    u32 state;
+    PARAMETRIZE { state = 0; } // actual P12 save inside the machine sequence
+    PARAMETRIZE { state = 1; } // same transient bits in another map
+    PARAMETRIZE { state = 2; } // same map number in another group
+    PARAMETRIZE { state = 3; } // help has not been accepted
+    PARAMETRIZE { state = 4; } // human already rescued
+    PARAMETRIZE { state = 5; } // older release does not prove this P12 scene
+    PARAMETRIZE { state = 6; } // unrelated/incomplete temporary flags
+    PARAMETRIZE { state = 7; }
+    const struct WarpData savedLocation = gSaveBlock1Ptr->location;
+    const struct MapHeader savedHeader = gMapHeader;
+    InitEventData();
+    ClearBag();
+    VarSet(VAR_TH_CLOCK_DISPLAY_HI, state == 5 ? TH_STATE_VERSION_11 : TH_STATE_VERSION_12);
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_TH12_ROUTE25_SEA_COTTAGE) + (state == 2);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_TH12_ROUTE25_SEA_COTTAGE) + (state == 1);
+    if (state != 3) FlagSet(FLAG_TEMP_2);
+    if (state != 6) FlagSet(FLAG_TEMP_3);
+    if (state != 7) FlagSet(FLAG_TEMP_4);
+    if (state == 4) FlagSet(FLAG_TH12_BILL_RESCUED);
+    TH_MigrateSaveState();
+    EXPECT_EQ(FlagGet(FLAG_TH13_BILL_IN_MACHINE), state == 0);
+    // Continue rebuilds the map and clears temp flags after migration.
+    gMapHeader = *Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TH12_ROUTE25_SEA_COTTAGE), MAP_NUM(MAP_TH12_ROUTE25_SEA_COTTAGE));
+    LoadObjEventTemplatesFromHeader();
+    ClearTempFieldEventData();
+    RunScriptImmediately(TH12_Bill_OnEntry);
+    EXPECT_EQ(FlagGet(FLAG_TEMP_2), state == 0);
+    EXPECT(!FlagGet(FLAG_TH12_TICKET));
+    gSaveBlock1Ptr->location = savedLocation;
+    gMapHeader = savedHeader;
+}
+
 TEST("Three Horizons playtest13 aide acknowledges completed supplies")
 {
     struct ScriptContext ctx;
