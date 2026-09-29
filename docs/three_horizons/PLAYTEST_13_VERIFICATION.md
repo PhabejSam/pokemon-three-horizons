@@ -282,8 +282,26 @@ recipient before each was added. All four focused host checks now pass: 68
 shipped ordinary trainers, unique bounded map slots and matching objects, all
 68 rematch script paths without one-time rewards, retryable badge-independent
 gift and reachable researcher/nurse, plus the approved Keigo first-fight roster.
-Implementation checkpoint ccbc848a1f6304b2965ca73151087cf563b54079 is undergoing
-native checks; emulator acceptance remains at the systems integration gate.
+Final focused checkpoint 9d4eabb8a87ed644f5665f770e04cbee1251e8fa, compiled/test
+revision 956240b96df42ecaba25f825699c90bb669dae34, run 36582645946/job
+109454553666: all nine native groups and four host checks PASS. Native tests
+cover full-width IDs, slot collisions/bounds, stale-map isolation, unchanged
+defeat flags/save sizes, repeated no-charge use and native lifecycle resets,
+level boundaries plus 90,900 combinations, Egg exclusion, unchanged first
+parties, authored tiers and legal generation for all 68 registered teams.
+The preceding synthetic-party fixture failed the engine's gender assertion
+because it omitted TrainerMon.gender; specifying RANDOM_GENDER corrected the
+fixture without weakening the assertion. Emulator acceptance and upstream
+compatibility remain at their planned integration gates.
+
+Task 28 source-executed delivery tests first reproduced missing Acro delivery,
+lost-item receipt failures, and the unexpanded chairman story. All three host
+groups now pass, including full-pocket retry, partial delivery, cancellation,
+no-voucher refusal, repeat visits, and simulated reload of bag/receipt state.
+The native engine keeps distinct Mach/Acro items; shop dialogue explains speed,
+tricks, registration and dismounting before changing bikes. Actual item UI,
+cycling/follower behavior and cold battery-save acceptance are still pending
+the systems candidate. No bike movement engine change was made.
 
 The 53 ordinary trainers on upcoming approved maps remain required additions to
 the same ROM registry. The chapter-wide target remains 121; the current shipped

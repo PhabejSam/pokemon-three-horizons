@@ -99,26 +99,43 @@ TH12_Voucher_Already:
     release
     end
 TH12_Voucher_Story:
-    .string "My RAPIDASH loves a morning ride!\nIts mane glows in the sunrise.\pYou listened to an old man's story.\nPlease take this BIKE VOUCHER!$"
+    .string "My RAPIDASH loves the sunrise.\nWe race the first ferry to the pier!\pIt always wins, of course. Then it\nwaits so we can watch the sea.\pSuch speed! Such grace! Yet it\nslows down for its old friend.\pThank you for listening. Take this\nBIKE VOUCHER and find your own pace!$"
 TH12_Voucher_Use:
-    .string "The bike shop in CERULEAN will\nexchange that voucher for a bike.$"
+    .string "CERULEAN's bike shop will help you\nfind your pace. Enjoy the journey!$"
 
 TH12_Bike_Redeem::
     lock
     faceplayer
-    goto_if_set FLAG_TH12_BIKE, TH12_Bike_Done
+    goto_if_set FLAG_TH12_BIKE, TH13_Bike_Offer
+    goto_if_set FLAG_TH13_ACRO, TH13_Bike_Offer
     checkitem ITEM_MACH_BIKE
-    goto_if_eq VAR_RESULT, TRUE, TH12_Bike_Receipt
+    goto_if_eq VAR_RESULT, TRUE, TH13_Bike_Offer
+    checkitem ITEM_ACRO_BIKE
+    goto_if_eq VAR_RESULT, TRUE, TH13_Bike_Offer
     checkitem ITEM_BIKE_VOUCHER
     goto_if_eq VAR_RESULT, FALSE, TH12_Bike_NoVoucher
-    msgbox TH12_Bike_Thanks
+TH13_Bike_Offer:
+    msgbox TH12_Bike_Thanks, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH13_Bike_Cancel
+    checkitem ITEM_MACH_BIKE
+    goto_if_eq VAR_RESULT, TRUE, TH12_Bike_Receipt
     giveitem ITEM_MACH_BIKE
     goto_if_eq VAR_RESULT, FALSE, TH12_RewardBagFull
 TH12_Bike_Receipt:
-    removeitem ITEM_BIKE_VOUCHER
     setflag FLAG_TH12_BIKE
+    removeitem ITEM_BIKE_VOUCHER
+    checkitem ITEM_ACRO_BIKE
+    goto_if_eq VAR_RESULT, TRUE, TH13_Bike_AcroReceipt
+    giveitem ITEM_ACRO_BIKE
+    goto_if_eq VAR_RESULT, FALSE, TH12_RewardBagFull
+TH13_Bike_AcroReceipt:
+    setflag FLAG_TH13_ACRO
 TH12_Bike_Done:
     msgbox TH12_Bike_Enjoy
+    release
+    end
+TH13_Bike_Cancel:
+    msgbox TH13_Bike_CancelText
     release
     end
 TH12_Bike_NoVoucher:
@@ -126,11 +143,13 @@ TH12_Bike_NoVoucher:
     release
     end
 TH12_Bike_VoucherHint:
-    .string "A BIKE VOUCHER gets you a bike!\nThe VERMILION FAN CLUB has them.$"
+    .string "A BIKE VOUCHER gets you both bikes!\nVisit the VERMILION FAN CLUB.$"
 TH12_Bike_Thanks:
-    .string "A voucher from the FAN CLUB!\nHere is your new bike.$"
+    .string "MACH for speed, ACRO for tricks!\nOne voucher covers both bikes.\pAlready own one? I'll supply the\nother. Shall I check your bikes?$"
 TH12_Bike_Enjoy:
-    .string "Enjoy the ride! You can register\nyour bike from the KEY ITEMS pocket.$"
+    .string "MACH builds speed on long paths.\nHold B on ACRO to wheelie or hop!\pRegister either in KEY ITEMS.\nDismount before using the other.$"
+TH13_Bike_CancelText:
+    .string "No rush! Come back whenever\nyou're ready to ride.$"
 
 TH12_Cerulean_CatchUpSupplies::
     lock
