@@ -8,11 +8,43 @@
 #include "three_horizons_rematches.h"
 #include "event_data.h"
 #include "battle_setup.h"
+#include "item.h"
+#include "item_use.h"
+#include "vs_seeker.h"
 #include "constants/maps.h"
 #include "constants/three_horizons.h"
+#include "constants/trainers.h"
 
 #if THREE_HORIZONS
 #include "../src/data/three_horizons_rematches.h"
+
+TEST("Three Horizons Vs Seeker requires no charge and native steps do not expire readiness")
+{
+    InitEventData();
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_VS_SEEKER, 1));
+    EXPECT(IsVsSeekerEnabled());
+    EXPECT(GetItemFieldFunc(ITEM_VS_SEEKER) == FieldUseFunc_VsSeeker);
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_TH_VIRIDIAN_FOREST);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_TH_VIRIDIAN_FOREST);
+    TH13_ResetRematches();
+    SetTrainerFlag(TRAINER_TH_DOUG);
+    EXPECT(TH13_SetRematchReady(TRAINER_TH_DOUG));
+    FlagSet(FLAG_TH13_VS_SEEKER_ACTIVE);
+    for (u32 i = 0; i < 200; i++)
+        EXPECT(!UpdateVsSeekerStepCounter());
+    EXPECT_EQ(gSaveBlock1Ptr->trainerRematchStepCounter, 0);
+    EXPECT(TH13_IsRematchReady(TRAINER_TH_DOUG));
+    for (u32 i = 0; i < MAX_REMATCH_ENTRIES; i++)
+        EXPECT_LE(gSaveBlock1Ptr->trainerRematches[i], 1);
+    MapResetTrainerRematches(MAP_GROUP(MAP_TH_PEWTER_GYM), MAP_NUM(MAP_TH_PEWTER_GYM));
+    EXPECT(!TH13_IsRematchReady(TRAINER_TH_DOUG));
+    EXPECT(HasTrainerBeenFought(TRAINER_TH_DOUG));
+    EXPECT(TH13_SetRematchReady(TRAINER_TH_DOUG));
+    ClearCurrentTrainerWantRematchVsSeeker();
+    EXPECT(!TH13_IsRematchReady(TRAINER_TH_DOUG));
+    EXPECT(HasTrainerBeenFought(TRAINER_TH_DOUG));
+}
 
 TEST("Three Horizons all registered rematch parties remain legal at chapter limits")
 {
@@ -126,9 +158,9 @@ TEST("Three Horizons rematch party excludes Eggs and leaves first battles untouc
 TEST("Three Horizons authored rematch tiers retain level offsets and legal abilities")
 {
     static const struct TrainerMon baseline[] = {
-        {.species = SPECIES_CATERPIE, .lvl = 5, .ability = ABILITY_SHIELD_DUST},
-        {.species = SPECIES_RATTATA, .lvl = 7, .ability = ABILITY_RUN_AWAY},
-        {.species = SPECIES_EEVEE, .lvl = 3, .ability = ABILITY_RUN_AWAY},
+        {.species = SPECIES_CATERPIE, .lvl = 5, .ability = ABILITY_SHIELD_DUST, .gender = TRAINER_MON_RANDOM_GENDER},
+        {.species = SPECIES_RATTATA, .lvl = 7, .ability = ABILITY_RUN_AWAY, .gender = TRAINER_MON_RANDOM_GENDER},
+        {.species = SPECIES_EEVEE, .lvl = 3, .ability = ABILITY_RUN_AWAY, .gender = TRAINER_MON_RANDOM_GENDER},
     };
     struct Trainer trainer = *TH_TestGetActualTrainer(TRAINER_TH_RICK);
     trainer.party = baseline;
