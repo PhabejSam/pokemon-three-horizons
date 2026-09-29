@@ -6,6 +6,34 @@
       "id": "MAP_TH13_ROUTE5_POKEMON_DAY_CARE",
       "layout": "LAYOUT_ROUTE5_POKEMON_DAY_CARE",
       "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "Route11_Frlg",
+      "name": "TH13_Route11",
+      "id": "MAP_TH13_ROUTE11",
+      "layout": "LAYOUT_ROUTE11",
+      "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "DiglettsCave_SouthEntrance_Frlg",
+      "name": "TH13_DiglettsCave_SouthEntrance",
+      "id": "MAP_TH13_DIGLETTS_CAVE_SOUTH_ENTRANCE",
+      "layout": "LAYOUT_DIGLETTS_CAVE_SOUTH_ENTRANCE",
+      "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "DiglettsCave_B1F_Frlg",
+      "name": "TH13_DiglettsCave_B1F",
+      "id": "MAP_TH13_DIGLETTS_CAVE_B1F",
+      "layout": "LAYOUT_DIGLETTS_CAVE_B1F",
+      "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "DiglettsCave_NorthEntrance_Frlg",
+      "name": "TH13_DiglettsCave_NorthEntrance",
+      "id": "MAP_TH13_DIGLETTS_CAVE_NORTH_ENTRANCE",
+      "layout": "LAYOUT_DIGLETTS_CAVE_NORTH_ENTRANCE",
+      "script_owner": "chapter13_routes.inc"
     }
   ]
 }

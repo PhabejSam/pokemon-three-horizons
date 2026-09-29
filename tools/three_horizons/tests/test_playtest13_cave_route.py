@@ -1,0 +1,71 @@
+import json
+import re
+import unittest
+from collections import Counter
+from tools.three_horizons.tests.test_playtest11_maps import ROOT, map_data, tiles, reachable
+from tools.three_horizons.tests.test_playtest13_research import Scene
+
+NAMES = ['TH13_Route11', 'TH13_DiglettsCave_SouthEntrance', 'TH13_DiglettsCave_B1F', 'TH13_DiglettsCave_NorthEntrance']
+
+class CaveRoute(unittest.TestCase):
+    def test_diglett_cave_connects_vermilion_to_route2(self):
+        registry = json.loads((ROOT/'data/maps/map_groups.json').read_text())['gMapGroup_ThreeHorizons']
+        for name in NAMES: self.assertIn(name, registry)
+        all_maps = {m['id']:m for name in registry for m in [map_data(name)]}
+        for name in NAMES:
+            m = map_data(name)
+            self.assertTrue(m['allow_cycling'])
+            for warp in m['warp_events']:
+                target = all_maps[warp['dest_map']]
+                back = target['warp_events'][int(warp['dest_warp_id'])]
+                self.assertEqual(back['dest_map'],m['id'])
+            for obj in m['object_events']:
+                self.assertTrue(obj['script'].startswith('TH13_'))
+                self.assertTrue(obj['flag']=='0' or obj['flag'].startswith('FLAG_TH13_PICKUP_'))
+        route=map_data(NAMES[0]); city=map_data('TH12_VermilionCity')
+        self.assertEqual(route['connections'],[{'map':city['id'],'offset':-10,'direction':'left'}])
+        self.assertIn({'map':route['id'],'offset':10,'direction':'right'},city['connections'])
+        self.assertFalse(any(o['script']=='TH12_EastBoundary' for o in city['coord_events']))
+        self.assertEqual(len(route['warp_events']),1)
+        self.assertEqual(map_data(NAMES[-1])['warp_events'][1]['dest_warp_id'],'4')
+        self.assertNotIn('setmetatile 17, 11, 169, TRUE',(ROOT/'data/maps/TH_Route2/scripts.inc').read_text())
+        # Research partners cannot disconnect the long native cave corridor.
+        w,h,a=tiles(NAMES[2]);floor={(i%w,i//w) for i,v in enumerate(a) if not v&0xc00}
+        objects={(o['x'],o['y']) for o in map_data(NAMES[2])['object_events']}
+        seen=reachable((82,71),floor,objects)
+        self.assertIn((3,3),seen)
+        for x,y in objects:self.assertTrue(seen.intersection(((x-1,y),(x+1,y),(x,y-1),(x,y+1))))
+
+    def test_cave_encounter_weights_and_levels(self):
+        group=json.loads((ROOT/'src/data/wild_encounters.json').read_text())['wild_encounter_groups'][0]
+        matches=[e for e in group['encounters'] if e['map']=='MAP_TH13_DIGLETTS_CAVE_B1F']
+        self.assertEqual(len(matches),1)
+        rates=next(f['encounter_rates'] for f in group['fields'] if f['type']=='land_mons')
+        mons=matches[0]['land_mons']['mons'];self.assertEqual(len(mons),len(rates))
+        totals=Counter()
+        for rate,mon in zip(rates,mons):
+            totals[mon['species']]+=rate
+            self.assertLessEqual(15,mon['min_level']);self.assertLessEqual(mon['min_level'],mon['max_level']);self.assertLessEqual(mon['max_level'],31)
+        self.assertEqual(totals,{'SPECIES_DIGLETT':70,'SPECIES_DUGTRIO':10,'SPECIES_PHANPY':10,'SPECIES_WHISMUR':10})
+
+    def test_cave_research_repeat_is_safe(self):
+        source=(ROOT/'data/scripts/three_horizons/chapter13_routes.inc').read_text()
+        self.assertIn('TH13_Cave_Pair::',source)
+        s=Scene(gear=False);s.run('TH13_Cave_Pair');self.assertEqual(s.entries,{'TH_RESEARCH_CAVE'});self.assertFalse(s.photos)
+        s.gear=True;s.answer=0;s.run('TH13_Cave_Pair');self.assertFalse(s.photos)
+        s.answer=1;s.run('TH13_Cave_Pair');s.run('TH13_Cave_Pair')
+        self.assertEqual(s.photos,{'TH_PHOTO_CAVE'});self.assertEqual(s.flashes,1)
+
+    def test_all_ten_native_route_trainers_keep_first_rosters(self):
+        path=ROOT/'data/maps/TH13_Route11/map.json';self.assertTrue(path.exists())
+        objects=[o for o in map_data(NAMES[0])['object_events'] if o['trainer_type']=='TRAINER_TYPE_NORMAL']
+        self.assertEqual(len(objects),10)
+        native=(ROOT/'src/data/trainers_frlg.party').read_text();authored=(ROOT/'src/data/trainers.party').read_text()
+        for o in objects:
+            name=o['script'].split('_')[-1].upper()
+            original=re.search(r'=== (TRAINER_[A-Z_]*'+name+r') ===\n(.*?)(?=\n===|\Z)',native,re.S)
+            current=re.search(r'=== TRAINER_TH13_ROUTE11_'+name+r' ===\n(.*?)(?=\n===|\n#endif|\Z)',authored,re.S)
+            self.assertIsNotNone(original);self.assertIsNotNone(current)
+            self.assertEqual(current[1].strip(),original[2].strip())
+
+if __name__=='__main__':unittest.main()

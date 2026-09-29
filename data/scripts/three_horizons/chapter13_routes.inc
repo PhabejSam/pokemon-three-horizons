@@ -168,3 +168,264 @@ TH13_Daycare_Text_YouveGotNoRoomForIt::
 TH13_Daycare_Text_DontHaveEnoughMoney::
 	.string "You don't have enough money.$"
 
+
+@ Route 11 retains native first battles, dialogue and ordinary rematch eligibility.
+TH13_Route11_Eddie::
+    trainerbattle_single TRAINER_TH13_ROUTE11_EDDIE, TH13_Route11_Text_EddieIntro, TH13_Route11_Text_EddieDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Eddie_Rematch
+    msgbox TH13_Route11_Text_EddiePostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Eddie_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_EDDIE, TH13_Route11_Text_EddieIntro, TH13_Route11_Text_EddieDefeat
+    msgbox TH13_Route11_Text_EddiePostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Hugo::
+    trainerbattle_single TRAINER_TH13_ROUTE11_HUGO, TH13_Route11_Text_HugoIntro, TH13_Route11_Text_HugoDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Hugo_Rematch
+    msgbox TH13_Route11_Text_HugoPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Hugo_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_HUGO, TH13_Route11_Text_HugoIntro, TH13_Route11_Text_HugoDefeat
+    msgbox TH13_Route11_Text_HugoPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Dillon::
+    trainerbattle_single TRAINER_TH13_ROUTE11_DILLON, TH13_Route11_Text_DillonIntro, TH13_Route11_Text_DillonDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Dillon_Rematch
+    msgbox TH13_Route11_Text_DillonPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Dillon_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_DILLON, TH13_Route11_Text_DillonIntro, TH13_Route11_Text_DillonDefeat
+    msgbox TH13_Route11_Text_DillonPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Dave::
+    trainerbattle_single TRAINER_TH13_ROUTE11_DAVE, TH13_Route11_Text_DaveIntro, TH13_Route11_Text_DaveDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Dave_Rematch
+    msgbox TH13_Route11_Text_DavePostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Dave_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_DAVE, TH13_Route11_Text_DaveIntro, TH13_Route11_Text_DaveDefeat
+    msgbox TH13_Route11_Text_DavePostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Jasper::
+    trainerbattle_single TRAINER_TH13_ROUTE11_JASPER, TH13_Route11_Text_JasperIntro, TH13_Route11_Text_JasperDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Jasper_Rematch
+    msgbox TH13_Route11_Text_JasperPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Jasper_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_JASPER, TH13_Route11_Text_JasperIntro, TH13_Route11_Text_JasperDefeat
+    msgbox TH13_Route11_Text_JasperPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Darian::
+    trainerbattle_single TRAINER_TH13_ROUTE11_DARIAN, TH13_Route11_Text_DarianIntro, TH13_Route11_Text_DarianDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Darian_Rematch
+    msgbox TH13_Route11_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Darian_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_DARIAN, TH13_Route11_Text_DarianIntro, TH13_Route11_Text_DarianDefeat
+    msgbox TH13_Route11_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Braxton::
+    trainerbattle_single TRAINER_TH13_ROUTE11_BRAXTON, TH13_Route11_Text_BraxtonIntro, TH13_Route11_Text_BraxtonDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Braxton_Rematch
+    msgbox TH13_Route11_Text_BraxtonPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Braxton_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_BRAXTON, TH13_Route11_Text_BraxtonIntro, TH13_Route11_Text_BraxtonDefeat
+    msgbox TH13_Route11_Text_BraxtonPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Yasu::
+    trainerbattle_single TRAINER_TH13_ROUTE11_YASU, TH13_Route11_Text_YasuIntro, TH13_Route11_Text_YasuDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Yasu_Rematch
+    msgbox TH13_Route11_Text_YasuPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Yasu_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_YASU, TH13_Route11_Text_YasuIntro, TH13_Route11_Text_YasuDefeat
+    msgbox TH13_Route11_Text_YasuPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Dirk::
+    trainerbattle_single TRAINER_TH13_ROUTE11_DIRK, TH13_Route11_Text_DirkIntro, TH13_Route11_Text_DirkDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Dirk_Rematch
+    msgbox TH13_Route11_Text_DirkPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Dirk_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_DIRK, TH13_Route11_Text_DirkIntro, TH13_Route11_Text_DirkDefeat
+    msgbox TH13_Route11_Text_DirkPostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Bernie::
+    trainerbattle_single TRAINER_TH13_ROUTE11_BERNIE, TH13_Route11_Text_BernieIntro, TH13_Route11_Text_BernieDefeat
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, TH13_Route11_Bernie_Rematch
+    msgbox TH13_Route11_Text_BerniePostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Bernie_Rematch::
+    trainerbattle_rematch TRAINER_TH13_ROUTE11_BERNIE, TH13_Route11_Text_BernieIntro, TH13_Route11_Text_BernieDefeat
+    msgbox TH13_Route11_Text_BerniePostBattle, MSGBOX_AUTOCLOSE
+    end
+TH13_Route11_Item0::
+    finditem ITEM_X_DEFENSE
+    end
+TH13_Route11_Item1::
+    finditem ITEM_GREAT_BALL
+    end
+TH13_Route11_Item2::
+    finditem ITEM_AWAKENING
+    end
+
+
+TH13_Route11_EventScript_DiglettsCaveSign::
+	msgbox TH13_Route11_Text_DiglettsCave, MSGBOX_SIGN
+	end
+
+TH13_Route11_Text_HugoIntro::
+	.string "Win, lose, or draw!$"
+
+TH13_Route11_Text_HugoDefeat::
+	.string "Atcha!\n"
+	.string "Didn't go my way!$"
+
+TH13_Route11_Text_HugoPostBattle::
+	.string "POKéMON is life!\n"
+	.string "And to live is to play games!$"
+
+TH13_Route11_Text_JasperIntro::
+	.string "Competition!\n"
+	.string "I can't get enough!$"
+
+TH13_Route11_Text_JasperDefeat::
+	.string "I had a chance!$"
+
+TH13_Route11_Text_JasperPostBattle::
+	.string "You can't be a coward in the world\n"
+	.string "of POKéMON!$"
+
+TH13_Route11_Text_EddieIntro::
+	.string "Let's go, but don't cheat!$"
+
+TH13_Route11_Text_EddieDefeat::
+	.string "Huh?\n"
+	.string "That's not right!$"
+
+TH13_Route11_Text_EddiePostBattle::
+	.string "I did my best.\n"
+	.string "I have no regrets.$"
+
+TH13_Route11_Text_BraxtonIntro::
+	.string "Careful!\n"
+	.string "I'm laying down some cables!$"
+
+TH13_Route11_Text_BraxtonDefeat::
+	.string "That was electric!$"
+
+TH13_Route11_Text_BraxtonPostBattle::
+	.string "Spread the word to save energy!$"
+
+TH13_Route11_Text_DillonIntro::
+	.string "I just became a TRAINER.\n"
+	.string "But, I think I can win.$"
+
+TH13_Route11_Text_DillonDefeat::
+	.string "My POKéMON couldn't win…\n"
+	.string "Haven't they grown enough?$"
+
+TH13_Route11_Text_DillonPostBattle::
+	.string "What now?\n"
+	.string "Leave me alone!$"
+
+TH13_Route11_Text_DirkIntro::
+	.string "Fwahaha!\n"
+	.string "I have never lost!$"
+
+TH13_Route11_Text_DirkDefeat::
+	.string "My first loss!$"
+
+TH13_Route11_Text_DirkPostBattle::
+	.string "You were just lucky, that's all.$"
+
+TH13_Route11_Text_DarianIntro::
+	.string "I have never won before…$"
+
+TH13_Route11_Text_DarianDefeat::
+	.string "I saw this coming…$"
+
+TH13_Route11_Text_DarianPostBattle::
+	.string "I was unlucky, as always.$"
+
+TH13_Route11_Text_YasuIntro::
+	.string "I'm the best in my class.\n"
+	.string "I train every morning.$"
+
+TH13_Route11_Text_YasuDefeat::
+	.string "Darn!\n"
+	.string "My POKéMON need to be stronger!$"
+
+TH13_Route11_Text_YasuPostBattle::
+	.string "There's a fat POKéMON that comes\n"
+	.string "down from the mountains.\p"
+	.string "I bet it'd be strong if you can\n"
+	.string "catch it.$"
+
+TH13_Route11_Text_BernieIntro::
+	.string "Watch out for live wires!$"
+
+TH13_Route11_Text_BernieDefeat::
+	.string "Whoa!\n"
+	.string "You spark plug!$"
+
+TH13_Route11_Text_BerniePostBattle::
+	.string "Well, better get back to work.$"
+
+TH13_Route11_Text_DaveIntro::
+	.string "I raised my POKéMON carefully.\n"
+	.string "They should be ready by now!$"
+
+TH13_Route11_Text_DaveDefeat::
+	.string "Bye-bye!\n"
+	.string "Thank you, and good-bye!$"
+
+TH13_Route11_Text_DavePostBattle::
+	.string "Tch…\n"
+	.string "I better go find stronger ones!$"
+
+TH13_Route11_Text_DiglettsCave::
+	.string "DIGLETT'S CAVE$"
+
+
+TH13_Route11_EastGate::
+    msgbox TH13_Route11_EastGateText, MSGBOX_NPC
+    end
+TH13_Route11_EastGateText:
+    .string "A sleeping POKéMON is blocking\nROUTE 12 beyond this gate.\pPlease use the western road\nuntil the path is clear.$"
+TH13_Cave_Miner::
+    msgbox TH13_Cave_MinerText, MSGBOX_NPC
+    end
+TH13_Cave_MinerText:
+    .string "DIGLETT have been digging more\nthan usual lately.\pNew tunnels keep appearing.\nSome tracks aren't DIGLETT tracks.$"
+TH13_Cave_Hiker::
+    msgbox TH13_Cave_HikerText, MSGBOX_NPC
+    end
+TH13_Cave_HikerText:
+    .string "This tunnel reaches ROUTE 11.\nI saw two unfamiliar POKéMON below.\pWhat brought them here?\nI wish I knew.$"
+TH13_Cave_Pair::
+    lockall
+    playmoncry SPECIES_PHANPY, CRY_MODE_NORMAL
+    waitmoncry
+    playmoncry SPECIES_WHISMUR, CRY_MODE_NORMAL
+    waitmoncry
+    msgbox TH13_Cave_PairText
+    setvar VAR_0x8004, TH_RESEARCH_CAVE
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_CAVE
+    call TH13_ResearchPhoto
+    releaseall
+    end
+TH13_Cave_PairText:
+    .string "PHANPY taps the tunnel floor.\nWHISMUR listens to the echoes.\pNeither seems ready to leave\nthis unfamiliar cave.$"

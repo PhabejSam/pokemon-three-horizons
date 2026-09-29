@@ -146,6 +146,13 @@
       "elevation": 3,
       "dest_map": "MAP_TH_FOREST_SOUTH_GATE",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 17,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_TH13_DIGLETTS_CAVE_NORTH_ENTRANCE",
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

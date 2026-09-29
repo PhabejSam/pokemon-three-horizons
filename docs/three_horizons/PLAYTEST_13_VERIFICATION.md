@@ -437,3 +437,14 @@ are tested together in Task 32 before the 30–32 group is closed. State-only te
 are not evidence of a completed field photo interaction. Screens and replay
 harnesses are retained in the plan workspace's research-after and emulator folders.
 These are focused development checks, not final hardware/personal-save acceptance.
+
+
+## Tasks 31–32 field integration gate
+
+Feature 74ffc703a70241a92ff3a8d7ef4154ce6c183439; compiled 3debc271e2f5100c6f96bd59354f62c74710f633. ROM SHA-256 9509a9dbb024295ff877335abe6a081c694ac905e6cf1796bf33e8d59bd7cb61. CI 36606070131/job109535278809 passed 2 call, 5 menu, 5 research and 6 migration/state native groups plus 5 research host checks. Local ownership 4 and continuity 6 also passed. Missing-interface RED: 901828bae868ff257332bd3395217065bdd2a86d.
+
+Exact-ROM mGBA: old sighting without Gear records observation; declined photo grants nothing; accepted photo flashes briefly and records once; repeat acknowledgement is readable; ordinary save/Continue retains it. Calls queued inside a menu wait, deliver three authored milestones in order, set receipts after their text, survive a pending ordinary save, and do not replay after completion/Continue. All three contact replays are read-only. Native callback guards cover battle, naming, bag, party, load, movement, warp/fade, field-control locks and script activity; these guard tests are not claims of separately playing every full UI workflow.
+
+Ship partners, traveler, deck exit, post-rival captain route and declined/accepted native departure passed with the new scene. Small Pikachu and large Gyarados followers were inspected. Thirty-six source geometry variants cover every deck NPC adjacency and both exits, with nine total objects including player/follower. Test-driver routes into existing barrels were corrected; no map alteration was needed. The captain staircase requires the native rightward stair input. No extra story gate/reward was added.
+
+Evidence archive 	asks30-32-research-evidence.zip SHA-256 644cf0d0dd1a1e616048b7218968573258a14afa61fb533e5193b853b6fef6a0. Synthetic development battery only; final personal P12 migration and RG40XX H acceptance remain outstanding.
