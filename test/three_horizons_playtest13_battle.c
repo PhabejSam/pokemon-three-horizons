@@ -10,6 +10,15 @@
 #include "event_data.h"
 #include "main.h"
 #include "constants/trainers.h"
+#include "battle_controllers.h"
+#include "battle_bg.h"
+#include "battle_gfx_sfx_util.h"
+#include "battle_anim.h"
+#include "palette.h"
+#include "sprite.h"
+#include "task.h"
+#include "text.h"
+#include "scanline_effect.h"
 
 #if THREE_HORIZONS
 extern bool32 Test_TH_ChooseRunAction(void);
@@ -103,5 +112,202 @@ TEST("Three Horizons playtest13 trainer RUN leaves wild escape unchanged")
     EXPECT_EQ(gBattleMons[0].hp, 30);
     EXPECT_EQ(gBattleMons[1].hp, 30);
     FreeBattleResources();
+}
+
+static struct ChooseMoveStruct *InitMoveProbe(u32 battler, bool32 duplicate, bool32 transformed)
+{
+    gMain.callback1 = NULL;
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
+    ScanlineEffect_Clear();
+    ResetTasks();
+    ResetSpriteData();
+    ResetPaletteFade();
+    memset(&gBattleScripting, 0, sizeof(gBattleScripting));
+    InitRunProbe(battler == 2 ? BATTLE_TYPE_DOUBLE : 0);
+    AllocateBattleSpritesData();
+    AllocateMonSpritesGfx();
+    SetDefaultFontsPointer();
+    for (u32 i = 0; i < gBattlersCount; i++)
+    {
+        gBattlerPartyIndexes[i] = i / 2;
+        CreateMonWithIVs(GetBattlerMon(i), SPECIES_RATTATA, 20, 123 + i, OTID_STRUCT_PLAYER_ID, 12);
+        PokemonToBattleMon(GetBattlerMon(i), &gBattleMons[i]);
+    }
+    enum Move moves[] = {MOVE_TACKLE, duplicate ? MOVE_TACKLE : MOVE_GROWL, MOVE_TAIL_WHIP, MOVE_NONE};
+    u8 pp[] = {0, 3, 5, 0};
+    u8 bonuses = 1 | (2 << 2) | (3 << 4);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        SetMonData(GetBattlerMon(battler), MON_DATA_MOVE1 + i, &moves[i]);
+        SetMonData(GetBattlerMon(battler), MON_DATA_PP1 + i, &pp[i]);
+    }
+    SetMonData(GetBattlerMon(battler), MON_DATA_PP_BONUSES, &bonuses);
+    PokemonToBattleMon(GetBattlerMon(battler), &gBattleMons[battler]);
+    gBattleMons[battler].volatiles.transformed = transformed;
+    struct ChooseMoveStruct *info = (void *)&gBattleResources->bufferA[battler][4];
+    memset(info, 0, sizeof(*info));
+    info->species = SPECIES_RATTATA;
+    info->monTypes[0] = info->monTypes[1] = TYPE_NORMAL;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        info->moves[i] = moves[i];
+        info->currentPP[i] = pp[i];
+        info->maxPP[i] = CalculatePPWithBonus(moves[i], bonuses, i);
+    }
+    gMoveSelectionCursor[battler] = 0;
+    gNumberOfMovesToChoose = 3;
+    gBattlerControllerFuncs[battler] = HandleInputChooseMove;
+    InitBattleBgsVideo();
+    LoadBattleTextboxAndBackground();
+    gMain.newKeys = gMain.heldKeys = gMain.newAndRepeatedKeys = 0;
+    return info;
+}
+
+static void MoveProbeKey(u32 battler, u16 key)
+{
+    gMain.newKeys = gMain.newAndRepeatedKeys = key;
+    gBattlerControllerFuncs[battler](battler);
+    gMain.newKeys = gMain.newAndRepeatedKeys = 0;
+}
+
+static void FreeMoveProbe(void)
+{
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
+    ResetTasks();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    CloseMainBattleScreen();
+    FreeMonSpritesGfx();
+    FreeBattleResources();
+    FreeBattleSpritesData();
+    gMain.newKeys = gMain.heldKeys = gMain.newAndRepeatedKeys = 0;
+}
+
+TEST("Three Horizons playtest13 SELECT swaps moves and PP")
+{
+    u32 battler;
+    bool32 duplicate, transformed;
+    PARAMETRIZE { battler = 0; duplicate = FALSE; transformed = FALSE; }
+    PARAMETRIZE { battler = 2; duplicate = FALSE; transformed = FALSE; }
+    PARAMETRIZE { battler = 0; duplicate = TRUE; transformed = FALSE; }
+    PARAMETRIZE { battler = 0; duplicate = FALSE; transformed = TRUE; }
+    struct ChooseMoveStruct *info = InitMoveProbe(battler, duplicate, transformed);
+    struct ChooseMoveStruct original = *info;
+    struct Pokemon party = *GetBattlerMon(battler);
+    struct BattlePokemon opponent = gBattleMons[1];
+    u8 ppBonuses = gBattleMons[battler].ppBonuses;
+    for (u32 round = 0; round < 4; round++)
+    {
+        gMoveSelectionCursor[battler] = 0;
+        MoveProbeKey(battler, SELECT_BUTTON);
+        EXPECT(gBattlerControllerFuncs[battler] == HandleMoveSwitching);
+        EXPECT_EQ(gMultiUsePlayerCursor, 1);
+        // The trailing empty fourth slot must remain unselectable.
+        MoveProbeKey(battler, DPAD_DOWN);
+        EXPECT_EQ(gMultiUsePlayerCursor, 1);
+        MoveProbeKey(battler, A_BUTTON);
+        EXPECT(gBattlerControllerFuncs[battler] == HandleInputChooseMove);
+        for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        {
+            u32 source = (round % 2 == 0 && i < 2) ? i ^ 1 : i;
+            EXPECT_EQ(info->moves[i], original.moves[source]);
+            EXPECT_EQ(info->currentPP[i], original.currentPP[source]);
+            EXPECT_EQ(info->maxPP[i], original.maxPP[source]);
+            EXPECT_EQ(gBattleMons[battler].moves[i], original.moves[source]);
+            EXPECT_EQ(gBattleMons[battler].pp[i], original.currentPP[source]);
+            EXPECT_EQ((gBattleMons[battler].ppBonuses >> (i * 2)) & 3, (ppBonuses >> (source * 2)) & 3);
+            if (!transformed)
+            {
+                EXPECT_EQ(GetMonData(GetBattlerMon(battler), MON_DATA_MOVE1 + i), original.moves[source]);
+                EXPECT_EQ(GetMonData(GetBattlerMon(battler), MON_DATA_PP1 + i), original.currentPP[source]);
+                EXPECT_EQ((GetMonData(GetBattlerMon(battler), MON_DATA_PP_BONUSES) >> (i * 2)) & 3, (ppBonuses >> (source * 2)) & 3);
+            }
+        }
+        if (transformed)
+            EXPECT_EQ(memcmp(&party, GetBattlerMon(battler), sizeof(party)), 0);
+        EXPECT_EQ(memcmp(&opponent, &gBattleMons[1], sizeof(opponent)), 0);
+    }
+    FreeMoveProbe();
+}
+
+TEST("Three Horizons playtest13 SELECT swap preserves disabled and choice slots")
+{
+    InitMoveProbe(0, FALSE, FALSE);
+    gBattleMons[0].volatiles.disabledMove = MOVE_GROWL;
+    gBattleStruct->choicedMove[0] = MOVE_TACKLE;
+    gBattleMons[0].volatiles.encoredMove = MOVE_GROWL;
+    gBattleMons[0].volatiles.encoredMovePos = 1;
+    gBattleMons[0].volatiles.mimickedMoves = 1 << 1;
+    gBattleMons[0].volatiles.usedMoves = (1 << 1) | (1 << 2);
+    // Drive the native swap directly to test state even with SELECT disabled.
+    gMultiUsePlayerCursor = 1;
+    gBattlerControllerFuncs[0] = HandleMoveSwitching;
+    MoveProbeKey(0, A_BUTTON);
+    EXPECT_EQ(gBattleMons[0].volatiles.disabledMove, MOVE_GROWL);
+    EXPECT_EQ(gBattleStruct->choicedMove[0], MOVE_TACKLE);
+    EXPECT_EQ(gBattleMons[0].volatiles.mimickedMoves, 1 << 0);
+    EXPECT_EQ(gBattleMons[0].volatiles.encoredMove, MOVE_GROWL);
+    EXPECT_EQ(gBattleMons[0].volatiles.encoredMovePos, 0);
+    EXPECT_EQ(gBattleMons[0].volatiles.usedMoves, (1 << 0) | (1 << 2));
+    FreeMoveProbe();
+}
+
+TEST("Three Horizons playtest13 SELECT moves Encore slot with its move")
+{
+    InitMoveProbe(0, FALSE, FALSE);
+    gBattleMons[0].volatiles.encoredMove = MOVE_GROWL;
+    gBattleMons[0].volatiles.encoredMovePos = 1;
+    gMultiUsePlayerCursor = 1;
+    gBattlerControllerFuncs[0] = HandleMoveSwitching;
+    MoveProbeKey(0, A_BUTTON);
+    EXPECT_EQ(gBattleMons[0].volatiles.encoredMove, MOVE_GROWL);
+    EXPECT_EQ(gBattleMons[0].volatiles.encoredMovePos, 0);
+    FreeMoveProbe();
+}
+
+TEST("Three Horizons playtest13 SELECT moves Last Resort history with its move")
+{
+    InitMoveProbe(0, FALSE, FALSE);
+    gBattleMons[0].volatiles.usedMoves = (1 << 1) | (1 << 2);
+    gMultiUsePlayerCursor = 1;
+    gBattlerControllerFuncs[0] = HandleMoveSwitching;
+    MoveProbeKey(0, A_BUTTON);
+    EXPECT_EQ(gBattleMons[0].volatiles.usedMoves, (1 << 0) | (1 << 2));
+    FreeMoveProbe();
+}
+
+TEST("Three Horizons playtest13 SELECT cancel changes nothing")
+{
+    struct ChooseMoveStruct *info = InitMoveProbe(0, FALSE, FALSE);
+    struct ChooseMoveStruct original = *info;
+    struct Pokemon party = *GetBattlerMon(0);
+    struct BattlePokemon mon = gBattleMons[0];
+    gMultiUsePlayerCursor = 1;
+    gBattlerControllerFuncs[0] = HandleMoveSwitching;
+    MoveProbeKey(0, B_BUTTON);
+    EXPECT(gBattlerControllerFuncs[0] == HandleInputChooseMove);
+    EXPECT_EQ(memcmp(info, &original, sizeof(original)), 0);
+    EXPECT_EQ(memcmp(&party, GetBattlerMon(0), sizeof(party)), 0);
+    EXPECT_EQ(memcmp(&mon, &gBattleMons[0], sizeof(mon)), 0);
+    FreeMoveProbe();
+}
+
+TEST("Three Horizons playtest13 SELECT preserves native entry restrictions")
+{
+    u32 restriction;
+    PARAMETRIZE { restriction = 0; } // Link battle.
+    PARAMETRIZE { restriction = 1; } // Z preview.
+    PARAMETRIZE { restriction = 2; } // Description open.
+    PARAMETRIZE { restriction = 3; } // Only one move.
+    InitMoveProbe(0, FALSE, FALSE);
+    if (restriction == 0) gBattleTypeFlags |= BATTLE_TYPE_LINK;
+    if (restriction == 1) gBattleStruct->zmove.viewing = TRUE;
+    if (restriction == 2) gBattleStruct->descriptionSubmenu = TRUE;
+    if (restriction == 3) gNumberOfMovesToChoose = 1;
+    MoveProbeKey(0, SELECT_BUTTON);
+    EXPECT(gBattlerControllerFuncs[0] == HandleInputChooseMove);
+    FreeMoveProbe();
 }
 #endif

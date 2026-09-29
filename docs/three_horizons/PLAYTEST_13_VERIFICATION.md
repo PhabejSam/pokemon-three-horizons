@@ -131,3 +131,10 @@ Pending: full project regression, final save-layout recheck, three upstream game
 - Reproduction inputs use a copied post-Surge fixture and task-owned QA party/position setup. No emulator state is transferred between ROM revisions; battery Continue creates each revision's base state. This is focused emulator evidence, not whole-chapter desktop or RG40XX H acceptance.
 - Local reproducible captures, traces and harness: `outputs/playtest-13-development/task18-cut-evidence.zip` in the task workspace. CI artifact `11007126589` contains the exact candidate ROM/ELF and native logs.
 - Upstream code paths remain guarded out of this TH-only repair; complete Emerald/FireRed/LeafGreen compilation is reserved for the approved integration gate.
+
+## Task 22 trainer RUN checkpoint
+
+- Feature `a2e234d015bcd291b3c0d35dfa27da4a8eb7d97c`; compiled/test `7db900004d0fc1f89004ad1bef48ef586d29ad7f`.
+- [CI run 36507024347](https://github.com/PhabejSam/pokemon-three-horizons/actions/runs/36507024347): two new native tests pass across five trainer and two wild cases; prior rival loss and Rocket retry tests also pass. The preceding test checkpoint fails the trainer response assertion while wild controls pass.
+- Exact prior-ROM mGBA reproduction: selecting RUN and confirming quit in Rick's trainer battle reduced money from 17320 to 15808 and warped to Cerulean Center. The TH-only setting now selects the native cannot-run script and returns to action selection, preserving money, HP, bag, flags, location and callback. Actual defeat behavior is unchanged.
+- Focused compilation uses the native runner and root TH suites; full upstream sources remain required at integration. No complete ROM was built for this config-only task.
