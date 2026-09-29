@@ -87,10 +87,11 @@ TEST("Three Horizons playtest13 state migration preserves P12 payload")
     ClearBag();
     u8 attackEv = 252;
     u16 heldItem = ITEM_POWER_BRACER;
+    static const u8 nickname[] = _("Lavender");
     CreateMonWithIVs(&gPlayerParty[0], first, 35, 0x3FFFFFFF, OTID_STRUCT_PLAYER_ID, 123);
     SetMonData(&gPlayerParty[0], MON_DATA_ATK_EV, &attackEv);
     SetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM, &heldItem);
-    SetMonData(&gPlayerParty[0], MON_DATA_NICKNAME, _("Lavender"));
+    SetMonData(&gPlayerParty[0], MON_DATA_NICKNAME, nickname);
     gPokemonStoragePtr->boxes[0][0] = gPlayerParty[0].box;
     SetMoney(&gSaveBlock1Ptr->money, 54321);
     EXPECT(AddBagItem(ITEM_HM01, 1));
