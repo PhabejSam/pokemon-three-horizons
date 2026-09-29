@@ -21,6 +21,7 @@ class Scene:
         self.vars, self.flags, self.entries, self.photos = {}, set(), set(), set()
         self.messages, self.flashes, self.completed = [], 0, []
         self.removed, self.queued = [], []
+        self.object_flags = {}
 
     def value(self, key):
         if key in ('NO', 'FALSE'): return 0
@@ -51,7 +52,10 @@ class Scene:
                     pc = self.labels[args[1]]
             elif op == 'setvar': self.vars[args[0]] = self.value(args[1])
             elif op == 'setflag': self.flags.add(args[0])
-            elif op == 'removeobject': self.removed.append(args[0])
+            elif op == 'clearflag': self.flags.discard(args[0])
+            elif op == 'removeobject':
+                self.removed.append(args[0])
+                if args[0] in self.object_flags: self.flags.add(self.object_flags[args[0]])
             elif op == 'getplayerxy':
                 self.vars[args[0]], self.vars[args[1]] = 0, 0
             elif op == 'msgbox':
@@ -65,6 +69,7 @@ class Scene:
                 elif args[0] == 'TH_ScriptTakeResearchPhoto':
                     self.vars['VAR_RESULT'] = int(value not in self.photos)
                     self.photos.add(value)
+                    self.flags.add(value.replace("TH_PHOTO_", "FLAG_TH13_PHOTO_"))
                 elif args[0] == 'TH_ScriptResearchCompleteCall':
                     self.completed.append((value, len(self.messages)))
                 elif args[0] == 'TH_ScriptResearchQueueCall': self.queued.append(value)

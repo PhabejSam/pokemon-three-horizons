@@ -265,7 +265,14 @@ TH13_Lavender_GhostRecord:
     closemessage
     applymovement LOCALID_TH13_LAVENDERTOWN_4, TH13_Lavender_GhostVanish
     waitmovement 0
+    goto_if_set FLAG_TH13_PHOTO_LAVENDER, TH13_Lavender_GhostPhotographed
+    @ Native removeobject sets its map flag. Undo only the unearned photo bit.
     removeobject LOCALID_TH13_LAVENDERTOWN_4
+    clearflag FLAG_TH13_PHOTO_LAVENDER
+    goto TH13_Lavender_GhostGone
+TH13_Lavender_GhostPhotographed:
+    removeobject LOCALID_TH13_LAVENDERTOWN_4
+TH13_Lavender_GhostGone:
     msgbox TH13_Lavender_GhostGoneText
     setvar VAR_0x8004, TH_CALL_LAVENDER
     special TH_ScriptResearchQueueCall

@@ -42,12 +42,16 @@ class Lavender(unittest.TestCase):
   m=map_data('TH13_LavenderTown');ghost=next(o for o in m['object_events'] if 'MISDREAVUS' in o['graphics_id'])
   self.assertEqual(ghost['flag'],'FLAG_TH13_PHOTO_LAVENDER')
   for gear in (False,True):
-   s=Scene(gear=gear,answer=0);s.run('TH13_Lavender_Misdreavus')
+   s=Scene(gear=gear,answer=0)
+   s.object_flags={ghost['local_id']:ghost['flag']}
+   s.run('TH13_Lavender_Misdreavus')
+   self.assertNotIn(ghost['flag'],s.flags, 'Native removeobject must not manufacture a photo receipt')
    self.assertIn('TH_RESEARCH_LAVENDER',s.entries);self.assertFalse(s.photos)
    self.assertIn(ghost['local_id'],s.removed)
    self.assertIn('FLAG_TH13_SCENE_LAVENDER',s.flags)
    s.gear=True;s.answer=1;s.run('TH13_Lavender_Misdreavus')
    self.assertEqual(s.photos,{'TH_PHOTO_LAVENDER'});self.assertEqual(s.flashes,1)
+   self.assertIn(ghost['flag'],s.flags)
    s.run('TH13_Lavender_Misdreavus');self.assertEqual(s.flashes,1)
    self.assertEqual(set(s.queued),{'TH_CALL_LAVENDER'})
   source=(ROOT/'data/scripts/three_horizons/chapter13_lavender.inc').read_text()
