@@ -8,19 +8,19 @@
 #if THREE_HORIZONS
 TEST("Three Horizons playtest13 learned move resumes candy evolution without another candy")
 {
-    s16 state;
-    s16 move;
-    PARAMETRIZE { state = 1; move = MOVE_DUAL_CHOP; }
-    PARAMETRIZE { state = 1; move = MOVE_RAGE_FIST; }
-    PARAMETRIZE { state = 0; move = MOVE_POUND; }
-    PARAMETRIZE { state = 0; move = MOVE_KARATE_CHOP; }
-    PARAMETRIZE { state = 2; move = MOVE_DUAL_CHOP; }
-    struct PartyMenu saved = gPartyMenu;
-    gPartyMenu.data1 = move;
-    gPartyMenu.learnMoveState = state;
-    s16 actual = Test_GetLearnedMoveContinuationState();
-    gPartyMenu = saved;
-    EXPECT_EQ(actual, state);
+    static const s16 cases[][2] = {
+        {1, MOVE_DUAL_CHOP}, {1, MOVE_RAGE_FIST},
+        {0, MOVE_POUND}, {0, MOVE_KARATE_CHOP}, {2, MOVE_DUAL_CHOP},
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
+    {
+        struct PartyMenu saved = gPartyMenu;
+        gPartyMenu.data1 = cases[i][1];
+        gPartyMenu.learnMoveState = cases[i][0];
+        s16 actual = Test_GetLearnedMoveContinuationState();
+        gPartyMenu = saved;
+        EXPECT_EQ(actual, cases[i][0]);
+    }
 }
 
 static bool32 LearnsAt(u16 species, u16 move, u32 level)
