@@ -8,6 +8,29 @@ ROOT = Path(__file__).resolve().parents[3]
 
 
 class Playtest13Repairs(unittest.TestCase):
+    def test_ship_hull_is_centered_on_existing_gangway_and_warps(self):
+        data = map_data('TH12_SSAnne_Exterior')
+        ship = next(o for o in data['object_events'] if o['graphics_id'] == 'OBJ_EVENT_GFX_SS_ANNE')
+        boarding = data['warp_events'][2]
+        self.assertEqual((ship['x'], ship['y']), (30, 16))
+        self.assertEqual((boarding['x'], boarding['y']), (32, 14))
+        # Native SS Anne subsprites span -32..96 horizontally. East facing
+        # flips that asymmetric span to -96..32 and shifts its visual center
+        # four tiles left, independently of the object's authored coordinates.
+        self.assertIn(ship['movement_type'], ('MOVEMENT_TYPE_FACE_DOWN', 'MOVEMENT_TYPE_FACE_RIGHT'))
+        half_span_offset = -32 if ship['movement_type'] == 'MOVEMENT_TYPE_FACE_RIGHT' else 32
+        visual_center = ship['x'] * 16 + 8 + half_span_offset
+        self.assertEqual(visual_center, boarding['x'] * 16 + 8)
+        width, _, grid = tiles(data['name'])
+        for y in range(5, 15):
+            self.assertEqual(grid[y * width + 32] & 0xC00, 0)
+        corridor = map_data('TH12_SSAnne_1F_Corridor')
+        for index in (2, 3):
+            self.assertEqual(data['warp_events'][index]['dest_map'], corridor['id'])
+            self.assertEqual(int(data['warp_events'][index]['dest_warp_id']), index)
+            self.assertEqual(corridor['warp_events'][index]['dest_map'], data['id'])
+            self.assertEqual(int(corridor['warp_events'][index]['dest_warp_id']), index)
+
     def test_ship_official_is_on_dock_and_all_lanes_have_safe_retreats(self):
         data = map_data('TH12_VermilionCity')
         width, _, grid = tiles(data['name'])
