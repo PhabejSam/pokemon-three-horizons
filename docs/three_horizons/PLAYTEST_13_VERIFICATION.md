@@ -365,3 +365,5 @@ Run 36594346912/job 109495283006 passed nine species, 38 starter, four evolution
 five training and nine rematch native groups, plus three species and ten systems
 host checks. Exact-ROM evolution UI acceptance is recorded separately after
 completion; this automated result alone does not assert it.
+
+Tasks 26–28 evidence archive: `tasks26-28-systems-evidence.zip`, SHA-256 `25aa6f889dadebe3afd6ce92554e5be06fd31af791d011b881f3f3f629c83982`. Archive metadata distinguishes earlier diagnostic failures from passing acceptance captures.

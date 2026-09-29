@@ -149,3 +149,25 @@ there, the following are acceptance steps rather than completed checks.
 
 Full release/save/upstream gates and the user's exact post-Surge RG40XX H P12
 battery migration remain separate from synthetic fixtures and focused tests.
+
+## Focused evidence recorded during Task 29
+
+On compiled revision `3c48c6e376283000e81068ac5cb2e85fb5b8c8f4`, exact-ROM
+mGBA checks passed all four pure-trade families at level 36 with one Rare Candy,
+identity preservation, evolved follower and cold Continue. This includes the
+Machoke move-learning continuation repair described in the verification report.
+Gyarados's Summary visibly shows Water/Dragon; maximum nickname, shiny appearance
+and identity persist. Native prompts teach Dragon Tail at 26, Outrage at 48 and
+Earth Power at 40; Earth Power also appears and teaches through Summary Relearn.
+Primeape's tracker at 19 did not evolve at the next level; 20 allowed evolution.
+Cancellation preserved Primeape; the following level evolved Annihilape, whose
+follower and cold Continue were checked. The qualifying Rage Fist hit/miss/Protect
+and prevented-sleep behavior, plus Laser Focus's one-attack scope, are covered by
+native battle tests.
+
+The same emulator pass exposed that the inherited release configuration disabled
+using evolution-held items from the Bag, despite valid native evolution tables.
+The Metal Coat attempt displayed the cannot-use message. A separate regression
+now checks the Bag type and evolution callback for all twelve thematic items.
+Item-use acceptance remains pending its repair and exact-ROM retest; the earlier
+target-species tests alone were not proof of usable single-player evolution.
