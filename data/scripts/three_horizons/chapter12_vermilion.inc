@@ -135,13 +135,22 @@ TH12_Bike_Enjoy:
 TH12_Cerulean_CatchUpSupplies::
     lock
     faceplayer
+    goto_if_unset FLAG_TH12_START_MONEY, TH13_CatchUpDeliver
+    goto_if_set FLAG_TH12_ULTRA_BALLS, TH13_CatchUpAlready
+TH13_CatchUpDeliver:
     special TH_TryGiveChapter12Supplies
     goto_if_eq VAR_RESULT, FALSE, TH12_RewardBagFull
     msgbox TH12_CatchUpText
     release
     end
+TH13_CatchUpAlready:
+    msgbox TH13_CatchUpAlreadyText
+    release
+    end
 TH12_CatchUpText:
-    .string "OAK sent two ULTRA BALLS and\n¥2,000 for your field work.\pIf you already collected them,\nyou are all set! BILL lives north.\pHis reports may explain why\nPOKéMON are crossing the regions.$"
+    .string "That completes OAK's field supplies:\ntwo ULTRA BALLS and ¥2,000.\pBILL lives beyond NUGGET BRIDGE.\nCompare notes on your sightings!$"
+TH13_CatchUpAlreadyText:
+    .string "Your ¥2,000 and two ULTRA BALLS\nwere already delivered.\pKeep them handy as you explore.\nBILL lives beyond NUGGET BRIDGE.$"
 
 TH12_Vermilion_Mart::
     lock
