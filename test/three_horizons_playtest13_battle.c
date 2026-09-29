@@ -22,6 +22,7 @@
 #include "pokedex.h"
 #include "battle_script_commands.h"
 #include "sound.h"
+#include "string_util.h"
 
 #if THREE_HORIZONS
 extern bool32 Test_TH_ChooseRunAction(void);
@@ -431,6 +432,91 @@ TEST("Three Horizons playtest13 first catch requires fresh input after presentat
     for (frame = 0; frame < 1200 && gBattlescriptCurrInstr == sDexProbeCommand; frame++)
         CatchProbeFrame(sDexProbeCommand, 0, 0);
     EXPECT_LT(frame, 1200);
+    FreeMoveProbe();
+    gMain.callback1 = old1;
+    SetMainCallback2(old2);
+}
+
+TEST("Three Horizons playtest13 first catch registers once and repeat skips Dex")
+{
+    enum Species species;
+    PARAMETRIZE { species = SPECIES_CATERPIE; }
+    PARAMETRIZE { species = SPECIES_WEEDLE; }
+    PARAMETRIZE { species = SPECIES_PIKACHU; }
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    InitMoveProbe(0, FALSE, FALSE);
+    CreateMonWithIVs(GetBattlerMon(1), species, 5, 9876, OTID_STRUCT_PLAYER_ID, 12);
+    PokemonToBattleMon(GetBattlerMon(1), &gBattleMons[1]);
+    gBattleScripting.monCaught = TRUE;
+    u32 dex = SpeciesToNationalPokedexNum(species), offset = (dex - 1) / 8;
+    u8 oldCaught = gSaveBlock1Ptr->dexCaught[offset];
+    u8 oldSeen = gSaveBlock1Ptr->dexSeen[offset];
+    gSaveBlock1Ptr->dexCaught[offset] &= ~(1 << ((dex - 1) % 8));
+    u32 before = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+    u8 command[6] = {B_SCR_OP_TRYSETCAUGHTMONDEXFLAGS};
+    const u8 *repeat = sNicknameProbeCommand;
+    memcpy(command + 1, &repeat, sizeof(repeat));
+    gBattlescriptCurrInstr = command;
+    gBattleScriptingCommandsTable[command[0]]();
+    EXPECT(gBattlescriptCurrInstr == command + 5);
+    EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_CAUGHT), before + 1);
+    EXPECT(GetSetPokedexFlag(dex, FLAG_GET_CAUGHT));
+    // Repeat capture follows the native skip pointer, with no second registration.
+    gBattlescriptCurrInstr = command;
+    gBattleScriptingCommandsTable[command[0]]();
+    EXPECT(gBattlescriptCurrInstr == repeat);
+    EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_CAUGHT), before + 1);
+    EXPECT_EQ(FindTaskIdByFunc(Task_HandleCaughtMonPageInput), TASK_NONE);
+    gSaveBlock1Ptr->dexCaught[offset] = oldCaught;
+    gSaveBlock1Ptr->dexSeen[offset] = oldSeen;
+    FreeMoveProbe();
+    gMain.callback1 = old1;
+    SetMainCallback2(old2);
+}
+
+TEST("Three Horizons playtest13 first catch nickname accepts max name with party or PC return")
+{
+    bool32 fullParty;
+    PARAMETRIZE { fullParty = FALSE; }
+    PARAMETRIZE { fullParty = TRUE; }
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    InitMoveProbe(0, FALSE, FALSE);
+    for (u32 i = 1; i < PARTY_SIZE; i++)
+    {
+        if (fullParty)
+            CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][i], SPECIES_RATTATA, 5, 100 + i, OTID_STRUCT_PLAYER_ID, 12);
+        else
+            ZeroMonData(&gParties[B_TRAINER_PLAYER][i]);
+    }
+    CalculatePlayerPartyCount();
+    gBattlerTarget = 1;
+    gBattleScripting.monCaught = TRUE;
+    SetMonData(GetBattlerMon(1), MON_DATA_NICKNAME, COMPOUND_STRING("ABCDEFGHIJKL"));
+    memset(gBattleCommunication, 0, sizeof(gBattleCommunication));
+    SetMainCallback2(BattleMainCB2);
+    SetVBlankCallback(VBlankCB_Battle);
+    gBattlescriptCurrInstr = sNicknameProbeCommand;
+    CatchProbeFrame(sNicknameProbeCommand, 0, 0);
+    EXPECT_EQ(gBattleCommunication[MULTIUSE_STATE], 1);
+    CatchProbeFrame(sNicknameProbeCommand, A_BUTTON, A_BUTTON);
+    EXPECT_EQ(gBattleCommunication[MULTIUSE_STATE], 2);
+    u32 frame;
+    for (frame = 0; frame < 1200 && gBattleCommunication[MULTIUSE_STATE] != 3; frame++)
+        CatchProbeFrame(sNicknameProbeCommand, 0, 0);
+    EXPECT_LT(frame, 1200);
+    // Accept the existing maximum-length name through the real naming UI.
+    for (frame = 0; frame < 1800 && gBattlescriptCurrInstr == sNicknameProbeCommand; frame++)
+    {
+        u16 key = frame % 40 == 0 ? START_BUTTON : frame % 40 == 20 ? A_BUTTON : 0;
+        CatchProbeFrame(sNicknameProbeCommand, key, key);
+    }
+    EXPECT_LT(frame, 1800);
+    EXPECT(gMain.callback2 == BattleMainCB2);
+    EXPECT(!gPaletteFade.active);
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    GetMonData(GetBattlerMon(1), MON_DATA_NICKNAME, nickname);
+    EXPECT_EQ(StringCompare(nickname, COMPOUND_STRING("ABCDEFGHIJKL")), 0);
+    EXPECT_EQ(CalculatePlayerPartyCount(), fullParty ? PARTY_SIZE : 1);
     FreeMoveProbe();
     gMain.callback1 = old1;
     SetMainCallback2(old2);
