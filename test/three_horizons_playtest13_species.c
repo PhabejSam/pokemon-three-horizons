@@ -4,8 +4,24 @@
 #include "party_menu.h"
 #include "three_horizons.h"
 #include "string_util.h"
+#include "item.h"
+#include "item_use.h"
 
 #if THREE_HORIZONS
+TEST("Three Horizons playtest13 thematic evolution items are usable from the bag")
+{
+    static const u16 items[] = {
+        ITEM_METAL_COAT, ITEM_KINGS_ROCK, ITEM_DRAGON_SCALE, ITEM_UPGRADE,
+        ITEM_DUBIOUS_DISC, ITEM_PROTECTOR, ITEM_ELECTIRIZER, ITEM_MAGMARIZER,
+        ITEM_REAPER_CLOTH, ITEM_DEEP_SEA_TOOTH, ITEM_DEEP_SEA_SCALE, ITEM_PRISM_SCALE,
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(items); i++)
+    {
+        EXPECT_EQ(GetItemType(items[i]), ITEM_USE_PARTY_MENU);
+        EXPECT_EQ(GetItemFieldFunc(items[i]), ItemUseOutOfBattle_EvolutionStone);
+    }
+}
+
 TEST("Three Horizons playtest13 learned move resumes candy evolution without another candy")
 {
     static const s16 cases[][2] = {

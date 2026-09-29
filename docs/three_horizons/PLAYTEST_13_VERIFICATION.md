@@ -308,3 +308,60 @@ the same ROM registry. The chapter-wide target remains 121; the current shipped
 map count of 68 is not a scope reduction. Integration must re-audit final maps.
 The exact post-Surge RG40XX H P12 battery save is still to be supplied by the user;
 the older Cerulean/P11-marked save must not satisfy personal-save acceptance.
+
+## Tasks 26–28 exact-ROM emulator acceptance
+
+This record supersedes the pending-UI statements above. Feature
+`8fe142c085699973215fdea7ba3165db2ddc9fdf`, compiled/test revision
+`682bfdc9d0f04b50c10bd64a3e24dde5604826c0`, ROM SHA-256
+`585898475be72ffe62e3c5cbc417c46926fc3cdb7918784080e40e4110c410ec`.
+CI 36589418225/job 109478294084 passed the grouped focused tests. Disposable
+battery fixtures and the exact matching ROM/ELF were used in mGBA libretro.
+
+- Trainer Services: four city vendors and the Berry Workshop were inspected.
+  Both shops passed purchase, cancellation, insufficient-money and full-pocket
+  cases. Mint, Capsule, Patch and EV berry use consumed the correct item and
+  preserved unrelated identity/stats across cold Continue. Incompatible Capsule
+  and ineffective berry did not consume an item. Silver Cap changed only the
+  chosen IV; repeat/no-effect and cancelled Gold Cap did not charge; Gold Cap
+  maximized all six. A capped Pokémon retained identity and IVs after native PC
+  deposit into Box 1 and cold Continue. Lavender placement belongs to Task 39.
+- Vs. Seeker: researcher acquisition works before badges, once only, with
+  full-pocket retry and cold Continue. Rick's actual rematch used evolved
+  Beedrill/Butterfree at level 35; victory and blackout cleared readiness while
+  preserving permanent defeat history. Immediate reuse, map changes and cold
+  Continue behaved correctly. Ready trainers were exercised on route, forest,
+  cave, Gym, bridge, cape and ship maps. Luis's actual rematch returned him to
+  the water edge with the walkway clear. An undefeated trainer and a boss-only
+  fixture were excluded. Keigo's first battle used the approved level-18 team,
+  awarded experience and set its original defeat flag.
+- Bikes: new voucher, either existing bike, both bikes and an old receipt with
+  missing items all led to exactly one of each native bike. Partial delivery
+  retried without duplicate items; cancellation left bag/receipts unchanged.
+  Both bikes moved outdoors; Acro B input, registration, switching by dismounting,
+  indoor refusal and cold Continue were checked. The inherited follower is
+  hidden during cycling and returns when walking. The chairman's four short
+  story pages, once-only voucher and repeat dialogue were inspected.
+
+These checks complete the focused shipped-map work for Tasks 26–28. The 53
+ordinary trainers on later approved maps and Lavender vendor remain explicit
+later-task obligations. Full upstream/save-layout integration, the exact user
+post-Surge battery save, and hardware acceptance remain separate gates.
+
+## Task 29 reproduced Rare Candy continuation defect
+
+A level-35 Machoke learned Dual Chop at 36 but initially skipped evolution until
+another candy raised it to 37. The move-learning completion handler compared a
+move ID with state values 1/2. The new native test reproduced 530 versus 1 on
+`ca50909451b1071d2d09dd05f3091ec7b0b9ca7a` (run 36593253105/job
+109491518808). Earlier test-fixture compilation errors are not behavioral RED.
+The TH-only repair selects the existing learnMoveState field; upstream still
+uses its original accessor result. No evolution level or save field changed.
+
+Feature `245e8fc66bb46b9f4e8ff94a98799269535d2f62`, compiled/test revision
+`3c48c6e376283000e81068ac5cb2e85fb5b8c8f4`, ROM SHA-256
+`168d9c4ad396fb7219291f8fe7f8b0c4ec4d03195b302e8e64aeca4df1b54065`.
+Run 36594346912/job 109495283006 passed nine species, 38 starter, four evolution,
+five training and nine rematch native groups, plus three species and ten systems
+host checks. Exact-ROM evolution UI acceptance is recorded separately after
+completion; this automated result alone does not assert it.

@@ -80,3 +80,14 @@ separately approved first-fight roster is Kakuna/Beedrill/Butterfree at level 18
 The user's exact post-Surge RG40XX H Playtest 12 battery save remains required
 for the final personal-save acceptance gate. The older Cerulean/Playtest-11-marked
 save is not evidence of that acceptance.
+
+## Focused acceptance
+
+Nine native groups and four host checks pass for the 68 shipped trainers,
+including full-width IDs, collisions/bounds, stale-map isolation, level clamps,
+first-battle preservation, defeat flags, unchanged save sizes and legal parties.
+Exact-ROM mGBA checks also cover rematch win/loss, immediate reuse, map change,
+cold Continue, indoor/cave/ship readiness, Luis's clear postbattle path, and
+boss/unseen exclusions. See PLAYTEST_13_VERIFICATION.md for revisions and limits.
+The remaining 53 trainers are added with their maps; the final coverage audit
+and non-TH runtime controls remain integration requirements.
