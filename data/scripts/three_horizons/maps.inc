@@ -135,3 +135,26 @@ TH_Route1_MapScripts::
 .include "data/maps/TH13_Route2_House/scripts.inc"
 
     .include "data/maps/TH13_Route9/scripts.inc"
+
+    .include "data/maps/TH13_Route10/scripts.inc"
+
+    .include "data/maps/TH13_RockTunnel_1F/scripts.inc"
+
+    .include "data/maps/TH13_RockTunnel_B1F/scripts.inc"
+
+    .include "data/maps/TH13_Route10_PokemonCenter_1F/scripts.inc"
+
+    .include "data/maps/TH13_ViridianCenter2F/scripts.inc"
+
+    .include "data/maps/TH13_PewterCenter2F/scripts.inc"
+
+    .include "data/maps/TH13_CeruleanCenter2F/scripts.inc"
+
+    .include "data/maps/TH13_Route4Center2F/scripts.inc"
+
+    .include "data/maps/TH13_VermilionCenter2F/scripts.inc"
+
+    .include "data/maps/TH13_Route10_PokemonCenter_2F/scripts.inc"
+
+    .include "data/scripts/three_horizons/chapter13_rock_tunnel.inc"
+    .include "data/scripts/three_horizons/chapter13_centers.inc"

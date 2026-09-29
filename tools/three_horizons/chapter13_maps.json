@@ -55,6 +55,76 @@
       "id": "MAP_TH13_ROUTE9",
       "layout": "LAYOUT_ROUTE9",
       "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "Route10_Frlg",
+      "name": "TH13_Route10",
+      "id": "MAP_TH13_ROUTE10",
+      "layout": "LAYOUT_ROUTE10",
+      "script_owner": "chapter13_rock_tunnel.inc"
+    },
+    {
+      "source": "RockTunnel_1F_Frlg",
+      "name": "TH13_RockTunnel_1F",
+      "id": "MAP_TH13_ROCK_TUNNEL_1F",
+      "layout": "LAYOUT_ROCK_TUNNEL_1F",
+      "script_owner": "chapter13_rock_tunnel.inc"
+    },
+    {
+      "source": "RockTunnel_B1F_Frlg",
+      "name": "TH13_RockTunnel_B1F",
+      "id": "MAP_TH13_ROCK_TUNNEL_B1F",
+      "layout": "LAYOUT_ROCK_TUNNEL_B1F",
+      "script_owner": "chapter13_rock_tunnel.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_1F_Frlg",
+      "name": "TH13_Route10_PokemonCenter_1F",
+      "id": "MAP_TH13_ROUTE10_POKEMON_CENTER_1F",
+      "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG",
+      "script_owner": "chapter13_rock_tunnel.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_ViridianCenter2F",
+      "id": "MAP_TH13_VIRIDIAN_CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_PewterCenter2F",
+      "id": "MAP_TH13_PEWTER_CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_CeruleanCenter2F",
+      "id": "MAP_TH13_CERULEAN_CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_Route4Center2F",
+      "id": "MAP_TH13_ROUTE4CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_VermilionCenter2F",
+      "id": "MAP_TH13_VERMILION_CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_Route10_PokemonCenter_2F",
+      "id": "MAP_TH13_ROUTE10_POKEMON_CENTER_2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
     }
   ]
 }

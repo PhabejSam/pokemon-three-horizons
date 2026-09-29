@@ -1043,3 +1043,77 @@ const struct Tileset gTileset_DiglettsCave =
     .metatileAttributes = gMetatileAttributes_DiglettsCave,
     .callback = NULL,
 };
+
+const u32 gTilesetTiles_LavenderTown[] = INCGFX_U32("data/tilesets/secondary/lavender_town_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_LavenderTown[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lavender_town_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_LavenderTown[] = INCBIN_U16("data/tilesets/secondary/lavender_town_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_LavenderTown[] = INCBIN_U16("data/tilesets/secondary/lavender_town_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_LavenderTown =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LavenderTown,
+    .palettes = gTilesetPalettes_LavenderTown,
+    .metatiles = gMetatiles_LavenderTown,
+    .metatileAttributes = gMetatileAttributes_LavenderTown,
+    .callback = NULL,
+};
+
+const u32 gTilesetTiles_RockTunnel[] = INCGFX_U32("data/tilesets/secondary/rock_tunnel_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_RockTunnel[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/rock_tunnel_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_RockTunnel[] = INCBIN_U16("data/tilesets/secondary/rock_tunnel_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_RockTunnel[] = INCBIN_U16("data/tilesets/secondary/rock_tunnel_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_RockTunnel =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_RockTunnel,
+    .palettes = gTilesetPalettes_RockTunnel,
+    .metatiles = gMetatiles_RockTunnel,
+    .metatileAttributes = gMetatileAttributes_RockTunnel,
+    .callback = NULL,
+};

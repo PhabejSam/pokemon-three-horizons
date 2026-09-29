@@ -98,17 +98,15 @@
       "elevation": 3,
       "dest_map": "MAP_TH_VIRIDIAN_ENTRANCE",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "elevation": 4,
+      "dest_map": "MAP_TH13_VIRIDIAN_CENTER2F",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
-  "bg_events": [
-    {
-      "type": "sign",
-      "x": 1,
-      "y": 6,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "TH_Journey_Closed"
-    }
-  ]
+  "bg_events": []
 }

@@ -159,3 +159,34 @@ TH13_Route9_RepeatText:
     .string "MAREEP and NIDORAN exchange\nsoft cries, then return to grazing.$"
 TH13_Route9_StudentText:
     .string "I'm checking OAK's encounter data.\nThese numbers don't match the usual\lseasonal distributions.\pMAREEP normally live in JOHTO.\nI'll record what I see before\ltrying to explain it.$"
+
+TH13_RockTunnel_Pair::
+    lockall
+    hidefollower
+    playmoncry SPECIES_ARON, CRY_MODE_NORMAL
+    waitmoncry
+    playmoncry SPECIES_GEODUDE, CRY_MODE_NORMAL
+    waitmoncry
+    goto_if_set FLAG_TH13_SCENE_ROCK_TUNNEL, TH13_RockTunnel_Repeat
+    msgbox TH13_RockTunnel_FirstText
+    setflag FLAG_TH13_SCENE_ROCK_TUNNEL
+    goto TH13_RockTunnel_Record
+TH13_RockTunnel_Repeat:
+    msgbox TH13_RockTunnel_RepeatText
+TH13_RockTunnel_Record:
+    setvar VAR_0x8004, TH_RESEARCH_ROCK_TUNNEL
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_ROCK_TUNNEL
+    call TH13_ResearchPhoto
+    special TH_RefreshFollower
+    releaseall
+    end
+TH13_RockTunnel_Hiker::
+    msgbox TH13_RockTunnel_HikerText, MSGBOX_NPC
+    end
+TH13_RockTunnel_FirstText:
+    .string "ARON scrapes at a mineral seam.\nGEODUDE investigates the same rock.\pNeither seems troubled by the other.\nThey settle beside the seam.$"
+TH13_RockTunnel_RepeatText:
+    .string "ARON keeps feeding on the minerals.\nGEODUDE rests nearby.$"
+TH13_RockTunnel_HikerText:
+    .string "I've never seen an ARON here before.\nBut it's behaving like it belongs.\pThere must be minerals it likes\nin these old rocks.$"

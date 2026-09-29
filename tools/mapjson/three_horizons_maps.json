@@ -94,6 +94,16 @@
     "TH13_DiglettsCave_NorthEntrance",
     "TH13_Route2_EastBuilding",
     "TH13_Route2_House",
-    "TH13_Route9"
+    "TH13_Route9",
+    "TH13_Route10",
+    "TH13_RockTunnel_1F",
+    "TH13_RockTunnel_B1F",
+    "TH13_Route10_PokemonCenter_1F",
+    "TH13_ViridianCenter2F",
+    "TH13_PewterCenter2F",
+    "TH13_CeruleanCenter2F",
+    "TH13_Route4Center2F",
+    "TH13_VermilionCenter2F",
+    "TH13_Route10_PokemonCenter_2F"
   ]
 }

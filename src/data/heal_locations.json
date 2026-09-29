@@ -409,6 +409,16 @@
       "respawn_npc": "LOCALID_TH12_VERMILIONCITY_POKEMONCENTER_1F_0",
       "respawn_x": 7,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_TH13_ROUTE10",
+      "map": "MAP_TH13_ROUTE10_POKEMON_CENTER_1F",
+      "x": 7,
+      "y": 4,
+      "respawn_map": "MAP_TH13_ROUTE10_POKEMON_CENTER_1F",
+      "respawn_npc": "LOCALID_TH13_ROUTE10_POKEMONCENTER_1F_1",
+      "respawn_x": 7,
+      "respawn_y": 4
     }
   ]
 }

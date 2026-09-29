@@ -1,6 +1,6 @@
 {
   "mode": "focused",
-  "native_filter": "test/three_horizons_rematches.c",
-  "host_filter": "test_playtest13_route9.py",
+  "native_filter": "test/three_horizons_flash.c",
+  "host_filter": "test_playtest13_rock_tunnel.py",
   "visual_gate": "routes"
 }

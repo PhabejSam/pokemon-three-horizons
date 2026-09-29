@@ -2381,6 +2381,7 @@ Level: 33
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 #endif
 
+#if !THREE_HORIZONS
 === TRAINER_CINDY_6 ===
 Name: CINDY
 Class: Lady
@@ -2398,7 +2399,9 @@ IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 - Mud Sport
 - Odor Sleuth
 - Sand Attack
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_MELISSA ===
 Name: MELISSA
 Class: Beauty
@@ -2411,7 +2414,9 @@ AI: Check Bad Move
 Marill
 Level: 21
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_SHEILA ===
 Name: SHEILA
 Class: Beauty
@@ -2424,7 +2429,9 @@ AI: Check Bad Move
 Shroomish
 Level: 21
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_SHIRLEY ===
 Name: SHIRLEY
 Class: Beauty
@@ -2437,7 +2444,9 @@ AI: Check Bad Move
 Numel
 Level: 21
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_JESSICA_1 ===
 Name: JESSICA
 Class: Beauty
@@ -2462,7 +2471,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Screech
 - Glare
 - Crunch
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_CONNIE ===
 Name: CONNIE
 Class: Beauty
@@ -2475,7 +2486,9 @@ AI: Check Bad Move
 Goldeen
 Level: 40
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_BRIDGET ===
 Name: BRIDGET
 Class: Beauty
@@ -2488,7 +2501,9 @@ AI: Check Bad Move
 Azumarill
 Level: 40
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_OLIVIA ===
 Name: OLIVIA
 Class: Beauty
@@ -2520,7 +2535,9 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Fury Swipes
 - Fake Out
 - Water Pulse
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_TIFFANY ===
 Name: TIFFANY
 Class: Beauty
@@ -2537,7 +2554,9 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 Sharpedo
 Level: 39
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_JESSICA_2 ===
 Name: JESSICA
 Class: Beauty
@@ -2562,7 +2581,9 @@ IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 - Screech
 - Glare
 - Crunch
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_JESSICA_3 ===
 Name: JESSICA
 Class: Beauty
@@ -2587,7 +2608,9 @@ IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 - Screech
 - Glare
 - Crunch
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_JESSICA_4 ===
 Name: JESSICA
 Class: Beauty
@@ -2612,7 +2635,9 @@ IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 - Screech
 - Glare
 - Crunch
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_JESSICA_5 ===
 Name: JESSICA
 Class: Beauty
@@ -2637,7 +2662,9 @@ IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 - Screech
 - Glare
 - Crunch
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_WINSTON_1 ===
 Name: WINSTON
 Class: Rich Boy
@@ -2651,7 +2678,9 @@ AI: Check Bad Move
 Zigzagoon @ Nugget
 Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_MOLLIE ===
 Name: MOLLIE
 Class: Expert
@@ -2668,7 +2697,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Meditite
 Level: 33
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_GARRET ===
 Name: GARRET
 Class: Rich Boy
@@ -2682,7 +2713,9 @@ AI: Check Bad Move
 Azumarill @ Nugget
 Level: 45
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_WINSTON_2 ===
 Name: WINSTON
 Class: Rich Boy
@@ -2696,7 +2729,9 @@ AI: Check Bad Move
 Linoone @ Nugget
 Level: 27
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_WINSTON_3 ===
 Name: WINSTON
 Class: Rich Boy
@@ -2710,7 +2745,9 @@ AI: Check Bad Move
 Linoone @ Nugget
 Level: 30
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_WINSTON_4 ===
 Name: WINSTON
 Class: Rich Boy
@@ -2724,7 +2761,9 @@ AI: Check Bad Move
 Linoone @ Nugget
 Level: 33
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_WINSTON_5 ===
 Name: WINSTON
 Class: Rich Boy
@@ -2742,7 +2781,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Mud Sport
 - Odor Sleuth
 - Sand Attack
+#endif
 
+#if !THREE_HORIZONS
 === TRAINER_STEVE_1 ===
 Name: STEVE
 Class: Pokemaniac
@@ -2755,6 +2796,7 @@ AI: Check Bad Move
 Aron
 Level: 19
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+#endif
 
 === TRAINER_THALIA_1 ===
 Name: THALIA
@@ -19537,5 +19579,425 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Sandshrew
 Level: 19
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+#endif
+
+#if THREE_HORIZONS
+=== TRAINER_TH13_ROUTE10_CAROL ===
+Name: CAROL
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Pidgey
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pidgeotto
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROUTE10_CLARK ===
+Name: CLARK
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Geodude
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Magnitude
+- Rock Throw
+- Mud Sport
+- Defense Curl
+
+Onix
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Harden
+- Rock Throw
+- Bind
+- Screech
+
+=== TRAINER_TH13_ROUTE10_HERMAN ===
+Name: HERMAN
+Class: Pokemaniac Frlg
+Pic: Pokemaniac Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Cubone
+Level: 20
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Slowpoke
+Level: 20
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+=== TRAINER_TH13_ROUTE10_TRENT ===
+Name: TRENT
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Onix
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Graveler
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROUTE10_MARK ===
+Name: MARK
+Class: Pokemaniac Frlg
+Pic: Pokemaniac Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Rhyhorn
+Level: 29
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Lickitung
+Level: 29
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+=== TRAINER_TH13_ROUTE10_HEIDI ===
+Name: HEIDI
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Pikachu
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Clefairy
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_1F_DANA ===
+Name: DANA
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Meowth
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Oddish
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pidgey
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_1F_ARIANA ===
+Name: ARIANA
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Pidgey
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Rattata
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Rattata
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Bellsprout
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_1F_LEAH ===
+Name: LEAH
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Bellsprout
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Clefairy
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_1F_LUCAS ===
+Name: LUCAS
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Geodude
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Magnitude
+- Rock Throw
+- Mud Sport
+- Defense Curl
+
+Graveler
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Magnitude
+- Rock Throw
+- Mud Sport
+- Defense Curl
+
+=== TRAINER_TH13_ROCKTUNNEL_1F_OLIVER ===
+Name: OLIVER
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Onix
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Onix
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Geodude
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_1F_LENNY ===
+Name: LENNY
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Geodude
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Machop
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Geodude
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Geodude
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_1F_ASHTON ===
+Name: ASHTON
+Class: Pokemaniac Frlg
+Pic: Pokemaniac Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Cubone
+Level: 23
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Slowpoke
+Level: 23
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_B1F_COOPER ===
+Name: COOPER
+Class: Pokemaniac Frlg
+Pic: Pokemaniac Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Slowpoke
+Level: 20
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Slowpoke
+Level: 20
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Slowpoke
+Level: 20
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_B1F_DUDLEY ===
+Name: DUDLEY
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Geodude
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Magnitude
+- Rock Throw
+- Mud Sport
+- Defense Curl
+
+Geodude
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Magnitude
+- Rock Throw
+- Mud Sport
+- Defense Curl
+
+Graveler
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Magnitude
+- Rock Throw
+- Mud Sport
+- Defense Curl
+
+=== TRAINER_TH13_ROCKTUNNEL_B1F_SOFIA ===
+Name: SOFIA
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Jigglypuff
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Pidgey
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Meowth
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_B1F_ALLEN ===
+Name: ALLEN
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Geodude
+Level: 25
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Magnitude
+- Rock Throw
+- Mud Sport
+- Defense Curl
+
+=== TRAINER_TH13_ROCKTUNNEL_B1F_ERIC ===
+Name: ERIC
+Class: Hiker Frlg
+Pic: Hiker Frlg
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Machop
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Onix
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_B1F_STEVE ===
+Name: STEVE
+Class: Pokemaniac Frlg
+Pic: Pokemaniac Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Charmander
+Level: 22
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+Cubone
+Level: 22
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_B1F_MARTHA ===
+Name: MARTHA
+Class: Picnicker Frlg
+Pic: Picnicker Frlg
+Gender: Male
+Music: Girl
+Double Battle: No
+AI: Check Bad Move
+
+Oddish
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Bulbasaur
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH13_ROCKTUNNEL_B1F_WINSTON ===
+Name: WINSTON
+Class: Pokemaniac Frlg
+Pic: Pokemaniac Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Slowpoke
+Level: 25
+IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
 #endif
