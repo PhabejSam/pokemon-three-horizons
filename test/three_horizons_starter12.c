@@ -436,7 +436,7 @@ TEST("Three Horizons playtest12 Typhlosion approved moves remain learnable")
     {
         bool32 found = FALSE;
         for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
-            if (learnset[i].level == 40 && learnset[i].move == MOVE_EARTHQUAKE) found = TRUE;
+            if (learnset[i].level == 40 && learnset[i].move == MOVE_EARTH_POWER) found = TRUE;
         EXPECT(found);
     }
     {

@@ -200,6 +200,16 @@ jobs:
             ! grep -q "No tests found" focused-departure-migration.log
             python3 -m unittest tools.three_horizons.tests.test_chapter12_maps tools.three_horizons.tests.test_playtest13_repairs -v 2>&1 | tee focused-departure-host.log
           fi
+          if [ "$NATIVE_FILTER" = "test/three_horizons_playtest13_species.c" ]; then
+            for systems_filter in "test/three_horizons_starter12.c" "test/three_horizons_evolution.c" "test/three_horizons_training.c" "test/three_horizons_rematches.c"; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$systems_filter" -j2 2>&1 | tee -a focused-systems-regression.log
+            done
+            ! grep -q "No tests found" focused-systems-regression.log
+            python3 -m unittest tools.three_horizons.tests.test_playtest13_training tools.three_horizons.tests.test_playtest13_rematches tools.three_horizons.tests.test_playtest13_bikes -v 2>&1 | tee focused-systems-host.log
+            # Read effective release macros, not test.h's forced species settings.
+            arm-none-eabi-gcc -E -dM -Iinclude -DMODERN=1 -DTESTING=0 -DTHREE_HORIZONS=1 -DEMERALD -x c include/global.h > focused-release-macros.log
+            grep -E '^#define (P_GEN_[1-9]_POKEMON|P_CROSS_GENERATION_EVOS|P_LVL_UP_LEARNSETS|TESTING|THREE_HORIZONS) ' focused-release-macros.log
+          fi
           for related in $related_sources; do
             make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$related" -j2 2>&1 | tee -a focused-move-state.log
           done
@@ -210,7 +220,7 @@ jobs:
           ! grep -q "No tests found" focused-native.log
           git rev-parse HEAD > demo-source-commit.txt
       - name: Focused visual integration candidate
-        if: steps.phase.outputs.mode == 'focused' && (steps.phase.outputs.visual_gate == 'cut' || steps.phase.outputs.visual_gate == 'battle-capture' || steps.phase.outputs.visual_gate == 'interiors' || steps.phase.outputs.visual_gate == 'routes' || steps.phase.outputs.visual_gate == 'interactions' || steps.phase.outputs.visual_gate == 'ship' || steps.phase.outputs.visual_gate == 'locals' || steps.phase.outputs.visual_gate == 'cave' || steps.phase.outputs.visual_gate == 'departure')
+        if: steps.phase.outputs.mode == 'focused' && (steps.phase.outputs.visual_gate == 'cut' || steps.phase.outputs.visual_gate == 'battle-capture' || steps.phase.outputs.visual_gate == 'interiors' || steps.phase.outputs.visual_gate == 'routes' || steps.phase.outputs.visual_gate == 'interactions' || steps.phase.outputs.visual_gate == 'ship' || steps.phase.outputs.visual_gate == 'locals' || steps.phase.outputs.visual_gate == 'cave' || steps.phase.outputs.visual_gate == 'departure' || steps.phase.outputs.visual_gate == 'systems')
         shell: bash
         run: |
           set -o pipefail

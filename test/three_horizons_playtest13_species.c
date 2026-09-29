@@ -35,7 +35,7 @@ TEST("Three Horizons playtest13 Typhlosion learns Earth Power at forty")
     EXPECT(!LearnsAt(SPECIES_TYPHLOSION, MOVE_EARTHQUAKE, 40));
     EXPECT(CanLearnTeachableMove(SPECIES_TYPHLOSION, MOVE_EARTHQUAKE));
     EXPECT_EQ(GetSpeciesType(SPECIES_TYPHLOSION, 1), TYPE_GROUND);
-    EXPECT(LearnsAt(SPECIES_CHARIZARD, MOVE_AIR_SLASH, 36));
+    EXPECT(LearnsAt(SPECIES_CHARIZARD, MOVE_AIR_SLASH, 0));
 }
 
 TEST("Three Horizons playtest13 pure trade families evolve at thirty six")
@@ -104,7 +104,7 @@ TEST("Three Horizons playtest13 Primeape Rage Fist threshold")
     EXPECT(LearnsAt(SPECIES_PRIMEAPE, MOVE_RAGE_FIST, 35));
 }
 
-SINGLE_BATTLE_TEST("Three Horizons playtest13 Rage Fist attempted uses count through miss and protect")
+WILD_BATTLE_TEST("Three Horizons playtest13 Rage Fist attempted uses count through miss and protect")
 {
     u32 mode;
     PARAMETRIZE { mode = 0; }
@@ -123,6 +123,18 @@ SINGLE_BATTLE_TEST("Three Horizons playtest13 Rage Fist attempted uses count thr
     } THEN {
         EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_EVOLUTION_TRACKER), 1);
         EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_PRIMEAPE);
+    }
+}
+
+WILD_BATTLE_TEST("Three Horizons playtest13 Rage Fist prevented by sleep does not count")
+{
+    GIVEN {
+        PLAYER(SPECIES_PRIMEAPE) { Status1(STATUS1_SLEEP_TURN(3)); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EVOLUTION_TRACKER), 0);
     }
 }
 
