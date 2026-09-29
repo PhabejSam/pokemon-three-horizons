@@ -7,9 +7,29 @@
 #include "overworld.h"
 #include "script.h"
 #include "constants/maps.h"
+#include "constants/script_commands.h"
 #include "constants/three_horizons.h"
 
 #if THREE_HORIZONS
+extern const u8 TH12_Captain_Talk[];
+
+TEST("Three Horizons playtest13 ship captain remains seasick before help")
+{
+    bool32 rivalBeaten;
+    PARAMETRIZE { rivalBeaten = FALSE; }
+    PARAMETRIZE { rivalBeaten = TRUE; }
+    struct ScriptContext ctx;
+    InitEventData();
+    ClearBag();
+    if (rivalBeaten) FlagSet(FLAG_TH12_SHIP_RIVAL);
+    EXPECT_EQ(TH12_Captain_Talk[0], SCR_OP_LOCK);
+    EXPECT(RunScriptImmediatelyUntilEffect(SCREFF_V1 | SCREFF_ANY, TH12_Captain_Talk + 1, &ctx));
+    // The first visible action must not turn the sick captain from his bin.
+    EXPECT_NE(*ctx.scriptPtr, SCR_OP_FACEPLAYER);
+    EXPECT(!FlagGet(FLAG_TH12_CUT));
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_HM01), 0);
+}
+
 TEST("Three Horizons playtest13 ship boarding requires ticket inspection in every lane")
 {
     bool32 ticket, departed;
