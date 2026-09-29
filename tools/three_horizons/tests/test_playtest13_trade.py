@@ -1,4 +1,5 @@
 import unittest
+import re
 from tools.three_horizons.tests.test_playtest11_maps import ROOT,map_data,tiles,reachable
 FLAG='FLAG_TH13_SKARMORY_TRADE'
 
@@ -41,6 +42,11 @@ def visit(flags,accept=True,selection=0,species='SPECIES_ZUBAT',egg=False):
  raise AssertionError('Trade did not return')
 
 class Route2Trade(unittest.TestCase):
+ def test_trade_dialogue_is_available_in_th_build(self):
+  text=(ROOT/'data/scripts/three_horizons/chapter13_route2.inc').read_text()
+  trade=text.split('TH13_Route2_Trader::')[1]
+  labels=set(re.findall(r'^(\w+)::?',text,re.M))
+  for label in re.findall(r'^\s*msgbox (\w+)',trade,re.M):self.assertIn(label,labels)
  def test_cancel_wrong_egg_no_exchange_or_receipt(self):
   for kwargs in ({'accept':False},{'selection':6},{'selection':7},{'species':'SPECIES_PIDGEY'},{'egg':True}):
    flags=set();self.assertEqual(visit(flags,**kwargs),[]);self.assertFalse(flags)

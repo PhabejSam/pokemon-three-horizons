@@ -52,7 +52,7 @@ TH13_Route2_Trader::
     call EventScript_GetInGameTradeSpeciesInfo
     goto_if_set FLAG_TH13_SKARMORY_TRADE, TH13_Route2_TradeDone
     msgbox TH13_Route2_TradeStory
-    msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+    msgbox TH13_Route2_TradeOfferText, MSGBOX_YESNO
     goto_if_eq VAR_RESULT, NO, TH13_Route2_TradeDecline
     call EventScript_ChooseMonForInGameTrade
     goto_if_ge VAR_0x8004, PARTY_SIZE, TH13_Route2_TradeDecline
@@ -69,12 +69,12 @@ TH13_Route2_TradeDone:
     release
     end
 TH13_Route2_TradeDecline:
-    msgbox Trade_Text_AwwOhWell
+    msgbox TH13_Route2_TradeDeclineText
     release
     end
 TH13_Route2_TradeWrong:
     bufferspeciesname STR_VAR_1, VAR_0x8009
-    msgbox Trade_Text_WhatThatsNoMon
+    msgbox TH13_Route2_TradeWrongText
     release
     end
 TH13_Route2_TradeScientist::
@@ -88,3 +88,9 @@ TH13_Route2_TradeDoneText:
     .string "ZUBAT is settling in well.\nI hope SKARMORY enjoys your travels!\pMy friend is keeping notes in JOHTO.\nThere is still much we don't know.$"
 TH13_Route2_TradeScientistText:
     .string "A healthy, compatible POKéMON can\nhelp with CUT or FLASH.\pKeep the HM and earn its badge.\nIt need not learn the battle move.$"
+TH13_Route2_TradeOfferText:
+    .string "Would you trade your {STR_VAR_1}\nfor my {STR_VAR_2}?$"
+TH13_Route2_TradeDeclineText:
+    .string "That's all right. Come back\nif you change your mind.$"
+TH13_Route2_TradeWrongText:
+    .string "I'm looking for a {STR_VAR_1}.\nLet me know if you find one.$"
