@@ -13,7 +13,7 @@ TEST("Three Horizons Keigo progressed roster fits route")
     struct TrainerGenerator generator = {0};
     struct Pokemon mon;
     MakeTrainerGenerator(&generator, trainer);
-    EXPECT_EQ(trainer->partySize, ARRAY_COUNT(species));
+    EXPECT_EQ((u32)trainer->partySize, ARRAY_COUNT(species));
     for (u32 i = 0; i < ARRAY_COUNT(species); i++)
     {
         EXPECT_EQ(trainer->party[i].species, species[i]);
