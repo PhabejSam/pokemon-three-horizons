@@ -8,6 +8,28 @@ ROOT = Path(__file__).resolve().parents[3]
 
 
 class Playtest13Repairs(unittest.TestCase):
+    def test_ship_official_is_on_dock_and_all_lanes_have_safe_retreats(self):
+        data = map_data('TH12_VermilionCity')
+        width, _, grid = tiles(data['name'])
+        official = next(o for o in data['object_events'] if o['script'] == 'TH12_Ship_Board')
+        # The documented boarding official is currently obscured by the pier
+        # pillar, whose entry has collision bits set and a different elevation.
+        tile = grid[official['y'] * width + official['x']]
+        self.assertEqual(tile & 0xC00, 0)
+        self.assertEqual(tile >> 12, official['elevation'])
+        triggers = {(e['x'], e['y']) for e in data['coord_events']
+                    if e['script'] == 'TH12_Ship_CheckTicket'}
+        self.assertEqual(triggers, {(22, 33), (23, 33), (24, 33)})
+        occupied = {(o['x'], o['y']) for o in data['object_events']}
+        for x, y in triggers:
+            self.assertNotIn((x, y), occupied)
+            self.assertNotIn((x, y - 1), occupied)
+            self.assertEqual(grid[(y - 1) * width + x] & 0xC00, 0)
+            self.assertLessEqual(abs(x-official['x']) + abs(y-official['y']), 4)
+            self.assertTrue(any(w['x'] == x and w['y'] == y + 1
+                                and w['dest_map'] == 'MAP_TH12_SSANNE_EXTERIOR'
+                                for w in data['warp_events']))
+
     def test_pewter_guide_is_outside_connection_camera_and_gate_covers_route(self):
         data = map_data('TH_Pewter')
         width, height, grid = tiles('TH_Pewter')
