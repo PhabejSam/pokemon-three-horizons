@@ -29,7 +29,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "TH12_Ship_Sailor",
-      "flag": "0"
+      "flag": "FLAG_TH13_SHIP_DEPARTED"
     }
   ],
   "warp_events": [
@@ -69,7 +69,35 @@
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 31,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TH13_Ship_FinalExit"
+    },
+    {
+      "type": "trigger",
+      "x": 32,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TH13_Ship_FinalExit"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TH13_Ship_FinalExit"
+    }
+  ],
   "bg_events": [
     {
       "type": "hidden_item",

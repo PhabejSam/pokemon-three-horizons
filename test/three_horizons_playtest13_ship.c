@@ -93,6 +93,8 @@ TEST("Three Horizons playtest13 ship departed-inside Continue recovers to safe d
     const struct Coords16 pos = gSaveBlock1Ptr->pos;
     const u16 layout = gSaveBlock1Ptr->mapLayoutId;
     const u8 warpFlags = gSaveBlock2Ptr->specialSaveWarpFlags;
+    u16 mapView[ARRAY_COUNT(gSaveBlock1Ptr->mapView)];
+    memcpy(mapView, gSaveBlock1Ptr->mapView, sizeof(mapView));
     for (u32 map = MAP_NUM(MAP_TH12_SSANNE_1F_CORRIDOR); map <= MAP_NUM(MAP_TH12_SSANNE_KITCHEN); map++)
     {
         InitEventData();
@@ -104,6 +106,8 @@ TEST("Three Horizons playtest13 ship departed-inside Continue recovers to safe d
         EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(MAP_TH12_VERMILION_CITY));
         EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_TH12_VERMILION_CITY));
         EXPECT_EQ(gSaveBlock1Ptr->location.warpId, -1);
+        EXPECT_EQ(gSaveBlock1Ptr->location.x, 23);
+        EXPECT_EQ(gSaveBlock1Ptr->location.y, 32);
         EXPECT_EQ(gSaveBlock1Ptr->pos.x, 23);
         EXPECT_EQ(gSaveBlock1Ptr->pos.y, 32);
         EXPECT_EQ(gSaveBlock1Ptr->mapLayoutId, Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TH12_VERMILION_CITY), MAP_NUM(MAP_TH12_VERMILION_CITY))->mapLayoutId);
@@ -114,6 +118,7 @@ TEST("Three Horizons playtest13 ship departed-inside Continue recovers to safe d
     gSaveBlock1Ptr->pos = pos;
     gSaveBlock1Ptr->mapLayoutId = layout;
     gSaveBlock2Ptr->specialSaveWarpFlags = warpFlags;
+    memcpy(gSaveBlock1Ptr->mapView, mapView, sizeof(mapView));
     InitEventData();
 }
 

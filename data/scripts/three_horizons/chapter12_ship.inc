@@ -44,6 +44,72 @@ TH12_Ship_StepUp:
 TH12_Ship_NoTicket:
     .string "A S.S. TICKET is required to board.\nBILL might be able to help you.$"
 
+TH13_Ship_FinalExit::
+    specialvar VAR_RESULT, GetPlayerFacingDirection
+    goto_if_ne VAR_RESULT, DIR_NORTH, TH12_Ship_End
+    goto_if_unset FLAG_TH12_SHIP_RIVAL, TH12_Ship_End
+    goto_if_unset FLAG_TH12_CUT, TH12_Ship_End
+    checkitem ITEM_HM01
+    goto_if_eq VAR_RESULT, FALSE, TH12_Ship_End
+    goto_if_set FLAG_TH13_SHIP_DEPARTED, TH12_Ship_End
+    lockall
+    msgbox TH13_Ship_FinalWarning, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH13_Ship_Stay
+    closemessage
+    hidefollower TRUE
+    getplayerxy VAR_0x8004, VAR_0x8005
+    goto_if_eq VAR_0x8004, 31, TH13_Ship_AlignRight
+    goto_if_eq VAR_0x8004, 33, TH13_Ship_AlignLeft
+    goto TH13_Ship_ViewDeparture
+TH13_Ship_AlignRight:
+    applymovement LOCALID_PLAYER, TH13_Ship_OneRight
+    waitmovement 0
+    goto TH13_Ship_ViewDeparture
+TH13_Ship_AlignLeft:
+    applymovement LOCALID_PLAYER, TH13_Ship_OneLeft
+    waitmovement 0
+TH13_Ship_ViewDeparture:
+    applymovement LOCALID_PLAYER, TH13_Ship_ToViewingPoint
+    waitmovement 0
+TH13_Ship_DepartNow:
+    fadenewbgm MUS_RG_SURF
+    delay 50
+    special DoSSAnneDepartureCutscene
+    waitstate
+    setflag FLAG_TH13_SHIP_DEPARTED
+    removeobject LOCALID_TH12_SSANNE_EXTERIOR_0
+    warp MAP_TH12_VERMILION_CITY, 23, 32
+    waitstate
+    special TH_RefreshFollower
+    releaseall
+    end
+TH13_Ship_Stay:
+    closemessage
+    applymovement LOCALID_PLAYER, TH13_Ship_OneDown
+    waitmovement 0
+    releaseall
+    end
+TH13_Ship_OneRight:
+    walk_right
+    step_end
+TH13_Ship_OneLeft:
+    walk_left
+    step_end
+TH13_Ship_OneDown:
+    walk_down
+    step_end
+TH13_Ship_ToViewingPoint:
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+TH13_Ship_FinalWarning:
+    .string "The S.S. ANNE will sail when you\nleave. Boarding will close.\pFinish any optional visits first.\nLeave now?$"
+
 TH12_Ship_Heal::
     lock
     faceplayer
@@ -99,7 +165,7 @@ TH12_Captain_Sick:
 TH12_Captain_Thanks:
     .string "Thank you! I feel much better!\nLet me share my CUT technique.$"
 TH12_Captain_Use:
-    .string "Carry HM01 and your CASCADE BADGE.\nA healthy, compatible POKéMON can\lCUT small trees without learning it.\pEGGS cannot help with field moves.\pOur ship is staying in port.\nYou are welcome aboard any time!$"
+    .string "Carry HM01 and your CASCADE BADGE.\nA healthy, compatible POKéMON can\lCUT small trees without learning it.\pEGGS cannot help with field moves.\pWe will sail when you leave. Finish\nyour visits before the final exit!$"
 
 TH12_Ship_Snorlax::
     lock

@@ -2167,7 +2167,11 @@ void CB2_ContinueSavedGame(void)
 
 #if THREE_HORIZONS
     bool32 refreshChapterMap = (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK) != TH_STATE_VERSION_13;
+    const struct WarpData savedChapterLocation = gSaveBlock1Ptr->location;
     TH_MigrateSaveState();
+    // A recovery relocation also needs new templates and a fresh map view.
+    refreshChapterMap |= savedChapterLocation.mapGroup != gSaveBlock1Ptr->location.mapGroup
+        || savedChapterLocation.mapNum != gSaveBlock1Ptr->location.mapNum;
 #endif
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();

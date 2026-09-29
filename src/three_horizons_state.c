@@ -3,6 +3,8 @@
 #include "event_data.h"
 #include "pokedex.h"
 #include "item.h"
+#include "overworld.h"
+#include "load_save.h"
 #include "constants/pokedex.h"
 #include "constants/three_horizons.h"
 #include "constants/trainers.h"
@@ -91,5 +93,24 @@ void TH_MigrateSaveState(void)
     u16 misty=VarGet(VAR_TH_MISTY_GIFT);
     if (misty && misty!=TH_GetMistyGift(first,VarGet(VAR_TH_BROCK_GIFT)))
         VarSet(VAR_TH_MISTY_GIFT,0);
+    // Only a witnessed P13 departure can make a ship interior impossible.
+    // P12's reserved bits were cleared above, so old completed ship saves stay.
+    if (FlagGet(FLAG_TH13_SHIP_DEPARTED)
+        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH12_SSANNE_EXTERIOR)
+        && gSaveBlock1Ptr->location.mapNum >= MAP_NUM(MAP_TH12_SSANNE_1F_CORRIDOR)
+        && gSaveBlock1Ptr->location.mapNum <= MAP_NUM(MAP_TH12_SSANNE_KITCHEN))
+    {
+        gSaveBlock1Ptr->location = (struct WarpData){
+            .mapGroup = MAP_GROUP(MAP_TH12_VERMILION_CITY),
+            .mapNum = MAP_NUM(MAP_TH12_VERMILION_CITY),
+            .warpId = WARP_ID_NONE, .x = 23, .y = 32,
+        };
+        gSaveBlock1Ptr->pos.x = 23;
+        gSaveBlock1Ptr->pos.y = 32;
+        gSaveBlock1Ptr->mapLayoutId = Overworld_GetMapHeaderByGroupAndId(
+            MAP_GROUP(MAP_TH12_VERMILION_CITY), MAP_NUM(MAP_TH12_VERMILION_CITY))->mapLayoutId;
+        memset(gSaveBlock1Ptr->mapView, 0, sizeof(gSaveBlock1Ptr->mapView));
+        ClearContinueGameWarpStatus();
+    }
 }
 #endif
