@@ -29,7 +29,7 @@ static const struct THResearchEntry sResearchEntries[TH_RESEARCH_ENTRY_COUNT] = 
         .flag = FLAG_TH13_OBS_MT_MOON, .photoId = TH_PHOTO_MT_MOON,
     },
     [TH_RESEARCH_SHIP] = {
-        .region = COMPOUND_STRING("KANTO"), .location = COMPOUND_STRING("S.S. Anne"),
+        .region = COMPOUND_STRING("KANTO"), .location = COMPOUND_STRING("Vermilion Harbor"),
         .species = COMPOUND_STRING("Regional travelers"), .origin = COMPOUND_STRING("JOHTO / HOENN"),
         .observation = COMPOUND_STRING("Cargo and passengers cross\nthe sea to Kanto."),
         .notes = {COMPOUND_STRING("OAK: Shipping is a reasonable\nlead. It is not yet an answer."), COMPOUND_STRING("ELM: Reports now cross regions.\nTheir pace is unusual."), COMPOUND_STRING("OAK: The Tower report leaves\nour shipping idea unresolved.")},

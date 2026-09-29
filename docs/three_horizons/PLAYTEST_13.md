@@ -85,7 +85,10 @@ losses and alternate choices, then return to the main route.
    length and leave at Route 2. Bring the Thunder Badge and at least ten distinct
    caught/received species to Oak's aide in the Route 2 passage. Receive Research
    Gear and HM05 Flash. Open Gear from Start, finish the activation call, and
-   save/cold Continue. In the nearby house, the one-time trade is your Zubat for
+   save/cold Continue. Return through the cave to Vermilion Harbor for the
+   Marill/Wingull photo: the partners remain ashore after the ship departs.
+   Decline once, return, accept, and confirm a repeat does not add another photo.
+   In the nearby Route 2 house, the one-time trade is your Zubat for
    Skarmory: try cancel/wrong target before accepting with a disposable checkpoint.
    Cut back through Viridian Forest for Pinsir/Heracross, a photo and the research
    reward. Revisit earlier sightings now that Gear is available. Return north

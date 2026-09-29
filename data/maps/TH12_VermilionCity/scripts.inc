@@ -4,4 +4,5 @@ TH12_VermilionCity_MapScripts::
 
 TH13_Vermilion_OnLoad:
     setvar VAR_TEMP_0, 0
+    call TH13_Harbor_OnLoad
     end

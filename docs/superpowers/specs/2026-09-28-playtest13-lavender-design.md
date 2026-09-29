@@ -1673,3 +1673,7 @@ The following remain approved and unchanged:
 
 No task renumbering is needed. The corrected implementation plan retains
 41 tasks. Implementation remains stopped until explicitly requested.
+
+## Approved integration correction — 2026-09-29
+
+The user approved the recommended resolution of the demonstrated ship-photo progression conflict. Preserve Research Gear after Surge and irreversible S.S. Anne departure after Cut/final exit. Add a small repeatable Marill/Wingull authored scene at Vermilion Harbor after departure, reusing the existing shipping observation/photo entry and flag. The partners' trainers stayed in Vermilion. Before Gear, the scene records only the observation; after Gear, offer the ordinary Yes/No photo flow. Decline permits retry, success persists and repeats do not duplicate. Keep pier access clear and verify small/large/no follower, cold Continue and normal progression order. No automatic photo grant, early Gear, delayed ship departure or save-block growth. Also repair the cargo-report conversation to record its shipping observation on first and repeat visits independently of Gear; hearing a report never grants a photo.

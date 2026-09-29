@@ -90,6 +90,67 @@ class Scene:
 
 
 class ResearchScripts(unittest.TestCase):
+    def test_ship_photo_reachable_after_departure_and_late_gear(self):
+        s = Scene(gear=False)
+        s.run('TH13_Harbor_OnLoad')
+        self.assertIn('FLAG_TEMP_11', s.flags)
+        s.run('TH13_Ship_Marill')
+        self.assertEqual(s.entries, {'TH_RESEARCH_SHIP'})
+        self.assertFalse(s.photos)
+        # Real story order: leave with Cut, then win Surge and receive Gear.
+        s.flags.add('FLAG_TH13_SHIP_DEPARTED')
+        s.run('TH13_Harbor_OnLoad')
+        self.assertNotIn('FLAG_TEMP_11', s.flags)
+        s.run('TH13_Harbor_Marill')
+        self.assertFalse(s.photos)
+        s.gear = True; s.answer = 0
+        s.run('TH13_Harbor_Wingull')
+        self.assertFalse(s.photos)
+        s.answer = 1
+        s.run('TH13_Harbor_Marill')
+        s.run('TH13_Harbor_Wingull')
+        self.assertEqual(s.photos, {'TH_PHOTO_SHIP'})
+        self.assertEqual(s.flashes, 1)
+        self.assertEqual(s.entries, {'TH_RESEARCH_SHIP'})
+        self.assertEqual(s.items, set())
+        self.assertIn('FLAG_TH13_SHIP_DEPARTED', s.flags)
+
+    def test_harbor_partners_leave_pier_and_existing_interactions_accessible(self):
+        data = map_data('TH12_VermilionCity')
+        objects = data['object_events']
+        partners = [o for o in objects if o['script'].startswith('TH13_Harbor_')]
+        self.assertEqual(len(partners), 2)
+        self.assertLessEqual(len(objects) + 2, 16)
+        w, h, grid = tiles(data['name'])
+        floor = {(i%w,i//w) for i,v in enumerate(grid) if not v&0xc00 and v>>12==3}
+        positions = {(o['x'],o['y']) for o in objects}
+        self.assertEqual(len(positions), len(objects))
+        for o in partners:
+            self.assertIn((o['x'],o['y']), floor)
+            self.assertEqual(o['flag'], 'FLAG_TEMP_11')
+        seen, queue = {(23,32)}, [(23,32)]
+        for x,y in queue:
+            for p in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+                if p in floor and p not in positions and p not in seen:
+                    seen.add(p); queue.append(p)
+        for o in partners + [o for o in objects if o['y']>=28]:
+            x,y=o['x'],o['y']
+            self.assertTrue(seen.intersection(((x-1,y),(x+1,y),(x,y-1),(x,y+1))))
+        self.assertTrue(any(y<28 for x,y in seen), 'harbor exit blocked')
+
+    def test_cargo_report_records_before_gear_on_first_and_repeat_visits(self):
+        for already_heard in (False, True):
+            s = Scene(gear=False)
+            if already_heard: s.flags.add('FLAG_TH12_SHIP_STORY')
+            s.run('TH12_Ship_Observation')
+            self.assertEqual(s.entries, {'TH_RESEARCH_SHIP'})
+            self.assertIn('FLAG_TH12_SHIP_STORY', s.flags)
+            self.assertFalse(s.photos)
+            s.gear = True
+            s.run('TH12_Ship_Observation')
+            self.assertEqual(s.entries, {'TH_RESEARCH_SHIP'})
+            self.assertFalse(s.photos)  # Hearing a report is not taking a photo.
+
     def test_ship_partner_capacity_and_access(self):
         data = map_data('TH12_SSAnne_Deck')
         objects = data['object_events']

@@ -606,3 +606,52 @@ historical mutation unnecessarily.
 The release package must not be marked accepted while any required row above
 is pending. A real hardware battery, synthetic fixtures, emulator states and
 user-reported P12 hardware success are distinct evidence classes.
+# Integration checkpoint and review blocker — 2026-09-29
+
+This checkpoint is not a packaged or accepted Playtest 13 release. At feature
+revision `6d0ef06b349d64383e4ef9b6fecc12240eae9ec5`, CI run `36645374739`
+passed all 152 host contracts, 212 Three Horizons native tests and four
+save-layout tests. The game ROM compiled at merge revision
+`ed33e0c70a8d91fc2ea40d2cccd5c094b3b28ee9` has SHA-256
+`0a5454db2943457ddfb94d86c36c9bd68fc04b2c60d7808766c615f2baedf7db`.
+Upstream run `36645374671` passed Emerald, FireRed, LeafGreen, release and
+the complete native test job. These are checkpoint results, not evidence for
+future code changes.
+
+The Cut mutation correctly failed its adjacent-tree camera-refresh test. Its
+reporting script incorrectly also required the separately protected player
+overlap test to fail. Checkpoint `165cb3b6f6def199aacd1f44d8c9c2141625e90b`
+corrects only that negative-control expectation; all positive tests remain.
+The complete negative-control/restoration gate is still pending.
+
+Seven synthetic P12 battery fixtures passed ordinary Continue, protected party,
+all-box storage, bag, money, old receipts/trainer history comparisons, in-game
+Save and second cold Continue: Bill mid-machine; ship aboard, dock and old
+official tile; fossils below, above and on the scientist's revised tile. They
+used the identical ROM checksum above (earlier compiled merge revision
+`f65e6396b17ce7277f96c39687d7a21c67bd2b81`). They are not the owner's
+post-Surge acceptance. Both owner-named local files, `ThreeHorizons_PT12_RG40XXH_FINAL_BACKUP.sav`
+and `pokemon-three-horizons-playtest-12-rocket-art.sav`, currently have SHA-256
+`2bac4d587f965215c6a008d06825bfd46ca8ec5a77a247d7b53211111ecf8c8c`;
+cold loading confirms Cerulean progress without HM01. A current device battery
+save containing the completed Surge progress is still required.
+
+The independent whole-branch review found two Important ship-research issues:
+
+- Gear unlocks after Surge, while the ship departs before Surge. The only ship
+  photo hook is aboard, so a normal new-game player cannot obtain that card.
+  Implementation is paused at the user's explicit design-blocker rule. The
+  proposed narrow resolution is a repeatable Marill/Wingull harbor scene after
+  departure, reusing the existing photo entry and preserving both story gates.
+  This proposal has not been implemented or approved at this checkpoint.
+- The cargo-report NPC writes the legacy story flag but omits the P13 research
+  observation on fresh saves. Migration imports the equivalent old receipt,
+  creating inconsistent fresh/migrated behavior. A focused first/repeat-path
+  regression and repair remain in the single review fix pass.
+
+Fresh-game mGBA checking has reached Viridian through the revised lab sequence,
+maximum-length starter nickname, opening rival loss/recovery and a natural
+first Pidgey catch with visible Pokédex registration. This is partial route
+evidence; neither complete chapter walkthrough is claimed complete. RG40XX H
+Playtest 13 acceptance remains a separate user test. The PR remains unmerged.
+

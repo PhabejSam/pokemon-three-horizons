@@ -182,6 +182,8 @@ TH12_Ship_SnorlaxText:
 TH12_Ship_Observation::
     lock
     faceplayer
+    setvar VAR_0x8004, TH_RESEARCH_SHIP
+    special TH_ScriptResearchObserve
     goto_if_set FLAG_TH12_SHIP_STORY, TH12_Ship_ObservationAgain
     msgbox TH12_Ship_ObservationText
     setflag FLAG_TH12_SHIP_STORY
@@ -328,3 +330,33 @@ TH13_Ship_Partners:
     end
 TH13_Ship_PartnersText:
     .string "MARILL and WINGULL enjoy the breeze.\nTheir trainers met on this voyage.\pTravel brings POKéMON from\ndifferent regions together.$"
+
+@ The partners' trainers disembarked in Vermilion. A later visit with Gear
+@ can record this live scene even though the S.S. Anne has sailed.
+TH13_Harbor_OnLoad::
+    setflag FLAG_TEMP_11
+    goto_if_unset FLAG_TH13_SHIP_DEPARTED, TH13_Harbor_LoadDone
+    clearflag FLAG_TEMP_11
+TH13_Harbor_LoadDone:
+    return
+TH13_Harbor_Marill::
+    lockall
+    goto_if_unset FLAG_TH13_SHIP_DEPARTED, TH13_Harbor_End
+    playmoncry SPECIES_MARILL, CRY_MODE_NORMAL
+    goto TH13_Harbor_Partners
+TH13_Harbor_Wingull::
+    lockall
+    goto_if_unset FLAG_TH13_SHIP_DEPARTED, TH13_Harbor_End
+    playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
+TH13_Harbor_Partners:
+    msgbox TH13_Harbor_PartnersText
+    waitmoncry
+    setvar VAR_0x8004, TH_RESEARCH_SHIP
+    special TH_ScriptResearchObserve
+    setvar VAR_0x8004, TH_PHOTO_SHIP
+    call TH13_ResearchPhoto
+TH13_Harbor_End:
+    releaseall
+    end
+TH13_Harbor_PartnersText:
+    .string "MARILL and WINGULL share the breeze.\nTheir trainers stayed in VERMILION.\pThe ship has sailed, but these\ntravelers are enjoying KANTO.$"
