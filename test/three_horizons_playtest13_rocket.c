@@ -3,6 +3,7 @@
 #include "three_horizons.h"
 #include "event_data.h"
 #include "pokemon.h"
+#include "data.h"
 #include "pokemon_storage_system.h"
 #include "script.h"
 #include "constants/script_commands.h"
@@ -13,6 +14,12 @@
 extern const u8 TH12_RocketSelectFormat[];
 extern const u8 TH12_RocketSingleIntro[];
 extern const u8 TH_RocketDuoIntro[];
+
+TEST("Three Horizons playtest13 Rocket individual records permit singles")
+{
+    EXPECT_EQ(GetTrainerBattleType(TRAINER_TH11_JESSIE), TRAINER_BATTLE_TYPE_SINGLES);
+    EXPECT_EQ(GetTrainerBattleType(TRAINER_TH11_JAMES), TRAINER_BATTLE_TYPE_SINGLES);
+}
 
 TEST("Three Horizons playtest13 Rocket usable party selects approved format")
 {

@@ -5,6 +5,15 @@ from tools.three_horizons.tests.test_playtest11_maps import ROOT
 
 
 class Playtest13Rocket(unittest.TestCase):
+    def test_individual_rocket_records_do_not_force_double_battles(self):
+        source = (ROOT / 'src/data/trainers.party').read_text()
+        for trainer in ('JESSIE', 'JAMES'):
+            block = source.split('=== TRAINER_TH11_' + trainer + ' ===', 1)[1].split('===', 1)[0]
+            self.assertNotIn('Double Battle: Yes', block)
+        # Their paired script still explicitly starts the two-trainer encounter.
+        script = (ROOT / 'data/scripts/three_horizons/playtest11_story.inc').read_text()
+        self.assertIn('TH_RocketDuoTooFew, TRUE, TRUE', script)
+
     def test_james_introduces_singles_and_jessie_hands_over(self):
         source = (ROOT / 'data/scripts/three_horizons/playtest11_story.inc').read_text()
         def dialogue(label):
