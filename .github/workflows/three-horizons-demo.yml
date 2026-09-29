@@ -164,7 +164,7 @@ jobs:
           ! grep -q "No tests found" focused-native.log
           git rev-parse HEAD > demo-source-commit.txt
       - name: Focused visual integration candidate
-        if: steps.phase.outputs.mode == 'focused' && (steps.phase.outputs.visual_gate == 'cut' || steps.phase.outputs.visual_gate == 'battle-capture' || steps.phase.outputs.visual_gate == 'interiors' || steps.phase.outputs.visual_gate == 'routes' || steps.phase.outputs.visual_gate == 'interactions')
+        if: steps.phase.outputs.mode == 'focused' && (steps.phase.outputs.visual_gate == 'cut' || steps.phase.outputs.visual_gate == 'battle-capture' || steps.phase.outputs.visual_gate == 'interiors' || steps.phase.outputs.visual_gate == 'routes' || steps.phase.outputs.visual_gate == 'interactions' || steps.phase.outputs.visual_gate == 'ship')
         shell: bash
         run: |
           set -o pipefail

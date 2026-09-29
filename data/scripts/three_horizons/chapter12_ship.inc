@@ -68,8 +68,8 @@ TH12_Ship_HealDone:
 
 TH12_Captain_Talk::
     lock
-    faceplayer
     goto_if_set FLAG_TH12_CUT, TH12_Captain_Already
+    turnobject LOCALID_TH12_SSANNE_CAPTAINSOFFICE_0, DIR_NORTH
     goto_if_unset FLAG_TH12_SHIP_RIVAL, TH12_Captain_Wait
     checkitem ITEM_HM01
     goto_if_eq VAR_RESULT, TRUE, TH12_Captain_Receipt
@@ -77,12 +77,14 @@ TH12_Captain_Talk::
     closemessage
     playse SE_USE_ITEM
     delay 45
+    faceplayer
     msgbox TH12_Captain_Thanks
     giveitem ITEM_HM01
     goto_if_eq VAR_RESULT, FALSE, TH12_RewardBagFull
 TH12_Captain_Receipt:
     setflag FLAG_TH12_CUT
 TH12_Captain_Already:
+    faceplayer
     msgbox TH12_Captain_Use
     release
     end
