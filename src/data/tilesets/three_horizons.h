@@ -1005,3 +1005,41 @@ const struct Tileset gTileset_VermilionGym =
     .metatileAttributes = gMetatileAttributes_VermilionGym,
     .callback = InitTilesetAnim_VermilionGym,
 };
+
+// Native FRLG cave assets, selected only by Three Horizons.
+const u32 gTilesetTiles_DiglettsCave[] = INCGFX_U32("data/tilesets/secondary/digletts_cave_frlg/tiles.png", ".4bpp.fastSmol");
+
+const u16 gTilesetPalettes_DiglettsCave[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/digletts_cave_frlg/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gMetatiles_DiglettsCave[] = INCBIN_U16("data/tilesets/secondary/digletts_cave_frlg/metatiles.bin");
+
+const u16 gMetatileAttributes_DiglettsCave[] = INCBIN_U16("data/tilesets/secondary/digletts_cave_frlg/metatile_attributes.bin");
+
+const struct Tileset gTileset_DiglettsCave =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_DiglettsCave,
+    .palettes = gTilesetPalettes_DiglettsCave,
+    .metatiles = gMetatiles_DiglettsCave,
+    .metatileAttributes = gMetatileAttributes_DiglettsCave,
+    .callback = NULL,
+};

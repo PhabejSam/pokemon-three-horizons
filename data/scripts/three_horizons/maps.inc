@@ -124,3 +124,7 @@ TH_Route1_MapScripts::
 
 .include "data/maps/TH13_Route5_PokemonDayCare/scripts.inc"
 .include "data/scripts/three_horizons/chapter13_routes.inc"
+.include "data/maps/TH13_Route11/scripts.inc"
+.include "data/maps/TH13_DiglettsCave_SouthEntrance/scripts.inc"
+.include "data/maps/TH13_DiglettsCave_B1F/scripts.inc"
+.include "data/maps/TH13_DiglettsCave_NorthEntrance/scripts.inc"

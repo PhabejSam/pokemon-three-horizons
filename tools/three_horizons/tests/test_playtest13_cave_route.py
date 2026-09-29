@@ -14,6 +14,26 @@ class CaveRoute(unittest.TestCase):
         self.assertEqual(selected, registry)
         self.assertEqual(len(selected), len(set(selected)))
 
+    def test_selected_maps_link_scripts_and_native_tilesets(self):
+        selected=json.loads((ROOT/'tools/mapjson/three_horizons_maps.json').read_text())['maps']
+        scripts=(ROOT/'data/scripts/three_horizons/maps.inc').read_text()
+        pending=re.findall(r'\.include "([^"]+)"',scripts); seen=set()
+        while pending:
+            path=pending.pop()
+            if path in seen:continue
+            seen.add(path);text=(ROOT/path).read_text(encoding='utf-8');scripts+='\n'+text
+            pending.extend(re.findall(r'\.include "([^"]+)"',text))
+        script_labels=set(re.findall(r'^(\w+)::',scripts,re.M))
+        layouts={x['id']:x for x in json.loads((ROOT/'data/layouts/layouts.json').read_text())['layouts']}
+        headers=(ROOT/'src/data/tilesets/three_horizons.h').read_text()
+        definitions=set(re.findall(r'const struct Tileset (\w+)\s*=',headers))
+        for name in selected:
+            with self.subTest(map=name):
+                self.assertIn(name+'_MapScripts',script_labels)
+                layout=layouts[map_data(name)['layout']]
+                for field in ('primary_tileset','secondary_tileset'):
+                    self.assertIn(layout[field],definitions)
+
     def test_new_trainer_ids_do_not_alias_any_existing_th_identity(self):
         ids=re.findall(r'#define (TRAINER_TH\w+) (\d+)',(ROOT/'include/constants/opponents.h').read_text())
         values=[int(n) for _,n in ids]
