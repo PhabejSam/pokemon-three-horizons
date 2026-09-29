@@ -481,8 +481,15 @@ TH_Pickup_23::
     end
 
 TH_Local_CeruleanGym_3::
+    goto_if_set FLAG_BADGE02_GET, TH13_CeruleanGuide_Won
     msgbox TH_Local_CeruleanGym_3_Text, MSGBOX_NPC
     end
+
+TH13_CeruleanGuide_Won:
+    msgbox TH13_CeruleanGuide_WonText, MSGBOX_NPC
+    end
+TH13_CeruleanGuide_WonText:
+    .string "You made a splash against MISTY!\nEnjoy your CASCADE BADGE, champ!$"
 
 TH_Local_CeruleanGym_3_Text:
     .string "Water moves can strike hard.\nTry Grass or Electric attacks.$"

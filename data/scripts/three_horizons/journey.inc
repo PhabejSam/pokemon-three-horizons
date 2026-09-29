@@ -301,8 +301,14 @@ TH_Local_PewterCenter_5Text:
     .string "My favorite is whichever POKéMON\nsaved the day in my last battle.$"
 
 TH_Local_PewterGym_0::
+    goto_if_set FLAG_BADGE01_GET, TH13_PewterGuide_Won
     msgbox TH_Local_PewterGym_0Text, MSGBOX_NPC
     end
+TH13_PewterGuide_Won:
+    msgbox TH13_PewterGuide_WonText, MSGBOX_NPC
+    end
+TH13_PewterGuide_WonText:
+    .string "You beat BROCK! Your team earned\nthat BOULDER BADGE. Well done!$"
 TH_Local_PewterGym_0Text:
     .string "BROCK has four partners.\nBring a team, not just one trick!$"
 

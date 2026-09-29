@@ -161,8 +161,14 @@ TH12_Surge_OpenText:
     .string "Both locks are open!$"
 
 TH12_Surge_Guide::
+    goto_if_set FLAG_BADGE03_GET, TH13_SurgeGuide_Won
     msgbox TH12_Surge_GuideText, MSGBOX_NPC
     end
+TH13_SurgeGuide_Won:
+    msgbox TH13_SurgeGuide_WonText, MSGBOX_NPC
+    end
+TH13_SurgeGuide_WonText:
+    .string "You beat LT. SURGE! That's a\nwell-earned THUNDER BADGE!$"
 TH12_Surge_GuideText:
     .string "LT. SURGE uses five ELECTRIC types!\nGROUND attacks can help.\pFind a hidden switch, then check\na can directly above, below,\lleft or right of it.$"
 TH12_Surge_Pillar::
