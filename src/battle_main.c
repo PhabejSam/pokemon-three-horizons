@@ -5179,6 +5179,17 @@ void Test_TH_HandleBattleLost(void)
 {
     HandleEndTurn_BattleLost();
 }
+
+void Test_TH_ChooseRunAction(void)
+{
+    // Feed the same controller reply as choosing RUN; leave unrelated battlers
+    // waiting so this probe only advances the player's action-selection owner.
+    for (u32 i = 0; i < gBattlersCount; i++)
+        gBattleCommunication[i] = 0xFF;
+    gBattleCommunication[0] = STATE_WAIT_ACTION_CHOSEN;
+    gBattleResources->bufferB[0][1] = B_ACTION_RUN;
+    HandleTurnActionSelectionState();
+}
 #endif
 
 static void HandleEndTurn_RanFromBattle(void)
