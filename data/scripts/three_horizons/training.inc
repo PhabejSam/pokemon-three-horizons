@@ -80,8 +80,6 @@ TH_TrainingEnd:
 
     .align 2
 TH_TrainingStock:
-    .2byte ITEM_POMEG_BERRY, ITEM_KELPSY_BERRY, ITEM_QUALOT_BERRY
-    .2byte ITEM_HONDEW_BERRY, ITEM_GREPA_BERRY, ITEM_TAMATO_BERRY
     .2byte ITEM_LONELY_MINT, ITEM_ADAMANT_MINT, ITEM_NAUGHTY_MINT, ITEM_BRAVE_MINT
     .2byte ITEM_BOLD_MINT, ITEM_IMPISH_MINT, ITEM_LAX_MINT, ITEM_RELAXED_MINT
     .2byte ITEM_MODEST_MINT, ITEM_MILD_MINT, ITEM_RASH_MINT, ITEM_QUIET_MINT
@@ -90,7 +88,7 @@ TH_TrainingStock:
     .2byte ITEM_SERIOUS_MINT, ITEM_BOTTLE_CAP, ITEM_GOLD_BOTTLE_CAP
     .2byte ITEM_ABILITY_CAPSULE, ITEM_ABILITY_PATCH, ITEM_NONE
 TH_Text_TrainingWelcome:
-    .string "Welcome! I help trainers shape\nany partner's potential.$"
+    .string "Welcome to TRAINER SERVICES!\nLet's shape your partner's potential.$"
 TH_Text_BuyTraining:
     .string "Buy supplies$"
 TH_Text_ImproveIVs:
@@ -126,4 +124,31 @@ TH_Text_CapDone:
 TH_Text_CapNoChange:
     .string "No changes were made. Check your caps.\nThe IVs may already be at 31.\pEggs cannot take part in training.\nYou haven't spent any items.$"
 TH_Text_TrainingHelp:
-    .string "Wild partners start with zero EVs.\nTheir IVs and nature usually vary.\pYour home PC holds a training kit.\nGive those items to a partner to hold.\pPower items add EVs for one stat.\nThe opponent's usual EVs still count.\pThese berries reduce unwanted EVs.\nMints change the nature used for stats.\pThe summary shows that stat nature.\nYour partner's birth nature is kept.\pBring caps to me to raise IVs to 31.\nOne silver cap improves one stat.\pOne gold cap improves all six stats.\nThere is no minimum level!\pAn ABILITY CAPSULE switches between\nnormal Abilities. An ABILITY PATCH\lcan unlock a Hidden Ability.$"
+    .string "Wild partners start with zero EVs.\nTheir IVs and nature usually vary.\pYour home PC holds a training kit.\nGive those items to a partner to hold.\pPower items add EVs for one stat.\nThe opponent's usual EVs still count.\pCERULEAN's BERRY WORKSHOP sells\nberries to reduce unwanted EVs.\pMints change the nature used for stats.\pThe summary shows that stat nature.\nYour partner's birth nature is kept.\pBring caps to me to raise IVs to 31.\nOne silver cap improves one stat.\pOne gold cap improves all six stats.\nThere is no minimum level!\pAn ABILITY CAPSULE switches between\nnormal Abilities. An ABILITY PATCH\lcan unlock a Hidden Ability.$"
+
+TH13_BerryWorkshop::
+    lockall
+    faceplayer
+    msgbox TH13_BerryWelcome
+    dynmultichoice 0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, TH13_BerryBuyText, TH13_BerryAdviceText, TH_Text_TrainingExit
+    goto_if_eq VAR_RESULT, 0, TH13_BerryBuy
+    goto_if_eq VAR_RESULT, 1, TH13_BerryAdvice
+    goto TH_TrainingEnd
+TH13_BerryBuy:
+    pokemart TH13_BerryStock
+    goto TH_TrainingEnd
+TH13_BerryAdvice:
+    msgbox TH13_BerryHelp
+    goto TH_TrainingEnd
+    .align 2
+TH13_BerryStock:
+    .2byte ITEM_POMEG_BERRY, ITEM_KELPSY_BERRY, ITEM_QUALOT_BERRY
+    .2byte ITEM_HONDEW_BERRY, ITEM_GREPA_BERRY, ITEM_TAMATO_BERRY, ITEM_NONE
+TH13_BerryWelcome:
+    .string "Welcome to the BERRY WORKSHOP!\nWe help partners fine-tune their EVs.$"
+TH13_BerryBuyText:
+    .string "Buy EV berries$"
+TH13_BerryAdviceText:
+    .string "Berry advice$"
+TH13_BerryHelp:
+    .string "Each berry lowers its matching\nstat's EVs by up to 10.\pPOMEG: HP\nKELPSY: Attack\pQUALOT: Defense\nHONDEW: Sp. Attack\pGREPA: Sp. Defense\nTAMATO: Speed\pEVs cannot fall below zero. A berry\nmay still make your partner friendlier.\pIf neither can change, the berry\nhas no effect and is not used.$"

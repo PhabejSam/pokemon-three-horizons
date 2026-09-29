@@ -597,14 +597,10 @@ TH_Local_CeruleanHouse4_0::
     end
 
 TH_Local_CeruleanHouse4_0_Text:
-    .string "Berries can help POKéMON train.\nThe VIRIDIAN seller has some.$"
+    .string "Berries can help POKéMON train.\nVisit CERULEAN's BERRY WORKSHOP!$"
 
 TH_Local_CeruleanHouse5_0::
-    msgbox TH_Local_CeruleanHouse5_0_Text, MSGBOX_NPC
-    end
-
-TH_Local_CeruleanHouse5_0_Text:
-    .string "I study berries and their uses.\nMy workshop opens in a later chapter.$"
+    goto TH13_BerryWorkshop
 
 TH_Sign_CeruleanHouse5_0::
     msgbox TH_Sign_CeruleanHouse5_0_Text, MSGBOX_NPC

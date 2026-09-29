@@ -86,4 +86,49 @@ TEST("Three Horizons training prices share native buy and sell pricing")
     EXPECT_EQ(GetItemPrice(ITEM_GOLD_BOTTLE_CAP), 6000);
     EXPECT_EQ(TH_GetTrainingItemPrice(ITEM_POTION, 321), 321);
 }
+TEST("Three Horizons training EV berries reduce matching stat by up to ten")
+{
+    u32 berry, stat;
+    PARAMETRIZE { berry = ITEM_POMEG_BERRY; stat = STAT_HP; }
+    PARAMETRIZE { berry = ITEM_KELPSY_BERRY; stat = STAT_ATK; }
+    PARAMETRIZE { berry = ITEM_QUALOT_BERRY; stat = STAT_DEF; }
+    PARAMETRIZE { berry = ITEM_HONDEW_BERRY; stat = STAT_SPATK; }
+    PARAMETRIZE { berry = ITEM_GREPA_BERRY; stat = STAT_SPDEF; }
+    PARAMETRIZE { berry = ITEM_TAMATO_BERRY; stat = STAT_SPEED; }
+    static const u8 amounts[] = {0, 1, 9, 10, 11, 252};
+    for (u32 n = 0; n < ARRAY_COUNT(amounts); n++)
+    {
+        struct Pokemon mon, expected;
+        CreateMonWithIVs(&mon, SPECIES_BULBASAUR, 50, 12345, OTID_STRUCT_PLAYER_ID, 31);
+        u8 value = MAX_FRIENDSHIP;
+        SetMonData(&mon, MON_DATA_FRIENDSHIP, &value);
+        for (u32 i = 0; i < NUM_STATS; i++)
+        {
+            value = i == stat ? amounts[n] : 1;
+            SetMonData(&mon, MON_DATA_HP_EV + i, &value);
+        }
+        CalculateMonStats(&mon);
+        expected = mon;
+        value = amounts[n] > 10 ? amounts[n] - 10 : 0;
+        SetMonData(&expected, MON_DATA_HP_EV + stat, &value);
+        CalculateMonStats(&expected);
+        ExecuteTableBasedItemEffect(&mon, berry, 0, 0);
+        for (u32 i = 0; i < NUM_STATS; i++)
+        {
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_EV + i), i == stat ? value : 1);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP + i), GetMonData(&expected, MON_DATA_MAX_HP + i));
+        }
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_FRIENDSHIP), MAX_FRIENDSHIP);
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_PERSONALITY), 12345);
+        // At zero EVs the native UI may still allow a friendship benefit.
+        if (amounts[n] == 0)
+        {
+            value = 0;
+            SetMonData(&mon, MON_DATA_FRIENDSHIP, &value);
+            ExecuteTableBasedItemEffect(&mon, berry, 0, 0);
+            EXPECT_GT(GetMonData(&mon, MON_DATA_FRIENDSHIP), 0);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_EV + stat), 0);
+        }
+    }
+}
 #endif

@@ -220,3 +220,20 @@ Pending: full project regression, final save-layout recheck, three upstream game
 - Guides: all three gyms show original advice before their badge and congratulations afterward, including battery Save/Continue. Six existing gym trainers still start the correct actual battles.
 - Cut: no HM, no badge, incompatible species, Egg and fainted party all display the same short two-line hint. Eligible party retains the original confirmation; native eligibility tests pass. Captain keeps detailed instruction including the Egg exclusion.
 - Before/after images inspected. Reproduction archive `outputs/playtest-13-development/task14-17-locals-evidence.zip`, SHA-256 `dc19768ab1aef0963aa5a728966dc27c66dc8c82f3d0ac857cafbbddfd01097b`; exact candidate/ELF retained in `locals-candidate` and artifact `11016693268`. Focused mGBA core acceptance only; full chapter and RG40XX H acceptance remain separate.
+
+
+## Focused Tasks 19–20 cave scene acceptance
+
+Feature `6547404a9fc3dbf56e3985a0d5f1c59044946086`; compiled `7c0d93fb9445f003b957541a9b18869c9d58b3c6`; ROM SHA-256 `5b43ffec2a6fdc0760898302aec4f1984ded65ba5a846309d9aeb29c010b0e0a`. CI run 36535422424/job 109298239716 passed nine native groups and eight host checks. The native script tests did not establish full Rocket acceptance: emulator testing subsequently found trainer records forcing doubles during singles, tracked separately in Task 21.
+
+The exact-ROM Clefairy circle returned all four participants to their spaced formation; repeat interaction used the brief stationary hop and survived native Save/cold Continue. Seven researcher approaches aligned correctly and completed actual battles. Loss/whiteout/retry, guarded fossils before victory, independent Dome/Helix rewards, full-bag retry, and native Save/cold Continue passed. Three actual P12 battery fixtures below the stairs, above the stairs, and on the researcher's new tile retained party/bag/position and allowed movement after migration. Screenshots were inspected.
+
+Evidence: `task19-20-cave-evidence.zip`, SHA-256 `c56a29a2a13bd532b22e50597796f765930bf1c4ac4846e0773d1348e70a8a9a`, in the local `outputs/playtest-13-development` release-work folder. These are focused emulator checks, not whole-chapter or hardware acceptance.
+
+## Focused Task 25 S.S. Anne departure acceptance
+
+Feature `e2670835efec6cdd35ae01e25778b5b60f2eff9b`; compiled `1990c965fb3969438413468a802737918aa97565`; ROM SHA-256 `43f975763c447f78a9ca0c8030ec53b5eeb22f30d5a6c5dcfdcff776770b7510`. CI run 36536670772/job 109302190526 passed five ship groups, four state groups, one Bill migration group and sixteen host checks.
+
+All seven incomplete prerequisite combinations retained the normal exit without departure. All three eligible exit lanes displayed the warning, allowed declining, aligned the player for the native sailing sequence, then delivered the player to the safe Vermilion dock and denied boarding. A large Gyarados follower was present for approach and correctly hidden during staging. Ticket/HM quantities were unchanged. Native Save/cold Continue passed inside after declining and outside after departure; reopening the last predeparture battery save retained the docked ship. An impossible departed-inside native save recovered to the dock with the correct town objects and working movement. Native tests cover every old ship-room ID both before and after captain help; P12 saves never auto-depart. Animation and warning screenshots were inspected.
+
+Evidence: `task25-departure-evidence.zip`, SHA-256 `fdbfe363afe4bcd56850f2f80bb7c89d92d27fcba2bdec240bb34a5e8b659d89`, in `outputs/playtest-13-development`. No RG40XX H acceptance claim.
