@@ -98,4 +98,28 @@ TEST("Three Horizons playtest13 Rocket single handoff does not heal or finish pa
     CalculatePlayerPartyCount();
     InitEventData();
 }
+TEST("Three Horizons playtest13 Rocket double loss retries complete encounter")
+{
+    u32 partial;
+    PARAMETRIZE { partial = 0; }
+    PARAMETRIZE { partial = 1; }
+    PARAMETRIZE { partial = 2; }
+    InitEventData();
+    if (partial & 1) FlagSet(TRAINER_FLAGS_START + TRAINER_TH11_JESSIE);
+    if (partial & 2) FlagSet(TRAINER_FLAGS_START + TRAINER_TH11_JAMES);
+    TH12_CompleteRocketPair();
+    EXPECT(!gSpecialVar_Result);
+    EXPECT(!FlagGet(FLAG_TH_ROCKET_DUO));
+    TH12_BeginRocketPair();
+    EXPECT(!FlagGet(TRAINER_FLAGS_START + TRAINER_TH11_JESSIE));
+    EXPECT(!FlagGet(TRAINER_FLAGS_START + TRAINER_TH11_JAMES));
+    FlagSet(TRAINER_FLAGS_START + TRAINER_TH11_JESSIE);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_TH11_JAMES);
+    TH12_CompleteRocketPair();
+    EXPECT(FlagGet(FLAG_TH_ROCKET_DUO));
+    TH12_BeginRocketPair();
+    TH12_CompleteRocketPair();
+    EXPECT(FlagGet(FLAG_TH_ROCKET_DUO));
+    InitEventData();
+}
 #endif
