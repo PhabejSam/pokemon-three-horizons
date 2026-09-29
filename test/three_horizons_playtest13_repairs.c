@@ -8,7 +8,7 @@
 #include "fieldmap.h"
 #include "malloc.h"
 #include "tv.h"
-#include "constants/metatiles.h"
+#include "constants/metatile_labels.h"
 #include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 
