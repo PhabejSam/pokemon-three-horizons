@@ -1,18 +1,43 @@
 TH12_Ship_Board::
-    msgbox TH12_Ship_BoardText, MSGBOX_NPC
-    end
-TH12_Ship_BoardText:
-    .string "Welcome to the S.S. ANNE!\nPlease have your S.S. TICKET ready.$"
-TH12_Ship_CheckTicket::
-    checkitem ITEM_SS_TICKET
-    goto_if_eq VAR_RESULT, TRUE, TH12_Ship_End
     lockall
-    msgbox TH12_Ship_NoTicket
+    faceplayer
+    call TH13_Ship_InspectTicket
+    releaseall
+    end
+TH12_Ship_CheckTicket::
+    specialvar VAR_RESULT, GetPlayerFacingDirection
+    goto_if_ne VAR_RESULT, DIR_SOUTH, TH12_Ship_End
+    lockall
+    setvar VAR_LAST_TALKED, LOCALID_TH12_VERMILIONCITY_5
+    faceplayer
+    call TH13_Ship_InspectTicket
+    goto_if_eq VAR_RESULT, TRUE, TH13_Ship_Release
+    closemessage
     applymovement OBJ_EVENT_ID_PLAYER, TH12_Ship_StepUp
     waitmovement 0
+TH13_Ship_Release:
     releaseall
 TH12_Ship_End:
     end
+TH13_Ship_InspectTicket:
+    goto_if_set FLAG_TH13_SHIP_DEPARTED, TH13_Ship_Departed
+    checkitem ITEM_SS_TICKET
+    goto_if_eq VAR_RESULT, FALSE, TH13_Ship_RejectTicket
+    msgbox TH13_Ship_TicketAcceptedText
+    setvar VAR_RESULT, TRUE
+    return
+TH13_Ship_RejectTicket:
+    msgbox TH12_Ship_NoTicket
+    setvar VAR_RESULT, FALSE
+    return
+TH13_Ship_Departed:
+    msgbox TH13_Ship_DepartedText
+    setvar VAR_RESULT, FALSE
+    return
+TH13_Ship_TicketAcceptedText:
+    .string "SAILOR: May I see your S.S. TICKET?\nYes, everything is in order!\pWelcome aboard the S.S. ANNE!\nPlease keep your ticket with you.$"
+TH13_Ship_DepartedText:
+    .string "SAILOR: The S.S. ANNE has sailed.\nBoarding is now closed.$"
 TH12_Ship_StepUp:
     walk_up
     step_end
