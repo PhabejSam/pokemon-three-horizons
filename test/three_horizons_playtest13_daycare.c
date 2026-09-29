@@ -18,8 +18,8 @@ TEST("Three Horizons playtest13 Daycare deposit growth and return")
     InitEventData();
     ZeroPlayerPartyMons();
     memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PIKACHU, 10, 20, TRUE, 12345, OT_ID_PLAYER_ID, 0);
-    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MAGIKARP, 5, 20, TRUE, 67890, OT_ID_PLAYER_ID, 0);
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_PIKACHU, 10, 12345, OTID_STRUCT_PLAYER_ID, 20);
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][1], SPECIES_MAGIKARP, 5, 67890, OTID_STRUCT_PLAYER_ID, 20);
     u16 item = ITEM_ORAN_BERRY;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
     CalculatePlayerPartyCount();
@@ -53,9 +53,9 @@ TEST("Three Horizons playtest13 Daycare reads existing serialized storage")
     ZeroPlayerPartyMons();
     memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
     struct Pokemon saved;
-    CreateMon(&saved, SPECIES_PIKACHU, 10, 20, TRUE, 11223, OT_ID_PLAYER_ID, 0);
+    CreateMonWithIVs(&saved, SPECIES_PIKACHU, 10, 11223, OTID_STRUCT_PLAYER_ID, 20);
     gSaveBlock1Ptr->daycare.mons[0].mon = saved.box;
-    CreateMon(&saved, SPECIES_MAGIKARP, 5, 20, TRUE, 99887, OT_ID_PLAYER_ID, 0);
+    CreateMonWithIVs(&saved, SPECIES_MAGIKARP, 5, 99887, OTID_STRUCT_PLAYER_ID, 20);
     gSaveBlock1Ptr->daycare.mons[1].mon = saved.box;
     gSaveBlock1Ptr->daycare.mons[1].steps = 42;
     struct DaycareMon untouched = gSaveBlock1Ptr->daycare.mons[1];
