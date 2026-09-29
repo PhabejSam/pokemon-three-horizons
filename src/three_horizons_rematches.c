@@ -5,6 +5,7 @@
 #include "battle_setup.h"
 #include "data.h"
 #include "pokemon.h"
+#include "random.h"
 #include "trainer_util.h"
 #include "constants/maps.h"
 #include "constants/opponents.h"
@@ -18,7 +19,7 @@ static EWRAM_DATA u16 sActiveTrainer = TRAINER_NONE;
 
 static u16 CurrentMap(void)
 {
-    return (gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
+    return ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
 }
 
 s32 TH13_ResolveRematchSlot(const struct TH13RematchEntry *entries, u32 count, u16 map, u16 trainerId)

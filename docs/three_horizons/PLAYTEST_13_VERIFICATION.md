@@ -260,3 +260,33 @@ Fixture corrections were explicit: a bit-field comparison needed a cast; the eng
 
 The pure level helper has no battle hook yet. Unlimited Vs. Seeker, readiness storage, scaled rosters, cleanup, acquisition and full Task 27 acceptance remain pending the required capacity decision documented in PLAYTEST_13_REMATCH_CAPACITY.md. These checks do not constitute a release candidate or hardware acceptance.
 
+
+### Task 27 approved rematch capacity implementation (verification in progress)
+
+User approval on 2026-09-29 resolves the global-capacity conflict in favor of
+map-local readiness. Full-width trainer IDs and authored evolution tiers are ROM
+data; the existing 100 rematch bytes contain only temporary 0/1 state. No save
+block or permanent trainer-flag layout changes. See
+[the capacity decision](PLAYTEST_13_REMATCH_CAPACITY.md).
+
+New-function RED: feature 5a9d574f6a4ec35ac7f56e61ad812f7a28e11494,
+compiled ee58c416, run 36578571134/job 109440450710 linked unsuccessfully on the
+missing readiness functions. The additional party/Egg/first-fight contracts at
+2f738638ec66a2f702d1df511e8c56a72c971399, compiled 445e8284,
+run 36579367252/job 109443168972, similarly detected the absent party overlay.
+These are new-interface absence checks, not claims of reproduced battle bugs.
+The prior exact bb96e627 baseline separately shows the disabled Vs. Seeker.
+
+Host coverage detected the missing registry, rematch scripts, and Vermilion
+recipient before each was added. All four focused host checks now pass: 68
+shipped ordinary trainers, unique bounded map slots and matching objects, all
+68 rematch script paths without one-time rewards, retryable badge-independent
+gift and reachable researcher/nurse, plus the approved Keigo first-fight roster.
+Implementation checkpoint ccbc848a1f6304b2965ca73151087cf563b54079 is undergoing
+native checks; emulator acceptance remains at the systems integration gate.
+
+The 53 ordinary trainers on upcoming approved maps remain required additions to
+the same ROM registry. The chapter-wide target remains 121; the current shipped
+map count of 68 is not a scope reduction. Integration must re-audit final maps.
+The exact post-Surge RG40XX H P12 battery save is still to be supplied by the user;
+the older Cerulean/P11-marked save must not satisfy personal-save acceptance.
