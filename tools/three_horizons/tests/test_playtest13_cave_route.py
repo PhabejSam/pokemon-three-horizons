@@ -8,6 +8,13 @@ from tools.three_horizons.tests.test_playtest13_research import Scene
 NAMES = ['TH13_Route11', 'TH13_DiglettsCave_SouthEntrance', 'TH13_DiglettsCave_B1F', 'TH13_DiglettsCave_NorthEntrance']
 
 class CaveRoute(unittest.TestCase):
+    def test_new_trainer_ids_do_not_alias_any_existing_th_identity(self):
+        ids=re.findall(r'#define (TRAINER_TH\w+) (\d+)',(ROOT/'include/constants/opponents.h').read_text())
+        values=[int(n) for _,n in ids]
+        self.assertEqual(len(values),len(set(values)))
+        for name,value in ids:
+            if name.startswith('TRAINER_TH13_ROUTE11_'):self.assertGreater(int(value),103)
+
     def test_diglett_cave_connects_vermilion_to_route2(self):
         registry = json.loads((ROOT/'data/maps/map_groups.json').read_text())['gMapGroup_ThreeHorizons']
         for name in NAMES: self.assertIn(name, registry)

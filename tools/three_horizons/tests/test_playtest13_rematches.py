@@ -24,7 +24,7 @@ class Playtest13Rematches(unittest.TestCase):
         text = (ROOT/'src/data/three_horizons_rematches.h').read_text()
         entries = re.findall(r'\{(TRAINER_TH\w+), (MAP_TH\w+), (\d+)\}', text)
         ids = dict(re.findall(r'#define (TRAINER_TH\w+) (\d+)', (ROOT/'include/constants/opponents.h').read_text()))
-        expected = (set(range(1, 32)) - {7, 24, 29}) | (set(range(53, 94)) - {68}) | set(range(94,104))
+        expected = (set(range(1, 32)) - {7, 24, 29}) | (set(range(53, 94)) - {68}) | set(range(104,114))
         self.assertEqual({int(ids[t]) for t, m, l in entries}, expected)
         self.assertEqual(len(entries), 78)
         maps = {d['id']: d for p in (ROOT/'data/maps').glob('TH*/map.json') for d in [json.loads(p.read_text())]}
