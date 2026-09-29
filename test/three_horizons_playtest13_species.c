@@ -8,7 +8,8 @@
 #if THREE_HORIZONS
 TEST("Three Horizons playtest13 learned move resumes candy evolution without another candy")
 {
-    s16 state, move;
+    s16 state;
+    s16 move;
     PARAMETRIZE { state = 1; move = MOVE_DUAL_CHOP; }
     PARAMETRIZE { state = 1; move = MOVE_RAGE_FIST; }
     PARAMETRIZE { state = 0; move = MOVE_POUND; }
