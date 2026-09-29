@@ -522,7 +522,7 @@ TH_Rival_BRIDGE_Defeat:
     .string "That was a great battle!\nWe both have grown stronger.$"
 
 TH_Rival_BRIDGE_AfterText:
-    .string "{RIVAL}: I will scout the road ahead.\nEnjoy CERULEAN while you are here!$"
+    .string "{RIVAL}: BILL lives past the bridge.\nMaybe he knows about these arrivals.\pYou follow that lead. I'll train!\nNext time, I'm taking the win!$"
 
 TH_Rival_BridgeTrigger::
     goto_if_set FLAG_TH_BRIDGE_RIVAL, TH_RivalTriggerEnd
@@ -584,7 +584,7 @@ TH_MistyFull:
     .string "Your badge is safe. Make room\nfor WATER PULSE and speak to me again.$"
 
 TH_ChapterComplete:
-    .string "You have completed this chapter!\nTwo badges and a reunion with {RIVAL}.\pKeep exploring, catching, and training.\nThe road beyond the bridge comes next!$"
+    .string "Two badges, and a stronger team!\nYour journey is gathering pace.\pBeyond NUGGET BRIDGE, BILL may have\na new lead for the professors.$"
 
 TH_Route3BadgeGate::
     goto_if_set FLAG_BADGE01_GET, TH_Route3BadgeGate_End
