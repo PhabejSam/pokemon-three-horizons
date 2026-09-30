@@ -1,3 +1,29 @@
+# Playtest 13.1 / RC2 verification — 2026-09-30
+
+Current software candidate: `a5d1ac19d0f3c8fb2dd39544a93401367f4e9b87`,
+ROM SHA-256 `c08a31c6ac0c3f5fff5a867b9a98b9ee6d246cf39f16c17d748b431a29a003f2`.
+Host 166/166, TH native 221/221 and unchanged save layout 4/4 pass. Four intended
+negative controls fail and restored focused runs pass. Emerald/FireRed/LeafGreen
+and generic compatibility pass. Exact-ROM desktop acceptance is complete for the
+RC2 targeted matrix. Hardware acceptance remains pending.
+
+[The RC2 release report](PLAYTEST_13_1_RC2_RELEASE.md) is the current detailed
+acceptance record, including original source hashes, double-cold migrations,
+native pixel/input proof, harness corrections, CI links and remaining limits.
+Packaged evidence includes `ui-results.json`, `new-game-results.json`,
+`dex-results.json`, `photo-matrix.json`, `photo-cold-colors.json`,
+`forest-three-distinct-results.json`, `photo-flash-results.json`,
+`migration-results.json`, `controls-results.json`, `catchup-results.json` and
+`calls-live-results.json`, plus native images and complete selected CI logs.
+
+The owner's actual post-Surge PT12 `.gba.eps` (hash `be9bbc47…`) supersedes older
+Cerulean personal-save sources. RC1 migration uses a separately identified desktop
+endpoint battery, not a newly supplied owner hardware RC1 save. No private save
+or RAM dump is packaged. Neither software matrix nor RC1 hardware history is
+RC2 RG40XX H acceptance.
+
+## Historical RC1 record (retained unchanged below)
+
 # Playtest 13 verification — verified software candidate
 
 Software integration and both chapter routes passed on 2026-09-29. The final

@@ -192,3 +192,4 @@
 - [Playtest 13.1 / RC2 implementation plan](superpowers/plans/2026-09-30-playtest13-1-rc2.md)
 - [Playtest 13.1 Research Gear guide](three_horizons/PLAYTEST_13_RESEARCH_GEAR.md)
 - [Playtest 13.1 hardware acceptance checklist](three_horizons/PLAYTEST_13_1_HARDWARE_QA.md)
+- [Playtest 13.1 RC2 release report](three_horizons/PLAYTEST_13_1_RC2_RELEASE.md)

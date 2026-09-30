@@ -1,16 +1,18 @@
 # Playtest 13.1 / RC2 — The Road to Lavender
 
-RC2 is under software verification. Use the RC2 release manifest when the
-candidate is packaged. The RC1 hash and dated acceptance below remain historical
-evidence only; they do not establish RC2 hardware acceptance. Research Gear and
-hardware testing details are in PLAYTEST_13_RESEARCH_GEAR.md and
-PLAYTEST_13_1_HARDWARE_QA.md.
+Software verified on 2026-09-30. RC2 ROM:
+`pokemon-three-horizons-playtest-13-1-road-to-lavender.gba`.
+SHA-256: `c08a31c6ac0c3f5fff5a867b9a98b9ee6d246cf39f16c17d748b431a29a003f2`.
+Exact feature/compiled/test revision: `a5d1ac19d0f3c8fb2dd39544a93401367f4e9b87`.
+See [release report](PLAYTEST_13_1_RC2_RELEASE.md) and
+[hardware checklist](PLAYTEST_13_1_HARDWARE_QA.md). RG40XX H acceptance is pending.
 
-Verified software candidate, 2026-09-29. Exact post-Surge personal-save migration, its normal continuation to the Tower endpoint and back to Lavender, and the separate new-game route through Surge to the endpoint passed. RG40XX H Playtest 13 acceptance remains the owner's separate hardware test. Evidence and test limits are in PLAYTEST_13_VERIFICATION.md.
-
-ROM: `pokemon-three-horizons-playtest-13-road-to-lavender.gba` (unchanged bytes
-from the passing CI artifact). SHA-256:
+RC2 validates the natural opening and targeted migration, Gear, photo, capture,
+call, Cut and trade checks. The full uninterrupted New Game and migrated routes
+completed on 2026-09-29 are historical RC1 evidence, with ROM SHA-256
 `ad918b00e4476e9db68cb1445206ef1126e8d962be51cd74208442be3ff85077`.
+They do not establish RC2 hardware acceptance. This guide describes the current
+RC2 walkthrough; preserve the old RC1 package.
 
 ## Prepare a safe test
 

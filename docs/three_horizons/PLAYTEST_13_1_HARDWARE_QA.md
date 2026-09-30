@@ -2,6 +2,12 @@
 
 Pending owner acceptance on RG40XX H / VBA-Next. Desktop and native automated checks are documented separately. Preserve the original ROM/battery backup, and record the exact RC2 ROM SHA-256 before testing. Use New Game or cold Continue; do not load an old emulator state.
 
+ROM: `pokemon-three-horizons-playtest-13-1-road-to-lavender.gba`.
+SHA-256: `c08a31c6ac0c3f5fff5a867b9a98b9ee6d246cf39f16c17d748b431a29a003f2`.
+Software: host 166/166, native 221/221, save layout 4/4; exact-ROM desktop
+checks passed. **All hardware boxes below remain unchecked.** The previous RC1
+result is historical only. See PLAYTEST_13_1_RC2_RELEASE.md for evidence and limits.
+
 ## Priority blockers
 
 - [ ] In Viridian Forest, take one, two and three different authored photos on the same map. Each flash ends at the original brightness; no accumulating tint or black screen.

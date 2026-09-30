@@ -1,6 +1,6 @@
 # Research Gear — Playtest 13.1 / RC2
 
-This guide describes the RC2 implementation under verification. It does not establish release or RG40XX H acceptance; see PLAYTEST_13_VERIFICATION.md for the exact candidate and evidence.
+Software verified on the exact RC2 candidate listed in PLAYTEST_13_1_RC2_RELEASE.md. RG40XX H acceptance remains pending; desktop evidence does not establish hardware acceptance.
 
 ## Receiving Gear
 
@@ -24,7 +24,7 @@ Oak introduces Gear in person. The Hoothoot interaction on Route 1 introduces El
 
 For older saves that passed those scenes before receiving Gear, the Forest Cut clearing, Diglett's Cave, Route 9 and Rock Tunnel provide appropriate live follow-up opportunities. Merely importing an old observation does not invent a photograph or deliver a new call.
 
-At Route 10, Oak delivers the coordinator update. At Lavender, Elm delivers the Tower follow-up. Other professors' corresponding analysis appears in Calls and notes without additional automatic speeches. Existing RC1 activation receipts preserve the professors you already heard.
+On entering Route 10 Pokémon Center, Oak delivers the coordinator update. After the Lavender Misdreavus sighting, Elm delivers the Tower follow-up. Other professors' corresponding analysis appears in Calls and notes without additional automatic speeches. Existing RC1 activation receipts preserve the professors you already heard.
 
 Calls wait until ordinary field controls are safe: no battle, naming screen, bag, party menu, script, fade, movement or field move. After one call, another pending call waits for eight tiles of further travel or a map change. Cold Continue clears only this temporary pacing; pending and delivered reports remain saved.
 
