@@ -93,14 +93,14 @@ class ResearchScripts(unittest.TestCase):
     def test_ship_photo_reachable_after_departure_and_late_gear(self):
         s = Scene(gear=False)
         s.run('TH13_Harbor_OnLoad')
-        self.assertIn('FLAG_TEMP_11', s.flags)
+        self.assertIn('FLAG_TEMP_10', s.flags)
         s.run('TH13_Ship_Marill')
         self.assertEqual(s.entries, {'TH_RESEARCH_SHIP'})
         self.assertFalse(s.photos)
         # Real story order: leave with Cut, then win Surge and receive Gear.
         s.flags.add('FLAG_TH13_SHIP_DEPARTED')
         s.run('TH13_Harbor_OnLoad')
-        self.assertNotIn('FLAG_TEMP_11', s.flags)
+        self.assertNotIn('FLAG_TEMP_10', s.flags)
         s.run('TH13_Harbor_Marill')
         self.assertFalse(s.photos)
         s.gear = True; s.answer = 0
@@ -127,7 +127,7 @@ class ResearchScripts(unittest.TestCase):
         self.assertEqual(len(positions), len(objects))
         for o in partners:
             self.assertIn((o['x'],o['y']), floor)
-            self.assertEqual(o['flag'], 'FLAG_TEMP_11')
+            self.assertEqual(o['flag'], 'FLAG_TEMP_10')
         seen, queue = {(23,32)}, [(23,32)]
         for x,y in queue:
             for p in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):

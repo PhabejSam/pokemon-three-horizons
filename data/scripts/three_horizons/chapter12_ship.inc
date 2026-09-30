@@ -334,9 +334,9 @@ TH13_Ship_PartnersText:
 @ The partners' trainers disembarked in Vermilion. A later visit with Gear
 @ can record this live scene even though the S.S. Anne has sailed.
 TH13_Harbor_OnLoad::
-    setflag FLAG_TEMP_11
+    setflag FLAG_TEMP_10
     goto_if_unset FLAG_TH13_SHIP_DEPARTED, TH13_Harbor_LoadDone
-    clearflag FLAG_TEMP_11
+    clearflag FLAG_TEMP_10
 TH13_Harbor_LoadDone:
     return
 TH13_Harbor_Marill::
