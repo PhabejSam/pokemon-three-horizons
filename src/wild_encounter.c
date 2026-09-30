@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "battle_setup.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
@@ -453,7 +454,7 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
     const struct WildPokemonInfo *wildMonInfo;
     enum TimeOfDay timeOfDay = GetTimeOfDay();
 
-    if (!OW_TIME_OF_DAY_ENCOUNTERS)
+    if (!OW_TIME_OF_DAY_ENCOUNTERS && !THREE_HORIZONS)
         return TIME_OF_DAY_DEFAULT;
 
     if (InBattlePike() || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
@@ -514,7 +515,14 @@ void CreateWildMon(enum Species species, u8 level)
 {
     ZeroEnemyPartyMons();
     u32 personality = GetMonPersonality(species, GetSynchronizedGender(WILDMON_ORIGIN, species), PickWildMonNature(species), RANDOM_UNOWN_LETTER);
+#if THREE_HORIZONS
+    gTHCreatingWildMon = TRUE;
+#endif
     CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
+#if THREE_HORIZONS
+    gTHCreatingWildMon = FALSE;
+    TH_ApplyWildHiddenAbility(&gParties[B_TRAINER_OPPONENT_A][0], RandomUniform(RNG_TH_WILD_HIDDEN_ABILITY, 0, 99));
+#endif
     GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 

@@ -1,4 +1,7 @@
 #include "global.h"
+#include "three_horizons.h"
+#include "event_data.h"
+#include "constants/three_horizons.h"
 #include "option_menu.h"
 #include "bg.h"
 #include "gpu_regs.h"
@@ -23,6 +26,16 @@
 #define tSound data[4]
 #define tButtonMode data[5]
 #define tWindowFrameType data[6]
+#define tTHPage data[7]
+#define tTHAutoRun data[8]
+#define tTHExpRate data[9]
+#define tTHFollowerOff data[10]
+#define tTHClock data[11]
+#define tTHShiny data[12]
+#if THREE_HORIZONS
+static void TH_DrawOptions(u8 taskId);
+static bool32 TH_ProcessOptions(u8 taskId);
+#endif
 
 enum
 {
@@ -72,7 +85,11 @@ static void DrawBgWindowFrames(void);
 
 EWRAM_DATA static bool8 sArrowPressed = FALSE;
 
-static const u8 gText_Option[]             = _("OPTION");
+#if THREE_HORIZONS
+static const u8 gText_Option[] = _("OPTIONS  1/2     L/R: PAGE");
+#else
+static const u8 gText_Option[] = _("OPTION");
+#endif
 static const u8 gText_TextSpeedSlow[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SLOW");
 static const u8 gText_TextSpeedMid[]       = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}MID");
 static const u8 gText_TextSpeedFast[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FAST");
@@ -244,6 +261,14 @@ void CB2_InitOptionMenu(void)
         u8 taskId = CreateTask(Task_OptionMenuFadeIn, 0);
 
         gTasks[taskId].tMenuSelection = 0;
+#if THREE_HORIZONS
+        gTasks[taskId].tTHPage = 0;
+        gTasks[taskId].tTHAutoRun = VarGet(VAR_TH_AUTO_RUN) == 1;
+        gTasks[taskId].tTHExpRate = VarGet(VAR_TH_EXP_RATE) < 4 ? VarGet(VAR_TH_EXP_RATE) : 0;
+        gTasks[taskId].tTHFollowerOff = !!VarGet(VAR_TH_FOLLOWER_OFF);
+        gTasks[taskId].tTHClock = VarGet(VAR_TH_CLOCK_MODE)==1;
+        gTasks[taskId].tTHShiny = VarGet(VAR_TH_SHINY_RATE)<4 ? VarGet(VAR_TH_SHINY_RATE) : 0;
+#endif
         gTasks[taskId].tTextSpeed = gSaveBlock2Ptr->optionsTextSpeed;
         gTasks[taskId].tBattleSceneOff = gSaveBlock2Ptr->optionsBattleSceneOff;
         gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;
@@ -279,6 +304,10 @@ static void Task_OptionMenuFadeIn(u8 taskId)
 
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
+#if THREE_HORIZONS
+    if (TH_ProcessOptions(taskId))
+        return;
+#endif
     if (JOY_NEW(A_BUTTON))
     {
         if (gTasks[taskId].tMenuSelection == MENUITEM_CANCEL)
@@ -366,6 +395,13 @@ static void Task_OptionMenuProcessInput(u8 taskId)
 
 static void Task_OptionMenuSave(u8 taskId)
 {
+#if THREE_HORIZONS
+    VarSet(VAR_TH_AUTO_RUN, gTasks[taskId].tTHAutoRun);
+    VarSet(VAR_TH_EXP_RATE, gTasks[taskId].tTHExpRate);
+    VarSet(VAR_TH_FOLLOWER_OFF, gTasks[taskId].tTHFollowerOff);
+    TH_SetClockMode(gTasks[taskId].tTHClock);
+    VarSet(VAR_TH_SHINY_RATE,gTasks[taskId].tTHShiny);
+#endif
     gSaveBlock2Ptr->optionsTextSpeed = gTasks[taskId].tTextSpeed;
     gSaveBlock2Ptr->optionsBattleSceneOff = gTasks[taskId].tBattleSceneOff;
     gSaveBlock2Ptr->optionsBattleStyle = gTasks[taskId].tBattleStyle;
@@ -682,3 +718,5 @@ static void DrawBgWindowFrames(void)
 
     CopyBgTilemapBufferToVram(1);
 }
+
+#include "three_horizons_options.inc"

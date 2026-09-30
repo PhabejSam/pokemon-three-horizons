@@ -8220,7 +8220,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "A kick with a high critical-\n"
             "hit ratio. May cause a burn."),
         .effect = EFFECT_HIT,
-        .power = 85,
+        .power = THREE_HORIZONS ? 95 : (85),
         .type = TYPE_FIRE,
         .accuracy = 90,
         .criticalHitStage = B_UPDATED_MOVE_DATA >= GEN_3 ? 1 : 2,
@@ -8995,7 +8995,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .effect = EFFECT_HIT,
         .power = 85,
         .type = TYPE_FIGHTING,
-        .accuracy = 90,
+        .accuracy = THREE_HORIZONS ? 100 : (90),
         .pp = 15,
         .target = TARGET_SELECTED,
         .priority = 0,
@@ -9073,9 +9073,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Attacks with muddy water.\n"
             "May lower accuracy."),
         .effect = EFFECT_HIT,
-        .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 90 : 95,
+        .power = THREE_HORIZONS ? 95 : (B_UPDATED_MOVE_DATA >= GEN_6 ? 90 : 95),
         .type = TYPE_WATER,
-        .accuracy = 85,
+        .accuracy = THREE_HORIZONS ? 100 : (85),
         .pp = 10,
         .target = TARGET_BOTH,
         .priority = 0,
@@ -9580,7 +9580,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Slashes with a sharp leaf.\n"
             "High critical-hit ratio."),
         .effect = EFFECT_HIT,
-        .power = B_UPDATED_MOVE_DATA >= GEN_4 ? 90 : 70,
+        .power = THREE_HORIZONS ? 95 : (B_UPDATED_MOVE_DATA >= GEN_4 ? 90 : 70),
         .type = TYPE_GRASS,
         .accuracy = 100,
         .criticalHitStage = B_UPDATED_MOVE_DATA >= GEN_3 ? 1 : 2,

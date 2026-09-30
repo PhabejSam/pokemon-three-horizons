@@ -1,3 +1,10 @@
+# Three Horizons artwork
+
+Jessie and James walking sprites and battle portraits by **monicaccina**
+(formerly Ody-chan): [GBA Jessie and James](https://www.deviantart.com/monicaccina/art/GBA-Jessie-and-James-353030680).
+Used with the artist's publicly stated permission. Native GBA layout and palette
+adaptation documented in `graphics/three_horizons/rocket/README.md`.
+
 ## Credits ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/en/reference/emoji-key/)):

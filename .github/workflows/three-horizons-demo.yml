@@ -1,0 +1,588 @@
+name: Three Horizons demo
+on:
+  push:
+    branches: [feature/opening-demo]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  demo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/cache@v4
+        with:
+          path: |
+            tools/bin2c/bin2c
+            tools/gbafix/gbafix
+            tools/gbagfx/gbagfx
+            tools/jsonproc/jsonproc
+            tools/mapjson/mapjson
+            tools/mid2agb/mid2agb
+            tools/preproc/preproc
+            tools/ramscrgen/ramscrgen
+            tools/rsfont/rsfont
+            tools/scaninc/scaninc
+            tools/trainerproc/trainerproc
+            tools/compresSmol/compresSmol
+            tools/compresSmol/compresSmolTilemap
+            tools/wav2agb/wav2agb
+            tools/patchelf/patchelf
+            tools/mgba-rom-test-hydra/mgba-rom-test-hydra
+          key: th13-tools-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev pkg-config python3 git
+          { uname -a; gcc --version; arm-none-eabi-gcc --version; make --version; python3 --version; dpkg-query -W build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev; } > demo-environment.txt
+      - name: Select verification phase
+        id: phase
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path('.github/three-horizons-stage.json')
+          stage = json.loads(p.read_text()) if p.exists() else {'mode': 'integration'}
+          assert stage['mode'] in ('focused', 'integration')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              for key, value in stage.items():
+                  assert '\n' not in value
+                  f.write(f'{key}={value}\n')
+          PY
+      - name: Focused Playtest 13 tests
+        if: steps.phase.outputs.mode == 'focused'
+        env:
+          NATIVE_FILTER: ${{ steps.phase.outputs.native_filter }}
+          HOST_FILTER: ${{ steps.phase.outputs.host_filter }}
+        shell: bash
+        run: |
+          set -o pipefail
+          test -n "$NATIVE_FILTER"
+          # Focused TH suites and the native test runner live at test/*.c.
+          # Integration mode below keeps Makefile's complete upstream source set.
+          focused_sources=$(find test -maxdepth 1 -name '*.c' ! -name '*.inc.c' -print | sort | tr '\n' ' ')
+          test -n "$focused_sources"
+          related_sources=""
+          if [ "$NATIVE_FILTER" = "test/three_horizons_tower.c" ]; then
+            related_sources="test/battle/ghost.c"
+            focused_sources="$focused_sources $related_sources"
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 SELECT" ]; then
+            related_sources="test/battle/move_effect/encore.c test/battle/move_effect/disable.c test/battle/move_effect/mimic.c test/battle/move_effect/last_resort.c test/battle/hold_effect/choice_band.c test/battle/hold_effect/choice_specs.c test/battle/hold_effect/choice_scarf.c"
+            focused_sources="$focused_sources $related_sources"
+          fi
+          printf '%s\n' "$focused_sources" > focused-test-sources.log
+          make -C tools/mapjson
+          if [ -n "$HOST_FILTER" ]; then
+            python3 -m unittest discover -s tools/three_horizons/tests -p "$HOST_FILTER" -v 2>&1 | tee focused-host.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 state" ]; then
+            cp src/three_horizons_state.c /tmp/th13-state-fixed.c
+            cp src/three_horizons_clock.c /tmp/th13-clock-fixed.c
+            trap 'cp /tmp/th13-state-fixed.c src/three_horizons_state.c; cp /tmp/th13-clock-fixed.c src/three_horizons_clock.c' EXIT
+            git fetch --depth=1 origin f49d3bd17a604d4593ad589b330018f5e911ecbc
+            git show f49d3bd17a604d4593ad589b330018f5e911ecbc:src/three_horizons_state.c > src/three_horizons_state.c
+            git show f49d3bd17a604d4593ad589b330018f5e911ecbc:src/three_horizons_clock.c > src/three_horizons_clock.c
+            if make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$NATIVE_FILTER" -j2 > focused-state-negative.log 2>&1; then
+              echo "State regressions missed the actual P12 implementation"; exit 1
+            fi
+            tail -n 100 focused-state-negative.log
+            grep -q 'state migration preserves P12 payload.*FAIL' focused-state-negative.log
+            grep -q 'state remains current after clock update.*FAIL' focused-state-negative.log
+            grep -q 'state initializes dirty slots only on upgrade.*FAIL' focused-state-negative.log
+            grep -q 'state imports witnessed reports without inventing photos.*FAIL' focused-state-negative.log
+            cp /tmp/th13-state-fixed.c src/three_horizons_state.c
+            cp /tmp/th13-clock-fixed.c src/three_horizons_clock.c
+          fi
+          if [ "${{ steps.phase.outputs.fixture_control }}" = "rocket-records" ]; then
+            # Prove that the corrected fixture reads generated trainer records,
+            # rather than the battle runner's dummy gTrainers table.
+            cp src/data/trainers.party /tmp/th13-trainers-record-control.party
+            trap 'cp /tmp/th13-trainers-record-control.party src/data/trainers.party' EXIT
+            python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/data/trainers.party')
+          text = p.read_text()
+          for name in ('JESSIE', 'JAMES'):
+              start = text.index('=== TRAINER_TH11_' + name + ' ===')
+              end = text.index('\n===', start + 4)
+              record = text[start:end]
+              assert 'Double Battle:' not in record
+              assert record.count('Multi Party: Half') == 1
+              changed = record.replace('Multi Party: Half', 'Double Battle: Yes\nMulti Party: Half')
+              text = text[:start] + changed + text[end:]
+          p.write_text(text)
+          PY
+            if make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons playtest13 Rocket individual" -j2 > focused-rocket-record-negative.log 2>&1; then
+              echo "Actual trainer-record regression missed forced doubles"; exit 1
+            fi
+            tail -n 20 focused-rocket-record-negative.log
+            grep -q 'Rocket individual records permit singles.*FAIL' focused-rocket-record-negative.log
+            cp /tmp/th13-trainers-record-control.party src/data/trainers.party
+            trap - EXIT
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons playtest13 Rocket individual" -j2 2>&1 | tee focused-rocket-record-positive.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 Cut" ]; then
+            cp src/overworld.c /tmp/th13-overworld-fixed.c
+            cp src/event_object_movement.c /tmp/th13-objects-fixed.c
+            trap 'cp /tmp/th13-overworld-fixed.c src/overworld.c; cp /tmp/th13-objects-fixed.c src/event_object_movement.c' EXIT
+            git fetch --depth=1 origin c862c43e2053c634735f3273fc5a52ab69fe00aa
+            git show c862c43e2053c634735f3273fc5a52ab69fe00aa:src/overworld.c > src/overworld.c
+            git show c862c43e2053c634735f3273fc5a52ab69fe00aa:src/event_object_movement.c > src/event_object_movement.c
+            if make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$NATIVE_FILTER" -j2 > focused-cut-negative.log 2>&1; then
+              echo "Cut regressions missed the P12 object lifecycle"; exit 1
+            fi
+            tail -n 100 focused-cut-negative.log
+            grep -q 'Cut removal stays visually collision consistent.*FAIL' focused-cut-negative.log
+            grep -q 'Cut target remains removed while another tree is unaffected.*FAIL' focused-cut-negative.log
+            grep -q 'Cut cold reload cannot overlap the player.*FAIL' focused-cut-negative.log
+            cp /tmp/th13-overworld-fixed.c src/overworld.c
+            cp /tmp/th13-objects-fixed.c src/event_object_movement.c
+          fi
+          if [ "${{ steps.phase.outputs.fixture_control }}" = "species-counter" ]; then
+            cp src/battle_move_resolution.c /tmp/th13-counter-fixed.c
+            trap 'cp /tmp/th13-counter-fixed.c src/battle_move_resolution.c' EXIT
+            python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/battle_move_resolution.c')
+          text = p.read_text()
+          guard = '\n     && (!THREE_HORIZONS || !gBattleStruct->unableToUseMove)'
+          assert text.count(guard) == 1
+          p.write_text(text.replace(guard, ''))
+          PY
+            if make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons playtest13 Rage Fist prevented" -j2 > focused-counter-negative.log 2>&1; then
+              echo "Counter regression missed the original blocked action"; exit 1
+            fi
+            tail -n 22 focused-counter-negative.log
+            grep -q 'Rage Fist prevented by sleep does not count.*FAIL' focused-counter-negative.log
+            cp /tmp/th13-counter-fixed.c src/battle_move_resolution.c
+            trap - EXIT
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 first catch" ]; then
+            # Native headless mode disables cry IDs; presentation tests need real audio.
+            make THREE_HORIZONS=1 pokemon-three-horizons-test.elf TEST_SRCS="$focused_sources" TESTS="$NATIVE_FILTER" -j2 2>&1 | tee focused-native.log
+            tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test arm-none-eabi-objcopy pokemon-three-horizons-test.elf 2>&1 | tee -a focused-native.log
+            if [ "${{ steps.phase.outputs.visual_gate }}" = "research" ]; then
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_photo_palette.c" -j2 2>&1 | tee focused-photo-palette.log
+              ! grep -q "No tests found" focused-photo-palette.log
+            fi
+          else
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$NATIVE_FILTER" -j2 2>&1 | tee focused-native.log
+          fi
+          ! grep -q "No tests found" focused-native.log
+          if [ "$NATIVE_FILTER" = "test/three_horizons_research.c" ] && [ "${{ steps.phase.outputs.visual_gate }}" = "research" ]; then
+            # Owning behavioral RED control: held-input loops used to starve calls.
+            cp src/three_horizons_research.c /tmp/th-rc2-research-fixed.c
+            trap 'cp /tmp/th-rc2-research-fixed.c src/three_horizons_research.c' EXIT
+            git fetch --depth=1 origin 0d6164892a0aa6ab8daf11f2e9a50bbd772712ed
+            git show 0d6164892a0aa6ab8daf11f2e9a50bbd772712ed:src/three_horizons_research.c > src/three_horizons_research.c
+            if make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons RC2 call travel" -j2 > focused-call-travel-negative.log 2>&1; then
+              echo "Call travel regression missed the old idle-only measurement"; exit 1
+            fi
+            tail -n 18 focused-call-travel-negative.log
+            grep -q 'call travel counts.*FAIL' focused-call-travel-negative.log
+            cp /tmp/th-rc2-research-fixed.c src/three_horizons_research.c
+            trap - EXIT
+            for suite in research_calls research_menu photo_palette; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_${suite}.c" -j2 2>&1 | tee "focused-${suite}.log"
+              ! grep -q "No tests found" "focused-${suite}.log"
+            done
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 Cut" ]; then
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_field_moves.c" -j2 2>&1 | tee focused-field-moves.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 state" ]; then
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons revision9" -j2 2>&1 | tee focused-legacy-state.log
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons playtest12 repeated Continue" -j2 2>&1 | tee -a focused-legacy-state.log
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons playtest12 upgrade initializes" -j2 2>&1 | tee -a focused-legacy-state.log
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/save.c" -j2 2>&1 | tee focused-save-layout.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 trainer RUN" ]; then
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons rival loss selects whiteout" -j2 2>&1 | tee focused-rival-loss.log
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons playtest12 Rocket retry" -j2 2>&1 | tee focused-rocket-retry.log
+            ! grep -q "No tests found" focused-rival-loss.log focused-rocket-retry.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 Saffron guard" ]; then
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="Three Horizons playtest13 Daycare" -j2 2>&1 | tee focused-daycare.log
+            ! grep -q "No tests found" focused-daycare.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 first catch" ]; then
+            for capture_filter in "Three Horizons new catch restores" "test/three_horizons_capture_lifecycle.c" "test/three_horizons_capture_ui.c"; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$capture_filter" -j2 2>&1 | tee -a focused-capture-regression.log
+            done
+            ! grep -q "No tests found" focused-capture-regression.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons bridge" ]; then
+            for bridge_filter in "Three Horizons chapter finishes once" "Three Horizons rival loss selects whiteout"; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$bridge_filter" -j2 2>&1 | tee -a focused-bridge.log
+            done
+            ! grep -q "No tests found" focused-bridge.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 aide" ]; then
+            for interaction_filter in "Three Horizons playtest13 Bill" "Three Horizons playtest12 catching supplies" "Three Horizons playtest12 supplies respect"; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$interaction_filter" -j2 2>&1 | tee -a focused-interactions.log
+            done
+            ! grep -q "No tests found" focused-interactions.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 local gym" ]; then
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_field_moves.c" -j2 2>&1 | tee focused-field-moves.log
+            ! grep -q "No tests found" focused-field-moves.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 Rocket" ] && [ "${{ steps.phase.outputs.visual_gate }}" = "cave" ]; then
+            for cave_filter in "Three Horizons playtest13 Moon" "Three Horizons fossil" "test/three_horizons_playtest12_rocket.c" "test/three_horizons_playtest12_team_balls.c"; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$cave_filter" -j2 2>&1 | tee -a focused-cave-regression.log
+            done
+            ! grep -q "No tests found" focused-cave-regression.log
+            python3 -m unittest tools.three_horizons.tests.test_playtest13_moon tools.three_horizons.tests.test_playtest13_fossil tools.three_horizons.tests.test_playtest11_story -v 2>&1 | tee focused-cave-host.log
+          fi
+          if [ "$NATIVE_FILTER" = "Three Horizons playtest13 ship" ] && [ "${{ steps.phase.outputs.visual_gate }}" = "departure" ]; then
+            for migration_filter in "Three Horizons playtest13 state" "Three Horizons playtest13 Bill migration"; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$migration_filter" -j2 2>&1 | tee -a focused-departure-migration.log
+            done
+            ! grep -q "No tests found" focused-departure-migration.log
+            python3 -m unittest tools.three_horizons.tests.test_chapter12_maps tools.three_horizons.tests.test_playtest13_repairs -v 2>&1 | tee focused-departure-host.log
+          fi
+          if [ "$NATIVE_FILTER" = "test/three_horizons_playtest13_species.c" ]; then
+            for systems_filter in "test/three_horizons_starter12.c" "test/three_horizons_evolution.c" "test/three_horizons_training.c" "test/three_horizons_rematches.c"; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$systems_filter" -j2 2>&1 | tee -a focused-systems-regression.log
+            done
+            ! grep -q "No tests found" focused-systems-regression.log
+            python3 -m unittest tools.three_horizons.tests.test_playtest13_training tools.three_horizons.tests.test_playtest13_rematches tools.three_horizons.tests.test_playtest13_bikes -v 2>&1 | tee focused-systems-host.log
+            # Read effective release macros, not test.h's forced species settings.
+            arm-none-eabi-gcc -E -dM -Iinclude -DMODERN=1 -DTESTING=0 -DTHREE_HORIZONS=1 -DEMERALD -x c include/global.h > focused-release-macros.log
+            grep -E '^#define (P_GEN_[1-9]_POKEMON|P_CROSS_GENERATION_EVOS|P_LVL_UP_LEARNSETS|TESTING|THREE_HORIZONS) ' focused-release-macros.log
+          fi
+          if [ "$NATIVE_FILTER" = "test/three_horizons_flash.c" ] || [ "$NATIVE_FILTER" = "test/three_horizons_forest.c" ]; then
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_field_moves.c" -j2 2>&1 | tee focused-cut-compatibility.log
+          fi
+          if [ "$NATIVE_FILTER" = "test/three_horizons_research.c" ]; then
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_state.c" -j2 2>&1 | tee focused-research-migration.log
+            ! grep -q "No tests found" focused-research-migration.log
+            arm-none-eabi-nm -S --size-sort pokemon-three-horizons-test.elf | grep -E 'sResearchEntries|sResearchPhotos|sPhotoFlags|sCallFlags|TH_Research' | tee focused-research-footprint.log
+          fi
+          if [ "$NATIVE_FILTER" = "test/three_horizons_research_calls.c" ]; then
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_research_menu.c" -j2 2>&1 | tee focused-research-menu.log
+            ! grep -q "No tests found" focused-research-menu.log
+          fi
+          if [ "$NATIVE_FILTER" = "test/three_horizons_research_menu.c" ] || [ "$NATIVE_FILTER" = "test/three_horizons_research_calls.c" ]; then
+            for research_filter in "test/three_horizons_research.c" "test/three_horizons_state.c"; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$research_filter" -j2 2>&1 | tee -a focused-research-migration.log
+            done
+            ! grep -q "No tests found" focused-research-migration.log
+          fi
+          for related in $related_sources; do
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$related" -j2 2>&1 | tee -a focused-move-state.log
+          done
+          if [ -n "$related_sources" ]; then
+            ! grep -q "No tests found" focused-move-state.log
+          fi
+          if [ "$NATIVE_FILTER" = "test/three_horizons_tower.c" ]; then
+            make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_rematches.c" -j2 2>&1 | tee focused-tower-rematches.log
+            ! grep -q "No tests found" focused-tower-rematches.log
+          fi
+          git diff --exit-code
+          ! grep -q "No tests found" focused-native.log
+          git rev-parse HEAD > demo-source-commit.txt
+      - name: Focused visual integration candidate
+        if: steps.phase.outputs.mode == 'focused' && (steps.phase.outputs.visual_gate == 'cut' || steps.phase.outputs.visual_gate == 'battle-capture' || steps.phase.outputs.visual_gate == 'interiors' || steps.phase.outputs.visual_gate == 'routes' || steps.phase.outputs.visual_gate == 'interactions' || steps.phase.outputs.visual_gate == 'ship' || steps.phase.outputs.visual_gate == 'locals' || steps.phase.outputs.visual_gate == 'cave' || steps.phase.outputs.visual_gate == 'departure' || steps.phase.outputs.visual_gate == 'systems' || steps.phase.outputs.visual_gate == 'research')
+        shell: bash
+        run: |
+          set -o pipefail
+          make THREE_HORIZONS=1 -j2 -O all 2>&1 | tee demo-build.log
+          test -s pokemon-three-horizons.gba
+          sha256sum pokemon-three-horizons.gba > pokemon-three-horizons.gba.sha256
+          git rev-parse HEAD > demo-source-commit.txt
+          git diff --exit-code
+      - name: Check map contracts
+        if: steps.phase.outputs.mode == 'integration'
+        run: |
+          make -C tools/mapjson
+          set -o pipefail
+          python3 -m unittest discover -s tools/three_horizons/tests -v 2>&1 | tee integration-host.log
+      - name: Build demo
+        if: steps.phase.outputs.mode == 'integration'
+        shell: bash
+        run: |
+          set -o pipefail
+          make THREE_HORIZONS=1 -j2 -O all 2>&1 | tee demo-build.log
+          test -s pokemon-three-horizons.gba
+          python3 tools/three_horizons/check_running_elf.py pokemon-three-horizons.elf | tee running-frames.log
+          arm-none-eabi-gcc -E -dM -Iinclude -DMODERN=1 -DTESTING=0 -DTHREE_HORIZONS=1 -DEMERALD -x c include/global.h > integration-release-macros.log
+          grep -E '^#define (P_GEN_[1-9]_POKEMON|P_CROSS_GENERATION_EVOS|TESTING|THREE_HORIZONS) ' integration-release-macros.log
+          git diff --exit-code
+          sha256sum pokemon-three-horizons.gba > pokemon-three-horizons.gba.sha256
+          git rev-parse HEAD > demo-source-commit.txt
+      - name: Verify legacy-state and clock regressions detect original defects
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/three_horizons_state.c /tmp/th-state.c
+          cp src/three_horizons_clock.c /tmp/th-clock.c
+          trap 'cp /tmp/th-state.c src/three_horizons_state.c; cp /tmp/th-clock.c src/three_horizons_clock.c' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/three_horizons_state.c')
+          s = p.read_text()
+          old = 'void TH_MigrateSaveState(void)\n{'
+          assert old in s
+          p.write_text(s.replace(old, old + '\n    return; // negative control: no migration'))
+          p = Path('src/three_horizons_clock.c')
+          s = p.read_text()
+          old = 'u32 TH_AdvanceVisualClock(u32 real, u32 visual, u32 now, u16 mode)\n{'
+          assert old in s
+          p.write_text(s.replace(old, old + '\n    mode = (u8)mode; // negative control: legacy narrowing'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons revision9" -j2 > revision9-negative.log 2>&1; then
+            echo "State regressions did not detect original defects"; exit 1
+          fi
+          grep -q 'legacy state migration.*FAIL' revision9-negative.log
+          grep -q 'invalid full-width clock.*FAIL' revision9-negative.log
+          cp /tmp/th-state.c src/three_horizons_state.c
+          cp /tmp/th-clock.c src/three_horizons_clock.c
+          git diff --exit-code
+      - name: Verify nickname exit regression detects a stale interrupt
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/naming_screen.c /tmp/th-naming.c
+          trap 'cp /tmp/th-naming.c src/naming_screen.c' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/naming_screen.c')
+          s = p.read_text()
+          old = 'ResetVHBlank();\n        ResetTasks();'
+          assert s.count(old) == 1
+          p.write_text(s.replace(old, 'ResetTasks(); // negative control: stale VBlank'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons native nickname" -j2 > nickname-negative.log 2>&1; then
+            echo "Nickname test did not detect the stale interrupt"; exit 1
+          fi
+          grep -q FAIL nickname-negative.log
+          cp /tmp/th-naming.c src/naming_screen.c
+          git diff --exit-code
+      - name: Test opening progression
+        if: steps.phase.outputs.mode == 'integration'
+        shell: bash
+        run: |
+          set -o pipefail
+          make THREE_HORIZONS=1 check TESTS="Three Horizons revision9" -j2 2>&1 | tee revision9-tests.log
+          # First-catch presentation assertions require real cry playback.
+          make THREE_HORIZONS=1 pokemon-three-horizons-test.elf TESTS="Three Horizons" -j2 2>&1 | tee demo-tests.log
+          tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test arm-none-eabi-objcopy pokemon-three-horizons-test.elf 2>&1 | tee -a demo-tests.log
+          make THREE_HORIZONS=1 check TESTS="test/save.c" -j2 2>&1 | tee -a demo-tests.log
+          ! grep -q "No tests found" demo-tests.log
+      - name: Verify Playtest 12 negative controls
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
+        run: |
+          python3 tools/three_horizons/check_playtest12_controls.py
+          git diff --exit-code
+      - name: Verify focused Playtest 13 negative controls
+        if: steps.phase.outputs.mode == 'integration'
+        run: |
+          python3 tools/three_horizons/check_playtest13_controls.py
+          git diff --exit-code
+      - name: Export source-matched playtest guide
+        if: steps.phase.outputs.mode == 'integration'
+        run: python3 tools/three_horizons/export_encounters.py --revision "$(git rev-parse HEAD)" --playtest 13 --output PLAYTEST_13_ENCOUNTERS.md
+      - name: Verify Playtest 11 scene regressions detect the previous behavior
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/evolution_scene.c /tmp/th11-evolution.c
+          cp src/battle_script_commands.c /tmp/th11-catch.c
+          trap 'cp /tmp/th11-evolution.c src/evolution_scene.c; cp /tmp/th11-catch.c src/battle_script_commands.c' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/evolution_scene.c')
+          s = p.read_text()
+          assert s.count('if (!TH_ResumeBattleEvolutionMusic())') == 2
+          p.write_text(s.replace('if (!TH_ResumeBattleEvolutionMusic())', 'if (TRUE)'))
+          p = Path('src/battle_script_commands.c')
+          s = p.read_text()
+          old = 'ReshowBattleScreenAfterMenu();\n            gBattleCommunication[0] = 6;'
+          assert old in s
+          p.write_text(s.replace(old, 'SetVBlankCallback(VBlankCB_Battle);\n            gBattleCommunication[0]++;'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons evolution returns directly" -j2 > playtest11-evolution-negative.log 2>&1; then
+            echo "Evolution check missed the old music behavior"; exit 1
+          fi
+          grep -q FAIL playtest11-evolution-negative.log
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons new catch restores" -j2 > playtest11-catch-negative.log 2>&1; then
+            echo "Capture check missed the old black backdrop"; exit 1
+          fi
+          grep -q FAIL playtest11-catch-negative.log
+          cp /tmp/th11-evolution.c src/evolution_scene.c
+          cp /tmp/th11-catch.c src/battle_script_commands.c
+          git diff --exit-code
+      - name: Verify first-battle regression catches the original overwrite
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/battle_controllers.c /tmp/th-battle-controllers.c
+          trap 'cp /tmp/th-battle-controllers.c src/battle_controllers.c' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/battle_controllers.c')
+          s = p.read_text()
+          original = 'if (!IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)\n        && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))'
+          assert original in s
+          p.write_text(s.replace(original, 'if (!IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons first rival battle initialization" -j2 > regression-negative.log 2>&1; then
+            echo "Regression failed to detect the overwrite"; exit 1
+          fi
+          grep -q 'FAIL' regression-negative.log
+          cp /tmp/th-battle-controllers.c src/battle_controllers.c
+          make THREE_HORIZONS=1 check TESTS="Three Horizons first rival battle initialization" -j2 > regression-positive.log 2>&1
+          git diff --exit-code
+      - name: Verify palette and fleeing regressions detect original defects
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/battle_ai_main.c /tmp/th-ai.c
+          cp include/constants/event_objects.h /tmp/th-event-objects.h
+          trap 'cp /tmp/th-ai.c src/battle_ai_main.c; cp /tmp/th-event-objects.h include/constants/event_objects.h' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/battle_ai_main.c')
+          s = p.read_text()
+          old = 'if (!IS_FRLG && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)\n        && gAiLogicData->hpPercents[battlerDef] <= 20)'
+          assert old in s
+          p.write_text(s.replace(old, 'if (!IS_FRLG && gAiLogicData->hpPercents[battlerDef] <= 20)'))
+          p = Path('include/constants/event_objects.h')
+          s = p.read_text()
+          p.write_text(s.replace('OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL 0x1300', 'OBJ_EVENT_PAL_TAG_TH_GOLD_NORMAL 0x1200'))
+          PY
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons Gold and weather" -j2 > palette-negative.log 2>&1; then
+            echo "Palette regression did not detect original bug"; exit 1
+          fi
+          grep -q FAIL palette-negative.log
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons first rival can attack" -j2 > flee-negative.log 2>&1; then
+            echo "AI regression did not detect original bug"; exit 1
+          fi
+          grep -q FAIL flee-negative.log
+          cp /tmp/th-ai.c src/battle_ai_main.c
+          cp /tmp/th-event-objects.h include/constants/event_objects.h
+          git diff --exit-code
+      - name: Verify training and capture regression controls
+        if: steps.phase.outputs.mode == 'integration' && steps.phase.outputs.legacy_controls == 'true'
+        shell: bash
+        run: |
+          set -o pipefail
+          cp src/three_horizons_training.c /tmp/th-training.c
+          cp src/three_horizons_capture.c /tmp/th-capture.c
+          trap 'cp /tmp/th-training.c src/three_horizons_training.c; cp /tmp/th-capture.c src/three_horizons_capture.c' EXIT
+          python3 - <<'PYCODE'
+          from pathlib import Path
+          p = Path('src/three_horizons_training.c')
+          s = p.read_text()
+          assert '!(mask & (1 << i))' in s
+          p.write_text(s.replace('!(mask & (1 << i))', 'TRUE'))
+          p = Path('src/three_horizons_capture.c')
+          s = p.read_text()
+          assert '!TH_PartnerOptionsValid(options)' in s
+          # Species-aware validation also checks the stat limits now. Remove
+          # both gates in the mutant so illegal IV/EV edits actually reach it.
+          species_gate = '!TH_PartnerOptionsValidForSpecies(GetMonData(mon, MON_DATA_SPECIES), options)'
+          assert species_gate in s
+          s = s.replace('!TH_PartnerOptionsValid(options)', 'options == NULL')
+          p.write_text(s.replace(species_gate, 'FALSE'))
+          PYCODE
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons training kit delivers" -j2 > kit-negative.log 2>&1; then
+            echo "Kit test did not detect duplicate delivery"; exit 1
+          fi
+          grep -q FAIL kit-negative.log
+          if make THREE_HORIZONS=1 check TESTS="Three Horizons caught Pokemon retain" -j2 > capture-negative.log 2>&1; then
+            echo "Capture test did not detect illegal edits"; exit 1
+          fi
+          grep -q FAIL capture-negative.log
+          cp /tmp/th-training.c src/three_horizons_training.c
+          cp /tmp/th-capture.c src/three_horizons_capture.c
+          make THREE_HORIZONS=1 check TESTS="Three Horizons" -j2 > training-capture-positive.log 2>&1
+          git diff --exit-code
+      - name: Check trainer regeneration when switching build modes
+        if: steps.phase.outputs.mode == 'integration'
+        shell: bash
+        run: |
+          set -o pipefail
+          make THREE_HORIZONS=0 generated > trainer-mode-switch.log 2>&1
+          ! grep -q 'TRAINER_TH_ROBIN_BULBASAUR' src/data/trainers.h
+          make THREE_HORIZONS=1 generated >> trainer-mode-switch.log 2>&1
+          grep -q 'TRAINER_TH_ROBIN_BULBASAUR' src/data/trainers.h
+          grep -q 'BLUE' src/data/trainers.h
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: three-horizons-opening
+          retention-days: 14
+          path: |
+            pokemon-three-horizons.gba
+            pokemon-three-horizons.elf
+            pokemon-three-horizons.map
+            pokemon-three-horizons.gba.sha256
+            PLAYTEST_13_ENCOUNTERS.md
+            integration-host.log
+            integration-release-macros.log
+            playtest13-*.log
+            docs/three_horizons/PLAYTEST_12.md
+            docs/superpowers/specs/2026-09-27-playtest12-starter-moves.md
+            playtest12-*-negative.log
+            demo-build.log
+            running-frames.log
+            focused-state-negative.log
+            focused-state.log
+            focused-photo_palette.log
+            focused-photo-palette.log
+            focused-call-travel-negative.log
+            focused-research_calls.log
+            focused-research_menu.log
+            focused-cut-negative.log
+            focused-cut-compatibility.log
+            focused-field-moves.log
+            focused-legacy-state.log
+            focused-save-layout.log
+            focused-host.log
+            focused-native.log
+            focused-counter-negative.log
+            focused-systems-regression.log
+            focused-systems-host.log
+            focused-release-macros.log
+            focused-research-migration.log
+            focused-research-menu.log
+            focused-research-footprint.log
+            focused-rocket-record-negative.log
+            focused-rocket-record-positive.log
+            focused-capture-regression.log
+            focused-test-sources.log
+            focused-rival-loss.log
+            focused-rocket-retry.log
+            focused-move-state.log
+            focused-tower-rematches.log
+            focused-bridge.log
+            focused-interactions.log
+            demo-tests.log
+            revision9-tests.log
+            revision9-negative.log
+            nickname-negative.log
+            demo-source-commit.txt
+            demo-environment.txt
+            kit-negative.log
+            capture-negative.log
+            training-capture-positive.log
+            trainer-mode-switch.log
+            regression-negative.log
+            regression-positive.log
+            palette-negative.log
+            flee-negative.log
+            playtest11-evolution-negative.log
+            playtest11-catch-negative.log
+            docs/three_horizons/OPENING_DEMO_TESTS.md

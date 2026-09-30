@@ -228,14 +228,28 @@ static void PrintRegionMapSecName(void)
     }
 }
 
+static const u8 *GetFieldRegionMapTitle(void)
+{
+#if THREE_HORIZONS
+    return GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_HOENN ? gText_Hoenn : gText_Kanto;
+#else
+    if (IS_FRLG)
+        return gText_Kanto;
+    return gText_Hoenn;
+#endif
+}
+
+#if TESTING && THREE_HORIZONS
+const u8 *Test_TH_FieldRegionMapTitle(void)
+{
+    return GetFieldRegionMapTitle();
+}
+#endif
+
 static void PrintTitleWindowText(void)
 {
     static const u8 FlyPromptText[] = _("{R_BUTTON} FLY");
-    const u8 *region;
-    if (IS_FRLG)
-        region = gText_Kanto;
-    else
-        region = gText_Hoenn;
+    const u8 *region = GetFieldRegionMapTitle();
     u32 hoennOffset = GetStringCenterAlignXOffset(FONT_NORMAL, region, 0x38);
     u32 flyOffset = GetStringCenterAlignXOffset(FONT_NORMAL, FlyPromptText, 0x38);
 

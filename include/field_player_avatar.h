@@ -74,4 +74,5 @@ void UpdateSpinData(void);
 void ResetSpinTimer(void);
 bool32 CanTriggerSpinEvolution();
 
+u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender);
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

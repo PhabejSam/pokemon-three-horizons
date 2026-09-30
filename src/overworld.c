@@ -1,4 +1,8 @@
 #include "global.h"
+#include "three_horizons.h"
+#include "three_horizons_rematches.h"
+#include "three_horizons_research.h"
+#include "constants/three_horizons.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -459,6 +463,9 @@ void Overworld_ResetBattleFlagsAndVars(void)
 
 static void Overworld_ResetStateAfterWhiteOut(void)
 {
+#if THREE_HORIZONS
+    TH13_ResetRematches();
+#endif
     ResetInitialPlayerAvatarState();
     FlagClear(FLAG_SYS_CYCLING_ROAD);
     FlagClear(FLAG_SYS_CRUISE_MODE);
@@ -532,6 +539,41 @@ void ApplyNewEncryptionKeyToGameStats(u32 newKey)
         ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->gameStats[i], newKey);
 }
 
+#if THREE_HORIZONS
+static void PrepareThreeHorizonsCutTemplates(void)
+{
+    u32 used = 0;
+    u32 i, flag;
+
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_TH_HOME_2F))
+        return;
+
+    // Early Kanto clones omitted obstacle hide flags. Use the engine's existing
+    // map-session flags, so removal, camera refresh and saved templates agree.
+    // Keep authored assignments (including the shipped Vermilion tree).
+    for (i = 0; i < gMapHeader.events->objectEventCount; i++)
+    {
+        flag = gSaveBlock1Ptr->objectEventTemplates[i].flagId;
+        if (flag >= FLAG_TEMP_11 && flag <= FLAG_TEMP_1F)
+            used |= 1u << flag;
+    }
+    for (i = 0; i < gMapHeader.events->objectEventCount; i++)
+    {
+        struct ObjectEventTemplate *tree = &gSaveBlock1Ptr->objectEventTemplates[i];
+        if (tree->flagId != 0 || (tree->graphicsId != OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG
+                             && tree->graphicsId != OBJ_EVENT_GFX_CUTTABLE_TREE))
+            continue;
+        for (flag = FLAG_TEMP_11; flag <= FLAG_TEMP_1F; flag++)
+            if (!(used & (1u << flag)))
+                break;
+        // The map-contract test rejects a chapter map that exhausts this pool.
+        fatal_assertf(flag <= FLAG_TEMP_1F);
+        tree->flagId = flag;
+        used |= 1u << flag;
+    }
+}
+#endif
+
 void LoadObjEventTemplatesFromHeader(void)
 {
     // Clear map object templates
@@ -561,6 +603,9 @@ void LoadObjEventTemplatesFromHeader(void)
             gSaveBlock1Ptr->objectEventTemplates[i] = gMapHeader.events->objectEvents[i];
         }
     }
+#if THREE_HORIZONS
+    PrepareThreeHorizonsCutTemplates();
+#endif
 }
 
 void LoadSaveblockObjEventScripts(void)
@@ -1667,6 +1712,12 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
             LockPlayerFieldControls();
             HideMapNamePopUpWindow();
         }
+#if THREE_HORIZONS
+        else if (TH_ResearchTryStartPendingCall())
+        {
+            HideMapNamePopUpWindow();
+        }
+#endif
         else
         {
             PlayerStep(inputStruct.dpadDirection, newKeys, heldKeys);
@@ -1702,8 +1753,17 @@ void UpdateTimeOfDay(bool32 updateBlend)
 {
     s32 hours, minutes;
     RtcCalcLocalTime();
+#if THREE_HORIZONS
+    u32 visualTime = TH_GetVisualTimeSeconds();
+    hours = sHoursOverride ? sHoursOverride : visualTime / 3600;
+#else
     hours = sHoursOverride ? sHoursOverride : gLocalTime.hours;
+#endif
+#if THREE_HORIZONS
+    minutes = sHoursOverride ? 0 : (visualTime / 60) % 60;
+#else
     minutes = sHoursOverride ? 0 : gLocalTime.minutes;
+#endif
 
     if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
     {
@@ -1938,7 +1998,7 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
-    if (IS_FRLG)
+    if (IS_FRLG || THREE_HORIZONS)
         gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     else
         gFieldCallback = ExecuteTruckSequence;
@@ -2116,6 +2176,17 @@ void CB2_ContinueSavedGame(void)
 {
     u8 trainerHillMapId;
 
+#if THREE_HORIZONS
+    bool32 refreshChapterMap = (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK) != TH_STATE_VERSION_CURRENT;
+    const struct WarpData savedChapterLocation = gSaveBlock1Ptr->location;
+    const u16 savedChapterLayout = gSaveBlock1Ptr->mapLayoutId;
+    TH_MigrateSaveState();
+    TH13_ResetRematches();
+    // A recovery relocation also needs new templates and a fresh map view.
+    refreshChapterMap |= savedChapterLocation.mapGroup != gSaveBlock1Ptr->location.mapGroup
+        || savedChapterLocation.mapNum != gSaveBlock1Ptr->location.mapNum
+        || savedChapterLayout != gSaveBlock1Ptr->mapLayoutId;
+#endif
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();
@@ -2129,6 +2200,10 @@ void CB2_ContinueSavedGame(void)
         LoadBattlePyramidFloorObjectEventScripts();
     else if (trainerHillMapId != 0 && trainerHillMapId != TRAINER_HILL_ENTRANCE)
         LoadTrainerHillFloorObjectEventScripts();
+#if THREE_HORIZONS
+    else if (refreshChapterMap)
+        LoadObjEventTemplatesFromHeader();
+#endif
     else
         LoadSaveblockObjEventScripts();
 
@@ -2155,6 +2230,18 @@ void CB2_ContinueSavedGame(void)
         TryPutTodaysRivalTrainerOnAir();
         SetMainCallback2(CB2_LoadMap);
     }
+#if THREE_HORIZONS
+    else if (refreshChapterMap)
+    {
+        // An old build may have different object slots, coordinates and scripts.
+        // A normal same-map load rebuilds both templates and object instances.
+        SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum,
+            WARP_ID_NONE, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
+        WarpIntoMap();
+        gFieldCallback = FieldCB_FadeTryShowMapPopup;
+        SetMainCallback2(CB2_LoadMap);
+    }
+#endif
     else
     {
         TryPutTodaysRivalTrainerOnAir();

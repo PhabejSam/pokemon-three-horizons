@@ -8,5 +8,16 @@ AUTO_GEN_TARGETS += test/battle/trainer_control.h
 AUTO_GEN_TARGETS += test/battle/partner_control.h
 AUTO_GEN_TARGETS += src/data/debug_trainers.h
 
-%.h: %.party $(TRAINERPROC)
+# Generated headers are shared between build directories. Invalidate them when
+# preprocessing changes, including switching from the original game to the demo.
+.PHONY: force-trainer-config
+force-trainer-config:
+
+build/trainer-config.txt: force-trainer-config
+	@mkdir -p build
+	@printf '%s\n' '$(CPPFLAGS)' > $@.tmp
+	@cmp -s $@.tmp $@ || cp $@.tmp $@
+	@rm -f $@.tmp
+
+%.h: %.party $(TRAINERPROC) build/trainer-config.txt
 	$(CPP) $(CPPFLAGS) -traditional-cpp - < $< | $(TRAINERPROC) -o $@ -i $< -

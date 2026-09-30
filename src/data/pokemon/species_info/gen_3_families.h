@@ -83,7 +83,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 95,
         .baseSpAttack  = 85,
         .baseSpDefense = 65,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_GRASS, TYPE_DRAGON),
+#else
         .types = MON_TYPES(TYPE_GRASS),
+#endif
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 142 : 141,
         .evYield_Speed = 2,
@@ -140,7 +144,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gOverworldPalette_Grovyle,
             gShinyOverworldPalette_Grovyle
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHGrovyleLevelUpLearnset,
+#else
         .levelUpLearnset = sGrovyleLevelUpLearnset,
+#endif
         .teachableLearnset = sGrovyleTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SCEPTILE}),
     },
@@ -153,7 +161,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 120,
         .baseSpAttack  = 105,
         .baseSpDefense = 85,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_GRASS, TYPE_DRAGON),
+#else
         .types = MON_TYPES(TYPE_GRASS),
+#endif
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 265,
@@ -214,7 +226,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gOverworldPalette_Sceptile,
             gShinyOverworldPalette_Sceptile
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHSceptileLevelUpLearnset,
+#else
         .levelUpLearnset = sSceptileLevelUpLearnset,
+#endif
         .teachableLearnset = sSceptileTeachableLearnset,
         .formSpeciesIdTable = sSceptileFormSpeciesIdTable,
         .formChangeTable = sSceptileFormChangeTable,
@@ -457,7 +473,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHCombuskenLevelUpLearnset,
+#else
         .levelUpLearnset = sCombuskenLevelUpLearnset,
+#endif
         .teachableLearnset = sCombuskenTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_BLAZIKEN}),
     },
@@ -546,7 +566,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHBlazikenLevelUpLearnset,
+#else
         .levelUpLearnset = sBlazikenLevelUpLearnset,
+#endif
         .teachableLearnset = sBlazikenTeachableLearnset,
         .formSpeciesIdTable = sBlazikenFormSpeciesIdTable,
         .formChangeTable = sBlazikenFormChangeTable,
@@ -768,7 +792,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gOverworldPalette_Marshtomp,
             gShinyOverworldPalette_Marshtomp
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHMarshtompLevelUpLearnset,
+#else
         .levelUpLearnset = sMarshtompLevelUpLearnset,
+#endif
         .teachableLearnset = sMarshtompTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SWAMPERT}),
     },
@@ -844,7 +872,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gOverworldPalette_Swampert,
             gShinyOverworldPalette_Swampert
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHSwampertLevelUpLearnset,
+#else
         .levelUpLearnset = sSwampertLevelUpLearnset,
+#endif
         .teachableLearnset = sSwampertTeachableLearnset,
         .formSpeciesIdTable = sSwampertFormSpeciesIdTable,
         .formChangeTable = sSwampertFormChangeTable,

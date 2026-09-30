@@ -151,7 +151,8 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     BattleAI_SetupItems();
     BattleAI_SetupFlags();
 
-    if (!IS_FRLG && gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    if (!IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+        && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
         CreateWildMon(SPECIES_ZIGZAGOON, 2);
 }
 
@@ -2673,7 +2674,7 @@ void BtlController_HandlePrintString(enum BattlerId battler)
     // else
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
 
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+    if (IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) && GetBattlerSide(battler) == B_SIDE_OPPONENT)
     {
         switch (*stringId)
         {

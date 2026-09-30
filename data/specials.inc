@@ -638,3 +638,33 @@ gSpecials::
 	def_special UpdateTrainerCardPhotoIcons
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
+
+#if THREE_HORIZONS
+    def_special TH_ChangeOutfit
+    def_special TH_ScriptGiveStarter
+    def_special TH_ScriptGiveSupplies
+    def_special TH_TryGiveChapter12Supplies
+    def_special TH12_BeginRocketPair
+    def_special TH12_CompleteRocketPair
+    def_special TH12_InitSurgeSwitches
+    def_special TH12_CheckSurgeSwitch
+    def_special TH_FinishRivalBattle
+    def_special TH_OpenRewardEditor
+    def_special TH_ScriptGiveReward
+    def_special TH_ScriptBuyMagikarp
+    def_special TH_ScriptCheckChapter
+    def_special TH_ScriptReviveFossil
+    def_special TH_ScriptRewardChoices
+    def_special TH_OpenPartnerEditor
+    def_special TH_ScriptGiveConfiguredStarter
+    def_special TH_ScriptDeliverTrainingKit
+    def_special TH_ScriptImproveIVs
+    def_special TH_RefreshFollower
+    def_special TH_ScriptResearchPhotoStatus
+    def_special TH_ScriptTakeResearchPhoto
+    def_special TH_ScriptResearchObserve
+    def_special TH_ScriptResearchQueueCall
+    def_special TH_ScriptResearchCompleteCall
+    def_special TH_ScriptBeginPhotoFlash
+    def_special TH_ScriptEndPhotoFlash
+#endif

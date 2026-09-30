@@ -21,6 +21,9 @@ enum InGameTradeID
     INGAME_TRADE_ELECTRODE,
     INGAME_TRADE_TANGELA,
     INGAME_TRADE_SEEL,
+#if THREE_HORIZONS
+    INGAME_TRADE_TH13_SKARMORY,
+#endif
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

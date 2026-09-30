@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "constants/trainers.h"
 
 static enum TrainerPicID GetEmeraldTrainerPic(enum Gender gender)
@@ -17,6 +18,10 @@ static enum TrainerPicID GetKantoTrainerPic(enum Gender gender)
 
 enum TrainerPicID GetPlayerTrainerPic(enum Gender gender, enum GameVersion version)
 {
+#if THREE_HORIZONS
+    if (version == GAME_VERSION)
+        return TH_GetTrainerPic();
+#endif
     switch (version)
     {
         case VERSION_SAPPHIRE:

@@ -1,0 +1,221 @@
+{
+  "maps": [
+    {
+      "source": "Route5_PokemonDayCare_Frlg",
+      "name": "TH13_Route5_PokemonDayCare",
+      "id": "MAP_TH13_ROUTE5_POKEMON_DAY_CARE",
+      "layout": "LAYOUT_ROUTE5_POKEMON_DAY_CARE",
+      "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "Route11_Frlg",
+      "name": "TH13_Route11",
+      "id": "MAP_TH13_ROUTE11",
+      "layout": "LAYOUT_ROUTE11",
+      "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "DiglettsCave_SouthEntrance_Frlg",
+      "name": "TH13_DiglettsCave_SouthEntrance",
+      "id": "MAP_TH13_DIGLETTS_CAVE_SOUTH_ENTRANCE",
+      "layout": "LAYOUT_DIGLETTS_CAVE_SOUTH_ENTRANCE",
+      "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "DiglettsCave_B1F_Frlg",
+      "name": "TH13_DiglettsCave_B1F",
+      "id": "MAP_TH13_DIGLETTS_CAVE_B1F",
+      "layout": "LAYOUT_DIGLETTS_CAVE_B1F",
+      "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "DiglettsCave_NorthEntrance_Frlg",
+      "name": "TH13_DiglettsCave_NorthEntrance",
+      "id": "MAP_TH13_DIGLETTS_CAVE_NORTH_ENTRANCE",
+      "layout": "LAYOUT_DIGLETTS_CAVE_NORTH_ENTRANCE",
+      "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "Route2_EastBuilding_Frlg",
+      "name": "TH13_Route2_EastBuilding",
+      "id": "MAP_TH13_ROUTE2_EAST_BUILDING",
+      "layout": "LAYOUT_ROUTE2_ENTRANCE",
+      "script_owner": "chapter13_route2.inc"
+    },
+    {
+      "source": "Route2_House_Frlg",
+      "name": "TH13_Route2_House",
+      "id": "MAP_TH13_ROUTE2_HOUSE",
+      "layout": "LAYOUT_HOUSE2_FRLG",
+      "script_owner": "chapter13_route2.inc"
+    },
+    {
+      "source": "Route9_Frlg",
+      "name": "TH13_Route9",
+      "id": "MAP_TH13_ROUTE9",
+      "layout": "LAYOUT_ROUTE9",
+      "script_owner": "chapter13_routes.inc"
+    },
+    {
+      "source": "Route10_Frlg",
+      "name": "TH13_Route10",
+      "id": "MAP_TH13_ROUTE10",
+      "layout": "LAYOUT_ROUTE10",
+      "script_owner": "chapter13_rock_tunnel.inc"
+    },
+    {
+      "source": "RockTunnel_1F_Frlg",
+      "name": "TH13_RockTunnel_1F",
+      "id": "MAP_TH13_ROCK_TUNNEL_1F",
+      "layout": "LAYOUT_ROCK_TUNNEL_1F",
+      "script_owner": "chapter13_rock_tunnel.inc"
+    },
+    {
+      "source": "RockTunnel_B1F_Frlg",
+      "name": "TH13_RockTunnel_B1F",
+      "id": "MAP_TH13_ROCK_TUNNEL_B1F",
+      "layout": "LAYOUT_ROCK_TUNNEL_B1F",
+      "script_owner": "chapter13_rock_tunnel.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_1F_Frlg",
+      "name": "TH13_Route10_PokemonCenter_1F",
+      "id": "MAP_TH13_ROUTE10_POKEMON_CENTER_1F",
+      "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG",
+      "script_owner": "chapter13_rock_tunnel.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_ViridianCenter2F",
+      "id": "MAP_TH13_VIRIDIAN_CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_PewterCenter2F",
+      "id": "MAP_TH13_PEWTER_CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_CeruleanCenter2F",
+      "id": "MAP_TH13_CERULEAN_CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_Route4Center2F",
+      "id": "MAP_TH13_ROUTE4CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_VermilionCenter2F",
+      "id": "MAP_TH13_VERMILION_CENTER2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "Route10_PokemonCenter_2F_Frlg",
+      "name": "TH13_Route10_PokemonCenter_2F",
+      "id": "MAP_TH13_ROUTE10_POKEMON_CENTER_2F",
+      "layout": "LAYOUT_POKEMON_CENTER_2F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "LavenderTown_Frlg",
+      "name": "TH13_LavenderTown",
+      "id": "MAP_TH13_LAVENDER_TOWN",
+      "layout": "LAYOUT_LAVENDER_TOWN",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_PokemonCenter_1F_Frlg",
+      "name": "TH13_LavenderTown_PokemonCenter_1F",
+      "id": "MAP_TH13_LAVENDER_TOWN_POKEMON_CENTER_1F",
+      "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_Mart_Frlg",
+      "name": "TH13_LavenderTown_Mart",
+      "id": "MAP_TH13_LAVENDER_TOWN_MART",
+      "layout": "LAYOUT_MART_FRLG",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_House1_Frlg",
+      "name": "TH13_LavenderTown_House1",
+      "id": "MAP_TH13_LAVENDER_TOWN_HOUSE1",
+      "layout": "LAYOUT_HOUSE5_FRLG",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_House2_Frlg",
+      "name": "TH13_LavenderTown_House2",
+      "id": "MAP_TH13_LAVENDER_TOWN_HOUSE2",
+      "layout": "LAYOUT_HOUSE5_FRLG",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_VolunteerPokemonHouse_Frlg",
+      "name": "TH13_LavenderTown_VolunteerPokemonHouse",
+      "id": "MAP_TH13_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE",
+      "layout": "LAYOUT_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE",
+      "script_owner": "chapter13_lavender.inc"
+    },
+    {
+      "source": "LavenderTown_PokemonCenter_2F_Frlg",
+      "name": "TH13_LavenderTown_PokemonCenter_2F",
+      "id": "MAP_TH13_LAVENDER_TOWN_POKEMON_CENTER_2F",
+      "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG",
+      "script_owner": "chapter13_centers.inc"
+    },
+    {
+      "source": "PokemonTower_1F_Frlg",
+      "name": "TH13_PokemonTower_1F",
+      "id": "MAP_TH13_POKEMON_TOWER_1F",
+      "layout": "LAYOUT_POKEMON_TOWER_1F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_2F_Frlg",
+      "name": "TH13_PokemonTower_2F",
+      "id": "MAP_TH13_POKEMON_TOWER_2F",
+      "layout": "LAYOUT_POKEMON_TOWER_2F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_3F_Frlg",
+      "name": "TH13_PokemonTower_3F",
+      "id": "MAP_TH13_POKEMON_TOWER_3F",
+      "layout": "LAYOUT_POKEMON_TOWER_3F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_4F_Frlg",
+      "name": "TH13_PokemonTower_4F",
+      "id": "MAP_TH13_POKEMON_TOWER_4F",
+      "layout": "LAYOUT_POKEMON_TOWER_4F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_5F_Frlg",
+      "name": "TH13_PokemonTower_5F",
+      "id": "MAP_TH13_POKEMON_TOWER_5F",
+      "layout": "LAYOUT_POKEMON_TOWER_5F",
+      "script_owner": "chapter13_tower.inc"
+    },
+    {
+      "source": "PokemonTower_6F_Frlg",
+      "name": "TH13_PokemonTower_6F",
+      "id": "MAP_TH13_POKEMON_TOWER_6F",
+      "layout": "LAYOUT_POKEMON_TOWER_6F",
+      "script_owner": "chapter13_tower.inc"
+    }
+  ]
+}

@@ -27,6 +27,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "region_map.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -41,6 +42,7 @@
 #include "constants/event_objects.h"
 #include "constants/field_poison.h"
 #include "constants/layouts.h"
+#include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
@@ -475,12 +477,26 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     return bgEvent->bgUnion.script;
 }
 
+#if TESTING && THREE_HORIZONS
+const u8 *Test_TH_MetatileScript(u8 behavior)
+{
+    struct MapPosition position = {0};
+    return GetInteractedMetatileScript(&position, behavior, DIR_NORTH);
+}
+#endif
+
 static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatileBehavior, enum Direction direction)
 {
     s8 elevation;
 
     if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
     {
+#if THREE_HORIZONS
+        extern const u8 TH_EventScript_KantoTV[];
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_HOME_2F)
+            && gMapHeader.mapLayout->isFrlg)
+            return TH_EventScript_KantoTV;
+#endif
         if (IS_FRLG)
             return EventScript_PlayerFacingTVScreen;
         else
@@ -499,7 +515,15 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     if (MetatileBehavior_IsTrickHousePuzzleDoor(metatileBehavior) == TRUE)
         return Route110_TrickHousePuzzle_EventScript_Door;
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
+    {
+#if THREE_HORIZONS
+        extern const u8 TH_EventScript_KantoRegionMap[];
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_HOME_2F)
+            && GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_KANTO)
+            return TH_EventScript_KantoRegionMap;
+#endif
         return EventScript_RegionMap;
+    }
     if (MetatileBehavior_IsRunningShoesManual(metatileBehavior) == TRUE)
         return EventScript_RunningShoesManual;
     if (MetatileBehavior_IsPictureBookShelf(metatileBehavior) == TRUE)

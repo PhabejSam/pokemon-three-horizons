@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "frontier_util.h"
 #include "battle_setup.h"
 #include "battle_util.h"
@@ -2300,6 +2301,15 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1);
 
     gSpecialVar_Result = PARTY_SIZE;
+#if THREE_HORIZONS
+    if (TH_IsHMFieldMove(fieldMove))
+    {
+        gSpecialVar_Result = TH_FindFieldMoveUser(fieldMove);
+        if (gSpecialVar_Result < PARTY_SIZE)
+            gSpecialVar_0x8004 = GetMonData(&gPlayerParty[gSpecialVar_Result], MON_DATA_SPECIES);
+        return FALSE;
+    }
+#endif
     if (doUnlockedCheck && !IsFieldMoveUnlocked(fieldMove))
         return FALSE;
 

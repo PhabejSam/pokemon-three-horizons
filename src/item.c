@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "item.h"
 #include "berry.h"
 #include "pokeball.h"
@@ -819,7 +820,11 @@ const u8 *GetItemName(enum Item itemId)
 
 u32 GetItemPrice(enum Item itemId)
 {
+#if THREE_HORIZONS
+    return TH_GetTrainingItemPrice(SanitizeItemId(itemId), gItemsInfo[SanitizeItemId(itemId)].price);
+#else
     return gItemsInfo[SanitizeItemId(itemId)].price;
+#endif
 }
 
 static bool32 DoesItemHavePluralName(enum Item itemId)

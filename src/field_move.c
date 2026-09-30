@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "event_data.h"
 #include "field_move.h"
 #include "fldeff.h"
@@ -21,6 +22,10 @@ static bool32 IsAlwaysTrue(enum FieldMove fieldMove)
 
 static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
 {
+#if THREE_HORIZONS
+    if (TH_IsHMFieldMove(fieldMove))
+        return TH_FieldMoveUnlocked(fieldMove);
+#endif
     return FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET);
 }
 

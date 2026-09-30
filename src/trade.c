@@ -4554,7 +4554,12 @@ static void BufferInGameTradeMonName(void)
 {
     u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8005];
+#if THREE_HORIZONS
+    // 0x8005 identifies the trade record; 0x8004 identifies the selected mon.
+    GetBoxMonData(GetSelectedBoxMonFromPcOrParty(), MON_DATA_NICKNAME, nickname);
+#else
     GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
+#endif
     StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(gStringVar2, GetSpeciesName(inGameTrade->species));
 }
@@ -5115,3 +5120,28 @@ static void CB2_SaveAndEndWirelessTrade(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
+
+#if defined(TESTING) && THREE_HORIZONS
+u16 TH_TestFindSkarmoryTrade(void)
+{
+    for(u32 i=0;i<ARRAY_COUNT(sIngameTrades);i++)
+        if(sIngameTrades[i].species==SPECIES_SKARMORY && sIngameTrades[i].requestedSpecies==SPECIES_ZUBAT)
+            return i;
+    return 0xffff;
+}
+
+void TH_TestFinishInGameTrade(u8 slot)
+{
+    typeof(*sTradeAnim) temp={0};
+    typeof(sTradeAnim) old=sTradeAnim;
+    sTradeAnim=&temp;
+    TradeMons(slot,0);
+    sTradeAnim=old;
+}
+
+void TH_TestBufferInGameTradeMonName(void)
+{
+    BufferInGameTradeMonName();
+}
+#endif
+

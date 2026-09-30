@@ -5150,7 +5150,13 @@ static void HandleEndTurn_BattleLost(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && TRAINER_BATTLE_PARAM.earlyRival)
         {
+#if THREE_HORIZONS
+            // Later rivals use their win speech too, but only the opening
+            // battle's explicit healing flag suppresses money loss/whiteout.
+            if (GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER)
+#else
             if (TRAINER_BATTLE_PARAM.earlyRival)
+#endif
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1; // Dont do white out text
             else
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2; // Do white out text
@@ -5165,6 +5171,27 @@ static void HandleEndTurn_BattleLost(void)
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
+
+#if TESTING && THREE_HORIZONS
+// Expose the real handler only to the native regression ROM. Its dispatch
+// table remains private, and release builds gain no test entry point.
+void Test_TH_HandleBattleLost(void)
+{
+    HandleEndTurn_BattleLost();
+}
+
+bool32 Test_TH_ChooseRunAction(void)
+{
+    // Feed the same controller reply as choosing RUN; leave unrelated battlers
+    // waiting so this probe only advances the player's action-selection owner.
+    for (u32 i = 0; i < gBattlersCount; i++)
+        gBattleCommunication[i] = 0xFF;
+    gBattleCommunication[0] = STATE_WAIT_ACTION_CHOSEN;
+    gBattleResources->bufferB[0][1] = B_ACTION_RUN;
+    HandleTurnActionSelectionState();
+    return gBattleCommunication[0] == STATE_BEFORE_ACTION_CHOSEN;
+}
+#endif
 
 static void HandleEndTurn_RanFromBattle(void)
 {

@@ -1,4 +1,6 @@
 #include "global.h"
+#include "three_horizons.h"
+#include "constants/three_horizons.h"
 #include "event_data.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
@@ -90,15 +92,23 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     [MPS_VIRIDIAN_FOREST] = {
         .mapsec = MAPSEC_VIRIDIAN_FOREST,
         .type = MPS_TYPE_FADE_IN,
+#if THREE_HORIZONS
+        .flagId = FLAG_TH_SEEN_FOREST,
+#else
         .flagId = FLAG_WORLD_MAP_VIRIDIAN_FOREST,
+#endif
         .tilesptr = sViridianForestMapPreviewTiles,
         .tilemapptr = sViridianForestMapPreviewTilemap,
         .palptr = sViridianForestMapPreviewPalette
     },
     [MPS_MT_MOON] = {
         .mapsec = MAPSEC_MT_MOON,
-        .type = MPS_TYPE_CAVE,
+        .type = THREE_HORIZONS ? MPS_TYPE_FADE_IN : MPS_TYPE_CAVE,
+#if THREE_HORIZONS
+        .flagId = FLAG_TH_SEEN_MT_MOON,
+#else
         .flagId = FLAG_WORLD_MAP_MT_MOON_1F,
+#endif
         .tilesptr = sMtMoonMapPreviewTiles,
         .tilemapptr = sMtMoonMapPreviewTilemap,
         .palptr = sMtMoonMapPreviewPalette
@@ -341,6 +351,10 @@ static const struct BgTemplate sMapPreviewBgTemplate[1] = {
 
 bool32 ShouldRunMapPreview(void)
 {
+#if THREE_HORIZONS
+    if (!TH_ShouldShowAreaCard(GetLastUsedWarpMapSectionId(), gMapHeader.regionMapSectionId))
+        return FALSE;
+#endif
     if (MPS_ENABLE_MAP_PREVIEWS && FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE && GetLastUsedWarpMapSectionId() != gMapHeader.regionMapSectionId)
         return TRUE;
 

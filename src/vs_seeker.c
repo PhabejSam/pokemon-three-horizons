@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons_rematches.h"
 #include "task.h"
 #include "event_object_movement.h"
 #include "item_use.h"
@@ -69,7 +70,12 @@ struct VsSeekerTrainerInfo
 
 struct VsSeekerStruct
 {
+#if THREE_HORIZONS
+    // One sentinel beyond the maximum visible object count.
+    struct VsSeekerTrainerInfo trainerInfo[OBJECT_EVENTS_COUNT + 1];
+#else
     struct VsSeekerTrainerInfo trainerInfo[OBJECT_EVENTS_COUNT];
+#endif
     u8 trainerIdxArray[OBJECT_EVENTS_COUNT];
     u8 runningBehaviourEtcArray[OBJECT_EVENTS_COUNT];
     u8 numRematchableTrainers;
@@ -230,6 +236,9 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
 
 bool8 UpdateVsSeekerStepCounter(void)
 {
+#if THREE_HORIZONS
+    return FALSE;
+#endif
 #if FREE_MATCH_CALL == FALSE
     u8 x = 0;
 
@@ -266,6 +275,10 @@ bool8 UpdateVsSeekerStepCounter(void)
 
 void MapResetTrainerRematches(u16 mapGroup, u16 mapNum)
 {
+#if THREE_HORIZONS
+    TH13_ResetRematches();
+    return;
+#endif
     if (!I_VS_SEEKER_CHARGING) return;
 
     FlagClear(I_VS_SEEKER_CHARGING);
@@ -321,6 +334,11 @@ void Task_InitVsSeekerAndCheckForTrainersOnScreen(u8 taskId)
     u32 respval;
 
     if (!I_VS_SEEKER_CHARGING) return;
+
+#if THREE_HORIZONS
+    // A new scan replaces old readiness, including no-target/cancel paths.
+    TH13_ResetRematches();
+#endif
 
     for (i = 0; i < 16; i++)
         gTasks[taskId].data[i] = 0;
@@ -413,11 +431,22 @@ static void GatherNearbyTrainerInfo(void)
 
     for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->objectEventCount; objectEventIdx++)
     {
+#if THREE_HORIZONS
+        if (objectEventIdx >= ARRAY_COUNT(gSaveBlock1Ptr->objectEventTemplates)
+         || vsSeekerObjectIdx >= OBJECT_EVENTS_COUNT)
+            break;
+        u16 trainerIdx = TH13_GetMapTrainer(templates[objectEventIdx].localId);
+        if (trainerIdx == TRAINER_NONE
+         || TryGetObjectEventIdByLocalIdAndMap(templates[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId)
+         || objectEventId >= OBJECT_EVENTS_COUNT || !gObjectEvents[objectEventId].active)
+            continue;
+#else
         u16 trainerIdx = GetTrainerFlagFromScript(templates[objectEventIdx].script);
         if (trainerIdx == TRAINER_NONE && (!I_SHOW_NO_ID_TRAINER || templates[objectEventIdx].trainerType == TRAINER_TYPE_NONE))
             continue;
         if (trainerIdx == TRAINER_NONE && templates[objectEventIdx].trainerType != TRAINER_TYPE_NONE)
             DebugPrintf("Object event with local id %d is not TRAINER_TYPE_NONE but doesn't have a visible trainerID", templates[objectEventIdx].localId);
+#endif
         sVsSeeker->trainerInfo[vsSeekerObjectIdx].script = templates[objectEventIdx].script;
         sVsSeeker->trainerInfo[vsSeekerObjectIdx].trainerIdx = trainerIdx;
         sVsSeeker->trainerInfo[vsSeekerObjectIdx].localId = templates[objectEventIdx].localId;
@@ -433,6 +462,9 @@ static void GatherNearbyTrainerInfo(void)
 
 static u8 CanUseVsSeeker(void)
 {
+#if THREE_HORIZONS
+    return HasFightableTrainers() ? VSSEEKER_CAN_USE : VSSEEKER_NO_ONE_IN_RANGE;
+#endif
 #if FREE_MATCH_CALL == FALSE
     u8 vsSeekerChargeSteps = gSaveBlock1Ptr->trainerRematchStepCounter;
 
@@ -482,7 +514,12 @@ static u8 GetVsSeekerResponseInArea(void)
             continue;
         }
 
+#if THREE_HORIZONS
+        if (!TH13_SetRematchReady(trainerIdx))
+            continue;
+#else
         gSaveBlock1Ptr->trainerRematches[VsSeekerConvertLocalIdToTableId(sVsSeeker->trainerInfo[vsSeekerIdx].localId)] = rematchTrainerIdx;
+#endif
         ShiftStillObjectEventCoords(&gObjectEvents[sVsSeeker->trainerInfo[vsSeekerIdx].objectEventId]);
         StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerRematch);
         sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = vsSeekerIdx;
@@ -515,6 +552,11 @@ static bool32 ShouldChangeMovementForTrainerType(u32 trainerType)
 
 void ClearRematchMovementByTrainerId(void)
 {
+#if THREE_HORIZONS
+    // TH emotes never overwrite persistent map movement or coordinates.
+    TH13_ResetRematches();
+    return;
+#endif
     s32 i;
     u8 objEventId = 0;
     struct ObjectEventTemplate *objectEventTemplates = gSaveBlock1Ptr->objectEventTemplates;
@@ -566,6 +608,14 @@ static u32 GetGameProgressFlags()
 
 u16 GetRematchTrainerIdVSSeeker(u16 trainerId)
 {
+#if THREE_HORIZONS
+    if (trainerId == TRAINER_NONE)
+        return TRAINER_NONE;
+    for (u32 localId = 1; localId <= MAX_REMATCH_ENTRIES; localId++)
+        if (TH13_GetMapTrainer(localId) == trainerId && HasTrainerBeenFought(trainerId))
+            return trainerId;
+    return TRAINER_NONE;
+#else
     u32 tableId = FirstBattleTrainerIdToRematchTableId(gRematchTable, trainerId);
     u32 rematchTrainerIdx = GetGameProgressFlags();
 
@@ -587,6 +637,7 @@ u16 GetRematchTrainerIdVSSeeker(u16 trainerId)
     }
 
     return gRematchTable[tableId].trainerIds[rematchTrainerIdx];
+#endif
 }
 
 bool32 IsVsSeekerEnabled(void)
@@ -816,6 +867,11 @@ void NativeVsSeekerRematchId(struct ScriptContext *ctx)
 
 static void StartAllRespondantIdleMovements(void)
 {
+#if THREE_HORIZONS
+    // Keep the native response emote, then resume authored idle movement.
+    // Never persist rematch-only movement/coordinates in a battery save.
+    return;
+#endif
 #if FREE_MATCH_CALL == FALSE
     s32 i;
     s32 j;

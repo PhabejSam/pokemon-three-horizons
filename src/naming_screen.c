@@ -695,16 +695,24 @@ static bool8 MainState_Exit(void)
 {
     if (!gPaletteFade.active)
     {
+        MainCallback returnCallback = sNamingScreen->returnCallback;
         if (sNamingScreen->templateNum == NAMING_SCREEN_PLAYER)
             SeedRngAndSetTrainerId();
         if (sNamingScreen->templateNum == NAMING_SCREEN_CAUGHT_MON
          && CalculatePlayerPartyCount() < PARTY_SIZE)
-            SetMainCallback2(BattleMainCB2);
-        else
-            SetMainCallback2(sNamingScreen->returnCallback);
-        DestroyTask(FindTaskIdByFunc(Task_NamingScreen));
+            returnCallback = BattleMainCB2;
+        // Naming owns these callbacks, sprites, tasks and tilemaps. In particular,
+        // VBlank and the underline sprites read sNamingScreen every frame, even
+        // after switching callback2. Retire them before releasing that state.
+        ResetVHBlank();
+        ResetTasks();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
         FreeAllWindowBuffers();
+        for (u32 bg = 1; bg <= 3; bg++)
+            UnsetBgTilemapBuffer(bg);
         FREE_AND_SET_NULL(sNamingScreen);
+        SetMainCallback2(returnCallback);
     }
     return FALSE;
 }
@@ -2071,6 +2079,8 @@ static void PrintControls(void)
 static void CB2_NamingScreen(void)
 {
     RunTasks();
+    if (sNamingScreen == NULL)
+        return;
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();

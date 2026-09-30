@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons_research.h"
 #include "config/save.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
@@ -194,7 +195,11 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
     [MENU_ACTION_POKEMON]         = {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
     [MENU_ACTION_BAG]             = {gText_MenuBag,     {.u8_void = StartMenuBagCallback}},
+#if THREE_HORIZONS
+    [MENU_ACTION_POKENAV]         = {COMPOUND_STRING("RESEARCH GEAR"), {.u8_void = StartMenuPokeNavCallback}},
+#else
     [MENU_ACTION_POKENAV]         = {gText_MenuPokenav, {.u8_void = StartMenuPokeNavCallback}},
+#endif
     [MENU_ACTION_PLAYER]          = {gText_MenuPlayer,  {.u8_void = StartMenuPlayerNameCallback}},
     [MENU_ACTION_SAVE]            = {gText_MenuSave,    {.u8_void = StartMenuSaveCallback}},
     [MENU_ACTION_OPTION]          = {gText_MenuOption,  {.u8_void = StartMenuOptionCallback}},
@@ -335,7 +340,11 @@ static void BuildNormalStartMenu(void)
 
     AddStartMenuAction(MENU_ACTION_BAG);
 
+#if THREE_HORIZONS
+    if (TH_ResearchGearUnlocked())
+#else
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
+#endif
         AddStartMenuAction(MENU_ACTION_POKENAV);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
@@ -727,7 +736,11 @@ static bool8 StartMenuPokeNavCallback(void)
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
+#if THREE_HORIZONS
+        TH_OpenResearchGear(CB2_ReturnToFieldWithOpenMenu);
+#else
         SetMainCallback2(CB2_InitPokeNav);  // Display PokéNav
+#endif
 
         return TRUE;
     }

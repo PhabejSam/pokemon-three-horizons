@@ -34,6 +34,13 @@ void ReshowBattleScreenDummy(void)
 
 void ReshowBattleScreenAfterMenu(void)
 {
+    if (THREE_HORIZONS && gBattleScripting.monCaught)
+    {
+        // The Dex fades only backgrounds. Its still-visible OBJ palette must
+        // not illuminate old OAM while the battle overwrites sprite VRAM.
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_ALL | BLDCNT_EFFECT_DARKEN);
+        SetGpuReg(REG_OFFSET_BLDY, 16);
+    }
     gPaletteFade.bufferTransferDisabled = 1;
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
@@ -172,6 +179,11 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         break;
     }
 
+    if (THREE_HORIZONS && gBattleScripting.monCaught && gMain.callback2 == CB2_ReshowBattleScreenAfterMenu)
+    {
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_ALL | BLDCNT_EFFECT_DARKEN);
+        SetGpuReg(REG_OFFSET_BLDY, 16);
+    }
     gBattleScripting.reshowMainState++;
 }
 

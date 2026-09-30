@@ -2193,7 +2193,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_REPEL] =
     {
         .name = ITEM_NAME("Repel"),
-        .price = (I_PRICE >= GEN_7) ? 400 : 350,
+        .price = THREE_HORIZONS ? 10 : ((I_PRICE >= GEN_7) ? 400 : 350),
         .holdEffectParam = 100,
         .description = COMPOUND_STRING(
             "Repels weak wild\n"
@@ -14127,10 +14127,17 @@ const struct ItemInfo gItemsInfo[] =
     {
         .name = ITEM_NAME("Vs. Seeker"),
         .price = 0,
+#if THREE_HORIZONS
+        .description = COMPOUND_STRING(
+            "Finds nearby Trainers\n"
+            "ready for a rematch.\n"
+            "No charging needed."),
+#else
         .description = COMPOUND_STRING(
             "A rechargeable unit\n"
             "that flags battle-\n"
             "ready Trainers."),
+#endif
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,

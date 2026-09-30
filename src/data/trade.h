@@ -1211,7 +1211,25 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_PONYTA
-    }
+    },
+#if THREE_HORIZONS
+    [INGAME_TRADE_TH13_SKARMORY] =
+    {
+        .nickname = _("SKARMORY"),
+        .species = SPECIES_SKARMORY,
+        .ivs = {15, 15, 15, 15, 15, 15},
+        .abilityNum = 0,
+        .otId = 28413,
+        .conditions = {0, 0, 0, 0, 0},
+        .personality = 0,
+        .heldItem = ITEM_NONE,
+        .mailNum = 255,
+        .otName = _("REYLEY"),
+        .otGender = MALE,
+        .sheen = 0,
+        .requestedSpecies = SPECIES_ZUBAT
+    },
+#endif
 };
 
 static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =

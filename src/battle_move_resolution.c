@@ -5193,7 +5193,8 @@ static enum MoveEndResult MoveEndClearBits(struct BattleCalcValues *cv)
         gBattleStruct->moveTarget[cv->battlerAtk] = gSpecialStatuses[cv->battlerAtk].backUpTarget - 1;
 
     // If the Pokémon needs to keep track of move usage for its evolutions, do it
-    if (originallyUsedMove != MOVE_NONE)
+    if (originallyUsedMove != MOVE_NONE
+     && (!THREE_HORIZONS || !gBattleStruct->unableToUseMove))
         TryUpdateEvolutionTracker(IF_USED_MOVE_X_TIMES, 1, originallyUsedMove);
 
     SetSameMoveTurnValues(cv->moveEffect);

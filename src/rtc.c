@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "datetime.h"
@@ -343,6 +344,9 @@ enum TimeOfDay GetTimeOfDayForDex(void)
 void RtcInitLocalTimeOffset(s32 hour, s32 minute)
 {
     RtcCalcLocalTimeOffset(0, hour, minute, 0);
+#if THREE_HORIZONS
+    TH_ResetVisualClock();
+#endif
 }
 
 void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds)

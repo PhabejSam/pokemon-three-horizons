@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons_rematches.h"
 #include "data.h"
 #include "main.h"
 #include "battle.h"
@@ -320,6 +321,18 @@ static void CreateBattleStartTask_Debug(u8 transition, u16 song)
 
 static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
 {
+#if THREE_HORIZONS
+    // Cloned chapter floors retain native unidentified-ghost rules.
+    if (mapGroup == MAP_GROUP(MAP_TH13_POKEMON_TOWER_1F)
+        && (mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_1F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_2F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_3F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_4F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_5F)
+         || mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_6F)))
+        return !CheckBagHasItem(ITEM_SILPH_SCOPE, 1);
+#endif
+
     if (mapGroup == MAP_GROUP(MAP_POKEMON_TOWER_1F)
      && (mapNum == MAP_NUM(MAP_POKEMON_TOWER_1F)
       || mapNum == MAP_NUM(MAP_POKEMON_TOWER_2F)
@@ -333,6 +346,13 @@ static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
     else
         return FALSE;
 }
+
+#ifdef TESTING
+bool8 TH_TestTowerGhostCheck(u16 mapGroup, u16 mapNum)
+{
+    return CheckSilphScopeInPokemonTower(mapGroup, mapNum);
+}
+#endif
 
 void BattleSetup_StartWildBattle(void)
 {
@@ -1632,6 +1652,19 @@ static void CB2_EndTrainerBattle(void)
 
 static void CB2_EndRematchBattle(void)
 {
+#if THREE_HORIZONS
+    TH13_ResetRematches();
+    if (IsPlayerDefeated(gBattleOutcome))
+        SetMainCallback2(CB2_WhiteOut);
+    else
+    {
+        // These trainers were already defeated before the scan. Do not award
+        // Match Call registrations or write permanent trainer/story flags.
+        DowngradeBadPoison();
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    }
+    return;
+#endif
     if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_SECRET_BASE)
     {
         DowngradeBadPoison();
@@ -1653,6 +1686,13 @@ static void CB2_EndRematchBattle(void)
 
 void BattleSetup_StartRematchBattle(void)
 {
+#if THREE_HORIZONS
+    if (!TH13_BeginRematch(TRAINER_BATTLE_PARAM.opponentA))
+    {
+        TH13_ResetRematches();
+        return;
+    }
+#endif
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     if (GetTrainerBattleType(TRAINER_BATTLE_PARAM.opponentA) == TRAINER_BATTLE_TYPE_DOUBLES)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
@@ -2031,6 +2071,10 @@ static void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16
 
 void ClearCurrentTrainerWantRematchVsSeeker(void)
 {
+#if THREE_HORIZONS
+    TH13_ResetRematches();
+    return;
+#endif
 #if FREE_MATCH_CALL == FALSE
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && FlagGet(I_VS_SEEKER_CHARGING) && (I_VS_SEEKER_CHARGING != 0))
     {
@@ -2131,6 +2175,9 @@ static bool32 IsRematchStepCounterMaxed(void)
 
 void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
 {
+#if THREE_HORIZONS
+    return;
+#endif
     if (IsRematchStepCounterMaxed() && UpdateRandomTrainerRematches(gRematchTable, mapGroup, mapNum) == TRUE)
         gSaveBlock1Ptr->trainerRematchStepCounter = 0;
 }
@@ -2139,6 +2186,9 @@ void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
 #if FREE_MATCH_CALL == FALSE
 static u16 GetRematchTrainerId(u16 trainerId)
 {
+#if THREE_HORIZONS
+    return trainerId;
+#endif
     if (FlagGet(I_VS_SEEKER_CHARGING) && (I_VS_SEEKER_CHARGING != 0))
         return GetRematchTrainerIdVSSeeker(trainerId);
     else
@@ -2158,6 +2208,9 @@ bool8 ShouldTryRematchBattle(void)
 
 bool8 ShouldTryRematchBattleForTrainerId(u16 trainerId)
 {
+#if THREE_HORIZONS
+    return TH13_IsRematchReady(trainerId);
+#endif
     if (IsFirstTrainerIdReadyForRematch(gRematchTable, trainerId))
         return TRUE;
 
@@ -2166,6 +2219,9 @@ bool8 ShouldTryRematchBattleForTrainerId(u16 trainerId)
 
 bool8 IsTrainerReadyForRematch(void)
 {
+#if THREE_HORIZONS
+    return TH13_IsRematchReady(TRAINER_BATTLE_PARAM.opponentA);
+#endif
     return IsTrainerReadyForRematch_(gRematchTable, TRAINER_BATTLE_PARAM.opponentA);
 }
 
@@ -2259,6 +2315,10 @@ void CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Traine
 
 static void CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 {
+#if THREE_HORIZONS
+    if (TH13_TryCreateRematchParty(party, trainerNum))
+        return;
+#endif
     if (!GetTrainerStructFromId(trainerNum)->overrideTrainer)
     {
         CreateNPCTrainerPartyFromTrainer(party, GetTrainerStructFromId(trainerNum));

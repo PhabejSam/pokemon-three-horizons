@@ -6,6 +6,7 @@
 #include "constants/battle.h"
 #include "constants/pokeball.h"
 #include "difficulty.h"
+#include "three_horizons.h"
 #include "debug.h"
 
 #define MAX_TRAINER_ITEMS 4
@@ -307,6 +308,10 @@ static inline const u8 *GetTrainerClassNameFromId(u16 trainerId)
 
 static inline const u8 *GetTrainerNameFromId(u16 trainerId)
 {
+#if THREE_HORIZONS
+    if (TH_IsRivalTrainer(trainerId))
+        return TH_GetRivalName();
+#endif
     return GetTrainerStructFromId(trainerId)->trainerName;
 }
 

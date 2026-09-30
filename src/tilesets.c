@@ -5,3 +5,7 @@
 #include "data/tilesets/graphics.h"
 #include "data/tilesets/metatiles.h"
 #include "data/tilesets/headers.h"
+
+#if THREE_HORIZONS
+#include "data/tilesets/three_horizons.h"
+#endif

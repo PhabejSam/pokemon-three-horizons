@@ -1,0 +1,314 @@
+{
+  "maps": [
+    {
+      "source": "Route24_Frlg",
+      "name": "TH12_Route24",
+      "id": "MAP_TH12_ROUTE24",
+      "layout": "LAYOUT_ROUTE24",
+      "script_owner": "chapter12_bill.inc"
+    },
+    {
+      "source": "Route25_Frlg",
+      "name": "TH12_Route25",
+      "id": "MAP_TH12_ROUTE25",
+      "layout": "LAYOUT_ROUTE25",
+      "script_owner": "chapter12_bill.inc"
+    },
+    {
+      "source": "Route25_SeaCottage_Frlg",
+      "name": "TH12_Route25_SeaCottage",
+      "id": "MAP_TH12_ROUTE25_SEA_COTTAGE",
+      "layout": "LAYOUT_ROUTE25_SEA_COTTAGE",
+      "script_owner": "chapter12_bill.inc"
+    },
+    {
+      "source": "Route5_Frlg",
+      "name": "TH12_Route5",
+      "id": "MAP_TH12_ROUTE5",
+      "layout": "LAYOUT_ROUTE5",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "Route5_SouthEntrance_Frlg",
+      "name": "TH12_Route5_SouthEntrance",
+      "id": "MAP_TH12_ROUTE5_SOUTH_ENTRANCE",
+      "layout": "LAYOUT_SAFFRON_CITY_NORTH_SOUTH_ENTRANCE",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "Route6_Frlg",
+      "name": "TH12_Route6",
+      "id": "MAP_TH12_ROUTE6",
+      "layout": "LAYOUT_ROUTE6",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "Route6_NorthEntrance_Frlg",
+      "name": "TH12_Route6_NorthEntrance",
+      "id": "MAP_TH12_ROUTE6_NORTH_ENTRANCE",
+      "layout": "LAYOUT_SAFFRON_CITY_NORTH_SOUTH_ENTRANCE",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "UndergroundPath_NorthEntrance_Frlg",
+      "name": "TH12_UndergroundPath_NorthEntrance",
+      "id": "MAP_TH12_UNDERGROUND_PATH_NORTH_ENTRANCE",
+      "layout": "LAYOUT_UNDERGROUND_PATH_ENTRANCE",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "UndergroundPath_NorthSouthTunnel_Frlg",
+      "name": "TH12_UndergroundPath_NorthSouthTunnel",
+      "id": "MAP_TH12_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL",
+      "layout": "LAYOUT_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "UndergroundPath_SouthEntrance_Frlg",
+      "name": "TH12_UndergroundPath_SouthEntrance",
+      "id": "MAP_TH12_UNDERGROUND_PATH_SOUTH_ENTRANCE",
+      "layout": "LAYOUT_UNDERGROUND_PATH_ENTRANCE",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "VermilionCity_Frlg",
+      "name": "TH12_VermilionCity",
+      "id": "MAP_TH12_VERMILION_CITY",
+      "layout": "LAYOUT_VERMILION_CITY",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "VermilionCity_Mart_Frlg",
+      "name": "TH12_VermilionCity_Mart",
+      "id": "MAP_TH12_VERMILION_CITY_MART",
+      "layout": "LAYOUT_MART_FRLG",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "VermilionCity_PokemonCenter_1F_Frlg",
+      "name": "TH12_VermilionCity_PokemonCenter_1F",
+      "id": "MAP_TH12_VERMILION_CITY_POKEMON_CENTER_1F",
+      "layout": "LAYOUT_POKEMON_CENTER_1F_FRLG",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "VermilionCity_PokemonFanClub_Frlg",
+      "name": "TH12_VermilionCity_PokemonFanClub",
+      "id": "MAP_TH12_VERMILION_CITY_POKEMON_FAN_CLUB",
+      "layout": "LAYOUT_VERMILION_CITY_POKEMON_FAN_CLUB",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "VermilionCity_House1_Frlg",
+      "name": "TH12_VermilionCity_House1",
+      "id": "MAP_TH12_VERMILION_CITY_HOUSE1",
+      "layout": "LAYOUT_HOUSE1_FRLG",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "VermilionCity_House2_Frlg",
+      "name": "TH12_VermilionCity_House2",
+      "id": "MAP_TH12_VERMILION_CITY_HOUSE2",
+      "layout": "LAYOUT_HOUSE1_FRLG",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "VermilionCity_House3_Frlg",
+      "name": "TH12_VermilionCity_House3",
+      "id": "MAP_TH12_VERMILION_CITY_HOUSE3",
+      "layout": "LAYOUT_HOUSE1_FRLG",
+      "script_owner": "chapter12_vermilion.inc"
+    },
+    {
+      "source": "SSAnne_1F_Corridor_Frlg",
+      "name": "TH12_SSAnne_1F_Corridor",
+      "id": "MAP_TH12_SSANNE_1F_CORRIDOR",
+      "layout": "LAYOUT_SSANNE_1F_CORRIDOR",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_1F_Room1_Frlg",
+      "name": "TH12_SSAnne_1F_Room1",
+      "id": "MAP_TH12_SSANNE_1F_ROOM1",
+      "layout": "LAYOUT_SSANNE_ROOM1",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_1F_Room2_Frlg",
+      "name": "TH12_SSAnne_1F_Room2",
+      "id": "MAP_TH12_SSANNE_1F_ROOM2",
+      "layout": "LAYOUT_SSANNE_ROOM1",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_1F_Room3_Frlg",
+      "name": "TH12_SSAnne_1F_Room3",
+      "id": "MAP_TH12_SSANNE_1F_ROOM3",
+      "layout": "LAYOUT_SSANNE_ROOM1",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_1F_Room4_Frlg",
+      "name": "TH12_SSAnne_1F_Room4",
+      "id": "MAP_TH12_SSANNE_1F_ROOM4",
+      "layout": "LAYOUT_SSANNE_ROOM1",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_1F_Room5_Frlg",
+      "name": "TH12_SSAnne_1F_Room5",
+      "id": "MAP_TH12_SSANNE_1F_ROOM5",
+      "layout": "LAYOUT_SSANNE_ROOM1",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_1F_Room6_Frlg",
+      "name": "TH12_SSAnne_1F_Room6",
+      "id": "MAP_TH12_SSANNE_1F_ROOM6",
+      "layout": "LAYOUT_SSANNE_ROOM1",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_1F_Room7_Frlg",
+      "name": "TH12_SSAnne_1F_Room7",
+      "id": "MAP_TH12_SSANNE_1F_ROOM7",
+      "layout": "LAYOUT_SSANNE_ROOM1",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_2F_Corridor_Frlg",
+      "name": "TH12_SSAnne_2F_Corridor",
+      "id": "MAP_TH12_SSANNE_2F_CORRIDOR",
+      "layout": "LAYOUT_SSANNE_2F_CORRIDOR",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_2F_Room1_Frlg",
+      "name": "TH12_SSAnne_2F_Room1",
+      "id": "MAP_TH12_SSANNE_2F_ROOM1",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_2F_Room2_Frlg",
+      "name": "TH12_SSAnne_2F_Room2",
+      "id": "MAP_TH12_SSANNE_2F_ROOM2",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_2F_Room3_Frlg",
+      "name": "TH12_SSAnne_2F_Room3",
+      "id": "MAP_TH12_SSANNE_2F_ROOM3",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_2F_Room4_Frlg",
+      "name": "TH12_SSAnne_2F_Room4",
+      "id": "MAP_TH12_SSANNE_2F_ROOM4",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_2F_Room5_Frlg",
+      "name": "TH12_SSAnne_2F_Room5",
+      "id": "MAP_TH12_SSANNE_2F_ROOM5",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_2F_Room6_Frlg",
+      "name": "TH12_SSAnne_2F_Room6",
+      "id": "MAP_TH12_SSANNE_2F_ROOM6",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_3F_Corridor_Frlg",
+      "name": "TH12_SSAnne_3F_Corridor",
+      "id": "MAP_TH12_SSANNE_3F_CORRIDOR",
+      "layout": "LAYOUT_SSANNE_3F_CORRIDOR",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_B1F_Corridor_Frlg",
+      "name": "TH12_SSAnne_B1F_Corridor",
+      "id": "MAP_TH12_SSANNE_B1F_CORRIDOR",
+      "layout": "LAYOUT_SSANNE_B1F_CORRIDOR",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_B1F_Room1_Frlg",
+      "name": "TH12_SSAnne_B1F_Room1",
+      "id": "MAP_TH12_SSANNE_B1F_ROOM1",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_B1F_Room2_Frlg",
+      "name": "TH12_SSAnne_B1F_Room2",
+      "id": "MAP_TH12_SSANNE_B1F_ROOM2",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_B1F_Room3_Frlg",
+      "name": "TH12_SSAnne_B1F_Room3",
+      "id": "MAP_TH12_SSANNE_B1F_ROOM3",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_B1F_Room4_Frlg",
+      "name": "TH12_SSAnne_B1F_Room4",
+      "id": "MAP_TH12_SSANNE_B1F_ROOM4",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_B1F_Room5_Frlg",
+      "name": "TH12_SSAnne_B1F_Room5",
+      "id": "MAP_TH12_SSANNE_B1F_ROOM5",
+      "layout": "LAYOUT_SSANNE_ROOM2",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_CaptainsOffice_Frlg",
+      "name": "TH12_SSAnne_CaptainsOffice",
+      "id": "MAP_TH12_SSANNE_CAPTAINS_OFFICE",
+      "layout": "LAYOUT_SSANNE_CAPTAINS_OFFICE",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_Deck_Frlg",
+      "name": "TH12_SSAnne_Deck",
+      "id": "MAP_TH12_SSANNE_DECK",
+      "layout": "LAYOUT_SSANNE_DECK",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_Exterior_Frlg",
+      "name": "TH12_SSAnne_Exterior",
+      "id": "MAP_TH12_SSANNE_EXTERIOR",
+      "layout": "LAYOUT_SSANNE_EXTERIOR",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "SSAnne_Kitchen_Frlg",
+      "name": "TH12_SSAnne_Kitchen",
+      "id": "MAP_TH12_SSANNE_KITCHEN",
+      "layout": "LAYOUT_SSANNE_KITCHEN",
+      "script_owner": "chapter12_ship.inc"
+    },
+    {
+      "source": "VermilionCity_Gym_Frlg",
+      "name": "TH12_VermilionCity_Gym",
+      "id": "MAP_TH12_VERMILION_CITY_GYM",
+      "layout": "LAYOUT_VERMILION_CITY_GYM",
+      "script_owner": "chapter12_vermilion.inc"
+    }
+  ],
+  "next_pickup": 31,
+  "next_trainer": 104
+}

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons.h"
 #include "string_util.h"
 #include "text.h"
 #include "strings.h"
@@ -467,6 +468,9 @@ static const u8 *ExpandPlaceholder_KunChan(void)
 
 static const u8 *ExpandPlaceholder_RivalName(void)
 {
+#if THREE_HORIZONS
+    return TH_GetRivalName();
+#endif
 #if IS_FRLG
     if (gSaveBlock1Ptr->rivalName[0] != EOS)
         return gSaveBlock1Ptr->rivalName;

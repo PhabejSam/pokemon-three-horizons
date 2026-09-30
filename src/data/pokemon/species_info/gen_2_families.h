@@ -67,7 +67,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Chikorita,
             gShinyOverworldPalette_Chikorita
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHChikoritaLevelUpLearnset,
+#else
         .levelUpLearnset = sChikoritaLevelUpLearnset,
+#endif
         .teachableLearnset = sChikoritaTeachableLearnset,
         .eggMoveLearnset = sChikoritaEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_BAYLEEF}),
@@ -81,7 +85,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseSpeed     = 60,
         .baseSpAttack  = 63,
         .baseSpDefense = 80,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_GRASS, TYPE_DRAGON),
+#else
         .types = MON_TYPES(TYPE_GRASS),
+#endif
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 142 : 141,
         .evYield_Defense = 1,
@@ -136,7 +144,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Bayleef,
             gShinyOverworldPalette_Bayleef
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHBayleefLevelUpLearnset,
+#else
         .levelUpLearnset = sBayleefLevelUpLearnset,
+#endif
         .teachableLearnset = sBayleefTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_MEGANIUM}),
     },
@@ -149,7 +161,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 83,
         .baseSpDefense = 100,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_GRASS, TYPE_DRAGON),
+#else
         .types = MON_TYPES(TYPE_GRASS),
+#endif
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 263,
@@ -223,7 +239,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHMeganiumLevelUpLearnset,
+#else
         .levelUpLearnset = sMeganiumLevelUpLearnset,
+#endif
         .teachableLearnset = sMeganiumTeachableLearnset,
         .formSpeciesIdTable = sMeganiumFormSpeciesIdTable,
         .formChangeTable = sMeganiumFormChangeTable,
@@ -355,7 +375,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Cyndaquil,
             gShinyOverworldPalette_Cyndaquil
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHCyndaquilLevelUpLearnset,
+#else
         .levelUpLearnset = sCyndaquilLevelUpLearnset,
+#endif
         .teachableLearnset = sCyndaquilTeachableLearnset,
         .eggMoveLearnset = sCyndaquilEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_QUILAVA}),
@@ -369,7 +393,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 80,
         .baseSpDefense = 65,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_FIRE, TYPE_GROUND),
+#else
         .types = MON_TYPES(TYPE_FIRE),
+#endif
         .catchRate = 45,
         .expYield = 142,
         .evYield_Speed = 1,
@@ -424,7 +452,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Quilava,
             gShinyOverworldPalette_Quilava
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHQuilavaLevelUpLearnset,
+#else
         .levelUpLearnset = sQuilavaLevelUpLearnset,
+#endif
         .teachableLearnset = sQuilavaTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_TYPHLOSION, CONDITIONS({IF_NOT_REGION, REGION_HISUI})}
                             #if P_HISUIAN_FORMS
@@ -441,7 +473,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseSpeed     = 100,
         .baseSpAttack  = 109,
         .baseSpDefense = 85,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_FIRE, TYPE_GROUND),
+#else
         .types = MON_TYPES(TYPE_FIRE),
+#endif
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 267,
@@ -502,7 +538,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Typhlosion,
             gShinyOverworldPalette_Typhlosion
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHTyphlosionLevelUpLearnset,
+#else
         .levelUpLearnset = sTyphlosionLevelUpLearnset,
+#endif
         .teachableLearnset = sTyphlosionTeachableLearnset,
         .formSpeciesIdTable = sTyphlosionFormSpeciesIdTable,
     },
@@ -642,7 +682,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Totodile,
             gShinyOverworldPalette_Totodile
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHTotodileLevelUpLearnset,
+#else
         .levelUpLearnset = sTotodileLevelUpLearnset,
+#endif
         .teachableLearnset = sTotodileTeachableLearnset,
         .eggMoveLearnset = sTotodileEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_CROCONAW}),
@@ -656,7 +700,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseSpeed     = 58,
         .baseSpAttack  = 59,
         .baseSpDefense = 63,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_WATER, TYPE_DARK),
+#else
         .types = MON_TYPES(TYPE_WATER),
+#endif
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 142 : 143,
         .evYield_Attack = 1,
@@ -712,7 +760,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Croconaw,
             gShinyOverworldPalette_Croconaw
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHCroconawLevelUpLearnset,
+#else
         .levelUpLearnset = sCroconawLevelUpLearnset,
+#endif
         .teachableLearnset = sCroconawTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_FERALIGATR}),
     },
@@ -725,7 +777,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseSpeed     = 78,
         .baseSpAttack  = 79,
         .baseSpDefense = 83,
+#if THREE_HORIZONS
+        .types = MON_TYPES(TYPE_WATER, TYPE_DARK),
+#else
         .types = MON_TYPES(TYPE_WATER),
+#endif
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 265,
@@ -789,7 +845,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gOverworldPalette_Feraligatr,
             gShinyOverworldPalette_Feraligatr
         )
+#if THREE_HORIZONS
+        .levelUpLearnset = sTHFeraligatrLevelUpLearnset,
+#else
         .levelUpLearnset = sFeraligatrLevelUpLearnset,
+#endif
         .teachableLearnset = sFeraligatrTeachableLearnset,
         .formSpeciesIdTable = sFeraligatrFormSpeciesIdTable,
         .formChangeTable = sFeraligatrFormChangeTable,

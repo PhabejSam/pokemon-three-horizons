@@ -15,8 +15,28 @@ env:
   DEPRECATED_ERROR: 1
 
 jobs:
+  th13-phase:
+    runs-on: ubuntu-latest
+    outputs:
+      integration: ${{ steps.phase.outputs.integration }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: phase
+        env:
+          HEAD_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path('.github/three-horizons-stage.json')
+          focused = (os.environ['HEAD_BRANCH'] == 'feature/opening-demo'
+                     and p.exists() and json.loads(p.read_text())['mode'] == 'focused')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write('integration=' + ('false' if focused else 'true') + '\n')
+          PY
   build-emerald:
-    if: github.actor != 'allcontributors[bot]'
+    needs: th13-phase
+    if: github.actor != 'allcontributors[bot]' && needs.th13-phase.outputs.integration == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -53,7 +73,8 @@ jobs:
         run: make -j$(nproc) -O all
 
   build-firered:
-    if: github.actor != 'allcontributors[bot]'
+    needs: th13-phase
+    if: github.actor != 'allcontributors[bot]' && needs.th13-phase.outputs.integration == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -88,7 +109,8 @@ jobs:
         run: make firered -j$(nproc) -O
 
   build-leafgreen:
-    if: github.actor != 'allcontributors[bot]'
+    needs: th13-phase
+    if: github.actor != 'allcontributors[bot]' && needs.th13-phase.outputs.integration == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -123,7 +145,8 @@ jobs:
         run: make leafgreen -j$(nproc) -O
 
   release:
-    if: github.actor != 'allcontributors[bot]'
+    needs: th13-phase
+    if: github.actor != 'allcontributors[bot]' && needs.th13-phase.outputs.integration == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -160,7 +183,8 @@ jobs:
         run: make -j$(nproc) release
 
   test:
-    if: github.actor != 'allcontributors[bot]'
+    needs: th13-phase
+    if: github.actor != 'allcontributors[bot]' && needs.th13-phase.outputs.integration == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

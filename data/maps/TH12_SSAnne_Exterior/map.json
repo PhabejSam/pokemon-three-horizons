@@ -1,0 +1,113 @@
+{
+  "id": "MAP_TH12_SSANNE_EXTERIOR",
+  "name": "TH12_SSAnne_Exterior",
+  "layout": "LAYOUT_SSANNE_EXTERIOR",
+  "music": "MUS_RG_SS_ANNE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_S_S_ANNE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_TH12_SSANNE_EXTERIOR_0",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SS_ANNE",
+      "x": 30,
+      "y": 16,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH12_Ship_Sailor",
+      "flag": "FLAG_TH13_SHIP_DEPARTED"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 31,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_TH12_VERMILION_CITY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 32,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_TH12_VERMILION_CITY",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 32,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_TH12_SSANNE_1F_CORRIDOR",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 33,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_TH12_SSANNE_1F_CORRIDOR",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 33,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_TH12_VERMILION_CITY",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 31,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TH13_Ship_FinalExit"
+    },
+    {
+      "type": "trigger",
+      "x": 32,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TH13_Ship_FinalExit"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TH13_Ship_FinalExit"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 58,
+      "y": 28,
+      "elevation": 3,
+      "item": "ITEM_LAVA_COOKIE",
+      "flag": "FLAG_TH12_PICKUP_26",
+      "quantity": 1,
+      "underfoot": false
+    }
+  ]
+}
