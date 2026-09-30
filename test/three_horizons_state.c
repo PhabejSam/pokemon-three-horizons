@@ -158,18 +158,18 @@ TEST("Three Horizons playtest13 state migration preserves P12 payload")
     memcpy(boxes, gPokemonStoragePtr, sizeof(*boxes));
     memcpy(party, gPlayerParty, sizeof(party));
     TH_MigrateSaveState();
-    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), 0xA90B);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_CURRENT | 1);
     EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_LO), 12345);
     // Normalize only the explicitly newly owned bits and version, then compare
     // every byte. This catches accidental changes to money, items, Dex, flags,
     // settings, existing trainer wins, saved party and reserved old fields.
-    for (u32 flag = TH13_FLAGS_START; flag <= TH13_FLAGS_END; flag++)
+    for (u32 flag = TH13_FLAGS_START; flag <= TH13_RC2_FLAGS_END; flag++)
     {
         u8 bit = 1 << (flag % 8);
         before->flags[flag / 8] = (before->flags[flag / 8] & ~bit)
             | (gSaveBlock1Ptr->flags[flag / 8] & bit);
     }
-    before->vars[VAR_TH_CLOCK_DISPLAY_HI - VARS_START] = 0xA90B;
+    before->vars[VAR_TH_CLOCK_DISPLAY_HI - VARS_START] = TH_STATE_VERSION_CURRENT | 1;
     EXPECT_EQ(memcmp(before, gSaveBlock1Ptr, sizeof(*before)), 0);
     EXPECT_EQ(memcmp(before2, gSaveBlock2Ptr, sizeof(*before2)), 0);
     EXPECT_EQ(memcmp(boxes, gPokemonStoragePtr, sizeof(*boxes)), 0);
@@ -186,13 +186,13 @@ TEST("Three Horizons playtest13 state migration preserves P12 payload")
     Free(before);
 }
 
-TEST("Three Horizons playtest13 state remains version13 after clock update")
+TEST("Three Horizons playtest13 state remains current after clock update")
 {
     VarSet(VAR_TH_CLOCK_DISPLAY_HI, 0xA90B);
     TH_ResetVisualClock();
-    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 0xFFFE, 0xA90A);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 0xFFFE, TH_STATE_VERSION_CURRENT);
     TH_GetVisualTimeSeconds();
-    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 0xFFFE, 0xA90A);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 0xFFFE, TH_STATE_VERSION_CURRENT);
 }
 TEST("Three Horizons playtest13 state initializes dirty slots only on upgrade")
 {
@@ -203,15 +203,16 @@ TEST("Three Horizons playtest13 state initializes dirty slots only on upgrade")
     PARAMETRIZE { version = TH_STATE_VERSION_11; }
     PARAMETRIZE { version = TH_STATE_VERSION_12; }
     PARAMETRIZE { version = TH_STATE_VERSION_13; }
+    PARAMETRIZE { version = TH_STATE_VERSION_13_1; }
     InitEventData();
     ClearBag();
     VarSet(VAR_TH_CLOCK_DISPLAY_HI, version | 1);
     for (u32 flag = TH13_FLAGS_START; flag <= TH13_FLAGS_END; flag++)
         FlagSet(flag);
     TH_MigrateSaveState();
-    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 0xFFFE, 0xA90A);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 0xFFFE, TH_STATE_VERSION_CURRENT);
     for (u32 flag = TH13_FLAGS_START; flag <= TH13_FLAGS_END; flag++)
-        EXPECT_EQ(FlagGet(flag), version == TH_STATE_VERSION_13);
+        EXPECT_EQ(FlagGet(flag), version == TH_STATE_VERSION_13 || version == TH_STATE_VERSION_13_1);
     FlagSet(FLAG_TH13_PHOTO_LAVENDER);
     TH_MigrateSaveState();
     EXPECT(FlagGet(FLAG_TH13_PHOTO_LAVENDER));
@@ -245,6 +246,7 @@ TEST("Three Horizons playtest13 migration initializes new trainer wins once and 
     u16 version;
     PARAMETRIZE { version = TH_STATE_VERSION_12; }
     PARAMETRIZE { version = TH_STATE_VERSION_13; }
+    PARAMETRIZE { version = TH_STATE_VERSION_13_1; }
     InitEventData();
     ClearBag();
     VarSet(VAR_TH_CLOCK_DISPLAY_HI, version | 1);
@@ -255,7 +257,7 @@ TEST("Three Horizons playtest13 migration initializes new trainer wins once and 
     TH_MigrateSaveState();
     for (u32 trainer = 1; trainer < TRAINERS_COUNT; trainer++)
         EXPECT_EQ(FlagGet(TRAINER_FLAGS_START + trainer),
-            version == TH_STATE_VERSION_13 || trainer < 104 || trainer > 156);
+            version == TH_STATE_VERSION_13 || version == TH_STATE_VERSION_13_1 || trainer < 104 || trainer > 156);
     EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_CURRENT | 1);
     // Actual P13 wins survive every subsequent Continue/migration call.
     for (u32 trainer = 104; trainer <= 156; trainer++)

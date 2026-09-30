@@ -122,4 +122,33 @@ TEST("Three Horizons RC2 queued calls wait for resumed travel and survive cold p
     EXPECT(TH_ResearchTryStartPendingCall());
     SafeField(); gMain.callback2 = old;
 }
+
+TEST("Three Horizons RC2 call travel counts a held-input loop and map changes")
+{
+    MainCallback old = gMain.callback2;
+    InitEventData(); SafeField(); FlagSet(FLAG_TH13_GEAR);
+    TH_ResearchQueueCall(TH_CALL_ELM); TH_ResearchQueueCall(TH_CALL_BIRCH);
+    EXPECT(TH_ResearchTryStartPendingCall());
+    gSpecialVar_0x8004 = TH_CALL_ELM; TH_ScriptResearchCompleteCall();
+    ScriptContext_Init(); UnlockPlayerFieldControls();
+    s16 start = gSaveBlock1Ptr->pos.x;
+    for (u32 step = 0; step < 8; step++)
+    {
+        gMain.heldKeys = DPAD_RIGHT;
+        gPlayerAvatar.runningState = MOVING;
+        gSaveBlock1Ptr->pos.x = start + (step % 2 == 0);
+        EXPECT(!TH_ResearchTryStartPendingCall());
+    }
+    gMain.heldKeys = 0; gPlayerAvatar.runningState = NOT_MOVING;
+    EXPECT(TH_ResearchTryStartPendingCall()); // same end position, eight traveled tiles
+    gSpecialVar_0x8004 = TH_CALL_BIRCH; TH_ScriptResearchCompleteCall();
+    ScriptContext_Init(); UnlockPlayerFieldControls();
+    TH_ResearchQueueCall(TH_CALL_ROUTE10);
+    EXPECT(!TH_ResearchTryStartPendingCall());
+    gSaveBlock1Ptr->location.mapNum++;
+    EXPECT(TH_ResearchTryStartPendingCall());
+    EXPECT(TH_ResearchCallDelivered(TH_CALL_ELM));
+    EXPECT(TH_ResearchCallDelivered(TH_CALL_BIRCH));
+    SafeField(); gMain.callback2 = old;
+}
 #endif

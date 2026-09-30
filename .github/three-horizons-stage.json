@@ -1,6 +1,6 @@
 {
   "mode": "focused",
-  "native_filter": "research",
+  "native_filter": "test/three_horizons_research.c",
   "host_filter": "test_playtest13_rc2.py",
   "visual_gate": "research"
 }

@@ -188,3 +188,7 @@
 - [Playtest 13 encounter checklist](three_horizons/PLAYTEST_13_ENCOUNTERS.md)
 - [Playtest 13 rematch capacity decision](three_horizons/PLAYTEST_13_REMATCH_CAPACITY.md)
 - [Playtest 13 evolution and training QA](three_horizons/PLAYTEST_13_EVOLUTION_QA.md)
+- [Playtest 13.1 / RC2 approved design](superpowers/specs/2026-09-30-playtest13-1-rc2-design.md)
+- [Playtest 13.1 / RC2 implementation plan](superpowers/plans/2026-09-30-playtest13-1-rc2.md)
+- [Playtest 13.1 Research Gear guide](three_horizons/PLAYTEST_13_RESEARCH_GEAR.md)
+- [Playtest 13.1 hardware acceptance checklist](three_horizons/PLAYTEST_13_1_HARDWARE_QA.md)

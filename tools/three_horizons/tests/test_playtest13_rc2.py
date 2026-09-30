@@ -24,6 +24,12 @@ class RC2Scripts(unittest.TestCase):
         boundary = script.split('TH12_Chapter_EndText:',1)[1]
         self.assertNotRegex(boundary, r'(?i)end of PLAYTEST|chapter ends here|next chapter')
 
+    def test_accessible_bike_shop_customer_uses_in_world_dialogue(self):
+        maps = json.loads((ROOT/'data/maps/TH_CeruleanBikeShop/map.json').read_text())
+        self.assertIn('TH_Local_CeruleanBikeShop_2', [o['script'] for o in maps['object_events']])
+        text = (ROOT/'data/scripts/three_horizons/chapter9_locals.inc').read_text().split('TH_Local_CeruleanBikeShop_2_Text:',1)[1].split('\n\n',1)[0]
+        self.assertNotRegex(text, r'(?i)later chapter|playtest')
+
     def test_gear_handoff_is_free_once_and_does_not_invent_photos(self):
         s = Scene(gear=False)
         s.run('TH13_GiveResearchGear')

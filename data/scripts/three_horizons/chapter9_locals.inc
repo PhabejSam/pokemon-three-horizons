@@ -628,7 +628,7 @@ TH_Local_CeruleanBikeShop_2::
     end
 
 TH_Local_CeruleanBikeShop_2_Text:
-    .string "The bicycles are being serviced.\nSales open in a later chapter.$"
+    .string "A well-serviced bicycle makes\ntravel between towns much easier.$"
 
 TH_Sign_CeruleanBikeShop_0::
     msgbox TH_Sign_CeruleanBikeShop_0_Text, MSGBOX_NPC

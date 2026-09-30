@@ -53,16 +53,11 @@ void TH_ResearchResetCallPacing(void) { sCallStepsRemaining = 0; }
 bool32 TH_ResearchTryStartPendingCall(void)
 {
     u16 call;
-    // The hook runs after priority field input. Never replace an interaction,
-    // menu, warp, field move, moving avatar or the script of another scene.
+    // Count travel even while direction input is held. Measuring only at idle
+    // loses a whole walking loop when the avatar returns to its starting tile.
     if (gMain.callback2 != CB2_Overworld || gMain.inBattle
         || gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_TH_PALLET)
-        || !FlagGet(FLAG_TH13_GEAR) || ArePlayerFieldControlsLocked()
-        || ScriptContext_IsEnabled() || gPaletteFade.active
-        || gPlayerAvatar.preventStep || gPlayerAvatar.transitionFlags
-        || gPlayerAvatar.tileTransitionState != T_NOT_MOVING
-        || gPlayerAvatar.runningState != NOT_MOVING
-        || gMain.newKeys || gMain.heldKeys)
+        || !FlagGet(FLAG_TH13_GEAR))
         return FALSE;
     if (sCallStepsRemaining)
     {
@@ -74,8 +69,16 @@ bool32 TH_ResearchTryStartPendingCall(void)
             sCallLastPos = gSaveBlock1Ptr->pos;
             sCallStepsRemaining = distance >= sCallStepsRemaining ? 0 : sCallStepsRemaining - distance;
         }
-        if (sCallStepsRemaining) return FALSE;
     }
+    // The hook runs after priority field input. Never replace an interaction,
+    // menu, warp, field move, moving avatar or the script of another scene.
+    if (sCallStepsRemaining || ArePlayerFieldControlsLocked()
+        || ScriptContext_IsEnabled() || gPaletteFade.active
+        || gPlayerAvatar.preventStep || gPlayerAvatar.transitionFlags
+        || gPlayerAvatar.tileTransitionState != T_NOT_MOVING
+        || gPlayerAvatar.runningState != NOT_MOVING
+        || gMain.newKeys || gMain.heldKeys)
+        return FALSE;
     call = TH_ResearchNextPendingCall();
     if (call >= ARRAY_COUNT(sResearchCallScripts))
         return FALSE;
