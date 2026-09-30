@@ -372,6 +372,28 @@ static u8 InitDexProbe(enum Species species)
     return FindTaskIdByFunc(Task_HandleCaughtMonPageInput);
 }
 
+TEST("Three Horizons playtest13 first catch rapid Zubat input cannot dismiss after cry")
+{
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    u8 dexTask = InitDexProbe(SPECIES_ZUBAT);
+    u32 frame;
+    for (frame = 0; frame < 1200 && (FuncIsActiveTask(Task_DuckBGMForPokemonCry) || IsCryPlaying()); frame++)
+        CatchProbeFrame(sDexProbeCommand, frame % 2 ? 0 : A_BUTTON, frame % 2 ? 0 : A_BUTTON);
+    EXPECT_LT(frame, 1200);
+    // Continue the capture's rapid pressing beyond presentation completion.
+    // A single released frame between presses is not intentional readiness.
+    for (frame = 0; frame < 120; frame++)
+    {
+        u16 key = frame % 2 ? A_BUTTON : 0;
+        CatchProbeFrame(sDexProbeCommand, key, key);
+        EXPECT(gTasks[dexTask].func == Task_HandleCaughtMonPageInput);
+        EXPECT(gBattlescriptCurrInstr == sDexProbeCommand);
+    }
+    FreeMoveProbe();
+    gMain.callback1 = old1;
+    SetMainCallback2(old2);
+}
+
 TEST("Three Horizons playtest13 first catch finishes Dex before nickname")
 {
     enum Species species;

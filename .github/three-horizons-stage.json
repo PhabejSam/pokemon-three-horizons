@@ -1,4 +1,5 @@
 {
-  "mode": "integration",
-  "legacy_controls": "false"
+  "mode": "focused",
+  "native_filter": "Three Horizons playtest13 first catch",
+  "host_filter": "test_playtest13_battle.py"
 }
