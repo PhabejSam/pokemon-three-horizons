@@ -195,4 +195,32 @@ TEST("Three Horizons RC2 research contacts follow individual introductions")
     for (u32 contact = 0; contact < 3; contact++) EXPECT_EQ(TH_ResearchContactLatestReport(contact), TH_CALL_LAVENDER);
     EXPECT(!TH_ResearchContactAvailable(3));
 }
+
+static u8 ResearchWindowPixel(u32 x, u32 y)
+{
+    u32 offset = ((y / 8) * 28 + x / 8) * 32 + (y % 8) * 4 + (x % 8) / 2;
+    return (gWindows[0].tileData[offset] >> ((x & 1) * 4)) & 15;
+}
+
+TEST("Three Horizons RC2 research window pixels retain text and photo cutout")
+{
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    IntrCallback oldVBlank = gMain.vblankCallback;
+    gMain.callback1 = NULL; SetDefaultFontsPointer(); InitEventData();
+    FlagSet(FLAG_TH13_GEAR);
+    TH_ResearchObserve(TH_RESEARCH_FOREST_PAIR);
+    TH_ResearchTakePhoto(TH_PHOTO_FOREST_PAIR);
+    TH_OpenResearchGear(ResearchReturn); ResearchFrames(0, 40);
+    u32 foreground = 0;
+    for (u32 y = 0; y < 12; y++)
+        for (u32 x = 4; x < 120; x++)
+            foreground += ResearchWindowPixel(x, y) == 2;
+    EXPECT_GT(foreground, 20); // actual glyph pixels, not menu state
+    Press(DPAD_DOWN); Press(A_BUTTON); Press(A_BUTTON);
+    for (u32 y = 24; y < 120; y++)
+        for (u32 x = 0; x < 224; x++) EXPECT_EQ(ResearchWindowPixel(x, y), 0);
+    EXPECT_EQ(TH_TestResearchMenuSubjects(), 2);
+    Press(B_BUTTON); Press(B_BUTTON); Press(B_BUTTON); ResearchFrames(0, 40);
+    SetVBlankCallback(oldVBlank); gMain.callback1 = old1; SetMainCallback2(old2);
+}
 #endif

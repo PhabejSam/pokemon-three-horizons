@@ -4,6 +4,14 @@ import re
 import subprocess
 
 CONTROLS = (
+    ('gear-frame', 'src/three_horizons_research_menu.c', (
+        ('    DrawStdFrameWithCustomTileAndPalette(0, FALSE, RESEARCH_FRAME_BASE, 15);',
+         '    FillWindowPixelBuffer(0, PIXEL_FILL(1));'),
+        ('    PutWindowTilemap(0); CopyWindowToVram(0, COPYWIN_FULL);',
+         '    DrawStdFrameWithCustomTileAndPalette(0, FALSE, RESEARCH_FRAME_BASE, 15);\n    PutWindowTilemap(0); CopyWindowToVram(0, COPYWIN_FULL);'),
+    ), 'Three Horizons RC2 research window pixels', (
+        'research window pixels retain text and photo cutout',
+    )),
     ('cut', 'src/overworld.c', (
         ('    PrepareThreeHorizonsCutTemplates();', '    ; // P12: no temporary Cut receipts'),
     ), 'Three Horizons playtest13 Cut', (
@@ -12,9 +20,9 @@ CONTROLS = (
         'Cut target remains removed while another tree is unaffected',
     )),
     ('version', 'src/three_horizons_clock.c', (
-        ('TH_STATE_VERSION_13 |', 'TH_STATE_VERSION_12 |'),
-    ), 'Three Horizons playtest13 state remains version13', (
-        'state remains version13 after clock update',
+        ('TH_STATE_VERSION_CURRENT |', 'TH_STATE_VERSION_12 |'),
+    ), 'Three Horizons playtest13 state remains current', (
+        'state remains current after clock update',
     )),
     ('battle', 'include/config/battle.h', (
         ('B_RUN_TRAINER_BATTLE                FALSE', 'B_RUN_TRAINER_BATTLE                TRUE'),

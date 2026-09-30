@@ -92,7 +92,7 @@ jobs:
             fi
             tail -n 100 focused-state-negative.log
             grep -q 'state migration preserves P12 payload.*FAIL' focused-state-negative.log
-            grep -q 'state remains version13 after clock update.*FAIL' focused-state-negative.log
+            grep -q 'state remains current after clock update.*FAIL' focused-state-negative.log
             grep -q 'state initializes dirty slots only on upgrade.*FAIL' focused-state-negative.log
             grep -q 'state imports witnessed reports without inventing photos.*FAIL' focused-state-negative.log
             cp /tmp/th13-state-fixed.c src/three_horizons_state.c

@@ -16,7 +16,9 @@ class Playtest13Rematches(unittest.TestCase):
         source = (ROOT/'data/scripts/three_horizons/chapter12_vermilion.inc').read_text()
         section = source.split('TH13_VsSeekerResearcher::', 1)[1]
         # Task34 adds a post-gift Surge/Flash lead; the gift itself stays ungated.
-        self.assertNotIn('FLAG_BADGE', section.split('TH13_VsSeekerReceived:', 1)[0])
+        catchup, gift = section.split('TH13_VsSeekerCheckGift:', 1)
+        self.assertIn('goto_if_unset FLAG_BADGE03_GET, TH13_VsSeekerCheckGift', catchup)
+        self.assertNotIn('FLAG_BADGE', gift.split('TH13_VsSeekerReceived:', 1)[0])
         self.assertIn('giveitem ITEM_VS_SEEKER', section)
         self.assertIn('goto_if_eq VAR_RESULT, FALSE, TH12_RewardBagFull', section)
         self.assertLess(section.index('goto_if_eq VAR_RESULT, FALSE'), section.index('setflag FLAG_TH13_VS_SEEKER'))

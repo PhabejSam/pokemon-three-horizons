@@ -31,7 +31,7 @@ TEST("Three Horizons playtest12 repeated Continue preserves completed earlier ch
     for (u32 pass = 0; pass < 2; pass++)
     {
         TH_MigrateSaveState();
-        EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), 0xA90B);
+        EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_CURRENT | 1);
         EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_LO), 12345);
         EXPECT_EQ(VarGet(VAR_TH_CLOCK_MODE), 1);
         EXPECT_EQ(VarGet(VAR_TH_SHINY_RATE), 3);

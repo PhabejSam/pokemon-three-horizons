@@ -1,4 +1,10 @@
-# Playtest 13 — The Road to Lavender
+# Playtest 13.1 / RC2 — The Road to Lavender
+
+RC2 is under software verification. Use the RC2 release manifest when the
+candidate is packaged. The RC1 hash and dated acceptance below remain historical
+evidence only; they do not establish RC2 hardware acceptance. Research Gear and
+hardware testing details are in PLAYTEST_13_RESEARCH_GEAR.md and
+PLAYTEST_13_1_HARDWARE_QA.md.
 
 Verified software candidate, 2026-09-29. Exact post-Surge personal-save migration, its normal continuation to the Tower endpoint and back to Lavender, and the separate new-game route through Surge to the endpoint passed. RG40XX H Playtest 13 acceptance remains the owner's separate hardware test. Evidence and test limits are in PLAYTEST_13_VERIFICATION.md.
 
@@ -24,7 +30,7 @@ The owner's accepted source is the raw 131072-byte VBA-Next EEPROM file
 `pokemon-three-horizons-playtest-12-rocket-art.gba.eps`, SHA-256
 `be9bbc4722188ce11ad86b6bcc34a89539a4572403cfade3330da75f1ccbadca`.
 For desktop mGBA, copy those bytes to
-`pokemon-three-horizons-playtest-13-road-to-lavender.sav` beside the new ROM.
+`pokemon-three-horizons-playtest-13-1-road-to-lavender.sav` beside the new ROM.
 Changing the working copy's extension is sufficient; do not convert the contents.
 On RG40XX H/VBA-Next, use that core's battery-save directory and naming convention
 (the P12 source used `.gba.eps`). Keep the P12 original and its ROM untouched.
@@ -41,18 +47,26 @@ losses and alternate choices, then return to the main route.
 1. **Pallet and the laboratory.** Start a new game, choose an outfit/name and
    set the clock. Inspect the desktop, TV, clock and Town Maps. Watch the lab
    arrival: everyone should finish moving and face the speaker. Choose the
-   first regional partner, inspect its Summary, and complete the opening rival
+   first regional partner and inspect its Summary. After partner/Pokédex setup,
+   Oak gives free Research Gear before you leave the laboratory. Open it from
+   Start and check Research Log, Field Photos and Calls; Oak is introduced, while
+   Elm/Birch await their own milestones. Complete the opening rival
    battle. Save, cold Continue, and compare the partner's identity and moves.
 2. **Route 1, Viridian and Route 22.** Follow the opening errands and exit
    dialogue. Heal with one Pokémon, then again with three and six as the party
    grows. Inspect Spearow and the Cut tree. Viridian Gym must stay locked at this
-   stage. Take Route 22 for the optional rival; use a separate checkpoint to
+   stage. Observe and optionally photograph Route 1's Hoothoot; Elm introduces
+   his Johto research after the scene when field controls are safe. Take Route 22 for the optional rival; use a separate checkpoint to
    lose and retry. The League gate still requires eight badges. Return to town.
 3. **Route 2 and Viridian Forest.** Read different signs and talk to trainers.
    Catch several distinct species, including a first Caterpie/Weedle/Pikachu
-   when encountered. Let every first-catch Pokédex screen close before naming;
+   when encountered. On a first catch, continue holding A or pressing rapidly:
+   the completed Pokédex entry must remain visible until input is released,
+   then a fresh A/B dismisses it. Test nickname Yes and No separately;
    try a maximum-length name and two Pokémon with the same nickname. Observe
-   Treecko and Shroomish; these visible scenes are not catches. Continue north
+   Treecko and Shroomish; these visible scenes are not catches. Decline a photo
+   once, reaccept, then check the card and its details/notes in Gear. Compare
+   field brightness before/after every flash. Continue north
    to Pewter. The optional Cut clearing is for the later backtrack.
 4. **Pewter and Brock.** Try the eastern exit before the badge and check the
    guide. Visit the museum, upstairs and downstairs, its exhibits and greeting.
@@ -63,7 +77,8 @@ losses and alternate choices, then return to the main route.
 5. **Route 3 and Mt. Moon.** Fight trainers, heal at the entrance Center, and
    enter Mt. Moon. Check first catches, poison/confusion, Repel expiry and the
    option to reuse another Repel. Use the first side ladder to visit the three
-   Clefairy and Makuhita; repeat the interaction and return by the ladder. Reach
+   Clefairy and Makuhita; photograph them, hear Birch's individual Hoenn call,
+   repeat the interaction and return by the ladder. Reach
    the fossil researcher from each approach on checkpoint copies: he challenges
    you before taking fossils, then permits both fossils after victory. Test the
    Jessie/James encounter with two conscious, non-Egg Pokémon for doubles. On a
@@ -98,15 +113,16 @@ losses and alternate choices, then return to the main route.
 9. **Diglett's Cave and the Route 2 backtrack.** Talk to the Vermilion scientist
    for Oak's lead. Head east to Route 11 and enter Diglett's Cave. Explore its
    length and leave at Route 2. Bring the Thunder Badge and at least ten distinct
-   caught/received species to Oak's aide in the Route 2 passage. Receive Research
-   Gear and HM05 Flash. Open Gear from Start, finish the activation call, and
-   save/cold Continue. Return through the cave to Vermilion Harbor for the
+   caught/received species to Oak's aide in the Route 2 passage. Receive HM05
+   Flash and research guidance; Gear was already supplied in the lab. Neither
+   teaching Flash nor freeing a move slot is needed. Save/cold Continue.
+   Return through the cave to Vermilion Harbor for the
    Marill/Wingull photo: the partners remain ashore after the ship departs.
    Decline once, return, accept, and confirm a repeat does not add another photo.
    In the nearby Route 2 house, the one-time trade is your Zubat for
    Skarmory: try cancel/wrong target before accepting with a disposable checkpoint.
    Cut back through Viridian Forest for Pinsir/Heracross, a photo and the research
-   reward. Revisit earlier sightings now that Gear is available. Return north
+   reward. Revisit earlier sightings to fill missing photos. Return north
    through Pewter, Route 3, Mt. Moon and Route 4 to Cerulean, or retrace the cave
    and the Vermilion/underground route. No Saffron shortcut is required.
 10. **Route 9, Route 10 and Rock Tunnel.** Leave Cerulean east using Cut.
@@ -135,8 +151,10 @@ losses and alternate choices, then return to the main route.
    team/boxes and existing Bill, fossil, starter, Ticket and Cut progress. Completed
    one-time battles/gifts must not replay. Do not use the older Cerulean/P11-marked
    backup as a substitute for the exact post-Surge hardware save.
-2. In Vermilion, heal and speak to the scientist for the Vs. Seeker and Route 2
-   lead. Visit the Fan Club if its voucher is unclaimed. Cerulean's bike shop
+2. In Vermilion, heal and speak to the Center scientist for free missing
+   Research Gear and the separate Vs. Seeker reward/Route 2 lead. Check Gear
+   before heading onward. The handoff uses no bag slot and invents no photos.
+   Visit the Fan Club if its voucher is unclaimed. Cerulean's bike shop
    supplies a missing second bike without charging another voucher. Finish any
    reachable ship content before the approved departure; an old save inside the
    ship must retain a safe exit rather than become stranded.

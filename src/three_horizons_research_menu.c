@@ -276,7 +276,8 @@ static bool32 ResearchDraw(void)
 {
     ClearSubjects();
     HideBg(1);
-    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    // The native frame helper fills the window; draw it before its contents.
+    DrawStdFrameWithCustomTileAndPalette(0, FALSE, RESEARCH_FRAME_BASE, 15);
     if (sResearchMenu->level == 0)
     {
         Print(4, 0, COMPOUND_STRING("RESEARCH GEAR"));
@@ -353,7 +354,6 @@ static bool32 ResearchDraw(void)
         }
         Print(4, 132, photo ? (sResearchMenu->page == 0 ? COMPOUND_STRING("A: Details    B: Back") : sResearchMenu->page == 1 ? COMPOUND_STRING("A: Professor note    B: Back") : COMPOUND_STRING("A: Photo    B: Back")) : COMPOUND_STRING("A: Turn page    B: Back"));
     }
-    DrawStdFrameWithCustomTileAndPalette(0, FALSE, RESEARCH_FRAME_BASE, 15);
     PutWindowTilemap(0); CopyWindowToVram(0, COPYWIN_FULL);
     return TRUE;
 }

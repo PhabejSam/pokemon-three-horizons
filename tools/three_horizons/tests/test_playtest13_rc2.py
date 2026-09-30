@@ -72,6 +72,13 @@ class RC2Scripts(unittest.TestCase):
         self.assertIn('DrawStdFrameWithCustomTileAndPalette', source)
         self.assertTrue((ROOT/'src/data/three_horizons_research_photos.h').exists())
 
+    def test_native_frame_is_drawn_before_text_and_photo_cutout(self):
+        source = (ROOT/'src/three_horizons_research_menu.c').read_text()
+        draw = source.split('static bool32 ResearchDraw(void)\n{',1)[1].split('static void ResearchMain',1)[0]
+        # Native frame helper fills the window, so drawing it last erases both.
+        self.assertLess(draw.index('DrawStdFrameWithCustomTileAndPalette'), draw.index('Print('))
+        self.assertLess(draw.index('DrawStdFrameWithCustomTileAndPalette'), draw.index('DrawPhotoBackdrop(id)'))
+
     def test_photo_assets_match_authored_sources_and_fit_hardware_budget(self):
         folder = ROOT/'graphics/three_horizons/research/photos'
         manifest = json.loads((folder/'manifest.json').read_text())
