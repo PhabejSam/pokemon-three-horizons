@@ -30,10 +30,18 @@ TEST("Three Horizons RC2 hardware photo flash preserves tinted palettes repeated
         FadeScreenHardware(FADE_TO_WHITE, 0);
         EXPECT(gPaletteFade.active);
         u32 frame;
-        for (frame = 0; frame < 120 && gPaletteFade.active; frame++) UpdatePaletteFade();
+        for (frame = 0; frame < 120 && gPaletteFade.active; frame++)
+        {
+            UpdatePaletteFade();
+            TransferPlttBuffer();
+        }
         EXPECT_LT(frame, 120);
         FadeScreenHardware(FADE_FROM_WHITE, 0);
-        for (frame = 0; frame < 120 && gPaletteFade.active; frame++) UpdatePaletteFade();
+        for (frame = 0; frame < 120 && gPaletteFade.active; frame++)
+        {
+            UpdatePaletteFade();
+            TransferPlttBuffer();
+        }
         EXPECT_LT(frame, 120);
         EXPECT_EQ(memcmp(base, gPlttBufferUnfaded, sizeof(base)), 0);
         EXPECT_EQ(memcmp(faded, gPlttBufferFaded, sizeof(faded)), 0);
