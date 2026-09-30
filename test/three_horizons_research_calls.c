@@ -15,6 +15,7 @@ static void BattleCallback(void) {}
 static void NamingCallback(void) {}
 static void SafeField(void)
 {
+    TH_ResearchResetCallPacing();
     ScriptContext_Init(); UnlockPlayerFieldControls();
     gMain.callback2 = CB2_Overworld;
     gMain.newKeys = gMain.heldKeys = 0;
@@ -80,12 +81,14 @@ TEST("Three Horizons playtest13 professor call stays pending until delivered")
     MainCallback old = gMain.callback2;
     u8 saved[NUM_FLAG_BYTES];
     InitEventData(); FlagSet(FLAG_TH13_GEAR);
-    for (s32 call = TH_CALL_LAVENDER; call >= TH_CALL_ACTIVATION; call--)
+    for (s32 call = TH_RESEARCH_CALL_COUNT - 1; call >= TH_CALL_ACTIVATION; call--)
         EXPECT(TH_ResearchQueueCall(call));
     memcpy(saved, gSaveBlock1Ptr->flags, sizeof(saved));
     InitEventData(); memcpy(gSaveBlock1Ptr->flags, saved, sizeof(saved));
-    for (u32 call = 0; call < TH_RESEARCH_CALL_COUNT; call++)
+    const u16 order[] = {TH_CALL_ACTIVATION, TH_CALL_ELM, TH_CALL_BIRCH, TH_CALL_ROUTE10, TH_CALL_LAVENDER};
+    for (u32 i = 0; i < ARRAY_COUNT(order); i++)
     {
+        u32 call = order[i];
         SafeField(); EXPECT(TH_ResearchTryStartPendingCall());
         EXPECT_EQ(TH_ResearchNextPendingCall(), call);
         EXPECT(!TH_ResearchCallDelivered(call));
@@ -98,5 +101,25 @@ TEST("Three Horizons playtest13 professor call stays pending until delivered")
     SafeField(); EXPECT(!TH_ResearchTryStartPendingCall());
     EXPECT(!ScriptContext_IsEnabled());
     gMain.callback2 = old;
+}
+
+TEST("Three Horizons RC2 queued calls wait for resumed travel and survive cold pacing reset")
+{
+    MainCallback old = gMain.callback2;
+    InitEventData(); SafeField(); FlagSet(FLAG_TH13_GEAR);
+    TH_ResearchQueueCall(TH_CALL_ELM); TH_ResearchQueueCall(TH_CALL_BIRCH);
+    EXPECT(TH_ResearchTryStartPendingCall());
+    gSpecialVar_0x8004 = TH_CALL_ELM; TH_ScriptResearchCompleteCall();
+    ScriptContext_Init(); UnlockPlayerFieldControls();
+    for (u32 frame = 0; frame < 180; frame++) EXPECT(!TH_ResearchTryStartPendingCall());
+    EXPECT_EQ(TH_ResearchNextPendingCall(), TH_CALL_BIRCH);
+    gSaveBlock1Ptr->pos.x += 8;
+    EXPECT(TH_ResearchTryStartPendingCall());
+    // Cold Continue resets RAM pacing, never the receipt or pending report.
+    ScriptContext_Init(); UnlockPlayerFieldControls(); TH_ResearchResetCallPacing();
+    EXPECT(TH_ResearchCallDelivered(TH_CALL_ELM));
+    EXPECT_EQ(TH_ResearchNextPendingCall(), TH_CALL_BIRCH);
+    EXPECT(TH_ResearchTryStartPendingCall());
+    SafeField(); gMain.callback2 = old;
 }
 #endif

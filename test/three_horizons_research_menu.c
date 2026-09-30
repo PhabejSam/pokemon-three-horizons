@@ -55,11 +55,11 @@ TEST("Three Horizons playtest13 research menu returns cleanly")
             Press(A_BUTTON);
             EXPECT_EQ(TH_TestResearchMenuLevel(), 1);
             Press(A_BUTTON);
-            if (module != 0 && counts[c])
+            if (module != 2 && counts[c])
             {
                 EXPECT_EQ(TH_TestResearchMenuLevel(), 2);
                 EXPECT_EQ(TH_TestResearchMenuRecord(), 0);
-                if (module == 2) EXPECT_EQ(TH_TestResearchMenuSubjects(), 1);
+                if (module == 1) EXPECT_EQ(TH_TestResearchMenuSubjects(), 1);
                 Press(DPAD_RIGHT);
                 Press(B_BUTTON);
             }
@@ -85,7 +85,7 @@ TEST("Three Horizons playtest13 research photo cards paginate with paired subjec
     for (u32 id = 0; id < TH_RESEARCH_PHOTO_COUNT; id++)
     { TH_ResearchObserve(id); TH_ResearchTakePhoto(id); }
     TH_OpenResearchGear(ResearchReturn); ResearchFrames(0, 40);
-    Press(DPAD_DOWN); Press(DPAD_DOWN); Press(A_BUTTON);
+    Press(DPAD_DOWN); Press(A_BUTTON);
     for (u32 id = 0; id < TH_RESEARCH_PHOTO_COUNT; id++)
     {
         Press(A_BUTTON);
@@ -93,7 +93,11 @@ TEST("Three Horizons playtest13 research photo cards paginate with paired subjec
         EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount);
         ResearchFrames(A_BUTTON, 30); // held input stays on the same record
         EXPECT_EQ(TH_TestResearchMenuRecord(), id);
-        Press(DPAD_RIGHT); Press(DPAD_LEFT); Press(B_BUTTON);
+        Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), 0);
+        Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), 0);
+        Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount);
+        Press(DPAD_LEFT); EXPECT_EQ(TH_TestResearchMenuSubjects(), 0);
+        Press(B_BUTTON);
         Press(DPAD_DOWN);
     }
     Press(B_BUTTON); Press(B_BUTTON); ResearchFrames(0, 40);
@@ -139,11 +143,13 @@ TEST("Three Horizons playtest13 research contacts replay without changing progre
     {
         TH_ResearchQueueCall(call); TH_ResearchCompleteCall(call);
         memcpy(saved, gSaveBlock1Ptr->flags, sizeof(saved));
-        TH_OpenResearchGear(ResearchReturn); ResearchFrames(0, 40); Press(A_BUTTON);
+        TH_OpenResearchGear(ResearchReturn); ResearchFrames(0, 40);
+        Press(DPAD_DOWN); Press(DPAD_DOWN); Press(A_BUTTON);
         for (u32 contact = 0; contact < 3; contact++)
         {
             EXPECT(TH_ResearchContactReport(contact, call) != NULL);
             EXPECT_LE(GetStringWidth(FONT_SMALL, TH_ResearchContactReport(contact, call), 0), 216);
+            if (!TH_ResearchContactAvailable(contact)) continue;
             Press(A_BUTTON); EXPECT_EQ(TH_TestResearchMenuLevel(), 2);
             EXPECT_EQ(TH_TestResearchMenuRecord(), contact);
             Press(B_BUTTON); Press(DPAD_DOWN);
@@ -152,7 +158,31 @@ TEST("Three Horizons playtest13 research contacts replay without changing progre
         EXPECT_EQ(memcmp(saved, gSaveBlock1Ptr->flags, sizeof(saved)), 0);
     }
     EXPECT(TH_ResearchContactReport(3, 0) == NULL);
-    EXPECT(TH_ResearchContactReport(0, 3) == NULL);
+    EXPECT(TH_ResearchContactReport(0, TH_RESEARCH_CALL_COUNT) == NULL);
     SetVBlankCallback(oldVBlank); gMain.callback1 = old1; SetMainCallback2(old2);
+}
+
+TEST("Three Horizons RC2 research contacts follow individual introductions")
+{
+    InitEventData(); FlagSet(FLAG_TH13_GEAR);
+    for (u32 contact = 0; contact < 3; contact++)
+    {
+        EXPECT(!TH_ResearchContactAvailable(contact));
+        EXPECT_EQ(TH_ResearchContactLatestReport(contact), TH_RESEARCH_CALL_NONE);
+    }
+    TH_ResearchQueueCall(TH_CALL_ACTIVATION); TH_ResearchCompleteCall(TH_CALL_ACTIVATION);
+    EXPECT(TH_ResearchContactAvailable(0));
+    EXPECT(!TH_ResearchContactAvailable(1)); EXPECT(!TH_ResearchContactAvailable(2));
+    TH_ResearchQueueCall(TH_CALL_ELM); TH_ResearchCompleteCall(TH_CALL_ELM);
+    EXPECT(TH_ResearchContactAvailable(1)); EXPECT(!TH_ResearchContactAvailable(2));
+    EXPECT_EQ(TH_ResearchContactLatestReport(1), TH_CALL_ELM);
+    TH_ResearchQueueCall(TH_CALL_BIRCH); TH_ResearchCompleteCall(TH_CALL_BIRCH);
+    EXPECT(TH_ResearchContactAvailable(2));
+    EXPECT_EQ(TH_ResearchContactLatestReport(2), TH_CALL_BIRCH);
+    TH_ResearchQueueCall(TH_CALL_ROUTE10); TH_ResearchCompleteCall(TH_CALL_ROUTE10);
+    for (u32 contact = 0; contact < 3; contact++) EXPECT_EQ(TH_ResearchContactLatestReport(contact), TH_CALL_ROUTE10);
+    TH_ResearchQueueCall(TH_CALL_LAVENDER); TH_ResearchCompleteCall(TH_CALL_LAVENDER);
+    for (u32 contact = 0; contact < 3; contact++) EXPECT_EQ(TH_ResearchContactLatestReport(contact), TH_CALL_LAVENDER);
+    EXPECT(!TH_ResearchContactAvailable(3));
 }
 #endif

@@ -102,6 +102,6 @@ TEST("Three Horizons Playtest 10 upgrade preserves every earned chapter receipt"
     EXPECT(FlagGet(FLAG_TH_FOSSIL_DOME));
     EXPECT(FlagGet(FLAG_TH_MISTY_TM));
     EXPECT_EQ(VarGet(VAR_TH_BROCK_GIFT), SPECIES_SQUIRTLE);
-    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_13 | 1);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_CURRENT | 1);
 }
 #endif

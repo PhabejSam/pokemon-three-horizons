@@ -69,7 +69,7 @@ TEST("Three Horizons playtest12 upgrade initializes only new receipts and keeps 
     FlagSet(FLAG_TH_FOSSIL_HELIX);
     FlagSet(TRAINER_FLAGS_START + TRAINER_TH9_LEADER_MISTY);
     TH_MigrateSaveState();
-    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_13 | 1);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_CURRENT | 1);
     EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_LO), 12345);
     EXPECT_EQ(FlagGet(FLAG_TH12_START_MONEY), version == TH_STATE_VERSION_12);
     EXPECT_EQ(FlagGet(FLAG_TH12_ULTRA_BALLS), version == TH_STATE_VERSION_12);

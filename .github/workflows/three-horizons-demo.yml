@@ -173,6 +173,12 @@ jobs:
           else
             make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="$NATIVE_FILTER" -j2 2>&1 | tee focused-native.log
           fi
+          if [ "$NATIVE_FILTER" = "research" ] && [ "${{ steps.phase.outputs.visual_gate }}" = "research" ]; then
+            for suite in state photo_palette; do
+              make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_${suite}.c" -j2 2>&1 | tee "focused-${suite}.log"
+              ! grep -q "No tests found" "focused-${suite}.log"
+            done
+          fi
           if [ "$NATIVE_FILTER" = "Three Horizons playtest13 Cut" ]; then
             make THREE_HORIZONS=1 check TEST_SRCS="$focused_sources" TESTS="test/three_horizons_field_moves.c" -j2 2>&1 | tee focused-field-moves.log
           fi
@@ -520,6 +526,9 @@ jobs:
             demo-build.log
             running-frames.log
             focused-state-negative.log
+            focused-state.log
+            focused-photo_palette.log
+            focused-photo-palette.log
             focused-cut-negative.log
             focused-cut-compatibility.log
             focused-field-moves.log

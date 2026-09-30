@@ -3,6 +3,7 @@
 #include "palette.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
+#include "three_horizons_research.h"
 #include "constants/field_weather.h"
 #include "constants/rgb.h"
 
@@ -28,6 +29,10 @@ TEST("Three Horizons RC2 hardware photo flash preserves tinted palettes repeated
     memcpy(sPhotoFaded, gPlttBufferFaded, sizeof(sPhotoFaded));
     for (u32 photo = 0; photo < 3; photo++)
     {
+        const u8 offsets[] = {REG_OFFSET_BLDCNT, REG_OFFSET_BLDALPHA, REG_OFFSET_BLDY, REG_OFFSET_WININ, REG_OFFSET_WINOUT};
+        const u16 registers[] = {BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND, 0x070D, 7, 0x1717, 0x1717};
+        for (u32 i = 0; i < ARRAY_COUNT(offsets); i++) SetGpuReg(offsets[i], registers[i]);
+        TH_ScriptBeginPhotoFlash();
         FadeScreenHardware(FADE_TO_WHITE, 0);
         EXPECT(gPaletteFade.active);
         u32 frame;
@@ -44,6 +49,8 @@ TEST("Three Horizons RC2 hardware photo flash preserves tinted palettes repeated
             TransferPlttBuffer();
         }
         EXPECT_LT(frame, 120);
+        TH_ScriptEndPhotoFlash();
+        for (u32 i = 0; i < ARRAY_COUNT(offsets); i++) EXPECT_EQ(GetGpuReg(offsets[i]), registers[i]);
         EXPECT_EQ(memcmp(sPhotoBase, gPlttBufferUnfaded, sizeof(sPhotoBase)), 0);
         EXPECT_EQ(memcmp(sPhotoFaded, gPlttBufferFaded, sizeof(sPhotoFaded)), 0);
     }

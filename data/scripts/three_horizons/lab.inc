@@ -133,6 +133,10 @@ TH_OakAfterSupplies:
     goto_if_ne VAR_RESULT, TRUE, TH_Lab_BagFull
     msgbox TH_Text_ExtraSupplies
 TH_OakSendoff:
+    goto_if_set FLAG_TH13_GEAR, TH13_OakGearReady
+    msgbox TH13_OakGearText
+    call TH13_GiveResearchGear
+TH13_OakGearReady:
     msgbox TH_Text_OakSendoff
     call TH_Lab_OakReturn
     special TH_RefreshFollower
@@ -147,6 +151,9 @@ TH_Lab_BagFull:
 
 TH_Text_ExtraSupplies:
     .string "OAK: Here are two ULTRA BALLS\nand 2,000 for your journey!\pUse them to investigate the unusual\nPOKéMON appearing in KANTO.$"
+
+TH13_OakGearText:
+    .string "OAK: Take this RESEARCH GEAR\nfor your journey as a Trainer.\pIts LOG records unusual sightings.\nIts CAMERA records those encounters.\pOpen it from the START menu. ELM\nand BIRCH will call as we learn more.$"
 
 TH_EventScript_Aide1::
     msgbox TH_Text_Aide1, MSGBOX_NPC

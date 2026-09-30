@@ -51,7 +51,7 @@ class Route2Aide(unittest.TestCase):
             bag={};flags={BADGE};messages,queue,values=visit(bag,flags,count)
             self.assertEqual(values['VAR_0x8006'],count)
             self.assertEqual(bool(bag),count>=10)
-            self.assertEqual(GEAR in flags,count>=10)
+            self.assertNotIn(GEAR, flags)
             if count<10:self.assertIn('TH13_Route2_QuotaText',messages)
         bag={};flags=set();messages,queue,_=visit(bag,flags,11)
         self.assertFalse(bag);self.assertFalse(flags);self.assertFalse(queue)
@@ -65,7 +65,8 @@ class Route2Aide(unittest.TestCase):
                     visit(bag,flags,room=False)
                     self.assertEqual(bag,{HM:1} if owned else {})
                     visit(bag,flags,room=True)
-                    self.assertTrue({GEAR,RECEIPT}<=flags)
+                    self.assertIn(RECEIPT, flags)
+                    self.assertEqual(GEAR in flags, gear)
                     # A valid receipt is authoritative: do not duplicate a delivered HM.
                     self.assertEqual(bag.get(HM,0),int(owned or not receipt))
                     before=(dict(bag),set(flags));visit(bag,flags)

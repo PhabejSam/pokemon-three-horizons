@@ -665,4 +665,6 @@ gSpecials::
     def_special TH_ScriptResearchObserve
     def_special TH_ScriptResearchQueueCall
     def_special TH_ScriptResearchCompleteCall
+    def_special TH_ScriptBeginPhotoFlash
+    def_special TH_ScriptEndPhotoFlash
 #endif

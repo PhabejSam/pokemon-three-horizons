@@ -12,6 +12,42 @@
 #include "constants/trainers.h"
 #include "constants/three_horizons.h"
 #if THREE_HORIZONS
+TEST("Three Horizons RC2 state preserves RC1 receipts and clears only newly owned flags")
+{
+    InitEventData(); ClearBag();
+    VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_13 | 1);
+    FlagSet(FLAG_TH13_GEAR); FlagSet(FLAG_TH13_PHOTO_FOREST_PAIR);
+    FlagSet(FLAG_TH13_FLASH); FlagSet(FLAG_TH13_CALL_ACTIVATION_DELIVERED);
+    FlagSet(FLAG_TH13_CALL_ROUTE10_DELIVERED);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_TH_BROCK);
+    for (u32 flag = TH13_RC2_FLAGS_START; flag <= TH13_RC2_FLAGS_END; flag++) FlagSet(flag);
+    TH_MigrateSaveState();
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_CURRENT | 1);
+    EXPECT(FlagGet(FLAG_TH13_GEAR)); EXPECT(FlagGet(FLAG_TH13_PHOTO_FOREST_PAIR));
+    EXPECT(FlagGet(FLAG_TH13_FLASH)); EXPECT(FlagGet(FLAG_TH13_CALL_ROUTE10_DELIVERED));
+    // RC1 activation really delivered all three professors; retain familiarity.
+    EXPECT(FlagGet(FLAG_TH13_CALL_ELM_DELIVERED));
+    EXPECT(FlagGet(FLAG_TH13_CALL_BIRCH_DELIVERED));
+    EXPECT(!FlagGet(FLAG_TH13_CALL_ELM_PENDING)); EXPECT(!FlagGet(FLAG_TH13_CALL_BIRCH_PENDING));
+    EXPECT(FlagGet(TRAINER_FLAGS_START + TRAINER_TH_BROCK));
+    u8 flags[NUM_FLAG_BYTES]; memcpy(flags, gSaveBlock1Ptr->flags, sizeof(flags));
+    TH_MigrateSaveState(); EXPECT_EQ(memcmp(flags, gSaveBlock1Ptr->flags, sizeof(flags)), 0);
+    EXPECT_EQ(sizeof(struct SaveBlock1), 15568); EXPECT_EQ(sizeof(struct SaveBlock2), 3884);
+}
+
+TEST("Three Horizons RC2 state never treats its current marker as a legacy save")
+{
+    InitEventData(); ClearBag();
+    VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_CURRENT);
+    FlagSet(FLAG_TH_ROCKET_DUO); FlagSet(FLAG_TH13_GEAR);
+    FlagSet(FLAG_TH13_PHOTO_HOOTHOOT); FlagSet(FLAG_TH13_CALL_ELM_PENDING);
+    FlagSet(FLAG_TH13_CALL_BIRCH_DELIVERED);
+    u8 flags[NUM_FLAG_BYTES]; memcpy(flags, gSaveBlock1Ptr->flags, sizeof(flags));
+    TH_MigrateSaveState();
+    EXPECT_EQ(memcmp(flags, gSaveBlock1Ptr->flags, sizeof(flags)), 0);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_CURRENT);
+}
+
 TEST("Three Horizons revision9 legacy state migration preserves established progress")
 {
     VarSet(VAR_TH_STAGE,TH_STAGE_COMPLETE);
@@ -220,7 +256,7 @@ TEST("Three Horizons playtest13 migration initializes new trainer wins once and 
     for (u32 trainer = 1; trainer < TRAINERS_COUNT; trainer++)
         EXPECT_EQ(FlagGet(TRAINER_FLAGS_START + trainer),
             version == TH_STATE_VERSION_13 || trainer < 104 || trainer > 156);
-    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_13 | 1);
+    EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_CURRENT | 1);
     // Actual P13 wins survive every subsequent Continue/migration call.
     for (u32 trainer = 104; trainer <= 156; trainer++)
         FlagSet(TRAINER_FLAGS_START + trainer);

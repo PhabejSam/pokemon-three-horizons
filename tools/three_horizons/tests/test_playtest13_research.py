@@ -79,6 +79,8 @@ class Scene:
                     self.completed.append((value, len(self.messages)))
                 elif args[0] == 'TH_ScriptResearchQueueCall': self.queued.append(value)
                 elif args[0] == 'StartMarowakBattle': self.battles.append(self.wild)
+                # Register ownership is verified by native palette tests.
+                elif args[0] in ('TH_ScriptBeginPhotoFlash', 'TH_ScriptEndPhotoFlash'): pass
                 elif args[0] != 'TH_RefreshFollower': raise AssertionError(line)
             elif op in ('fadescreen', 'fadescreenswapbuffers') and args[0] == 'FADE_TO_WHITE': self.flashes += 1
             elif op in ('lock', 'lockall', 'release', 'releaseall', 'closemessage', 'hidefollower',
@@ -200,7 +202,7 @@ class ResearchScripts(unittest.TestCase):
     def test_calls_complete_after_their_authored_text(self):
         for label, call in [('Activation','ACTIVATION'), ('Route10','ROUTE10'), ('Lavender','LAVENDER')]:
             s = Scene(); s.run('TH13_ResearchCall_' + label)
-            self.assertGreaterEqual(len(s.messages), 3)
+            self.assertEqual(len(s.messages), 1)
             self.assertEqual(s.completed, [('TH_CALL_' + call, len(s.messages))])
             self.assertEqual(s.flashes, 0)
 

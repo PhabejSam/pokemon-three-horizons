@@ -1,6 +1,6 @@
 {
   "mode": "focused",
-  "native_filter": "Three Horizons playtest13 first catch",
+  "native_filter": "research",
   "host_filter": "test_playtest13_rc2.py",
   "visual_gate": "research"
 }

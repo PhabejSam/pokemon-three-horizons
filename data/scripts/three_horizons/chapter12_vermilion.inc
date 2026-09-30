@@ -213,6 +213,11 @@ TH12_CenterText4:
 TH13_VsSeekerResearcher::
     lock
     faceplayer
+    goto_if_unset FLAG_BADGE03_GET, TH13_VsSeekerCheckGift
+    goto_if_set FLAG_TH13_GEAR, TH13_VsSeekerCheckGift
+    msgbox TH13_VermilionGearText
+    call TH13_GiveResearchGear
+TH13_VsSeekerCheckGift:
     goto_if_set FLAG_TH13_VS_SEEKER, TH13_VsSeekerAdvice
     checkitem ITEM_VS_SEEKER
     goto_if_eq VAR_RESULT, TRUE, TH13_VsSeekerReceived
@@ -235,3 +240,6 @@ TH13_VsSeekerAdviceText:
 
 TH13_VermilionFlashLeadText:
     .string "OAK asked another aide to meet you\non ROUTE 2, beyond DIGLETT'S CAVE.\pHead east to ROUTE 11 for the cave.\nThe aide has supplies for your work.$"
+
+TH13_VermilionGearText:
+    .string "OAK sent this RESEARCH GEAR\nto help with your growing reports.\pOpen its LOG, PHOTOS and CALLS\nfrom the START menu.\pUse the CAMERA at unusual sightings.\nNew photos must be taken in person.$"

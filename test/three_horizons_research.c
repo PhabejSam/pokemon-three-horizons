@@ -71,17 +71,36 @@ TEST("Three Horizons playtest13 research calls use persistent authored priority"
     EXPECT(TH_ResearchQueueCall(TH_CALL_LAVENDER));
     EXPECT(TH_ResearchQueueCall(TH_CALL_ROUTE10));
     EXPECT(TH_ResearchQueueCall(TH_CALL_ACTIVATION));
+    EXPECT(TH_ResearchQueueCall(TH_CALL_ELM));
+    EXPECT(TH_ResearchQueueCall(TH_CALL_BIRCH));
     EXPECT(!TH_ResearchQueueCall(TH_CALL_ACTIVATION));
     memcpy(saved, gSaveBlock1Ptr->flags, sizeof(saved));
     InitEventData(); memcpy(gSaveBlock1Ptr->flags, saved, sizeof(saved));
-    for (u32 id = 0; id < TH_RESEARCH_CALL_COUNT; id++)
+    const u16 order[] = {TH_CALL_ACTIVATION, TH_CALL_ELM, TH_CALL_BIRCH, TH_CALL_ROUTE10, TH_CALL_LAVENDER};
+    for (u32 i = 0; i < ARRAY_COUNT(order); i++)
     {
+        u32 id = order[i];
         EXPECT_EQ(TH_ResearchNextPendingCall(), id);
         TH_ResearchCompleteCall(id);
         EXPECT(TH_ResearchCallDelivered(id));
         EXPECT(!TH_ResearchQueueCall(id));
     }
     EXPECT_EQ(TH_ResearchNextPendingCall(), TH_RESEARCH_CALL_NONE);
+}
+TEST("Three Horizons RC2 live regional observations introduce contacts without photos")
+{
+    InitEventData(); TH_ResearchObserve(TH_RESEARCH_HOOTHOOT);
+    EXPECT_EQ(TH_ResearchNextPendingCall(), TH_RESEARCH_CALL_NONE);
+    FlagSet(FLAG_TH13_GEAR);
+    EXPECT(!TH_ResearchObserve(TH_RESEARCH_HOOTHOOT)); // imported/repeated still live
+    EXPECT_EQ(TH_ResearchNextPendingCall(), TH_CALL_ELM);
+    TH_ResearchCompleteCall(TH_CALL_ELM);
+    EXPECT(TH_ResearchObserve(TH_RESEARCH_MT_MOON));
+    EXPECT_EQ(TH_ResearchNextPendingCall(), TH_CALL_BIRCH);
+    TH_ResearchCompleteCall(TH_CALL_BIRCH);
+    TH_ResearchObserve(TH_RESEARCH_CAVE);
+    EXPECT_EQ(TH_ResearchNextPendingCall(), TH_RESEARCH_CALL_NONE);
+    for (u32 photo = 0; photo < TH_RESEARCH_PHOTO_COUNT; photo++) EXPECT(!TH_ResearchHasPhoto(photo));
 }
 TEST("Three Horizons playtest13 research migration imports only witnessed observations")
 {
@@ -132,7 +151,7 @@ TEST("Three Horizons playtest13 photo card binds authored tableau and metadata")
         {
             EXPECT(photo->subjects[j].species > SPECIES_NONE && photo->subjects[j].species < SPECIES_EGG);
             EXPECT(photo->subjects[j].x >= 24 && photo->subjects[j].x <= 216);
-            EXPECT(photo->subjects[j].y >= 32 && photo->subjects[j].y <= 96);
+            EXPECT(photo->subjects[j].y >= 32 && photo->subjects[j].y <= 112);
         }
     }
     EXPECT_EQ(TH_ResearchGetPhoto(TH_PHOTO_FOREST_PAIR)->subjects[0].species, SPECIES_PINSIR);

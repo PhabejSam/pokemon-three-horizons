@@ -11,9 +11,11 @@ TH13_ResearchPhoto::
     goto_if_eq VAR_RESULT, FALSE, TH13_ResearchPhoto_End
     playse SE_CLICK
     @ Hardware flash leaves weather/day-night source palettes untouched.
+    special TH_ScriptBeginPhotoFlash
     fadescreenswapbuffers FADE_TO_WHITE
     delay 4
     fadescreenswapbuffers FADE_FROM_WHITE
+    special TH_ScriptEndPhotoFlash
     msgbox TH13_ResearchPhoto_SavedText
 TH13_ResearchPhoto_End:
     return
@@ -29,13 +31,21 @@ TH13_ResearchPhoto_RecordedText:
 
 @ The field dispatcher chooses one named script. No receipt is written until
 @ every message has finished; resetting before that leaves the call pending.
+@ Oak's in-person handoff records his assignment without an automatic replay.
+TH13_GiveResearchGear::
+    goto_if_set FLAG_TH13_GEAR, TH13_GiveResearchGear_End
+    setflag FLAG_TH13_GEAR
+    setvar VAR_0x8004, TH_CALL_ACTIVATION
+    special TH_ScriptResearchQueueCall
+    special TH_ScriptResearchCompleteCall
+TH13_GiveResearchGear_End:
+    return
+
 TH13_ResearchCall_Activation::
     lockall
     playse SE_POKENAV_CALL
     waitse
     msgbox TH13_ResearchCall_ActivationOak
-    msgbox TH13_ResearchCall_ActivationElm
-    msgbox TH13_ResearchCall_ActivationBirch
     setvar VAR_0x8004, TH_CALL_ACTIVATION
     goto TH13_ResearchCall_Finish
 TH13_ResearchCall_Route10::
@@ -43,18 +53,28 @@ TH13_ResearchCall_Route10::
     playse SE_POKENAV_CALL
     waitse
     msgbox TH13_ResearchCall_Route10Oak
-    msgbox TH13_ResearchCall_Route10Elm
-    msgbox TH13_ResearchCall_Route10Birch
     setvar VAR_0x8004, TH_CALL_ROUTE10
     goto TH13_ResearchCall_Finish
 TH13_ResearchCall_Lavender::
     lockall
     playse SE_POKENAV_CALL
     waitse
-    msgbox TH13_ResearchCall_LavenderOak
     msgbox TH13_ResearchCall_LavenderElm
-    msgbox TH13_ResearchCall_LavenderBirch
     setvar VAR_0x8004, TH_CALL_LAVENDER
+    goto TH13_ResearchCall_Finish
+TH13_ResearchCall_Elm::
+    lockall
+    playse SE_POKENAV_CALL
+    waitse
+    msgbox TH13_ResearchCall_ActivationElm
+    setvar VAR_0x8004, TH_CALL_ELM
+    goto TH13_ResearchCall_Finish
+TH13_ResearchCall_Birch::
+    lockall
+    playse SE_POKENAV_CALL
+    waitse
+    msgbox TH13_ResearchCall_ActivationBirch
+    setvar VAR_0x8004, TH_CALL_BIRCH
 TH13_ResearchCall_Finish:
     closemessage
     special TH_ScriptResearchCompleteCall

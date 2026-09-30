@@ -230,6 +230,6 @@ TH12_Chapter_NotYet:
 TH12_Chapter_NotYetText:
     .string "OAK, ELM and BIRCH sent me to\ncompare reports from the port.\pVisit BILL and the S.S. ANNE, then\ntry VERMILION GYM. Tell me how\lyour third badge challenge goes!$"
 TH12_Chapter_EndText:
-    .string "Three badges! The professors will\nbe delighted with your progress.\pBILL's reports and the ship's cargo\nrecords point to POKéMON following\lnew routes across the three regions.\pYour journey has helped us see\nKANTO in a different way.\pThis is the end of PLAYTEST 12.\nSave at the POKéMON CENTER.\pYou can keep exploring these routes\nand the ship. The next chapter\lwill open more of KANTO!$"
+    .string "Three badges! Your port reports\nhave reached the professors.\pHead east to ROUTE 11. DIGLETT'S\nCAVE leads to OAK's ROUTE 2 aide.\pKeep comparing what you see.\nThere is much we don't understand.$"
 TH12_Chapter_RepeatText:
-    .string "Thank you for helping with our\nresearch! This chapter ends here,\lbut your team can keep growing.$"
+    .string "OAK's network follows your reports.\nTry ROUTE 11 and DIGLETT'S CAVE.\pThe ROUTE 2 aide can help you\nprepare for the road ahead.$"

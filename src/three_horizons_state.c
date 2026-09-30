@@ -1,5 +1,6 @@
 #include "global.h"
 #include "three_horizons.h"
+#include "three_horizons_research.h"
 #include "event_data.h"
 #include "pokedex.h"
 #include "item.h"
@@ -13,11 +14,12 @@
 #if THREE_HORIZONS
 void TH_MigrateSaveState(void)
 {
+    TH_ResearchResetCallPacing();
     static const u16 variables[] = {VAR_TH_BROCK_GIFT, VAR_TH_MISTY_GIFT,
         VAR_TH_SHINY_RATE, VAR_TH_CLOCK_MODE, VAR_TH_CLOCK_REAL_LO,
         VAR_TH_CLOCK_REAL_HI, VAR_TH_CLOCK_DISPLAY_LO};
     u16 version = VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK;
-    if (version != TH_STATE_VERSION_9 && version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13)
+    if (version != TH_STATE_VERSION_9 && version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
     {
         // Only this chapter's newly owned state is cleared. Never touch the
         // original partner, rival, trainer flags, badges, clock setup or kit.
@@ -26,19 +28,19 @@ void TH_MigrateSaveState(void)
         for (u32 flag=FLAG_TH_MAGIKARP;flag<=FLAG_TH_LAB_INTRO;flag++) FlagClear(flag);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI,TH_STATE_VERSION_9);
     }
-    if (version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13)
+    if (version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
     {
         FlagClear(FLAG_TH_DIG_TM);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_10 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
-    if (version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13)
+    if (version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
     {
         FlagClear(FLAG_TH_ROCKET_DUO);
         FlagClear(TRAINER_FLAGS_START + TRAINER_TH11_JESSIE);
         FlagClear(TRAINER_FLAGS_START + TRAINER_TH11_JAMES);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_11 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
-    if (version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13)
+    if (version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
     {
         for (u32 flag = TH12_FLAGS_START; flag <= TH12_FLAGS_END; flag++)
             FlagClear(flag);
@@ -52,7 +54,7 @@ void TH_MigrateSaveState(void)
             FlagSet(FLAG_TH12_REVIVED_HELIX);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_12 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
-    if (version != TH_STATE_VERSION_13)
+    if (version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
     {
         // These audited unused slots belong only to P13. Old versions may
         // contain arbitrary bits here; initialize them once, never on Continue.
@@ -89,6 +91,17 @@ void TH_MigrateSaveState(void)
             FlagSet(FLAG_TH13_VS_SEEKER);
         // Gear, photos and ship departure require witnessed P13 events.
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_13 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
+    }
+    if (version != TH_STATE_VERSION_13_1)
+    {
+        // RC2 owns four previously unused bits; existing P13 receipts stay intact.
+        for (u32 flag = TH13_RC2_FLAGS_START; flag <= TH13_RC2_FLAGS_END; flag++) FlagClear(flag);
+        if (version == TH_STATE_VERSION_13 && FlagGet(FLAG_TH13_CALL_ACTIVATION_DELIVERED))
+        {
+            FlagSet(FLAG_TH13_CALL_ELM_DELIVERED);
+            FlagSet(FLAG_TH13_CALL_BIRCH_DELIVERED);
+        }
+        VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_CURRENT | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
     // Continue restores the saved layout ID. Replace only the obsolete forest
     // layout, retaining all old paths/coordinates and every progress receipt.
