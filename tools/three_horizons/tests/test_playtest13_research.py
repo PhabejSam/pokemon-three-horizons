@@ -80,10 +80,10 @@ class Scene:
                 elif args[0] == 'TH_ScriptResearchQueueCall': self.queued.append(value)
                 elif args[0] == 'StartMarowakBattle': self.battles.append(self.wild)
                 elif args[0] != 'TH_RefreshFollower': raise AssertionError(line)
-            elif op == 'fadescreen' and args[0] == 'FADE_TO_WHITE': self.flashes += 1
+            elif op in ('fadescreen', 'fadescreenswapbuffers') and args[0] == 'FADE_TO_WHITE': self.flashes += 1
             elif op in ('lock', 'lockall', 'release', 'releaseall', 'closemessage', 'hidefollower',
                         'applymovement', 'waitmovement', 'playmoncry', 'waitmoncry', 'faceplayer',
-                        'playse', 'waitse', 'delay', 'fadescreen'):
+                        'playse', 'waitse', 'delay', 'fadescreen', 'fadescreenswapbuffers'):
                 pass
             else: raise AssertionError(line)
         raise AssertionError('scene did not finish')

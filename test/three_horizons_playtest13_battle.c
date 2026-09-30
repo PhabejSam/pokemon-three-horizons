@@ -389,6 +389,11 @@ TEST("Three Horizons playtest13 first catch rapid Zubat input cannot dismiss aft
         EXPECT(gTasks[dexTask].func == Task_HandleCaughtMonPageInput);
         EXPECT(gBattlescriptCurrInstr == sDexProbeCommand);
     }
+    for (frame = 0; frame < 16; frame++) CatchProbeFrame(sDexProbeCommand, 0, 0);
+    CatchProbeFrame(sDexProbeCommand, A_BUTTON, A_BUTTON);
+    for (frame = 0; frame < 1200 && gBattlescriptCurrInstr == sDexProbeCommand; frame++)
+        CatchProbeFrame(sDexProbeCommand, 0, 0);
+    EXPECT_LT(frame, 1200);
     FreeMoveProbe();
     gMain.callback1 = old1;
     SetMainCallback2(old2);
@@ -414,7 +419,7 @@ TEST("Three Horizons playtest13 first catch finishes Dex before nickname")
         EXPECT(gBattlescriptCurrInstr == sDexProbeCommand);
     }
     EXPECT_LT(frame, 1200);
-    CatchProbeFrame(sDexProbeCommand, 0, 0);
+    for (frame = 0; frame < 16; frame++) CatchProbeFrame(sDexProbeCommand, 0, 0);
     CatchProbeFrame(sDexProbeCommand, A_BUTTON, A_BUTTON);
     for (frame = 0; frame < 1200 && gBattlescriptCurrInstr == sDexProbeCommand; frame++)
         CatchProbeFrame(sDexProbeCommand, 0, 0);
@@ -440,17 +445,26 @@ TEST("Three Horizons playtest13 first catch finishes Dex before nickname")
 
 TEST("Three Horizons playtest13 first catch requires fresh input after presentation")
 {
+    u16 held, fresh;
+    PARAMETRIZE { held = A_BUTTON; fresh = A_BUTTON; }
+    PARAMETRIZE { held = B_BUTTON; fresh = B_BUTTON; }
+    PARAMETRIZE { held = A_BUTTON; fresh = B_BUTTON; }
     MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
-    u8 dexTask = InitDexProbe(SPECIES_CATERPIE);
+    u8 dexTask = InitDexProbe(SPECIES_ZUBAT);
     u32 frame;
     for (frame = 0; frame < 1200 && FuncIsActiveTask(Task_DuckBGMForPokemonCry); frame++)
-        CatchProbeFrame(sDexProbeCommand, 0, A_BUTTON);
+        CatchProbeFrame(sDexProbeCommand, 0, held);
     EXPECT_LT(frame, 1200);
     // Even a new press on the completion boundary must wait for a release.
-    CatchProbeFrame(sDexProbeCommand, A_BUTTON, A_BUTTON);
+    CatchProbeFrame(sDexProbeCommand, held, held);
     EXPECT(gTasks[dexTask].func == Task_HandleCaughtMonPageInput);
-    CatchProbeFrame(sDexProbeCommand, 0, 0);
-    CatchProbeFrame(sDexProbeCommand, A_BUTTON, A_BUTTON);
+    // No input leaves the fully initialized entry readable indefinitely.
+    for (frame = 0; frame < 120; frame++)
+    {
+        CatchProbeFrame(sDexProbeCommand, 0, 0);
+        EXPECT(gTasks[dexTask].func == Task_HandleCaughtMonPageInput);
+    }
+    CatchProbeFrame(sDexProbeCommand, fresh, fresh);
     for (frame = 0; frame < 1200 && gBattlescriptCurrInstr == sDexProbeCommand; frame++)
         CatchProbeFrame(sDexProbeCommand, 0, 0);
     EXPECT_LT(frame, 1200);
@@ -465,6 +479,7 @@ TEST("Three Horizons playtest13 first catch registers once and repeat skips Dex"
     PARAMETRIZE { species = SPECIES_CATERPIE; }
     PARAMETRIZE { species = SPECIES_WEEDLE; }
     PARAMETRIZE { species = SPECIES_PIKACHU; }
+    PARAMETRIZE { species = SPECIES_ZUBAT; }
     MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
     InitMoveProbe(0, FALSE, FALSE);
     CreateMonWithIVs(GetBattlerMon(1), species, 5, 9876, OTID_STRUCT_PLAYER_ID, 12);

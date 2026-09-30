@@ -3968,6 +3968,7 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 #define tPalTimer      data[2]
 #define tMonSpriteId   data[3]
 #define tCaughtInputReady data[4]
+#define tCaughtReleasedFrames data[5]
 #define tIsShiny       data[13]
 #define tPersonalityLo 14
 #define tPersonalityHi 15
@@ -3984,6 +3985,7 @@ u8 DisplayCaughtMonDexPage(enum Species species, bool32 isShiny, u32 personality
     gTasks[taskId].tSpecies = species;
 #if THREE_HORIZONS
     gTasks[taskId].tCaughtInputReady = FALSE;
+    gTasks[taskId].tCaughtReleasedFrames = 0;
 #endif
     gTasks[taskId].tIsShiny = isShiny;
     gTasks[taskId].data[tPersonalityLo] = personality;
@@ -4091,16 +4093,23 @@ void Task_HandleCaughtMonPageInput(u8 taskId)
 #if THREE_HORIZONS
     // The cry owner also covers the interval before its audio channel starts.
     // Keep the entry visible until presentation completes, then require a
-    // release and fresh press so repeated A cannot carry through the entry.
+    // continuous release and fresh press. A neutral frame between rapid taps
+    // must not arm dismissal. This is an input handshake, not a timed exit.
     if (FuncIsActiveTask(Task_DuckBGMForPokemonCry) || IsCryPlaying())
     {
         gTasks[taskId].tCaughtInputReady = FALSE;
+        gTasks[taskId].tCaughtReleasedFrames = 0;
         acceptInput = FALSE;
     }
     else if (!gTasks[taskId].tCaughtInputReady)
     {
         if (!JOY_HELD(A_BUTTON | B_BUTTON) && !JOY_NEW(A_BUTTON | B_BUTTON))
-            gTasks[taskId].tCaughtInputReady = TRUE;
+        {
+            if (++gTasks[taskId].tCaughtReleasedFrames >= 12)
+                gTasks[taskId].tCaughtInputReady = TRUE;
+        }
+        else
+            gTasks[taskId].tCaughtReleasedFrames = 0;
         acceptInput = FALSE;
     }
 #endif
@@ -4173,6 +4182,7 @@ static void SpriteCB_SlideCaughtMonToCenter(struct Sprite *sprite)
 #undef tPalTimer
 #undef tMonSpriteId
 #undef tCaughtInputReady
+#undef tCaughtReleasedFrames
 #undef tOtIdLo
 #undef tOtIdHi
 #undef tPersonalityLo

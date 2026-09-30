@@ -10,9 +10,10 @@ TH13_ResearchPhoto::
     special TH_ScriptTakeResearchPhoto
     goto_if_eq VAR_RESULT, FALSE, TH13_ResearchPhoto_End
     playse SE_CLICK
-    fadescreen FADE_TO_WHITE
+    @ Hardware flash leaves weather/day-night source palettes untouched.
+    fadescreenswapbuffers FADE_TO_WHITE
     delay 4
-    fadescreen FADE_FROM_WHITE
+    fadescreenswapbuffers FADE_FROM_WHITE
     msgbox TH13_ResearchPhoto_SavedText
 TH13_ResearchPhoto_End:
     return
