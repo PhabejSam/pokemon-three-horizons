@@ -7,24 +7,25 @@
 #include "constants/rgb.h"
 
 #if THREE_HORIZONS
+// Full palette snapshots exceed the native test runner's small IWRAM stack.
+static EWRAM_DATA u16 sOriginalBase[PLTT_BUFFER_SIZE], sOriginalFaded[PLTT_BUFFER_SIZE];
+static EWRAM_DATA u16 sPhotoBase[PLTT_BUFFER_SIZE], sPhotoFaded[PLTT_BUFFER_SIZE];
 TEST("Three Horizons RC2 hardware photo flash preserves tinted palettes repeatedly")
 {
-    u16 originalBase[PLTT_BUFFER_SIZE], originalFaded[PLTT_BUFFER_SIZE];
     u16 tint;
     PARAMETRIZE { tint = 0; } // daylight
     PARAMETRIZE { tint = 3; } // shaded forest
     PARAMETRIZE { tint = 8; } // night tint
-    memcpy(originalBase, gPlttBufferUnfaded, sizeof(originalBase));
-    memcpy(originalFaded, gPlttBufferFaded, sizeof(originalFaded));
+    memcpy(sOriginalBase, gPlttBufferUnfaded, sizeof(sOriginalBase));
+    memcpy(sOriginalFaded, gPlttBufferFaded, sizeof(sOriginalFaded));
     ResetPaletteFade();
     for (u32 i = 0; i < PLTT_BUFFER_SIZE; i++)
     {
         gPlttBufferUnfaded[i] = RGB(12 + i % 12, 14 + i % 16, 10 + i % 14);
         gPlttBufferFaded[i] = RGB(12 + i % 12 - tint, 14 + i % 16 - tint, 10 + i % 14 - tint);
     }
-    u16 base[PLTT_BUFFER_SIZE], faded[PLTT_BUFFER_SIZE];
-    memcpy(base, gPlttBufferUnfaded, sizeof(base));
-    memcpy(faded, gPlttBufferFaded, sizeof(faded));
+    memcpy(sPhotoBase, gPlttBufferUnfaded, sizeof(sPhotoBase));
+    memcpy(sPhotoFaded, gPlttBufferFaded, sizeof(sPhotoFaded));
     for (u32 photo = 0; photo < 3; photo++)
     {
         FadeScreenHardware(FADE_TO_WHITE, 0);
@@ -43,11 +44,11 @@ TEST("Three Horizons RC2 hardware photo flash preserves tinted palettes repeated
             TransferPlttBuffer();
         }
         EXPECT_LT(frame, 120);
-        EXPECT_EQ(memcmp(base, gPlttBufferUnfaded, sizeof(base)), 0);
-        EXPECT_EQ(memcmp(faded, gPlttBufferFaded, sizeof(faded)), 0);
+        EXPECT_EQ(memcmp(sPhotoBase, gPlttBufferUnfaded, sizeof(sPhotoBase)), 0);
+        EXPECT_EQ(memcmp(sPhotoFaded, gPlttBufferFaded, sizeof(sPhotoFaded)), 0);
     }
-    memcpy(gPlttBufferUnfaded, originalBase, sizeof(originalBase));
-    memcpy(gPlttBufferFaded, originalFaded, sizeof(originalFaded));
+    memcpy(gPlttBufferUnfaded, sOriginalBase, sizeof(sOriginalBase));
+    memcpy(gPlttBufferFaded, sOriginalFaded, sizeof(sOriginalFaded));
     ResetPaletteFade();
 }
 #endif
