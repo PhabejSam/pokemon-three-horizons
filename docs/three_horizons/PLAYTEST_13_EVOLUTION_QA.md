@@ -1,7 +1,8 @@
 # Playtest 13 evolution and training QA
 
-Implementation and acceptance are in progress. A method listed here is not a
-claim that its Pokémon or required item is already obtainable by Lavender.
+Software verification is complete for the recorded candidate; RG40XX H Playtest 13
+acceptance remains separate. A method listed here is not a claim that its Pokémon
+or required item is already obtainable by Lavender.
 
 ## Release configuration and compatibility
 

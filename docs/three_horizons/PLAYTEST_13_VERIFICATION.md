@@ -1,6 +1,8 @@
-# Playtest 13 verification — implementation in progress
+# Playtest 13 verification — verified software candidate
 
-No release or hardware acceptance is claimed by this working record.
+Software integration and both chapter routes passed on 2026-09-29. The final
+acceptance accounting at the end supersedes historical pending statements below.
+RG40XX H Playtest 13 acceptance is not claimed.
 
 ## Baseline
 
@@ -8,7 +10,7 @@ No release or hardware acceptance is claimed by this working record.
 - P12 compiled/test: `d8da3c365b74a0bd87099fb4e983e32f8d0e0c03`.
 - P12 ROM SHA-256: `2191ebf684fb829cc86d4bc8638a11ee5aa535a9c88dbd47f8b3e96ce38f312d`.
 - P13 implementation starts from `f49d3bd17a604d4593ad589b330018f5e911ecbc`.
-- Personal battery-save backup: `ThreeHorizons_PT12_RG40XXH_FINAL_BACKUP.sav`, 131088 bytes, SHA-256 `2bac4d587f965215c6a008d06825bfd46ca8ec5a77a247d7b53211111ecf8c8c`. Original preserved; testing uses a copy. Its actual state marker is Playtest 11 (0xA907), in Cerulean, despite its filename. The actual post-Surge P12 save has been requested; personal P12 migration acceptance is pending.
+- Superseded personal backup: `ThreeHorizons_PT12_RG40XXH_FINAL_BACKUP.sav`, 131088 bytes, SHA-256 `2bac4d587f965215c6a008d06825bfd46ca8ec5a77a247d7b53211111ecf8c8c`. Its actual state marker is Playtest 11 (0xA907), in Cerulean. Neither this file nor the identical older `.sav` establishes final personal acceptance. The actual RG40XX H post-Surge `.gba.eps` passed the exact-candidate migration below; historical pending statements are superseded by that dated record.
 - Existing native layout expectations: SaveBlock1 15568, SaveBlock2 3884, SaveBlock3 4, PokemonStorage 34144 bytes. All four native size checks passed at the Task 1 gate; they will run again at final integration.
 - P12 map index snapshot: `tools/three_horizons/tests/playtest12-map-indices.json`.
 
@@ -608,6 +610,9 @@ is pending. A real hardware battery, synthetic fixtures, emulator states and
 user-reported P12 hardware success are distinct evidence classes.
 # Integration checkpoint and review blocker — 2026-09-29
 
+Historical checkpoint: the review findings below were subsequently resolved by
+the approved harbor correction. See the current checkpoint at the end.
+
 This checkpoint is not a packaged or accepted Playtest 13 release. At feature
 revision `6d0ef06b349d64383e4ef9b6fecc12240eae9ec5`, CI run `36645374739`
 passed all 152 host contracts, 212 Three Horizons native tests and four
@@ -655,3 +660,319 @@ first Pidgey catch with visible Pokédex registration. This is partial route
 evidence; neither complete chapter walkthrough is claimed complete. RG40XX H
 Playtest 13 acceptance remains a separate user test. The PR remains unmerged.
 
+## Approved harbor correction: verified integration checkpoint — 2026-09-29
+
+This is an integration checkpoint, not final chapter or hardware acceptance.
+
+- Feature revision: `24ef1cb7c5bfa264685032427181ce65ed9f889d`.
+- Exact compiled/test merge revision: `c83e8c08adba9ace2f0c75139915b2ace8cb2f7a`.
+- ROM: `pokemon-three-horizons.gba`.
+- ROM SHA-256: `ad918b00e4476e9db68cb1445206ef1126e8d962be51cd74208442be3ff85077`.
+- Three Horizons CI: run `36648475853`, artifact `11070531081`.
+- Artifact ZIP SHA-256: `40ab453aa992ea4bc5702da155200d946a5abc3cb0d2dc322fa5f9c2547c0393`.
+- Upstream CI: run `36648475859`; Emerald, FireRed, LeafGreen, release,
+  native tests and documentation validation all passed.
+
+The Three Horizons gate passed 155 host contracts, 212 native tests and all four
+save-layout tests. Trainer-data regeneration across build modes passed. The
+effective release macros are `TESTING=0` and `THREE_HORIZONS=1`. Each intentional
+negative control failed its owning assertion: Cut (one failure), version write
+(one), trainer RUN/SELECT (two). Restoring the original code passed all 3, 1 and
+13 tests respectively. No assertion or compiler policy was suppressed.
+
+The user's approved fix preserves Gear-after-Surge and the departed ship gate.
+Two harbor actors reuse the existing ship observation/photo entry and receipt.
+The cargo NPC now records that observation on both first and repeated reports,
+including before Gear ownership. The only data changes are the city actors and
+load hook, ship scripts, and the existing research card's location label.
+No save structure or permanent flag allocation grew.
+
+The initial harbor implementation mistakenly used `FLAG_TEMP_11`, which belongs
+to the Cut obstacle pool. The unchanged Cut ownership tests caught this. The
+scene now uses audited, otherwise-unused `FLAG_TEMP_10`; the new scene test was
+observed failing before that allocation repair and passing afterward.
+
+Exact-candidate mGBA evidence confirms cargo first/repeat reports without Gear;
+partners hidden before departure and present afterward; both no-Gear reports;
+photo decline, revisit, acceptance, repeat without item changes; ordinary Save
+and cold Continue retaining the photo; and legible native photo/card/note screens.
+The professor's note retains the unresolved shipping lead. Small, large Gyarados,
+and disabled followers were checked with both partners, the existing sailor,
+closed boarding interaction and pier traversal. Native before/after images and
+driver logs are retained with the Task41 evidence. These controlled fixtures
+prove the scene branches, not natural Gear acquisition or a complete new game.
+
+Ten synthetic P12 battery fixtures passed normal Continue, protected-field
+comparison, ordinary Save and a second cold Continue on this exact ROM: Bill
+mid-machine and before rescue; ship aboard, dock and the old official tile;
+fossils below, above and on the revised scientist tile; a full Key Items pocket;
+and a partially delivered aide reward. Party identities/moves/PP, all boxes,
+bag, money, old story receipts, trainer defeat history and non-clock TH variables
+were preserved. Temporary rematch readiness reset; input file hashes remained
+unchanged. Full-pocket ticket delivery and partial aide rewards also passed
+make-room/retry/repeat without duplicates. The full pockets are synthetic
+capacity-stress fixtures, not naturally obtained duplicate-item inventories.
+
+The independent review's two Important ship-research findings are resolved.
+The full fresh-game route has reached Pewter, including natural Caterpie capture,
+visible first Pokédex/nickname screens, three forest trainers, Liam, a Brock loss
+and normal Center recovery, then a successful Brock retry, the Totodile gift,
+four-member healing, ordinary Save and cold Continue. This lineage used an
+ordinary battery Continue to move from the earlier integration ROM to this
+candidate before the successful retry; it did not reuse an old emulator state.
+Full Pallet-to-Tower and migrated post-Surge-to-Tower
+routes remain incomplete. Both owner-named files still identify the older
+Cerulean backup documented above; final personal-save acceptance requires the
+actual post-Surge device battery. The draft PR remains unmerged. RG40XX H/VBA-Next
+Playtest 13 acceptance remains a separate user test.
+
+## Actual RG40XX H post-Surge personal migration — PASS, 2026-09-29
+
+This record supersedes every earlier personal-save acceptance or pending-source
+statement involving the older Cerulean backups. It does not supersede the
+remaining complete-route or RG40XX H Playtest 13 hardware gates.
+
+The source is `pokemon-three-horizons-playtest-12-rocket-art.gba.eps`, recovered
+by the owner from the RG40XX H VBA-Next EEPROM directory: 131072 bytes, SHA-256
+`be9bbc4722188ce11ad86b6bcc34a89539a4572403cfade3330da75f1ccbadca`.
+It is a raw in-game battery, not an emulator state. The original and a separate
+working copy retained that hash after all checks. Personal batteries remain
+private local evidence and are not committed or included in a public release.
+
+Normal P12 boot/Continue confirmed Vermilion City (23,19), three badges,
+Surge victory, HM01 Cut, money 13910, and six party members: Charizard 45,
+Sceptile 38, Gyarados 37, Feraligatr 42, Kabuto 33 and Omanyte 33. Existing
+Rocket duo/researcher victories, both fossil collection and revival receipts,
+Bill rescue, ticket and Surge reward receipts were present.
+
+The exact candidate above (feature `24ef1cb7`, compiled `c83e8c08`, ROM SHA-256
+`ad918b00e4476e9db68cb1445206ef1126e8d962be51cd74208442be3ff85077`)
+passed ordinary first Continue, ordinary in-game Save, complete core closure,
+fresh core initialization and a second normal Continue. No emulator state
+crossed ROMs, and no game-progression patches were used for this acceptance.
+
+Both comparisons preserved all six complete raw party records and decoded
+nicknames, IVs/EVs, nature, ability slots, held items, moves and PP; all 14 boxes
+byte-for-byte; bag and PC items; money and coins; player identity; Pokédex
+metadata, seen and caught data; location/warps; old permanent story/reward
+and trainer-defeat flags; and non-clock Three Horizons variables. Checks permit
+only the documented P13-owned initialization flags on the first migration.
+Temporary rematch readiness was zero without changing defeat history.
+
+A broad second-load comparison initially reported a difference in one TV slot.
+Investigation identified the existing `TryPutTodaysRivalTrainerOnAir` lifecycle
+call: the first migration skips it while refreshing map state; normal same-version
+Continue creates an inactive kind-26 news record. Verification validates that
+exact previously empty 36-byte record (including badge count, language, player
+name terminator and trainer IDs), and asserts all remaining persistent-tail
+bytes, other TV slots and Pokédex data unchanged. The failed broad comparison
+and diagnostic control remain in the evidence; no assertion was silently removed.
+
+The twice-continued P13 battery is `personal-eps-pt13.sav`, SHA-256
+`63e7931b6985d66944d122affcb672e6a2a089f0f903c1dde48aa916f436ed56`.
+Private evidence includes `personal-eps-migration/acceptance.json`, provenance,
+three protected snapshots, the verification driver and normal Continue images.
+The migrated continuation route now uses a further disposable copy. Complete
+chapter routes and physical-device Playtest 13 acceptance are not claimed here.
+
+## Actual personal-save continuation route — PASS, 2026-09-29
+
+The separate, disposable continuation copy completed Vermilion → Diglett's
+Cave → Route 2 aide/Gear/HM05 → Forest Cut backtracking → Vermilion harbor →
+Route 6/Underground Path/Cerulean → Routes 9/10 → Rock Tunnel → Lavender →
+Tower 1F–6F endpoint, then walked back through all Tower floors to Lavender.
+This supersedes earlier statements that the migrated route was incomplete.
+The complete fresh-game route remains a separate unfinished gate.
+
+Only ordinary controller actions advanced this route. Original party levels,
+owned items and progression were used; there were no location, trainer-defeat,
+party, bag or story patches. Diagnostic navigation used the actual map grid,
+including directional ledges, and stopped for battles, NPCs and Repel prompts.
+The Save helper selected the menu cursor for reproducibility; it did not alter
+saved gameplay state. Ordinary level gains, move learning and an Omanyte
+evolution occurred on this disposable route; Kabuto's evolution cancellation
+returned safely. Those changes are not migration discrepancies.
+
+Observed checkpoints include natural Vs. Seeker receipt, six-member healing,
+HM-only Cut/Flash with full unrelated move sets, professor calls, optional
+photo decline/retry/acceptance, ship departure and the newly accessible harbor
+photo, Route 9 ledges and trainer approaches, Rock Tunnel's full ladder route,
+Lavender's non-battle rival conversation and Rocket cameo, and Misdreavus
+reappearing after a declined photo. Normal Save/cold Continue checkpoints
+preserved the acquired Gear, Flash and all P13 receipts at each checkpoint.
+
+The Tower's purified zone restored HP/status/PP. A naturally encountered Ghost
+remained unidentified, prevented attacking with the expected fear message,
+and allowed retreat. At 6F the level-30 unidentified ghost blocked passage;
+retreat displayed the Scope/Celadon lead, recorded only the endpoint receipt
+and pushed the player back safely. Save/cold Continue retained it. All return
+stairs and the exit to Lavender worked; a further Save/cold Continue in town
+passed. No Silph Scope or Poké Flute was granted.
+
+Private evidence is retained as `personal-route-*` snapshots/checkpoints and
+`personal-route-acceptance.json`. Final checks verified all named scene/photo
+receipts, the three original badges, Bill/ticket/Surge/fossil receipts, and the
+unchanged hashes of both the owner's original `.eps` and the exact twice-cold
+migration baseline. The native screenshots were inspected at 240×160.
+The emulator diagnostic exporter was corrected to omit a stale overworld-tile
+dump while in battle; its field-mode bounds/read assertions remain intact.
+That exporter-only issue did not modify the candidate or indicate a game crash.
+
+This establishes the migrated normal-route gate, not complete new-game or
+RG40XX H Playtest 13 acceptance. The compiled candidate remains unchanged.
+
+
+### Fresh-game route checkpoint: Surge reached and defeated
+
+The ordinary new-game lineage now reaches and defeats Surge on the exact
+24ef1cb7 / c83e8c08 candidate above. Evidence includes natural Brock and Misty
+loss/retry recovery; Mt. Moon's researcher, both fossils and Jessie/James double
+battle; full-party fossil revival into the PC; all three regional gifts; bridge
+rival loss/retry; Bill's mid-machine Save/cold Continue, rescue and ticket;
+Cerulean's police gate/Rocket reward; Route 6 battles; ship cargo report, rival,
+Cut, rest cabin, departure decline/accept; and Surge's switch puzzle and victory.
+
+Normal Save/cold checkpoints preserve the earned party, boxes, bag and P13
+receipts. `new-game-surge-victory.sav` and
+`new-game-post-surge-vs-seeker.sav` are private test artifacts. This is separate
+from the immutable personal EPS migration baseline. The fresh run's onward
+research route to the Tower remains in progress; this checkpoint does not claim
+complete Task 41 acceptance or RG40XX H Playtest 13 acceptance.
+
+Input-driver navigation stops and remembered move-menu selection mistakes are
+retained in the scratch evidence. They required only corrected ordinary inputs
+and navigation handling, with no gameplay memory patches, game source changes,
+or suppressed assertions.
+
+## Final software acceptance — 2026-09-29
+
+This section supersedes every earlier pending integration/personal-save/route
+statement. The software candidate is ready for the owner's separate P13 hardware
+test. The existing pull request stays draft and unmerged; repository protection
+and settings are unchanged.
+
+| Identity | Exact value |
+|---|---|
+| Feature revision | `24ef1cb7c5bfa264685032427181ce65ed9f889d` |
+| Compiled/test revision | `c83e8c08adba9ace2f0c75139915b2ace8cb2f7a` |
+| Build | `TESTING=0`, `THREE_HORIZONS=1`, Emerald engine |
+| Candidate filename | `pokemon-three-horizons-playtest-13-road-to-lavender.gba` |
+| ROM bytes | 33554432 |
+| ROM SHA-256 | `ad918b00e4476e9db68cb1445206ef1126e8d962be51cd74208442be3ff85077` |
+| Source artifact | CI run 36648475853, artifact 11070531081 |
+| Original CI filename | `pokemon-three-horizons.gba`; candidate is a byte-identical rename |
+| Upstream gate | CI run 36648475859 |
+
+Documentation checkpoints after the feature revision change no game code or
+compiled data. The local package manifest records its documentation revision,
+per-file hashes, build/test logs and source-matched encounter guide separately.
+No further ROM rebuild was needed for documentation-only changes.
+
+### Fresh-game route completed
+
+The ordinary new-game lineage completed Pallet, Brock, Mt. Moon, Misty, Bill,
+the S.S. Anne, Surge, Diglett's Cave, the Route 2 aide, Route 9, Route 10,
+Rock Tunnel, Lavender and the sixth-floor Tower endpoint. It used normal
+controller actions, earned experience, purchased/collected items, and ordinary
+battery checkpoints. No party, location, inventory or story patches advanced it.
+
+For precision, this lineage began on the preceding integration candidate and
+continued on the final exact candidate via its ordinary post-Brock-loss battery
+save. No old-ROM emulator state crossed that transition. All remaining chapters,
+the Brock retry, Gear/Flash and endpoint were played on the final candidate.
+The prior opening segment and focused repair evidence are retained with their
+own revisions; this is not represented as one uninterrupted final-ROM session.
+
+The final section includes natural Gear/HM05 delivery and calls, unchanged full
+move sets after Flash, all four Rock Tunnel ladder connections and its southern
+exit, ordinary trainer battles, fainted replacements, Caterpie's in-battle
+evolution and continuation, Lavender's rival/cameo/photo/call, first Tower
+trainer battles, unidentified wild Ghost attack refusal and retreat, and the
+purified zone restoring HP/PP and reviving a fainted lead. At the sixth-floor
+barrier the level-30 Ghost remained unidentified; Run returned the player to
+(11,14), recorded the endpoint, and left the Scope and Flute absent. Ordinary
+Save and cold Continue preserved party, boxes, bag and P13 receipts.
+
+A separate copy of the fresh lineage's post-Surge Gear battery was booted
+normally for the Forest backtrack. Route 2 Cut access, gate travel, the clearing's
+Cut entrance, photo No/retry/Yes, the one-time Bottle Cap and Save/cold Continue
+inside the clearing passed. A regrown tree was cut again and the player walked
+out safely. The endpoint checkpoint was preserved separately throughout.
+
+Private evidence: `fresh-route-acceptance.json`,
+`fresh-backtrack-acceptance.json`, `new-game-tower-endpoint.sav`,
+`new-game-forest-backtrack.sav`, and the associated native frames/action snapshots.
+Checkpoint naming correction: `new-game-route10-healed.sav` and
+`new-game-route10-party-restored.sav` were interrupted by a call/Repel prompt and
+prove save continuity only. Actual full healing was subsequently observed and
+verified in `new-game-route10-nurse-complete.sav`. Failed navigation and
+active-dialogue Save preconditions remain in scratch evidence; none was silenced.
+
+### Final Bible §35 accounting
+
+The focused task evidence above remains attributable to its own compiled
+revision. Final integration reran all positive software regressions and the
+three specified negative controls. Both natural routes provide final-candidate
+integration coverage; they do not claim every combinatorial fixture was manually
+repeated on the final binary.
+
+| Required area | Final result and evidence |
+|---|---|
+| All 24 P12 repairs A–X | PASS: Tasks 2–25 before/after native frames and focused regressions; natural chapter routes cover repaired progression, losses/retries, fossils/Rockets, Bill, ship, gyms, naming, healing and Cut. Guide retains the full A–X hardware checklist. |
+| Exact P12 personal battery migration | PASS: actual post-Surge `.gba.eps`; full protected-field comparisons at first and second cold Continue. Earlier Cerulean acceptance is superseded. |
+| Synthetic migration/partial rewards | PASS: ten P12 fixtures, pre/post-Bill, ship inside/outside, ticket/full-pocket and aide partial delivery; old defeat history preserved. |
+| Research Gear/log/photos/calls | PASS: focused first/repeat/No/Yes/read-only replay, scene tableaus and metadata, save persistence and safe-call guards; final harbor and both route checkpoints. |
+| Diglett/Flash/Skarmory/Forest | PASS: Tasks 33–36 actual travel, trade animation/cancel/Egg/full party, HM eligibility/unchanged moves, photos/rewards; both natural route and fresh backtrack. |
+| Routes 9/10 and Rock Tunnel | PASS: focused geometry/items/encounters/blackout and both natural traversals, native Flash and reciprocal ladders. |
+| Lavender/Misdreavus/rival/Rocket cameo | PASS: Task 39 all facilities and scene variants; final migrated and fresh routes with cold receipts. |
+| Tower endpoint | PASS: Task 40 all 13 first trainers, both barrier lanes, loss/capture refusal/Run; both natural routes, purified-zone recovery and endpoint cold Continue. Migrated route also walked back to Lavender. |
+| Vs. Seeker | PASS: full-width ROM trainer IDs, 121 eligible records, map-local bounded readiness, no aliasing/truncation, safe scaling, original first battles and defeat flags, reset paths and immediate reuse. See capacity document. |
+| Run/SELECT/Cut | PASS: focused battle/field matrices; final positive regressions and expected-failure/restored negative controls. |
+| Ship departure/old inside saves | PASS: focused recovery fixtures and both natural routes; final harbor photo repair retains departure/Gear order. |
+| Balance and single-player evolutions | PASS: Task 29 actual prompts/evolution/Bag use/cold Continue; final native tests and effective release macros. Availability limits remain in evolution QA. |
+| Polished ship/chairman/Keigo/upstairs | PASS: Tasks 27/28/32/38/39 actual presentation and return paths, one voucher, approved Keigo team, all six supported Centers upstairs plus Lavender; no communication wait. |
+| Three Horizons regression | PASS: 155 host tests and 212 native tests on exact compiled revision. |
+| Save layout/build modes | PASS: four native layout tests; unchanged sizes 15568/3884/4/34144; trainer regeneration across modes. |
+| Upstream compatibility | PASS: isolated Emerald, FireRed and LeafGreen builds, native tests, release and documentation jobs in run 36648475859. |
+| Manual mGBA chapter exercise | PASS: agent-driven ordinary controller routes and inspected native 240×160 frames in mGBA libretro; lineage/checkpoint boundaries stated above. |
+| Candidate identity/export | PASS: exact ROM hash, source/compiled revisions, generated encounter table and packaged logs tied together. |
+| RG40XX H/VBA-Next P13 | NOT CLAIMED: separate owner hardware pass. |
+
+The final CI job results were checked again before packaging. The three negative
+controls produced assertion failures for old Cut refresh, old version writing and
+old trainer Run/SELECT behavior, then passed after restoration. Native test logs
+contain inherited `ASSUME failed` diagnostics for unselected cases; reported
+selected totals are 212/212 and 4/4, with successful owning jobs. Assertions,
+warning policy and test selection were not silently relaxed.
+
+### Changed systems and remaining limits
+
+Major work is in `data/scripts/three_horizons/chapter13_*.inc`, the appended TH13
+maps/layouts and encounter/trainer records, `src/three_horizons_research*.c`,
+`src/three_horizons_rematches.c`, field-move/state/scene helpers, and the guarded
+battle, save-migration, capture/naming, evolution and item-use paths. Host tests
+live under `tools/three_horizons/tests`; native TH tests and integration workflows
+record the behavioral contracts. Jessie/James credits, including monicaccina,
+remain intact. No save blocks or species/Dex IDs were expanded or renumbered.
+
+No unresolved release-blocking defect is known in the tested software scope.
+This does not claim exhaustive manual coverage of every starter, outfit, rare
+encounter, battle RNG outcome or party combination. Statistical encounter/Hidden
+Ability rates are established by tables/tests, not a short visual sample. Earlier
+focused screenshots and fixture tests are distinct from the two natural routes.
+The local Windows map generator is stale; its previously recorded hash-test
+failure is not hidden, and freshly rebuilt Linux CI is the authoritative generator
+and compatibility gate. No unchanged ROM was rebuilt solely for final prose.
+
+P13 intentionally stops at the unresolved Tower ghost. No Scope acquisition,
+Fuji rescue, Flute reward, Celadon chapter or explanation of the phenomenon is
+included. Later-generation engine support is inherited, not a full roster unlock.
+Multiplayer trading is not required. gPSP compatibility is untested.
+
+The owner still needs to test the packaged bytes on RG40XX H/VBA-Next: normal
+boot/New Game/battery Continue, sound and clock, first-catch/naming display,
+party/boxes, both Rocket formats, healing, Cut/Flash/followers, bikes, research
+cards/calls, rematches, Tower endpoint, and repeated in-game saves/cold boots.
+P12 hardware success and desktop migration do not mark any of those P13 hardware
+checks passed. Detailed new-game and migrated-save walkthroughs are in
+`PLAYTEST_13.md`; finite encounter sampling is in `PLAYTEST_13_ENCOUNTERS.md`.

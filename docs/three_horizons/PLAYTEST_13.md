@@ -1,6 +1,10 @@
 # Playtest 13 — The Road to Lavender
 
-Candidate walkthrough. Final integration and exact personal-save acceptance are still in progress; consult PLAYTEST_13_VERIFICATION.md before treating any build as the release candidate.
+Verified software candidate, 2026-09-29. Exact post-Surge personal-save migration, its normal continuation to the Tower endpoint and back to Lavender, and the separate new-game route through Surge to the endpoint passed. RG40XX H Playtest 13 acceptance remains the owner's separate hardware test. Evidence and test limits are in PLAYTEST_13_VERIFICATION.md.
+
+ROM: `pokemon-three-horizons-playtest-13-road-to-lavender.gba` (unchanged bytes
+from the passing CI artifact). SHA-256:
+`ad918b00e4476e9db68cb1445206ef1126e8d962be51cd74208442be3ff85077`.
 
 ## Prepare a safe test
 
@@ -15,6 +19,17 @@ nicknames, levels, held items, moves/PP, boxes, money, items, badges and complet
 events before walking. Save through the game menu, close the emulator, reopen,
 and Continue again. Keep the original copy untouched. Temporary Vs. Seeker
 readiness disappearing on Continue is intentional; trainer victories must remain.
+
+The owner's accepted source is the raw 131072-byte VBA-Next EEPROM file
+`pokemon-three-horizons-playtest-12-rocket-art.gba.eps`, SHA-256
+`be9bbc4722188ce11ad86b6bcc34a89539a4572403cfade3330da75f1ccbadca`.
+For desktop mGBA, copy those bytes to
+`pokemon-three-horizons-playtest-13-road-to-lavender.sav` beside the new ROM.
+Changing the working copy's extension is sufficient; do not convert the contents.
+On RG40XX H/VBA-Next, use that core's battery-save directory and naming convention
+(the P12 source used `.gba.eps`). Keep the P12 original and its ROM untouched.
+The older Cerulean/P11-marked `.sav` files are superseded and are not acceptance
+evidence for the owner's post-Surge progress.
 
 For a new game, use a new save filename. Test at normal speed first. Keep separate
 battery checkpoints before Brock, Mt. Moon's fossils/Rockets, Misty, Bill, the
@@ -210,7 +225,7 @@ Test both orders: beat Misty before the bridge rival, then repeat on a separate 
 
 At Nugget Bridge, first lose to the rival. Continue from the Pokémon Center and return for the retry. Win, read the dialogue, and revisit the bridge. Confirm that the rival departs, the path stays open, and the encounter does not repeat after victory. The rival's partner and the existing loss/retry behavior remain unchanged.
 
-Follow the route beyond Nugget Bridge to Bill's cottage. Further Playtest 13 checks will be added as their implementation and verification gates pass.
+Follow the route beyond Nugget Bridge to Bill's cottage, then continue with the full route above.
 
 ## Bill and supplies checks
 
@@ -224,9 +239,10 @@ Bug Catcher Keigo on Route 6 now uses Kakuna, Beedrill and Butterfree, all level
 This is his first-fight roster, separate from the later Vs. Seeker scaling feature.
 Check normal experience awards, battle dialogue and the defeated-trainer receipt.
 Neighboring trainers retain their previous first-fight teams. Native generation
-verification is being completed; the full new-game emulator route remains pending.
+and the focused actual first battle passed; the complete new-game route also
+reached the Tower endpoint. See the verification record for evidence boundaries.
 
-### Vs. Seeker systems acceptance route (candidate checks pending)
+### Vs. Seeker systems acceptance route
 
 1. On your first Vermilion visit, talk to the scientist in the Pokémon Center's
    open floor, left of the central Poké Ball pattern. Receive the Vs. Seeker

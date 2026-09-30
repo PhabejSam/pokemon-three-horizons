@@ -1,6 +1,6 @@
 # Playtest 13 rematch capacity decision
 
-Status: approved by the user on 2026-09-29; all 121 ordinary trainers are implemented. Focused checks pass; final integration and hardware acceptance are tracked separately.
+Status: approved by the user on 2026-09-29; all 121 ordinary trainers are implemented. Focused checks and final software integration pass on feature `24ef1cb7c5bfa264685032427181ce65ed9f889d`. The exact post-Surge personal battery also passes migration with unchanged save layout and defeat history. RG40XX H Playtest 13 hardware acceptance remains separate.
 
 The existing save contains 100 one-byte `trainerRematches` entries. Its size and
 offset must remain unchanged for Playtest 12 battery saves. A trainer ID must not
@@ -77,9 +77,11 @@ Evolution improvements use explicit ROM-authored species tiers, never arbitrary
 branch selection. First fights continue to use their original records; Keigo's
 separately approved first-fight roster is Kakuna/Beedrill/Butterfree at level 18.
 
-The user's exact post-Surge RG40XX H Playtest 12 battery save remains required
-for the final personal-save acceptance gate. The older Cerulean/Playtest-11-marked
-save is not evidence of that acceptance.
+The user's actual post-Surge RG40XX H VBA-Next battery,
+`pokemon-three-horizons-playtest-12-rocket-art.gba.eps`, passed first migration,
+ordinary Save and second cold Continue on the final integration candidate.
+Readiness reset safely and permanent defeat history remained unchanged. The
+older Cerulean/Playtest-11-marked backups are superseded for personal acceptance.
 
 ## Focused acceptance
 
@@ -90,8 +92,13 @@ Exact-ROM mGBA checks also cover rematch win/loss, immediate reuse, map change,
 cold Continue, indoor/cave/ship readiness, Luis's clear postbattle path, and
 boss/unseen exclusions. See PLAYTEST_13_VERIFICATION.md for revisions and limits.
 The remaining 53 trainers have been added with their maps; Task40's nine native
-rematch groups pass with all 121 records. The final coverage audit and non-TH
-runtime controls remain integration requirements.
+rematch groups pass with all 121 records. Integration at feature `24ef1cb7`
+passed the full 155 host contracts, 212 Three Horizons native tests, all four
+save-layout checks, and upstream Emerald/FireRed/LeafGreen builds and native
+tests. Ten synthetic battery cases also confirmed readiness is cleared without
+altering old trainer defeat history. Exact personal post-Surge migration also
+passed; the complete chapter routes remain pending. See PLAYTEST_13_VERIFICATION.md
+for source/ROM hashes, protected comparisons and the separate hardware gate.
 
 
 ## Route 11 addition (Task 33)
