@@ -25,6 +25,15 @@ static void ResearchFrames(u16 keys, u32 count)
     gMain.newKeys = gMain.heldKeys = 0;
 }
 static void Press(u16 keys) { ResearchFrames(keys, 2); ResearchFrames(0, 2); }
+static void HoldWithoutFreshPress(u16 keys, u32 count)
+{
+    for (u32 i = 0; i < count; i++)
+    {
+        gMain.newKeys = 0; gMain.heldKeys = keys;
+        gMain.callback2(); MapMusicMain(); VBlankIntrWait();
+    }
+    gMain.newKeys = gMain.heldKeys = 0;
+}
 
 TEST("Three Horizons playtest13 research menu returns cleanly")
 {
@@ -91,8 +100,9 @@ TEST("Three Horizons playtest13 research photo cards paginate with paired subjec
         Press(A_BUTTON);
         EXPECT_EQ(TH_TestResearchMenuRecord(), id);
         EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount);
-        ResearchFrames(A_BUTTON, 30); // held input stays on the same record
+        HoldWithoutFreshPress(A_BUTTON, 30); // continuation has no fresh A edge
         EXPECT_EQ(TH_TestResearchMenuRecord(), id);
+        EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount);
         Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), 0);
         Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), 0);
         Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount);
