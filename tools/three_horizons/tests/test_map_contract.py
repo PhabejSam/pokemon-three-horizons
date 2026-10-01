@@ -34,7 +34,7 @@ class MapContract(unittest.TestCase):
             else:
                 constants.write_bytes(before)
 
-    def generate(self, mode, version):
+    def generate(self, mode, version, response=False, normalize_output_paths=False):
         with tempfile.TemporaryDirectory(dir=ROOT, prefix='.th-') as folder:
             out = Path(folder)
             args = [str(EXE), mode, version]
@@ -42,14 +42,34 @@ class MapContract(unittest.TestCase):
                 args += ['data/layouts/layouts.json']
             else:
                 args += ['data/maps/map_groups.json']
+                map_paths = []
                 for i, path in enumerate(sorted((ROOT / 'data/maps').glob('*/map.json'))):
                     short = out / str(i)
                     short.write_bytes(path.read_bytes())
-                    args.append(str(short.relative_to(ROOT)))
+                    map_paths.append(str(short.relative_to(ROOT)))
+                if response:
+                    listing = out / 'map paths.txt'
+                    listing.write_text('\n'.join(map_paths) + '\n')
+                    args.append('@' + str(listing.relative_to(ROOT)))
+                else:
+                    args += map_paths
             args += [str(out), str(out)]
             run = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
             self.assertEqual(run.returncode, 0, run.stderr)
-            return {p.name: p.read_text() for p in out.iterdir() if p.suffix in ('.h', '.inc')}
+            generated = {p.name: p.read_text() for p in out.iterdir() if p.suffix in ('.h', '.inc')}
+            if normalize_output_paths:
+                # groups.inc embeds the generated output directory. Each run
+                # has its own temporary folder; only that prefix differs.
+                generated = {name: contents.replace(str(out), '<GENERATED>')
+                             for name, contents in generated.items()}
+            return generated
+
+    def test_response_file_preserves_all_map_groups_beyond_windows_command_limit(self):
+        # The normal build's full map-name command exceeds Windows' limit.
+        # Short controlled paths let the old direct mode be our oracle.
+        for version in ('emerald', 'firered', 'three_horizons'):
+            self.assertEqual(self.generate('groups', version, response=True, normalize_output_paths=True),
+                             self.generate('groups', version, normalize_output_paths=True))
 
     def test_demo_includes_native_kanto_layouts(self):
         """Rejects a mode that omits the bedroom or emits its Emerald format."""

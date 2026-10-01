@@ -985,6 +985,25 @@ void process_layouts(string layouts_filepath, string output_asm, string output_c
     write_text_file(output_c + "layouts.h", layouts_constants_text);
 }
 
+// One path per line keeps large builds within Windows' process command limit.
+// Direct arguments remain supported for callers and small map contracts.
+void append_map_paths(vector<string> &paths, const char *argument) {
+    if (argument[0] != '@') {
+        paths.push_back(argument);
+        return;
+    }
+    ifstream input(argument + 1);
+    if (!input)
+        FATAL_ERROR("Cannot open map response file %s for reading.\n", argument + 1);
+    string path;
+    while (std::getline(input, path)) {
+        if (!path.empty() && path.back() == '\r') path.pop_back();
+        if (!path.empty()) paths.push_back(path);
+    }
+    if (!input.eof())
+        FATAL_ERROR("Cannot read map response file %s.\n", argument + 1);
+}
+
 int main(int argc, char *argv[]) {
     if (argc < 3)
         FATAL_ERROR("USAGE: mapjson <mode> <game-version> [options]\n");
@@ -1020,7 +1039,7 @@ int main(int argc, char *argv[]) {
         const int firstMapFileArg = 4;
         const int lastMapFileArg = argc - 3;
         for (int i = firstMapFileArg; i <= lastMapFileArg; i++) {
-            map_filepaths.push_back(argv[i]);
+            append_map_paths(map_filepaths, argv[i]);
         }
 
         string output_asm(argv[argc - 2]);
@@ -1049,7 +1068,7 @@ int main(int argc, char *argv[]) {
         const int firstMapFileArg = 3;
         const int lastMapFileArg = argc - 2;
         for (int i = firstMapFileArg; i <= lastMapFileArg; i++) {
-            filepaths.push_back(argv[i]);
+            append_map_paths(filepaths, argv[i]);
         }
         string output_ids_file(argv[argc - 1]);
 
