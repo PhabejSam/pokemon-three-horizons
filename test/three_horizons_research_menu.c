@@ -202,6 +202,35 @@ static u8 ResearchWindowPixel(u32 x, u32 y)
     return (gWindows[0].tileData[offset] >> ((x & 1) * 4)) & 15;
 }
 
+TEST("Three Horizons Gear visibly moves selection between illustrated module cards")
+{
+    MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
+    IntrCallback oldVBlank = gMain.vblankCallback;
+    u8 saved[NUM_FLAG_BYTES];
+    gMain.callback1 = NULL; SetDefaultFontsPointer(); InitEventData();
+    FlagSet(FLAG_TH13_GEAR);
+    memcpy(saved, gSaveBlock1Ptr->flags, sizeof(saved));
+    TH_OpenResearchGear(ResearchReturn); ResearchFrames(0, 40);
+    // Sample the unprinted right-hand interior of each card. These distinguish
+    // real visible selection from an invisible cursor-only state change.
+    u8 selected = ResearchWindowPixel(208, 46);
+    u8 idle = ResearchWindowPixel(208, 76);
+    EXPECT_NE(selected, idle);
+    Press(DPAD_DOWN);
+    EXPECT_EQ(ResearchWindowPixel(208, 46), idle);
+    EXPECT_EQ(ResearchWindowPixel(208, 76), selected);
+    Press(DPAD_DOWN); Press(DPAD_DOWN);
+    EXPECT_EQ(ResearchWindowPixel(208, 46), selected);
+    Press(DPAD_UP);
+    EXPECT_EQ(ResearchWindowPixel(208, 106), selected);
+    Press(A_BUTTON); EXPECT_EQ(TH_TestResearchMenuLevel(), 1);
+    Press(A_BUTTON); EXPECT_EQ(TH_TestResearchMenuLevel(), 1); // empty Calls
+    Press(B_BUTTON); Press(B_BUTTON); ResearchFrames(0, 40);
+    EXPECT_EQ(memcmp(saved, gSaveBlock1Ptr->flags, sizeof(saved)), 0);
+    EXPECT(gMain.callback2 == ResearchReturn);
+    SetVBlankCallback(oldVBlank); gMain.callback1 = old1; SetMainCallback2(old2);
+}
+
 TEST("Three Horizons RC2 research window pixels retain text and photo cutout")
 {
     MainCallback old1 = gMain.callback1, old2 = gMain.callback2;

@@ -49,10 +49,10 @@ static const struct WindowTemplate sResearchWindows[] = {
     DUMMY_WIN_TEMPLATE,
 };
 static const u16 sResearchPalette[16] = {
-    RGB(23, 27, 31), RGB(31, 31, 31), RGB(4, 4, 6), RGB(22, 23, 25),
-    RGB(20, 26, 17), RGB(9, 17, 11), RGB(21, 19, 14), RGB(13, 12, 10),
-    RGB(25, 21, 13), RGB(17, 13, 8), RGB(16, 17, 22), RGB(10, 11, 16),
-    RGB(17, 20, 15), RGB(27, 29, 23), RGB(15, 20, 21), RGB(31, 31, 31),
+    RGB(5, 13, 21), RGB(30, 31, 29), RGB(3, 8, 14), RGB(21, 25, 27),
+    RGB(5, 18, 26), RGB(3, 12, 20), RGB(31, 25, 10), RGB(19, 13, 5),
+    RGB(30, 12, 15), RGB(19, 5, 10), RGB(4, 11, 18), RGB(9, 23, 20),
+    RGB(4, 14, 12), RGB(24, 29, 30), RGB(15, 23, 27), RGB(31, 31, 31),
 };
 enum {MODULE_LOG, MODULE_PHOTOS, MODULE_CALLS};
 static const u8 *const sModules[] = {COMPOUND_STRING("RESEARCH LOG"), COMPOUND_STRING("FIELD PHOTOS"), COMPOUND_STRING("CALLS")};
@@ -185,6 +185,89 @@ static void Print(u16 x, u16 y, const u8 *text)
     AddTextPrinterParameterized3(0, FONT_SMALL, x, y, colors, TEXT_SKIP_DRAW, text);
 }
 
+static void PrintOn(u16 x, u16 y, const u8 *text, u8 background, u8 foreground, u8 shadow)
+{
+    u8 colors[] = {background, foreground, shadow};
+    AddTextPrinterParameterized3(0, FONT_SMALL, x, y, colors, TEXT_SKIP_DRAW, text);
+}
+
+static void Panel(u16 x, u16 y, u16 width, u16 height, u8 color)
+{
+    FillWindowPixelRect(0, PIXEL_FILL(color), x, y, width, height);
+}
+
+// Small native pixel illustrations use window tiles, leaving every OBJ slot
+// and the photo background/palette available for the authored photographs.
+static void DrawModuleIcon(u32 module, u16 x, u16 y)
+{
+    if (module == MODULE_LOG)
+    {
+        Panel(x + 3, y + 1, 17, 22, 5);
+        Panel(x + 5, y + 2, 13, 19, 6);
+        Panel(x + 7, y + 4, 9, 15, 1);
+        for (u32 row = 0; row < 3; row++)
+        {
+            Panel(x + 1, y + 5 + row * 5, 5, 2, 14);
+            Panel(x + 9, y + 6 + row * 4, 5, 1, 4);
+        }
+    }
+    else if (module == MODULE_PHOTOS)
+    {
+        Panel(x + 6, y + 2, 8, 4, 9);
+        Panel(x + 2, y + 6, 20, 15, 9);
+        Panel(x + 2, y + 5, 20, 13, 8);
+        Panel(x + 5, y + 7, 4, 2, 6);
+        Panel(x + 11, y + 8, 8, 9, 1);
+        Panel(x + 10, y + 10, 10, 5, 1);
+        Panel(x + 12, y + 10, 6, 5, 5);
+        Panel(x + 14, y + 10, 2, 2, 14);
+    }
+    else
+    {
+        Panel(x + 5, y + 2, 15, 20, 12);
+        Panel(x + 4, y + 1, 15, 20, 11);
+        Panel(x + 7, y + 4, 9, 8, 5);
+        Panel(x + 8, y + 5, 7, 5, 13);
+        for (u32 row = 0; row < 2; row++)
+            for (u32 column = 0; column < 3; column++)
+                Panel(x + 7 + column * 3, y + 14 + row * 3, 2, 2, 1);
+        Panel(x + 15, y, 2, 3, 6);
+    }
+}
+
+static void DrawGearHeader(const u8 *title, const u8 *subtitle)
+{
+    Panel(0, 0, 224, 24, 1);
+    Panel(0, 23, 224, 1, 14);
+    Print(4, 0, title);
+    Print(4, 12, subtitle);
+    DrawModuleIcon(sResearchMenu->module, 198, 0);
+}
+
+static void DrawGearHome(void)
+{
+    static const u8 *const descriptions[] = {
+        COMPOUND_STRING("Observations across Kanto"),
+        COMPOUND_STRING("Your photographs and notes"),
+        COMPOUND_STRING("Reports from the professors"),
+    };
+    DrawGearHeader(COMPOUND_STRING("RESEARCH GEAR"), COMPOUND_STRING("KANTO FIELD UNIT"));
+    for (u32 i = 0; i < ARRAY_COUNT(sModules); i++)
+    {
+        u16 y = 34 + i * 30;
+        bool32 selected = i == sResearchMenu->module;
+        u8 background = selected ? 4 : 1;
+        Panel(6, y + 2, 214, 26, 5);
+        Panel(4, y, 214, 26, background);
+        Panel(4, y, 2, 26, selected ? 6 : 14);
+        DrawModuleIcon(i, 10, y + 1);
+        PrintOn(40, y + 1, sModules[i], background, selected ? 1 : 2, selected ? 5 : 3);
+        PrintOn(40, y + 13, descriptions[i], background, selected ? 1 : 2, selected ? 5 : 3);
+        if (selected) PrintOn(195, y + 7, COMPOUND_STRING(">"), background, 6, 5);
+    }
+    PrintOn(4, 132, COMPOUND_STRING("A: Open    B: Return"), 10, 1, 5);
+}
+
 static u16 CurrentRecord(void)
 {
     return sResearchMenu->cursor < sResearchMenu->count ? sResearchMenu->records[sResearchMenu->cursor] : 0xFFFF;
@@ -280,45 +363,49 @@ static bool32 ResearchDraw(void)
     DrawStdFrameWithCustomTileAndPalette(0, FALSE, RESEARCH_FRAME_BASE, 15);
     if (sResearchMenu->level == 0)
     {
-        Print(4, 0, COMPOUND_STRING("RESEARCH GEAR"));
-        Print(4, 18, COMPOUND_STRING("Kanto field research"));
-        for (u32 i = 0; i < ARRAY_COUNT(sModules); i++)
-        {
-            Print(18, 44 + i * 24, sModules[i]);
-            if (i == sResearchMenu->module) Print(4, 44 + i * 24, COMPOUND_STRING(">"));
-        }
-        Print(4, 132, COMPOUND_STRING("A: Open    B: Return"));
+        FillWindowPixelBuffer(0, PIXEL_FILL(10));
+        DrawGearHome();
     }
     else if (sResearchMenu->level == 1)
     {
-        Print(4, 0, sModules[sResearchMenu->module]);
+        FillWindowPixelBuffer(0, PIXEL_FILL(10));
+        DrawGearHeader(sModules[sResearchMenu->module], COMPOUND_STRING("RESEARCH ARCHIVE"));
         if (sResearchMenu->count == 0)
+        {
+            Panel(4, 32, 214, 92, 1);
             Print(4, 34, COMPOUND_STRING("Nothing recorded yet.\nKeep observing during your travels."));
+        }
         else
         {
             u8 number[8];
+            Panel(4, 12, 120, 11, 1);
             ConvertIntToDecimalStringN(number, sResearchMenu->cursor + 1, STR_CONV_MODE_LEFT_ALIGN, 2);
-            Print(4, 15, number); Print(22, 15, COMPOUND_STRING("of"));
-            ConvertIntToDecimalStringN(number, sResearchMenu->count, STR_CONV_MODE_LEFT_ALIGN, 2); Print(40, 15, number);
+            Print(4, 12, number); Print(22, 12, COMPOUND_STRING("of"));
+            ConvertIntToDecimalStringN(number, sResearchMenu->count, STR_CONV_MODE_LEFT_ALIGN, 2); Print(40, 12, number);
             u32 first = sResearchMenu->cursor / ROWS_PER_PAGE * ROWS_PER_PAGE;
             for (u32 i = first; i < min(first + ROWS_PER_PAGE, sResearchMenu->count); i++)
             {
                 u16 id = sResearchMenu->records[i];
                 const struct THResearchPhoto *photo = sResearchMenu->module == MODULE_PHOTOS ? TH_ResearchGetPhoto(id) : NULL;
                 const struct THResearchEntry *entry = sResearchMenu->module == MODULE_CALLS ? NULL : TH_ResearchGetEntry(photo ? photo->entryId : id);
-                u32 y = 34 + (i - first) * 24;
-                Print(18, y, entry ? entry->location : sContacts[id]);
-                Print(18, y + 12, entry ? entry->species : sReportTitles[id]);
-                if (i == sResearchMenu->cursor) Print(4, y, COMPOUND_STRING(">"));
+                u32 y = 28 + (i - first) * 26;
+                bool32 selected = i == sResearchMenu->cursor;
+                u8 background = selected ? 13 : 1;
+                Panel(4, y, 214, 25, background);
+                if (selected) Panel(4, y, 3, 25, 4);
+                PrintOn(18, y - 1, entry ? entry->location : sContacts[id], background, 2, 3);
+                PrintOn(18, y + 11, entry ? entry->species : sReportTitles[id], background, 2, 3);
+                if (selected) PrintOn(8, y - 1, COMPOUND_STRING(">"), background, 4, 3);
             }
         }
-        Print(4, 132, COMPOUND_STRING("Up/Down: Select   A: Read   B: Back"));
+        PrintOn(4, 132, COMPOUND_STRING("Up/Down: Select   A: Read   B: Back"), 10, 1, 5);
     }
     else if (sResearchMenu->module == MODULE_CALLS)
     {
         u16 report = TH_ResearchContactLatestReport(CurrentRecord());
-        Print(4, 0, sContacts[CurrentRecord()]);
-        Print(4, 14, sReportTitles[CurrentRecord()]);
+        DrawGearHeader(sContacts[CurrentRecord()], sReportTitles[CurrentRecord()]);
+        Panel(4, 28, 214, 91, 13);
+        Panel(7, 31, 208, 85, 1);
         Print(4, 32, TH_ResearchContactReport(CurrentRecord(), report));
         Print(4, 132, COMPOUND_STRING("Latest received report    B: Back"));
     }
@@ -328,8 +415,7 @@ static bool32 ResearchDraw(void)
         const struct THResearchPhoto *photo = sResearchMenu->module == MODULE_PHOTOS ? TH_ResearchGetPhoto(id) : NULL;
         const struct THResearchEntry *entry = TH_ResearchGetEntry(photo ? photo->entryId : id);
         if (entry == NULL) return FALSE;
-        Print(4, 0, photo ? COMPOUND_STRING("FIELD PHOTO") : COMPOUND_STRING("FIELD OBSERVATION"));
-        Print(4, 12, entry->location);
+        DrawGearHeader(photo ? COMPOUND_STRING("FIELD PHOTO") : COMPOUND_STRING("FIELD OBSERVATION"), entry->location);
         if (sResearchMenu->page == (photo ? 2 : 1))
         {
             Print(4, 36, COMPOUND_STRING("PROFESSOR NOTE"));
