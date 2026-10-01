@@ -27,9 +27,10 @@ define mapjson_newline
 
 
 endef
-.mapjson-inputs: $(MAP_JSONS)
-	$(file >$@,$(subst $(mapjson_space),$(mapjson_newline),$(MAP_JSONS)))
-	@:
+.mapjson-inputs: FORCE
+	$(file >$@.tmp,$(subst $(mapjson_space),$(mapjson_newline),$(MAP_JSONS)))
+	@cmp -s $@ $@.tmp || cp $@.tmp $@
+	@rm -f $@.tmp
 MAP_JSON_ARGUMENTS := @.mapjson-inputs
 MAP_JSON_RESPONSE := .mapjson-inputs
 else
