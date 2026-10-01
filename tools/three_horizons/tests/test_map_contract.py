@@ -73,6 +73,43 @@ class MapContract(unittest.TestCase):
             self.assertEqual(self.generate('groups', version, response=True, normalize_output_paths=True),
                              self.generate('groups', version, normalize_output_paths=True))
 
+    def test_event_constants_accept_separator_free_response_file_with_checked_strings(self):
+        # A plain @.mapjson-inputs has no directory separator. Checked libstdc++
+        # makes an accidental filename[npos] read fail deterministically.
+        compiler = shutil.which('g++')
+        self.assertIsNotNone(compiler, 'g++ is required for checked mapjson regression')
+        with tempfile.TemporaryDirectory(dir=ROOT, prefix='.th-') as folder:
+            out = Path(folder)
+            checked = out / 'mapjson-checked.exe'
+            build = subprocess.run([compiler, '-std=c++17', '-O1', '-D_GLIBCXX_ASSERTIONS',
+                str(ROOT/'tools/mapjson/json11.cpp'), str(ROOT/'tools/mapjson/mapjson.cpp'),
+                '-o', str(checked)], capture_output=True, text=True)
+            self.assertEqual(build.returncode, 0, build.stderr)
+            fixtures = {
+                'tools/mapjson/three_horizons_maps.json': {'maps': ['TH_Probe']},
+                'data/layouts/layouts.json': {'layouts': [{'id': 'LAYOUT_TH_PROBE'}]},
+                'data/maps/TH_Probe/map.json': {'id': 'MAP_TH_PROBE', 'name': 'TH_Probe',
+                    'layout': 'LAYOUT_TH_PROBE', 'object_events': [{'local_id': 'LOCALID_PROBE'}],
+                    'warp_events': [{'warp_id': 'WARP_PROBE'}]},
+            }
+            for name, data in fixtures.items():
+                path = out / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(json.dumps(data))
+            map_path = 'data/maps/TH_Probe/map.json'
+            (out/'.mapjson-inputs').write_text(map_path + '\n')
+            for version in ('emerald', 'firered', 'three_horizons'):
+                results = []
+                for argument in (map_path, '@.mapjson-inputs'):
+                    generated = out / 'ids.h'
+                    run = subprocess.run([str(checked), 'event_constants', version,
+                        argument, str(generated)], cwd=out, capture_output=True, text=True)
+                    self.assertEqual(run.returncode, 0, (version, argument, run.stderr))
+                    results.append(generated.read_text())
+                self.assertEqual(results[0], results[1])
+                self.assertIn('#define LOCALID_PROBE 1', results[0])
+                self.assertIn('#define WARP_PROBE 0', results[0])
+
     def test_windows_response_list_tracks_removed_maps_without_rewriting_unchanged_lists(self):
         make = shutil.which('make')
         self.assertIsNotNone(make, 'GNU make is required to verify the actual response-file rule')

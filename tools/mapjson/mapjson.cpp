@@ -1062,8 +1062,8 @@ int main(int argc, char *argv[]) {
         if (argc < 5)
             FATAL_ERROR("USAGE: mapjson event_constants <game-version> <map_file> [additional_map_files] <output_ids_file>");
 
-        infer_separator(argv[3]);
-
+        // The explicit output filename needs no directory separator inference.
+        // A response argument such as @.mapjson-inputs contains no separator.
         vector<string> filepaths;
         const int firstMapFileArg = 3;
         const int lastMapFileArg = argc - 2;
