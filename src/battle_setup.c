@@ -1832,11 +1832,18 @@ static const u8 *ReturnEmptyStringIfNull(const u8 *string)
 
 static const u8 *GetIntroSpeechOfApproachingTrainer(void)
 {
+#if THREE_HORIZONS
+    static const u8 rematchIntro[] = _("Good to see you again!\nLet's see how our teams have grown!");
+#endif
     if (gApproachingTrainerId == 0)
     {
         if (OW_NAME_BOX_NPC_TRAINER)
             gSpeakerName = GetTrainerNameFromId(TRAINER_BATTLE_PARAM.opponentA);
 
+#if THREE_HORIZONS
+        if (TH13_IsRematchReady(TRAINER_BATTLE_PARAM.opponentA))
+            return rematchIntro;
+#endif
         return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.introTextA);
     }
     else
@@ -1844,9 +1851,20 @@ static const u8 *GetIntroSpeechOfApproachingTrainer(void)
         if (OW_NAME_BOX_NPC_TRAINER)
             gSpeakerName = GetTrainerNameFromId(TRAINER_BATTLE_PARAM.opponentB);
 
+#if THREE_HORIZONS
+        if (TH13_IsRematchReady(TRAINER_BATTLE_PARAM.opponentB))
+            return rematchIntro;
+#endif
         return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.introTextB);
     }
 }
+
+#if THREE_HORIZONS && TESTING
+const u8 *Test_TH_GetTrainerIntroSpeech(void)
+{
+    return GetIntroSpeechOfApproachingTrainer();
+}
+#endif
 
 const u8 *GetTrainerALoseText(void)
 {

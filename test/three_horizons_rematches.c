@@ -14,9 +14,41 @@
 #include "constants/maps.h"
 #include "constants/three_horizons.h"
 #include "constants/trainers.h"
+#include "string_util.h"
+#include "trainer_see.h"
 
 #if THREE_HORIZONS
 #include "../src/data/three_horizons_rematches.h"
+extern const u8 *Test_TH_GetTrainerIntroSpeech(void);
+
+TEST("Three Horizons ready rematches replace first meeting speech without changing first battles")
+{
+    TrainerBattleParameter oldParams = gTrainerBattleParameter;
+    u8 oldApproaching = gApproachingTrainerId;
+    u8 first[] = _("I've never seen you around!");
+    InitEventData();
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_TH_VIRIDIAN_FOREST);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_TH_VIRIDIAN_FOREST);
+    TH13_ResetRematches();
+    gApproachingTrainerId = 0;
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_TH_DOUG;
+    TRAINER_BATTLE_PARAM.introTextA = first;
+    EXPECT(Test_TH_GetTrainerIntroSpeech() == first);
+    SetTrainerFlag(TRAINER_TH_DOUG);
+    EXPECT(Test_TH_GetTrainerIntroSpeech() == first); // ordinary defeated talk
+    EXPECT(TH13_SetRematchReady(TRAINER_TH_DOUG));
+    EXPECT(Test_TH_GetTrainerIntroSpeech() != first);
+    EXPECT_NE(StringCompare(Test_TH_GetTrainerIntroSpeech(), first), 0);
+    EXPECT(HasTrainerBeenFought(TRAINER_TH_DOUG));
+    gApproachingTrainerId = 1;
+    TRAINER_BATTLE_PARAM.opponentB = TRAINER_TH_DOUG;
+    TRAINER_BATTLE_PARAM.introTextB = first;
+    EXPECT(Test_TH_GetTrainerIntroSpeech() != first);
+    TH13_ResetRematches();
+    EXPECT(Test_TH_GetTrainerIntroSpeech() == first);
+    gApproachingTrainerId = oldApproaching;
+    gTrainerBattleParameter = oldParams;
+}
 
 TEST("Three Horizons Vs Seeker requires no charge and native steps do not expire readiness")
 {
