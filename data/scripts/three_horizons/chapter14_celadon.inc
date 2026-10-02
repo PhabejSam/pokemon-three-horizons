@@ -168,69 +168,6 @@ TH14_CeladonCity_PokemonCenter_1F_EventScript_Youngster::
 TH14_CeladonCity_PokemonCenter_1F_EventScript_Youngster_Text::
     .string "The western road is closed.\nI can still ride around the city!$"
 
-TH14_CeladonCity_Gym_EventScript_Kay::
-    msgbox TH14_CeladonCity_Gym_EventScript_Kay_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_Gym_EventScript_Kay_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
-TH14_CeladonCity_Gym_EventScript_Bridget::
-    msgbox TH14_CeladonCity_Gym_EventScript_Bridget_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_Gym_EventScript_Bridget_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
-TH14_CeladonCity_Gym_EventScript_Tina::
-    msgbox TH14_CeladonCity_Gym_EventScript_Tina_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_Gym_EventScript_Tina_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
-TH14_CeladonCity_Gym_EventScript_Tamia::
-    msgbox TH14_CeladonCity_Gym_EventScript_Tamia_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_Gym_EventScript_Tamia_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
-TH14_CeladonCity_Gym_EventScript_Lori::
-    msgbox TH14_CeladonCity_Gym_EventScript_Lori_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_Gym_EventScript_Lori_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
-TH14_CeladonCity_Gym_EventScript_Lisa::
-    msgbox TH14_CeladonCity_Gym_EventScript_Lisa_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_Gym_EventScript_Lisa_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
-TH14_CeladonCity_Gym_EventScript_Erika::
-    msgbox TH14_CeladonCity_Gym_EventScript_Erika_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_Gym_EventScript_Erika_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
-TH14_CeladonCity_Gym_EventScript_Mary::
-    msgbox TH14_CeladonCity_Gym_EventScript_Mary_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_Gym_EventScript_Mary_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
-TH14_CeladonCity_Gym_EventScript_GymStatue::
-    msgbox TH14_CeladonCity_Gym_EventScript_GymStatue_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_Gym_EventScript_GymStatue_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
 TH14_CeladonCity_DepartmentStore_1F_EventScript_Receptionist::
     msgbox TH14_CeladonCity_DepartmentStore_1F_EventScript_Receptionist_Text, MSGBOX_NPC
     end
@@ -852,6 +789,7 @@ lockall
     end
 
 TH14_CeladonCity_GameCorner_EventScript_GymGuy::
+    goto_if_set FLAG_BADGE04_GET, TH14_Erika_GuideWon
     msgbox TH14_CeladonCity_GameCorner_EventScript_GymGuy_Text, MSGBOX_NPC
     end
 

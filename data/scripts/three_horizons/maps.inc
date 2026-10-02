@@ -220,3 +220,5 @@ TH_Route1_MapScripts::
     .include "data/maps/TH14_CeladonCity_Hotel/scripts.inc"
     .include "data/maps/TH14_CeladonCity_House1/scripts.inc"
     .include "data/scripts/three_horizons/chapter14_celadon.inc"
+
+    .include "data/scripts/three_horizons/chapter14_gym.inc"

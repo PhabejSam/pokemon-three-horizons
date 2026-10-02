@@ -1218,51 +1218,6 @@
   ],
   "unfinishedInteractions": [
     {
-      "script": "TH14_CeladonCity_Gym_EventScript_Kay",
-      "ownerTask": 11,
-      "reason": "Celadon Gym battle/reward/statue"
-    },
-    {
-      "script": "TH14_CeladonCity_Gym_EventScript_Bridget",
-      "ownerTask": 11,
-      "reason": "Celadon Gym battle/reward/statue"
-    },
-    {
-      "script": "TH14_CeladonCity_Gym_EventScript_Tina",
-      "ownerTask": 11,
-      "reason": "Celadon Gym battle/reward/statue"
-    },
-    {
-      "script": "TH14_CeladonCity_Gym_EventScript_Tamia",
-      "ownerTask": 11,
-      "reason": "Celadon Gym battle/reward/statue"
-    },
-    {
-      "script": "TH14_CeladonCity_Gym_EventScript_Lori",
-      "ownerTask": 11,
-      "reason": "Celadon Gym battle/reward/statue"
-    },
-    {
-      "script": "TH14_CeladonCity_Gym_EventScript_Lisa",
-      "ownerTask": 11,
-      "reason": "Celadon Gym battle/reward/statue"
-    },
-    {
-      "script": "TH14_CeladonCity_Gym_EventScript_Erika",
-      "ownerTask": 11,
-      "reason": "Celadon Gym battle/reward/statue"
-    },
-    {
-      "script": "TH14_CeladonCity_Gym_EventScript_Mary",
-      "ownerTask": 11,
-      "reason": "Celadon Gym battle/reward/statue"
-    },
-    {
-      "script": "TH14_CeladonCity_Gym_EventScript_GymStatue",
-      "ownerTask": 11,
-      "reason": "Celadon Gym battle/reward/statue"
-    },
-    {
       "map": "TH14_CeladonCity_GameCorner",
       "ownerTask": 12,
       "reason": "Append return-compatible Hideout warp3 and activate poster stairs only after its maps exist."
@@ -1282,6 +1237,10 @@
     {
       "item": "ITEM_TOWN_MAP",
       "receipt": "FLAG_TH14_TOWN_MAP"
+    },
+    {
+      "item": "ITEM_TM19",
+      "receipt": "FLAG_TH14_ERIKA_TM"
     }
   ],
   "economy": {

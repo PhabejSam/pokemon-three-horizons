@@ -27,6 +27,7 @@ Department Store uses native item prices and quantity/ownership handling.
 | Department Store roof girl | TM16 Light Screen | 1 Fresh Water | One successful exchange |
 | Department Store roof girl | TM20 Safeguard | 1 Soda Pop | One successful exchange |
 | Department Store roof girl | TM33 Reflect | 1 Lemonade | One successful exchange |
+| Celadon Gym Erika | TM19 Giga Drain | Victory reward | Defeat Erika; retry if TM pocket full |
 
 Roof vending prices are Fresh Water200, Soda Pop300, Lemonade400. Failed TM
 delivery consumes no drink and sets no exchange receipt. An already-owned
@@ -41,8 +42,9 @@ unlock is supplied.
 
 ## Pending chapter and long-range obligations
 
-- Task11 owns Erika's TM19 Giga Drain with a separate retryable reward receipt.
-  It is not marked delivered or implemented by this Task10 checkpoint.
+- Task11 adds Erika's TM19 Giga Drain with a separate retryable reward receipt.
+  The badge survives a failed TM delivery. Bag/PC ownership prevents a duplicate.
+  Real Gym battle and reward presentation remain GateB acceptance cases.
 - Later content must address remaining reusable TM availability. That obligation
   does not authorize adding future stock or maps during Playtest14.
 - Pokémon prizes are optional repeatable ordinary gifts: Abra9/180 coins,

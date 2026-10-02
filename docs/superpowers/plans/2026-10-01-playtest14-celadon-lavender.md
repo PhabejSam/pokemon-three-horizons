@@ -201,11 +201,11 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 **Files:** `chapter14_gym.inc`, Celadon Gym map/scripts, `src/data/trainers.party`, rematch registry for eligible ordinary Gym trainers, unique-item transaction; tests `test/three_horizons_playtest14_erika.c`, `tools/three_horizons/tests/test_playtest14_erika.py`.
 **Interfaces:** Erika uses Appendix C donor-based party and permanent trainer flag; badge4, TM19 Giga Drain delivery receipt and guide/champ text are distinct outcomes. Uses Task2 gift API. Erika is never an ordinary rematch.
 
-- [ ] Write `erika_before_or_after_giovanni`, `loss_does_not_grant_badge`, `victory_sets_badge_once_tm_full_bag_retry`, `gym_guide_and_repeat_dialogue_after_win`; unchanged ordinary first parties and valid sightlines are also asserted.
-- [ ] Run RED; port native Gym identity/cut access and seven ordinary trainers with project IDs. Badge/trainer victory is recorded after success even if the TM pocket cannot accept the reward; Erika repeats only the pending TM handoff. No mandatory Hideout receipt gate.
-- [ ] Run H(erika), N(`Three Horizons PT14 erika:`,`erika-green`); verify fourth badge changes rematch cap through existing code without changing owner Pokémon levels or earlier parties.
+- [x] Write `erika_before_or_after_giovanni`, `loss_does_not_grant_badge`, `victory_sets_badge_once_tm_full_bag_retry`, `gym_guide_and_repeat_dialogue_after_win`; unchanged ordinary first parties and valid sightlines are also asserted.
+- [x] Run RED; port native Gym identity/cut access and seven ordinary trainers with project IDs. Badge/trainer victory is recorded after success even if the TM pocket cannot accept the reward; Erika repeats only the pending TM handoff. No mandatory Hideout receipt gate.
+- [x] Run H(erika), N(`Three Horizons PT14 erika:`,`erika-green`); verify fourth badge changes rematch cap through existing code without changing owner Pokémon levels or earlier parties.
 - [ ] Capture loss/retry, victory/reward and clean route to Erika at Gate B; test Hideout-first ordering on a separate labelled branch.
-- [ ] Commit `feat: add Erika and retryable Rainbow Badge rewards`.
+- [x] Commit `feat: add Erika and retryable Rainbow Badge rewards`.
 
 ## Task 12: Rocket Hideout exploration, lift key and puzzles
 

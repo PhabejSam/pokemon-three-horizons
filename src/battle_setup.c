@@ -1860,6 +1860,11 @@ static const u8 *GetIntroSpeechOfApproachingTrainer(void)
 }
 
 #if THREE_HORIZONS && TESTING
+void Test_TH14_EndTrainerBattle(void)
+{
+    CB2_EndTrainerBattle();
+}
+
 const u8 *Test_TH_GetTrainerIntroSpeech(void)
 {
     return GetIntroSpeechOfApproachingTrainer();

@@ -28,6 +28,7 @@ static const struct
 {
     {ITEM_TOWN_MAP, FLAG_TH14_TOWN_MAP},
     {ITEM_COIN_CASE, FLAG_TH14_COIN_CASE},
+    {ITEM_TM19, FLAG_TH14_ERIKA_TM},
 };
 
 u8 TH14_TryGiveUniqueItem(u16 itemId, u16 receiptFlag)
