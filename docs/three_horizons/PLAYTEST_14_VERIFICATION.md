@@ -314,3 +314,28 @@ The full native build compiled the complete source set, then could not invoke th
 The new read-only final content validator checks all37 maps,66 receipt owners,43 pickup sources,7 unique gifts, the active50 TMs, both authored wild encounter tables, production shop/prize/coin/drink tables and accessible script references. It exposed a missing Coin Case entry in the unique-item ledger; the production gift already existed and is now documented. Route7/8 encounter coverage points to the existing production JSON rather than duplicating its slots. Negative-control mutations reject donor warps/flags, duplicate receipts/pickups, missing handlers, placeholders and unsupported TMs without editing build inputs.
 
 Evidence: final-host-01, host-tools-red-02/green-01, host-graph-green-01, final-native-build-01, link-host-red-01/green-01, coverage-red-01 through05, coverage-green-02 and final-doc-index-02. Full host/native/upstream/production acceptance remains pending. The initial native build overlapped host map-generation checks that temporarily replace and restore generated inputs; it is not accepted as final compilation evidence. A serial generation/rebuild after host completion will invalidate those dependencies explicitly.
+
+
+### Task18 — complete integration gate
+
+Feature checkpoint `1926813246d52a689bdc91f6eae17f8f6bb25c53`; exact compiled/test revision `b2c6962cbd65acfc90dd8d98549c2f5f92a92354`. Later documentation commits do not change this compiled identity. Full host discovery **278 PASS**. Native matrix **349 unique definitions / 601 parameter cases PASS**, zero skips, normal audio, strict skip-is-fail, executable-local official runtime DLLs. There were350 definition executions because the layout definition is both in Three Horizons and rerun separately. The Three Horizons subset contains323 definitions /512 cases. Native test ELF SHA256 `8e5e8df7f135fa1c0d9ea495834a31e0731e349e5b3aa52d9ba2dc3610b09ebd`.
+
+Complete native build02 linked1,981 objects including1,029 test objects, without a source override. The serial rebuild invalidated map-generated dependencies after host completion; build01 is retained only as failed historical evidence. Fixed save sizes remain15,568 /3,884 /4 /34,144 bytes (SaveBlock1/2/3/storage), with unchanged expected offsets and signed one-byte warp fields. All ghost, Misty Terrain, Misty Surge, starting-status/terrain/weather regressions passed. Content validator passes37 maps,66 receipt owners,654 accessible labels,43 pickup sources,7 unique gifts,50 active TMs and2 wild tables. Documentation indexing passes.
+
+| Upstream configuration | Actual result | ROM SHA256 |
+|---|---|---|
+| emerald | PASS (exit 0) | `b70e0547e899e218db7067e3c395df8f82a23ed30e4efbce8cde847fff852abc` |
+| firered | PASS (exit 0) | `d72fa0c563ee355327426412ba2875a197acb5ce1b00c6979d349d5f2767cefd` |
+| leafgreen | PASS (exit 0) | `e9820fd0638b5bb40347834d848f735ac28def00b0e561ce6fc346b1e815305b` |
+
+After the three serial upstream builds, Three Horizons map/trainer assets were regenerated and the final production ROM built successfully. Immutable private candidate: `.superpowers/sdd/2026-10-01-playtest14-celadon-lavender/final-candidate/`.
+
+- `pokemon-three-horizons.gba`: `1746110c9314a2850ccf340c8dcc472f28fd4b8f483f29a59f00f59ff63c2ae0` (33,554,432 bytes).
+- `pokemon-three-horizons.elf`: `bb2de5f2b57f25235adf22c69c2fc06e7b915364da0a1d73dd771e868535b6e1` (37,354,920 bytes).
+- `pokemon-three-horizons.map`: `3028f74a6cafdbb10bd651e353347ee08e70a836e0650799776acafb73884e5f` (4,959,888 bytes).
+
+Toolchain: official ARM GNU13.2.Rel1, GCC13.2.1 (20231009), project MSYS2 tools; flags `THREE_HORIZONS=1 CHECK_TOOL_NAMES=patchelf TOOLCHAIN=<private ARM path> -j8`, normal production (TEST=0). Upstream uses THREE_HORIZONS=0 and BUILD=emerald/firered/leafgreen. Exact commands and memory totals are retained in final-build-matrix.json/final-build-warning-summary.json.
+
+Warning classification: inherited deprecated-party-pointer/unused-function sites were compared to baseline2d85555 (source comparison, not a fresh baseline build). The nonfatal compiler startup diagnostic “is shorter than expected” also occurs in earlier task builds and all three upstream configurations; it has no named source site and its precise toolchain cause remains unestablished. The two linker RWX segment warnings use the inherited GBA linker layout. No warnings or assertions were suppressed for this gate. Detailed diagnostics remain in logs.
+
+All six protected artifacts retain their original hashes, and both prior source worktrees retain their original branches/commits/status. Evidence: final-host-02, final-native-build-02, final-native-matrix-20261002-125150, final-native-results.json, final-coverage-02, final-doc-index-03, final-build-matrix.json, task18-protected-check.json. This is automated/build acceptance only: Task19 exact-ROM emulator acceptance remains pending; RG40XX H/VBA-Next capture remains HIGH/unresolved.
