@@ -1,3 +1,80 @@
+# Playtest 14 — development handoff
+
+Feature and compiled/test revision: `abdec6f2508bbf2d4f1c104d863e5908281f6f6e`.
+
+ROM: `pokemon-three-horizons-playtest-14-celadon-silph-scope.gba`
+
+SHA-256: `7e9e18bcb30026a47c9e46e187f8a1ba906e431682eb704b48c2ed8fd67a77a7`.
+
+This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next acceptance remains **PENDING**; the intermittent full-party Ekans capture report is **HIGH / unresolved**. Use normal speed first.
+
+## Resume point
+
+Tasks1–19 complete; Task20 final independent review and Task21 private packaging
+remain. Feature/compiled revision abdec6f; emulator documentation checkpoint
+7c58aee03e. Do not rebuild unchanged code after documentation-only commits.
+Private evidence is retained, never packaged or deleted. No merge/push/settings
+change is authorized. The older1746110c candidate is BLOCKED/superseded.
+
+Major changes: appended group76/37 maps and explicit66 receipt ownership;
+version-safe migration/map-family predicates; Town Map/Cut/Flash/forest/lead
+repairs;25 rematch stone tiers and bounded twins behavior; atmospheric Tower
+fog; Celadon/shops/economy/Erika/Hideout/Scope; mother required photo and guarded
+battle/fade; Fuji destination-map reward resume; gate/trade/Itemfinder/Snorlax.
+Files concentrate in src/three_horizons_*.c, their data/constants, authored map
+JSON/layouts/scripts, chapter14 manifests, native test files and host regressions.
+No saved structure grew and no older map identity was renumbered.
+
+Integration:280 host,350 unique native/602 cases,zero skips,three upstream builds
+and production PASS. Exact owner route and27 focused branches PASS. Actual-owner
+capture nonreproduction is mGBA-only; HIGH hardware report remains unresolved.
+Native Save/cold checks compare all14 boxes and story receipts. Fresh new game
+coverage is opening/all-nine choices, not an entire new-game chapter journey.
+See PLAYTEST_14_VERIFICATION.md for evidence classes and all53 final fields.
+
+Planned private output: outputs/playtest-14-celadon-silph-scope-abdec6f/ with the
+explicitly named PT14 ROM and sanitized guides. Task21 must assert hashes,
+whitelisted contents and a fresh extracted-ROM smoke before claiming packaging.
+Owner originals remain untouched; no raw saves/RAM belong in the package.
+
+## Implementation rulings retained from the private ledger
+
+- Ruling: preserve private evidence and earlier baseline dependency reads required by the approved plan — user explicitly protects temporary state; generic skill cleanup/sibling-isolation language cannot discard needed evidence — cost if wrong: extra local disk use, no gameplay change.
+
+- Ruling: use focused suites per task and full suites at the approved integration gates — explicit owner strategy overrides generic TDD full-suite-every-task wording — cost if wrong: an unrelated regression could be found at the next gate; no release before all gates.
+
+- Ruling: portable skill helper needed MSYS path normalization and precreation of only its approved worktree directory — native Windows Git emits drive-letter paths and MSYS mkdir -p attempts protected ancestors; bounded retry succeeds after normalizing Git output/precreating leaf with Python — cost if wrong: bookkeeping only; product source unaffected. Failed helper logs retained; runaway helper stopped, no user process targeted.
+
+- Ruling: make source restriction is TEST_SRCS, as inspected in this Makefile — TEST_SRC_FILES is only an optional shell variable — cost if wrong: slower overbroad build, never a skipped required test.
+
+- Task 1: Ruling: native test build uses CHECK_TOOL_NAMES=patchelf and the documented serial mGBA adapter — the default Linux Hydra launcher cannot compile on Windows (missing poll.h); this excludes an unavailable launcher, not any test or assertion. Preserve normal audio, strict skip-is-fail, and nonzero test counts. Cost if wrong: runner orchestration only; full test content remains required at gates.
+
+- Task1 Ruling: existing P13 all-trainer-bits regression now also expects newly owned157–194 reset for old saves, then sets those as newly earned wins before repeated migration — the approved PT14 ownership contract extends the expected reset set; it does not relax protection for existing wins.
+
+- Task3 Ruling: complete the south crowns inside the existing blocked perimeter using native topper/crown/body patterns, retaining destination collision/elevation bits. Native topper corners are grass-looking but this preserves every existing walkable floor exactly and avoids a broad forest phase shift. Cost if wrong: those already-blocked corners may look too permissive; GateA visual/controller acceptance must assess them. North bases use native trunk/base sequences. Refresh only the affected forest-pair Gear crop/manifest to reflect this source map repair; all other photo assets remain unchanged.
+
+- Task4 host RED:5 tests, missing Flash-intro trace plus three expected story/staging failures; gate/full-bag controls pass. Ruling: observer repeat speech uses unused Tower2F map-local FLAG_TEMP_1, with existing ENDPOINT also selecting the shorter branch for progressed saves. This adds no permanent story flag; after leaving before the barrier, the full introduction may be heard again. Cost if wrong: repeated information only; no progression affected.
+
+- Task5 Ruling: implement and verify the future Route8 alias against its allocated group76/index0 now, but require its canonical registry row before resolution; actual new-map first/rematch doubles and thirty new ordinary entries land with Tasks8/11/12 as specified. Cost if wrong: new rematches would be absent until map integration, which remains an explicit GateB blocker, never silently accepted.
+
+- Task8 in progress BASE fb57ecb649e5ed539d0e00310d111095a44b98a5: imported seven locked travel footprints and12 complete donor first trainers after absent-map host RED. Ruling: Route7 west edge and off-map Cut clone await registered Celadon in Task9; no undefined destination now. Old121 ordinary identities remain exact; new rows follow only approved registered maps. Immutable first-party snapshot retained, excluding only appended PT14 records before comparing old raw records (last original includes trailing #endif). GateB owns full visual traversal. Native regression targets discovered: group75-only queued-call guard and rematch-double macro encoding isDouble FALSE; tests added before repair. Test ELF regenerates dependent objects because maps/layout IDs were appended, not a repeated release build.
+
+- Task8 native RED travel-red-01: expected queued-call rejection and rematch-double missing flag reproduced. Compiled-map test additionally exposed mapjson rejecting TH14 prefixes/omitted opt-in manifest (group76 NULL); fixed loader/filter/manifest, with host compiler RED then GREEN across TH/Emerald/FireRed layout selection. No assertion disabled. Capture test initially used self-assignment in PARAMETRIZE (species0 fixture error); switched independent loop counters. Build setup corrected EXPECT on bitfield via explicit cast and hid donor Emerald157-168 records only in TH to avoid duplicate approved trainer slots (upstream records unchanged). Ruling: shared rematch-double macro repair is TH-only, leaving upstream expansion byte-identical; cost if wrong is an incorrect twins guard, covered by actual-script native dispatch and GateB gameplay.
+
+- Task8 RNG root cause: retained VBlankCB_Battle advances RNG at battle_main.c:1795 while the next WILD_BATTLE_TEST GIVEN has cleared RECORDED (test_runner_battle.c:535), before the callback is replaced. Main VBlank guard alone does not cover it. Diagnostic-format-only ELF showed exactly one extra draw between fixture restore and generator entry. Ruling: suspend/restore only the prior battle VBlank callback around the field-generation fixture, preserving production RNG and all 24 species/level/capture assertions; no gameplay RNG change. Temporary source traces removed. DLL repair independently committed e8b5eae905; original owner save rehashed unchanged.
+
+- Task9 in progress; official BASE0cfd3c13d410cdd3fd0c2d31429982728cef8ea4, documentation-only DLL confirmation61229ec3a4 followed before resume. Host7 missing-content RED captured; imported21 exact private donor footprints with owned scripts, no native progress flags, reciprocal Route7 connection/Cut clone, and visible western guard spanning all3 road lanes. Ruling: department elevator derives floor from saved dynamicWarp and transient8005/8006, avoiding native VAR_ELEVATOR_FLOOR collision; cost if wrong is elevator return, covered by native resolver/cancel and GateB cold checks. Deferred61 Task10-12 interactions explicitly listed and forbidden at Final. Eevee/native Center tests written before service implementations. GateB owns visual/controller evidence.
+
+- Task14 Ruling: old RC2 manifest assertion now expects11 with exact old ten-name prefix; generic note expectation special-cases new mother note, whose Fuji eligibility has dedicated coverage. An older host test incorrectly required PT13_1 in the already-committed PT14-only migration guard. It now requires exactly one PT14-only guard and exactly six historical guards containing both versions. No production migration change; cost if wrong is missed guard regression, mitigated by exact count/content and dedicated PT14 state tests.
+
+- Task15 Ruling: descriptive old home local-ID names end2–6 but compiled values are1–5 (mapjson assigns array index+1). Append Fuji6 instead of restoring donor Fuji1, preserving all existing object IDs — cost if wrong is a misplaced spawn predicate; native/host tests assert actual slot6 and original-name prefix. The existing unique-item service had only the earlier delivered features, so Flute's approved pair is registered in this task with its ledger row. No extra saved flags/fields.
+
+- Task16 in progress BASEdde6690aeed25ef503dfbeaa1e8deea1091c22ee. Host RED8:5FAIL/2missing-label errors/1existing-control pass against old endpoint. Native RED build01 running with upper-floor Scope classification and appended-actor regressions plus all28 throwable Balls/ordinary Marowak capture controls. Ruling: no registered unidentified-Ghost overworld graphic exists; preserve the unseen presence/barrier until Scope reveal, then show the existing native Marowak actor via bounded observation/resolution spawn predicate. No invented art. Actor flag0 avoids removeobject prematurely setting final resolution; final flag remains explicit after fade. Cost if wrong: pre-reveal visual expectation, mitigated by approved unidentified-presence copy and exact scene acceptance in Task19.
+
+- Task19 Important defect: natural owner actions426-432 reached Fuji's home after rescue but the automatic home thanks/Flute delivery never ran. Native cold save432 confirms rescue set, Flute receipt unset and item absent. Manual re-talk433-434 recovers, but does not satisfy automatic handoff acceptance. Old immutable candidate1746110c is BLOCKED (candidate-1746110c-status.json), retained unchanged as RED evidence; later travel through action439 is diagnostic only. Root cause: DoWarp replaces ScriptContext, so instructions after warp/waitstate are discarded. The host scene model incorrectly continued that discarded context. Emulator fixture fuji-warp-red and corrected host model reproduce failure (4/11 host failures). Destination-map OnLoad/OnFrame now resumes only rescued, undelivered arrivals at the authored3,4 location, using existing receipts and map-local TEMP1; no save growth. Ordinary doorway entry and delivered reward do not trigger; cold pending Continue resumes; full pocket remains retryable. Related30 host checks and7 compiled native definitions PASS (task19-fuji-related-host-01.log/native/task19-fuji-fix-01.json); separate production build running, emulator GREEN pending. Ruling: refresh Task18 integration and exact-ROM Task19 acceptance after this root-cause fix; old-ROM passes remain historical evidence, never proof of the replacement candidate. Cost is another bounded integration/owner route, required to avoid releasing untested code.
+
+## Chronological history (intermediate statuses)
+
 # Playtest 14 development handoff — 2026-10-01
 
 Current stage: the owner approved the detailed 21-task plan and serial/inline execution. Tasks 1–7 are implemented/investigated with focused checks passing. Gate A production build, carry-forward visual acceptance and owner-source migration are next. No PT14 release candidate or hardware acceptance is claimed.

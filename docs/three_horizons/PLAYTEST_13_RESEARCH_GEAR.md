@@ -37,3 +37,35 @@ The cards cover Route 1, two early Forest pairs, Mt. Moon, Vermilion Harbor, the
 The palettes use fifteen opaque map colors plus transparency in one BG bank. Native subject OBJ palettes are separate. This is a miniature of the map, not a full screen capture. The image page prioritizes the environment; readable metadata and notes occupy the following pages.
 
 Keep the original PT12/RC1 ROM and battery files unchanged. Copy the battery to the RC2 filename, boot normally, Continue, compare progress, save through the game, close, reopen and Continue again. Old emulator states are not migration evidence. RG40XX H/VBA-Next uses its EEPROM directory and core naming convention; the owner's original source is a raw 128 KB `.gba.eps` file.
+
+## PT14 addendum — Mother's Watch, 2026-10-02
+
+Feature and compiled/test revision: `abdec6f2508bbf2d4f1c104d863e5908281f6f6e`.
+
+ROM: `pokemon-three-horizons-playtest-14-celadon-silph-scope.gba`
+
+SHA-256: `7e9e18bcb30026a47c9e46e187f8a1ba906e431682eb704b48c2ed8fd67a77a7`.
+
+This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next acceptance remains **PENDING**; the intermittent full-party Ekans capture report is **HIGH / unresolved**. Use normal speed first.
+
+The reviewed Navigator remains exactly three modules: Research Log, Field Photos
+and Calls. All ten old photos and existing record/call IDs remain stable.
+MOTHER'S WATCH appends the eleventh photo; the all-owned archive displays12
+observations because an existing observation has no photo. No new Gear module
+or full later-generation Pokédex is enabled.
+
+Unlike earlier optional photos, the mother photo is required after Scope reveal
+and before her battle. A player without Gear is directed to the free ground-floor
+Tower aide (5,11). Failed setup must not invent photo/completion receipts. Loss
+retains the photograph but does not resolve the mother. Victory resumes the cry,
+pause and fade; a saved won-but-pending aftermath continues without a second
+battle. The mother's spirit is documented, never captured. The quiet archive
+note changes after Fuji and does not pretend a professor call was received.
+
+The photo uses the native Tower backdrop with Marowak and the current walking
+outfit. All seven outfits, all11 photo fronts/details/notes, contacts, list wrap,
+read-only archive state and native Save/cold were checked on this exact ROM.
+The all-record/all-outfit checks are labelled fixtures; the actual owner route
+records the mother naturally. The new-game smoke confirms initial handoff and
+empty early archive without fabricated later photos. Full hardware art/input/
+flash-palette acceptance remains pending; follow PLAYTEST_14_HARDWARE_QA.md.

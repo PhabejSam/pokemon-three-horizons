@@ -200,3 +200,7 @@
 - [Playtest 14 verification ledger](three_horizons/PLAYTEST_14_VERIFICATION.md)
 - [Playtest 14 development notes](three_horizons/PLAYTEST_14_DEVELOPMENT_NOTES.md)
 - [Playtest 14 TM availability](three_horizons/PLAYTEST_14_TM_AVAILABILITY.md)
+
+- [Playtest 14 full beta walkthrough](three_horizons/PLAYTEST_14.md)
+- [Playtest 14 hardware QA](three_horizons/PLAYTEST_14_HARDWARE_QA.md)
+- [Playtest 14 encounter tables](three_horizons/PLAYTEST_14_ENCOUNTERS.md)

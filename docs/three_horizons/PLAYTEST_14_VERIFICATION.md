@@ -1,8 +1,142 @@
-# Playtest 14 verification ledger
+# Playtest 14 — verification and release record
 
-**2026-10-02: approved plan in serial/inline execution. Tasks 1–2 foundations verified; no PT14 release candidate exists yet.**
+Feature and compiled/test revision: `abdec6f2508bbf2d4f1c104d863e5908281f6f6e`.
 
-The owner requested Celadon → Silph Scope → return to Lavender → mother's Marowak/photo → Fuji/Flute → Route11 Snorlax, with the carry-forward repairs in the chapter blueprint. Full implementation/build/acceptance fields remain pending until their respective gates. Do not use this document as release acceptance.
+ROM: `pokemon-three-horizons-playtest-14-celadon-silph-scope.gba`
+
+SHA-256: `7e9e18bcb30026a47c9e46e187f8a1ba906e431682eb704b48c2ed8fd67a77a7`.
+
+This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next acceptance remains **PENDING**; the intermittent full-party Ekans capture report is **HIGH / unresolved**. Use normal speed first.
+
+## Current status (supersedes intermediate statuses below)
+
+Tasks1–19 are complete. The full replacement automated/build matrix and exact-ROM
+mGBA acceptance pass. Release guides are prepared; the one independent final
+review and private package/extraction smoke remain pending Tasks20–21. The old
+ROM1746110c is blocked by the reproduced Fuji handoff defect; no old screenshot
+or old pass substitutes for acceptance of this replacement candidate.
+
+The exact owner continuation is fixture-free. Adversarial branches are labelled
+fixtures, and fresh-game coverage is an opening smoke plus all nine choices.
+**No full natural new-game journey or RG40XX H acceptance is claimed.**
+
+## Required final report — all53 fields
+
+| # | Required field | Result / evidence / limitation |
+|---:|---|---|
+| 1 | Exact branch/worktree | feature/playtest14-celadon-lavender; work/playtest14-celadon under this task; isolated, no merge/push |
+| 2 | Exact feature revision | abdec6f2508bbf2d4f1c104d863e5908281f6f6e |
+| 3 | Exact compiled/test revision | abdec6f2508bbf2d4f1c104d863e5908281f6f6e; later documentation commits do not change compiled inputs |
+| 4 | ROM filename | pokemon-three-horizons-playtest-14-celadon-silph-scope.gba |
+| 5 | ROM SHA-256 | 7e9e18bcb30026a47c9e46e187f8a1ba906e431682eb704b48c2ed8fd67a77a7 |
+| 6 | Story Bible version | Narrative Canon v1.2; supplied bytes unchanged |
+| 7 | Story Bible path | docs/three_horizons/THREE_HORIZONS_STORY_BIBLE.md; SHA256 53d09fbead5167252cfe42c9e8097bc6e9d838b6a56c44a5944dfb4f55a81605 |
+| 8 | Chapter Blueprint path | docs/superpowers/specs/2026-10-01-playtest14-celadon-lavender-design.md |
+| 9 | Implementation plan path | docs/superpowers/plans/2026-10-01-playtest14-celadon-lavender.md |
+| 10 | Research Navigator revision integrated | Runtime ea393ce3174751c50206e85101b9682c5cfbb0c7; reviewed handoff 2d85555d74f34f5029c38a3b2db26fb7eb3f99c0 |
+| 11 | Host test total | PASS:280 actual tests, replacement-host-01.log |
+| 12 | Native test total | PASS:350 unique definitions /602 parameter cases; zero skips. Raw351/603 includes one repeated layout definition; replacement-native-results.json |
+| 13 | Save layout | PASS: SaveBlock1/2/3/storage=15568/3884/4/34144 bytes; fixed offset expectations unchanged; native layout tests |
+| 14 | Upstream Emerald | PASS: fresh THREE_HORIZONS=0 build exit0; replacement-build-matrix.json |
+| 15 | Upstream FireRed | PASS: fresh THREE_HORIZONS=0 build exit0; same matrix |
+| 16 | Upstream LeafGreen | PASS: fresh THREE_HORIZONS=0 build exit0; same matrix |
+| 17 | Owner battery SHA verification | PASS: original131072 bytes; e94846ce281dc01c245f1fdeabf300b350433fda5a1368924767a3de41536ef2; originals rehashed unchanged |
+| 18 | Owner migration | PASS: actual PT13.1 Tower6F battery, cold Continue/native Save/full close/second Continue; bounded raw/semantic deltas, all14 boxes, permanent history; final-owner02 |
+| 19 | Town Map fresh game | PASS: native Daisy delivery/repeat and cold persistence; final-owner-newgame02/32,33,42; Kanto frontend native/Gate A/B controls |
+| 20 | Town Map migration catch-up | PASS: actual owner natural catch-up plus labelled full-pocket retry and native cold; owner02/reward-town-map |
+| 21 | Viridian clearing visual | PASS in mGBA: targeted before/after frames, Gate A and exact-owner revisit; hardware pending |
+| 22 | Route9 Cut tree | PASS: map-local ownership/collision regression, before/after Gate A and exact-owner revisit; hardware pending |
+| 23 | Route2 Flash aide | PASS: supplied-first copy and native field eligibility; actual owner revisit; Gate A/final route |
+| 24 | Vs. Seeker greeting | PASS: rematch greeting native routing, Gate A/final revisit; ordinary rematches only |
+| 25 | Vs. Seeker unbeaten trainer | PASS: first-battle path/history untouched, no fabricated defeat/readiness; native rematch tests |
+| 26 | Authored rematch evolution tiers | PASS:25 exact trainer/slot overrides, both thresholds, first-party preservation and clamp tests; PT14 rematch addendum |
+| 27 | Route11 gate | PASS: both-sided corridor/floors/native travel; Itemfinder capacity/cold and trade selected-slot native tests; owner route |
+| 28 | Pre-Flute Snorlax | PASS: actual owner blocked sleeper; later retry branches; no early road opening |
+| 29 | Lavender rival dialogue | PASS: respectful conversation-only first/repeat; source/native and Gate A/owner interaction |
+| 30 | Lavender trio | PASS: repositioned existing cameo, preserved old receipt; before/after mGBA staging |
+| 31 | Tower Rocket Celadon lead | PASS: accessible in-world first/repeat causal lead; no developer endpoint copy |
+| 32 | Tower fog mechanical audit | PASS: cosmetic weather no longer activates terrain; explicit Misty Terrain/Misty Surge and unrelated upstream controls pass |
+| 33 | Intermittent Ekans capture | HIGH / UNRESOLVED on reported RG40XX H/VBA-Next. Exact-owner fixture-free mGBA capture/name/full-party replacement/PC/native-save/cold PASS; not a hardware fix or hardware pass |
+| 34 | Celadon city | PASS:21 maps, linked interiors/doors/elevator/Center/Mansion; Gate B controller coverage and final owner route; later western routes restricted |
+| 35 | Erika | PASS: authored first party, victory badge/retryable TM; actual owner first and labelled reverse order; no boss rematch |
+| 36 | Department Store/TM | PASS: native staged catalogue and transactions; real purchase/cold plus all3 full-pocket drink retry branches.50 active TMs documented; Surf-side tutor access not newly supplied |
+| 37 | Game Corner/Prize Corner | PASS: coins/menu/prize/cold; full420-box failure/retry, other419 preserved; optional prize species future-access obligations retained |
+| 38 | Rocket Hideout | PASS: natural spinner/key/lift/guards route; failure-safe Key and derived doors; source/native/labelled capacity evidence |
+| 39 | Celadon trio | PASS: actual doubles/190+191 wins; insufficient-party native/scene guard and loss retry; Meowth noncombatant |
+| 40 | Giovanni | PASS: actual authored battle and victory-only progression, reverse order independently exercised |
+| 41 | Silph Scope | PASS: actual pickup and native Save/cold; full pocket/retry/repeat; identified normal wild ghosts remain catchable |
+| 42 | Tower post-Scope | PASS: exact-owner return, identified wild species and unlocked mother sequence; upper floor only after resolution |
+| 43 | Marowak reveal | PASS: Scope reveals female Lv30 Serious mother, old object IDs preserved; exact native frames |
+| 44 | Mother's Watch photo | PASS: required flash/photo before battle; natural owner and all7 outfit/all11 archive fixture visuals; missing Gear safe catch-up; no invented capture |
+| 45 | Marowak noncapture | PASS: exact-owner Ball dodge; native all28 Ball cases and ordinary Marowak control |
+| 46 | Emotional resolution | PASS: actual cry/pause/fade; victory-only receipt; labelled loss retains photo; won-pending cold resumes without battle; no immediate call |
+| 47 | Fuji | PASS:3 upper Rockets/rescue/home warp/automatic thanks; old1746110c failed this and is BLOCKED, repaired exact7e9e18bc rerun passes |
+| 48 | Poké Flute | PASS: automatic delivered once; full-pocket/cold/retry/ordinary-door controls; existing save fields |
+| 49 | Snorlax wake battle | PASS: natural owner WON/open road; labelled decline/escape/loss remain retryable, native capture/name/fullpartyPC/cold passes; bounded endpoints |
+| 50 | Exact ROM native-save/cold | PASS: initial owner and earned checkpoints212/350/432/457; final generation23, all protected payloads exact across runtime/battery/cold except permitted clock bookkeeping; all starter branches |
+| 51 | Hardware-only remaining acceptance | PENDING: RG40XX H/VBA-Next cold boot, capture monitoring, art/input/audio/performance and bounded route; PLAYTEST_14_HARDWARE_QA.md |
+| 52 | Known defects or limitations | HIGH intermittent hardware capture unresolved; no full natural new-game emulator journey; inherited startup/RWX/deprecation warnings recorded; Saffron/extended Route12/Fuchsia/regions excluded; later prize-species/alternate Snorlax sources unimplemented |
+| 53 | Deferred minors | Final whole-branch Astra/Ultra review PENDING; no final review result claimed yet |
+
+## Build warnings and test-runner provenance
+
+The refreshed builds all exit0. Each upstream build retains the startup
+“is shorter than expected” diagnostic and two RWX linker warnings; the production
+build additionally retains deprecated party-pointer and unused-function warnings
+at inherited sites. No warning, assertion or test was silenced. The startup
+message's toolchain root cause is unestablished; it is not treated as new gameplay
+breakage. Native tests use normal audio and strict skip-is-fail.
+
+The Windows runner's missing libwinpthread-1.dll was repaired using matching
+local official MSYS2 runtime files installed beside the isolated runner. The
+reproducible repository helper documents the provenance. System32-only PATH
+startup was verified. Missing-DLL attempts did not execute tests and are not
+counted as passes; successful reruns are identified separately below.
+
+## Evidence classes and test limitations
+
+- **Exact final candidate:** replacement-candidate ROM/ELF/map hashes equal
+  fuji-fix-candidate; actions identify ROM7e9e18bc. Production feature and compiled
+  revision are identical. New docs do not imply a new compiled revision.
+- **Actual supplied battery:** source checksum/sector baseline, cold migration,
+  full natural owner route and four earned native-save/cold checkpoints. Original
+  identities and all original boxed bytes retained; earned deltas explained.
+- **Labelled fixtures:** boundary capacity, reverse order, archive/all outfits,
+  mother loss/pending, Snorlax alternate outcomes. They prove those paths only.
+- **Fresh game:** blank intro/options/outfit/PC, configured Bulbasaur/first win/
+  Daisy/Mom/Gear/save; other eight native choices from its prechoice battery.
+- **Historical gates:** Gate A/B and old Task18 records below retain their exact
+  revisions. Later pending wording in those dated entries describes that time.
+- **Failed attempts:** old Fuji behavior is a real fixed defect. Emulator-driver
+  timing/path/task-name assumptions and early build/test-harness errors were
+  retained and corrected. A failed launch, timeout or assertion is not a pass.
+- **Not run:** full natural new-game journey to chapter end and RG40XX H tests.
+  The documented new-game route is a requested beta walkthrough, not evidence.
+
+## Appendix D self-check (implementation/release)
+
+| Requirement group | Checked implementation / acceptance |
+|---|---|
+| Canon/protected lineage/no future cause | Bible hash, six protected artifacts, old worktree snapshots; source/dialogue audit |
+| Capacity/maps/flags/migration |37 appended maps in group76,66 owned receipts, unchanged old IDs/offsets/sizes; native and exact-owner cold checks |
+| Navigator exactly3 modules | old assets/IDs unchanged, appended mother photo, all-record controller check |
+| Town Map/Cut/forest/Flash/earlier leads | focused RED/GREEN, targeted Gate A before/after, final owner revisit and fresh Daisy |
+| Rematch first/history/twins/tiers |151 identities, bounded readiness,25 stone rows, clamp/alias/upstream controls |
+| Atmospheric fog | cosmetic-only Tower fog; explicit terrain/ability regressions |
+| Intermittent capture | actual-owner exact-ROM attempt PASS in mGBA; hardware HIGH unresolved |
+| Routes/city/doors/elevators | native registries/layout graph, Gate B walkthrough, exact-owner route |
+| Economy/TMs/prizes |50 active identities,26 currently obtainable; all capacity/coin/drink retries; full guide |
+| Erika/order/Hideout/trio/Scope | main owner route plus reverse-order fixture and loss/reward controls |
+| Mother/Gear/photo/aftermath | natural scene, all-Ball control, missing Gear/loss/pending/all-outfit checks |
+| Fuji/Flute | real warp failure RED, destination resume GREEN, exact route/full-pocket/cold/repeat |
+| Gate/trade/Itemfinder/Snorlax | native trades/gates/outcomes, natural win/road, labelled capture/retry/cold |
+| Supported saves | legacy marker matrix plus actual PT13.1 source; no save growth |
+| Guides/review/package | guides prepared; independent review and private extraction gate pending |
+
+## Historical implementation evidence
+
+The entries below preserve their original intermediate results and limitations.
+The current report above and the final dated Task19 section take precedence.
 
 ## Sources and preservation
 
@@ -50,7 +184,7 @@ The owner now reports successful RC2 hardware progression to the Tower barrier. 
 
 TMs already are reusable in Three Horizons. Keep that mechanic; design progression-aware access/catalogue stock. The existing active set is 50 TMs plus 8 HMs in a 64-slot machine pocket. Research photos reside in ROM with persisted ownership flags; append the mother's record without changing saved structure sizes.
 
-## Gate status
+## Historical preflight gate status
 
 | Gate | Current status |
 | --- | --- |

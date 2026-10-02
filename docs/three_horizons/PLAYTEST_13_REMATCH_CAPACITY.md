@@ -104,3 +104,68 @@ for source/ROM hashes, protected comparisons and the separate hardware gate.
 ## Route 11 addition (Task 33)
 
 Ten native Route 11 ordinary trainers use new full-width ROM IDs 104–113 and local readiness slots 0–9. The roster now contains 78 ordinary trainers; 43 approved trainers remain for Route 9, Route 10, Rock Tunnel and Pokémon Tower. Existing ship-rival IDs 94–102 and Surge ID 103 remain unchanged and excluded. A cross-table uniqueness check verifies both TH and upstream configurations; no saved trainer IDs or save structures were resized. Final 121-trainer coverage remains an integration gate.
+
+## PT14 addendum — exact candidate, 2026-10-02
+
+Feature and compiled/test revision: `abdec6f2508bbf2d4f1c104d863e5908281f6f6e`.
+
+ROM: `pokemon-three-horizons-playtest-14-celadon-silph-scope.gba`
+
+SHA-256: `7e9e18bcb30026a47c9e46e187f8a1ba906e431682eb704b48c2ed8fd67a77a7`.
+
+This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next acceptance remains **PENDING**; the intermittent full-party Ekans capture report is **HIGH / unresolved**. Use normal speed first.
+
+The map-local readiness architecture is preserved: full-width trainer IDs and
+authored parties/tiers remain in ROM; existing byte slots carry only bounded
+transient readiness. No save growth, ID truncation or map-local aliasing.
+Permanent first-defeat flags remain authoritative. Map exit/change, cancellation,
+completed rematch, blackout and cold Continue clear readiness without erasing
+trainer/story history. Repeated immediate use needs no charge. Bosses, Leaders,
+scripted rivals, Jessie/James, poster guard and upper Tower Rockets are excluded.
+
+PT14 adds30 ordinary trainer identities (12 Route8,7 Gym,11 Hideout) to the121
+existing entries. Route8 twins share one canonical slot; either actor routes to
+the same identity, with a safe insufficient-party guard. First battle parties
+are unchanged. Scaling remains clamped and lower/higher levels tested. Losing
+or cancelling must not fabricate a first victory. Before a rematch, trainers
+use their rematch greeting; undefeated trainers still use the first-battle path.
+
+All25 stone overrides below are generated from the tested chapter14_content.json
+manifest. Both level **and** badge thresholds must be met for the exact trainer,
+party slot and base species. They are trainer-only; player evolution methods
+remain unchanged. Source slots are zero-based; this table adds1 for readability.
+
+| Trainer constant | Party slot (1-based) | Base → rematch species | Minimum individual level | Minimum badges |
+|---|---:|---|---:|---:|
+| TRAINER_TH9_LASS_ROBIN | 1 | Jigglypuff → Wigglytuff | 30 | 3 |
+| TRAINER_TH9_LASS_IRIS | 1 | Clefairy → Clefable | 30 | 3 |
+| TRAINER_TH12_PICNICKER_NANCY | 2 | Pikachu → Raichu | 30 | 3 |
+| TRAINER_TH12_GENTLEMAN_THOMAS | 1 | Growlithe → Arcanine | 32 | 4 |
+| TRAINER_TH12_GENTLEMAN_THOMAS | 2 | Growlithe → Arcanine | 32 | 4 |
+| TRAINER_TH12_GENTLEMAN_BROOKS | 1 | Pikachu → Raichu | 30 | 3 |
+| TRAINER_TH12_GENTLEMAN_LAMAR | 1 | Growlithe → Arcanine | 32 | 4 |
+| TRAINER_TH12_LASS_DAWN | 2 | Pikachu → Raichu | 30 | 3 |
+| TRAINER_TH12_SAILOR_DWAYNE | 1 | Pikachu → Raichu | 30 | 3 |
+| TRAINER_TH12_SAILOR_DWAYNE | 2 | Pikachu → Raichu | 30 | 3 |
+| TRAINER_TH12_GENTLEMAN_TUCKER | 1 | Pikachu → Raichu | 30 | 3 |
+| TRAINER_TH13_ROUTE11_DARIAN | 1 | Growlithe → Arcanine | 32 | 4 |
+| TRAINER_TH13_ROUTE11_DARIAN | 2 | Vulpix → Ninetales | 32 | 4 |
+| TRAINER_TH13_ROUTE9_CHRIS | 1 | Growlithe → Arcanine | 32 | 4 |
+| TRAINER_TH13_ROUTE10_HEIDI | 1 | Pikachu → Raichu | 30 | 3 |
+| TRAINER_TH13_ROUTE10_HEIDI | 2 | Clefairy → Clefable | 30 | 3 |
+| TRAINER_TH13_ROCKTUNNEL_1F_LEAH | 2 | Clefairy → Clefable | 30 | 3 |
+| TRAINER_TH13_ROCKTUNNEL_B1F_SOFIA | 1 | Jigglypuff → Wigglytuff | 30 | 3 |
+| TRAINER_TH14_ROUTE8_JULIA | 1 | Clefairy → Clefable | 30 | 3 |
+| TRAINER_TH14_ROUTE8_JULIA | 2 | Clefairy → Clefable | 30 | 3 |
+| TRAINER_TH14_ROUTE8_RICH | 1 | Growlithe → Arcanine | 32 | 4 |
+| TRAINER_TH14_ROUTE8_RICH | 2 | Vulpix → Ninetales | 32 | 4 |
+| TRAINER_TH14_ROUTE8_MEGAN | 5 | Pikachu → Raichu | 30 | 3 |
+| TRAINER_TH14_ROUTE8_ELI_ANNE | 1 | Clefairy → Clefable | 30 | 3 |
+| TRAINER_TH14_ROUTE8_ELI_ANNE | 2 | Jigglypuff → Wigglytuff | 30 | 3 |
+
+Native tests prove all25 mappings, threshold negatives, low/high scaling,
+first-party preservation, defeat-history stability, map-change cleanup and
+upstream fallback. The exact-owner route and labelled twin/rematch tests have
+separate evidence in PLAYTEST_14_VERIFICATION.md. New-game and copied-battery
+routes use the same architecture; cold Continue intentionally clears readiness.
+Ship rematch entries remain authored, but ship departure restricts later access.
