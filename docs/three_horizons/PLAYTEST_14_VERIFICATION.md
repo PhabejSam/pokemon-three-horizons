@@ -13,7 +13,8 @@ This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next 
 Tasks1–20 are complete. The replacement automated/build matrix and exact-ROM
 mGBA acceptance pass. One independent Astra/Ultra review found no Critical or
 Important issues. Its guide correction is applied; two dialogue minors are
-deferred below. Private packaging/extraction smoke remains Task21. The older
+deferred below. Private package assembly and extracted-ROM preflight have passed
+(see package checkpoint below). Final archive sealing is recorded separately. The older
 ROM1746110c is blocked by the reproduced Fuji handoff defect; no old screenshot
 or pass substitutes for acceptance of this replacement candidate.
 
@@ -78,6 +79,23 @@ fixtures, and fresh-game coverage is an opening smoke plus all nine choices.
 | 51 | Hardware-only remaining acceptance | PENDING: RG40XX H/VBA-Next cold boot, capture monitoring, art/input/audio/performance and bounded route; PLAYTEST_14_HARDWARE_QA.md |
 | 52 | Known defects or limitations | HIGH intermittent hardware capture unresolved; no full natural new-game emulator journey; inherited startup/RWX/deprecation warnings recorded; Saffron/extended Route12/Fuchsia/regions excluded; later prize-species/alternate Snorlax sources unimplemented |
 | 53 | Deferred minors | Lavender worker incorrectly calls west Route8 closed; Celadon local Rocket/Scope aftermath reactions remain unfinished. Guide corrected for text-only pre-Scope barrier. Final review: 0 Critical/Important, 3 Minor (1 documentation correction, 2 deferred) |
+
+## Package checkpoint
+
+The separately named candidate directory is
+`outputs/playtest-14-celadon-silph-scope-abdec6f/`; its final ZIP has the same stem.
+The first archive passed an exact 19-member allowlist, CRC and every member hash.
+Its extracted ROM cold-Continued the untouched source battery's private copy,
+opened Research Gear and returned to the field. Party, boxes, items, money,
+coins and Dex matched; that working battery was not written. The original was
+never a write target. Only four labelled archive-fixture PNGs accompany guides;
+no save, state, raw RAM, ELF, map or private inventory is included.
+
+`PACKAGING_ACCEPTANCE.json` in the release records this preflight evidence.
+`RELEASE_MANIFEST.json` identifies the documentation revision and every member
+hash. The final sealed ZIP receives a separate extraction/hash and cold-boot
+check; its final receipt is retained in the local execution record rather than
+embedding an impossible self-referential archive hash. RG40XX H remains pending.
 
 ## Final independent review disposition
 

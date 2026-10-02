@@ -10,7 +10,8 @@ This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next 
 
 ## Resume point
 
-Tasks1–20 complete; Task21 private package/extraction smoke is next. One
+Tasks1–20 complete; Task21 archive preflight and extracted-ROM smoke passed.
+The final ZIP still needs sealing and its separate extraction/cold smoke. One
 independent Astra/Ultra review found no Critical/Important findings. Two dialogue
 minors remain: Lavender's outdated west-road closure and missing Celadon local
 Rocket-aftermath reactions. The pre-Scope walkthrough instruction is corrected.
