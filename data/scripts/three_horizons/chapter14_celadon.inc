@@ -260,18 +260,28 @@ TH14_CeladonCity_DepartmentStore_2F_EventScript_Lass_Text::
     .string "For long outings, you should buy\nREVIVE.$"
 
 TH14_CeladonCity_DepartmentStore_2F_EventScript_ClerkItems::
-    msgbox TH14_CeladonCity_DepartmentStore_2F_EventScript_ClerkItems_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    msgbox TH14_EcoWelcome
+    closemessage
+    setvar VAR_0x8004, 0
+    special TH14_ScriptOpenShop
+    goto_if_eq VAR_RESULT, 0, TH14_EcoNoStock
+    waitstate
+    releaseall
     end
-
-TH14_CeladonCity_DepartmentStore_2F_EventScript_ClerkItems_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_DepartmentStore_2F_EventScript_ClerkTMs::
-    msgbox TH14_CeladonCity_DepartmentStore_2F_EventScript_ClerkTMs_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    msgbox TH14_EcoWelcome
+    closemessage
+    setvar VAR_0x8004, 1
+    special TH14_ScriptOpenShop
+    goto_if_eq VAR_RESULT, 0, TH14_EcoNoStock
+    waitstate
+    releaseall
     end
-
-TH14_CeladonCity_DepartmentStore_2F_EventScript_ClerkTMs_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_DepartmentStore_2F_EventScript_Woman::
     msgbox TH14_CeladonCity_DepartmentStore_2F_EventScript_Woman_Text, MSGBOX_NPC
@@ -395,11 +405,16 @@ TH14_CeladonCity_DepartmentStore_4F_EventScript_Youngster_Text::
     .string "I heard something useful.\pIf a wild POKéMON appears, you can\ndistract it with a POKé DOLL.\pYou can run away while the wild\nPOKéMON is distracted.$"
 
 TH14_CeladonCity_DepartmentStore_4F_EventScript_Clerk::
-    msgbox TH14_CeladonCity_DepartmentStore_4F_EventScript_Clerk_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    msgbox TH14_EcoWelcome
+    closemessage
+    setvar VAR_0x8004, 2
+    special TH14_ScriptOpenShop
+    goto_if_eq VAR_RESULT, 0, TH14_EcoNoStock
+    waitstate
+    releaseall
     end
-
-TH14_CeladonCity_DepartmentStore_4F_EventScript_Clerk_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_DepartmentStore_4F_EventScript_FloorSign::
     msgbox TH14_CeladonCity_DepartmentStore_4F_EventScript_FloorSign_Text, MSGBOX_SIGN
@@ -423,18 +438,28 @@ TH14_CeladonCity_DepartmentStore_5F_EventScript_Sailor_Text::
     .string "I'm here for POKéMON stat\nenhancers.\pPROTEIN increases the base ATTACK\npower.\pIRON increases the base DEFENSE\nstat.$"
 
 TH14_CeladonCity_DepartmentStore_5F_EventScript_ClerkXItems::
-    msgbox TH14_CeladonCity_DepartmentStore_5F_EventScript_ClerkXItems_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    msgbox TH14_EcoWelcome
+    closemessage
+    setvar VAR_0x8004, 3
+    special TH14_ScriptOpenShop
+    goto_if_eq VAR_RESULT, 0, TH14_EcoNoStock
+    waitstate
+    releaseall
     end
-
-TH14_CeladonCity_DepartmentStore_5F_EventScript_ClerkXItems_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins::
-    msgbox TH14_CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    msgbox TH14_EcoWelcome
+    closemessage
+    setvar VAR_0x8004, 4
+    special TH14_ScriptOpenShop
+    goto_if_eq VAR_RESULT, 0, TH14_EcoNoStock
+    waitstate
+    releaseall
     end
-
-TH14_CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_DepartmentStore_5F_EventScript_FloorSign::
     msgbox TH14_CeladonCity_DepartmentStore_5F_EventScript_FloorSign_Text, MSGBOX_SIGN
@@ -451,11 +476,21 @@ TH14_CeladonCity_DepartmentStore_Roof_EventScript_CooltrainerM_Text::
     .string "My sister is a TRAINER, believe it\nor not.\pBut, she's so immature, she drives\nme nuts!$"
 
 TH14_CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl::
-    msgbox TH14_CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    setvar VAR_0x8009, 0
+    setvar VAR_0x8009, 0
+    msgbox TH14_EcoChoose5
+    dynmultichoice 12, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, TH14_EcoMenu_5_0_0, TH14_EcoMenu_5_0_1, TH14_EcoMenu_5_0_2, TH14_EcoExitText
+    goto_if_ge VAR_RESULT, 3, TH14_EcoEnd
+    copyvar VAR_0x8005, VAR_RESULT
+    msgbox TH14_EcoConfirm, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setvar VAR_0x8008, 5
+    setvar VAR_0x8004, 5
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_DepartmentStore_Roof_EventScript_FloorSign::
     msgbox TH14_CeladonCity_DepartmentStore_Roof_EventScript_FloorSign_Text, MSGBOX_SIGN
@@ -465,11 +500,21 @@ TH14_CeladonCity_DepartmentStore_Roof_EventScript_FloorSign_Text::
     .string "ROOFTOP SQUARE:\nVENDING MACHINES$"
 
 TH14_CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine::
-    msgbox TH14_CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    showmoneybox 0, 5
+    setvar VAR_0x8009, 2
+    msgbox TH14_EcoChoose4
+    dynmultichoice 12, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, TH14_EcoMenu_4_0_0, TH14_EcoMenu_4_0_1, TH14_EcoMenu_4_0_2, TH14_EcoExitText
+    goto_if_ge VAR_RESULT, 3, TH14_EcoEnd
+    copyvar VAR_0x8005, VAR_RESULT
+    msgbox TH14_EcoConfirm, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setvar VAR_0x8008, 4
+    setvar VAR_0x8004, 4
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_Condominiums_1F_EventScript_Meowth::
     lock
@@ -620,88 +665,136 @@ TH14_CeladonCity_Condominiums_RoofRoom_EventScript_TMsPamphlet_Text::
     .string "A pamphlet about TMs.\pA TM can teach a compatible move.\nYou can use it more than once!$"
 
 TH14_CeladonCoinPickup_13::
-    msgbox TH14_CeladonCoinPickup_13_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_13, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 3
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_13_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_14::
-    msgbox TH14_CeladonCoinPickup_14_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_14, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 4
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_14_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_15::
-    msgbox TH14_CeladonCoinPickup_15_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_15, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 5
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_15_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_16::
-    msgbox TH14_CeladonCoinPickup_16_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_16, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 6
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_16_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_17::
-    msgbox TH14_CeladonCoinPickup_17_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_17, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 7
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_17_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_18::
-    msgbox TH14_CeladonCoinPickup_18_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_18, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 8
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_18_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_19::
-    msgbox TH14_CeladonCoinPickup_19_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_19, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 9
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_19_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_20::
-    msgbox TH14_CeladonCoinPickup_20_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_20, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 10
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_20_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_21::
-    msgbox TH14_CeladonCoinPickup_21_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_21, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 11
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_21_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_22::
-    msgbox TH14_CeladonCoinPickup_22_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_22, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 12
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_22_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_23::
-    msgbox TH14_CeladonCoinPickup_23_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_23, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 13
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_23_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCoinPickup_24::
-    msgbox TH14_CeladonCoinPickup_24_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_PICKUP_24, TH14_EcoEnd
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 14
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCoinPickup_24_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_InfoClerk::
     msgbox TH14_CeladonCity_GameCorner_EventScript_InfoClerk_Text, MSGBOX_NPC
@@ -711,11 +804,25 @@ TH14_CeladonCity_GameCorner_EventScript_InfoClerk_Text::
     .string "Welcome!\pYou can exchange your COINS for\nfabulous prizes next door.$"
 
 TH14_CeladonCity_GameCorner_EventScript_CoinsClerk::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_CoinsClerk_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    showcoinsbox 0, 0
+    showmoneybox 0, 5
+    setvar VAR_0x8009, 3
+    msgbox TH14_EcoChoose2
+    dynmultichoice 12, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, TH14_EcoMenu_2_0_0, TH14_EcoMenu_2_0_1, TH14_EcoExitText
+    goto_if_ge VAR_RESULT, 2, TH14_EcoEnd
+    copyvar VAR_0x8005, VAR_RESULT
+    msgbox TH14_EcoConfirm, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setvar VAR_0x8008, 2
+    setvar VAR_0x8004, 2
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCity_GameCorner_EventScript_CoinsClerk_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_BaldingMan::
     msgbox TH14_CeladonCity_GameCorner_EventScript_BaldingMan_Text, MSGBOX_NPC
@@ -732,11 +839,17 @@ TH14_CeladonCity_GameCorner_EventScript_Woman1_Text::
     .string "I think these machines have\ndifferent odds.$"
 
 TH14_CeladonCity_GameCorner_EventScript_Fisher::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_Fisher_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_GAMBLER_COINS_10, TH14_CeladonCity_GameCorner_EventScript_Fisher_Repeat
+    msgbox TH14_CeladonCity_GameCorner_EventScript_Fisher_Offer
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 0
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCity_GameCorner_EventScript_Fisher_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_GymGuy::
     msgbox TH14_CeladonCity_GameCorner_EventScript_GymGuy_Text, MSGBOX_NPC
@@ -760,18 +873,30 @@ TH14_CeladonCity_GameCorner_EventScript_OldMan_Text::
     .string "Games are scary!\nIt's so easy to get hooked!$"
 
 TH14_CeladonCity_GameCorner_EventScript_Scientist::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_Scientist_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_GAMBLER_COINS_20_A, TH14_CeladonCity_GameCorner_EventScript_Scientist_Repeat
+    msgbox TH14_CeladonCity_GameCorner_EventScript_Scientist_Offer
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 1
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCity_GameCorner_EventScript_Scientist_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_Gentleman::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_Gentleman_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    setvar VAR_0x8009, 0
+    goto_if_set FLAG_TH14_GAMBLER_COINS_20_B, TH14_CeladonCity_GameCorner_EventScript_Gentleman_Repeat
+    msgbox TH14_CeladonCity_GameCorner_EventScript_Gentleman_Offer
+    setvar VAR_0x8008, 3
+    setvar VAR_0x8004, 3
+    setvar VAR_0x8005, 2
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCity_GameCorner_EventScript_Gentleman_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_RocketGrunt::
     msgbox TH14_CeladonCity_GameCorner_EventScript_RocketGrunt_Text, MSGBOX_NPC
@@ -781,158 +906,339 @@ TH14_CeladonCity_GameCorner_EventScript_RocketGrunt_Text::
     .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine0::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine0_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine0_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine1::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine1_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine1_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine2::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine2_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine2_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine3::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine3_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine3_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine1::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine1_Text, MSGBOX_NPC
+msgbox TH14_EcoUnusable1, MSGBOX_SIGN
     end
-
-TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine1_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine5::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine5_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine5_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine6::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine6_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine6_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine7::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine7_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine7_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine8::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine8_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine8_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine9::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine9_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine9_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine10::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine10_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine10_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine11::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine11_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine11_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine12::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine12_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine12_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine13::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine13_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine13_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine14::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine14_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine14_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine2::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine2_Text, MSGBOX_NPC
+msgbox TH14_EcoUnusable2, MSGBOX_SIGN
     end
-
-TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine2_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine16::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine16_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine16_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine17::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine17_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine17_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine3::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine3_Text, MSGBOX_NPC
+msgbox TH14_EcoUnusable3, MSGBOX_SIGN
     end
-
-TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine3_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine19::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine19_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine19_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine20::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine20_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine20_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine21::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_SlotMachine21_Text, MSGBOX_NPC
+lockall
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    msgbox TH14_EcoPlaySlots, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setfieldeffectargument 0, LOCALID_PLAYER
+    setfieldeffectargument 1, MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    setfieldeffectargument 2, MAP_GROUP(MAP_TH14_CELADON_CITY_GAME_CORNER)
+    dofieldeffect FLDEFF_SMILEY_FACE_ICON
+    waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+    specialvar VAR_RESULT, GetRandomSlotMachineId
+    playslotmachine VAR_RESULT
+    releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_SlotMachine21_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_Poster::
     msgbox TH14_CeladonCity_GameCorner_EventScript_Poster_Text, MSGBOX_NPC
@@ -963,25 +1269,65 @@ TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_OldMan_Text::
     .string "Gahaha! I raked it in today!\nIf only every day were like this…$"
 
 TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons::
-    msgbox TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    showcoinsbox 0, 0
+    setvar VAR_0x8009, 1
+    msgbox TH14_EcoChoose1
+    dynmultichoice 12, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, TH14_EcoMenu_1_0_0, TH14_EcoMenu_1_0_1, TH14_EcoMenu_1_0_2, TH14_EcoMenu_1_0_3, TH14_EcoMenu_1_0_4, TH14_EcoExitText
+    goto_if_ge VAR_RESULT, 5, TH14_EcoEnd
+    copyvar VAR_0x8005, VAR_RESULT
+    msgbox TH14_EcoConfirm, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setvar VAR_0x8008, 1
+    setvar VAR_0x8004, 1
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs::
-    msgbox TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    showcoinsbox 0, 0
+    setvar VAR_0x8009, 1
+    msgbox TH14_EcoChoose0
+    dynmultichoice 12, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, TH14_EcoMenu_0_0_0, TH14_EcoMenu_0_0_1, TH14_EcoMenu_0_0_2, TH14_EcoMenu_0_0_3, TH14_EcoMenu_0_0_4, TH14_EcoExitText
+    goto_if_ge VAR_RESULT, 5, TH14_EcoEnd
+    copyvar VAR_0x8005, VAR_RESULT
+    msgbox TH14_EcoConfirm, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setvar VAR_0x8008, 0
+    setvar VAR_0x8004, 0
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems::
-    msgbox TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    setvar VAR_0x8009, 0
+    checkitem ITEM_COIN_CASE, 1
+    goto_if_eq VAR_RESULT, FALSE, TH14_EcoNoCase
+    showcoinsbox 0, 0
+    setvar VAR_0x8009, 1
+    msgbox TH14_EcoChoose0
+    dynmultichoice 12, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, TH14_EcoMenu_0_5_0, TH14_EcoMenu_0_5_1, TH14_EcoMenu_0_5_2, TH14_EcoMenu_0_5_3, TH14_EcoMenu_0_5_4, TH14_EcoExitText
+    goto_if_ge VAR_RESULT, 5, TH14_EcoEnd
+    copyvar VAR_0x8005, VAR_RESULT
+    addvar VAR_0x8005, 5
+    msgbox TH14_EcoConfirm, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    setvar VAR_0x8008, 0
+    setvar VAR_0x8004, 0
+    special TH14_ScriptEconomy
+    goto TH14_EcoResult
     end
-
-TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_Restaurant_EventScript_Chef::
     msgbox TH14_CeladonCity_Restaurant_EventScript_Chef_Text, MSGBOX_NPC
@@ -1005,11 +1351,19 @@ TH14_CeladonCity_Restaurant_EventScript_FatMan_Text::
     .string "Munch…\pThe man at that table lost it all\nat the slots.$"
 
 TH14_CeladonCity_Restaurant_EventScript_CoinCaseMan::
-    msgbox TH14_CeladonCity_Restaurant_EventScript_CoinCaseMan_Text, MSGBOX_NPC
+lockall
+    faceplayer
+    msgbox TH14_EcoCaseIntro
+    setvar VAR_0x8004, ITEM_COIN_CASE
+    setvar VAR_0x8005, FLAG_TH14_COIN_CASE
+    special TH14_ScriptGiveUniqueItem
+    goto_if_eq VAR_RESULT, 0, TH14_EcoCaseFull
+    goto_if_eq VAR_RESULT, 2, TH14_EcoCaseOwned
+    playfanfare MUS_OBTAIN_ITEM
+    msgbox TH14_EcoCaseReceived
+    waitfanfare
+    releaseall
     end
-
-TH14_CeladonCity_Restaurant_EventScript_CoinCaseMan_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_Restaurant_EventScript_WorkerM::
     msgbox TH14_CeladonCity_Restaurant_EventScript_WorkerM_Text, MSGBOX_NPC
@@ -1255,3 +1609,299 @@ TH14_DeptElevator_ReturnValid:
 TH14_DeptElevator_Invalid:
     releaseall
     end
+
+@ Approved Celadon transaction UI; failed transactions remain retryable.
+TH14_EcoNoStock::
+msgbox TH14_EcoNoStockText
+    releaseall
+    end
+
+TH14_EcoWelcome::
+    .string "Welcome!\nPlease take your time.$"
+
+TH14_EcoNoStockText::
+    .string "Please come back after earning\nmore GYM BADGES.$"
+
+TH14_EcoCaseFull::
+msgbox TH14_EcoCaseFullText
+    releaseall
+    end
+
+TH14_EcoCaseOwned::
+msgbox TH14_EcoCaseOwnedText
+    releaseall
+    end
+
+TH14_EcoCaseIntro::
+    .string "I have given up on the slots.\nYou may have my COIN CASE.$"
+
+TH14_EcoCaseReceived::
+    .string "{PLAYER} received a COIN CASE!$"
+
+TH14_EcoCaseFullText::
+    .string "Please make room in your BAG.\nI will keep it for you.$"
+
+TH14_EcoCaseOwnedText::
+    .string "You already have a COIN CASE.\nKeep an eye on your COINS!$"
+
+TH14_EcoMenu_2_0_0::
+    .string "50 COINS ¥1000$"
+
+TH14_EcoMenu_2_0_1::
+    .string "500 COINS ¥10000$"
+
+TH14_EcoMenu_1_0_0::
+    .string "ABRA 180$"
+
+TH14_EcoMenu_1_0_1::
+    .string "CLEFAIRY 500$"
+
+TH14_EcoMenu_1_0_2::
+    .string "DRATINI 2800$"
+
+TH14_EcoMenu_1_0_3::
+    .string "SCYTHER 5500$"
+
+TH14_EcoMenu_1_0_4::
+    .string "PORYGON 9999$"
+
+TH14_EcoMenu_0_0_0::
+    .string "ICE BEAM 4000$"
+
+TH14_EcoMenu_0_0_1::
+    .string "IRON TAIL 3500$"
+
+TH14_EcoMenu_0_0_2::
+    .string "THUNDERBOLT 4000$"
+
+TH14_EcoMenu_0_0_3::
+    .string "SHADOW BALL 4500$"
+
+TH14_EcoMenu_0_0_4::
+    .string "FLAMETHROWER 4000$"
+
+TH14_EcoMenu_0_5_0::
+    .string "SMOKE BALL 800$"
+
+TH14_EcoMenu_0_5_1::
+    .string "MIRACLE SEED 1000$"
+
+TH14_EcoMenu_0_5_2::
+    .string "CHARCOAL 1000$"
+
+TH14_EcoMenu_0_5_3::
+    .string "MYSTIC WATER 1000$"
+
+TH14_EcoMenu_0_5_4::
+    .string "YELLOW FLUTE 1600$"
+
+TH14_EcoMenu_4_0_0::
+    .string "FRESH WATER ¥200$"
+
+TH14_EcoMenu_4_0_1::
+    .string "SODA POP ¥300$"
+
+TH14_EcoMenu_4_0_2::
+    .string "LEMONADE ¥400$"
+
+TH14_EcoMenu_5_0_0::
+    .string "FRESH WATER$"
+
+TH14_EcoMenu_5_0_1::
+    .string "SODA POP$"
+
+TH14_EcoMenu_5_0_2::
+    .string "LEMONADE$"
+
+TH14_EcoExitText::
+    .string "EXIT$"
+
+TH14_EcoChoose0::
+    .string "Which prize would you like?\nPrices are in COINS.$"
+
+TH14_EcoChoose1::
+    .string "Which POKéMON would you like?\nPrices are in COINS.$"
+
+TH14_EcoChoose2::
+    .string "Would you like to buy some COINS?$"
+
+TH14_EcoChoose4::
+    .string "Which drink would you like?$"
+
+TH14_EcoChoose5::
+    .string "I am thirsty! Would you share\na drink for one of my TMs?$"
+
+TH14_EcoConfirm::
+    .string "Is that your choice?$"
+
+TH14_CeladonCity_GameCorner_EventScript_Fisher_Repeat::
+msgbox TH14_CeladonCity_GameCorner_EventScript_Fisher_RepeatText
+    goto TH14_EcoEnd
+    end
+
+TH14_CeladonCity_GameCorner_EventScript_Fisher_Offer::
+    .string "Do you want to try the slots?\nHere are 10 COINS to start with.$"
+
+TH14_CeladonCity_GameCorner_EventScript_Fisher_RepeatText::
+    .string "Remember to take a break.\nIt is easy to lose track of time.$"
+
+TH14_CeladonCity_GameCorner_EventScript_Scientist_Repeat::
+msgbox TH14_CeladonCity_GameCorner_EventScript_Scientist_RepeatText
+    goto TH14_EcoEnd
+    end
+
+TH14_CeladonCity_GameCorner_EventScript_Scientist_Offer::
+    .string "I am saving for a POKéMON prize.\nYou can have these 20 COINS.$"
+
+TH14_CeladonCity_GameCorner_EventScript_Scientist_RepeatText::
+    .string "I still need more COINS\nfor the POKéMON I want.$"
+
+TH14_CeladonCity_GameCorner_EventScript_Gentleman_Repeat::
+msgbox TH14_CeladonCity_GameCorner_EventScript_Gentleman_RepeatText
+    goto TH14_EcoEnd
+    end
+
+TH14_CeladonCity_GameCorner_EventScript_Gentleman_Offer::
+    .string "Here are 20 COINS.\nWatch the reels closely!$"
+
+TH14_CeladonCity_GameCorner_EventScript_Gentleman_RepeatText::
+    .string "Wins come and go.\nKnow when to stop.$"
+
+TH14_EcoPlaySlots::
+    .string "It is a slot machine.\nWould you like to play?$"
+
+TH14_EcoUnusable1::
+    .string "OUT OF ORDER$"
+
+TH14_EcoUnusable2::
+    .string "Someone has left a lunch here.$"
+
+TH14_EcoUnusable3::
+    .string "Someone has left their keys here.$"
+
+TH14_EcoResult::
+switch VAR_RESULT
+    case 1, TH14_EcoSuccess
+    case 2, TH14_EcoFunds
+    case 3, TH14_EcoRoom
+    case 4, TH14_EcoOwned
+    goto TH14_EcoNoCase
+    end
+
+TH14_EcoSuccess::
+    call_if_eq VAR_0x8009, 1, TH14_EcoUpdateCoins
+    call_if_eq VAR_0x8009, 3, TH14_EcoUpdateCoins
+    call_if_eq VAR_0x8009, 2, TH14_EcoUpdateMoney
+    call_if_eq VAR_0x8009, 3, TH14_EcoUpdateMoney
+goto_if_eq VAR_0x8008, 1, TH14_EcoMon
+    goto_if_eq VAR_0x8008, 2, TH14_EcoCoins
+    goto_if_eq VAR_0x8008, 3, TH14_EcoCoins
+    bufferitemname STR_VAR_1, VAR_0x8007
+    playfanfare MUS_OBTAIN_ITEM
+    msgbox TH14_EcoItemReceived
+    waitfanfare
+    goto TH14_EcoEnd
+    end
+
+TH14_EcoCoins::
+buffernumberstring STR_VAR_1, VAR_0x8007
+    playse SE_SHOP
+    msgbox TH14_EcoCoinsReceived
+    goto TH14_EcoEnd
+    end
+
+TH14_EcoMon::
+hidecoinsbox
+    setvar VAR_0x8009, 0
+    copyvar VAR_TEMP_2, VAR_0x8006
+    bufferspeciesname STR_VAR_1, VAR_TEMP_TRANSFERRED_SPECIES
+    playfanfare MUS_LEVEL_UP
+    message gText_PlayerObtainedTheMon
+    waitmessage
+    waitfanfare
+    msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+    goto_if_eq VAR_TEMP_2, 1, TH14_EcoMonPC
+    goto_if_eq VAR_RESULT, NO, TH14_EcoEnd
+    call Common_EventScript_GetGiftMonPartySlot
+    call Common_EventScript_NameReceivedPartyMon
+    goto TH14_EcoEnd
+    end
+
+TH14_EcoMonPC::
+goto_if_eq VAR_RESULT, NO, TH14_EcoTransferred
+    call Common_EventScript_NameReceivedBoxMon
+TH14_EcoTransferred:
+    call Common_EventScript_TransferredToPC
+    goto TH14_EcoEnd
+    end
+
+TH14_EcoFunds::
+goto_if_eq VAR_0x8008, 5, TH14_EcoDrinkMissing
+    msgbox TH14_EcoFundsText
+    goto TH14_EcoEnd
+    end
+
+TH14_EcoDrinkMissing::
+msgbox TH14_EcoDrinkMissingText
+    goto TH14_EcoEnd
+    end
+
+TH14_EcoRoom::
+msgbox TH14_EcoRoomText
+    goto TH14_EcoEnd
+    end
+
+TH14_EcoOwned::
+msgbox TH14_EcoOwnedText
+    goto TH14_EcoEnd
+    end
+
+TH14_EcoNoCase::
+msgbox TH14_EcoNoCaseText
+    goto TH14_EcoEnd
+    end
+
+TH14_EcoEnd::
+call_if_eq VAR_0x8009, 1, TH14_EcoHideCoins
+    call_if_eq VAR_0x8009, 3, TH14_EcoHideCoins
+    call_if_eq VAR_0x8009, 2, TH14_EcoHideMoney
+    call_if_eq VAR_0x8009, 3, TH14_EcoHideMoney
+    releaseall
+    end
+
+TH14_EcoHideCoins::
+hidecoinsbox
+    return
+
+TH14_EcoUpdateCoins::
+    updatecoinsbox
+    return
+
+TH14_EcoUpdateMoney::
+    updatemoneybox
+    return
+
+TH14_EcoHideMoney::
+hidemoneybox
+    return
+
+TH14_EcoItemReceived::
+    .string "{PLAYER} obtained\n{STR_VAR_1}!$"
+
+TH14_EcoCoinsReceived::
+    .string "{PLAYER} received {STR_VAR_1} COINS!$"
+
+TH14_EcoFundsText::
+    .string "You do not have enough to pay.\nPlease come back another time.$"
+
+TH14_EcoDrinkMissingText::
+    .string "You do not have that drink\nin your BAG.$"
+
+TH14_EcoRoomText::
+    .string "There is not enough room.\nPlease make space and try again.$"
+
+TH14_EcoOwnedText::
+    .string "You have already received that\nreward. Keep it safe!$"
+
+TH14_EcoNoCaseText::
+    .string "You need a COIN CASE\nin your BAG to use COINS.$"

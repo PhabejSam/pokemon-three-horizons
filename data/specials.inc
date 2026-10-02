@@ -670,4 +670,6 @@ gSpecials::
     def_special TH14_ScriptGiveUniqueItem
     def_special TH14_GetDeptStoreFloor
     def_special TH14_TryGiveEevee
+    def_special TH14_ScriptOpenShop
+    def_special TH14_ScriptEconomy
 #endif

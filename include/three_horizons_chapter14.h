@@ -28,4 +28,23 @@ u16 TH14_GetDeptStoreFloor(void);
 u16 TH14_TryGiveEevee(void);
 bool32 TH14_IsFrlgPokemonCenterLayout(u16 layoutId);
 
+enum TH14PrizeResult
+{
+    TH14_PRIZE_INVALID = 0,
+    TH14_PRIZE_GIVEN = 1,
+    TH14_PRIZE_NO_FUNDS = 2,
+    TH14_PRIZE_NO_ROOM = 3,
+    TH14_PRIZE_ALREADY_OWNED = 4,
+};
+
+u16 TH14_BuildShopStock(u8 shopId, u16 *items, u16 capacity);
+void TH14_ScriptOpenShop(void);
+u8 TH14_TryBuyItemPrize(u8 prizeId);
+u8 TH14_TryBuyMonPrize(u8 prizeId);
+u8 TH14_TryBuyCoins(u8 bundleId);
+u8 TH14_TryGiveCoins(u8 giftId);
+u8 TH14_TryBuyDrink(u8 drinkId);
+u8 TH14_TryExchangeDrink(u8 drinkId);
+void TH14_ScriptEconomy(void);
+
 #endif

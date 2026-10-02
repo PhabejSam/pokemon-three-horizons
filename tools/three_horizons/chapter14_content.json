@@ -1263,124 +1263,9 @@
       "reason": "Celadon Gym battle/reward/statue"
     },
     {
-      "script": "TH14_CeladonCity_DepartmentStore_2F_EventScript_ClerkItems",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_DepartmentStore_2F_EventScript_ClerkTMs",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_DepartmentStore_4F_EventScript_Clerk",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_DepartmentStore_5F_EventScript_ClerkXItems",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
       "map": "TH14_CeladonCity_GameCorner",
       "ownerTask": 12,
       "reason": "Append return-compatible Hideout warp3 and activate poster stairs only after its maps exist."
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_13",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_13"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_14",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_14"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_15",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_15"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_16",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_16"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_17",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_17"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_18",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_18"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_19",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_19"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_20",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_20"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_21",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_21"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_22",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_22"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_23",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_23"
-    },
-    {
-      "script": "TH14_CeladonCoinPickup_24",
-      "ownerTask": 10,
-      "reason": "Atomic hidden coin gift FLAG_TH14_PICKUP_24"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_CoinsClerk",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_Fisher",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_Scientist",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_Gentleman",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
     },
     {
       "script": "TH14_CeladonCity_GameCorner_EventScript_RocketGrunt",
@@ -1388,139 +1273,9 @@
       "reason": "Poster grunt and Hideout access"
     },
     {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine0",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine1",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine2",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine3",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine1",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine5",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine6",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine7",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine8",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine9",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine10",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine11",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine12",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine13",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine14",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine2",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine16",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine17",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_UnusableSlotMachine3",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine19",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine20",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_SlotMachine21",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
       "script": "TH14_CeladonCity_GameCorner_EventScript_Poster",
       "ownerTask": 12,
       "reason": "Poster grunt and Hideout access"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
-    },
-    {
-      "script": "TH14_CeladonCity_Restaurant_EventScript_CoinCaseMan",
-      "ownerTask": 10,
-      "reason": "Celadon shop/coin/prize transaction"
     }
   ],
   "uniqueItems": [
@@ -1528,5 +1283,426 @@
       "item": "ITEM_TOWN_MAP",
       "receipt": "FLAG_TH14_TOWN_MAP"
     }
-  ]
+  ],
+  "economy": {
+    "shops": [
+      {
+        "id": 0,
+        "name": "Supplies",
+        "stock": [
+          {
+            "item": "GREAT_BALL",
+            "price": 600,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "SUPER_POTION",
+            "price": 700,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "REVIVE",
+            "price": 2000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "ANTIDOTE",
+            "price": 200,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "PARALYZE_HEAL",
+            "price": 200,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "AWAKENING",
+            "price": 200,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "BURN_HEAL",
+            "price": 200,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "ICE_HEAL",
+            "price": 200,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "SUPER_REPEL",
+            "price": 700,
+            "minBadges": 0,
+            "requiredFlag": 0
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "TMs",
+        "stock": [
+          {
+            "item": "TM_ROAR",
+            "price": 1000,
+            "minBadges": 3,
+            "requiredFlag": 0
+          },
+          {
+            "item": "TM_DIG",
+            "price": 2000,
+            "minBadges": 3,
+            "requiredFlag": 0
+          },
+          {
+            "item": "TM_BRICK_BREAK",
+            "price": 3000,
+            "minBadges": 3,
+            "requiredFlag": 0
+          },
+          {
+            "item": "TM_SECRET_POWER",
+            "price": 3000,
+            "minBadges": 3,
+            "requiredFlag": 0
+          },
+          {
+            "item": "TM_ATTRACT",
+            "price": 3000,
+            "minBadges": 3,
+            "requiredFlag": 0
+          },
+          {
+            "item": "TM_HYPER_BEAM",
+            "price": 7500,
+            "minBadges": 4,
+            "requiredFlag": 0
+          },
+          {
+            "item": "TM_PROTECT",
+            "price": 3000,
+            "minBadges": 4,
+            "requiredFlag": 0
+          },
+          {
+            "item": "TM_REST",
+            "price": 3000,
+            "minBadges": 4,
+            "requiredFlag": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Evolution",
+        "stock": [
+          {
+            "item": "POKE_DOLL",
+            "price": 300,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "RETRO_MAIL",
+            "price": 50,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "FIRE_STONE",
+            "price": 3000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "THUNDER_STONE",
+            "price": 3000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "WATER_STONE",
+            "price": 3000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "LEAF_STONE",
+            "price": 3000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Battle",
+        "stock": [
+          {
+            "item": "X_ATTACK",
+            "price": 1000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "X_DEFENSE",
+            "price": 2000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "X_SPEED",
+            "price": 1000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "X_SP_ATK",
+            "price": 1000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "X_ACCURACY",
+            "price": 1000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "GUARD_SPEC",
+            "price": 1500,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "DIRE_HIT",
+            "price": 1000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Vitamins",
+        "stock": [
+          {
+            "item": "HP_UP",
+            "price": 10000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "PROTEIN",
+            "price": 10000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "IRON",
+            "price": 10000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "CALCIUM",
+            "price": 10000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "ZINC",
+            "price": 10000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          },
+          {
+            "item": "CARBOS",
+            "price": 10000,
+            "minBadges": 0,
+            "requiredFlag": 0
+          }
+        ]
+      }
+    ],
+    "coinBundles": [
+      [
+        50,
+        1000
+      ],
+      [
+        500,
+        10000
+      ]
+    ],
+    "coinGifts": [
+      {
+        "flag": "FLAG_TH14_GAMBLER_COINS_10",
+        "coins": 10
+      },
+      {
+        "flag": "FLAG_TH14_GAMBLER_COINS_20_A",
+        "coins": 20
+      },
+      {
+        "flag": "FLAG_TH14_GAMBLER_COINS_20_B",
+        "coins": 20
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_13",
+        "coins": 10
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_14",
+        "coins": 10
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_15",
+        "coins": 20
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_16",
+        "coins": 10
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_17",
+        "coins": 10
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_18",
+        "coins": 20
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_19",
+        "coins": 10
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_20",
+        "coins": 10
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_21",
+        "coins": 10
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_22",
+        "coins": 40
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_23",
+        "coins": 100
+      },
+      {
+        "flag": "FLAG_TH14_PICKUP_24",
+        "coins": 10
+      }
+    ],
+    "itemPrizes": [
+      {
+        "item": "TM_ICE_BEAM",
+        "coins": 4000,
+        "reusable": true
+      },
+      {
+        "item": "TM_IRON_TAIL",
+        "coins": 3500,
+        "reusable": true
+      },
+      {
+        "item": "TM_THUNDERBOLT",
+        "coins": 4000,
+        "reusable": true
+      },
+      {
+        "item": "TM_SHADOW_BALL",
+        "coins": 4500,
+        "reusable": true
+      },
+      {
+        "item": "TM_FLAMETHROWER",
+        "coins": 4000,
+        "reusable": true
+      },
+      {
+        "item": "SMOKE_BALL",
+        "coins": 800,
+        "reusable": false
+      },
+      {
+        "item": "MIRACLE_SEED",
+        "coins": 1000,
+        "reusable": false
+      },
+      {
+        "item": "CHARCOAL",
+        "coins": 1000,
+        "reusable": false
+      },
+      {
+        "item": "MYSTIC_WATER",
+        "coins": 1000,
+        "reusable": false
+      },
+      {
+        "item": "YELLOW_FLUTE",
+        "coins": 1600,
+        "reusable": false
+      }
+    ],
+    "monPrizes": [
+      {
+        "species": "ABRA",
+        "level": 9,
+        "coins": 180
+      },
+      {
+        "species": "CLEFAIRY",
+        "level": 8,
+        "coins": 500
+      },
+      {
+        "species": "DRATINI",
+        "level": 18,
+        "coins": 2800
+      },
+      {
+        "species": "SCYTHER",
+        "level": 25,
+        "coins": 5500
+      },
+      {
+        "species": "PORYGON",
+        "level": 26,
+        "coins": 9999
+      }
+    ],
+    "drinks": [
+      {
+        "drink": "FRESH_WATER",
+        "price": 200,
+        "reward": "TM_LIGHT_SCREEN",
+        "flag": "FLAG_TH14_ROOF_FRESH_WATER"
+      },
+      {
+        "drink": "SODA_POP",
+        "price": 300,
+        "reward": "TM_SAFEGUARD",
+        "flag": "FLAG_TH14_ROOF_SODA_POP"
+      },
+      {
+        "drink": "LEMONADE",
+        "price": 400,
+        "reward": "TM_REFLECT",
+        "flag": "FLAG_TH14_ROOF_LEMONADE"
+      }
+    ]
+  }
 }
