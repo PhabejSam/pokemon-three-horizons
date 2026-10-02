@@ -28,6 +28,9 @@ Department Store uses native item prices and quantity/ownership handling.
 | Department Store roof girl | TM20 Safeguard | 1 Soda Pop | One successful exchange |
 | Department Store roof girl | TM33 Reflect | 1 Lemonade | One successful exchange |
 | Celadon Gym Erika | TM19 Giga Drain | Victory reward | Defeat Erika; retry if TM pocket full |
+| Rocket Hideout B2F (5,7) | TM12 Taunt | Item ball | Reachable puzzle pickup; successful-delivery receipt |
+| Rocket Hideout B3F (19,14) | TM21 Frustration | Item ball | Reachable puzzle pickup; successful-delivery receipt |
+| Rocket Hideout B4F (1,6) | TM49 Snatch | Item ball | Reachable pickup; successful-delivery receipt |
 
 Roof vending prices are Fresh Water200, Soda Pop300, Lemonade400. Failed TM
 delivery consumes no drink and sets no exchange receipt. An already-owned

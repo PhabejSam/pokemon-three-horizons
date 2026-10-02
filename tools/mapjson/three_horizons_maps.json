@@ -145,6 +145,11 @@
     "TH14_CeladonCity_GameCorner_PrizeRoom",
     "TH14_CeladonCity_Restaurant",
     "TH14_CeladonCity_Hotel",
-    "TH14_CeladonCity_House1"
+    "TH14_CeladonCity_House1",
+    "TH14_RocketHideout_B1F",
+    "TH14_RocketHideout_B2F",
+    "TH14_RocketHideout_B3F",
+    "TH14_RocketHideout_B4F",
+    "TH14_RocketHideout_Elevator"
   ]
 }

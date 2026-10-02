@@ -3320,7 +3320,6 @@ AI: Check Bad Move
 Sharpedo
 Level: 33
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
-#endif
 
 === TRAINER_TONY_4 ===
 Name: TONY
@@ -3521,6 +3520,8 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 Machoke
 Level: 26
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+#endif
 
 === TRAINER_DAISUKE ===
 Name: DAISUKE
@@ -20672,4 +20673,281 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Acid
 - Stun Spore
 - Giga Drain
+
+=== TRAINER_TH14_GAME_CORNER_GRUNT ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Raticate
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Zubat
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH14_HIDEOUT_B1F_GRUNT1 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Drowzee
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Machop
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH14_HIDEOUT_B1F_GRUNT2 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Raticate
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Raticate
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH14_HIDEOUT_B1F_GRUNT3 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Grimer
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Minimize
+- Sludge
+- Disable
+- Harden
+
+Koffing
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Smog
+- Tackle
+- Poison Gas
+
+Koffing
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Smog
+- Tackle
+- Poison Gas
+
+=== TRAINER_TH14_HIDEOUT_B1F_GRUNT4 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Raticate
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Raticate
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Rattata
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH14_HIDEOUT_B1F_GRUNT5 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Grimer
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Minimize
+- Sludge
+- Disable
+- Harden
+
+Koffing
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Sludge
+- Smog
+- Tackle
+- Poison Gas
+
+=== TRAINER_TH14_HIDEOUT_B2F_GRUNT ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Zubat
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Bite
+- Astonish
+- Supersonic
+- Leech Life
+
+Koffing
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Smog
+- Tackle
+- Poison Gas
+
+Grimer
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Sludge
+- Disable
+- Harden
+- Pound
+
+Zubat
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Bite
+- Astonish
+- Supersonic
+- Leech Life
+
+Raticate
+Level: 17
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Hyper Fang
+- Quick Attack
+- Tail Whip
+- Tackle
+
+=== TRAINER_TH14_HIDEOUT_B3F_GRUNT1 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Rattata
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Raticate
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Drowzee
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH14_HIDEOUT_B3F_GRUNT2 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Machop
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Machop
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH14_HIDEOUT_B4F_GRUNT1 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Koffing
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Zubat
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH14_HIDEOUT_B4F_GRUNT2 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Sandshrew
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Ekans
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Sandslash
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH14_HIDEOUT_B4F_GRUNT3 ===
+Name: GRUNT
+Class: Team Rocket Frlg
+Pic: Rocket Grunt M Frlg
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Ekans
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Sandshrew
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Arbok
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 #endif

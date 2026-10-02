@@ -1583,6 +1583,10 @@ static bool8 ShouldInitObjectEventStateFromTemplate(const struct ObjectEventTemp
         && mapGroup == gSaveBlock1Ptr->location.mapGroup
         && mapNum == gSaveBlock1Ptr->location.mapNum
         && TH_IsProjectMap(mapGroup, mapNum);
+    // Story prerequisites must not borrow a successful-delivery flag merely
+    // to hide an undropped item. This also guards camera respawn and addobject.
+    if (isLocalProjectTemplate && !TH14_ShouldSpawnObject(mapGroup, mapNum, template->localId))
+        return FALSE;
     // An old battery save can put the player on a previously cut tile. During
     // its one-time map rebuild, retain an open path for this visit rather than
     // spawning a solid tree inside the player. Normal map changes clear it.

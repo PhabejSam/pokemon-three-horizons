@@ -212,12 +212,12 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 **Files:** five Appendix A Hideout maps/layouts, `chapter14_hideout.inc`, trainer/item/hidden-item ledgers and elevator adapters; tests `test/three_horizons_playtest14_hideout.c`, `tools/three_horizons/tests/test_playtest14_hideout.py`.
 **Interfaces:** poster switch receipt, lift-key dropped/delivered state and explicit TH elevator destinations; item/hide receipt is shared only when it describes the same successful pickup. Door opening derives from the two appropriate guard defeats, not a spare persistent bit.
 
-- [ ] Add tests for poster battle→switch→stairs, spinner stop tiles/follower cleanup, every lift destination and cancel, locked-vs-owned-key access, blackout/re-entry, item pickup full-bag retries and guard-door recomputation on reload.
-- [ ] Run H(hideout) RED; port recognizable B1F–B4F/elevator geometry and trainer roster. Retarget dynamic warps and scripts to TH maps. Rewrite donor Lift Key ordering so a failed give does not remove its object or consume its retry route.
-- [ ] Add exactly three optional research records with Appendix C text: distribution comparison, unconfirmed ghost/migration statements, and orders for sightings/evolution/witness notes. They are readable scenery, not required new flags or research modules; the mandatory trio supplies the causal clue too.
-- [ ] Run H(hideout), N(`Three Horizons PT14 hideout:`,`hideout-green`); count active scene objects with follower and ensure the key/lift cannot strand the player. The poster guard and disappearing upper-Tower story Rockets are not ordinary rematches; persistent first-victory bits remain authoritative.
+- [x] Add tests for poster battle→switch→stairs, spinner stop tiles/follower cleanup, every lift destination and cancel, locked-vs-owned-key access, blackout/re-entry, item pickup full-bag retries and guard-door recomputation on reload.
+- [x] Run H(hideout) RED; port recognizable B1F–B4F/elevator geometry and trainer roster. Retarget dynamic warps and scripts to TH maps. Rewrite donor Lift Key ordering so a failed give does not remove its object or consume its retry route.
+- [x] Add exactly three optional research records with Appendix C text: distribution comparison, unconfirmed ghost/migration statements, and orders for sightings/evolution/witness notes. They are readable scenery, not required new flags or research modules; the mandatory trio supplies the causal clue too.
+- [x] Run H(hideout), N(`Three Horizons PT14 hideout:`,`hideout-green`); count active scene objects with follower and ensure the key/lift cannot strand the player. The poster guard and disappearing upper-Tower story Rockets are not ordinary rematches; persistent first-victory bits remain authoritative.
 - [ ] At Gate B traverse the entire puzzle/lift route and return, collect representative items, black out to the last valid Center and retry. Preserve native before/after geometry evidence where retargeting alters a visible exit.
-- [ ] Commit `feat: add Rocket Hideout exploration and safe lift-key progression`.
+- [x] Commit `feat: add Rocket Hideout exploration and safe lift-key progression`.
 
 ## Task 13: Jessie, James, Giovanni and the Silph Scope
 

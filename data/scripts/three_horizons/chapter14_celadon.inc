@@ -836,13 +836,6 @@ lockall
     goto TH14_EcoResult
     end
 
-TH14_CeladonCity_GameCorner_EventScript_RocketGrunt::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_RocketGrunt_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_GameCorner_EventScript_RocketGrunt_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
-
 TH14_CeladonCity_GameCorner_EventScript_SlotMachine0::
 lockall
     setvar VAR_0x8009, 0
@@ -1177,13 +1170,6 @@ lockall
     playslotmachine VAR_RESULT
     releaseall
     end
-
-TH14_CeladonCity_GameCorner_EventScript_Poster::
-    msgbox TH14_CeladonCity_GameCorner_EventScript_Poster_Text, MSGBOX_NPC
-    end
-
-TH14_CeladonCity_GameCorner_EventScript_Poster_Text::
-    .string "Please wait a moment.\nI will be with you shortly.$"
 
 TH14_CeladonCity_GameCorner_EventScript_PhotoPrinter::
     msgbox TH14_CeladonCity_GameCorner_EventScript_PhotoPrinter_Text, MSGBOX_SIGN

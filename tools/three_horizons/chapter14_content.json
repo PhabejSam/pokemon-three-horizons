@@ -1218,19 +1218,14 @@
   ],
   "unfinishedInteractions": [
     {
-      "map": "TH14_CeladonCity_GameCorner",
-      "ownerTask": 12,
-      "reason": "Append return-compatible Hideout warp3 and activate poster stairs only after its maps exist."
+      "script": "TH14_RocketHideout_B4F_EventScript_Giovanni",
+      "ownerTask": 13,
+      "reason": "Giovanni battle/Scope transaction"
     },
     {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_RocketGrunt",
-      "ownerTask": 12,
-      "reason": "Poster grunt and Hideout access"
-    },
-    {
-      "script": "TH14_CeladonCity_GameCorner_EventScript_Poster",
-      "ownerTask": 12,
-      "reason": "Poster grunt and Hideout access"
+      "script": "TH14_RocketHideout_B4F_EventScript_SilphScope",
+      "ownerTask": 13,
+      "reason": "Giovanni battle/Scope transaction"
     }
   ],
   "uniqueItems": [
@@ -1241,6 +1236,10 @@
     {
       "item": "ITEM_TM19",
       "receipt": "FLAG_TH14_ERIKA_TM"
+    },
+    {
+      "item": "ITEM_LIFT_KEY",
+      "receipt": "FLAG_TH14_LIFT_KEY"
     }
   ],
   "economy": {

@@ -672,4 +672,6 @@ gSpecials::
     def_special TH14_TryGiveEevee
     def_special TH14_ScriptOpenShop
     def_special TH14_ScriptEconomy
+    def_special TH14_GetHideoutFloor
+    def_special TH14_ScriptSelectHideoutFloor
 #endif

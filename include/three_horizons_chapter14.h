@@ -47,4 +47,10 @@ u8 TH14_TryBuyDrink(u8 drinkId);
 u8 TH14_TryExchangeDrink(u8 drinkId);
 void TH14_ScriptEconomy(void);
 
+bool32 TH14_ShouldSpawnObject(u8 mapGroup, u8 mapNum, u8 localId);
+#define TH14_INVALID_FLOOR 0xFFFF
+u16 TH14_GetHideoutFloor(void);
+bool32 TH14_SelectHideoutFloor(u16 choice);
+bool32 TH14_ScriptSelectHideoutFloor(void);
+
 #endif

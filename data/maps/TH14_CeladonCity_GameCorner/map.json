@@ -176,7 +176,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "TH14_CeladonCity_GameCorner_EventScript_RocketGrunt",
       "flag": "0"
@@ -202,6 +202,13 @@
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_TH14_CELADON_CITY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 15,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_TH14_ROCKET_HIDEOUT_B1F",
       "dest_warp_id": "0"
     }
   ],
