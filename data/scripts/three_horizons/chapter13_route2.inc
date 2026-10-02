@@ -10,6 +10,7 @@ TH13_Route2_CheckFlash:
     goto_if_set FLAG_TH13_FLASH, TH13_Route2_Complete
     checkitem ITEM_HM05
     goto_if_eq VAR_RESULT, TRUE, TH13_Route2_FlashReceipt
+    msgbox TH14_Route2_DeliveryText
     giveitem ITEM_HM05
     goto_if_eq VAR_RESULT, FALSE, TH12_RewardBagFull
 TH13_Route2_FlashReceipt:
@@ -40,7 +41,7 @@ TH13_Route2_GearText:
 TH13_Route2_GearLeadText:
     .string "OAK's researcher at VERMILION's\nPOKéMON CENTER has field equipment.\pYour notes help the professors\ncompare sightings across regions.$"
 TH13_Route2_FlashText:
-    .string "HM05 lets a compatible, healthy\nPOKéMON light caves with FLASH.\pIt need not learn FLASH or replace\na move. Use its party menu.\pYour THUNDERBADGE permits field use.\nKeep the HM with you.$"
+    .string "A conscious, compatible POKéMON\ncan help with FLASH. Not an Egg!\pIt need not learn FLASH or have\na free move slot. Use its party menu.\pYour THUNDERBADGE permits field use.\nKeep the HM with you.$"
 TH13_Route2_RockerText:
     .string "The passage connects both sides\nof the building. You can go back.\pBeyond CERULEAN, ROCK TUNNEL is\ndark. FLASH makes the trip easier.$"
 
@@ -93,3 +94,6 @@ TH13_Route2_TradeDeclineText:
     .string "That's all right. Come back\nif you change your mind.$"
 TH13_Route2_TradeWrongText:
     .string "I'm looking for a {STR_VAR_1}.\nLet me know if you find one.$"
+
+TH14_Route2_DeliveryText:
+    .string "OAK sent these supplies for your\nresearch. Your POKéDEX already\precords ten species! ROCK TUNNEL\nlies ahead.\pThis should help you\nfind your way.$"

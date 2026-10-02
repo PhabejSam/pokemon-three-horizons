@@ -59,7 +59,7 @@ TMs already are reusable in Three Horizons. Keep that mechanic; design progressi
 | Same owner source cold-loaded on reviewed Navigator; protected payload comparison | PASS; clock-only differences, no PT14 or save-roundtrip claim |
 | Canonical v1.2 copy and independent source/canon/capacity/map audits | Completed; written design approved in chat |
 | Detailed implementation plan | APPROVED by user; serial/inline execution underway |
-| PT14 behavioral/visual implementation and focused RED/GREEN checks | Tasks 1–3 focused checks PASS; candidate visuals and remaining tasks/gates pending |
+| PT14 behavioral/visual implementation and focused RED/GREEN checks | Tasks 1–4 focused checks PASS; candidate visuals and remaining tasks/gates pending |
 | Full PT14 host/native/layout/offset/documentation matrix | NOT RUN |
 | New Emerald/FireRed/LeafGreen compatibility builds | NOT RUN |
 | Exact PT14 ROM build/hash/feature/compiled/test revisions | NOT AVAILABLE |
@@ -105,3 +105,12 @@ The new plan contains21 ordered tasks, Gate A for carry-forward/save safety, Gat
 - Focused native results: **5 new plus 3 inherited definitions PASS**; host geometry/interaction checks **4 new plus 3 inherited PASS**. Initial upstream fixture setup incorrectly referenced a donor map absent from the Three Horizons ROM; the corrected control uses registered upstream identity with real tree geometry. Full upstream ROM builds remain integration gates. No assertion was suppressed.
 - Forest north edges now finish in native trunks/bases; south crowns fit within existing blocked cells. All floor words, collision/elevation bits, objects, receipts and optional Cut reachability remain identical. Three forest Gear crop/source records were verified; only the affected forest-pair image/palette changed. Static reconstruction is inspected, but **candidate emulator before/after and follower/cold-reload acceptance remain Gate A**.
 - Presentation ruling: native grass/topper artwork retains the old blocked perimeter, including grass-looking corners. This avoids moving paths or shifting the whole forest grid; Gate A must assess those corners in actual play.
+
+## Task 4 — Flash and Lavender leads
+
+- Qualified Flash delivery now explains Oak's research supplies and Rock Tunnel before HM05, followed by the conscious, compatible, non-Egg field-use instructions. Badge three, ten caught/received species, inventory/full-bag retry, existing receipt and no learned move/free slot requirements remain.
+- Lavender rival speech is respectful and conversation-only. The Tower observer names Giovanni's ghost/migration reports and Celadon equipment; both barrier messages connect Scope, Giovanni and Jessie/James. The old endpoint receipt remains, with no developer chapter-completion sentence.
+- Jessie/James/Meowth retain IDs6/7/8, approved art/scripts and their existing hide receipt; their new positions are(14,18)/(15,18)/(16,18), facing up. Host checks verify floor/headroom, escape access and follower lifecycle. Existing completed cameo never replays.
+- Focused results: **6 new + 9 inherited host tests, 2 new + 3 inherited native definitions PASS**. Native controls verify nine-versus-ten cross-region caught counts, seen-only exclusion, all16 combinations of preserved Flash/rival/cameo/endpoint receipts, and existing Flash eligibility/party invariance. Dialogue lines measure at most201px in the native normal font with a seven-letter rival name.
+- Host RED recorded missing handoff speech, old rival/repeat guidance and old trio placement before editing. Old-ROM before frames and exact fixture/input/hash record live privately in `leads-before-04/`; initial wait-helper calls supplied the wrong argument order and are retained as controller errors. Actual candidate first/repeat/full-bag/continued-scene and all-speaker visibility checks remain **Gate A**.
+- Repeat observer wording uses Tower2F's otherwise-unused `FLAG_TEMP_1` per visit, or the already-existing endpoint receipt for progressed saves. No new permanent story flag is allocated; leaving before the barrier can cause the longer introduction to be heard again.

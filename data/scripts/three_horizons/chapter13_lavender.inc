@@ -306,9 +306,9 @@ TH13_Lavender_RivalEnd:
     releaseall
     end
 TH13_Lavender_RivalFirstText:
-    .string "{RIVAL}: I thought this assignment\nwas OAK's excuse to send us traveling.\pBut these reports are real.\nThey're turning up everywhere.\pMy partner and I are checking them.\nBattling isn't the only way to learn.\pDon't get comfortable, though!\nI'll still beat you to the next lead.$"
+    .string "{RIVAL}: Not here. People are\ngrieving.\pOAK asked us to pay attention\nto what POKéMON are experiencing, too.\pI will keep training. But next time\nwe meet, we are battling!$"
 TH13_Lavender_RivalRepeatText:
-    .string "{RIVAL}: The people here need help.\nLet's find out what's happening.\pAnd keep training! I expect a better\nbattle from you next time.$"
+    .string "{RIVAL}: There will be time\nfor another battle.\pFor now, let us show some respect.$"
 
 TH13_Lavender_Rockets::
     lockall

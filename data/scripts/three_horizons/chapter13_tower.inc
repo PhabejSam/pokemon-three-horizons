@@ -395,10 +395,21 @@ TH13_PokemonTower_6F_Item27::
     end
 
 TH13_Tower_RocketRecord::
-    msgbox TH13_Tower_RocketText, MSGBOX_NPC
+    lock
+    faceplayer
+    @ Repeat speech is map-local; no new permanent story receipt.
+    goto_if_set FLAG_TH13_ENDPOINT, TH14_Tower_RocketRepeat
+    goto_if_set FLAG_TEMP_1, TH14_Tower_RocketRepeat
+    msgbox TH13_Tower_RocketText
+    setflag FLAG_TEMP_1
+    release
+    end
+TH14_Tower_RocketRepeat:
+    msgbox TH14_Tower_RocketRepeatText
+    release
     end
 TH13_Tower_RocketText:
-    .string "The orders say to document unusual\nPOKéMON, ghost reports and migration.\pGIOVANNI never tells us why.\nOther grunts only care about loot.\pI'm taking these notes to CELADON.\nMaybe someone there understands.$"
+    .string "GIOVANNI ordered us to collect\nunusual sightings, ghost reports\pand migration notes.\nI am on paperwork duty.\pThese reports are going\nto CELADON.$"
 TH13_Tower_GhostBarrier::
     lockall
     hidefollower
@@ -429,6 +440,9 @@ TH13_Tower_ForceUp:
 TH13_Tower_GhostWarning:
     .string "A restless presence bars the stairs.\nGHOST: Be gone… Intruders…$"
 TH13_Tower_EndpointText:
-    .string "The unidentified ghost will not\nlet you pass. You must turn back.\pA SILPH SCOPE could reveal it.\nThe ROCKET reports point to CELADON.\pYour journey to LAVENDER is complete.\nThe investigation continues.\pThe sightings are real, but their\ncause remains a mystery.$"
+    .string "A restless presence bars the stairs.\nA SILPH SCOPE could reveal it.\pGIOVANNI's observer sends ghost\nreports to CELADON.\pJESSIE and JAMES have business\nthere, too.$"
 TH13_Tower_RepeatText:
-    .string "The ghost still bars the way.\nThe upper floor remains unsafe.\pThe next lead is in CELADON.\nReturn to town to prepare.$"
+    .string "The presence still bars the stairs.\nA SILPH SCOPE could reveal it.\pGIOVANNI's ghost reports and the\ntrio's business point to CELADON.\pFind out what JESSIE and JAMES\nare doing there.$"
+
+TH14_Tower_RocketRepeatText:
+    .string "Our people in CELADON are\ncomparing the reports.\pThey have equipment for things\nwe cannot identify.$"

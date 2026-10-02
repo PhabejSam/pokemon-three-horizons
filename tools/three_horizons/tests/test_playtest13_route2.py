@@ -7,7 +7,7 @@ RECEIPT='FLAG_TH13_FLASH'
 GEAR='FLAG_TH13_GEAR'
 BADGE='FLAG_BADGE03_GET'
 
-def visit(bag, flags, caught=10, room=True):
+def visit(bag, flags, caught=10, room=True, trace=None):
     lines=[]; labels={}
     for p in (ROOT/'data/scripts/three_horizons').glob('*.inc'):
         for raw in p.read_text(encoding='utf-8').splitlines():
@@ -24,11 +24,14 @@ def visit(bag, flags, caught=10, room=True):
         op,_,tail=lines[pc].partition(' ');pc+=1;args=[x.strip() for x in tail.split(',')]
         if op=='end':return messages,queued,values
         if op in ('lock','release','releaseall','faceplayer','buffernumberstring'):continue
-        if op=='msgbox':messages.append(args[0])
+        if op=='msgbox':
+            messages.append(args[0])
+            if trace is not None: trace.append(('message',args[0]))
         elif op=='setvar':values[args[0]]=val(args[1])
         elif op=='setflag':flags.add(args[0])
         elif op=='checkitem':values['VAR_RESULT']=int(bool(bag.get(args[0],0)))
         elif op=='giveitem':
+            if trace is not None: trace.append(('give',args[0],room))
             values['VAR_RESULT']=int(room)
             if room:bag[args[0]]=bag.get(args[0],0)+1
         elif op in ('goto_if_eq','goto_if_lt'):

@@ -109,12 +109,12 @@ For a demonstrated behavioral bug, record reproduction → regression → expect
 **Files:** `data/scripts/three_horizons/chapter13_route2.inc`, `chapter13_lavender.inc`, `chapter13_tower.inc`, `data/maps/TH13_LavenderTown/map.json`; tests `test/three_horizons_playtest14_leads.c`, `tools/three_horizons/tests/test_playtest14_leads.py`.
 **Interfaces:** preserves existing Flash, rival, cameo and endpoint receipts; no new story flag for rewritten speech.
 
-- [ ] Add script-order assertions: Oak/research/Rock Tunnel introduction before successful HM05 grant, field-use explanation afterward; badge3 and10 caught/received species still required, full bag/owned states retry correctly. Run H(leads) for RED.
-- [ ] Implement the dialogue contract in Appendix C. Lavender rival remains conversation-only on first/repeat; the observer Rocket remains nonbattle. Repeat barrier guidance connects Giovanni's Tower reports, Celadon trio business and Scope. Remove the developer completion sentence without clearing FLAG_TH13_ENDPOINT.
-- [ ] Place Jessie/James/Meowth on a verified walkable, unobscured three-tile row, using the concrete staging ledger in Appendix C; keep existing cameo hide receipt and all local IDs. Retain a free approach/escape lane and safe follower hiding/restoration during conversation.
-- [ ] Test full-bag Flash retry/owned HM/no badge/9 vs10 species, conscious compatible non-Egg field use without learned move/free slot; preserve completed rival/cameo on migration. Run existing Flash tests, H(leads), N(`Three Horizons PT14 leads:`,`leads-green`).
+- [x] Add script-order assertions: Oak/research/Rock Tunnel introduction before successful HM05 grant, field-use explanation afterward; badge3 and10 caught/received species still required, full bag/owned states retry correctly. Run H(leads) for RED.
+- [x] Implement the dialogue contract in Appendix C. Lavender rival remains conversation-only on first/repeat; the observer Rocket remains nonbattle. Repeat barrier guidance connects Giovanni's Tower reports, Celadon trio business and Scope. Remove the developer completion sentence without clearing FLAG_TH13_ENDPOINT.
+- [x] Place Jessie/James/Meowth on a verified walkable, unobscured three-tile row, using the concrete staging ledger in Appendix C; keep existing cameo hide receipt and all local IDs. Retain a free approach/escape lane and safe follower hiding/restoration during conversation.
+- [x] Test full-bag Flash retry/owned HM/no badge/9 vs10 species, conscious compatible non-Egg field use without learned move/free slot; preserve completed rival/cameo on migration. Run existing Flash tests, H(leads), N(`Three Horizons PT14 leads:`,`leads-green`).
 - [ ] At Gate A capture all speakers unobscured and the first/repeat speech paths with labelled fixtures; the owner save's already completed scene must not replay.
-- [ ] Commit `fix: clarify Flash handoff and Lavender Celadon leads`.
+- [x] Commit `fix: clarify Flash handoff and Lavender Celadon leads`.
 
 ## Task 5: Extend rematches without changing first battles or save storage
 
