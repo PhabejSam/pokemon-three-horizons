@@ -1014,7 +1014,208 @@
   "encounters": [],
   "shops": [],
   "prizes": [],
-  "rematchEvolutions": [],
+  "rematchEvolutions": [
+    {
+      "trainerId": "TRAINER_TH9_LASS_ROBIN",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_JIGGLYPUFF",
+      "evolvedSpecies": "SPECIES_WIGGLYTUFF",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH9_LASS_IRIS",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_CLEFAIRY",
+      "evolvedSpecies": "SPECIES_CLEFABLE",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH12_PICNICKER_NANCY",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_PIKACHU",
+      "evolvedSpecies": "SPECIES_RAICHU",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH12_GENTLEMAN_THOMAS",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_GROWLITHE",
+      "evolvedSpecies": "SPECIES_ARCANINE",
+      "minLevel": 32,
+      "minBadges": 4
+    },
+    {
+      "trainerId": "TRAINER_TH12_GENTLEMAN_THOMAS",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_GROWLITHE",
+      "evolvedSpecies": "SPECIES_ARCANINE",
+      "minLevel": 32,
+      "minBadges": 4
+    },
+    {
+      "trainerId": "TRAINER_TH12_GENTLEMAN_BROOKS",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_PIKACHU",
+      "evolvedSpecies": "SPECIES_RAICHU",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH12_GENTLEMAN_LAMAR",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_GROWLITHE",
+      "evolvedSpecies": "SPECIES_ARCANINE",
+      "minLevel": 32,
+      "minBadges": 4
+    },
+    {
+      "trainerId": "TRAINER_TH12_LASS_DAWN",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_PIKACHU",
+      "evolvedSpecies": "SPECIES_RAICHU",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH12_SAILOR_DWAYNE",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_PIKACHU",
+      "evolvedSpecies": "SPECIES_RAICHU",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH12_SAILOR_DWAYNE",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_PIKACHU",
+      "evolvedSpecies": "SPECIES_RAICHU",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH12_GENTLEMAN_TUCKER",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_PIKACHU",
+      "evolvedSpecies": "SPECIES_RAICHU",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH13_ROUTE11_DARIAN",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_GROWLITHE",
+      "evolvedSpecies": "SPECIES_ARCANINE",
+      "minLevel": 32,
+      "minBadges": 4
+    },
+    {
+      "trainerId": "TRAINER_TH13_ROUTE11_DARIAN",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_VULPIX",
+      "evolvedSpecies": "SPECIES_NINETALES",
+      "minLevel": 32,
+      "minBadges": 4
+    },
+    {
+      "trainerId": "TRAINER_TH13_ROUTE9_CHRIS",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_GROWLITHE",
+      "evolvedSpecies": "SPECIES_ARCANINE",
+      "minLevel": 32,
+      "minBadges": 4
+    },
+    {
+      "trainerId": "TRAINER_TH13_ROUTE10_HEIDI",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_PIKACHU",
+      "evolvedSpecies": "SPECIES_RAICHU",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH13_ROUTE10_HEIDI",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_CLEFAIRY",
+      "evolvedSpecies": "SPECIES_CLEFABLE",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH13_ROCKTUNNEL_1F_LEAH",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_CLEFAIRY",
+      "evolvedSpecies": "SPECIES_CLEFABLE",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH13_ROCKTUNNEL_B1F_SOFIA",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_JIGGLYPUFF",
+      "evolvedSpecies": "SPECIES_WIGGLYTUFF",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH14_ROUTE8_JULIA",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_CLEFAIRY",
+      "evolvedSpecies": "SPECIES_CLEFABLE",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH14_ROUTE8_JULIA",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_CLEFAIRY",
+      "evolvedSpecies": "SPECIES_CLEFABLE",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH14_ROUTE8_RICH",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_GROWLITHE",
+      "evolvedSpecies": "SPECIES_ARCANINE",
+      "minLevel": 32,
+      "minBadges": 4
+    },
+    {
+      "trainerId": "TRAINER_TH14_ROUTE8_RICH",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_VULPIX",
+      "evolvedSpecies": "SPECIES_NINETALES",
+      "minLevel": 32,
+      "minBadges": 4
+    },
+    {
+      "trainerId": "TRAINER_TH14_ROUTE8_MEGAN",
+      "partySlot": 4,
+      "baseSpecies": "SPECIES_PIKACHU",
+      "evolvedSpecies": "SPECIES_RAICHU",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH14_ROUTE8_ELI_ANNE",
+      "partySlot": 0,
+      "baseSpecies": "SPECIES_CLEFAIRY",
+      "evolvedSpecies": "SPECIES_CLEFABLE",
+      "minLevel": 30,
+      "minBadges": 3
+    },
+    {
+      "trainerId": "TRAINER_TH14_ROUTE8_ELI_ANNE",
+      "partySlot": 1,
+      "baseSpecies": "SPECIES_JIGGLYPUFF",
+      "evolvedSpecies": "SPECIES_WIGGLYTUFF",
+      "minLevel": 30,
+      "minBadges": 3
+    }
+  ],
   "unfinishedInteractions": [],
   "uniqueItems": [
     {

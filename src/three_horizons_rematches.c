@@ -14,7 +14,7 @@
 #if THREE_HORIZONS
 #include "data/three_horizons_rematches.h"
 
-// EWRAM_DATA is the zero-initialized .sbss section. TH maps are in group 75;
+// EWRAM_DATA is the zero-initialized .sbss section. TH maps are in groups 75/76;
 // the zero startup key cannot inherit their saved readiness.
 static EWRAM_DATA u16 sReadinessMap = 0;
 static EWRAM_DATA u16 sActiveTrainer = TRAINER_NONE;
@@ -65,15 +65,44 @@ static s32 CurrentSlot(u16 trainerId)
     return TH13_ResolveRematchSlot(sRematchEntries, ARRAY_COUNT(sRematchEntries), map, trainerId);
 }
 
+u16 TH14_ResolveMapTrainer(const struct TH13RematchEntry *entries, u32 count,
+    const struct TH14RematchAlias *aliases, u32 aliasCount, u16 map, u8 localId)
+{
+    u16 trainer = TRAINER_NONE;
+    const struct TH14RematchAlias *alias = NULL;
+    if (!localId || localId > MAX_REMATCH_ENTRIES)
+        return TRAINER_NONE;
+    for (u32 i = 0; i < count; i++)
+    {
+        if (entries[i].map != map || entries[i].localId != localId)
+            continue;
+        if (trainer != TRAINER_NONE || TH13_ResolveRematchSlot(entries, count, map, entries[i].trainerId) < 0)
+            return TRAINER_NONE;
+        trainer = entries[i].trainerId;
+    }
+    for (u32 i = 0; i < aliasCount; i++)
+    {
+        if (aliases[i].map != map || aliases[i].localId != localId)
+            continue;
+        // A visual alias cannot shadow an ordinary trainer or another alias.
+        if (trainer != TRAINER_NONE || alias != NULL)
+            return TRAINER_NONE;
+        alias = &aliases[i];
+    }
+    if (alias == NULL)
+        return trainer;
+    if (!alias->canonicalLocalId || alias->canonicalLocalId > MAX_REMATCH_ENTRIES
+        || alias->canonicalLocalId == localId)
+        return TRAINER_NONE;
+    s32 slot = TH13_ResolveRematchSlot(entries, count, map, alias->trainerId);
+    return slot == alias->canonicalLocalId - 1 ? alias->trainerId : TRAINER_NONE;
+}
+
 u16 TH13_GetMapTrainer(u8 localId)
 {
-    for (u32 i = 0; i < ARRAY_COUNT(sRematchEntries); i++)
-    {
-        const struct TH13RematchEntry *entry = &sRematchEntries[i];
-        if (entry->map == CurrentMap() && entry->localId == localId && CurrentSlot(entry->trainerId) >= 0)
-            return entry->trainerId;
-    }
-    return TRAINER_NONE;
+    u16 trainer = TH14_ResolveMapTrainer(sRematchEntries, ARRAY_COUNT(sRematchEntries),
+        sRematchAliases, ARRAY_COUNT(sRematchAliases), CurrentMap(), localId);
+    return trainer != TRAINER_NONE && CurrentSlot(trainer) >= 0 ? trainer : TRAINER_NONE;
 }
 
 bool32 TH13_MapHasRematchTrainers(void)
@@ -134,7 +163,19 @@ u8 TH13_HighestNonEggPartyLevel(void)
     return highest;
 }
 
-bool32 TH13_CreateRematchPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, u8 highestLevel, u8 badges)
+u16 TH14_GetAuthoredRematchEvolution(u16 trainerId, u8 slot, u16 species, u8 scaledLevel, u8 badges)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sRematchEvolutions); i++)
+    {
+        const struct TH14RematchEvolution *row = &sRematchEvolutions[i];
+        if (row->trainerId == trainerId && row->partySlot == slot && row->baseSpecies == species
+            && scaledLevel >= row->minLevel && badges >= row->minBadges)
+            return row->evolvedSpecies;
+    }
+    return species;
+}
+
+static bool32 CreateRematchParty(struct Pokemon *party, const struct Trainer *trainer, u16 trainerId, u8 highestLevel, u8 badges)
 {
     u8 originalHighest = 1;
     struct TrainerGenerator generator = {0};
@@ -156,6 +197,9 @@ bool32 TH13_CreateRematchPartyFromTrainer(struct Pokemon *party, const struct Tr
         for (u32 tier = 0; tier < ARRAY_COUNT(sRematchTiers); tier++)
             if (sRematchTiers[tier].base == trainer->party[i].species && mon.lvl >= sRematchTiers[tier].level)
                 mon.species = sRematchTiers[tier].species;
+        u16 evolved = TH14_GetAuthoredRematchEvolution(trainerId, i, trainer->party[i].species, mon.lvl, badges);
+        if (evolved != trainer->party[i].species)
+            mon.species = evolved;
         // Native generation chooses legal normal abilities and current moves.
         mon.ability = ABILITY_NONE;
         for (u32 move = 0; move < MAX_MON_MOVES; move++)
@@ -165,6 +209,18 @@ bool32 TH13_CreateRematchPartyFromTrainer(struct Pokemon *party, const struct Tr
     return TRUE;
 }
 
+bool32 TH13_CreateRematchPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, u8 highestLevel, u8 badges)
+{
+    return CreateRematchParty(party, trainer, TRAINER_NONE, highestLevel, badges);
+}
+
+#if TESTING
+bool32 Test_TH14_CreateRematchParty(struct Pokemon *party, const struct Trainer *trainer, u16 trainerId, u8 highestLevel, u8 badges)
+{
+    return CreateRematchParty(party, trainer, trainerId, highestLevel, badges);
+}
+#endif
+
 bool32 TH13_TryCreateRematchParty(struct Pokemon *party, u16 trainerId)
 {
     if (trainerId == TRAINER_NONE || sActiveTrainer != trainerId || !TH13_IsRematchReady(trainerId))
@@ -172,6 +228,6 @@ bool32 TH13_TryCreateRematchParty(struct Pokemon *party, u16 trainerId)
     u8 badges = 0;
     for (u32 i = 0; i < NUM_BADGES; i++)
         badges += FlagGet(FLAG_BADGE01_GET + i) != 0;
-    return TH13_CreateRematchPartyFromTrainer(party, GetTrainerStructFromId(trainerId), TH13_HighestNonEggPartyLevel(), badges);
+    return CreateRematchParty(party, GetTrainerStructFromId(trainerId), trainerId, TH13_HighestNonEggPartyLevel(), badges);
 }
 #endif

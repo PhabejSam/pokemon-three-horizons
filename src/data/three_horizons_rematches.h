@@ -124,7 +124,7 @@ static const struct TH13RematchEntry sRematchEntries[] = {
 };
 
 // Authored tiers, evaluated against each member's resulting level. Stone,
-// friendship, item and branched evolutions stay at their authored base species.
+// friendship, item and branched evolutions stay at base unless explicitly keyed below.
 // All rematch moves use that resulting species' native level-up learnset and
 // its native normal ability selection, rather than an unevolved ability.
 static const struct { u16 base, species; u8 level; } sRematchTiers[] = {
@@ -159,4 +159,49 @@ static const struct { u16 base, species; u8 level; } sRematchTiers[] = {
     {SPECIES_SQUIRTLE, SPECIES_WARTORTLE, 16},
     {SPECIES_SQUIRTLE, SPECIES_BLASTOISE, 36},
     {SPECIES_WARTORTLE, SPECIES_BLASTOISE, 36},
+};
+
+// Approved group76/index0, reserved by chapter14_maps.json. Task8 registers this
+// map and the canonical row; until then the alias intentionally resolves NONE.
+#define TH14_ROUTE8_REMATCH_MAP ((76 << 8) | 0)
+static const struct TH14RematchAlias sRematchAliases[] = {
+    {TRAINER_TH14_ROUTE8_ELI_ANNE, TH14_ROUTE8_REMATCH_MAP, 13, 12},
+};
+
+struct TH14RematchEvolution
+{
+    u16 trainerId;
+    u8 partySlot;
+    u16 baseSpecies;
+    u16 evolvedSpecies;
+    u8 minLevel;
+    u8 minBadges;
+};
+// These are authored rematch slots, not player evolution methods or global tiers.
+static const struct TH14RematchEvolution sRematchEvolutions[] = {
+    {TRAINER_TH9_LASS_ROBIN, 0, SPECIES_JIGGLYPUFF, SPECIES_WIGGLYTUFF, 30, 3},
+    {TRAINER_TH9_LASS_IRIS, 0, SPECIES_CLEFAIRY, SPECIES_CLEFABLE, 30, 3},
+    {TRAINER_TH12_PICNICKER_NANCY, 1, SPECIES_PIKACHU, SPECIES_RAICHU, 30, 3},
+    {TRAINER_TH12_GENTLEMAN_THOMAS, 0, SPECIES_GROWLITHE, SPECIES_ARCANINE, 32, 4},
+    {TRAINER_TH12_GENTLEMAN_THOMAS, 1, SPECIES_GROWLITHE, SPECIES_ARCANINE, 32, 4},
+    {TRAINER_TH12_GENTLEMAN_BROOKS, 0, SPECIES_PIKACHU, SPECIES_RAICHU, 30, 3},
+    {TRAINER_TH12_GENTLEMAN_LAMAR, 0, SPECIES_GROWLITHE, SPECIES_ARCANINE, 32, 4},
+    {TRAINER_TH12_LASS_DAWN, 1, SPECIES_PIKACHU, SPECIES_RAICHU, 30, 3},
+    {TRAINER_TH12_SAILOR_DWAYNE, 0, SPECIES_PIKACHU, SPECIES_RAICHU, 30, 3},
+    {TRAINER_TH12_SAILOR_DWAYNE, 1, SPECIES_PIKACHU, SPECIES_RAICHU, 30, 3},
+    {TRAINER_TH12_GENTLEMAN_TUCKER, 0, SPECIES_PIKACHU, SPECIES_RAICHU, 30, 3},
+    {TRAINER_TH13_ROUTE11_DARIAN, 0, SPECIES_GROWLITHE, SPECIES_ARCANINE, 32, 4},
+    {TRAINER_TH13_ROUTE11_DARIAN, 1, SPECIES_VULPIX, SPECIES_NINETALES, 32, 4},
+    {TRAINER_TH13_ROUTE9_CHRIS, 0, SPECIES_GROWLITHE, SPECIES_ARCANINE, 32, 4},
+    {TRAINER_TH13_ROUTE10_HEIDI, 0, SPECIES_PIKACHU, SPECIES_RAICHU, 30, 3},
+    {TRAINER_TH13_ROUTE10_HEIDI, 1, SPECIES_CLEFAIRY, SPECIES_CLEFABLE, 30, 3},
+    {TRAINER_TH13_ROCKTUNNEL_1F_LEAH, 1, SPECIES_CLEFAIRY, SPECIES_CLEFABLE, 30, 3},
+    {TRAINER_TH13_ROCKTUNNEL_B1F_SOFIA, 0, SPECIES_JIGGLYPUFF, SPECIES_WIGGLYTUFF, 30, 3},
+    {TRAINER_TH14_ROUTE8_JULIA, 0, SPECIES_CLEFAIRY, SPECIES_CLEFABLE, 30, 3},
+    {TRAINER_TH14_ROUTE8_JULIA, 1, SPECIES_CLEFAIRY, SPECIES_CLEFABLE, 30, 3},
+    {TRAINER_TH14_ROUTE8_RICH, 0, SPECIES_GROWLITHE, SPECIES_ARCANINE, 32, 4},
+    {TRAINER_TH14_ROUTE8_RICH, 1, SPECIES_VULPIX, SPECIES_NINETALES, 32, 4},
+    {TRAINER_TH14_ROUTE8_MEGAN, 4, SPECIES_PIKACHU, SPECIES_RAICHU, 30, 3},
+    {TRAINER_TH14_ROUTE8_ELI_ANNE, 0, SPECIES_CLEFAIRY, SPECIES_CLEFABLE, 30, 3},
+    {TRAINER_TH14_ROUTE8_ELI_ANNE, 1, SPECIES_JIGGLYPUFF, SPECIES_WIGGLYTUFF, 30, 3},
 };
