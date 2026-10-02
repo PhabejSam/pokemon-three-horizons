@@ -10,14 +10,22 @@ This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next 
 
 ## Resume point
 
-Tasks1–20 complete; Task21 archive preflight and extracted-ROM smoke passed.
-The final ZIP still needs sealing and its separate extraction/cold smoke. One
-independent Astra/Ultra review found no Critical/Important findings. Two dialogue
-minors remain: Lavender's outdated west-road closure and missing Celadon local
-Rocket-aftermath reactions. The pre-Scope walkthrough instruction is corrected.
-Feature/compiled revision remains abdec6f; all later changes are documentation.
-Keep private evidence and isolated branch. No merge, push or cleanup is authorized.
-The older1746110c candidate remains blocked/superseded.
+Tasks1–21 complete for the private hardware candidate. Keep branch
+`feature/playtest14-celadon-lavender` and all private evidence. The final ZIP is
+`outputs/playtest-14-celadon-silph-scope-abdec6f.zip`, SHA256
+`8245d4ecdfb3eb765349fd0c010d836bb468b2f63910bc9dcb62024e506f5edf`. Its packaged docs are revision
+`4e5de6c81ff49b771e05db9d83ea1005834a4646`; this final handoff is
+a later documentation-only checkpoint. Feature/compiled/test remain abdec6f.
+
+Final 20-member allowlist/hash/CRC and actual extracted-ROM cold Continue/Gear/
+return passed. All six originals and both other worktrees are unchanged. One
+independent Astra/Ultra review found no Critical/Important findings. Deferred:
+outdated Lavender west-road closure dialogue; missing Celadon local Rocket/Scope
+aftermath reactions. The impossible pre-Scope Run guide instruction was corrected.
+HIGH intermittent Ekans corruption/black screen on RG40XX H/VBA-Next remains
+unresolved. Full natural new-game chapter playthrough and hardware acceptance
+are not claimed. Stop here for owner hardware testing; no next chapter,
+merge, push, publication, settings changes or private-evidence cleanup.
 
 Major changes: appended group76/37 maps and explicit66 receipt ownership;
 version-safe migration/map-family predicates; Town Map/Cut/Flash/forest/lead
@@ -35,10 +43,10 @@ Native Save/cold checks compare all14 boxes and story receipts. Fresh new game
 coverage is opening/all-nine choices, not an entire new-game chapter journey.
 See PLAYTEST_14_VERIFICATION.md for evidence classes and all53 final fields.
 
-Planned private output: outputs/playtest-14-celadon-silph-scope-abdec6f/ with the
-explicitly named PT14 ROM and sanitized guides. Task21 must assert hashes,
-whitelisted contents and a fresh extracted-ROM smoke before claiming packaging.
-Owner originals remain untouched; no raw saves/RAM belong in the package.
+Delivered private output: the separately named directory and ZIP above, containing
+the exact ROM, guides, artwork credit and sanitized presentation evidence.
+Use PLAYTEST_14.md for either a new game or the exact supplied Tower-save route;
+finish PLAYTEST_14_HARDWARE_QA.md before declaring handheld acceptance.
 
 ## Implementation rulings retained from the private ledger
 

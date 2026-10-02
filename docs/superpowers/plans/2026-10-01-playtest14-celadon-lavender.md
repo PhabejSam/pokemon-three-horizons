@@ -10,7 +10,7 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-01-playtest14-celadon-lavender-design.md` (owner approved in chat: “approve”). Canon: `docs/three_horizons/THREE_HORIZONS_STORY_BIBLE.md`, Narrative Canon v1.2, SHA-256 `53d09fbead5167252cfe42c9e8097bc6e9d838b6a56c44a5944dfb4f55a81605`.
 
-**Status:** User approved this implementation plan in chat on 2026-10-01. Serial/inline execution with `superpowers:executing-plans` is underway; checked task steps and the execution ledger record verified progress. Independent read-only support may run in parallel. The approved blueprint is not being reopened.
+**Status:** User approved this implementation plan in chat on 2026-10-01. Serial/inline execution with `superpowers:executing-plans` completed Tasks1–21 for the private hardware candidate, with two disclosed dialogue minors deferred. Checked steps and the ledger record verified work; RG40XX H acceptance remains pending. Independent read-only support may run in parallel. The approved blueprint is not being reopened.
 
 ## Global Constraints
 
@@ -327,11 +327,11 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 
 **Files:** new `outputs/playtest-14-celadon-silph-scope-<feature-shortsha>/`, matching ZIP and sanitized evidence; local release manifest, no source gameplay edits.
 
-- [ ] Create a never-overwritten output directory using exact feature revision. Copy the immutable passing candidate to `pokemon-three-horizons-playtest-14-celadon-silph-scope.gba`. Include SHA256 manifest, release/encounter/hardware/TM guides, sanitized verification/evidence and migration instructions. Keep ELF/map privately with the exact candidate rather than exposing owner state.
-- [ ] Reject package entries containing `.sav`, `.eps`, warm `.bin` states, raw RAM, private baseline/identity inventories, unrelated screenshots or workspace secrets. Whitelist intended files; verify archive member paths and each packaged hash.
-- [ ] Reopen a separate extraction of the packaged ROM with a copied battery for boot/Continue/menu smoke; verify packaged ROM SHA equals the exact tested candidate. Recheck all protected source/save/old ROM/package hashes and original worktree statuses.
-- [ ] Report the53 required fields through a concise user summary plus linked verification table; distinguish feature revision, compiled/test revision and later documentation commit. State exactly which emulator acceptance happened and that RG40XX H/VBA-Next remains pending.
-- [ ] Stop. No merge, push, release publication, repository changes or next chapter. Keep the isolated branch and private evidence for the owner's hardware findings.
+- [x] Create a never-overwritten output directory using exact feature revision. Copy the immutable passing candidate to `pokemon-three-horizons-playtest-14-celadon-silph-scope.gba`. Include SHA256 manifest, release/encounter/hardware/TM guides, sanitized verification/evidence and migration instructions. Keep ELF/map privately with the exact candidate rather than exposing owner state.
+- [x] Reject package entries containing `.sav`, `.eps`, warm `.bin` states, raw RAM, private baseline/identity inventories, unrelated screenshots or workspace secrets. Whitelist intended files; verify archive member paths and each packaged hash.
+- [x] Reopen a separate extraction of the packaged ROM with a copied battery for boot/Continue/menu smoke; verify packaged ROM SHA equals the exact tested candidate. Recheck all protected source/save/old ROM/package hashes and original worktree statuses.
+- [x] Report the53 required fields through a concise user summary plus linked verification table; distinguish feature revision, compiled/test revision and later documentation commit. State exactly which emulator acceptance happened and that RG40XX H/VBA-Next remains pending.
+- [x] Stop. No merge, push, release publication, repository changes or next chapter. Keep the isolated branch and private evidence for the owner's hardware findings.
 
 
 ## Appendix A: Exact map, trainer and receipt ledger

@@ -10,13 +10,13 @@ This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next 
 
 ## Current status (supersedes intermediate statuses below)
 
-Tasks1–20 are complete. The replacement automated/build matrix and exact-ROM
-mGBA acceptance pass. One independent Astra/Ultra review found no Critical or
-Important issues. Its guide correction is applied; two dialogue minors are
-deferred below. Private package assembly and extracted-ROM preflight have passed
-(see package checkpoint below). Final archive sealing is recorded separately. The older
-ROM1746110c is blocked by the reproduced Fuji handoff defect; no old screenshot
-or pass substitutes for acceptance of this replacement candidate.
+Tasks1–21 are complete for this private hardware candidate, with two disclosed
+dialogue minors deferred. Automated/build and exact-ROM mGBA gates passed.
+One independent Astra/Ultra review found no Critical/Important issues. The
+sealed 20-member ZIP passed every hash/CRC check and a separate extracted-ROM
+cold Continue, Research Gear and field-return smoke. All six protected original
+artifacts and both other worktrees remain unchanged. No merge/push occurred.
+The older ROM1746110c remains blocked/superseded by the repaired Fuji candidate.
 
 The exact owner continuation is fixture-free. Adversarial branches are labelled
 fixtures, and fresh-game coverage is an opening smoke plus all nine choices.
@@ -79,6 +79,23 @@ fixtures, and fresh-game coverage is an opening smoke plus all nine choices.
 | 51 | Hardware-only remaining acceptance | PENDING: RG40XX H/VBA-Next cold boot, capture monitoring, art/input/audio/performance and bounded route; PLAYTEST_14_HARDWARE_QA.md |
 | 52 | Known defects or limitations | HIGH intermittent hardware capture unresolved; no full natural new-game emulator journey; inherited startup/RWX/deprecation warnings recorded; Saffron/extended Route12/Fuchsia/regions excluded; later prize-species/alternate Snorlax sources unimplemented |
 | 53 | Deferred minors | Lavender worker incorrectly calls west Route8 closed; Celadon local Rocket/Scope aftermath reactions remain unfinished. Guide corrected for text-only pre-Scope barrier. Final review: 0 Critical/Important, 3 Minor (1 documentation correction, 2 deferred) |
+
+## Final sealed package acceptance
+
+- Package: `outputs/playtest-14-celadon-silph-scope-abdec6f.zip`.
+- ZIP SHA-256: `8245d4ecdfb3eb765349fd0c010d836bb468b2f63910bc9dcb62024e506f5edf`.
+- Packaged documentation revision: `4e5de6c81ff49b771e05db9d83ea1005834a4646`.
+  This final local verification note is a later documentation-only checkpoint;
+  the sealed ZIP and tested ROM are never overwritten to insert its own hash.
+- Actual final extraction: fresh core + copied battery, normal Continue at
+  Tower6F (11,14), Research Gear open/return; protected payload and battery
+  unchanged. This is a real second smoke, separate from the preflight below.
+- Every one of the 20 members matches its allowlist/hash; no save/state/RAM or
+  private inventory included. Four PNGs are explicitly labelled archive fixtures.
+- Final protection check: six originals and both other worktrees unchanged.
+- Private receipts: `task21-package-check.json`, `package-smoke-final/`,
+  `task21-final-summary.json` and `task21-protected-check.json` under the plan's
+  retained execution evidence. Hardware acceptance is still **PENDING**.
 
 ## Package checkpoint
 
