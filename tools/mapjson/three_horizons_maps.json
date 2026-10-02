@@ -117,6 +117,13 @@
     "TH13_PokemonTower_3F",
     "TH13_PokemonTower_4F",
     "TH13_PokemonTower_5F",
-    "TH13_PokemonTower_6F"
+    "TH13_PokemonTower_6F",
+    "TH14_Route8",
+    "TH14_Route8_WestEntrance",
+    "TH14_UndergroundPath_EastEntrance",
+    "TH14_UndergroundPath_EastWestTunnel",
+    "TH14_UndergroundPath_WestEntrance",
+    "TH14_Route7",
+    "TH14_Route7_EastEntrance"
   ]
 }

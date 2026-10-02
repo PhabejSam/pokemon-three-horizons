@@ -28,8 +28,14 @@ class Playtest13Rematches(unittest.TestCase):
         entries = re.findall(r'\{(TRAINER_TH\w+), (MAP_TH\w+), (\d+)\}', text)
         ids = dict(re.findall(r'#define (TRAINER_TH\w+) (\d+)', (ROOT/'include/constants/opponents.h').read_text()))
         expected = (set(range(1, 32)) - {7, 24, 29}) | (set(range(53, 94)) - {68}) | set(range(104,157))
+        # Keep the 121 shipped identities exact; new maps contribute only their
+        # explicitly approved ordinary trainers, never story/boss encounters.
+        self.assertEqual({int(ids[t]) for t, m, l in entries if not t.startswith('TRAINER_TH14_')}, expected)
+        planned = json.loads((ROOT/'tools/three_horizons/chapter14_content.json').read_text())['trainers']
+        active = [r for r in planned if r['rematch'] and (ROOT/'data/maps'/r['map']/'map.json').exists()]
+        expected |= {r['id'] for r in active}
         self.assertEqual({int(ids[t]) for t, m, l in entries}, expected)
-        self.assertEqual(len(entries), 121)
+        self.assertEqual(len(entries), 121 + len(active))
         maps = {d['id']: d for p in (ROOT/'data/maps').glob('TH*/map.json') for d in [json.loads(p.read_text())]}
         sources = '\n'.join(p.read_text() for p in (ROOT/'data/scripts/three_horizons').glob('*.inc'))
         seen = set()
@@ -47,9 +53,11 @@ class Playtest13Rematches(unittest.TestCase):
         entries = re.findall(r'\{(TRAINER_TH\w+), (MAP_TH\w+), (\d+)\}', (ROOT/'src/data/three_horizons_rematches.h').read_text())
         sources = '\n'.join(p.read_text() for p in (ROOT/'data/scripts/three_horizons').glob('*.inc'))
         for trainer, _, _ in entries:
-            self.assertRegex(sources, r'trainerbattle_rematch '+trainer+r',')
+            self.assertRegex(sources, r'trainerbattle_rematch(?:_double)? '+trainer+r',')
         blocks = re.findall(r'^TH\w+_Rematch:+\n(.*?)(?=^\w+:|\Z)', sources, re.M|re.S)
-        self.assertEqual(len(blocks), 121)
+        planned = json.loads((ROOT/'tools/three_horizons/chapter14_content.json').read_text())['trainers']
+        aliases = sum(len(r['interactionAliases']) for r in planned if r['rematch'] and (ROOT/'data/maps'/r['map']/'map.json').exists())
+        self.assertEqual(len(blocks), len(entries) + aliases)
         for block in blocks:
             for one_time_command in ('giveitem', 'givemon', 'setflag', 'setvar', 'addmoney'):
                 self.assertNotIn(one_time_command, block)

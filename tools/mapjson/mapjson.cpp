@@ -135,7 +135,7 @@ void load_project_maps() {
     Json layouts = Json::parse(read_text_file("data/layouts/layouts.json"), err);
     for (auto &entry : manifest["maps"].array_items()) {
         string name = json_to_string(entry);
-        if ((name.rfind("TH_", 0) != 0 && name.rfind("TH12_", 0) != 0 && name.rfind("TH13_", 0) != 0) || name.find_first_of("/\\") != string::npos)
+        if ((name.rfind("TH_", 0) != 0 && name.rfind("TH12_", 0) != 0 && name.rfind("TH13_", 0) != 0 && name.rfind("TH14_", 0) != 0) || name.find_first_of("/\\") != string::npos)
             FATAL_ERROR("Invalid project map name: %s\n", name.c_str());
         Json record = Json::parse(read_text_file("data/maps/" + name + "/map.json"), err);
         if (!err.empty() || record["name"].string_value() != name)
@@ -154,7 +154,8 @@ bool is_project_layout(Json layout) {
     const string id = layout["id"].string_value();
     return id.rfind("LAYOUT_TH_", 0) == 0
         || id.rfind("LAYOUT_TH12_", 0) == 0
-        || id.rfind("LAYOUT_TH13_", 0) == 0;
+        || id.rfind("LAYOUT_TH13_", 0) == 0
+        || id.rfind("LAYOUT_TH14_", 0) == 0;
 }
 
 bool project_layout_selected(Json layout, string layout_version) {
@@ -790,7 +791,7 @@ void process_groups(string groups_filepath, vector<string> &map_filepaths, strin
         }
         string map_name = json_to_string(map_data, "name");
 
-        bool project = map_name.rfind("TH_", 0) == 0 || map_name.rfind("TH12_", 0) == 0 || map_name.rfind("TH13_", 0) == 0;
+        bool project = map_name.rfind("TH_", 0) == 0 || map_name.rfind("TH12_", 0) == 0 || map_name.rfind("TH13_", 0) == 0 || map_name.rfind("TH14_", 0) == 0;
         bool selectedProject = find(project_maps.begin(), project_maps.end(), map_name) != project_maps.end();
         if ((project && (version != "three_horizons" || !selectedProject))
          || (!project && ((version == "emerald" || version == "three_horizons") && region != "REGION_HOENN"))

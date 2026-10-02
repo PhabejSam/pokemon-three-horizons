@@ -9349,6 +9349,97 @@
       "border_filepath": "data/layouts/ViridianForest_Frlg/border.bin",
       "blockdata_filepath": "data/layouts/TH13_ViridianForest/map.bin",
       "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_ROUTE8",
+      "name": "TH14_Route8_Layout",
+      "width": 72,
+      "height": 20,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General_Frlg",
+      "secondary_tileset": "gTileset_LavenderTown",
+      "border_filepath": "data/layouts/TH14_Route8/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_Route8/map.bin",
+      "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_ROUTE8_WEST_ENTRANCE",
+      "name": "TH14_Route8_WestEntrance_Layout",
+      "width": 13,
+      "height": 9,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_BuildingFrlg",
+      "secondary_tileset": "gTileset_GenericBuilding2",
+      "border_filepath": "data/layouts/TH14_Route8_WestEntrance/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_Route8_WestEntrance/map.bin",
+      "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_UNDERGROUND_PATH_EAST_ENTRANCE",
+      "name": "TH14_UndergroundPath_EastEntrance_Layout",
+      "width": 13,
+      "height": 10,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_BuildingFrlg",
+      "secondary_tileset": "gTileset_GenericBuilding2",
+      "border_filepath": "data/layouts/TH14_UndergroundPath_EastEntrance/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_UndergroundPath_EastEntrance/map.bin",
+      "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_UNDERGROUND_PATH_EAST_WEST_TUNNEL",
+      "name": "TH14_UndergroundPath_EastWestTunnel_Layout",
+      "width": 80,
+      "height": 7,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_BuildingFrlg",
+      "secondary_tileset": "gTileset_UndergroundPath",
+      "border_filepath": "data/layouts/TH14_UndergroundPath_EastWestTunnel/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_UndergroundPath_EastWestTunnel/map.bin",
+      "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_UNDERGROUND_PATH_WEST_ENTRANCE",
+      "name": "TH14_UndergroundPath_WestEntrance_Layout",
+      "width": 13,
+      "height": 10,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_BuildingFrlg",
+      "secondary_tileset": "gTileset_GenericBuilding2",
+      "border_filepath": "data/layouts/TH14_UndergroundPath_WestEntrance/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_UndergroundPath_WestEntrance/map.bin",
+      "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_ROUTE7",
+      "name": "TH14_Route7_Layout",
+      "width": 24,
+      "height": 20,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General_Frlg",
+      "secondary_tileset": "gTileset_CeladonCity",
+      "border_filepath": "data/layouts/TH14_Route7/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_Route7/map.bin",
+      "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_ROUTE7_EAST_ENTRANCE",
+      "name": "TH14_Route7_EastEntrance_Layout",
+      "width": 13,
+      "height": 9,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_BuildingFrlg",
+      "secondary_tileset": "gTileset_GenericBuilding2",
+      "border_filepath": "data/layouts/TH14_Route7_EastEntrance/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_Route7_EastEntrance/map.bin",
+      "layout_version": "frlg"
     }
   ]
 }

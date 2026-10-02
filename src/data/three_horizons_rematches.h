@@ -121,6 +121,18 @@ static const struct TH13RematchEntry sRematchEntries[] = {
     {TRAINER_TH13_POKEMONTOWER_6F_ANGELICA, MAP_TH13_POKEMON_TOWER_6F, 1},
     {TRAINER_TH13_POKEMONTOWER_6F_JENNIFER, MAP_TH13_POKEMON_TOWER_6F, 2},
     {TRAINER_TH13_POKEMONTOWER_6F_EMILIA, MAP_TH13_POKEMON_TOWER_6F, 3},
+    {TRAINER_TH14_ROUTE8_JULIA, MAP_TH14_ROUTE8, 1},
+    {TRAINER_TH14_ROUTE8_RICH, MAP_TH14_ROUTE8, 2},
+    {TRAINER_TH14_ROUTE8_GLENN, MAP_TH14_ROUTE8, 3},
+    {TRAINER_TH14_ROUTE8_PAIGE, MAP_TH14_ROUTE8, 4},
+    {TRAINER_TH14_ROUTE8_LESLIE, MAP_TH14_ROUTE8, 5},
+    {TRAINER_TH14_ROUTE8_ANDREA, MAP_TH14_ROUTE8, 6},
+    {TRAINER_TH14_ROUTE8_MEGAN, MAP_TH14_ROUTE8, 7},
+    {TRAINER_TH14_ROUTE8_STAN, MAP_TH14_ROUTE8, 8},
+    {TRAINER_TH14_ROUTE8_AIDAN, MAP_TH14_ROUTE8, 9},
+    {TRAINER_TH14_ROUTE8_ELI_ANNE, MAP_TH14_ROUTE8, 12},
+    {TRAINER_TH14_ROUTE8_RICARDO, MAP_TH14_ROUTE8, 14},
+    {TRAINER_TH14_ROUTE8_JAREN, MAP_TH14_ROUTE8, 15},
 };
 
 // Authored tiers, evaluated against each member's resulting level. Stone,
@@ -161,11 +173,9 @@ static const struct { u16 base, species; u8 level; } sRematchTiers[] = {
     {SPECIES_WARTORTLE, SPECIES_BLASTOISE, 36},
 };
 
-// Approved group76/index0, reserved by chapter14_maps.json. Task8 registers this
-// map and the canonical row; until then the alias intentionally resolves NONE.
-#define TH14_ROUTE8_REMATCH_MAP ((76 << 8) | 0)
+// Both twins share one full-width trainer identity and readiness byte.
 static const struct TH14RematchAlias sRematchAliases[] = {
-    {TRAINER_TH14_ROUTE8_ELI_ANNE, TH14_ROUTE8_REMATCH_MAP, 13, 12},
+    {TRAINER_TH14_ROUTE8_ELI_ANNE, MAP_TH14_ROUTE8, 13, 12},
 };
 
 struct TH14RematchEvolution

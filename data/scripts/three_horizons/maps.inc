@@ -188,3 +188,12 @@ TH_Route1_MapScripts::
     .include "data/maps/TH13_PokemonTower_6F/scripts.inc"
 
     .include "data/scripts/three_horizons/chapter13_tower.inc"
+
+    .include "data/maps/TH14_Route8/scripts.inc"
+    .include "data/maps/TH14_Route8_WestEntrance/scripts.inc"
+    .include "data/maps/TH14_UndergroundPath_EastEntrance/scripts.inc"
+    .include "data/maps/TH14_UndergroundPath_EastWestTunnel/scripts.inc"
+    .include "data/maps/TH14_UndergroundPath_WestEntrance/scripts.inc"
+    .include "data/maps/TH14_Route7/scripts.inc"
+    .include "data/maps/TH14_Route7_EastEntrance/scripts.inc"
+    .include "data/scripts/three_horizons/chapter14_travel.inc"

@@ -21,6 +21,9 @@ class Playtest14Rematches(unittest.TestCase):
     def test_existing_first_parties_byte_identical(self):
         baseline = json.loads((Path(__file__).with_name('playtest13-first-parties-baseline.json')).read_text())
         source = (ROOT/'src/data/trainers.party').read_text()
+        # The immutable snapshot includes the trailing #endif in the last old
+        # record. Remove ONLY new records to reconstruct that original boundary.
+        source = re.sub(r'^=== TRAINER_TH14_\w+ ===\n.*?(?=^=== |^#endif|\Z)', '', source, flags=re.M|re.S)
         current = {a:hashlib.sha256(b.encode()).hexdigest()
             for a,b in re.findall(r'^=== (TRAINER_TH\w+) ===\n(.*?)(?=^=== |\Z)',source,re.M|re.S)}
         self.assertGreaterEqual(len(baseline),156)
@@ -30,7 +33,7 @@ class Playtest14Rematches(unittest.TestCase):
         source = (ROOT/'src/data/three_horizons_rematches.h').read_text()
         self.assertTrue('sRematchAliases[] = {' in source, 'missing bounded alias table')
         aliases = source.split('sRematchAliases[] = {',1)[1].split('};',1)[0]
-        self.assertRegex(aliases,r'\{TRAINER_TH14_ROUTE8_ELI_ANNE, TH14_ROUTE8_REMATCH_MAP, 13, 12\}')
+        self.assertRegex(aliases,r'\{TRAINER_TH14_ROUTE8_ELI_ANNE, MAP_TH14_ROUTE8, 13, 12\}')
         self.assertEqual(aliases.count('TRAINER_TH14_ROUTE8_ELI_ANNE'),1)
         maps = json.loads((ROOT/'tools/three_horizons/chapter14_maps.json').read_text())
         self.assertEqual((maps[0]['name'],maps[0]['group'],maps[0]['index']),('TH14_Route8',76,0))

@@ -121,7 +121,7 @@ TEST("Three Horizons PT14 rematches: shipped first rosters offsets and unchanged
 {
     struct Pokemon party[PARTY_SIZE];
     struct TrainerMon original[PARTY_SIZE];
-    for (u32 row = 0; row < 18; row++)
+    for (u32 row = 0; row < ARRAY_COUNT(sExpected); row++)
     {
         const struct Trainer *trainer = TH_TestGetActualTrainer(sExpected[row].trainerId);
         memcpy(original, trainer->party, trainer->partySize * sizeof(*original));

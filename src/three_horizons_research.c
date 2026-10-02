@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons_chapter14.h"
 #include "event_data.h"
 #include "overworld.h"
 #include "palette.h"
@@ -56,7 +57,7 @@ bool32 TH_ResearchTryStartPendingCall(void)
     // Count travel even while direction input is held. Measuring only at idle
     // loses a whole walking loop when the avatar returns to its starting tile.
     if (gMain.callback2 != CB2_Overworld || gMain.inBattle
-        || gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_TH_PALLET)
+        || !TH_IsProjectMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)
         || !FlagGet(FLAG_TH13_GEAR))
         return FALSE;
     if (sCallStepsRemaining)
