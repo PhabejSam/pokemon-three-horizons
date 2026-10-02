@@ -101,7 +101,7 @@ For a demonstrated behavioral bug, record reproduction → regression → expect
 - [x] Add `route9_current_map_tree_survives_connection_edge_filter` and `cut_visibility_collision_reload_agree`: uncut x2 tree visible/colliding, correct owner map despite connection edge, Cut removes graphic/collision together, reload obeys existing session lifecycle, no stale FLAG_TEMP_12 from another map. Record behavioral RED.
 - [x] Repair only the current-map/connecting-map ownership filter proven responsible; use explicit bounded project-map checks at the existing shared hooks. Restore forest whole-tree metatiles around x27–35/y29–34 and entrance x36–38/y31–32 without moving Pinsir(30,32), Heracross(32,32), researcher(29,34), reward(35,30), Cut(38,31/32), paths or receipts.
 - [x] Add host geometry/interaction assertions; run existing native Cut regressions plus N(`Three Horizons PT14 cut:`,`cut-green`) and H(cut).
-- [ ] At Gate A inspect before/after native frames, first arrival, jump/follower, Cut, leave/re-enter, then cold Continue; if source hypothesis does not reproduce, retain evidence and investigate instead of speculative filter removal.
+- [x] At Gate A inspect before/after native frames, first arrival, jump/follower, Cut, leave/re-enter, then cold Continue; if source hypothesis does not reproduce, retain evidence and investigate instead of speculative filter removal.
 - [x] Commit `fix: preserve Route9 Cut state and complete forest tree graphics` only for demonstrated repairs.
 
 ## Task 4: Improve Flash handoff and Lavender's causal story lead
@@ -113,7 +113,7 @@ For a demonstrated behavioral bug, record reproduction → regression → expect
 - [x] Implement the dialogue contract in Appendix C. Lavender rival remains conversation-only on first/repeat; the observer Rocket remains nonbattle. Repeat barrier guidance connects Giovanni's Tower reports, Celadon trio business and Scope. Remove the developer completion sentence without clearing FLAG_TH13_ENDPOINT.
 - [x] Place Jessie/James/Meowth on a verified walkable, unobscured three-tile row, using the concrete staging ledger in Appendix C; keep existing cameo hide receipt and all local IDs. Retain a free approach/escape lane and safe follower hiding/restoration during conversation.
 - [x] Test full-bag Flash retry/owned HM/no badge/9 vs10 species, conscious compatible non-Egg field use without learned move/free slot; preserve completed rival/cameo on migration. Run existing Flash tests, H(leads), N(`Three Horizons PT14 leads:`,`leads-green`).
-- [ ] At Gate A capture all speakers unobscured and the first/repeat speech paths with labelled fixtures; the owner save's already completed scene must not replay.
+- [x] At Gate A capture all speakers unobscured and the first/repeat speech paths with labelled fixtures; the owner save's already completed scene must not replay.
 - [x] Commit `fix: clarify Flash handoff and Lavender Celadon leads`.
 
 ## Task 5: Extend rematches without changing first battles or save storage
@@ -155,10 +155,10 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 
 ## Gate A: Carry-forward systems and save safety
 
-- [ ] Build P(`gate-a`); record compiler warnings against the inherited baseline, investigate relevant new warnings.
-- [ ] Complete Tasks2–7 native visual/controller checks on this identified ROM, including old/candidate forest and trio frames, native Kanto map, Flash order, Route9 first arrival, Gear regression and owner-source capture attempt. Run L once here because migration/structure code changed.
-- [ ] Cold Continue from an untouched private owner-source copy; compare protected state before movement. Save natively, fully close the core, cold Continue again. Assert new version0xA90E, old story/Dex/party/PC/research intact and new PT14 flags still correctly initialized. This intermediate gate is not final exact-ROM acceptance.
-- [ ] Checkpoint results. Repair failures before adding the new city. Do not run the complete upstream/full host/native matrix yet.
+- [x] Build P(`gate-a`); record compiler warnings against the inherited baseline, investigate relevant new warnings.
+- [x] Complete Tasks2–7 native visual/controller checks on this identified ROM, including old/candidate forest and trio frames, native Kanto map, Flash order, Route9 first arrival, Gear regression and owner-source capture attempt. Run L once here because migration/structure code changed.
+- [x] Cold Continue from an untouched private owner-source copy; compare protected state before movement. Save natively, fully close the core, cold Continue again. Assert new version0xA90E, old story/Dex/party/PC/research intact and new PT14 flags still correctly initialized. This intermediate gate is not final exact-ROM acceptance.
+- [x] Checkpoint results. Repair failures before adding the new city. Do not run the complete upstream/full host/native matrix yet.
 
 ## Task 8: Open Route 8, the Underground Path and Route 7
 
