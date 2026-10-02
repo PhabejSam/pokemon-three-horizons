@@ -19,6 +19,11 @@
       "map": "MAP_TH12_VERMILION_CITY",
       "offset": -10,
       "direction": "left"
+    },
+    {
+      "map": "MAP_TH14_ROUTE12_LANDING",
+      "offset": 0,
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -216,21 +221,6 @@
       "script": "TH13_Route11_Item2",
       "flag": "FLAG_TH13_PICKUP_2",
       "local_id": "LOCALID_TH13_ROUTE11_13"
-    },
-    {
-      "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_MAN_1",
-      "x": 58,
-      "y": 10,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "TH13_Route11_EastGate",
-      "flag": "0",
-      "local_id": "LOCALID_TH13_ROUTE11_GATE"
     }
   ],
   "warp_events": [
@@ -240,6 +230,20 @@
       "elevation": 0,
       "dest_map": "MAP_TH13_DIGLETTS_CAVE_SOUTH_ENTRANCE",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 58,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_TH14_ROUTE11_EAST_ENTRANCE_1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 65,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_TH14_ROUTE11_EAST_ENTRANCE_1F",
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

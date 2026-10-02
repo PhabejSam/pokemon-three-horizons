@@ -677,4 +677,5 @@ gSpecials::
     def_special TH14_ScriptSelectHideoutFloor
     def_special TH14_BeginRocketPair
     def_special TH14_CompleteRocketPair
+    def_special TH14_ConfirmNinaTrade
 #endif

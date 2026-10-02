@@ -232,3 +232,8 @@ TH_Route1_MapScripts::
     .include "data/maps/TH14_RocketHideout_Elevator/scripts.inc"
 
     .include "data/maps/TH14_PokemonTower_7F/scripts.inc"
+
+    .include "data/scripts/three_horizons/chapter14_snorlax.inc"
+    .include "data/maps/TH14_Route11_EastEntrance_1F/scripts.inc"
+    .include "data/maps/TH14_Route11_EastEntrance_2F/scripts.inc"
+    .include "data/maps/TH14_Route12_Landing/scripts.inc"

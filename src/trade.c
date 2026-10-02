@@ -5121,6 +5121,26 @@ static void CB2_SaveAndEndWirelessTrade(void)
     UpdatePaletteFade();
 }
 
+#if THREE_HORIZONS
+void TH14_ConfirmNinaTrade(void)
+{
+    const struct InGameTrade *trade = &sIngameTrades[INGAME_TRADE_NIDORINOA];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE], otName[PLAYER_NAME_LENGTH + 1];
+    gSpecialVar_Result = FALSE;
+    if (gSpecialVar_0x8004 >= PARTY_SIZE || gSpecialVar_0x8005 != INGAME_TRADE_NIDORINOA)
+        return;
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    GetMonData(mon, MON_DATA_NICKNAME, nickname);
+    GetMonData(mon, MON_DATA_OT_NAME, otName);
+    gSpecialVar_Result = !GetMonData(mon, MON_DATA_IS_EGG)
+        && GetMonData(mon, MON_DATA_SPECIES) == trade->species
+        && GetMonData(mon, MON_DATA_PERSONALITY) == trade->personality
+        && GetMonData(mon, MON_DATA_OT_ID) == trade->otId
+        && StringCompare(nickname, trade->nickname) == 0
+        && StringCompare(otName, trade->otName) == 0;
+}
+#endif
+
 #if defined(TESTING) && THREE_HORIZONS
 u16 TH_TestFindSkarmoryTrade(void)
 {

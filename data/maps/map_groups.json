@@ -1317,6 +1317,9 @@
     "TH14_RocketHideout_B3F",
     "TH14_RocketHideout_B4F",
     "TH14_RocketHideout_Elevator",
-    "TH14_PokemonTower_7F"
+    "TH14_PokemonTower_7F",
+    "TH14_Route11_EastEntrance_1F",
+    "TH14_Route11_EastEntrance_2F",
+    "TH14_Route12_Landing"
   ]
 }

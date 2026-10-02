@@ -9,7 +9,8 @@ NAMES = ['TH13_Route11', 'TH13_DiglettsCave_SouthEntrance', 'TH13_DiglettsCave_B
 
 class CaveRoute(unittest.TestCase):
     def test_build_selects_every_registered_project_map_in_order(self):
-        registry = json.loads((ROOT/'data/maps/map_groups.json').read_text())['gMapGroup_ThreeHorizons']
+        groups = json.loads((ROOT/'data/maps/map_groups.json').read_text())
+        registry = groups['gMapGroup_ThreeHorizons'] + groups['gMapGroup_ThreeHorizons14']
         selected = json.loads((ROOT/'tools/mapjson/three_horizons_maps.json').read_text())['maps']
         self.assertEqual(selected, registry)
         self.assertEqual(len(selected), len(set(selected)))
@@ -61,7 +62,8 @@ class CaveRoute(unittest.TestCase):
     def test_diglett_cave_connects_vermilion_to_route2(self):
         registry = json.loads((ROOT/'data/maps/map_groups.json').read_text())['gMapGroup_ThreeHorizons']
         for name in NAMES: self.assertIn(name, registry)
-        all_maps = {m['id']:m for name in registry for m in [map_data(name)]}
+        appended = json.loads((ROOT/'data/maps/map_groups.json').read_text())['gMapGroup_ThreeHorizons14']
+        all_maps = {m['id']:m for name in registry+appended for m in [map_data(name)]}
         for name in NAMES:
             m = map_data(name)
             self.assertTrue(m['allow_cycling'])
@@ -73,10 +75,13 @@ class CaveRoute(unittest.TestCase):
                 self.assertTrue(obj['script'].startswith('TH13_'))
                 self.assertTrue(obj['flag']=='0' or obj['flag'].startswith('FLAG_TH13_PICKUP_'))
         route=map_data(NAMES[0]); city=map_data('TH12_VermilionCity')
-        self.assertEqual(route['connections'],[{'map':city['id'],'offset':-10,'direction':'left'}])
+        self.assertEqual(route['connections'],[{'map':city['id'],'offset':-10,'direction':'left'},
+            {'map':'MAP_TH14_ROUTE12_LANDING','offset':0,'direction':'right'}])
         self.assertIn({'map':route['id'],'offset':10,'direction':'right'},city['connections'])
         self.assertFalse(any(o['script']=='TH12_EastBoundary' for o in city['coord_events']))
-        self.assertEqual(len(route['warp_events']),1)
+        self.assertEqual(len(route['warp_events']),3)
+        self.assertEqual(route['warp_events'][0],{'x':6,'y':7,'elevation':0,
+            'dest_map':'MAP_TH13_DIGLETTS_CAVE_SOUTH_ENTRANCE','dest_warp_id':'0'})
         self.assertEqual(map_data(NAMES[-1])['warp_events'][1]['dest_warp_id'],'4')
         self.assertNotIn('setmetatile 17, 11, 169, TRUE',(ROOT/'data/maps/TH_Route2/scripts.inc').read_text())
         self.assertFalse(any((o['x'],o['y'])==(17,11) and o['script']=='TH_Journey_Closed' for o in map_data('TH_Route2')['bg_events']))

@@ -1011,7 +1011,21 @@
       "interactionAliases": []
     }
   ],
-  "encounters": [],
+  "encounters": [
+    {
+      "map": "MAP_TH14_ROUTE12_LANDING",
+      "script": "TH14_Snorlax",
+      "species": "SPECIES_SNORLAX",
+      "level": 30,
+      "method": "scripted-normal-wild",
+      "receipt": "FLAG_TH14_SNORLAX_RESOLVED",
+      "acceptedOutcomes": [
+        "B_OUTCOME_CAUGHT",
+        "B_OUTCOME_WON"
+      ],
+      "futureObligation": "Later approved chapter must provide alternate Snorlax availability; no second PT14 encounter."
+    }
+  ],
   "shops": [],
   "prizes": [],
   "rematchEvolutions": [
@@ -1237,6 +1251,10 @@
     {
       "item": "ITEM_POKE_FLUTE",
       "receipt": "FLAG_TH14_POKE_FLUTE"
+    },
+    {
+      "item": "ITEM_ITEMFINDER",
+      "receipt": "FLAG_TH14_ITEMFINDER"
     }
   ],
   "economy": {
@@ -1659,5 +1677,16 @@
         "flag": "FLAG_TH14_ROOF_LEMONADE"
       }
     ]
-  }
+  },
+  "localTrades": [
+    {
+      "map": "MAP_TH14_ROUTE11_EAST_ENTRANCE_2F",
+      "script": "TH14_Gate_Turner",
+      "trade": "INGAME_TRADE_NIDORINOA",
+      "requestedSpecies": "SPECIES_NIDORINO",
+      "receivedSpecies": "SPECIES_NIDORINA",
+      "nickname": "NINA",
+      "receipt": "FLAG_TH14_NINA_TRADE"
+    }
+  ]
 }

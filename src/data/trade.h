@@ -1114,7 +1114,7 @@ static const struct InGameTrade sIngameTrades[] =
     },
     [INGAME_TRADE_NIDORINOA] = 
     {
-#if defined(FIRERED)
+#if defined(FIRERED) || THREE_HORIZONS
         .nickname = _("NINA"),
         .species = SPECIES_NIDORINA,
         .ivs = {22, 25, 18, 19, 22, 15},

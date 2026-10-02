@@ -9791,6 +9791,45 @@
       "border_filepath": "data/layouts/TH14_PokemonTower_7F/border.bin",
       "blockdata_filepath": "data/layouts/TH14_PokemonTower_7F/map.bin",
       "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_ROUTE11_EAST_ENTRANCE_1F",
+      "name": "TH14_Route11_EastEntrance_1F_Layout",
+      "width": 13,
+      "height": 12,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_BuildingFrlg",
+      "secondary_tileset": "gTileset_GenericBuilding2",
+      "border_filepath": "data/layouts/TH14_Route11_EastEntrance_1F/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_Route11_EastEntrance_1F/map.bin",
+      "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_ROUTE11_EAST_ENTRANCE_2F",
+      "name": "TH14_Route11_EastEntrance_2F_Layout",
+      "width": 13,
+      "height": 11,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_BuildingFrlg",
+      "secondary_tileset": "gTileset_GenericBuilding2",
+      "border_filepath": "data/layouts/TH14_Route11_EastEntrance_2F/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_Route11_EastEntrance_2F/map.bin",
+      "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_ROUTE12_LANDING",
+      "name": "TH14_Route12_Landing_Layout",
+      "width": 24,
+      "height": 22,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General_Frlg",
+      "secondary_tileset": "gTileset_LavenderTown",
+      "border_filepath": "data/layouts/TH14_Route12_Landing/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_Route12_Landing/map.bin",
+      "layout_version": "frlg"
     }
   ]
 }
