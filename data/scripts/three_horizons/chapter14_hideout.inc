@@ -363,12 +363,36 @@ TH14_HideoutB4F_Victory::
     end
 
 TH14_RocketHideout_B4F_EventScript_Giovanni::
-    msgbox TH14_HideoutPending, MSGBOX_NPC
-    end
+    trainerbattle_single TRAINER_TH14_GIOVANNI, TH14_GiovanniIntro, TH14_GiovanniDefeat, TH14_GiovanniVictory
+    goto TH14_GiovanniVictory
+
+TH14_GiovanniVictory::
+    lockall
+    msgbox TH14_GiovanniAfter
+    closemessage
+    removeobject LOCALID_TH14_ROCKETHIDEOUT_B4F_1
+    goto_if_set FLAG_TH14_SILPH_SCOPE, TH14_HideoutEnd
+    addobject LOCALID_TH14_ROCKETHIDEOUT_B4F_2
+    goto TH14_HideoutEnd
 
 TH14_RocketHideout_B4F_EventScript_SilphScope::
-    msgbox TH14_HideoutPending, MSGBOX_NPC
-    end
+    lockall
+    goto_if_not_defeated TRAINER_TH14_GIOVANNI, TH14_HideoutEnd
+    setvar VAR_0x8004, ITEM_SILPH_SCOPE
+    setvar VAR_0x8005, FLAG_TH14_SILPH_SCOPE
+    special TH14_ScriptGiveUniqueItem
+    goto_if_eq VAR_RESULT, 0, TH14_ScopeNoRoom
+    removeobject LOCALID_TH14_ROCKETHIDEOUT_B4F_2
+    goto_if_eq VAR_RESULT, 2, TH14_ScopeLead
+    playfanfare MUS_OBTAIN_ITEM
+    msgbox TH14_ScopeReceived
+    waitfanfare
+TH14_ScopeLead:
+    msgbox TH14_ScopeLeadText
+    goto TH14_HideoutEnd
+TH14_ScopeNoRoom:
+    msgbox TH14_ScopeNoRoomText
+    goto TH14_HideoutEnd
 
 TH14_HideoutKeyGuard_Victory::
     msgbox TH14_RocketHideout_B4F_Text_Grunt1PostBattle
@@ -549,5 +573,73 @@ TH14_HideoutPosterOpenText:
     .string "The hidden stairs are open.$"
 TH14_HideoutPosterBlockedText:
     .string "The ROCKET won't let you\nexamine the poster.$"
-TH14_HideoutPending:
-    .string "We have business to discuss.$"
+TH14_RocketTrioTrigger::
+    goto_if_set FLAG_TH14_TRIO_DEFEATED, TH14_RocketTrioEnd
+    lockall
+    hidefollower TRUE
+    setvar VAR_0x8004, PARTY_SIZE
+    specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
+    goto_if_lt VAR_RESULT, 2, TH14_RocketTrioTooFew
+    special TH14_BeginRocketPair
+    turnobject LOCALID_PLAYER, DIR_NORTH
+    msgbox TH14_RocketTrioIntro
+    setvar VAR_LAST_TALKED, LOCALID_TH14_JESSIE
+    closemessage
+TH14_RocketTrioBattle::
+    trainerbattle LOCALID_TH14_JESSIE, TRAINER_TH14_JESSIE, NULL, TH14_JessieDefeat, TH14_RocketTrioVictory, LOCALID_TH14_JAMES, TRAINER_TH14_JAMES, NULL, TH14_JamesDefeat, NULL, NULL, TH14_RocketTrioTooFewText, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
+    goto TH14_RocketTrioVictory
+TH14_RocketTrioVictory::
+    lockall
+    special TH14_CompleteRocketPair
+    goto_if_eq VAR_RESULT, FALSE, TH14_RocketTrioRelease
+    msgbox TH14_RocketTrioExit
+    closemessage
+    playse SE_M_JUMP_KICK
+    applymovement LOCALID_TH14_JESSIE, TH12_RocketBlastOff
+    applymovement LOCALID_TH14_JAMES, TH12_RocketBlastOff
+    applymovement LOCALID_TH14_MEOWTH, TH12_RocketBlastOff
+    waitmovement 0
+    removeobject LOCALID_TH14_JESSIE
+    removeobject LOCALID_TH14_JAMES
+    removeobject LOCALID_TH14_MEOWTH
+    goto TH14_RocketTrioRelease
+TH14_RocketTrioTooFew:
+    msgbox TH14_RocketTrioTooFewText
+    closemessage
+    applymovement LOCALID_PLAYER, TH14_RocketTrioRetreat
+    waitmovement 0
+    goto TH14_RocketTrioRelease
+TH14_RocketTrioRelease:
+    special TH_RefreshFollower
+    releaseall
+    end
+TH14_RocketTrioEnd:
+    end
+TH14_RocketTrioRetreat:
+    walk_down
+    step_end
+TH14_RocketTrioTalk::
+    msgbox TH14_RocketTrioTooFewText, MSGBOX_NPC
+    end
+TH14_RocketTrioIntro:
+    .string "JESSIE: These reports are important\nTEAM ROCKET business!\pJAMES: Then why am I carrying\nall the notebooks?\pMEOWTH: The BOSS compares the\nsightings before we grab the rare\lones!\pEr… forget you heard that!$"
+TH14_RocketTrioTooFewText:
+    .string "Come back with two POKéMON\nready to battle!$"
+TH14_JessieDefeat:
+    .string "Not the reports!\nThis was supposed to be simple!$"
+TH14_JamesDefeat:
+    .string "I should have packed\nlighter notebooks!$"
+TH14_RocketTrioExit:
+    .string "JESSIE: Our perfect plan!\nJAMES: And all those notebooks!\pMEOWTH: I'm not carrying you two!\nWe're blasting off again!$"
+TH14_GiovanniIntro:
+    .string "Anyone can chase a rare POKéMON.\pKnowing where it will appear\nfirst--that is useful.\pYou have interfered enough.$"
+TH14_GiovanniDefeat:
+    .string "You have earned this victory.$"
+TH14_GiovanniAfter:
+    .string "A setback. Nothing more.\pThe SILPH SCOPE reveals what\nordinary eyes cannot identify.\pTake it. Our business here\nis finished.$"
+TH14_ScopeReceived:
+    .string "{PLAYER} obtained the SILPH SCOPE!$"
+TH14_ScopeNoRoomText:
+    .string "The BAG is full.\nThe SILPH SCOPE is still here.$"
+TH14_ScopeLeadText:
+    .string "The SILPH SCOPE reveals things\nordinary eyes cannot identify.\pThe ghost in POKéMON TOWER\nmay finally be seen.$"

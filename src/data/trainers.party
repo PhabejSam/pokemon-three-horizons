@@ -3521,8 +3521,6 @@ Machoke
 Level: 26
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
-#endif
-
 === TRAINER_DAISUKE ===
 Name: DAISUKE
 Class: Black Belt
@@ -3572,6 +3570,8 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Charge
 - Shock Wave
 - Screech
+
+#endif
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_7 ===
 Name: GRUNT
@@ -20950,4 +20950,61 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Arbok
 Level: 23
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TH14_GIOVANNI ===
+Name: GIOVANNI
+Class: Boss Frlg
+Pic: Leader Giovanni Frlg
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move
+
+Onix
+Level: 25
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+
+Rhyhorn
+Level: 24
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+
+Kangaskhan
+Level: 29
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+
+=== TRAINER_TH14_JESSIE ===
+Name: JESSIE
+Class: Team Rocket Frlg
+Pic: TH Jessie
+Gender: Female
+Music: Suspicious
+Multi Party: Half
+AI: Check Bad Move / Try To Faint
+
+Arbok
+Level: 28
+Ability: Intimidate
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Crunch
+- Acid
+- Glare
+- Screech
+
+=== TRAINER_TH14_JAMES ===
+Name: JAMES
+Class: Team Rocket Frlg
+Pic: TH James
+Gender: Male
+Music: Suspicious
+Multi Party: Half
+AI: Check Bad Move / Try To Faint
+
+Koffing
+Level: 28
+Ability: Levitate
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Sludge
+- Assurance
+- Smokescreen
+- Haze
 #endif

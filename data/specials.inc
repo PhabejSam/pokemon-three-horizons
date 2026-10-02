@@ -674,4 +674,6 @@ gSpecials::
     def_special TH14_ScriptEconomy
     def_special TH14_GetHideoutFloor
     def_special TH14_ScriptSelectHideoutFloor
+    def_special TH14_BeginRocketPair
+    def_special TH14_CompleteRocketPair
 #endif

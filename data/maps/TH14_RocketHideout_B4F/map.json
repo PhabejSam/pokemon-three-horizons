@@ -150,6 +150,51 @@
       "script": "TH14_RocketHideout_B4F_EventScript_ItemCalcium",
       "flag": "FLAG_TH14_PICKUP_40",
       "local_id": "LOCALID_TH14_ROCKETHIDEOUT_B4F_9"
+    },
+    {
+      "type": "object",
+      "local_id": "LOCALID_TH14_JESSIE",
+      "graphics_id": "OBJ_EVENT_GFX_TH_JESSIE",
+      "x": 17,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH14_RocketTrioTalk",
+      "flag": "FLAG_TH14_TRIO_DEFEATED"
+    },
+    {
+      "type": "object",
+      "local_id": "LOCALID_TH14_JAMES",
+      "graphics_id": "OBJ_EVENT_GFX_TH_JAMES",
+      "x": 19,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH14_RocketTrioTalk",
+      "flag": "FLAG_TH14_TRIO_DEFEATED"
+    },
+    {
+      "type": "object",
+      "local_id": "LOCALID_TH14_MEOWTH",
+      "graphics_id": "OBJ_EVENT_GFX_MEOWTH",
+      "x": 21,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TH14_RocketTrioTalk",
+      "flag": "FLAG_TH14_TRIO_DEFEATED"
     }
   ],
   "warp_events": [
@@ -175,7 +220,26 @@
       "dest_warp_id": "1"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TH14_RocketTrioTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TH14_RocketTrioTrigger"
+    }
+  ],
   "bg_events": [
     {
       "type": "hidden_item",
@@ -204,6 +268,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "TH14_HideoutResearchRecord2"
+    },
+    {
+      "type": "sign",
+      "x": 20,
+      "y": 5,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TH14_RocketHideout_B4F_EventScript_SilphScope"
     }
   ]
 }

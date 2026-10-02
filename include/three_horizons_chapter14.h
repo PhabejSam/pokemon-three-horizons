@@ -22,6 +22,8 @@ enum TH14GiftResult
 
 u8 TH14_TryGiveUniqueItem(u16 itemId, u16 receiptFlag);
 void TH14_ScriptGiveUniqueItem(void);
+void TH14_BeginRocketPair(void);
+void TH14_CompleteRocketPair(void);
 
 #define TH14_EEVEE_ALREADY_GIVEN 3
 u16 TH14_GetDeptStoreFloor(void);

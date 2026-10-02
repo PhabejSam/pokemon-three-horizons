@@ -1216,18 +1216,7 @@
       "minBadges": 3
     }
   ],
-  "unfinishedInteractions": [
-    {
-      "script": "TH14_RocketHideout_B4F_EventScript_Giovanni",
-      "ownerTask": 13,
-      "reason": "Giovanni battle/Scope transaction"
-    },
-    {
-      "script": "TH14_RocketHideout_B4F_EventScript_SilphScope",
-      "ownerTask": 13,
-      "reason": "Giovanni battle/Scope transaction"
-    }
-  ],
+  "unfinishedInteractions": [],
   "uniqueItems": [
     {
       "item": "ITEM_TOWN_MAP",
@@ -1240,6 +1229,10 @@
     {
       "item": "ITEM_LIFT_KEY",
       "receipt": "FLAG_TH14_LIFT_KEY"
+    },
+    {
+      "item": "ITEM_SILPH_SCOPE",
+      "receipt": "FLAG_TH14_SILPH_SCOPE"
     }
   ],
   "economy": {

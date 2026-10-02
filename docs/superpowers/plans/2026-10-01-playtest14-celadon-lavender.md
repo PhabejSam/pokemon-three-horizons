@@ -224,12 +224,12 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 **Files:** chapter14 Hideout script, scene map/templates, trainer data, chapter14 helper; tests `test/three_horizons_playtest14_rocket.c`, `tools/three_horizons/tests/test_playtest14_rocket.py`.
 **Interfaces:** `void TH14_BeginRocketPair(void)` initializes the two Appendix C trainer identities through existing two-opponent battle setup; `void TH14_CompleteRocketPair(void)` records both defeats/story completion only after a win. Scope uses Task2's ITEM_SILPH_SCOPE/receipt pair. Existing Jessie/James art and `monicaccina` attribution are retained.
 
-- [ ] Add `trio_requires_two_usable_not_eggs`, `trio_loss_retry_retains_scene`, `trio_win_marks_both_distinct_ids_once`, `trio_never_vs_seeker`, `giovanni_defeat_scope_full_bag_retry` and `scope_return_lead_repeats_without_duplicate`.
-- [ ] Run RED; implement the mandatory Appendix C staging/conversation. Meowth talks and follows/stages with the pair but is not added to their battle party. With fewer than two conscious usable Pokémon, give an in-world retry message and leave progression unchanged; no forced unwinnable double battle.
-- [ ] Implement Appendix C trio and Giovanni parties, first/win/loss/repeat text and controlled strategic Giovanni voice. Do not imply he knows the cause. Preserve flee/blackout and follower/control cleanup.
-- [ ] Award Scope only through successful retryable delivery after Giovanni. On failed delivery the source remains reachable and visible; on success give the explicit return-to-Tower lead. No Erika-dependent gate.
+- [x] Add `trio_requires_two_usable_not_eggs`, `trio_loss_retry_retains_scene`, `trio_win_marks_both_distinct_ids_once`, `trio_never_vs_seeker`, `giovanni_defeat_scope_full_bag_retry` and `scope_return_lead_repeats_without_duplicate`.
+- [x] Run RED; implement the mandatory Appendix C staging/conversation. Meowth talks and follows/stages with the pair but is not added to their battle party. With fewer than two conscious usable Pokémon, give an in-world retry message and leave progression unchanged; no forced unwinnable double battle.
+- [x] Implement Appendix C trio and Giovanni parties, first/win/loss/repeat text and controlled strategic Giovanni voice. Do not imply he knows the cause. Preserve flee/blackout and follower/control cleanup.
+- [x] Award Scope only through successful retryable delivery after Giovanni. On failed delivery the source remains reachable and visible; on success give the explicit return-to-Tower lead. No Erika-dependent gate.
 - [ ] Run H(rocket), N(`Three Horizons PT14 rocket:`,`rocket-green`); at Gate B show all three speakers, correct two-opponent intro/parties, loss/retry and Giovanni→Scope handoff.
-- [ ] Commit `feat: complete Celadon Rocket story and Silph Scope reward`.
+- [x] Commit `feat: complete Celadon Rocket story and Silph Scope reward`.
 
 ## Gate B: New city, travel and Rocket content
 
