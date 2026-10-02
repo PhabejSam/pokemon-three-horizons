@@ -10,11 +10,12 @@ This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next 
 
 ## Current status (supersedes intermediate statuses below)
 
-Tasks1–19 are complete. The full replacement automated/build matrix and exact-ROM
-mGBA acceptance pass. Release guides are prepared; the one independent final
-review and private package/extraction smoke remain pending Tasks20–21. The old
+Tasks1–20 are complete. The replacement automated/build matrix and exact-ROM
+mGBA acceptance pass. One independent Astra/Ultra review found no Critical or
+Important issues. Its guide correction is applied; two dialogue minors are
+deferred below. Private packaging/extraction smoke remains Task21. The older
 ROM1746110c is blocked by the reproduced Fuji handoff defect; no old screenshot
-or old pass substitutes for acceptance of this replacement candidate.
+or pass substitutes for acceptance of this replacement candidate.
 
 The exact owner continuation is fixture-free. Adversarial branches are labelled
 fixtures, and fresh-game coverage is an opening smoke plus all nine choices.
@@ -76,7 +77,17 @@ fixtures, and fresh-game coverage is an opening smoke plus all nine choices.
 | 50 | Exact ROM native-save/cold | PASS: initial owner and earned checkpoints212/350/432/457; final generation23, all protected payloads exact across runtime/battery/cold except permitted clock bookkeeping; all starter branches |
 | 51 | Hardware-only remaining acceptance | PENDING: RG40XX H/VBA-Next cold boot, capture monitoring, art/input/audio/performance and bounded route; PLAYTEST_14_HARDWARE_QA.md |
 | 52 | Known defects or limitations | HIGH intermittent hardware capture unresolved; no full natural new-game emulator journey; inherited startup/RWX/deprecation warnings recorded; Saffron/extended Route12/Fuchsia/regions excluded; later prize-species/alternate Snorlax sources unimplemented |
-| 53 | Deferred minors | Final whole-branch Astra/Ultra review PENDING; no final review result claimed yet |
+| 53 | Deferred minors | Lavender worker incorrectly calls west Route8 closed; Celadon local Rocket/Scope aftermath reactions remain unfinished. Guide corrected for text-only pre-Scope barrier. Final review: 0 Critical/Important, 3 Minor (1 documentation correction, 2 deferred) |
+
+## Final independent review disposition
+
+Read-only Astra/Ultra review covered base2d85555d through e94862514a. It did not
+rerun tests. Root verified all three citations: two dialogue issues remain
+deferred and disclosed in the walkthrough, while the impossible pre-Scope Run
+instruction is corrected. These do not prevent travel, rewards or saving.
+Celadon's approved aftermath reactions are still unfinished, not removed from
+the design. Hardware reliability, complete natural new-game travel and exhaustive
+upstream runtime playthroughs were not judged or claimed by the review.
 
 ## Build warnings and test-runner provenance
 

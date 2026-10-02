@@ -10,11 +10,13 @@ This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next 
 
 ## Resume point
 
-Tasks1–19 complete; Task20 final independent review and Task21 private packaging
-remain. Feature/compiled revision abdec6f; emulator documentation checkpoint
-7c58aee03e. Do not rebuild unchanged code after documentation-only commits.
-Private evidence is retained, never packaged or deleted. No merge/push/settings
-change is authorized. The older1746110c candidate is BLOCKED/superseded.
+Tasks1–20 complete; Task21 private package/extraction smoke is next. One
+independent Astra/Ultra review found no Critical/Important findings. Two dialogue
+minors remain: Lavender's outdated west-road closure and missing Celadon local
+Rocket-aftermath reactions. The pre-Scope walkthrough instruction is corrected.
+Feature/compiled revision remains abdec6f; all later changes are documentation.
+Keep private evidence and isolated branch. No merge, push or cleanup is authorized.
+The older1746110c candidate remains blocked/superseded.
 
 Major changes: appended group76/37 maps and explicit66 receipt ownership;
 version-safe migration/map-family predicates; Town Map/Cut/Flash/forest/lead
@@ -72,6 +74,20 @@ Owner originals remain untouched; no raw saves/RAM belong in the package.
 - Task16 in progress BASEdde6690aeed25ef503dfbeaa1e8deea1091c22ee. Host RED8:5FAIL/2missing-label errors/1existing-control pass against old endpoint. Native RED build01 running with upper-floor Scope classification and appended-actor regressions plus all28 throwable Balls/ordinary Marowak capture controls. Ruling: no registered unidentified-Ghost overworld graphic exists; preserve the unseen presence/barrier until Scope reveal, then show the existing native Marowak actor via bounded observation/resolution spawn predicate. No invented art. Actor flag0 avoids removeobject prematurely setting final resolution; final flag remains explicit after fade. Cost if wrong: pre-reveal visual expectation, mitigated by approved unidentified-presence copy and exact scene acceptance in Task19.
 
 - Task19 Important defect: natural owner actions426-432 reached Fuji's home after rescue but the automatic home thanks/Flute delivery never ran. Native cold save432 confirms rescue set, Flute receipt unset and item absent. Manual re-talk433-434 recovers, but does not satisfy automatic handoff acceptance. Old immutable candidate1746110c is BLOCKED (candidate-1746110c-status.json), retained unchanged as RED evidence; later travel through action439 is diagnostic only. Root cause: DoWarp replaces ScriptContext, so instructions after warp/waitstate are discarded. The host scene model incorrectly continued that discarded context. Emulator fixture fuji-warp-red and corrected host model reproduce failure (4/11 host failures). Destination-map OnLoad/OnFrame now resumes only rescued, undelivered arrivals at the authored3,4 location, using existing receipts and map-local TEMP1; no save growth. Ordinary doorway entry and delivered reward do not trigger; cold pending Continue resumes; full pocket remains retryable. Related30 host checks and7 compiled native definitions PASS (task19-fuji-related-host-01.log/native/task19-fuji-fix-01.json); separate production build running, emulator GREEN pending. Ruling: refresh Task18 integration and exact-ROM Task19 acceptance after this root-cause fix; old-ROM passes remain historical evidence, never proof of the replacement candidate. Cost is another bounded integration/owner route, required to avoid releasing untested code.
+
+- Final: Ruling: correct the third finding as part of Task20's explicitly required accurate release walkthrough — pre-Scope barrier starts no battle, so guide says approach/read/leave normally. This is release-document completion, not a gameplay minor-fix pass; no compiled input changes. Cost if wrong: an incorrect test instruction; verified against both no-Scope script branches.
+
+- Final: Ruling: hardware capture reliability remains HIGH/unresolved and RG40XX H acceptance pending — mGBA nonreproduction cannot establish a VBA-Next fix. Cost if wrong: owner may still encounter corruption; retain backups and hardware checklist.
+
+- Final: Ruling: new-game acceptance is opening plus all nine choices only; full natural chapter journey is a user beta item — fixture-free owner route covers chapter progression without inventing unperformed new-game coverage. Cost if wrong: new-game-only late progression issue can remain unobserved.
+
+- Final: Ruling: future regions and inaccessible Soft-Boiled access remain excluded under the approved bounded chapter — no Surf/Saffron/Cycling Road/full Route12 work is inferred. Cost if wrong: later content stays unavailable, explicitly documented.
+
+- Final: Ruling: upstream compatibility result means the three clean builds and recorded native conditional controls, not exhaustive upstream playthroughs — reviewer ran no independent upstream games. Cost if wrong: unexercised upstream runtime behavior remains uncertain.
+
+- Final: Ruling: package contents/distribution remain Task21's separate hash/allowlist/extraction/cold-smoke gate — review completion does not declare an uncreated archive accepted. Cost if wrong: artifact assembly can fail despite correct compiled ROM; do not deliver until gate passes.
+
+- Final: Ruling: keep isolated branch/worktree and private evidence as explicitly instructed; no merge/push/cleanup menu or repeated unchanged full builds — user has already selected keep-as-is and gate-based testing. Cost if wrong: additional local disk space, no user artifact loss.
 
 ## Chronological history (intermediate statuses)
 

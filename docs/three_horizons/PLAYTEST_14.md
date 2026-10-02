@@ -151,17 +151,21 @@ A checkbox is a requested test, not a declaration that you have passed it.
     queued professor call. Enter Tower, talk to mourners and the record-taking
     Rocket, and climb floors 1–6. Fight Channelers and test the 5F purified zone.
     Without a Scope, wild ghosts are unidentified and cannot be caught. At the
-    upper stairs, encounter the barrier ghost, retreat with Run, and read the
-    Scope/Celadon lead. Return to town, save, cold Continue,
+    upper stairs, approach the barrier, read the Scope/Celadon lead, and leave
+    normally. This pre-Scope barrier does not start a battle. Return to town, save, cold Continue,
     and revisit: the upper floor must remain blocked. In PT14, continue west toward Celadon below. The earlier chapter lead is replaced by the in-world Scope/Rocket lead.
 
 12. **West from Lavender to Celadon.** Exit Lavender west onto Route8.
+    Known dialogue issue: the worker still says the west road is closed; this
+    line is outdated. The western exit is open; the southern road stays closed.
     Fight its ordinary trainers and test one Vs. Seeker rematch after winning.
     Eli & Anne share one battle history; approach each twin, and try insufficient
     usable party on a checkpoint. The Saffron gate stays restricted. Use Route8's
     underground entrance, traverse the east–west tunnel, exit onto Route7, then
     walk west into Celadon. Read signs and try reciprocal doors. Heal and save.
-13. **Explore Celadon.** Visit the Center, restaurant, hotel, houses, Mansion
+13. **Explore Celadon.** The scientist and city Rockets currently repeat their
+    earlier dialogue after the Scope recovery; this is a known deferred issue.
+    Visit the Center, restaurant, hotel, houses, Mansion
     and Department Store. The restaurant supplies the Coin Case once. Enter the
     Mansion from its rear route to the roof room for Eevee Lv25; with six party
     members it goes to the PC. Inspect the front route and safe return. Tour
