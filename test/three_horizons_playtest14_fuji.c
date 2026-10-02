@@ -20,7 +20,31 @@
 #if THREE_HORIZONS
 extern const u8 TH14_Fuji_CanRescue[], TH14_Fuji_TowerThanks[], TH13_GiveResearchGear[];
 extern const u8 TH14_Tower7F_Grunt1[], TH14_Tower7F_Grunt2[], TH14_Tower7F_Grunt3[];
+extern const u8 TH14_Fuji_HomeLoad[], TH14_Fuji_CanResumeHome[];
 void Test_TH14_EndTrainerBattle(void);
+
+TEST("Three Horizons PT14 fuji: destination handoff only resumes pending rescue at authored arrival")
+{
+    const s16 positions[][2] = {{3,4},{4,7},{3,5},{2,4}};
+    for (u32 state = 0; state < 4; state++)
+    {
+        for (u32 i = 0; i < ARRAY_COUNT(positions); i++)
+        {
+            InitEventData();
+            if (state & 1) FlagSet(FLAG_TH14_FUJI_RESCUED);
+            if (state & 2) FlagSet(FLAG_TH14_POKE_FLUTE);
+            gSaveBlock1Ptr->pos.x = positions[i][0];
+            gSaveBlock1Ptr->pos.y = positions[i][1];
+            u8 flags[NUM_FLAG_BYTES]; memcpy(flags, gSaveBlock1Ptr->flags, sizeof(flags));
+            VarSet(VAR_TEMP_1, 1);
+            RunScriptImmediately(TH14_Fuji_HomeLoad);
+            EXPECT_EQ(VarGet(VAR_TEMP_1), 0);
+            RunScriptImmediately(TH14_Fuji_CanResumeHome);
+            EXPECT_EQ(gSpecialVar_Result, state == 1 && i == 0);
+            EXPECT_EQ(memcmp(flags, gSaveBlock1Ptr->flags, sizeof(flags)), 0);
+        }
+    }
+}
 
 TEST("Three Horizons PT14 fuji: compiled rescue predicate requires mother and every upper trainer")
 {

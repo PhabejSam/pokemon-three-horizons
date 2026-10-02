@@ -63,10 +63,34 @@ TH14_Tower_Fuji::
     hidefollower TRUE
     warp MAP_TH13_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 3, 4
     waitstate
+    end
+@ DoWarp replaces the script context. Resume the handoff from the destination,
+@ including a cold Continue while the unique reward is still pending.
+TH14_Fuji_HomeLoad::
+    setvar VAR_TEMP_1, 0
+    return
+TH14_Fuji_CanResumeHome::
+    setvar VAR_RESULT, FALSE
+    goto_if_unset FLAG_TH14_FUJI_RESCUED, TH14_Fuji_CannotResumeHome
+    goto_if_set FLAG_TH14_POKE_FLUTE, TH14_Fuji_CannotResumeHome
+    getplayerxy VAR_0x8006, VAR_0x8007
+    goto_if_ne VAR_0x8006, 3, TH14_Fuji_CannotResumeHome
+    goto_if_ne VAR_0x8007, 4, TH14_Fuji_CannotResumeHome
+    setvar VAR_RESULT, TRUE
+TH14_Fuji_CannotResumeHome:
+    return
+TH14_Fuji_HomeArrival::
+    setvar VAR_TEMP_1, 1
+    call TH14_Fuji_CanResumeHome
+    goto_if_eq VAR_RESULT, FALSE, TH14_Fuji_ArrivalEnd
+    lockall
+    hidefollower TRUE
     applymovement LOCALID_PLAYER, TH14_Fuji_FaceUp
     waitmovement 0
     msgbox TH14_Fuji_HomeThanks
     goto TH14_Fuji_DeliverFlute
+TH14_Fuji_ArrivalEnd:
+    end
 TH14_Fuji_NotSafe:
     msgbox TH14_Fuji_NotSafeText
     goto TH14_Fuji_Release

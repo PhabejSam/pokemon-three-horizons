@@ -18,7 +18,21 @@ class Scene:
         self.labels={m[1]:i+1 for i,line in enumerate(self.lines) if (m:=re.match(r'^(\w+)::?$',line))}
         self.flags=set();self.defeated=set();self.items=set();self.vars={};self.messages=[]
         self.full=False;self.gifts=0;self.warps=[];self.delays=[];self.locked=False;self.win=True
-        self.calls=[];self.removed=[]
+        self.calls=[];self.removed=[];self.xy=(0,0)
+
+    def enter_map(self,name,xy):
+        # A real DoWarp/CB2_LoadMap discards the old script context. Run the
+        # destination's actual load/frame hooks, never the line after `warp`.
+        self.xy=xy;self.locked=False
+        for key in list(self.vars):
+            if key.startswith('VAR_TEMP_'):del self.vars[key]
+        source=(ROOT/'data/maps'/name/'scripts.inc').read_text()
+        for kind,label in re.findall(r'map_script (MAP_SCRIPT_\w+), (\w+)',source):
+            if kind=='MAP_SCRIPT_ON_LOAD':self.run(label)
+            elif kind=='MAP_SCRIPT_ON_FRAME_TABLE':
+                table=source.split(label+':',1)[1].split('.2byte 0',1)[0]
+                for var,value,target in re.findall(r'map_script_2 (\w+), (\d+), (\w+)',table):
+                    if self.vars.get(var,0)==int(value):self.run(target)
 
     def run(self,label):
         pc=self.labels[label];stack=[]
@@ -37,15 +51,21 @@ class Scene:
                 if (a[0] in self.flags)==(op=='goto_if_set'):pc=self.labels[a[1]]
             elif op=='goto_if_not_defeated':
                 if a[0] not in self.defeated:pc=self.labels[a[1]]
-            elif op=='goto_if_eq':
-                if value(a[0])==value(a[1]):pc=self.labels[a[2]]
+            elif op in ('goto_if_eq','goto_if_ne'):
+                if (value(a[0])==value(a[1]))==(op=='goto_if_eq'):pc=self.labels[a[2]]
+            elif op=='getplayerxy':self.vars[a[0]],self.vars[a[1]]=self.xy
             elif op=='setvar':self.vars[a[0]]=value(a[1])
             elif op=='setflag':self.flags.add(a[0])
             elif op=='checkitem':self.vars['VAR_RESULT']=int(a[0] in self.items)
             elif op=='msgbox':self.messages.append(a[0])
             elif op in ('lock','lockall'):self.locked=True
             elif op in ('release','releaseall'):self.locked=False
-            elif op=='warp':self.warps.append(a)
+            elif op=='warp':
+                self.warps.append(a)
+                if a[0]=='MAP_TH13_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE':
+                    self.enter_map('TH13_LavenderTown_VolunteerPokemonHouse',tuple(map(int,a[1:])))
+                else:self.locked=False
+                return
             elif op=='removeobject':self.removed.append(a[0])
             elif op=='trainerbattle_single':
                 if a[0] in self.defeated:continue
@@ -124,6 +144,33 @@ class Fuji(unittest.TestCase):
         s=Scene();s.run('TH14_Fuji_Home');self.assertFalse(s.items);self.assertFalse(s.flags)
         s.flags.add(RESCUED);s.items.add('ITEM_POKE_FLUTE');s.full=True;s.run('TH14_Fuji_Home')
         self.assertIn(FLUTE,s.flags);self.assertEqual(s.gifts,0)
+
+    def test_fuji_reward_survives_real_warp_context_reset(self):
+        s=Scene();s.flags.add(RESOLVED);s.defeated=TRAINERS.copy()
+        s.run('TH14_Tower_Fuji')
+        self.assertEqual(len(s.warps),1)
+        self.assertIn('TH14_Fuji_HomeThanks',s.messages)
+        self.assertEqual(s.gifts,1)
+        self.assertIn(FLUTE,s.flags)
+        self.assertFalse(s.locked)
+
+    def test_home_cold_arrival_retries_pending_reward_once_without_entry_hijack(self):
+        for rescued in (False,True):
+            for delivered in (False,True):
+                for xy in ((3,4),(4,7),(3,5)):
+                    s=Scene()
+                    if rescued:s.flags.add(RESCUED)
+                    if delivered:s.flags.add(FLUTE);s.items.add('ITEM_POKE_FLUTE')
+                    s.enter_map('TH13_LavenderTown_VolunteerPokemonHouse',xy)
+                    self.assertEqual(s.gifts,int(rescued and not delivered and xy==(3,4)))
+                    self.assertFalse(s.locked)
+        s=Scene();s.flags.add(RESCUED);s.full=True
+        s.enter_map('TH13_LavenderTown_VolunteerPokemonHouse',(3,4))
+        self.assertIn('TH14_Fuji_FullBagText',s.messages);self.assertNotIn(FLUTE,s.flags)
+        s.full=False;s.run('TH14_Fuji_Home')
+        self.assertEqual(s.gifts,1)
+        s.enter_map('TH13_LavenderTown_VolunteerPokemonHouse',(3,4))
+        self.assertEqual(s.gifts,1)
 
     def test_cubone_and_memorial_dialogue_tracks_progress_without_writing_flags(self):
         cases=[('TH13_Lavender_Boy',RESCUED,'TH14_Lavender_FujiHomeText'),
