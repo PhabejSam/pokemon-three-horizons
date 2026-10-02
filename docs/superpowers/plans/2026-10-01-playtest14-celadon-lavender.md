@@ -146,11 +146,12 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 **Files:** new `test/three_horizons_playtest14_capture.c`; existing capture lifecycle tests; inspect `src/battle_script_commands.c`, `src/battle_main.c`, `src/party_menu.c`, `src/pokedex.c`, `src/pokemon_storage_system.c`, `src/three_horizons_capture.c` and follower restoration sites. Private controller cases and `PLAYTEST_14_VERIFICATION.md` own evidence.
 **Interfaces:** preserve existing public capture callbacks; introduce no global workaround unless evidence identifies a defect.
 
-- [ ] Starting from an unmodified copy of the actual supplied battery, naturally travel to Route11 and attempt the Ekans → first registration if still unseen → nickname → full-party Add-to-Party route. Record exact source/ROM/core/hash, observed Dex state, prior Gyarados/evolution/follower state, input timings, screenshots and result. No fixture manipulation in this required run.
-- [ ] Use separate labelled fixtures for first-catch Ekans/Drowzee/control species, maximal nickname, yes-swap first/middle/last slot, cancel-to-PC, full-PC failure, recent evolution, Gyarados lead and follower on/off. Compare all unaffected party/box payloads through save/cold reload; check sprite identity/VRAM/callback restoration.
-- [ ] If a meaningful defect reproduces, add the smallest behavioral regression and record RED before changing its responsible callback/index/lifetime; use systematic-debugging and retain original failing evidence. Otherwise add only justified coverage and retain high-severity unresolved classification.
-- [ ] Run related capture suites and N(`Three Horizons PT14 capture:`,`capture-investigation`); no skipped failure or assertion suppression. Repeat the exact candidate route at Final; a clean mGBA run never closes the hardware report.
-- [ ] Commit `test: cover reported full-party capture lifecycle` (or a root-cause-specific fix message only if established).
+- [x] Starting from an unmodified copy of the actual supplied battery, naturally travel to Route11 and attempt the Ekans → first registration if still unseen → nickname → full-party Add-to-Party route. Record exact source/ROM/core/hash, observed Dex state, prior Gyarados/evolution/follower state, input timings, screenshots and result. No fixture manipulation in this required run.
+- [x] Use separate labelled fixtures for first-catch Ekans/Drowzee/control species, maximal nickname, yes-swap first/middle/last slot, cancel-to-PC, full-PC failure, recent evolution, Gyarados lead and follower on/off. Compare all unaffected party/box payloads through save/cold reload; check sprite identity/VRAM/callback restoration.
+- [x] If a meaningful defect reproduces, add the smallest behavioral regression and record RED before changing its responsible callback/index/lifetime; use systematic-debugging and retain original failing evidence. Otherwise add only justified coverage and retain high-severity unresolved classification.
+- [x] Run related capture suites and N(`Three Horizons PT14 capture:`,`capture-investigation`); no skipped failure or assertion suppression.
+- [ ] Repeat the exact candidate route at Final; a clean mGBA run never closes the hardware report.
+- [x] Commit `test: cover reported full-party capture lifecycle` (or a root-cause-specific fix message only if established).
 
 ## Gate A: Carry-forward systems and save safety
 

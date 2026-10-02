@@ -407,6 +407,10 @@ TEST("Three Horizons playtest13 first catch finishes Dex before nickname")
     PARAMETRIZE { species = SPECIES_WEEDLE; rapid = TRUE; }
     PARAMETRIZE { species = SPECIES_PIKACHU; rapid = TRUE; }
     PARAMETRIZE { species = SPECIES_CATERPIE; rapid = FALSE; }
+    PARAMETRIZE { species = SPECIES_EKANS; rapid = TRUE; }
+    PARAMETRIZE { species = SPECIES_EKANS; rapid = FALSE; }
+    PARAMETRIZE { species = SPECIES_DROWZEE; rapid = TRUE; }
+    PARAMETRIZE { species = SPECIES_DROWZEE; rapid = FALSE; }
     MainCallback old1 = gMain.callback1, old2 = gMain.callback2;
     u8 dexTask = InitDexProbe(species);
     u32 frame;
