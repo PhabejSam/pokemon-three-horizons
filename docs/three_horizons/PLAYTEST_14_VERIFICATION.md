@@ -170,6 +170,7 @@ The runner also imports `libepoxy-0.dll`. Both x86-64 libraries were copied besi
 - Rerun with only Windows System32 on the runner's PATH, normal audio, skip-as-failure: SaveBlock1/2/3, PokemonStorage and PT14 field-offset checks **5 PASS**; travel maps, calls, twins dispatch and readiness **4 PASS**.
 - The initial encounter/capture rerun **executed and failed** the slot2 expected-Growlithe assertion; it was not blocked by a DLL. The separate fixture correction and subsequent passing rerun are recorded below. The diagnostic logging build was not a release candidate.
 - Evidence: private `windows-runtime-before.json`, `windows-runtime-installed.json` and native `runtime-saveblocks-01`, `runtime-storage-01`, `runtime-layout-01`, `travel-diagnostic-01` logs/reports.
+- Final runtime confirmation: `runtime-final-*-20261002-053453` executed **20 native definitions, all PASS** (save/layout5, travel5, rematches6, calls4) using normal audio, skip-as-failure and System32-only PATH. No selected test remained blocked by a missing DLL. This includes the corrected encounter fixture described below; the original loader failure still counts as no execution. All six protected source artifacts were rehashed unchanged, including both ROMs, both packages, the Story Bible and the owner's battery save. Private aggregate evidence: `windows-runtime-final-verification.json`. These focused results do not establish full-release or handheld acceptance.
 
 ## Task 8 — Route 8, Underground Path and Route 7
 
