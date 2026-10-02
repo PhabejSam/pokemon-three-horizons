@@ -21,6 +21,8 @@ static const u32 sPhoto_rock_tunnel_Tiles[] = INCBIN_U32("graphics/three_horizon
 static const u16 sPhoto_rock_tunnel_Palette[] = INCBIN_U16("graphics/three_horizons/research/photos/rock_tunnel.gbapal");
 static const u32 sPhoto_lavender_Tiles[] = INCBIN_U32("graphics/three_horizons/research/photos/lavender.4bpp");
 static const u16 sPhoto_lavender_Palette[] = INCBIN_U16("graphics/three_horizons/research/photos/lavender.gbapal");
+static const u32 sPhoto_mothers_watch_Tiles[] = INCBIN_U32("graphics/three_horizons/research/photos/mothers_watch.4bpp");
+static const u16 sPhoto_mothers_watch_Palette[] = INCBIN_U16("graphics/three_horizons/research/photos/mothers_watch.gbapal");
 static const struct THResearchBackdropArt sResearchBackdropArt[TH_RESEARCH_PHOTO_COUNT] = {
     {sPhoto_hoothoot_Tiles, sPhoto_hoothoot_Palette},
     {sPhoto_treecko_Tiles, sPhoto_treecko_Palette},
@@ -32,5 +34,6 @@ static const struct THResearchBackdropArt sResearchBackdropArt[TH_RESEARCH_PHOTO
     {sPhoto_route9_Tiles, sPhoto_route9_Palette},
     {sPhoto_rock_tunnel_Tiles, sPhoto_rock_tunnel_Palette},
     {sPhoto_lavender_Tiles, sPhoto_lavender_Palette},
+    {sPhoto_mothers_watch_Tiles, sPhoto_mothers_watch_Palette},
 };
 STATIC_ASSERT(ARRAY_COUNT(sResearchBackdropArt) == TH_RESEARCH_PHOTO_COUNT, ResearchBackdropCountMatchesPhotos);

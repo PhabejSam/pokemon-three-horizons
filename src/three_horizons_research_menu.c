@@ -7,6 +7,8 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "field_player_avatar.h"
+#include "constants/event_objects.h"
 #include "gpu_regs.h"
 #include "malloc.h"
 #include "menu.h"
@@ -291,24 +293,28 @@ static void BuildRecords(void)
 }
 
 // Extract one native overworld pose, not a saved framebuffer or a front icon.
-static bool32 DrawSubject(u32 slot, const struct THResearchSubject *subject)
+static bool32 DrawActor(u32 slot, const struct ObjectEventGraphicsInfo *info,
+                       u16 frameSize, s16 x, s16 y, u8 direction,
+                       const u16 *colors, u16 objectPaletteTag)
 {
-    const struct ObjectEventGraphicsInfo *info = SpeciesToGraphicsInfo(subject->species, FALSE, FALSE);
+    if (slot >= TH_RESEARCH_MAX_SUBJECTS || info == NULL || !frameSize
+        || frameSize % TILE_SIZE_4BPP || direction < DIR_SOUTH || direction > DIR_EAST)
+        return FALSE;
     struct SpriteTemplate *template = &sResearchMenu->templates[slot];
-    struct AnimFrameCmd pose = info->anims[GetFaceDirectionAnimNum(subject->direction)][0].frame;
-    struct SpriteSheet sheet = {.size = info->size, .tag = RESEARCH_TAG + slot};
-    struct SpritePalette palette = {.tag = RESEARCH_TAG + slot};
+    struct AnimFrameCmd pose = info->anims[GetFaceDirectionAnimNum(direction)][0].frame;
+    struct SpriteSheet sheet = {.size = frameSize, .tag = RESEARCH_TAG + slot};
+    struct SpritePalette palette = {.data = colors, .tag = RESEARCH_TAG + slot};
     void *buffer = NULL;
     if (info->compressed)
     {
         u32 size = GetDecompressedDataSize(info->images[0].data);
-        if ((pose.imageValue + 1) * info->size > size || (buffer = AllocUnchecked(size)) == NULL)
+        if ((pose.imageValue + 1) * frameSize > size || (buffer = AllocUnchecked(size)) == NULL)
             return FALSE;
         DecompressDataWithHeaderWram(info->images[0].data, buffer);
-        sheet.data = (u8 *)buffer + pose.imageValue * info->size;
+        sheet.data = (u8 *)buffer + pose.imageValue * frameSize;
     }
     else if (info->images[0].relativeFrames)
-        sheet.data = (u8 *)info->images[0].data + pose.imageValue * info->size;
+        sheet.data = (u8 *)info->images[0].data + pose.imageValue * frameSize;
     else
         sheet.data = info->images[pose.imageValue].data;
     if (!CanAllocSpriteTiles(sheet.size / TILE_SIZE_4BPP))
@@ -316,19 +322,21 @@ static bool32 DrawSubject(u32 slot, const struct THResearchSubject *subject)
         Free(buffer);
         return FALSE;
     }
-    LoadSpriteSheet(&sheet);
+    u16 tileStart = LoadSpriteSheet(&sheet);
     Free(buffer);
-    palette.data = gSpeciesInfo[subject->species].overworldPalette;
-    if (palette.data == NULL) palette.data = GetMonSpritePalFromSpecies(subject->species, FALSE, FALSE);
-    if (LoadSpritePalette(&palette) == 0xFF) return FALSE;
+    if (tileStart == 0xFFFF) return FALSE;
+    // Only the seven ROM-authored walking outfits use object palette tags.
+    u32 paletteSlot = objectPaletteTag == OBJ_EVENT_PAL_TAG_NONE
+        ? LoadSpritePalette(&palette) : LoadObjectEventPaletteCopy(objectPaletteTag, palette.tag);
+    if (paletteSlot == 0xFF) goto fail;
     template->tileTag = sheet.tag;
     template->paletteTag = palette.tag;
     template->oam = info->oam;
     template->anims = gDummySpriteAnimTable;
     template->affineAnims = gDummySpriteAffineAnimTable;
     template->callback = SpriteCallbackDummy;
-    u32 id = CreateSpriteUnchecked(template, subject->x, subject->y, slot);
-    if (id == MAX_SPRITES) return FALSE;
+    u32 id = CreateSpriteUnchecked(template, x, y, slot);
+    if (id == MAX_SPRITES) goto fail;
     sResearchMenu->spriteIds[slot] = id;
     gSprites[id].oam.priority = 0;
     gSprites[id].animBeginning = FALSE;
@@ -336,6 +344,26 @@ static bool32 DrawSubject(u32 slot, const struct THResearchSubject *subject)
     SetSpriteOamFlipBits(&gSprites[id], pose.hFlip, pose.vFlip);
     sResearchMenu->subjects++;
     return TRUE;
+fail:
+    FreeSpriteTilesByTag(sheet.tag);
+    FreeSpritePaletteByTag(palette.tag);
+    return FALSE;
+}
+
+static bool32 DrawSubject(u32 slot, const struct THResearchSubject *subject)
+{
+    const struct ObjectEventGraphicsInfo *info = SpeciesToGraphicsInfo(subject->species, FALSE, FALSE);
+    const u16 *colors = gSpeciesInfo[subject->species].overworldPalette;
+    if (colors == NULL) colors = GetMonSpritePalFromSpecies(subject->species, FALSE, FALSE);
+    return DrawActor(slot, info, info->size, subject->x, subject->y, subject->direction, colors, OBJ_EVENT_PAL_TAG_NONE);
+}
+
+static bool32 DrawObserver(u32 slot, s16 x, s16 y, u8 direction)
+{
+    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
+    // Walking frames are 16x32 (256 bytes), even where info->size reserves512.
+    // Use the actual frame stride for both explicit and relative image tables.
+    return DrawActor(slot, info, info->images[0].size, x, y, direction, NULL, info->paletteTag);
 }
 
 static void DrawPhotoBackdrop(u16 photoId)
@@ -428,7 +456,16 @@ static bool32 ResearchDraw(void)
             DrawPhotoBackdrop(id);
             for (u32 i = 0; i < photo->subjectCount; i++)
                 if (!DrawSubject(i, &photo->subjects[i])) return FALSE;
+            if (id == TH_PHOTO_MOTHERS_WATCH && !DrawObserver(photo->subjectCount, 128, 80, DIR_SOUTH)) return FALSE;
             Print(4, 120, entry->species);
+        }
+        else if (entry->photoId == TH_PHOTO_MOTHERS_WATCH)
+        {
+            Print(4, 34, TH_ResearchHasPhoto(TH_PHOTO_MOTHERS_WATCH)
+                ? COMPOUND_STRING("DOCUMENTED: MAROWAK") : COMPOUND_STRING("OBSERVED: MAROWAK"));
+            Print(4, 48, entry->observation);
+            Print(4, 100, COMPOUND_STRING("Region:")); Print(50, 100, entry->region);
+            Print(4, 112, COMPOUND_STRING("Origin:")); Print(50, 112, entry->origin);
         }
         else
         {

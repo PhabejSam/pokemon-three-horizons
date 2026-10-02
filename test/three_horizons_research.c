@@ -136,9 +136,9 @@ TEST("Three Horizons playtest13 photo card binds authored tableau and metadata")
         for (u32 note = 0; note < 3; note++) EXPECT(entry->notes[note] != NULL);
         EXPECT(TH_ResearchProfessorNote(id) == entry->notes[0]);
         FlagSet(FLAG_TH13_CALL_ROUTE10_DELIVERED);
-        EXPECT(TH_ResearchProfessorNote(id) == entry->notes[1]);
+        EXPECT(TH_ResearchProfessorNote(id) == entry->notes[id == TH_RESEARCH_MOTHERS_WATCH ? 0 : 1]);
         FlagSet(FLAG_TH13_CALL_LAVENDER_DELIVERED);
-        EXPECT(TH_ResearchProfessorNote(id) == entry->notes[2]);
+        EXPECT(TH_ResearchProfessorNote(id) == entry->notes[id == TH_RESEARCH_MOTHERS_WATCH ? 0 : 2]);
         FlagClear(FLAG_TH13_CALL_ROUTE10_DELIVERED); FlagClear(FLAG_TH13_CALL_LAVENDER_DELIVERED);
     }
     for (u32 id = 0; id < TH_RESEARCH_PHOTO_COUNT; id++)

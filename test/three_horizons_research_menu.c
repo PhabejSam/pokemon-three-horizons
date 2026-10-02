@@ -92,20 +92,20 @@ TEST("Three Horizons playtest13 research photo cards paginate with paired subjec
     gMain.callback1 = NULL; SetDefaultFontsPointer(); InitEventData();
     FlagSet(FLAG_TH13_GEAR);
     for (u32 id = 0; id < TH_RESEARCH_PHOTO_COUNT; id++)
-    { TH_ResearchObserve(id); TH_ResearchTakePhoto(id); }
+    { TH_ResearchObserve(TH_ResearchGetPhoto(id)->entryId); TH_ResearchTakePhoto(id); }
     TH_OpenResearchGear(ResearchReturn); ResearchFrames(0, 40);
     Press(DPAD_DOWN); Press(A_BUTTON);
     for (u32 id = 0; id < TH_RESEARCH_PHOTO_COUNT; id++)
     {
         Press(A_BUTTON);
         EXPECT_EQ(TH_TestResearchMenuRecord(), id);
-        EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount);
+        EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount + (id == TH_PHOTO_MOTHERS_WATCH));
         HoldWithoutFreshPress(A_BUTTON, 30); // continuation has no fresh A edge
         EXPECT_EQ(TH_TestResearchMenuRecord(), id);
-        EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount);
+        EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount + (id == TH_PHOTO_MOTHERS_WATCH));
         Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), 0);
         Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), 0);
-        Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount);
+        Press(DPAD_RIGHT); EXPECT_EQ(TH_TestResearchMenuSubjects(), TH_ResearchGetPhoto(id)->subjectCount + (id == TH_PHOTO_MOTHERS_WATCH));
         Press(DPAD_LEFT); EXPECT_EQ(TH_TestResearchMenuSubjects(), 0);
         Press(B_BUTTON);
         Press(DPAD_DOWN);

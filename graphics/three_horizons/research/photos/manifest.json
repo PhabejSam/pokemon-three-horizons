@@ -128,5 +128,18 @@
     "source_sha256": "a3443db62a2609856280bb6559971a28ab885e4bcab6240d8721e6973804037b",
     "tiles_sha256": "b3d32d46d2f9b1eef0795efafc9a9be8ba501e5d9da1e61b05cc2e03c56e8607",
     "palette_sha256": "1abd367147a7463c84685a3d72f90d89f6ce314f756a71282b0a9a0f8412e629"
+  },
+  {
+    "id": 10,
+    "name": "mothers_watch",
+    "map": "TH13_PokemonTower_6F",
+    "left": 4,
+    "top": 11,
+    "width": 224,
+    "height": 96,
+    "source_layout": "data/layouts/PokemonTower_6F_Frlg/map.bin",
+    "source_sha256": "b1dd1b2b5d9d5f72cb46c35ccdd435b093b3d6d69c817951313b4a8fa14e1623",
+    "tiles_sha256": "497ff9cd510efc2aa968c45cfcbf35d9da6edeb4a7d5fa6c02db1634b328bc9e",
+    "palette_sha256": "96c6e933d518c8b2bec79c250121ac6163d34feb92baac2bf8442d98b5983b3a"
   }
 ]

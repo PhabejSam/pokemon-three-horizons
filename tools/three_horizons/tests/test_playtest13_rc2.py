@@ -13,9 +13,14 @@ class RC2Scripts(unittest.TestCase):
     def test_rc2_migration_recognizes_current_marker_in_every_history_guard(self):
         state = (ROOT/'src/three_horizons_state.c').read_text()
         guards = re.findall(r'if \((version != TH_STATE_VERSION_[^\n]*)\)', state)
-        self.assertGreaterEqual(len(guards), 5)
-        for guard in guards:
+        # PT14 alone initializes its newly owned flags when importing RC2.
+        # Every older history guard must still preserve both current markers.
+        self.assertEqual(guards.count('version != TH_STATE_VERSION_14'), 1)
+        history_guards = [g for g in guards if g != 'version != TH_STATE_VERSION_14']
+        self.assertEqual(len(history_guards), 6)
+        for guard in history_guards:
             self.assertIn('TH_STATE_VERSION_13_1', guard)
+            self.assertIn('TH_STATE_VERSION_14', guard)
         clock = (ROOT/'src/three_horizons_clock.c').read_text()
         self.assertIn('TH_STATE_VERSION_CURRENT', clock)
 
@@ -82,7 +87,10 @@ class RC2Scripts(unittest.TestCase):
     def test_photo_assets_match_authored_sources_and_fit_hardware_budget(self):
         folder = ROOT/'graphics/three_horizons/research/photos'
         manifest = json.loads((folder/'manifest.json').read_text())
-        self.assertEqual([p['id'] for p in manifest], list(range(10)))
+        self.assertEqual([p['id'] for p in manifest], list(range(11)))
+        self.assertEqual([p['name'] for p in manifest[:10]], [
+            'hoothoot','treecko','shroomish','mt_moon','harbor','forest_pair',
+            'diglett_cave','route9','rock_tunnel','lavender'])
         for photo in manifest:
             with self.subTest(photo=photo['name']):
                 self.assertEqual((photo['width'], photo['height']), (224, 96))

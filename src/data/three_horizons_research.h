@@ -77,6 +77,15 @@ static const struct THResearchEntry sResearchEntries[TH_RESEARCH_ENTRY_COUNT] = 
         .notes = {COMPOUND_STRING("OAK: Revisit the forest to\nidentify each interaction."), COMPOUND_STRING("OAK: Revisit the forest to\nidentify each interaction."), COMPOUND_STRING("OAK: Revisit the forest to\nidentify each interaction.")},
         .flag = FLAG_TH13_OBS_FOREST_LEGACY, .photoId = TH_RESEARCH_PHOTO_NONE,
     },
+    [TH_RESEARCH_MOTHERS_WATCH] = {
+        .region = COMPOUND_STRING("KANTO"), .location = COMPOUND_STRING("Pokemon Tower"),
+        .species = COMPOUND_STRING("MOTHER'S WATCH"), .origin = COMPOUND_STRING("KANTO"),
+        .observation = COMPOUND_STRING("A mother's spirit remained at the\nTower. Her concern for CUBONE seems\nstronger than the place itself."),
+        .notes = {COMPOUND_STRING("OAK: Her concern for CUBONE seems\nstronger than the place itself."),
+                  COMPOUND_STRING("OAK: Her concern for CUBONE seems\nstronger than the place itself."),
+                  COMPOUND_STRING("OAK: Habitat tells us where a\nPOKéMON lives. This record reminds\nus that bonds and memory deserve\ncareful study, too.")},
+        .flag = FLAG_TH14_OBS_MOTHER, .photoId = TH_PHOTO_MOTHERS_WATCH,
+    },
 };
 static const struct THResearchPhoto sResearchPhotos[TH_RESEARCH_PHOTO_COUNT] = {
     [TH_PHOTO_HOOTHOOT] = {TH_RESEARCH_HOOTHOOT, TH_BACKDROP_GRASS, 1, {
@@ -119,6 +128,9 @@ static const struct THResearchPhoto sResearchPhotos[TH_RESEARCH_PHOTO_COUNT] = {
     [TH_PHOTO_LAVENDER] = {TH_RESEARCH_LAVENDER, TH_BACKDROP_TOWER, 1, {
         {SPECIES_MISDREAVUS, 176, 112, DIR_SOUTH},
     }},
+    [TH_PHOTO_MOTHERS_WATCH] = {TH_RESEARCH_MOTHERS_WATCH, TH_BACKDROP_TOWER, 1, {
+        {SPECIES_MAROWAK, 128, 112, DIR_NORTH},
+    }},
 };
 static const u16 sPhotoFlags[TH_RESEARCH_PHOTO_COUNT] = {
     [TH_PHOTO_HOOTHOOT] = FLAG_TH13_PHOTO_HOOTHOOT,
@@ -131,6 +143,7 @@ static const u16 sPhotoFlags[TH_RESEARCH_PHOTO_COUNT] = {
     [TH_PHOTO_ROUTE9] = FLAG_TH13_PHOTO_ROUTE9,
     [TH_PHOTO_ROCK_TUNNEL] = FLAG_TH13_PHOTO_ROCK_TUNNEL,
     [TH_PHOTO_LAVENDER] = FLAG_TH13_PHOTO_LAVENDER,
+    [TH_PHOTO_MOTHERS_WATCH] = FLAG_TH14_PHOTO_MOTHER,
 };
 static const u16 sCallFlags[TH_RESEARCH_CALL_COUNT][2] = {
     [TH_CALL_ACTIVATION] = {FLAG_TH13_CALL_ACTIVATION_PENDING, FLAG_TH13_CALL_ACTIVATION_DELIVERED},

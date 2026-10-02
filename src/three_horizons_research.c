@@ -51,6 +51,16 @@ static EWRAM_DATA struct Coords16 sCallLastPos = {0};
 static EWRAM_DATA u8 sCallMapGroup = 0, sCallMapNum = 0;
 void TH_ResearchResetCallPacing(void) { sCallStepsRemaining = 0; }
 
+void TH_ResearchDelayCalls(u8 steps)
+{
+    sCallStepsRemaining = steps;
+    sCallLastPos = gSaveBlock1Ptr->pos;
+    sCallMapGroup = gSaveBlock1Ptr->location.mapGroup;
+    sCallMapNum = gSaveBlock1Ptr->location.mapNum;
+}
+
+void TH14_DelayAftermathCalls(void) { TH_ResearchDelayCalls(8); }
+
 bool32 TH_ResearchTryStartPendingCall(void)
 {
     u16 call;
@@ -97,12 +107,7 @@ void TH_ScriptResearchCompleteCall(void)
     bool32 wasPending = TH_ResearchNextPendingCall() == gSpecialVar_0x8004;
     TH_ResearchCompleteCall(gSpecialVar_0x8004);
     if (wasPending)
-    {
-        sCallStepsRemaining = 8;
-        sCallLastPos = gSaveBlock1Ptr->pos;
-        sCallMapGroup = gSaveBlock1Ptr->location.mapGroup;
-        sCallMapNum = gSaveBlock1Ptr->location.mapNum;
-    }
+        TH_ResearchDelayCalls(8);
 }
 
 const struct THResearchEntry *TH_ResearchGetEntry(u16 entryId)
@@ -202,6 +207,9 @@ const u8 *TH_ResearchProfessorNote(u16 entryId)
     const struct THResearchEntry *entry = TH_ResearchGetEntry(entryId);
     if (entry == NULL)
         return NULL;
+    // This quiet archive note is evidence from Fuji's rescue, not a call.
+    if (entryId == TH_RESEARCH_MOTHERS_WATCH)
+        return entry->notes[FlagGet(FLAG_TH14_FUJI_RESCUED) ? 2 : 0];
     if (TH_ResearchCallDelivered(TH_CALL_LAVENDER))
         return entry->notes[2];
     if (TH_ResearchCallDelivered(TH_CALL_ROUTE10))

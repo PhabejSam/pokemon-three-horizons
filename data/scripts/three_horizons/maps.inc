@@ -224,6 +224,7 @@ TH_Route1_MapScripts::
     .include "data/scripts/three_horizons/chapter14_gym.inc"
 
     .include "data/scripts/three_horizons/chapter14_hideout.inc"
+    .include "data/scripts/three_horizons/chapter14_tower.inc"
     .include "data/maps/TH14_RocketHideout_B1F/scripts.inc"
     .include "data/maps/TH14_RocketHideout_B2F/scripts.inc"
     .include "data/maps/TH14_RocketHideout_B3F/scripts.inc"
