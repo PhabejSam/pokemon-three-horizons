@@ -1,7 +1,7 @@
 # Playtest 14 — Celadon, the Silph Scope, and the Return to Lavender
 
-**Chapter Blueprint / written design for owner review — 2026-10-01.**
-This document translates the owner's supplied PT14 scope and approved Narrative Canon v1.2 into a bounded chapter. It is not a claim of implementation or release acceptance. The detailed execution plan follows review of this written design.
+**Chapter Blueprint / owner-approved written design — 2026-10-01.**
+This document translates the owner's supplied PT14 scope and approved Narrative Canon v1.2 into a bounded chapter. It is not a claim of implementation or release acceptance. The owner approved this written design in chat (“approve”). The detailed implementation plan is now saved at `docs/superpowers/plans/2026-10-01-playtest14-celadon-lavender.md` for its execution handoff review.
 
 ## 1. Authority, lineage, and evidence
 
@@ -261,7 +261,7 @@ The final report covers all 53 owner-requested fields, using PASS/FAIL/NOT RUN/P
 ## 14. Review status and demonstrated risks
 
 - Canon audit: no conflict between v1.2 and this bounded arc. Mandatory MOTHER'S WATCH and the uncatchable mother are explicit task requirements.
-- Map capacity: demonstrated signed-index limit; new group76 is the recommended solution above, pending owner review of this design.
+- Map capacity: demonstrated signed-index limit; new group76 is the owner-approved solution above; the implementation plan fixes the 37-map order and validation gates.
 - State capacity: a safe candidate pool exists; final ledger and global collision scan are mandatory before allocation. No saved-size growth is proposed.
 - Migration: existing exclusion predicates would reset prior state if updated incompletely; explicit new-version tests are mandatory.
 - Tower fog: confirmed source-level unwanted terrain conversion; fix is scoped to project Tower maps.

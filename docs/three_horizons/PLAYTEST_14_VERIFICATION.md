@@ -1,6 +1,6 @@
 # Playtest 14 verification ledger
 
-**2026-10-01: investigation and written-design stage. No PT14 ROM exists yet.**
+**2026-10-01: owner-approved blueprint; detailed implementation plan written for review. No PT14 ROM exists yet.**
 
 The owner requested Celadon → Silph Scope → return to Lavender → mother's Marowak/photo → Fuji/Flute → Route11 Snorlax, with the carry-forward repairs in the chapter blueprint. Full implementation/build/acceptance fields remain pending until their respective gates. Do not use this document as release acceptance.
 
@@ -36,8 +36,8 @@ The owner now reports successful RC2 hardware progression to the Tower barrier. 
 
 | Priority | Finding | Evidence class / required action |
 | --- | --- | --- |
-| Architectural | 118 maps occupy group75; signed saved map indices leave only ten safe slots while this chapter needs about37 | Confirmed source/registry constraint. Blueprint proposes appended group76, stable old IDs/layouts and explicit map-family predicates. |
-| Architectural | PT13's unused flag range is occupied; all named unused persistent variables are already allocated | Confirmed source audit. Candidate70-bit unused persistent allowlist exists; exact ownership manifest/collision tests required. No save growth. |
+| Architectural | 118 maps occupy group75; signed saved map indices leave only ten safe slots while this chapter needs about37 | Confirmed source/registry constraint. Owner-approved appended group76; plan fixes 37 maps with stable old IDs/layouts and explicit map-family predicates. |
+| Architectural | PT13's unused flag range is occupied; all named unused persistent variables are already allocated | Confirmed source audit. Approved70-bit pool; plan assigns66 explicit owners, leaving4 untouched. Compiled ownership/collision tests still required. No save growth. |
 | High if implemented incorrectly | Old migration predicates do not recognize a future marker | Confirmed source risk. Update every historical gate and test repeated PT14 Continue before advancing a marker. |
 | High | Mandatory photo requires Gear; optional earlier handoffs can be skipped | Confirmed prerequisite gap. Natural free Tower catch-up and explicit photo-success checks required; no fabricated receipt. |
 | Medium | Tower's fog activates Misty Terrain | Confirmed source behavior. Make Tower fog atmospheric while preserving explicit move terrain and upstream behavior; cover Terrain Pulse preview. |
@@ -57,8 +57,8 @@ TMs already are reusable in Three Horizons. Keep that mechanic; design progressi
 | Owner source checksum/size/sector inspection | PASS |
 | Exact older-RC2 cold Continue baseline and raw party/storage equality | PASS |
 | Same owner source cold-loaded on reviewed Navigator; protected payload comparison | PASS; clock-only differences, no PT14 or save-roundtrip claim |
-| Canonical v1.2 copy and independent source/canon/capacity/map audits | Completed; written design awaits owner review |
-| Detailed implementation plan | Pending written-design review |
+| Canonical v1.2 copy and independent source/canon/capacity/map audits | Completed; written design approved in chat |
+| Detailed implementation plan | Written/self-reviewed; awaiting written-plan review before serial/inline execution |
 | PT14 behavioral/visual implementation and focused RED/GREEN checks | NOT RUN |
 | Full PT14 host/native/layout/offset/documentation matrix | NOT RUN |
 | New Emerald/FireRed/LeafGreen compatibility builds | NOT RUN |
@@ -69,3 +69,13 @@ TMs already are reusable in Three Horizons. Keep that mechanic; design progressi
 | PT14 RG40XX H/VBA-Next acceptance | PENDING OWNER HARDWARE TEST after packaging |
 
 Do not inflate the current totals using Navigator's historical 170 host / 222 native / four layout / three compatibility builds. Upstream FireRed/LeafGreen checks use `THREE_HORIZONS=0`; the TH game itself builds on Emerald. This document must be updated with exact failing/passing evidence, limitations and all 53 requested completion fields at release.
+
+## Planning checkpoint validation
+
+The new plan contains21 ordered tasks, Gate A for carry-forward/save safety, Gate B for travel/city/Rocket content, and Final integration/exact-ROM owner migration/package gates. It includes source-specific map/trainer/flag/economy ledgers and explicit requirement traceability. Planning audits and documentation validation are not gameplay tests; no new host/native gameplay suite, build or emulator session was run for this documentation checkpoint.
+
+- Planning-ledger/preservation audit: PASS, 78 checks. Verified21 sequential tasks;37 unique ordered maps with actual donor files;38 trainer identities with36 donor records;66 noncolliding receipt values within the70-bit pool; four untouched reserves;25 distinct rematch trainer/party-slot keys; and two12-slot encounter tables totaling100% each.
+- Repository documentation-index validator: PASS after adding six omitted links (five PT14/canon documents and one inherited Navigator plan). The initial failure was retained as a documentation defect and corrected; no assertion was suppressed.
+- Whitespace check for changed authored documents: PASS. Canonical Bible bytes remain unchanged.
+- Protected artifacts: all six original ROM/package/Bible/battery sizes and SHA-256 values match baseline; the two earlier worktrees retain identical branch, commit and short-status snapshots. The repository canonical copy still matches the supplied Bible exactly.
+- Evidence: private `.superpowers/sdd/2026-10-01-playtest14/planning-document-checks.json`. These checks validate the written plan and preservation only. Product, migration and hardware acceptance gates above remain pending.

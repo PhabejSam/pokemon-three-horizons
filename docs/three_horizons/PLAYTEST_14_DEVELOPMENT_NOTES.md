@@ -1,6 +1,6 @@
 # Playtest 14 development handoff — 2026-10-01
 
-Current stage: inspected actual sources, preserved baseline, wrote Chapter Blueprint for owner review. No PT14 product code, build or release package has been created. The next prerequisite is review of `docs/superpowers/specs/2026-10-01-playtest14-celadon-lavender-design.md`, then the detailed implementation plan and its execution-method review under the explicitly requested Superpowers workflow.
+Current stage: the owner approved the Chapter Blueprint in chat (“approve”). The 21-task implementation plan is saved at `docs/superpowers/plans/2026-10-01-playtest14-celadon-lavender.md` for review before execution. Preserve the serial/inline method; do not reopen the approved design or ask for an execution-method choice again. No PT14 product code, build or release package has been created.
 
 Work only in `work/playtest14-celadon`, branch `feature/playtest14-celadon-lavender`, descended from local reviewed Navigator commit `2d85555d74f34f5029c38a3b2db26fb7eb3f99c0`. Original feature and review worktrees contain unrelated untracked/private evidence and remain protected. Native worktree creation returned `Not a git repository` for the task root; the correct nested repository's Git worktree mechanism created this isolated checkout. No remote change occurred.
 
@@ -21,3 +21,13 @@ Implementation must preserve existing maps/IDs/receipts and take an exact alloca
 After a passing separate PT14 candidate is packaged, stop for owner RG40XX H/VBA-Next acceptance. No merge, publish, settings changes or next-chapter work.
 
 Documentation verification: the imported canonical source intentionally uses Markdown two-space hard line breaks. Git's broad whitespace check reports those source lines; they are retained to preserve the owner's byte-identical canonical artifact, not silently reformatted. The three newly authored documents are checked separately. Protected ROM/package/save hashes and both prior branch/status snapshots were rechecked unchanged before this documentation checkpoint.
+
+## Approved-blueprint planning checkpoint
+
+The implementation plan fixes 37 appended group76 maps, 38 new trainer identities (157–194), 30 eligible ordinary rematches, 66 explicitly owned flags from the approved 70-bit pool, two 12-slot wild tables and 25 authored stone-evolution rematch slots. The remaining four flags stay undefined/unmodified. It specifies current active TM identities, shop/prize prices, delivery ordering, Rocket/mother/Fuji/Snorlax staging, private test runners and three production-build gates.
+
+Read-only Astra/Ultra map, economy and test-tooling audits supplied the source evidence. Root self-review corrected callback polarity, task references, map registration dependencies, twins shared readiness, offset-test timing, all-box auditing and the inherited warm-state/cold-load distinction. Private audit reports remain under `.superpowers/sdd/2026-10-01-playtest14/`; they are not product code or game-test acceptance. The plan's later whole-branch review remains pending implementation.
+
+The documentation index check initially reported six omitted links: the new plan, four blueprint-stage documents, and the inherited Navigator review plan. This checkpoint adds the links in docs/SUMMARY.md without changing the linked historical/canonical artifacts. Final documentation/preservation results are recorded in PLAYTEST_14_VERIFICATION.md.
+
+Next action after written-plan review: use superpowers:executing-plans, inspect current HEAD/status, begin Task1, and retain local logical commits. No new design request or additional feature is inferred from this planning checkpoint. The unresolved high-severity handheld capture issue remains an investigation requirement; passing local tests must not silently close it.
