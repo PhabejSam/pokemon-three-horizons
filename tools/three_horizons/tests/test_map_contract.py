@@ -164,11 +164,44 @@ class MapContract(unittest.TestCase):
             layout = layouts[record['layout']]
             for kind in ('object_events', 'warp_events', 'coord_events', 'bg_events'):
                 for event in record[kind]:
+                    if event.get('type') == 'clone':
+                        # Connected-map clones intentionally sit beyond this
+                        # map's bounds. Validate the real owner and transform.
+                        self.assertIn(event['target_map'], maps)
+                        owner = maps[event['target_map']]
+                        targets = [o for o in owner['object_events']
+                                   if o.get('local_id') == event['target_local_id']]
+                        self.assertEqual(len(targets), 1, event)
+                        edges = [e for e in record['connections'] or []
+                                 if e['map'] == event['target_map']]
+                        self.assertEqual(len(edges), 1, event)
+                        edge = edges[0]; target = targets[0]
+                        other = layouts[owner['layout']]
+                        offsets = {'left': (-other['width'], int(edge['offset'])),
+                                   'right': (layout['width'], int(edge['offset'])),
+                                   'up': (int(edge['offset']), -other['height']),
+                                   'down': (int(edge['offset']), layout['height'])}
+                        dx, dy = offsets[edge['direction']]
+                        self.assertEqual((event['x'], event['y']), (target['x']+dx, target['y']+dy))
+                        self.assertEqual(event['graphics_id'], target['graphics_id'])
+                        continue
                     self.assertGreaterEqual(event['x'], 0)
                     self.assertGreaterEqual(event['y'], 0)
                     self.assertLess(event['x'], layout['width'])
                     self.assertLess(event['y'], layout['height'])
             for warp in record['warp_events']:
+                if warp['dest_map'] == 'MAP_DYNAMIC':
+                    self.assertEqual(record['id'], 'MAP_TH14_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR')
+                    self.assertEqual(warp['dest_warp_id'], 'WARP_ID_DYNAMIC')
+                    script = (ROOT/'data/scripts/three_horizons/chapter14_celadon.inc').read_text()
+                    destinations = set(re.findall(r'setdynamicwarp (\w+), 255, (\d+), (\d+)', script))
+                    self.assertEqual(destinations, {(f'MAP_TH14_CELADON_CITY_DEPARTMENT_STORE_{i}F', '6', '1') for i in range(1,6)})
+                    for dest, x, y in destinations:
+                        self.assertIn(dest, maps)
+                        dl = layouts[maps[dest]['layout']]
+                        self.assertTrue(0 <= int(x) < dl['width'] and 0 <= int(y) < dl['height'])
+                        self.assertTrue(any(w['dest_map'] == record['id'] for w in maps[dest]['warp_events']))
+                    continue
                 self.assertIn(warp['dest_map'], maps)
                 self.assertGreaterEqual(int(warp['dest_warp_id']), 0)
                 self.assertLess(int(warp['dest_warp_id']), len(maps[warp['dest_map']]['warp_events']))

@@ -23,4 +23,9 @@ enum TH14GiftResult
 u8 TH14_TryGiveUniqueItem(u16 itemId, u16 receiptFlag);
 void TH14_ScriptGiveUniqueItem(void);
 
+#define TH14_EEVEE_ALREADY_GIVEN 3
+u16 TH14_GetDeptStoreFloor(void);
+u16 TH14_TryGiveEevee(void);
+bool32 TH14_IsFrlgPokemonCenterLayout(u16 layoutId);
+
 #endif

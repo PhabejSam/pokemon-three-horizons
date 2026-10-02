@@ -35,6 +35,7 @@
 #include "start_menu.h"
 #include "trainer_see.h"
 #include "trainer_hill.h"
+#include "three_horizons_chapter14.h"
 #include "vs_seeker.h"
 #include "wild_encounter.h"
 #include "wild_encounter_ow.h"
@@ -493,7 +494,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     {
 #if THREE_HORIZONS
         extern const u8 TH_EventScript_KantoTV[];
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_HOME_2F)
+        if (TH_IsProjectMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)
             && gMapHeader.mapLayout->isFrlg)
             return TH_EventScript_KantoTV;
 #endif
@@ -518,7 +519,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     {
 #if THREE_HORIZONS
         extern const u8 TH_EventScript_KantoRegionMap[];
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_HOME_2F)
+        if (TH_IsProjectMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)
             && GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_KANTO)
             return TH_EventScript_KantoRegionMap;
 #endif

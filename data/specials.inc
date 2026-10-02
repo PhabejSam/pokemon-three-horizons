@@ -668,4 +668,6 @@ gSpecials::
     def_special TH_ScriptBeginPhotoFlash
     def_special TH_ScriptEndPhotoFlash
     def_special TH14_ScriptGiveUniqueItem
+    def_special TH14_GetDeptStoreFloor
+    def_special TH14_TryGiveEevee
 #endif

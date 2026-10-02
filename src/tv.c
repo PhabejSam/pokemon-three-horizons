@@ -33,6 +33,7 @@
 #include "decoration.h"
 #include "secret_base.h"
 #include "tv.h"
+#include "three_horizons_chapter14.h"
 #include "pokeball.h"
 #include "data.h"
 #include "frontier_util.h"
@@ -788,7 +789,7 @@ static void SetTVMetatilesOnMap(int width, int height, u16 metatileId)
 
 #if THREE_HORIZONS
     // Imported Kanto layouts do not use Emerald's animated TV tile IDs.
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_HOME_2F)
+    if (TH_IsProjectMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)
         && gMapHeader.mapLayout->isFrlg)
         return;
 #endif

@@ -429,6 +429,16 @@
       "respawn_npc": "LOCALID_TH13_LAVENDERTOWN_POKEMONCENTER_1F_1",
       "respawn_x": 7,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_TH14_CELADON",
+      "map": "MAP_TH14_CELADON_CITY_POKEMON_CENTER_1F",
+      "x": 7,
+      "y": 4,
+      "respawn_map": "MAP_TH14_CELADON_CITY_POKEMON_CENTER_1F",
+      "respawn_npc": "LOCALID_TH14_CELADONCITY_POKEMONCENTER_1F_1",
+      "respawn_x": 7,
+      "respawn_y": 4
     }
   ]
 }

@@ -1290,6 +1290,27 @@
     "TH14_UndergroundPath_EastWestTunnel",
     "TH14_UndergroundPath_WestEntrance",
     "TH14_Route7",
-    "TH14_Route7_EastEntrance"
+    "TH14_Route7_EastEntrance",
+    "TH14_CeladonCity",
+    "TH14_CeladonCity_PokemonCenter_1F",
+    "TH14_CeladonCity_PokemonCenter_2F",
+    "TH14_CeladonCity_Gym",
+    "TH14_CeladonCity_DepartmentStore_1F",
+    "TH14_CeladonCity_DepartmentStore_2F",
+    "TH14_CeladonCity_DepartmentStore_3F",
+    "TH14_CeladonCity_DepartmentStore_4F",
+    "TH14_CeladonCity_DepartmentStore_5F",
+    "TH14_CeladonCity_DepartmentStore_Elevator",
+    "TH14_CeladonCity_DepartmentStore_Roof",
+    "TH14_CeladonCity_Condominiums_1F",
+    "TH14_CeladonCity_Condominiums_2F",
+    "TH14_CeladonCity_Condominiums_3F",
+    "TH14_CeladonCity_Condominiums_Roof",
+    "TH14_CeladonCity_Condominiums_RoofRoom",
+    "TH14_CeladonCity_GameCorner",
+    "TH14_CeladonCity_GameCorner_PrizeRoom",
+    "TH14_CeladonCity_Restaurant",
+    "TH14_CeladonCity_Hotel",
+    "TH14_CeladonCity_House1"
   ]
 }

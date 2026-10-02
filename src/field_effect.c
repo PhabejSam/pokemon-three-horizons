@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons_chapter14.h"
 #include "data.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -1390,7 +1391,11 @@ static u8 CreatePokecenterMonitorSprite(s16 x, s16 y)
 {
     u8 spriteId;
     struct Sprite *sprite;
-    if (IS_FRLG || (THREE_HORIZONS && gMapHeader.mapLayoutId == LAYOUT_POKEMON_CENTER_1F_FRLG))
+    if (IS_FRLG
+#if THREE_HORIZONS
+        || TH14_IsFrlgPokemonCenterLayout(gMapHeader.mapLayoutId)
+#endif
+    )
     {
         spriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokecenterMonitor_FrLg, x + 4, y, 0);
     }

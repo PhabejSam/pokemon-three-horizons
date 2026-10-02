@@ -1186,3 +1186,176 @@ const struct Tileset gTileset_CeladonCity =
     .metatileAttributes = gMetatileAttributes_CeladonCity,
     .callback = InitTilesetAnim_CeladonCity,
 };
+
+const u32 gTilesetTiles_Condominiums[] = INCGFX_U32("data/tilesets/secondary/condominiums_frlg/tiles.png", ".4bpp.fastSmol");
+const u16 gTilesetPalettes_Condominiums[][16] = {
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/condominiums_frlg/palettes/15.pal", ".gbapal"),
+};
+const u16 gMetatiles_Condominiums[] = INCBIN_U16("data/tilesets/secondary/condominiums_frlg/metatiles.bin");
+const u16 gMetatileAttributes_Condominiums[] = INCBIN_U16("data/tilesets/secondary/condominiums_frlg/metatile_attributes.bin");
+const struct Tileset gTileset_Condominiums =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Condominiums,
+    .palettes = gTilesetPalettes_Condominiums,
+    .metatiles = gMetatiles_Condominiums,
+    .metatileAttributes = gMetatileAttributes_Condominiums,
+    .callback = NULL,
+};
+
+const u32 gTilesetTiles_DepartmentStore[] = INCGFX_U32("data/tilesets/secondary/department_store_frlg/tiles.png", ".4bpp.fastSmol");
+const u16 gTilesetPalettes_DepartmentStore[][16] = {
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/department_store_frlg/palettes/15.pal", ".gbapal"),
+};
+const u16 gMetatiles_DepartmentStore[] = INCBIN_U16("data/tilesets/secondary/department_store_frlg/metatiles.bin");
+const u16 gMetatileAttributes_DepartmentStore[] = INCBIN_U16("data/tilesets/secondary/department_store_frlg/metatile_attributes.bin");
+const struct Tileset gTileset_DepartmentStore =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_DepartmentStore,
+    .palettes = gTilesetPalettes_DepartmentStore,
+    .metatiles = gMetatiles_DepartmentStore,
+    .metatileAttributes = gMetatileAttributes_DepartmentStore,
+    .callback = NULL,
+};
+
+const u16 gMetatiles_SilphCo[] = INCBIN_U16("data/tilesets/secondary/silph_co_frlg/metatiles.bin");
+const u16 gMetatileAttributes_SilphCo[] = INCBIN_U16("data/tilesets/secondary/silph_co_frlg/metatile_attributes.bin");
+const struct Tileset gTileset_SilphCo =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Condominiums,
+    .palettes = gTilesetPalettes_Condominiums,
+    .metatiles = gMetatiles_SilphCo,
+    .metatileAttributes = gMetatileAttributes_SilphCo,
+    .callback = InitTilesetAnim_SilphCo,
+};
+
+const u32 gTilesetTiles_GameCorner[] = INCGFX_U32("data/tilesets/secondary/game_corner_frlg/tiles.png", ".4bpp.fastSmol");
+const u16 gTilesetPalettes_GameCorner[][16] = {
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/game_corner_frlg/palettes/15.pal", ".gbapal"),
+};
+const u16 gMetatiles_GameCorner[] = INCBIN_U16("data/tilesets/secondary/game_corner_frlg/metatiles.bin");
+const u16 gMetatileAttributes_GameCorner[] = INCBIN_U16("data/tilesets/secondary/game_corner_frlg/metatile_attributes.bin");
+const struct Tileset gTileset_GameCorner =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_GameCorner,
+    .palettes = gTilesetPalettes_GameCorner,
+    .metatiles = gMetatiles_GameCorner,
+    .metatileAttributes = gMetatileAttributes_GameCorner,
+    .callback = NULL,
+};
+
+const u32 gTilesetTiles_CeladonGym[] = INCGFX_U32("data/tilesets/secondary/celadon_gym_frlg/tiles.png", ".4bpp.fastSmol");
+const u16 gTilesetPalettes_CeladonGym[][16] = {
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/celadon_gym_frlg/palettes/15.pal", ".gbapal"),
+};
+const u16 gMetatiles_CeladonGym[] = INCBIN_U16("data/tilesets/secondary/celadon_gym_frlg/metatiles.bin");
+const u16 gMetatileAttributes_CeladonGym[] = INCBIN_U16("data/tilesets/secondary/celadon_gym_frlg/metatile_attributes.bin");
+const struct Tileset gTileset_CeladonGym =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CeladonGym,
+    .palettes = gTilesetPalettes_CeladonGym,
+    .metatiles = gMetatiles_CeladonGym,
+    .metatileAttributes = gMetatileAttributes_CeladonGym,
+    .callback = InitTilesetAnim_CeladonGym,
+};
+
+const u32 gTilesetTiles_RestaurantHotel[] = INCGFX_U32("data/tilesets/secondary/restaurant_hotel_frlg/tiles.png", ".4bpp.fastSmol");
+const u16 gTilesetPalettes_RestaurantHotel[][16] = {
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/restaurant_hotel_frlg/palettes/15.pal", ".gbapal"),
+};
+const u16 gMetatiles_RestaurantHotel[] = INCBIN_U16("data/tilesets/secondary/restaurant_hotel_frlg/metatiles.bin");
+const u16 gMetatileAttributes_RestaurantHotel[] = INCBIN_U16("data/tilesets/secondary/restaurant_hotel_frlg/metatile_attributes.bin");
+const struct Tileset gTileset_RestaurantHotel =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_RestaurantHotel,
+    .palettes = gTilesetPalettes_RestaurantHotel,
+    .metatiles = gMetatiles_RestaurantHotel,
+    .metatileAttributes = gMetatileAttributes_RestaurantHotel,
+    .callback = NULL,
+};

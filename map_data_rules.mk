@@ -20,6 +20,12 @@ MAP_EVENTS := $(patsubst $(MAPS_DIR)/%/,$(MAPS_DIR)/%/events.inc,$(MAP_DIRS))
 MAP_HEADERS := $(patsubst $(MAPS_DIR)/%/,$(MAPS_DIR)/%/header.inc,$(MAP_DIRS))
 MAP_JSONS := $(patsubst $(MAPS_DIR)/%/,$(MAPS_DIR)/%/map.json,$(MAP_DIRS))
 
+# Project selection affects both map groups and layout inclusion. Track it so
+# incremental Three Horizons builds cannot retain a stale layout table.
+ifeq ($(MAP_VERSION),three_horizons)
+MAP_PROJECT_MANIFEST := tools/mapjson/three_horizons_maps.json
+endif
+
 ifeq ($(OS),Windows_NT)
 mapjson_empty :=
 mapjson_space := $(mapjson_empty) $(mapjson_empty)
@@ -46,11 +52,11 @@ $(MAPS_OUTDIR)/%/header.inc $(MAPS_OUTDIR)/%/events.inc $(MAPS_OUTDIR)/%/connect
 	$(MAPJSON) map $(MAP_VERSION) $< $(LAYOUTS_DIR)/layouts.json $(@D)
 
 
-$(MAPS_OUTDIR)/connections.inc $(MAPS_OUTDIR)/groups.inc $(MAPS_OUTDIR)/events.inc $(MAPS_OUTDIR)/headers.inc $(INCLUDECONSTS_OUTDIR)/map_groups.h $(DATA_SRC_SUBDIR)/map_group_count.h: $(MAPS_DIR)/map_groups.json $(MAP_JSONS) $(MAP_JSON_RESPONSE) .map_version $(MAPJSON)
+$(MAPS_OUTDIR)/connections.inc $(MAPS_OUTDIR)/groups.inc $(MAPS_OUTDIR)/events.inc $(MAPS_OUTDIR)/headers.inc $(INCLUDECONSTS_OUTDIR)/map_groups.h $(DATA_SRC_SUBDIR)/map_group_count.h: $(MAPS_DIR)/map_groups.json $(MAP_JSONS) $(MAP_JSON_RESPONSE) $(MAP_PROJECT_MANIFEST) .map_version $(MAPJSON)
 	@$(MAPJSON) groups $(MAP_VERSION) $(MAPS_DIR)/map_groups.json $(MAP_JSON_ARGUMENTS) $(MAPS_OUTDIR) $(INCLUDECONSTS_OUTDIR)
 	@echo "$(MAPJSON) groups $(MAP_VERSION) $(MAPS_DIR)/map_groups.json <MAP_JSONS> $(MAPS_OUTDIR) $(INCLUDECONSTS_OUTDIR)"
 
-$(LAYOUTS_OUTDIR)/layouts.inc $(LAYOUTS_OUTDIR)/layouts_table.inc $(INCLUDECONSTS_OUTDIR)/layouts.h: $(LAYOUTS_DIR)/layouts.json .map_version $(MAPJSON)
+$(LAYOUTS_OUTDIR)/layouts.inc $(LAYOUTS_OUTDIR)/layouts_table.inc $(INCLUDECONSTS_OUTDIR)/layouts.h: $(LAYOUTS_DIR)/layouts.json $(MAP_PROJECT_MANIFEST) .map_version $(MAPJSON)
 	$(MAPJSON) layouts $(MAP_VERSION) $< $(LAYOUTS_OUTDIR) $(INCLUDECONSTS_OUTDIR)
 
 # Generate constants for map events, which depend on data that's distributed across the map.json files.
