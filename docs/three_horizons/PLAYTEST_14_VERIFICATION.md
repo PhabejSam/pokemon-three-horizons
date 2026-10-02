@@ -1,6 +1,6 @@
 # Playtest 14 verification ledger
 
-**2026-10-01: owner-approved blueprint; detailed implementation plan written for review. No PT14 ROM exists yet.**
+**2026-10-02: approved plan in serial/inline execution. Task 1 save-state foundation verified; no PT14 release candidate exists yet.**
 
 The owner requested Celadon → Silph Scope → return to Lavender → mother's Marowak/photo → Fuji/Flute → Route11 Snorlax, with the carry-forward repairs in the chapter blueprint. Full implementation/build/acceptance fields remain pending until their respective gates. Do not use this document as release acceptance.
 
@@ -58,8 +58,8 @@ TMs already are reusable in Three Horizons. Keep that mechanic; design progressi
 | Exact older-RC2 cold Continue baseline and raw party/storage equality | PASS |
 | Same owner source cold-loaded on reviewed Navigator; protected payload comparison | PASS; clock-only differences, no PT14 or save-roundtrip claim |
 | Canonical v1.2 copy and independent source/canon/capacity/map audits | Completed; written design approved in chat |
-| Detailed implementation plan | Written/self-reviewed; awaiting written-plan review before serial/inline execution |
-| PT14 behavioral/visual implementation and focused RED/GREEN checks | NOT RUN |
+| Detailed implementation plan | APPROVED by user; serial/inline execution underway |
+| PT14 behavioral/visual implementation and focused RED/GREEN checks | Task 1 focused checks PASS; remaining tasks and integration gates pending |
 | Full PT14 host/native/layout/offset/documentation matrix | NOT RUN |
 | New Emerald/FireRed/LeafGreen compatibility builds | NOT RUN |
 | Exact PT14 ROM build/hash/feature/compiled/test revisions | NOT AVAILABLE |
@@ -79,3 +79,12 @@ The new plan contains21 ordered tasks, Gate A for carry-forward/save safety, Gat
 - Whitespace check for changed authored documents: PASS. Canonical Bible bytes remain unchanged.
 - Protected artifacts: all six original ROM/package/Bible/battery sizes and SHA-256 values match baseline; the two earlier worktrees retain identical branch, commit and short-status snapshots. The repository canonical copy still matches the supplied Bible exactly.
 - Evidence: private `.superpowers/sdd/2026-10-01-playtest14/planning-document-checks.json`. These checks validate the written plan and preservation only. Product, migration and hardware acceptance gates above remain pending.
+
+## Task 1 — state ownership and migration
+
+- Allocated exactly 66 explicit native-unused persistent flags, 38 trainer identities (157–194), and a ROM-side ledger for 37 planned group76 maps. No save structure, old map identity or old layout definition changed. Four reserved flags remain untouched.
+- Before repair, the native old-code run failed all three state test definitions: legacy/new-game migration stopped at the old marker, and treating a PT14 save as unknown reset protected progress. The separate compiler-evaluated offset baseline passed.
+- After repair: new host allocation suite **4/4**, existing allocation suite **4/4**, and the focused native state/layout set **15/15 test definitions** passed with normal audio and strict skip-as-failure. Five of these definitions cover PT14; parameter combinations are not counted as extra tests. Evidence: private execution `state-host-green-01.log`, `state-existing-host-green-01.log`, `native/state-green-01.*`, `native/state-combined-green-01.*`.
+- Native coverage includes old even/odd version markers, current-marker repeated migration, raw SaveBlock1/SaveBlock2/party/all-box invariance against explicitly permitted initialization, negative and positive ship/photo receipts, all 65,536 map-group/index pairs, and actual temporary/daily flag reset APIs.
+- Fresh local tools and the focused test ELF built successfully. Windows uses the repository's serial mGBA runner because the Linux Hydra launcher requires unavailable POSIX headers; no tests or assertions were removed. Initial tool/bootstrap failures are retained separately and are not counted as behavioral RED.
+- Existing converter metadata, old party-alias deprecation and test-ELF RWX link warnings remain recorded. The new test uses the current party API. Full save-size/layout matrix, upstream builds, owner-battery roundtrip and hardware acceptance remain pending their planned gates.

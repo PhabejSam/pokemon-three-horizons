@@ -257,10 +257,11 @@ TEST("Three Horizons playtest13 migration initializes new trainer wins once and 
     TH_MigrateSaveState();
     for (u32 trainer = 1; trainer < TRAINERS_COUNT; trainer++)
         EXPECT_EQ(FlagGet(TRAINER_FLAGS_START + trainer),
-            version == TH_STATE_VERSION_13 || version == TH_STATE_VERSION_13_1 || trainer < 104 || trainer > 156);
+            (version == TH_STATE_VERSION_13 || version == TH_STATE_VERSION_13_1 || trainer < 104 || trainer > 156)
+            && (trainer < 157 || trainer > 194));
     EXPECT_EQ(VarGet(VAR_TH_CLOCK_DISPLAY_HI), TH_STATE_VERSION_CURRENT | 1);
-    // Actual P13 wins survive every subsequent Continue/migration call.
-    for (u32 trainer = 104; trainer <= 156; trainer++)
+    // Actual P13 and new P14 wins survive every subsequent Continue.
+    for (u32 trainer = 104; trainer <= 194; trainer++)
         FlagSet(TRAINER_FLAGS_START + trainer);
     TH_MigrateSaveState();
     for (u32 trainer = 1; trainer < TRAINERS_COUNT; trainer++)

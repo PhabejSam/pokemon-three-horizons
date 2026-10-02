@@ -1,0 +1,298 @@
+[
+  {
+    "name": "TH14_Route8",
+    "donor": "Route8_Frlg",
+    "group": 76,
+    "index": 0,
+    "layout": "LAYOUT_TH14_ROUTE8",
+    "ownerTask": 8
+  },
+  {
+    "name": "TH14_Route8_WestEntrance",
+    "donor": "Route8_WestEntrance_Frlg",
+    "group": 76,
+    "index": 1,
+    "layout": "LAYOUT_TH14_ROUTE8_WEST_ENTRANCE",
+    "ownerTask": 8
+  },
+  {
+    "name": "TH14_UndergroundPath_EastEntrance",
+    "donor": "UndergroundPath_EastEntrance_Frlg",
+    "group": 76,
+    "index": 2,
+    "layout": "LAYOUT_TH14_UNDERGROUND_PATH_EAST_ENTRANCE",
+    "ownerTask": 8
+  },
+  {
+    "name": "TH14_UndergroundPath_EastWestTunnel",
+    "donor": "UndergroundPath_EastWestTunnel_Frlg",
+    "group": 76,
+    "index": 3,
+    "layout": "LAYOUT_TH14_UNDERGROUND_PATH_EAST_WEST_TUNNEL",
+    "ownerTask": 8
+  },
+  {
+    "name": "TH14_UndergroundPath_WestEntrance",
+    "donor": "UndergroundPath_WestEntrance_Frlg",
+    "group": 76,
+    "index": 4,
+    "layout": "LAYOUT_TH14_UNDERGROUND_PATH_WEST_ENTRANCE",
+    "ownerTask": 8
+  },
+  {
+    "name": "TH14_Route7",
+    "donor": "Route7_Frlg",
+    "group": 76,
+    "index": 5,
+    "layout": "LAYOUT_TH14_ROUTE7",
+    "ownerTask": 8
+  },
+  {
+    "name": "TH14_Route7_EastEntrance",
+    "donor": "Route7_EastEntrance_Frlg",
+    "group": 76,
+    "index": 6,
+    "layout": "LAYOUT_TH14_ROUTE7_EAST_ENTRANCE",
+    "ownerTask": 8
+  },
+  {
+    "name": "TH14_CeladonCity",
+    "donor": "CeladonCity_Frlg",
+    "group": 76,
+    "index": 7,
+    "layout": "LAYOUT_TH14_CELADON_CITY",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_PokemonCenter_1F",
+    "donor": "CeladonCity_PokemonCenter_1F_Frlg",
+    "group": 76,
+    "index": 8,
+    "layout": "LAYOUT_TH14_CELADON_CITY_POKEMON_CENTER_1F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_PokemonCenter_2F",
+    "donor": "CeladonCity_PokemonCenter_2F_Frlg",
+    "group": 76,
+    "index": 9,
+    "layout": "LAYOUT_TH14_CELADON_CITY_POKEMON_CENTER_2F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_Gym",
+    "donor": "CeladonCity_Gym_Frlg",
+    "group": 76,
+    "index": 10,
+    "layout": "LAYOUT_TH14_CELADON_CITY_GYM",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_DepartmentStore_1F",
+    "donor": "CeladonCity_DepartmentStore_1F_Frlg",
+    "group": 76,
+    "index": 11,
+    "layout": "LAYOUT_TH14_CELADON_CITY_DEPARTMENT_STORE_1F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_DepartmentStore_2F",
+    "donor": "CeladonCity_DepartmentStore_2F_Frlg",
+    "group": 76,
+    "index": 12,
+    "layout": "LAYOUT_TH14_CELADON_CITY_DEPARTMENT_STORE_2F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_DepartmentStore_3F",
+    "donor": "CeladonCity_DepartmentStore_3F_Frlg",
+    "group": 76,
+    "index": 13,
+    "layout": "LAYOUT_TH14_CELADON_CITY_DEPARTMENT_STORE_3F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_DepartmentStore_4F",
+    "donor": "CeladonCity_DepartmentStore_4F_Frlg",
+    "group": 76,
+    "index": 14,
+    "layout": "LAYOUT_TH14_CELADON_CITY_DEPARTMENT_STORE_4F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_DepartmentStore_5F",
+    "donor": "CeladonCity_DepartmentStore_5F_Frlg",
+    "group": 76,
+    "index": 15,
+    "layout": "LAYOUT_TH14_CELADON_CITY_DEPARTMENT_STORE_5F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_DepartmentStore_Elevator",
+    "donor": "CeladonCity_DepartmentStore_Elevator_Frlg",
+    "group": 76,
+    "index": 16,
+    "layout": "LAYOUT_TH14_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_DepartmentStore_Roof",
+    "donor": "CeladonCity_DepartmentStore_Roof_Frlg",
+    "group": 76,
+    "index": 17,
+    "layout": "LAYOUT_TH14_CELADON_CITY_DEPARTMENT_STORE_ROOF",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_Condominiums_1F",
+    "donor": "CeladonCity_Condominiums_1F_Frlg",
+    "group": 76,
+    "index": 18,
+    "layout": "LAYOUT_TH14_CELADON_CITY_CONDOMINIUMS_1F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_Condominiums_2F",
+    "donor": "CeladonCity_Condominiums_2F_Frlg",
+    "group": 76,
+    "index": 19,
+    "layout": "LAYOUT_TH14_CELADON_CITY_CONDOMINIUMS_2F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_Condominiums_3F",
+    "donor": "CeladonCity_Condominiums_3F_Frlg",
+    "group": 76,
+    "index": 20,
+    "layout": "LAYOUT_TH14_CELADON_CITY_CONDOMINIUMS_3F",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_Condominiums_Roof",
+    "donor": "CeladonCity_Condominiums_Roof_Frlg",
+    "group": 76,
+    "index": 21,
+    "layout": "LAYOUT_TH14_CELADON_CITY_CONDOMINIUMS_ROOF",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_Condominiums_RoofRoom",
+    "donor": "CeladonCity_Condominiums_RoofRoom_Frlg",
+    "group": 76,
+    "index": 22,
+    "layout": "LAYOUT_TH14_CELADON_CITY_CONDOMINIUMS_ROOF_ROOM",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_GameCorner",
+    "donor": "CeladonCity_GameCorner_Frlg",
+    "group": 76,
+    "index": 23,
+    "layout": "LAYOUT_TH14_CELADON_CITY_GAME_CORNER",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_GameCorner_PrizeRoom",
+    "donor": "CeladonCity_GameCorner_PrizeRoom_Frlg",
+    "group": 76,
+    "index": 24,
+    "layout": "LAYOUT_TH14_CELADON_CITY_GAME_CORNER_PRIZE_ROOM",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_Restaurant",
+    "donor": "CeladonCity_Restaurant_Frlg",
+    "group": 76,
+    "index": 25,
+    "layout": "LAYOUT_TH14_CELADON_CITY_RESTAURANT",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_Hotel",
+    "donor": "CeladonCity_Hotel_Frlg",
+    "group": 76,
+    "index": 26,
+    "layout": "LAYOUT_TH14_CELADON_CITY_HOTEL",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_CeladonCity_House1",
+    "donor": "CeladonCity_House1_Frlg",
+    "group": 76,
+    "index": 27,
+    "layout": "LAYOUT_TH14_CELADON_CITY_HOUSE1",
+    "ownerTask": 9
+  },
+  {
+    "name": "TH14_RocketHideout_B1F",
+    "donor": "RocketHideout_B1F_Frlg",
+    "group": 76,
+    "index": 28,
+    "layout": "LAYOUT_TH14_ROCKET_HIDEOUT_B1F",
+    "ownerTask": 12
+  },
+  {
+    "name": "TH14_RocketHideout_B2F",
+    "donor": "RocketHideout_B2F_Frlg",
+    "group": 76,
+    "index": 29,
+    "layout": "LAYOUT_TH14_ROCKET_HIDEOUT_B2F",
+    "ownerTask": 12
+  },
+  {
+    "name": "TH14_RocketHideout_B3F",
+    "donor": "RocketHideout_B3F_Frlg",
+    "group": 76,
+    "index": 30,
+    "layout": "LAYOUT_TH14_ROCKET_HIDEOUT_B3F",
+    "ownerTask": 12
+  },
+  {
+    "name": "TH14_RocketHideout_B4F",
+    "donor": "RocketHideout_B4F_Frlg",
+    "group": 76,
+    "index": 31,
+    "layout": "LAYOUT_TH14_ROCKET_HIDEOUT_B4F",
+    "ownerTask": 12
+  },
+  {
+    "name": "TH14_RocketHideout_Elevator",
+    "donor": "RocketHideout_Elevator_Frlg",
+    "group": 76,
+    "index": 32,
+    "layout": "LAYOUT_TH14_ROCKET_HIDEOUT_ELEVATOR",
+    "ownerTask": 12
+  },
+  {
+    "name": "TH14_PokemonTower_7F",
+    "donor": "PokemonTower_7F_Frlg",
+    "group": 76,
+    "index": 33,
+    "layout": "LAYOUT_TH14_POKEMON_TOWER_7F",
+    "ownerTask": 15
+  },
+  {
+    "name": "TH14_Route11_EastEntrance_1F",
+    "donor": "Route11_EastEntrance_1F_Frlg",
+    "group": 76,
+    "index": 34,
+    "layout": "LAYOUT_TH14_ROUTE11_EAST_ENTRANCE_1F",
+    "ownerTask": 17
+  },
+  {
+    "name": "TH14_Route11_EastEntrance_2F",
+    "donor": "Route11_EastEntrance_2F_Frlg",
+    "group": 76,
+    "index": 35,
+    "layout": "LAYOUT_TH14_ROUTE11_EAST_ENTRANCE_2F",
+    "ownerTask": 17
+  },
+  {
+    "name": "TH14_Route12_Landing",
+    "donor": "Route12_Frlg",
+    "group": 76,
+    "index": 36,
+    "layout": "LAYOUT_TH14_ROUTE12_LANDING",
+    "ownerTask": 17
+  }
+]

@@ -1,0 +1,1019 @@
+{
+  "schemaVersion": 1,
+  "receipts": [
+    {
+      "name": "FLAG_TH14_PICKUP_0",
+      "value": 2277,
+      "kind": "hidden-item",
+      "writer": "TH14_Route8",
+      "reward": "Rawst Berry hidden",
+      "coordinate": [
+        42,
+        10
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_1",
+      "value": 2278,
+      "kind": "hidden-item",
+      "writer": "TH14_Route8",
+      "reward": "Lum Berry hidden",
+      "coordinate": [
+        38,
+        11
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_2",
+      "value": 2279,
+      "kind": "hidden-item",
+      "writer": "TH14_Route8",
+      "reward": "Leppa Berry hidden",
+      "coordinate": [
+        42,
+        15
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_3",
+      "value": 2280,
+      "kind": "hidden-item",
+      "writer": "TH14_Route7",
+      "reward": "Wepear Berry hidden",
+      "coordinate": [
+        16,
+        15
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_4",
+      "value": 2281,
+      "kind": "hidden-item",
+      "writer": "TH14_UndergroundPath_EastWestTunnel",
+      "reward": "Potion hidden",
+      "coordinate": [
+        7,
+        3
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_5",
+      "value": 2282,
+      "kind": "hidden-item",
+      "writer": "TH14_UndergroundPath_EastWestTunnel",
+      "reward": "Paralyze Heal hidden",
+      "coordinate": [
+        17,
+        5
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_6",
+      "value": 2283,
+      "kind": "hidden-item",
+      "writer": "TH14_UndergroundPath_EastWestTunnel",
+      "reward": "Awakening hidden",
+      "coordinate": [
+        31,
+        4
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_7",
+      "value": 2284,
+      "kind": "hidden-item",
+      "writer": "TH14_UndergroundPath_EastWestTunnel",
+      "reward": "Burn Heal hidden",
+      "coordinate": [
+        45,
+        3
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_8",
+      "value": 2285,
+      "kind": "hidden-item",
+      "writer": "TH14_UndergroundPath_EastWestTunnel",
+      "reward": "Ice Heal hidden",
+      "coordinate": [
+        70,
+        3
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_9",
+      "value": 2286,
+      "kind": "hidden-item",
+      "writer": "TH14_UndergroundPath_EastWestTunnel",
+      "reward": "Ether hidden",
+      "coordinate": [
+        55,
+        2
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_10",
+      "value": 2287,
+      "kind": "hidden-item",
+      "writer": "TH14_UndergroundPath_EastWestTunnel",
+      "reward": "Antidote hidden",
+      "coordinate": [
+        62,
+        5
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_11",
+      "value": 2288,
+      "kind": "object-item",
+      "writer": "TH14_CeladonCity",
+      "reward": "Ether ball",
+      "coordinate": [
+        5,
+        3
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_12",
+      "value": 2289,
+      "kind": "hidden-item",
+      "writer": "TH14_CeladonCity",
+      "reward": "PP Up hidden",
+      "coordinate": [
+        55,
+        20
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_13",
+      "value": 2290,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "10 coins hidden",
+      "coordinate": [
+        2,
+        4
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_14",
+      "value": 2291,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "10 coins hidden",
+      "coordinate": [
+        3,
+        8
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_15",
+      "value": 2292,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "20 coins hidden",
+      "coordinate": [
+        2,
+        11
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_16",
+      "value": 2293,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "10 coins hidden",
+      "coordinate": [
+        6,
+        12
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_17",
+      "value": 2294,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "10 coins hidden",
+      "coordinate": [
+        9,
+        9
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_18",
+      "value": 2295,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "20 coins hidden",
+      "coordinate": [
+        8,
+        5
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_19",
+      "value": 2296,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "10 coins hidden",
+      "coordinate": [
+        10,
+        4
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_20",
+      "value": 2297,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "10 coins hidden",
+      "coordinate": [
+        13,
+        3
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_21",
+      "value": 2298,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "10 coins hidden",
+      "coordinate": [
+        15,
+        5
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_22",
+      "value": 2299,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "40 coins hidden",
+      "coordinate": [
+        17,
+        5
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_23",
+      "value": 2300,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "100 coins hidden",
+      "coordinate": [
+        15,
+        13
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_24",
+      "value": 2301,
+      "kind": "hidden-coins",
+      "writer": "TH14_CeladonCity_GameCorner",
+      "reward": "10 coins hidden",
+      "coordinate": [
+        12,
+        12
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_25",
+      "value": 2302,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B1F",
+      "reward": "Escape Rope ball",
+      "coordinate": [
+        5,
+        16
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_26",
+      "value": 2303,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B1F",
+      "reward": "Hyper Potion ball",
+      "coordinate": [
+        1,
+        22
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_27",
+      "value": 2304,
+      "kind": "hidden-item",
+      "writer": "TH14_RocketHideout_B1F",
+      "reward": "PP Up hidden",
+      "coordinate": [
+        16,
+        17
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_28",
+      "value": 2305,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B2F",
+      "reward": "X Speed ball",
+      "coordinate": [
+        15,
+        3
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_29",
+      "value": 2306,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B2F",
+      "reward": "Moon Stone ball",
+      "coordinate": [
+        2,
+        5
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_30",
+      "value": 2307,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B2F",
+      "reward": "TM12 ball; active mapping Taunt",
+      "coordinate": [
+        5,
+        7
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_31",
+      "value": 2308,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B2F",
+      "reward": "Super Potion ball",
+      "coordinate": [
+        0,
+        14
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_32",
+      "value": 2309,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B3F",
+      "reward": "Rare Candy ball",
+      "coordinate": [
+        12,
+        12
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_33",
+      "value": 2310,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B3F",
+      "reward": "TM21 ball; active mapping Frustration",
+      "coordinate": [
+        19,
+        14
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_34",
+      "value": 2311,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B3F",
+      "reward": "Black Glasses ball",
+      "coordinate": [
+        14,
+        24
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_35",
+      "value": 2312,
+      "kind": "hidden-item",
+      "writer": "TH14_RocketHideout_B3F",
+      "reward": "Nugget hidden",
+      "coordinate": [
+        1,
+        3
+      ]
+    },
+    {
+      "name": "FLAG_TH14_SILPH_SCOPE",
+      "value": 2313,
+      "kind": "key-item",
+      "writer": "TH14_RocketHideout_B4F",
+      "reward": "Scope delivery AND collected-object receipt",
+      "coordinate": [
+        20,
+        5
+      ]
+    },
+    {
+      "name": "FLAG_TH14_LIFT_KEY",
+      "value": 2314,
+      "kind": "key-item",
+      "writer": "TH14_RocketHideout_B4F",
+      "reward": "Lift Key delivery AND collected-object receipt",
+      "coordinate": [
+        3,
+        2
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_38",
+      "value": 2315,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B4F",
+      "reward": "TM49 ball; active mapping Snatch",
+      "coordinate": [
+        1,
+        6
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_39",
+      "value": 2316,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B4F",
+      "reward": "Max Ether ball",
+      "coordinate": [
+        4,
+        14
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_40",
+      "value": 2317,
+      "kind": "object-item",
+      "writer": "TH14_RocketHideout_B4F",
+      "reward": "Calcium ball",
+      "coordinate": [
+        6,
+        23
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_41",
+      "value": 2318,
+      "kind": "hidden-item",
+      "writer": "TH14_RocketHideout_B4F",
+      "reward": "Nest Ball hidden",
+      "coordinate": [
+        22,
+        6
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_42",
+      "value": 2319,
+      "kind": "hidden-item",
+      "writer": "TH14_RocketHideout_B4F",
+      "reward": "Net Ball hidden",
+      "coordinate": [
+        16,
+        6
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_43",
+      "value": 2320,
+      "kind": "hidden-item",
+      "writer": "TH14_PokemonTower_7F",
+      "reward": "Soothe Bell hidden",
+      "coordinate": [
+        11,
+        4
+      ]
+    },
+    {
+      "name": "FLAG_TH14_PICKUP_44",
+      "value": 2321,
+      "kind": "hidden-item",
+      "writer": "TH14_Route12_Landing",
+      "reward": "Leftovers hidden, underfoot",
+      "coordinate": [
+        14,
+        10
+      ]
+    },
+    {
+      "name": "FLAG_TH14_TOWN_MAP",
+      "value": 2322,
+      "kind": "chapter-receipt",
+      "writer": "Daisy or Oak/network catch-up actually delivered the unique Town Map; both locations share one receipt",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_COIN_CASE",
+      "value": 2323,
+      "kind": "chapter-receipt",
+      "writer": "Restaurant actually delivered Coin Case; owned check and retryable full bag",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_EEVEE",
+      "value": 2324,
+      "kind": "chapter-receipt",
+      "writer": "Mansion Eevee successfully entered party or PC; also hides its ball; no separate gift/hide flag",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_ROOF_FRESH_WATER",
+      "value": 2325,
+      "kind": "chapter-receipt",
+      "writer": "Fresh Water exchange successfully delivered TM16 Light Screen",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_ROOF_SODA_POP",
+      "value": 2326,
+      "kind": "chapter-receipt",
+      "writer": "Soda Pop exchange successfully delivered TM20 Safeguard",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_ROOF_LEMONADE",
+      "value": 2327,
+      "kind": "chapter-receipt",
+      "writer": "Lemonade exchange successfully delivered TM33 Reflect",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_GAMBLER_COINS_10",
+      "value": 2328,
+      "kind": "chapter-receipt",
+      "writer": "GameCorner Fisher successfully gives10 coins",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_GAMBLER_COINS_20_A",
+      "value": 2329,
+      "kind": "chapter-receipt",
+      "writer": "GameCorner Scientist successfully gives20 coins",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_GAMBLER_COINS_20_B",
+      "value": 2330,
+      "kind": "chapter-receipt",
+      "writer": "GameCorner Gentleman successfully gives20 coins",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_ERIKA_TM",
+      "value": 2331,
+      "kind": "chapter-receipt",
+      "writer": "Erika's TM19 Giga Drain delivered; distinct from existing standard badge4 and trainer176 defeat",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_HIDEOUT_POSTER",
+      "value": 2332,
+      "kind": "chapter-receipt",
+      "writer": "Poster switch intentionally activated and stairs opened",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_TRIO_DEFEATED",
+      "value": 2333,
+      "kind": "chapter-receipt",
+      "writer": "Authored double encounter WON, both Jessie190/James191 trainer histories recorded, story scene complete",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_OBS_MOTHER",
+      "value": 2334,
+      "kind": "chapter-receipt",
+      "writer": "Required prebattle mother observation committed; does not imply photo or victory",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_PHOTO_MOTHER",
+      "value": 2177,
+      "kind": "chapter-receipt",
+      "writer": "MOTHER'S WATCH presentation completed and archive photo owned; actual mandatory transaction only",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_MOTHER_WON",
+      "value": 2178,
+      "kind": "chapter-receipt",
+      "writer": "Mother battle returned B_OUTCOME_WON; allows recovery into pending calm/fade if interrupted",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_MOTHER_RESOLVED",
+      "value": 2179,
+      "kind": "chapter-receipt",
+      "writer": "Calm/recognition/fade completed; stairs open and blocking ghost gone",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_FUJI_RESCUED",
+      "value": 2180,
+      "kind": "chapter-receipt",
+      "writer": "Upper Rockets completed and Fuji rescue completed; controls Tower removal AND house presence",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_POKE_FLUTE",
+      "value": 2181,
+      "kind": "chapter-receipt",
+      "writer": "Fuji's Flute actually delivered; pending delivery remains retryable at home",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_SNORLAX_RESOLVED",
+      "value": 2182,
+      "kind": "chapter-receipt",
+      "writer": "Snorlax caught OR defeated; sole persistent roadblock-hide and binocular aftermath receipt",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_ITEMFINDER",
+      "value": 2183,
+      "kind": "chapter-receipt",
+      "writer": "Route11 gate aide delivered Itemfinder at30 caught/received species; retryable and unique",
+      "reward": null,
+      "coordinate": null
+    },
+    {
+      "name": "FLAG_TH14_NINA_TRADE",
+      "value": 2190,
+      "kind": "chapter-receipt",
+      "writer": "Route11 gate native local trade successfully completed; no repeat on decline/failure",
+      "reward": null,
+      "coordinate": null
+    }
+  ],
+  "trainers": [
+    {
+      "constant": "TRAINER_TH14_ROUTE8_JULIA",
+      "id": 157,
+      "donor": "TRAINER_LASS_JULIA",
+      "map": "TH14_Route8",
+      "localId": 1,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_RICH",
+      "id": 158,
+      "donor": "TRAINER_GAMER_RICH",
+      "map": "TH14_Route8",
+      "localId": 2,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_GLENN",
+      "id": 159,
+      "donor": "TRAINER_SUPER_NERD_GLENN",
+      "map": "TH14_Route8",
+      "localId": 3,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_PAIGE",
+      "id": 160,
+      "donor": "TRAINER_LASS_PAIGE",
+      "map": "TH14_Route8",
+      "localId": 4,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_LESLIE",
+      "id": 161,
+      "donor": "TRAINER_SUPER_NERD_LESLIE",
+      "map": "TH14_Route8",
+      "localId": 5,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_ANDREA",
+      "id": 162,
+      "donor": "TRAINER_LASS_ANDREA",
+      "map": "TH14_Route8",
+      "localId": 6,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_MEGAN",
+      "id": 163,
+      "donor": "TRAINER_LASS_MEGAN",
+      "map": "TH14_Route8",
+      "localId": 7,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_STAN",
+      "id": 164,
+      "donor": "TRAINER_GAMER_STAN",
+      "map": "TH14_Route8",
+      "localId": 8,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_AIDAN",
+      "id": 165,
+      "donor": "TRAINER_SUPER_NERD_AIDAN",
+      "map": "TH14_Route8",
+      "localId": 9,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_ELI_ANNE",
+      "id": 166,
+      "donor": "TRAINER_TWINS_ELI_ANNE",
+      "map": "TH14_Route8",
+      "localId": 12,
+      "rematch": true,
+      "interactionAliases": [
+        13
+      ]
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_RICARDO",
+      "id": 167,
+      "donor": "TRAINER_BIKER_RICARDO",
+      "map": "TH14_Route8",
+      "localId": 14,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ROUTE8_JAREN",
+      "id": 168,
+      "donor": "TRAINER_BIKER_JAREN",
+      "map": "TH14_Route8",
+      "localId": 15,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_GYM_KAY",
+      "id": 169,
+      "donor": "TRAINER_LASS_KAY",
+      "map": "TH14_CeladonCity_Gym",
+      "localId": 1,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_GYM_BRIDGET",
+      "id": 170,
+      "donor": "TRAINER_BEAUTY_BRIDGET",
+      "map": "TH14_CeladonCity_Gym",
+      "localId": 2,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_GYM_TINA",
+      "id": 171,
+      "donor": "TRAINER_PICNICKER_TINA",
+      "map": "TH14_CeladonCity_Gym",
+      "localId": 3,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_GYM_TAMIA",
+      "id": 172,
+      "donor": "TRAINER_BEAUTY_TAMIA",
+      "map": "TH14_CeladonCity_Gym",
+      "localId": 4,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_GYM_LORI",
+      "id": 173,
+      "donor": "TRAINER_BEAUTY_LORI",
+      "map": "TH14_CeladonCity_Gym",
+      "localId": 5,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_GYM_LISA",
+      "id": 174,
+      "donor": "TRAINER_LASS_LISA",
+      "map": "TH14_CeladonCity_Gym",
+      "localId": 6,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_GYM_MARY",
+      "id": 175,
+      "donor": "TRAINER_COOLTRAINER_MARY",
+      "map": "TH14_CeladonCity_Gym",
+      "localId": 8,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_ERIKA",
+      "id": 176,
+      "donor": "TRAINER_LEADER_ERIKA",
+      "map": "TH14_CeladonCity_Gym",
+      "localId": 7,
+      "rematch": false,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_GAME_CORNER_GRUNT",
+      "id": 177,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_7",
+      "map": "TH14_CeladonCity_GameCorner",
+      "localId": 11,
+      "rematch": false,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B1F_GRUNT1",
+      "id": 178,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_8",
+      "map": "TH14_RocketHideout_B1F",
+      "localId": 2,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B1F_GRUNT2",
+      "id": 179,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_9",
+      "map": "TH14_RocketHideout_B1F",
+      "localId": 1,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B1F_GRUNT3",
+      "id": 180,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_10",
+      "map": "TH14_RocketHideout_B1F",
+      "localId": 4,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B1F_GRUNT4",
+      "id": 181,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_11",
+      "map": "TH14_RocketHideout_B1F",
+      "localId": 3,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B1F_GRUNT5",
+      "id": 182,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_12",
+      "map": "TH14_RocketHideout_B1F",
+      "localId": 5,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B2F_GRUNT",
+      "id": 183,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_13",
+      "map": "TH14_RocketHideout_B2F",
+      "localId": 1,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B3F_GRUNT1",
+      "id": 184,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_14",
+      "map": "TH14_RocketHideout_B3F",
+      "localId": 2,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B3F_GRUNT2",
+      "id": 185,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_15",
+      "map": "TH14_RocketHideout_B3F",
+      "localId": 1,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B4F_GRUNT1",
+      "id": 186,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_18",
+      "map": "TH14_RocketHideout_B4F",
+      "localId": 3,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B4F_GRUNT2",
+      "id": 187,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_16",
+      "map": "TH14_RocketHideout_B4F",
+      "localId": 6,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_HIDEOUT_B4F_GRUNT3",
+      "id": 188,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_17",
+      "map": "TH14_RocketHideout_B4F",
+      "localId": 5,
+      "rematch": true,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_GIOVANNI",
+      "id": 189,
+      "donor": "TRAINER_BOSS_GIOVANNI",
+      "map": "TH14_RocketHideout_B4F",
+      "localId": 1,
+      "rematch": false,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_JESSIE",
+      "id": 190,
+      "donor": null,
+      "map": "TH14_RocketHideout_B4F",
+      "localId": 10,
+      "rematch": false,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_JAMES",
+      "id": 191,
+      "donor": null,
+      "map": "TH14_RocketHideout_B4F",
+      "localId": 11,
+      "rematch": false,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_TOWER7F_GRUNT1",
+      "id": 192,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_19",
+      "map": "TH14_PokemonTower_7F",
+      "localId": 2,
+      "rematch": false,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_TOWER7F_GRUNT2",
+      "id": 193,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_20",
+      "map": "TH14_PokemonTower_7F",
+      "localId": 3,
+      "rematch": false,
+      "interactionAliases": []
+    },
+    {
+      "constant": "TRAINER_TH14_TOWER7F_GRUNT3",
+      "id": 194,
+      "donor": "TRAINER_TEAM_ROCKET_GRUNT_21",
+      "map": "TH14_PokemonTower_7F",
+      "localId": 4,
+      "rematch": false,
+      "interactionAliases": []
+    }
+  ],
+  "encounters": [],
+  "shops": [],
+  "prizes": [],
+  "rematchEvolutions": [],
+  "unfinishedInteractions": []
+}

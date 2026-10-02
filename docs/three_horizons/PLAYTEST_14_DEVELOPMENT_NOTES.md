@@ -1,6 +1,6 @@
 # Playtest 14 development handoff — 2026-10-01
 
-Current stage: the owner approved the Chapter Blueprint in chat (“approve”). The 21-task implementation plan is saved at `docs/superpowers/plans/2026-10-01-playtest14-celadon-lavender.md` for review before execution. Preserve the serial/inline method; do not reopen the approved design or ask for an execution-method choice again. No PT14 product code, build or release package has been created.
+Current stage: the owner approved the detailed 21-task plan and serial/inline execution. Task 1 state allocation and migration are implemented and focused host/native checks pass. Task 2 (Town Map) is next. No PT14 release candidate or hardware acceptance is claimed.
 
 Work only in `work/playtest14-celadon`, branch `feature/playtest14-celadon-lavender`, descended from local reviewed Navigator commit `2d85555d74f34f5029c38a3b2db26fb7eb3f99c0`. Original feature and review worktrees contain unrelated untracked/private evidence and remain protected. Native worktree creation returned `Not a git repository` for the task root; the correct nested repository's Git worktree mechanism created this isolated checkout. No remote change occurred.
 
@@ -31,3 +31,11 @@ Read-only Astra/Ultra map, economy and test-tooling audits supplied the source e
 The documentation index check initially reported six omitted links: the new plan, four blueprint-stage documents, and the inherited Navigator review plan. This checkpoint adds the links in docs/SUMMARY.md without changing the linked historical/canonical artifacts. Final documentation/preservation results are recorded in PLAYTEST_14_VERIFICATION.md.
 
 Next action after written-plan review: use superpowers:executing-plans, inspect current HEAD/status, begin Task1, and retain local logical commits. No new design request or additional feature is inferred from this planning checkpoint. The unresolved high-severity handheld capture issue remains an investigation requirement; passing local tests must not silently close it.
+
+## Implementation checkpoint — Task 1
+
+PT14 marker is `0xA90E`; every historical migration gate recognizes it. The appended step initializes only the 66 named flags and trainer157–194 once. `chapter14_content.json` and `chapter14_maps.json` now carry approved ownership; maps will be registered in task order. `TH_IsProjectMap` bounds both old group75 and planned group76 without dereferencing maps.
+
+Focused evidence: eight host tests and fifteen native state/layout definitions passed. Behavioral RED and the unchanged-offset baseline were captured first. Existing all-trainer migration expectations now include the newly owned trainer range, then verify earned PT13/PT14 wins survive repeat calls. Full release gates remain pending.
+
+Resume through `.superpowers/sdd/2026-10-01-playtest14-celadon-lavender/progress.md` and the current task brief. The private Windows runner uses `TEST_SRCS` for focused native builds, `CHECK_TOOL_NAMES=patchelf` to bypass only the unavailable Linux launcher, and real normal-audio mGBA with skip-as-failure. The first fresh tool/asset build is complete; use incremental builds. Do not recopy/rebootstrap caches or rerun already completed tasks.

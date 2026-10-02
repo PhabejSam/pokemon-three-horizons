@@ -12,6 +12,77 @@
 #include "constants/maps.h"
 #include "constants/layouts.h"
 #if THREE_HORIZONS
+// Only these chapter-owned receipts may be initialized during PT14 migration.
+static const u16 sTH14OwnedFlags[] =
+{
+    FLAG_TH14_PICKUP_0,
+    FLAG_TH14_PICKUP_1,
+    FLAG_TH14_PICKUP_2,
+    FLAG_TH14_PICKUP_3,
+    FLAG_TH14_PICKUP_4,
+    FLAG_TH14_PICKUP_5,
+    FLAG_TH14_PICKUP_6,
+    FLAG_TH14_PICKUP_7,
+    FLAG_TH14_PICKUP_8,
+    FLAG_TH14_PICKUP_9,
+    FLAG_TH14_PICKUP_10,
+    FLAG_TH14_PICKUP_11,
+    FLAG_TH14_PICKUP_12,
+    FLAG_TH14_PICKUP_13,
+    FLAG_TH14_PICKUP_14,
+    FLAG_TH14_PICKUP_15,
+    FLAG_TH14_PICKUP_16,
+    FLAG_TH14_PICKUP_17,
+    FLAG_TH14_PICKUP_18,
+    FLAG_TH14_PICKUP_19,
+    FLAG_TH14_PICKUP_20,
+    FLAG_TH14_PICKUP_21,
+    FLAG_TH14_PICKUP_22,
+    FLAG_TH14_PICKUP_23,
+    FLAG_TH14_PICKUP_24,
+    FLAG_TH14_PICKUP_25,
+    FLAG_TH14_PICKUP_26,
+    FLAG_TH14_PICKUP_27,
+    FLAG_TH14_PICKUP_28,
+    FLAG_TH14_PICKUP_29,
+    FLAG_TH14_PICKUP_30,
+    FLAG_TH14_PICKUP_31,
+    FLAG_TH14_PICKUP_32,
+    FLAG_TH14_PICKUP_33,
+    FLAG_TH14_PICKUP_34,
+    FLAG_TH14_PICKUP_35,
+    FLAG_TH14_SILPH_SCOPE,
+    FLAG_TH14_LIFT_KEY,
+    FLAG_TH14_PICKUP_38,
+    FLAG_TH14_PICKUP_39,
+    FLAG_TH14_PICKUP_40,
+    FLAG_TH14_PICKUP_41,
+    FLAG_TH14_PICKUP_42,
+    FLAG_TH14_PICKUP_43,
+    FLAG_TH14_PICKUP_44,
+    FLAG_TH14_TOWN_MAP,
+    FLAG_TH14_COIN_CASE,
+    FLAG_TH14_EEVEE,
+    FLAG_TH14_ROOF_FRESH_WATER,
+    FLAG_TH14_ROOF_SODA_POP,
+    FLAG_TH14_ROOF_LEMONADE,
+    FLAG_TH14_GAMBLER_COINS_10,
+    FLAG_TH14_GAMBLER_COINS_20_A,
+    FLAG_TH14_GAMBLER_COINS_20_B,
+    FLAG_TH14_ERIKA_TM,
+    FLAG_TH14_HIDEOUT_POSTER,
+    FLAG_TH14_TRIO_DEFEATED,
+    FLAG_TH14_OBS_MOTHER,
+    FLAG_TH14_PHOTO_MOTHER,
+    FLAG_TH14_MOTHER_WON,
+    FLAG_TH14_MOTHER_RESOLVED,
+    FLAG_TH14_FUJI_RESCUED,
+    FLAG_TH14_POKE_FLUTE,
+    FLAG_TH14_SNORLAX_RESOLVED,
+    FLAG_TH14_ITEMFINDER,
+    FLAG_TH14_NINA_TRADE,
+};
+
 void TH_MigrateSaveState(void)
 {
     TH_ResearchResetCallPacing();
@@ -19,7 +90,7 @@ void TH_MigrateSaveState(void)
         VAR_TH_SHINY_RATE, VAR_TH_CLOCK_MODE, VAR_TH_CLOCK_REAL_LO,
         VAR_TH_CLOCK_REAL_HI, VAR_TH_CLOCK_DISPLAY_LO};
     u16 version = VarGet(VAR_TH_CLOCK_DISPLAY_HI) & TH_STATE_VERSION_MASK;
-    if (version != TH_STATE_VERSION_9 && version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
+    if (version != TH_STATE_VERSION_9 && version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1 && version != TH_STATE_VERSION_14)
     {
         // Only this chapter's newly owned state is cleared. Never touch the
         // original partner, rival, trainer flags, badges, clock setup or kit.
@@ -28,19 +99,19 @@ void TH_MigrateSaveState(void)
         for (u32 flag=FLAG_TH_MAGIKARP;flag<=FLAG_TH_LAB_INTRO;flag++) FlagClear(flag);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI,TH_STATE_VERSION_9);
     }
-    if (version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
+    if (version != TH_STATE_VERSION_10 && version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1 && version != TH_STATE_VERSION_14)
     {
         FlagClear(FLAG_TH_DIG_TM);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_10 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
-    if (version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
+    if (version != TH_STATE_VERSION_11 && version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1 && version != TH_STATE_VERSION_14)
     {
         FlagClear(FLAG_TH_ROCKET_DUO);
         FlagClear(TRAINER_FLAGS_START + TRAINER_TH11_JESSIE);
         FlagClear(TRAINER_FLAGS_START + TRAINER_TH11_JAMES);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_11 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
-    if (version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
+    if (version != TH_STATE_VERSION_12 && version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1 && version != TH_STATE_VERSION_14)
     {
         for (u32 flag = TH12_FLAGS_START; flag <= TH12_FLAGS_END; flag++)
             FlagClear(flag);
@@ -54,7 +125,7 @@ void TH_MigrateSaveState(void)
             FlagSet(FLAG_TH12_REVIVED_HELIX);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_12 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
-    if (version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1)
+    if (version != TH_STATE_VERSION_13 && version != TH_STATE_VERSION_13_1 && version != TH_STATE_VERSION_14)
     {
         // These audited unused slots belong only to P13. Old versions may
         // contain arbitrary bits here; initialize them once, never on Continue.
@@ -92,7 +163,7 @@ void TH_MigrateSaveState(void)
         // Gear, photos and ship departure require witnessed P13 events.
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_13 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
-    if (version != TH_STATE_VERSION_13_1)
+    if (version != TH_STATE_VERSION_13_1 && version != TH_STATE_VERSION_14)
     {
         // RC2 owns four previously unused bits; existing P13 receipts stay intact.
         for (u32 flag = TH13_RC2_FLAGS_START; flag <= TH13_RC2_FLAGS_END; flag++) FlagClear(flag);
@@ -101,6 +172,16 @@ void TH_MigrateSaveState(void)
             FlagSet(FLAG_TH13_CALL_ELM_DELIVERED);
             FlagSet(FLAG_TH13_CALL_BIRCH_DELIVERED);
         }
+        VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_13_1 | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
+    }
+    if (version != TH_STATE_VERSION_14)
+    {
+        // Old saves may hold arbitrary data in these previously unowned bits.
+        // Never clear between the disjoint pools or reinitialize a PT14 save.
+        for (u32 i = 0; i < ARRAY_COUNT(sTH14OwnedFlags); i++)
+            FlagClear(sTH14OwnedFlags[i]);
+        for (u32 trainer = TH14_TRAINERS_START; trainer <= TH14_TRAINERS_END; trainer++)
+            FlagClear(TRAINER_FLAGS_START + trainer);
         VarSet(VAR_TH_CLOCK_DISPLAY_HI, TH_STATE_VERSION_CURRENT | (VarGet(VAR_TH_CLOCK_DISPLAY_HI) & 1));
     }
     // Continue restores the saved layout ID. Replace only the obsolete forest
