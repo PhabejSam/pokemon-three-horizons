@@ -169,7 +169,7 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 - [x] Run H(travel) for absent-route RED. Import only the first seven Appendix A donor footprints and explicit project tilesets; register the group and append maps in fixed order. Omit Route7's west connection until Task9 registers Celadon and adds both connection edges; record this explicit pending edge with ownerTask9. Do not leave an undefined destination in generated maps. Adapt Saffron guards to remain restricted without Tea/global-native progression writes.
 - [x] Add authored first trainers/encounters, rematch dispatch and relevant Cut object behavior. Route7's donor has no trainer, so preserve its quiet connecting role rather than inventing a forced battle/research scene. Preserve twins' shared identity and doubled battle as Task5 specifies.
 - [x] Run H(travel), map/capacity snapshots and N(`Three Horizons PT14 travel:`,`travel-green`); verify walkable warps/signs/items, no sightline through walls, group75↔76 readiness reset, Call pacing and field transitions using TH_IsProjectMap.
-- [ ] At Gate B traverse both directions with follower, bicycle where allowed, a trainer approach and the Underground entrances; verify native Town Map markers at each section.
+- [x] At Gate B traverse both directions with follower, bicycle where allowed, a trainer approach and the Underground entrances; verify native Town Map markers at each section.
 - [x] Commit `feat: connect Lavender to Celadon through Routes8 and7`.
 
 ## Task 9: Build Celadon's city and accessible interiors
@@ -181,7 +181,7 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 - [x] Run H(celadon) for RED; import/retarget the city and20 interiors exactly from Appendix A. Add both Route7↔Celadon edges now and test the complete reciprocal Lavender→Celadon route; clear that pending-edge record. Hideout entrance/poster handlers remain Task12-owned wrappers until its maps exist. Add the seven existing native secondary tileset families; retain recognizable Mansion, department floors, Game/Prize Corner and Gym geometry. Remove donor connections/warps into unapproved chapters and use visible boundaries/native in-world guard text.
 - [x] Author distinct local NPC/signs, Center healing and return hooks. Native setworldmapflag/first-visit-preview bookkeeping is omitted (its FRLG aliases are zero under TH); retain existing TH area-name presentation without new flags. Tea/guard, Fly, postgame, trainer-card diploma and native regional-unlock dialogue must not grant unrelated progression. Preserve approved free repeatable Counter/Softboiled tutor semantics as Appendix B defines; no new permanent tutor bits.
 - [x] Connect Mansion Eevee delivery through an atomic party-or-PC gift, following Appendix B's ordinary level/configuration policy. Use one delivered/hide receipt; no disappearance on full storage, no nickname/Pokémon identity corruption. Add a full-party and all-boxes-full test.
-- [ ] GateB controller/visual cases pending; focused H(celadon) and native tests PASS (26 host/10 native definitions). Run H(celadon), N(`Three Horizons PT14 celadon:`,`celadon-green`); exercise every elevator floor/cancel/re-entry, stairs, healing with1/6 Pokémon and blackout restoration at Gate B. Capture native city/interior screens for clipping and object visibility.
+- [x] GateB controller/visual cases pending; focused H(celadon) and native tests PASS (26 host/10 native definitions). Run H(celadon), N(`Three Horizons PT14 celadon:`,`celadon-green`); exercise every elevator floor/cancel/re-entry, stairs, healing with1/6 Pokémon and blackout restoration at Gate B. Capture native city/interior screens for clipping and object visibility.
 - [x] Commit `feat: make Celadon a usable city with safe interiors and services`.
 
 ## Task 10: Department Store, coins and Prize Corner transactions
@@ -193,7 +193,7 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 - [x] Run focused RED. Reuse native shop quantity/ownership/charge-after-AddBagItem behavior instead of altering global item prices or mechanics. Build explicit TH prize tables because FIRERED/LEAFGREEN donor conditionals do not populate an Emerald TH build.
 - [x] Implement Coin Case gift, coin sales/games, selected item/TM/Pokémon prizes and roof drink rewards with delivery-before-cost/receipt ordering. Full-PC/party, cancellation or insufficient coins does not consume coins; roof drink is removed only after its TM delivery succeeds. Native slot games remain replayable; tested return callbacks restore field/control/palettes.
 - [x] Run H(economy), N(`Three Horizons PT14 economy:`,`economy-green`). Test below/at every stock gate, repeatable purchases, all supported active-TM mapping, full bag/PC, exactly required coins and capped coin balance. Record prize-species alternate long-range availability obligations without creating future locations.
-- [ ] At Gate B actually buy a TM, reopen it as already-owned, buy/use coins, play/exit a slot machine, redeem a Pokémon into party and PC, cancel a purchase and verify money/coins after native Save/cold Continue.
+- [x] At Gate B actually buy a TM, reopen it as already-owned, buy/use coins, play/exit a slot machine, redeem a Pokémon into party and PC, cancel a purchase and verify money/coins after native Save/cold Continue.
 - [x] Commit `feat: add staged Celadon shops and transactional prizes`; update `PLAYTEST_14_TM_AVAILABILITY.md` with current sources and deferred coverage obligations.
 
 ## Task 11: Erika and fourth-badge rewards
@@ -204,7 +204,7 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 - [x] Write `erika_before_or_after_giovanni`, `loss_does_not_grant_badge`, `victory_sets_badge_once_tm_full_bag_retry`, `gym_guide_and_repeat_dialogue_after_win`; unchanged ordinary first parties and valid sightlines are also asserted.
 - [x] Run RED; port native Gym identity/cut access and seven ordinary trainers with project IDs. Badge/trainer victory is recorded after success even if the TM pocket cannot accept the reward; Erika repeats only the pending TM handoff. No mandatory Hideout receipt gate.
 - [x] Run H(erika), N(`Three Horizons PT14 erika:`,`erika-green`); verify fourth badge changes rematch cap through existing code without changing owner Pokémon levels or earlier parties.
-- [ ] Capture loss/retry, victory/reward and clean route to Erika at Gate B; test Hideout-first ordering on a separate labelled branch.
+- [x] Capture loss/retry, victory/reward and clean route to Erika at Gate B; test Hideout-first ordering on a separate labelled branch.
 - [x] Commit `feat: add Erika and retryable Rainbow Badge rewards`.
 
 ## Task 12: Rocket Hideout exploration, lift key and puzzles
@@ -216,7 +216,7 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 - [x] Run H(hideout) RED; port recognizable B1F–B4F/elevator geometry and trainer roster. Retarget dynamic warps and scripts to TH maps. Rewrite donor Lift Key ordering so a failed give does not remove its object or consume its retry route.
 - [x] Add exactly three optional research records with Appendix C text: distribution comparison, unconfirmed ghost/migration statements, and orders for sightings/evolution/witness notes. They are readable scenery, not required new flags or research modules; the mandatory trio supplies the causal clue too.
 - [x] Run H(hideout), N(`Three Horizons PT14 hideout:`,`hideout-green`); count active scene objects with follower and ensure the key/lift cannot strand the player. The poster guard and disappearing upper-Tower story Rockets are not ordinary rematches; persistent first-victory bits remain authoritative.
-- [ ] At Gate B traverse the entire puzzle/lift route and return, collect representative items, black out to the last valid Center and retry. Preserve native before/after geometry evidence where retargeting alters a visible exit.
+- [x] At Gate B traverse the entire puzzle/lift route and return, collect representative items, black out to the last valid Center and retry. Preserve native before/after geometry evidence where retargeting alters a visible exit.
 - [x] Commit `feat: add Rocket Hideout exploration and safe lift-key progression`.
 
 ## Task 13: Jessie, James, Giovanni and the Silph Scope
@@ -228,15 +228,15 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 - [x] Run RED; implement the mandatory Appendix C staging/conversation. Meowth talks and follows/stages with the pair but is not added to their battle party. With fewer than two conscious usable Pokémon, give an in-world retry message and leave progression unchanged; no forced unwinnable double battle.
 - [x] Implement Appendix C trio and Giovanni parties, first/win/loss/repeat text and controlled strategic Giovanni voice. Do not imply he knows the cause. Preserve flee/blackout and follower/control cleanup.
 - [x] Award Scope only through successful retryable delivery after Giovanni. On failed delivery the source remains reachable and visible; on success give the explicit return-to-Tower lead. No Erika-dependent gate.
-- [ ] Run H(rocket), N(`Three Horizons PT14 rocket:`,`rocket-green`); at Gate B show all three speakers, correct two-opponent intro/parties, loss/retry and Giovanni→Scope handoff.
+- [x] Run H(rocket), N(`Three Horizons PT14 rocket:`,`rocket-green`); at Gate B show all three speakers, correct two-opponent intro/parties, loss/retry and Giovanni→Scope handoff.
 - [x] Commit `feat: complete Celadon Rocket story and Silph Scope reward`.
 
 ## Gate B: New city, travel and Rocket content
 
-- [ ] Build P(`gate-b`) and run the focused map/economy/Gym/Hideout/rocket/rematch native groups plus relevant host files.
-- [ ] Perform Tasks8–13 practical traversal/service/battle checks, both Erika/Hideout orders, new-group Town Map and Call pacing, twins' single/dual readiness displays and both interaction paths. Label all fixture-created progress; no fabricated owner acceptance.
-- [ ] Save in Celadon and Hideout on test copies, close/reopen normally; verify saved mapGroup76/mapNum and elevator state, badge, key, Scope and all earlier research survive. Correct failures before implementing the Tower conclusion.
-- [ ] Update verification with actual evidence and checkpoint; no full upstream matrix yet.
+- [x] Build P(`gate-b`) and run the focused map/economy/Gym/Hideout/rocket/rematch native groups plus relevant host files.
+- [x] Perform Tasks8–13 practical traversal/service/battle checks, both Erika/Hideout orders, new-group Town Map and Call pacing, twins' single/dual readiness displays and both interaction paths. Label all fixture-created progress; no fabricated owner acceptance.
+- [x] Save in Celadon and Hideout on test copies, close/reopen normally; verify saved mapGroup76/mapNum and elevator state, badge, key, Scope and all earlier research survive. Correct failures before implementing the Tower conclusion.
+- [x] Update verification with actual evidence and checkpoint; no full upstream matrix yet.
 
 ## Task 14: Append MOTHER'S WATCH art and archive record
 
