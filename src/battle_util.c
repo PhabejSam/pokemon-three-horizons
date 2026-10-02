@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons_chapter14.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_anim_scripts.h"
@@ -2897,6 +2898,9 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
             effect = TRUE;
         }
         else if (B_OVERWORLD_FOG >= GEN_8
+#if THREE_HORIZONS
+              && !TH14_IsTowerMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)
+#endif
               && (GetCurrentWeather() == WEATHER_FOG_HORIZONTAL || GetCurrentWeather() == WEATHER_FOG_DIAGONAL)
               && gFieldTimers.terrain != B_TERRAIN_MISTY)
         {
@@ -2956,6 +2960,11 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
                 break;
             case WEATHER_FOG_DIAGONAL:
             case WEATHER_FOG_HORIZONTAL:
+#if THREE_HORIZONS
+                // Tower fog is visual; explicit trainer/move/ability effects remain native.
+                if (TH14_IsTowerMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
+                    break;
+#endif
                 if (B_OVERWORLD_FOG == GEN_4 && !(gBattleWeather & B_WEATHER_FOG))
                 {
                     gBattleWeather = B_WEATHER_FOG;

@@ -3,12 +3,21 @@
 #include "item.h"
 #include "three_horizons_chapter14.h"
 #include "constants/three_horizons.h"
+#include "constants/maps.h"
 
 #if THREE_HORIZONS
 bool32 TH_IsProjectMap(u8 mapGroup, u8 mapNum)
 {
     return (mapGroup == TH_MAP_GROUP_LEGACY && mapNum < TH_MAP_COUNT_LEGACY)
         || (mapGroup == TH14_MAP_GROUP && mapNum < TH14_MAP_COUNT);
+}
+
+bool32 TH14_IsTowerMap(u8 mapGroup, u8 mapNum)
+{
+    return (mapGroup == MAP_GROUP(MAP_TH13_POKEMON_TOWER_1F)
+            && mapNum >= MAP_NUM(MAP_TH13_POKEMON_TOWER_1F)
+            && mapNum <= MAP_NUM(MAP_TH13_POKEMON_TOWER_6F))
+        || (mapGroup == TH14_MAP_GROUP && mapNum == TH14_MAP_TOWER_7F);
 }
 
 static const struct

@@ -11,6 +11,7 @@
 #define TH14_MAP_TOWER_7F 33
 
 bool32 TH_IsProjectMap(u8 mapGroup, u8 mapNum);
+bool32 TH14_IsTowerMap(u8 mapGroup, u8 mapNum);
 
 enum TH14GiftResult
 {

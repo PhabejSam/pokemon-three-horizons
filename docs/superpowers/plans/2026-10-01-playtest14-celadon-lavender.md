@@ -135,11 +135,11 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 **Files:** `src/battle_util.c`, `src/battle_main.c`, chapter14 helper/header; new `test/three_horizons_playtest14_fog.c`, `tools/three_horizons/tests/test_playtest14_fog.py`.
 **Interfaces:** `bool32 TH14_IsTowerMap(u8 mapGroup, u8 mapNum)` recognizes existing TH Tower1F–6F and new TH14 Tower7F at group76/index33 only. Task1 declares the manifest-checked numeric map index so this helper can be tested before that new map is registered. Used in actual fog initialization and Terrain Pulse's fog-derived preview path.
 
-- [ ] Add native `Three Horizons PT14 fog: horizontal Tower fog creates no battle terrain` and `explicit terrain still works`; compare an outside-project fog map retaining current generation behavior. Add move-type/accuracy/stat/damage checks at equal RNG/context, including Terrain Pulse before selection.
-- [ ] Run native RED to observe the existing automatic Misty Terrain; keep visible field fog in reproduction.
-- [ ] Guard only automatic fog-to-battle effects on TH Tower maps. Do not remove WEATHER_FOG_HORIZONTAL from maps or suppress terrain intentionally created by a move/ability.
-- [ ] Run H(fog), N(`Three Horizons PT14 fog:`,`fog-green`); keep upstream compile/runtime counterpart for Final. Gate A/B captures field fog and a battle without a false terrain announcement.
-- [ ] Commit `fix: keep Three Horizons Tower fog atmospheric`.
+- [x] Add native `Three Horizons PT14 fog: horizontal Tower fog creates no battle terrain` and `explicit terrain still works`; compare an outside-project fog map retaining current generation behavior. Add move-type/accuracy/stat/damage checks at equal RNG/context, including Terrain Pulse before selection.
+- [x] Run native RED to observe the existing automatic Misty Terrain; keep visible field fog in reproduction.
+- [x] Guard only automatic fog-to-battle effects on TH Tower maps. Do not remove WEATHER_FOG_HORIZONTAL from maps or suppress terrain intentionally created by a move/ability.
+- [x] Run H(fog), N(`Three Horizons PT14 fog:`,`fog-green`); keep upstream compile/runtime counterpart for Final. Gate A/B captures field fog and a battle without a false terrain announcement.
+- [x] Commit `fix: keep Three Horizons Tower fog atmospheric`.
 
 ## Task 7: Investigate the intermittent full-party capture failure
 

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "three_horizons_chapter14.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_main.h"
@@ -5727,7 +5728,11 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
                 break;
             case WEATHER_FOG_HORIZONTAL:
             case WEATHER_FOG_DIAGONAL:
-                if (B_OVERWORLD_FOG >= GEN_8)
+                if (B_OVERWORLD_FOG >= GEN_8
+#if THREE_HORIZONS
+                    && !TH14_IsTowerMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)
+#endif
+                   )
                     return TYPE_FAIRY;
                 break;
             }
