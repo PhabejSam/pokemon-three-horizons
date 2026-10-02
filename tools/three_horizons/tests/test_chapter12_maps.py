@@ -1,6 +1,7 @@
 import json
 import re
 import unittest
+from tools.three_horizons.map_graph import destinations
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[3]
@@ -42,7 +43,7 @@ class Chapter12Maps(unittest.TestCase):
                 if node in seen: continue
                 seen.add(node)
                 m=maps[node]
-                pending.extend([c['map'] for c in m['connections'] or []]+[w['dest_map'] for w in m['warp_events']])
+                pending.extend(destinations(ROOT, m))
             return seen
         outward=reachable('MAP_TH_CERULEAN')
         for name in expected:

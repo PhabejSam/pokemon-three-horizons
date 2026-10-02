@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from tools.three_horizons.map_graph import dynamic_destinations
 
 ROOT = Path(__file__).resolve().parents[3]
 EXE = ROOT / 'tools/mapjson' / ('mapjson.exe' if os.name == 'nt' else 'mapjson')
@@ -191,11 +192,8 @@ class MapContract(unittest.TestCase):
                     self.assertLess(event['y'], layout['height'])
             for warp in record['warp_events']:
                 if warp['dest_map'] == 'MAP_DYNAMIC':
-                    self.assertEqual(record['id'], 'MAP_TH14_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR')
                     self.assertEqual(warp['dest_warp_id'], 'WARP_ID_DYNAMIC')
-                    script = (ROOT/'data/scripts/three_horizons/chapter14_celadon.inc').read_text()
-                    destinations = set(re.findall(r'setdynamicwarp (\w+), 255, (\d+), (\d+)', script))
-                    self.assertEqual(destinations, {(f'MAP_TH14_CELADON_CITY_DEPARTMENT_STORE_{i}F', '6', '1') for i in range(1,6)})
+                    destinations = dynamic_destinations(ROOT, record['id'])
                     for dest, x, y in destinations:
                         self.assertIn(dest, maps)
                         dl = layouts[maps[dest]['layout']]

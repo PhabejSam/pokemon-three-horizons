@@ -366,7 +366,12 @@ $(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST)
 
 $(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tools check-tools
 	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o ../../$@ <objects> <test-objects> <lib>"
+ifeq ($(OS),Windows_NT)
+	$(file >$(OBJ_DIR)/test-link-inputs.rsp,$(OBJS_REL) $(TEST_OBJS_REL))
+	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o ../../$@ @test-link-inputs.rsp $(LIB)
+else
 	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o ../../$@ $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
+endif
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) -d0 --silent
 	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS:%*=%)\0"
 

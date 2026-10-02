@@ -1028,6 +1028,10 @@
   ],
   "shops": [],
   "prizes": [],
+  "wildEncounterSource": {
+    "path": "src/data/wild_encounters.json",
+    "maps": ["MAP_TH14_ROUTE8", "MAP_TH14_ROUTE7"]
+  },
   "rematchEvolutions": [
     {
       "trainerId": "TRAINER_TH9_LASS_ROBIN",
@@ -1232,6 +1236,10 @@
   ],
   "unfinishedInteractions": [],
   "uniqueItems": [
+    {
+      "item": "ITEM_COIN_CASE",
+      "receipt": "FLAG_TH14_COIN_CASE"
+    },
     {
       "item": "ITEM_TOWN_MAP",
       "receipt": "FLAG_TH14_TOWN_MAP"

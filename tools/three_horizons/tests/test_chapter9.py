@@ -1,5 +1,6 @@
 import json
 import unittest
+from tools.three_horizons.map_graph import destinations
 import struct
 from collections import deque
 from pathlib import Path
@@ -40,7 +41,7 @@ class Chapter9(unittest.TestCase):
         manifest=json.loads((ROOT/'tools/three_horizons/chapter9_maps.json').read_text())
         names=json.loads((ROOT/'tools/mapjson/three_horizons_maps.json').read_text())['maps']
         maps={m['id']:m for n in names for m in [json.loads((ROOT/'data/maps'/n/'map.json').read_text())]}
-        graph={key:{w['dest_map'] for w in m['warp_events']} | {c['map'] for c in m['connections'] or []} for key,m in maps.items()}
+        graph={key:destinations(ROOT, m) for key,m in maps.items()}
         for start,end in [('MAP_TH_HOME_2F','MAP_TH_CERULEAN_GYM'),('MAP_TH_CERULEAN_GYM','MAP_TH_HOME_2F')]:
             seen=set();pending=[start]
             while pending:
