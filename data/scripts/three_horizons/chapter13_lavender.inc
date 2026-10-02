@@ -10,6 +10,7 @@ TH13_Lavender_Worker::
 TH13_Lavender_WorkerText:
     .string "The roads west and south are closed\nwhile workers check them.\pThe northern road to ROCK TUNNEL\nis still open.$"
 TH13_Lavender_Boy::
+    goto_if_set FLAG_TH14_FUJI_RESCUED, TH14_Lavender_FujiHome
     msgbox TH13_Lavender_BoyText, MSGBOX_NPC
     end
 TH13_Lavender_BoyText:
@@ -50,11 +51,13 @@ TH13_Lavender_CenterBoy::
 TH13_Lavender_CenterBoyText:
     .string "MR. FUJI says POKéMON often sense\nchanges before people do.\pHe listens before making a guess.$"
 TH13_Lavender_HouseWoman::
+    goto_if_set FLAG_TH14_MOTHER_RESOLVED, TH14_Lavender_CuboneCare
     msgbox TH13_Lavender_HouseWomanText, MSGBOX_NPC
     end
 TH13_Lavender_HouseWomanText:
     .string "TEAM ROCKET took CUBONE's mother.\nIt cries for her every night.\pWe cannot replace her. But we can\nmake sure CUBONE is not alone.$"
 TH13_Lavender_VolunteerBoy::
+    goto_if_set FLAG_TH14_FUJI_RESCUED, TH14_Lavender_FujiHome
     msgbox TH13_Lavender_VolunteerBoyText, MSGBOX_NPC
     end
 TH13_Lavender_VolunteerBoyText:
@@ -98,12 +101,30 @@ TH13_Lavender_CUBONE::
     lock
     faceplayer
     playmoncry SPECIES_CUBONE, CRY_MODE_NORMAL
+    goto_if_set FLAG_TH14_MOTHER_RESOLVED, TH14_Lavender_CuboneQuiet
     msgbox TH13_Lavender_CUBONEText
     waitmoncry
     release
     end
 TH13_Lavender_CUBONEText:
     .string "CUBONE: Cuuu...$"
+TH14_Lavender_CuboneQuiet:
+    msgbox TH14_Lavender_CuboneQuietText
+    waitmoncry
+    release
+    end
+TH14_Lavender_CuboneQuietText:
+    .string "CUBONE: Cuuu...\pCUBONE sits quietly beside the\npeople caring for it.$"
+TH14_Lavender_CuboneCare:
+    msgbox TH14_Lavender_CuboneCareText, MSGBOX_NPC
+    end
+TH14_Lavender_CuboneCareText:
+    .string "Thank you for helping its mother\nfind peace.\pCUBONE still misses her.\nWe will keep caring for it.$"
+TH14_Lavender_FujiHome:
+    msgbox TH14_Lavender_FujiHomeText, MSGBOX_NPC
+    end
+TH14_Lavender_FujiHomeText:
+    .string "MR. FUJI is home safely.\nThank you for helping him.\pThe POKéMON have missed him.$"
 TH13_Lavender_NIDORINO::
     lock
     faceplayer

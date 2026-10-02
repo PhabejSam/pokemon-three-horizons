@@ -11,7 +11,13 @@
 #if THREE_HORIZONS
 bool32 TH14_ShouldSpawnObject(u8 mapGroup, u8 mapNum, u8 localId)
 {
+    // Fuji is appended as local6; the five saved PT13 house locals stay put.
+    if (mapGroup == MAP_GROUP(MAP_TH13_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE)
+     && mapNum == MAP_NUM(MAP_TH13_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE) && localId == 6)
+        return FlagGet(FLAG_TH14_FUJI_RESCUED);
     if (mapGroup != TH14_MAP_GROUP) return TRUE;
+    if (mapNum == TH14_MAP_TOWER_7F && localId >= 2 && localId <= 4)
+        return !HasTrainerBeenFought(TRAINER_TH14_TOWER7F_GRUNT1 + localId - 2);
     if (mapNum == MAP_NUM(MAP_TH14_CELADON_CITY_GAME_CORNER) && localId == 11)
         return !HasTrainerBeenFought(TRAINER_TH14_GAME_CORNER_GRUNT);
     if (mapNum == MAP_NUM(MAP_TH14_ROCKET_HIDEOUT_B4F))

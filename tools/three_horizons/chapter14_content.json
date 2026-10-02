@@ -1233,6 +1233,10 @@
     {
       "item": "ITEM_SILPH_SCOPE",
       "receipt": "FLAG_TH14_SILPH_SCOPE"
+    },
+    {
+      "item": "ITEM_POKE_FLUTE",
+      "receipt": "FLAG_TH14_POKE_FLUTE"
     }
   ],
   "economy": {

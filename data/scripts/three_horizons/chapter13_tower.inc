@@ -33,6 +33,7 @@ TH13_PokemonTower_1F_EventScript_WorkerF::
 	end
 
 TH13_PokemonTower_1F_EventScript_Channeler::
+    goto_if_set FLAG_TH14_MOTHER_RESOLVED, TH14_Tower_MemorialQuiet
 	msgbox TH13_PokemonTower_1F_Text_SenseSpiritsUpToMischief, MSGBOX_NPC
 	end
 
@@ -52,6 +53,12 @@ TH13_PokemonTower_1F_EventScript_Woman2::
 TH13_PokemonTower_1F_EventScript_BaldingMan::
 	msgbox TH13_PokemonTower_1F_Text_CameToPrayForDepartedClefairy, MSGBOX_NPC
 	end
+
+TH14_Tower_MemorialQuiet:
+    msgbox TH14_Tower_MemorialQuietText, MSGBOX_NPC
+    end
+TH14_Tower_MemorialQuietText:
+    .string "The restless presence has quieted.\nMay those at rest find peace.$"
 
 TH13_PokemonTower_1F_EventScript_Woman2MalePlayer::
 	msgbox TH13_PokemonTower_1F_Text_ComeToPayRespectsSon

@@ -230,3 +230,5 @@ TH_Route1_MapScripts::
     .include "data/maps/TH14_RocketHideout_B3F/scripts.inc"
     .include "data/maps/TH14_RocketHideout_B4F/scripts.inc"
     .include "data/maps/TH14_RocketHideout_Elevator/scripts.inc"
+
+    .include "data/maps/TH14_PokemonTower_7F/scripts.inc"

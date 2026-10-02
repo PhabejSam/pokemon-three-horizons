@@ -34,6 +34,7 @@ static const struct
     {ITEM_TM19, FLAG_TH14_ERIKA_TM},
     {ITEM_LIFT_KEY, FLAG_TH14_LIFT_KEY},
     {ITEM_SILPH_SCOPE, FLAG_TH14_SILPH_SCOPE},
+    {ITEM_POKE_FLUTE, FLAG_TH14_POKE_FLUTE},
 };
 
 u8 TH14_TryGiveUniqueItem(u16 itemId, u16 receiptFlag)

@@ -9778,6 +9778,19 @@
       "border_filepath": "data/layouts/TH14_RocketHideout_Elevator/border.bin",
       "blockdata_filepath": "data/layouts/TH14_RocketHideout_Elevator/map.bin",
       "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TH14_POKEMON_TOWER_7F",
+      "name": "TH14_PokemonTower_7F_Layout",
+      "width": 24,
+      "height": 20,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_BuildingFrlg",
+      "secondary_tileset": "gTileset_PokemonTower",
+      "border_filepath": "data/layouts/TH14_PokemonTower_7F/border.bin",
+      "blockdata_filepath": "data/layouts/TH14_PokemonTower_7F/map.bin",
+      "layout_version": "frlg"
     }
   ]
 }

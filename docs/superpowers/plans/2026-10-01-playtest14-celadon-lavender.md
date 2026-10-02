@@ -255,11 +255,11 @@ Task5 checkpoint: bounded alias/runtime rules pass; live twin dispatch and30 new
 **Files:** new Tower7F map, existing Tower1F and VolunteerPokemonHouse maps/scripts, `chapter14_tower.inc`, trainer and reward ledger; tests `test/three_horizons_playtest14_fuji.c`, `tools/three_horizons/tests/test_playtest14_fuji.py`.
 **Interfaces:** consumes Task14's completed TH14_Tower_GearContact and TH14_DelayAftermathCalls scripts. Fuji-rescued and Flute-delivered receipts are separate; Task2 gives ITEM_POKE_FLUTE. Existing Cubone/memorial locals receive conditional dialogue without new flags.
 
-- [ ] Add `gearless_scope_return_gets_real_gear_no_old_photos`, `equipped_return_not_interrupted`, `upper_floor_locked_until_mother_resolved`, `fuji_only_after_upper_rockets`, `fuji_loss_reload_no_duplicate_rescue`, `flute_full_bag_retry`, and `fuji_note_does_not_force_call`.
-- [ ] Port donor Tower7F stairs/three Rocket trainers and Fuji placement, rewriting all donor warps/flags to TH. Resolve all Gear-contact references through Task14. Tower7F is map index33 and lands here before the mother task opens its stairs; focused fixtures can exercise the upper floor while the ordinary route remains blocked until Task16.
-- [ ] Stage Fuji's one-time rescue/return home only after required upper Rocket victories. Use compassionate Appendix C dialogue and no future lore. Repeat house interaction gives pending Flute safely, then sleeping-Pokémon guidance; duplicate owned bag/PC cases consume no receipt incorrectly.
-- [ ] Run H(fuji), N(`Three Horizons PT14 fuji:`,`fuji-green`) and the research focused group; Task16 reruns the linked mother/rescue flow. Test direct anomalous arrival, bag full at rescue and later retry, all old Tower receipts, photo/observation and note states across native Save/cold Continue at Final.
-- [ ] Commit `feat: rescue Fuji and deliver the Poke Flute safely`.
+- [x] Add `gearless_scope_return_gets_real_gear_no_old_photos`, `equipped_return_not_interrupted`, `upper_floor_locked_until_mother_resolved`, `fuji_only_after_upper_rockets`, `fuji_loss_reload_no_duplicate_rescue`, `flute_full_bag_retry`, and `fuji_note_does_not_force_call`.
+- [x] Port donor Tower7F stairs/three Rocket trainers and Fuji placement, rewriting all donor warps/flags to TH. Resolve all Gear-contact references through Task14. Tower7F is map index33 and lands here before the mother task opens its stairs; focused fixtures can exercise the upper floor while the ordinary route remains blocked until Task16.
+- [x] Stage Fuji's one-time rescue/return home only after required upper Rocket victories. Use compassionate Appendix C dialogue and no future lore. Repeat house interaction gives pending Flute safely, then sleeping-Pokémon guidance; duplicate owned bag/PC cases consume no receipt incorrectly.
+- [x] Run H(fuji), N(`Three Horizons PT14 fuji:`,`fuji-green`) and the research focused group; Task16 reruns the linked mother/rescue flow. Test direct anomalous arrival, bag full at rescue and later retry, all old Tower receipts, photo/observation and note states across native Save/cold Continue at Final.
+- [x] Commit `feat: rescue Fuji and deliver the Poke Flute safely`.
 
 ## Task 16: Reveal, document and resolve Cubone's mother
 
