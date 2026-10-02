@@ -97,12 +97,12 @@ For a demonstrated behavioral bug, record reproduction → regression → expect
 **Files:** `data/layouts/TH13_ViridianForest/map.bin`, `data/maps/TH13_Route9/map.json` or its script only if needed, `src/event_object_movement.c`, `src/overworld.c`; `test/three_horizons_playtest13_cut.c`, new `test/three_horizons_playtest14_cut.c`, `tools/three_horizons/tests/test_playtest14_cut.py`.
 **Interfaces:** consumes TH_IsProjectMap for project-wide Cut handling. Existing Cut session/regrowth contract stays unchanged; no new permanent tree flag.
 
-- [ ] Reproduce Route9 arrival from Cerulean on an uncut copied save, separately test direct warp and first connection entry. Capture the forest clearing before frames at its north/south crowns and Cut mouth.
-- [ ] Add `route9_current_map_tree_survives_connection_edge_filter` and `cut_visibility_collision_reload_agree`: uncut x2 tree visible/colliding, correct owner map despite connection edge, Cut removes graphic/collision together, reload obeys existing session lifecycle, no stale FLAG_TEMP_12 from another map. Record behavioral RED.
-- [ ] Repair only the current-map/connecting-map ownership filter proven responsible; use explicit bounded project-map checks at the existing shared hooks. Restore forest whole-tree metatiles around x27–35/y29–34 and entrance x36–38/y31–32 without moving Pinsir(30,32), Heracross(32,32), researcher(29,34), reward(35,30), Cut(38,31/32), paths or receipts.
-- [ ] Add host geometry/interaction assertions; run existing native Cut regressions plus N(`Three Horizons PT14 cut:`,`cut-green`) and H(cut).
+- [x] Reproduce Route9 arrival from Cerulean on an uncut copied save, separately test direct warp and first connection entry. Capture the forest clearing before frames at its north/south crowns and Cut mouth.
+- [x] Add `route9_current_map_tree_survives_connection_edge_filter` and `cut_visibility_collision_reload_agree`: uncut x2 tree visible/colliding, correct owner map despite connection edge, Cut removes graphic/collision together, reload obeys existing session lifecycle, no stale FLAG_TEMP_12 from another map. Record behavioral RED.
+- [x] Repair only the current-map/connecting-map ownership filter proven responsible; use explicit bounded project-map checks at the existing shared hooks. Restore forest whole-tree metatiles around x27–35/y29–34 and entrance x36–38/y31–32 without moving Pinsir(30,32), Heracross(32,32), researcher(29,34), reward(35,30), Cut(38,31/32), paths or receipts.
+- [x] Add host geometry/interaction assertions; run existing native Cut regressions plus N(`Three Horizons PT14 cut:`,`cut-green`) and H(cut).
 - [ ] At Gate A inspect before/after native frames, first arrival, jump/follower, Cut, leave/re-enter, then cold Continue; if source hypothesis does not reproduce, retain evidence and investigate instead of speculative filter removal.
-- [ ] Commit `fix: preserve Route9 Cut state and complete forest tree graphics` only for demonstrated repairs.
+- [x] Commit `fix: preserve Route9 Cut state and complete forest tree graphics` only for demonstrated repairs.
 
 ## Task 4: Improve Flash handoff and Lavender's causal story lead
 

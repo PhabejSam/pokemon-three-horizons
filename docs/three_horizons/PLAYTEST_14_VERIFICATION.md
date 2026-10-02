@@ -59,7 +59,7 @@ TMs already are reusable in Three Horizons. Keep that mechanic; design progressi
 | Same owner source cold-loaded on reviewed Navigator; protected payload comparison | PASS; clock-only differences, no PT14 or save-roundtrip claim |
 | Canonical v1.2 copy and independent source/canon/capacity/map audits | Completed; written design approved in chat |
 | Detailed implementation plan | APPROVED by user; serial/inline execution underway |
-| PT14 behavioral/visual implementation and focused RED/GREEN checks | Tasks 1–2 focused checks PASS; candidate visuals and remaining tasks/gates pending |
+| PT14 behavioral/visual implementation and focused RED/GREEN checks | Tasks 1–3 focused checks PASS; candidate visuals and remaining tasks/gates pending |
 | Full PT14 host/native/layout/offset/documentation matrix | NOT RUN |
 | New Emerald/FireRed/LeafGreen compatibility builds | NOT RUN |
 | Exact PT14 ROM build/hash/feature/compiled/test revisions | NOT AVAILABLE |
@@ -97,3 +97,11 @@ The new plan contains21 ordered tasks, Gate A for carry-forward/save safety, Gat
 - Focused results: **5/5 host tests and 5/5 native definitions PASS**, normal audio, strict skip-as-failure. Evidence `town-map-host-red.log`, `native/town-map-routing-red-02.*`, `native/town-map-green-01.*`; baseline frames/inputs in private `town-map-before/` and `town-map-native-before/`.
 - Two initial native fixtures exhausted stack space by copying entire save blocks locally; checked heap snapshots repaired the fixtures without weakening assertions. Rerunning with old script selection then produced exactly the intended one failure and four passes. Early controller waits also needed the map's opening message/entrance preview to complete; those are recorded sequencing corrections, not game failures.
 - Gate A still owes candidate handoff/full-bag/PC/first-partner/continued-save screenshots and native-save persistence, repeated Bag/registered open-close in old project locations. Gate B adds actual Celadon/group76. These are explicit deferred integration checks, not completed visual acceptance.
+
+## Task 3 — Cut ownership and forest tree edges
+
+- Old Navigator ROM reproduction: direct Route9 arrival retained the uncut tree and blocked movement; normal entry from Cerulean incorrectly set `FLAG_TEMP_12` and allowed crossing. A previous-map stale-flag case reproduced the same problem. Exact ROM/source hashes, inputs and before frames are retained privately under execution `cut-before-02/`.
+- Native RED confirmed both the initial hide and failed regrowth. The repaired ownership check exempts only the current bounded project map's ordinary templates from the connecting-map edge filter. Clones and upstream map ownership retain that filter; player-overlap protection and transient regrowth remain. Both shared Cut hooks now use bounded project-map recognition.
+- Focused native results: **5 new plus 3 inherited definitions PASS**; host geometry/interaction checks **4 new plus 3 inherited PASS**. Initial upstream fixture setup incorrectly referenced a donor map absent from the Three Horizons ROM; the corrected control uses registered upstream identity with real tree geometry. Full upstream ROM builds remain integration gates. No assertion was suppressed.
+- Forest north edges now finish in native trunks/bases; south crowns fit within existing blocked cells. All floor words, collision/elevation bits, objects, receipts and optional Cut reachability remain identical. Three forest Gear crop/source records were verified; only the affected forest-pair image/palette changed. Static reconstruction is inspected, but **candidate emulator before/after and follower/cold-reload acceptance remain Gate A**.
+- Presentation ruling: native grass/topper artwork retains the old blocked perimeter, including grass-looking corners. This avoids moving paths or shifting the whole forest grid; Gate A must assess those corners in actual play.

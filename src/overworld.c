@@ -1,5 +1,6 @@
 #include "global.h"
 #include "three_horizons.h"
+#include "three_horizons_chapter14.h"
 #include "three_horizons_rematches.h"
 #include "three_horizons_research.h"
 #include "constants/three_horizons.h"
@@ -545,7 +546,7 @@ static void PrepareThreeHorizonsCutTemplates(void)
     u32 used = 0;
     u32 i, flag;
 
-    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_TH_HOME_2F))
+    if (!TH_IsProjectMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
         return;
 
     // Early Kanto clones omitted obstacle hide flags. Use the engine's existing

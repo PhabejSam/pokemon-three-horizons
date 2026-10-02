@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/three_horizons.h"
+#include "three_horizons_chapter14.h"
 #include "malloc.h"
 #include "battle_anim.h"
 #include "battle_pyramid.h"
@@ -1575,14 +1576,17 @@ static bool8 TemplateIsObstacleAndVisibleFromConnectingMap(const struct ObjectEv
     return TRUE;
 }
 
-static bool8 ShouldInitObjectEventStateFromTemplate(const struct ObjectEventTemplate *template, bool8 isClone, s16 x, s16 y)
+static bool8 ShouldInitObjectEventStateFromTemplate(const struct ObjectEventTemplate *template, bool8 isClone, u8 mapNum, u8 mapGroup, s16 x, s16 y)
 {
 #if THREE_HORIZONS
+    bool32 isLocalProjectTemplate = !isClone
+        && mapGroup == gSaveBlock1Ptr->location.mapGroup
+        && mapNum == gSaveBlock1Ptr->location.mapNum
+        && TH_IsProjectMap(mapGroup, mapNum);
     // An old battery save can put the player on a previously cut tile. During
     // its one-time map rebuild, retain an open path for this visit rather than
     // spawning a solid tree inside the player. Normal map changes clear it.
-    if (!isClone
-     && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TH_HOME_2F)
+    if (isLocalProjectTemplate
      && (template->graphicsId == OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG
       || template->graphicsId == OBJ_EVENT_GFX_CUTTABLE_TREE)
      && template->x == gSaveBlock1Ptr->pos.x
@@ -1595,6 +1599,11 @@ static bool8 ShouldInitObjectEventStateFromTemplate(const struct ObjectEventTemp
     if (isClone && !TemplateIsObstacleAndWithinView(template, x, y))
         return FALSE;
 
+    // The connecting-map filter must not mark this map's own tree as cut
+    // merely because the player arrived on an edge. Clones keep their policy.
+#if THREE_HORIZONS
+    if (!isLocalProjectTemplate)
+#endif
     if (!TemplateIsObstacleAndVisibleFromConnectingMap(template, x, y))
         return FALSE;
 
@@ -1633,7 +1642,7 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     if (objectEventId == OBJECT_EVENTS_COUNT)
         return OBJECT_EVENTS_COUNT;
 
-    if (!ShouldInitObjectEventStateFromTemplate(template, isClone, x3, y3))
+    if (!ShouldInitObjectEventStateFromTemplate(template, isClone, mapNum, mapGroup, x3, y3))
         return OBJECT_EVENTS_COUNT;
     objectEvent = &gObjectEvents[objectEventId];
     ClearObjectEvent(objectEvent);

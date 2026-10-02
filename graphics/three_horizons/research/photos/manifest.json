@@ -21,7 +21,7 @@
     "width": 224,
     "height": 96,
     "source_layout": "data/layouts/TH13_ViridianForest/map.bin",
-    "source_sha256": "9189cd565f1c325f153c1dd2f5238c9adceb99519ec0b70e8561e0f2aec16776",
+    "source_sha256": "a75e4458e80191984f6b05f7ee7eefad7f40109b5f8d8ba7d86df7c4242805f6",
     "tiles_sha256": "b45db3110c5523e362aa71d9d3c9c03364a715120749c5b05346d6138800f66f",
     "palette_sha256": "3fbd026bb0a7021bfb0ed37ec7d61137dfdf978e350d1c687004ba3c0e88e713"
   },
@@ -34,7 +34,7 @@
     "width": 224,
     "height": 96,
     "source_layout": "data/layouts/TH13_ViridianForest/map.bin",
-    "source_sha256": "9189cd565f1c325f153c1dd2f5238c9adceb99519ec0b70e8561e0f2aec16776",
+    "source_sha256": "a75e4458e80191984f6b05f7ee7eefad7f40109b5f8d8ba7d86df7c4242805f6",
     "tiles_sha256": "5e9e93c24976e4b7820d79d152430b46afc00664f6e95750b6d7332c2db7cef6",
     "palette_sha256": "65b88de7f4a04fc1f395d23a0dc00bca4d3defd74f9037533084bd283b44d3ab"
   },
@@ -73,9 +73,9 @@
     "width": 224,
     "height": 96,
     "source_layout": "data/layouts/TH13_ViridianForest/map.bin",
-    "source_sha256": "9189cd565f1c325f153c1dd2f5238c9adceb99519ec0b70e8561e0f2aec16776",
-    "tiles_sha256": "29a4d3adec720c6ec2ca13f03e0f39580a0dfc05c04cc6bbcb9b997d0dce3904",
-    "palette_sha256": "4cd8c15f79b91a0b8e796c549e7f8bd148b796991c5ad2cad4dd2abf9f60a626"
+    "source_sha256": "a75e4458e80191984f6b05f7ee7eefad7f40109b5f8d8ba7d86df7c4242805f6",
+    "tiles_sha256": "5cf26dc64fb035bd10b1e4fab0381a6068fa9821b1d0a7e3243a743fc34a1755",
+    "palette_sha256": "aa1157a5794db6ad33a2f74732c94cf693f553a44b42a7cfad9d9310d03c9d83"
   },
   {
     "id": 6,
