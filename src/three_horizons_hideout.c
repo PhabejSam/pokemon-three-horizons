@@ -11,6 +11,11 @@
 #if THREE_HORIZONS
 bool32 TH14_ShouldSpawnObject(u8 mapGroup, u8 mapNum, u8 localId)
 {
+    // Reveal owns observation; the final calm/fade owns resolution.
+    if (mapGroup == MAP_GROUP(MAP_TH13_POKEMON_TOWER_6F)
+     && mapNum == MAP_NUM(MAP_TH13_POKEMON_TOWER_6F) && localId == 6)
+        return (FlagGet(FLAG_TH14_OBS_MOTHER) || FlagGet(FLAG_TH14_MOTHER_WON))
+            && !FlagGet(FLAG_TH14_MOTHER_RESOLVED);
     // Fuji is appended as local6; the five saved PT13 house locals stay put.
     if (mapGroup == MAP_GROUP(MAP_TH13_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE)
      && mapNum == MAP_NUM(MAP_TH13_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE) && localId == 6)

@@ -162,3 +162,145 @@ TH14_Tower7F_Grunt3Defeat:
     .string "Don't fight us ROCKETS!$"
 TH14_Tower7F_Grunt3After:
     .string "You're not getting away with this!$"
+
+
+@ Staging avoids both the occupied stair and the recalled follower.
+TH14_Mother_Stage:
+    getplayerxy VAR_0x8006, VAR_0x8007
+    goto_if_eq VAR_0x8006, 12, TH14_Mother_FromRight
+    goto_if_eq VAR_0x8007, 15, TH14_Mother_FromAbove
+    applymovement LOCALID_PLAYER, TH14_Mother_FaceDown
+    waitmovement 0
+    return
+TH14_Mother_FromRight:
+    applymovement LOCALID_PLAYER, TH14_Mother_StageRight
+    waitmovement 0
+    return
+TH14_Mother_FromAbove:
+    applymovement LOCALID_PLAYER, TH14_Mother_StageAbove
+    waitmovement 0
+    return
+TH14_Mother_StageRight:
+    walk_up
+    walk_up
+    walk_left
+    face_down
+    step_end
+TH14_Mother_StageAbove:
+    walk_up
+TH14_Mother_FaceDown:
+    face_down
+    step_end
+
+TH14_Mother_Resume::
+    setvar VAR_TEMP_2, 1
+    goto_if_set FLAG_TH14_MOTHER_RESOLVED, TH14_Mother_End
+    goto_if_unset FLAG_TH14_MOTHER_WON, TH14_Mother_End
+    lockall
+    hidefollower TRUE
+    call TH14_Mother_Stage
+    goto TH14_Mother_Aftermath
+
+TH14_Tower_MotherBarrier::
+    goto_if_set FLAG_TH14_MOTHER_RESOLVED, TH14_Mother_End
+    lockall
+    hidefollower TRUE
+    call TH14_Mother_Stage
+    goto_if_set FLAG_TH14_MOTHER_WON, TH14_Mother_Aftermath
+    checkitem ITEM_SILPH_SCOPE
+    goto_if_eq VAR_RESULT, FALSE, TH14_Mother_NoScope
+    goto_if_unset FLAG_TH13_GEAR, TH14_Mother_NeedGear
+    msgbox TH14_Mother_Reveal
+    setvar VAR_0x8004, TH_RESEARCH_MOTHERS_WATCH
+    special TH_ScriptResearchObserve
+    addobject LOCALID_TH14_MOTHER
+    turnobject LOCALID_TH14_MOTHER, DIR_NORTH
+    setvar VAR_0x8004, TH_PHOTO_MOTHERS_WATCH
+    special TH_ScriptResearchPhotoStatus
+    goto_if_eq VAR_RESULT, 2, TH14_Mother_Battle
+    goto_if_ne VAR_RESULT, 1, TH14_Mother_PhotoFailed
+    msgbox TH14_Mother_Record
+    closemessage
+    special TH_ScriptBeginPhotoFlash
+    goto_if_eq VAR_RESULT, FALSE, TH14_Mother_PhotoFailed
+    playse SE_CLICK
+    fadescreenswapbuffers FADE_TO_WHITE
+    delay 4
+    fadescreenswapbuffers FADE_FROM_WHITE
+    special TH_ScriptEndPhotoFlash
+    goto_if_eq VAR_RESULT, FALSE, TH14_Mother_PhotoFailed
+    @ Commit only after the real, synchronous hardware presentation completed.
+    special TH_ScriptTakeResearchPhoto
+    goto_if_eq VAR_RESULT, FALSE, TH14_Mother_PhotoFailed
+    msgbox TH14_Mother_Recorded
+TH14_Mother_Battle:
+    closemessage
+    @ Abort/unknown callbacks start unresolved; only the native WON clears it.
+    setvar VAR_RESULT, TRUE
+    setwildbattle SPECIES_MAROWAK, 30
+    special StartMarowakBattle
+    waitstate
+    call TH14_Mother_RecordWin
+    goto_if_unset FLAG_TH14_MOTHER_WON, TH14_Mother_Unresolved
+TH14_Mother_Aftermath:
+    addobject LOCALID_TH14_MOTHER
+    turnobject LOCALID_TH14_MOTHER, DIR_NORTH
+    msgbox TH14_Mother_Calm
+    closemessage
+    playmoncry SPECIES_MAROWAK, CRY_MODE_NORMAL
+    waitmoncry
+    delay 45
+    fadescreen FADE_TO_BLACK
+    @ The scene actor has flag0: removing it cannot prematurely commit resolution.
+    removeobject LOCALID_TH14_MOTHER
+    fadescreen FADE_FROM_BLACK
+    setflag FLAG_TH14_MOTHER_RESOLVED
+    call TH14_Mother_OpenStairs
+    special DrawWholeMapView
+    playbgm MUS_RG_POKE_TOWER, FALSE
+    special TH14_DelayAftermathCalls
+    goto TH14_Mother_Release
+
+TH14_Mother_RecordWin::
+    goto_if_ne VAR_RESULT, FALSE, TH14_Mother_RecordWinDone
+    goto_if_unset FLAG_TH14_OBS_MOTHER, TH14_Mother_RecordWinDone
+    goto_if_unset FLAG_TH14_PHOTO_MOTHER, TH14_Mother_RecordWinDone
+    setflag FLAG_TH14_MOTHER_WON
+TH14_Mother_RecordWinDone:
+    return
+TH14_Mother_NoScope:
+    goto_if_set FLAG_TH13_ENDPOINT, TH14_Mother_NoScopeRepeat
+    msgbox TH13_Tower_EndpointText
+    setflag FLAG_TH13_ENDPOINT
+    goto TH14_Mother_Release
+TH14_Mother_NoScopeRepeat:
+    msgbox TH13_Tower_RepeatText
+    goto TH14_Mother_Release
+TH14_Mother_NeedGear:
+    msgbox TH14_Mother_MissingGear
+    goto TH14_Mother_Release
+TH14_Mother_PhotoFailed:
+    msgbox TH14_Mother_RetryPhoto
+    goto TH14_Mother_Release
+TH14_Mother_Unresolved:
+    msgbox TH14_Mother_StillWatching
+TH14_Mother_Release:
+    closemessage
+    special TH_RefreshFollower
+    releaseall
+TH14_Mother_End:
+    end
+TH14_Mother_Reveal::
+    .string "The SILPH SCOPE reveals MAROWAK.\pIt is the restless spirit of\nCUBONE's mother.\pShe still stands watch\nover the stairs.$"
+TH14_Mother_Record::
+    .string "You keep a respectful distance\nand record her watch.$"
+TH14_Mother_Recorded::
+    .string "MOTHER'S WATCH was recorded\nin your RESEARCH GEAR.$"
+TH14_Mother_MissingGear::
+    .string "OAK's research aide on the ground\nfloor can help you record what\lthe SCOPE reveals.$"
+TH14_Mother_RetryPhoto::
+    .string "The record is not yet complete.\nTake a moment, then try again.$"
+TH14_Mother_StillWatching::
+    .string "MAROWAK still watches the stairs.\nHer spirit has not found peace.$"
+TH14_Mother_Calm::
+    .string "MAROWAK's anger begins to fade.\nHer watch is over.$"

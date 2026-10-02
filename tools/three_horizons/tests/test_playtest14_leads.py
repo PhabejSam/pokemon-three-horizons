@@ -84,8 +84,8 @@ class Leads(unittest.TestCase):
         for term in ('GIOVANNI','ghost reports','migration','paperwork','CELADON'):
             self.assertIn(term,text(body,'TH13_Tower_RocketText'))
         self.assertIn('equipment',text(body,'TH14_Tower_RocketRepeatText'))
-        self.assertIn('setflag FLAG_TH13_ENDPOINT',body)
-        self.assertNotIn('clearflag FLAG_TH13_ENDPOINT',body)
+        self.assertIn('setflag FLAG_TH13_ENDPOINT',body+source('chapter14_tower.inc'))
+        self.assertNotIn('clearflag FLAG_TH13_ENDPOINT',body+source('chapter14_tower.inc'))
 
     def test_authored_lines_fit_native_normal_font(self):
         font=(ROOT/'src/fonts.c').read_text().split('gFontNormalLatinGlyphWidths[] = {',1)[1].split('};',1)[0]

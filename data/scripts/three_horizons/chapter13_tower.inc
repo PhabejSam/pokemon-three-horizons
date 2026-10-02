@@ -418,34 +418,7 @@ TH14_Tower_RocketRepeat:
 TH13_Tower_RocketText:
     .string "GIOVANNI ordered us to collect\nunusual sightings, ghost reports\pand migration notes.\nI am on paperwork duty.\pThese reports are going\nto CELADON.$"
 TH13_Tower_GhostBarrier::
-    lockall
-    hidefollower
-    checkitem ITEM_SILPH_SCOPE
-    goto_if_eq VAR_RESULT, TRUE, TH13_Tower_Unresolved
-    msgbox TH13_Tower_GhostWarning
-    setwildbattle SPECIES_MAROWAK, 30
-    special StartMarowakBattle
-    waitstate
-    @ No victory/resolution branch: this chapter never provides a Scope.
-TH13_Tower_Unresolved:
-    goto_if_set FLAG_TH13_ENDPOINT, TH13_Tower_Repeat
-    msgbox TH13_Tower_EndpointText
-    setflag FLAG_TH13_ENDPOINT
-    goto TH13_Tower_PushBack
-TH13_Tower_Repeat:
-    msgbox TH13_Tower_RepeatText
-TH13_Tower_PushBack:
-    closemessage
-    applymovement LOCALID_PLAYER, TH13_Tower_ForceUp
-    waitmovement 0
-    special TH_RefreshFollower
-    releaseall
-    end
-TH13_Tower_ForceUp:
-    walk_up
-    step_end
-TH13_Tower_GhostWarning:
-    .string "A restless presence bars the stairs.\nGHOST: Be gone… Intruders…$"
+    goto TH14_Tower_MotherBarrier
 TH13_Tower_EndpointText:
     .string "A restless presence bars the stairs.\nA SILPH SCOPE could reveal it.\pGIOVANNI's observer sends ghost\nreports to CELADON.\pJESSIE and JAMES have business\nthere, too.$"
 TH13_Tower_RepeatText:

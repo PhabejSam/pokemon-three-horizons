@@ -105,3 +105,43 @@ GHOST_BATTLE_TEST("Ghost battle: player cannot capture ghost (Marowak)")
         MESSAGE("It dodged your thrown Poké Ball! This Pokémon can't be caught!");
     }
 }
+
+
+GHOST_BATTLE_TEST("Ghost battle: scoped mother dodges every configured throwable Ball")
+{
+    enum Item item = ITEM_NONE;
+    for (enum Item ball = ITEM_POKE_BALL; ball <= ITEM_CHERISH_BALL; ball++)
+        PARAMETRIZE { item = ball; }
+    PARAMETRIZE { item = ITEM_STRANGE_BALL; }
+    GIVEN {
+        GIVE_PLAYER_ITEM(ITEM_SILPH_SCOPE, 1);
+        GIVE_PLAYER_ITEM(item, 1);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_MAROWAK);
+    } WHEN {
+        TURN { USE_ITEM(player, item, WITH_RNG(RNG_BALLTHROW_SHAKE, 0)); }
+    } SCENE {
+        MESSAGE("It dodged your thrown Poké Ball! This Pokémon can't be caught!");
+    } THEN {
+        // The runner stops unfinished recorded battles with B after the turn.
+        // BattleMainCB2 reports that teardown as PLAYER_TELEPORTED, not CAUGHT.
+        EXPECT_EQ(gBattleOutcome, B_OUTCOME_PLAYER_TELEPORTED);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_NONE);
+        EXPECT(!GetSetPokedexFlag(NATIONAL_DEX_MAROWAK, FLAG_GET_CAUGHT));
+    }
+}
+
+WILD_BATTLE_TEST("Ghost battle: normal wild Marowak remains catchable with Scope")
+{
+    GIVEN {
+        GIVE_PLAYER_ITEM(ITEM_SILPH_SCOPE, 1);
+        GIVE_PLAYER_ITEM(ITEM_MASTER_BALL, 1);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_MAROWAK);
+    } WHEN {
+        TURN { USE_ITEM(player, ITEM_MASTER_BALL); }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_MAROWAK);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_POKEBALL), BALL_MASTER);
+    }
+}

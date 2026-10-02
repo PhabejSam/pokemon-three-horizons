@@ -5,7 +5,7 @@ from tools.three_horizons.tests.test_playtest13_research import Scene
 class Lavender(unittest.TestCase):
  def test_all_interiors_and_connections_are_reciprocal(self):
   town=map_data('TH13_LavenderTown');route=map_data('TH13_Route10')
-  self.assertEqual(town['connections'],[dict(map=route['id'],direction='up',offset=0)])
+  self.assertEqual(town['connections'],[dict(map=route['id'],direction='up',offset=0),dict(map='MAP_TH14_ROUTE8',direction='left',offset=0)])
   self.assertIn(dict(map=town['id'],direction='down',offset=0),route['connections'])
   registry=json.loads((ROOT/'data/maps/map_groups.json').read_text())['gMapGroup_ThreeHorizons']
   maps={map_data(n)['id']:map_data(n) for n in registry}
@@ -22,7 +22,8 @@ class Lavender(unittest.TestCase):
   self.assertEqual(len(up['object_events']),3);self.assertEqual(len(up['warp_events']),1)
   self.assertTrue(all(o['script'].startswith('TH13_Center_Attendant') for o in up['object_events']))
   heals=json.loads((ROOT/'src/data/heal_locations.json').read_text())['heal_locations']
-  self.assertEqual(heals[-1]['id'],'HEAL_LOCATION_TH13_LAVENDER');self.assertEqual(heals[-1]['map'],center['id'])
+  lavender=[h for h in heals if h['id']=='HEAL_LOCATION_TH13_LAVENDER']
+  self.assertEqual(len(lavender),1);self.assertEqual(lavender[0]['map'],center['id'])
 
  def test_scene_positions_allow_every_door_and_interaction(self):
   m=map_data('TH13_LavenderTown');w,h,c=tiles(m['name']);floor={(i%w,i//w) for i,t in enumerate(c) if not t&0xc00}
@@ -70,13 +71,16 @@ class Lavender(unittest.TestCase):
   self.assertIn('OBJ_EVENT_GFX_TH_JESSIE',{o['graphics_id'] for o in rockets})
   self.assertIn('OBJ_EVENT_GFX_TH_JAMES',{o['graphics_id'] for o in rockets})
 
- def test_town_services_cries_and_absent_fuji(self):
+ def test_town_services_cries_and_appended_fuji(self):
   source=(ROOT/'data/scripts/three_horizons/chapter13_lavender.inc').read_text()
   for species in ['CUBONE','NIDORINO','PSYDUCK']:self.assertIn('playmoncry SPECIES_'+species,source)
   self.assertNotIn('ITEM_POKE_FLUTE',source)
   house=map_data('TH13_LavenderTown_VolunteerPokemonHouse')
-  self.assertEqual(len(house['object_events']),5)
-  self.assertFalse(any('Fuji' in o['script'] or o['graphics_id']=='OBJ_EVENT_GFX_MR_FUJI' for o in house['object_events']))
+  self.assertEqual(len(house['object_events']),6)
+  self.assertEqual([o['local_id'] for o in house['object_events'][:5]],[f'LOCALID_TH13_LAVENDERTOWN_VOLUNTEERPOKEMONHOUSE_{i}' for i in range(2,7)])
+  self.assertEqual(house['object_events'][5]['local_id'],'LOCALID_TH14_FUJI_HOME')
+  self.assertEqual(house['object_events'][5]['script'],'TH14_Fuji_Home')
+  self.assertFalse(any('Fuji' in o['script'] or o['graphics_id']=='OBJ_EVENT_GFX_MR_FUJI' for o in house['object_events'][:5]))
   self.assertEqual(sum(o['script']=='TH_TrainingClerk' for o in map_data('TH13_LavenderTown_Mart')['object_events']),1)
 
  def test_interior_residents_never_overlap_training_clerk(self):

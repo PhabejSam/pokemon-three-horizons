@@ -1,21 +1,24 @@
 import json,re,unittest
 from tools.three_horizons.tests.test_playtest11_maps import ROOT,map_data,tiles,reachable
-from tools.three_horizons.tests.test_playtest13_research import Scene
+from tools.three_horizons.tests.test_playtest14_mother import Scene
 class Tower(unittest.TestCase):
  def test_append_only_registry_and_reciprocal_graph(self):
   names=[f'TH13_PokemonTower_{i}F' for i in range(1,7)]
   registry=json.loads((ROOT/'data/maps/map_groups.json').read_text())['gMapGroup_ThreeHorizons']
   self.assertEqual(registry[112:118],names)
   self.assertNotIn('TH13_PokemonTower_7F',registry)
-  maps={map_data(n)['id']:map_data(n) for n in registry}
+  groups=json.loads((ROOT/'data/maps/map_groups.json').read_text())
+  maps={map_data(n)['id']:map_data(n) for n in registry+groups['gMapGroup_ThreeHorizons14']}
   for n in names+['TH13_LavenderTown']:
    m=map_data(n)
    for w in m['warp_events']:
     self.assertIn(w['dest_map'],maps)
     other=maps[w['dest_map']];back=other['warp_events'][int(w['dest_warp_id'])]
     self.assertEqual(back['dest_map'],m['id'],(n,w))
-  self.assertEqual(len(maps['MAP_TH13_POKEMON_TOWER_6F']['warp_events']),1)
- def test_endpoint_every_lane_stays_closed_after_completion(self):
+  self.assertEqual(len(maps['MAP_TH13_POKEMON_TOWER_6F']['warp_events']),2)
+  self.assertEqual(maps['MAP_TH13_POKEMON_TOWER_6F']['warp_events'][0]['dest_map'],'MAP_TH13_POKEMON_TOWER_5F')
+  self.assertEqual(maps['MAP_TH13_POKEMON_TOWER_6F']['warp_events'][1]['dest_map'],'MAP_TH14_POKEMON_TOWER_7F')
+ def test_unresolved_endpoint_every_lane_stays_closed_until_pt14_resolution(self):
   m=map_data('TH13_PokemonTower_6F');w,h,c=tiles(m['name'])
   self.assertEqual({(e['x'],e['y']) for e in m['coord_events']},{(11,15),(12,16)})
   for e in m['coord_events']:
@@ -32,10 +35,12 @@ class Tower(unittest.TestCase):
   self.assertNotRegex(source,r'(giveitem|additem) ITEM_(SILPH_SCOPE|POKE_FLUTE)')
   self.assertNotIn('MAP_TH13_POKEMON_TOWER_7F',source)
   self.assertNotRegex(source,r'setflag FLAG_(?:HIDE_)?(?:MR_FUJI|RESCUED|DEFEATED_MAROWAK)')
-  self.assertIn('checkitem ITEM_SILPH_SCOPE',source)
-  self.assertIn('goto_if_set FLAG_TH13_ENDPOINT',source)
-  self.assertEqual(source.count('setflag FLAG_TH13_ENDPOINT'),1)
-  self.assertNotIn('JESSIE',source);self.assertNotIn('JAMES',source)
+  current=source+(ROOT/'data/scripts/three_horizons/chapter14_tower.inc').read_text()
+  self.assertIn('goto TH14_Tower_MotherBarrier',source)
+  self.assertIn('checkitem ITEM_SILPH_SCOPE',current)
+  self.assertIn('goto_if_set FLAG_TH13_ENDPOINT',current)
+  self.assertEqual(current.count('setflag FLAG_TH13_ENDPOINT'),1)
+  self.assertNotRegex(current,r'trainerbattle[^\n]*TRAINER_TH(?:11|14)_(?:JESSIE|JAMES)')
  def test_native_trainers_and_finite_item_receipts(self):
   count=0;flags=[]
   for i in range(1,7):
@@ -57,23 +62,22 @@ class Tower(unittest.TestCase):
   source=(ROOT/'data/scripts/three_horizons/chapter13_tower.inc').read_text()
   self.assertIn('special HealPlayerParty',source)
   self.assertIn('SILPH SCOPE',source);self.assertIn('CELADON',source)
- def test_endpoint_receipt_is_once_and_debug_scope_never_resolves(self):
-  for scope in (False,True):
-   s=Scene();s.flags={'FLAG_BADGE03_GET','FLAG_TH12_BILL_RESCUED'}
-   if scope:s.items.add('ITEM_SILPH_SCOPE')
-   before=set(s.flags)
-   for visit in range(3):
-    s.run('TH13_Tower_GhostBarrier')
-    self.assertEqual(s.flags,before|{'FLAG_TH13_ENDPOINT'})
-    self.assertEqual(s.items,{'ITEM_SILPH_SCOPE'} if scope else set())
-    self.assertEqual(s.movements[-1],['LOCALID_PLAYER','TH13_Tower_ForceUp'])
-   self.assertEqual(s.messages.count('TH13_Tower_EndpointText'),1)
-   self.assertEqual(s.messages.count('TH13_Tower_RepeatText'),2)
-   self.assertEqual(len(s.battles),0 if scope else 3)
+ def test_no_scope_endpoint_receipt_once_and_old_receipts_survive(self):
+  s=Scene(scope=False);s.flags|={'FLAG_BADGE03_GET','FLAG_TH12_BILL_RESCUED'}
+  before=set(s.flags)
+  for visit in range(3):
+   s.run('TH13_Tower_GhostBarrier')
+   self.assertEqual(s.flags,before|{'FLAG_TH13_ENDPOINT'})
+   self.assertEqual(s.battles,0);self.assertEqual(s.awards,0)
+   self.assertIn(('applymovement',['LOCALID_PLAYER','TH14_Mother_StageAbove']),s.trace)
+  self.assertEqual(s.trace.count(('msgbox',['TH13_Tower_EndpointText'])),1)
+  self.assertEqual(s.trace.count(('msgbox',['TH13_Tower_RepeatText'])),2)
  def test_native_first_parties_and_encounters_are_preserved(self):
   old=(ROOT/'src/data/trainers_frlg.party').read_text();new=(ROOT/'src/data/trainers.party').read_text()
   rematches=(ROOT/'src/data/three_horizons_rematches.h').read_text()
-  self.assertEqual(len(re.findall(r'^    \{TRAINER_',rematches,re.M)),121)
+  entries=rematches.split('sRematchEntries[] = {',1)[1].split('};',1)[0]
+  self.assertEqual(len(re.findall(r'^    \{TRAINER_(?!TH14_)',entries,re.M)),121)
+  self.assertEqual(len(re.findall(r'^    \{TRAINER_TH14_',entries,re.M)),30)
   for i in range(3,7):
    m=map_data(f'TH13_PokemonTower_{i}F')
    for o in m['object_events']:

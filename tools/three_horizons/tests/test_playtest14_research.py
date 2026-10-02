@@ -51,7 +51,8 @@ class Research(unittest.TestCase):
         self.assertIn('goto_if_set FLAG_TH13_GEAR',s)
         self.assertIn('checkitem ITEM_SILPH_SCOPE',s)
         self.assertEqual(s.count('call TH13_GiveResearchGear'),1)
-        self.assertNotRegex(s,r'(setflag FLAG_TH13_(OBS|PHOTO)|special TH_ScriptResearchObserve)')
+        contact=s.split('TH14_Tower_GearContact::',1)[1].split('TH14_Tower7F_Entry::',1)[0]
+        self.assertNotRegex(contact,r'(setflag FLAG_TH13_(OBS|PHOTO)|special TH_ScriptResearchObserve)')
         self.assertIn('chapter14_tower.inc',(ROOT/'data/scripts/three_horizons/maps.inc').read_text())
 
     def test_observer_is_bounded_and_uses_current_native_outfit(self):

@@ -20,17 +20,22 @@ static EWRAM_DATA u16 sPhotoRegisters[ARRAY_COUNT(sPhotoRegisterOffsets)] = {0};
 static EWRAM_DATA bool8 sPhotoFlashActive = FALSE;
 void TH_ScriptBeginPhotoFlash(void)
 {
+    gSpecialVar_Result = FALSE;
     if (sPhotoFlashActive) return;
     for (u32 i = 0; i < ARRAY_COUNT(sPhotoRegisterOffsets); i++)
         sPhotoRegisters[i] = GetGpuReg(sPhotoRegisterOffsets[i]);
     sPhotoFlashActive = TRUE;
+    gSpecialVar_Result = TRUE;
 }
 void TH_ScriptEndPhotoFlash(void)
 {
+    gSpecialVar_Result = FALSE;
     if (!sPhotoFlashActive) return;
+    bool32 completed = !gPaletteFade.active;
     for (u32 i = 0; i < ARRAY_COUNT(sPhotoRegisterOffsets); i++)
         SetGpuReg(sPhotoRegisterOffsets[i], sPhotoRegisters[i]);
     sPhotoFlashActive = FALSE;
+    gSpecialVar_Result = completed;
 }
 
 extern const u8 TH13_ResearchCall_Activation[];
