@@ -157,3 +157,16 @@ The new plan contains21 ordered tasks, Gate A for carry-forward/save safety, Gat
 - **Hardware capture report remains HIGH/unresolved.** Four modified capture/evolution fixtures from Task7 are explicitly old-ROM controls, not claimed as candidate fixtures. Candidate native coverage and this ordinary owner-copy attempt passed; the exact Final candidate route and owner RG40XX H/VBA-Next acceptance are still required.
 
 Evidence is private under execution `gate-a-{candidate,owner,town,oak,map,forest-day,cut,leads,flash-02,fog,gear,natural-capture}/`, `native/gate-a-save-*.{json,log}`, build log and `gate-a-results.json`. Every scene records ROM/core identity and labels modifications. Harness mistakes (wrong Flash pocket, unknown first-barrier fixture name, expected Route11 index typo) were preserved, corrected and rechecked; unknown fixture kinds now fail explicitly. They are not product defects and no product assertion was suppressed. Gate A closes the earlier Task2–4/6 visual deferrals; Task5 new-map doubles/rematch scenes remain Tasks8/11/12 and Gate B.
+
+## Windows native-runner runtime repair — 2026-10-02
+
+The direct diagnostic launch outside the private wrapper failed at Windows loader startup: `libwinpthread-1.dll` was unavailable. That launch ran no tests and is not counted as a pass. Previous wrapper runs supplied MSYS2 on PATH and produced actual native result records; their PASS/FAIL results remain valid.
+
+The runner also imports `libepoxy-0.dll`. Both x86-64 libraries were copied beside the isolated runner from the existing project MSYS2 toolchain after validating their installed package SHA-256 manifests and recorded SHA-256/PGP package validation. No DLL download, global PATH change, runner executable replacement, owner ROM write or owner-save write occurred. The new repeatable setup command is documented in `tools/mgba/README.md`; it rejects architecture mismatches and different existing DLLs.
+
+- Runner SHA-256 unchanged: `84c7f1babecf563722224d462a889f7f6d34ab11bcfa6b6160eef569b5f2608a`.
+- libwinpthread package: `mingw-w64-x86_64-libwinpthread-14.0.0.r426.g4564ee4b5-1`; DLL SHA-256 `72bf8802de3a99d28f0bc2db9a11f281a9f9f3fa83dab2bc67e69fac3bd3d9c0`.
+- libepoxy package: `mingw-w64-x86_64-libepoxy-1.5.10-7`; DLL SHA-256 `8e7d48294d79eb5b1f44cd7c2a637239d8ddcdabaedea12bf9fb7ca919d1a37a`.
+- Rerun with only Windows System32 on the runner's PATH, normal audio, skip-as-failure: SaveBlock1/2/3, PokemonStorage and PT14 field-offset checks **5 PASS**; travel maps, calls, twins dispatch and readiness **4 PASS**.
+- The encounter/capture definition **executed and failed** the slot2 expected-Growlithe assertion; it was not blocked by a DLL. Investigation remains open. Diagnostic logging build is not a release candidate.
+- Evidence: private `windows-runtime-before.json`, `windows-runtime-installed.json` and native `runtime-saveblocks-01`, `runtime-storage-01`, `runtime-layout-01`, `travel-diagnostic-01` logs/reports.

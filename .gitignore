@@ -1,4 +1,6 @@
 *.exe
+tools/mgba/libwinpthread-1.dll
+tools/mgba/libepoxy-0.dll
 *.o
 *.i
 *.elf
