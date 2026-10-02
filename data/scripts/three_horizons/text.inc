@@ -147,9 +147,10 @@ TH_Text_Supplies::
     .string "from all three regions.$"
 
 TH_Text_OakSendoff::
-    .string "OAK: Travel at your own pace. A\n"
-    .string "good question is a fine\p"
-    .string "discovery.$"
+    .string "OAK: DAISY next door has a TOWN MAP\n"
+    .string "to help you find your way.\p"
+    .string "Travel at your own pace. A good\n"
+    .string "question is a fine discovery.$"
 
 TH_Text_BagFull::
     .string "OAK: Make a little room in your\n"

@@ -667,4 +667,5 @@ gSpecials::
     def_special TH_ScriptResearchCompleteCall
     def_special TH_ScriptBeginPhotoFlash
     def_special TH_ScriptEndPhotoFlash
+    def_special TH14_ScriptGiveUniqueItem
 #endif

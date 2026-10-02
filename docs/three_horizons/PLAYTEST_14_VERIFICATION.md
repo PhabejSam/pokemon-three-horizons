@@ -1,6 +1,6 @@
 # Playtest 14 verification ledger
 
-**2026-10-02: approved plan in serial/inline execution. Task 1 save-state foundation verified; no PT14 release candidate exists yet.**
+**2026-10-02: approved plan in serial/inline execution. Tasks 1–2 foundations verified; no PT14 release candidate exists yet.**
 
 The owner requested Celadon → Silph Scope → return to Lavender → mother's Marowak/photo → Fuji/Flute → Route11 Snorlax, with the carry-forward repairs in the chapter blueprint. Full implementation/build/acceptance fields remain pending until their respective gates. Do not use this document as release acceptance.
 
@@ -59,7 +59,7 @@ TMs already are reusable in Three Horizons. Keep that mechanic; design progressi
 | Same owner source cold-loaded on reviewed Navigator; protected payload comparison | PASS; clock-only differences, no PT14 or save-roundtrip claim |
 | Canonical v1.2 copy and independent source/canon/capacity/map audits | Completed; written design approved in chat |
 | Detailed implementation plan | APPROVED by user; serial/inline execution underway |
-| PT14 behavioral/visual implementation and focused RED/GREEN checks | Task 1 focused checks PASS; remaining tasks and integration gates pending |
+| PT14 behavioral/visual implementation and focused RED/GREEN checks | Tasks 1–2 focused checks PASS; candidate visuals and remaining tasks/gates pending |
 | Full PT14 host/native/layout/offset/documentation matrix | NOT RUN |
 | New Emerald/FireRed/LeafGreen compatibility builds | NOT RUN |
 | Exact PT14 ROM build/hash/feature/compiled/test revisions | NOT AVAILABLE |
@@ -88,3 +88,12 @@ The new plan contains21 ordered tasks, Gate A for carry-forward/save safety, Gat
 - Native coverage includes old even/odd version markers, current-marker repeated migration, raw SaveBlock1/SaveBlock2/party/all-box invariance against explicitly permitted initialization, negative and positive ship/photo receipts, all 65,536 map-group/index pairs, and actual temporary/daily flag reset APIs.
 - Fresh local tools and the focused test ELF built successfully. Windows uses the repository's serial mGBA runner because the Linux Hydra launcher requires unavailable POSIX headers; no tests or assertions were removed. Initial tool/bootstrap failures are retained separately and are not counted as behavioral RED.
 - Existing converter metadata, old party-alias deprecation and test-ELF RWX link warnings remain recorded. The new test uses the current party API. Full save-size/layout matrix, upstream builds, owner-battery roundtrip and hardware acceptance remain pending their planned gates.
+
+## Task 2 — Town Map
+
+- Daisy gives the Town Map after the first partner; Oak's initial sendoff points to her. A later supplies-complete Oak interaction offers the same once-only missing-map catch-up. The table still opens its inspectable map. Bag/PC ownership and the shared receipt prevent duplicate gifts; no-room leaves inventory/receipt unchanged and retryable. Only explicitly authored item/receipt pairs are accepted.
+- Baseline reproduction used the exact reviewed Navigator ROM and a private battery copy, followed by clearly labelled position/item fixtures. Daisy's generic conversation and absent item were captured. The native renderer already shows Kanto correctly in Pallet, Tower and a cave entered through its real doorway (Route4 entrance marker); Bag Use and registered Select both open, and A/B return to field. No Fly permission was added.
+- Confirmed additional presentation defect: native Town Map item introduction said HOENN although the renderer displayed Kanto. The real script-selection regression failed before repair; item use now routes only bounded project maps to the existing Kanto inspection script. Upstream/invalid-map routing retains the original script. No renderer/artwork rewrite.
+- Focused results: **5/5 host tests and 5/5 native definitions PASS**, normal audio, strict skip-as-failure. Evidence `town-map-host-red.log`, `native/town-map-routing-red-02.*`, `native/town-map-green-01.*`; baseline frames/inputs in private `town-map-before/` and `town-map-native-before/`.
+- Two initial native fixtures exhausted stack space by copying entire save blocks locally; checked heap snapshots repaired the fixtures without weakening assertions. Rerunning with old script selection then produced exactly the intended one failure and four passes. Early controller waits also needed the map's opening message/entrance preview to complete; those are recorded sequencing corrections, not game failures.
+- Gate A still owes candidate handoff/full-bag/PC/first-partner/continued-save screenshots and native-save persistence, repeated Bag/registered open-close in old project locations. Gate B adds actual Celadon/group76. These are explicit deferred integration checks, not completed visual acceptance.

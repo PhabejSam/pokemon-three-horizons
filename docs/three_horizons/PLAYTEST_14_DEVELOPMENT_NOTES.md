@@ -1,6 +1,6 @@
 # Playtest 14 development handoff — 2026-10-01
 
-Current stage: the owner approved the detailed 21-task plan and serial/inline execution. Task 1 state allocation and migration are implemented and focused host/native checks pass. Task 2 (Town Map) is next. No PT14 release candidate or hardware acceptance is claimed.
+Current stage: the owner approved the detailed 21-task plan and serial/inline execution. Tasks 1–2 are implemented with focused host/native checks passing. Task 3 (Route9 Cut / forest presentation) is next. No PT14 release candidate or hardware acceptance is claimed.
 
 Work only in `work/playtest14-celadon`, branch `feature/playtest14-celadon-lavender`, descended from local reviewed Navigator commit `2d85555d74f34f5029c38a3b2db26fb7eb3f99c0`. Original feature and review worktrees contain unrelated untracked/private evidence and remain protected. Native worktree creation returned `Not a git repository` for the task root; the correct nested repository's Git worktree mechanism created this isolated checkout. No remote change occurred.
 
@@ -39,3 +39,5 @@ PT14 marker is `0xA90E`; every historical migration gate recognizes it. The appe
 Focused evidence: eight host tests and fifteen native state/layout definitions passed. Behavioral RED and the unchanged-offset baseline were captured first. Existing all-trainer migration expectations now include the newly owned trainer range, then verify earned PT13/PT14 wins survive repeat calls. Full release gates remain pending.
 
 Resume through `.superpowers/sdd/2026-10-01-playtest14-celadon-lavender/progress.md` and the current task brief. The private Windows runner uses `TEST_SRCS` for focused native builds, `CHECK_TOOL_NAMES=patchelf` to bypass only the unavailable Linux launcher, and real normal-audio mGBA with skip-as-failure. The first fresh tool/asset build is complete; use incremental builds. Do not recopy/rebootstrap caches or rerun already completed tasks.
+
+Task2 checkpoint: shared validated unique-item helper, Daisy post-partner gift, later Oak catch-up, initial Daisy direction, and a reproduced native item HOENN→KANTO wording repair. Five host and five native definitions pass. Actual baseline native renderer is retained; candidate visual/cold persistence remains Gate A, new group76 Gate B. Private before inputs document message/preview waits and why a direct cave warp's stale escapeWarp was not treated as a product defect.

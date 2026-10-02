@@ -1,5 +1,6 @@
 #include "global.h"
 #include "three_horizons_rematches.h"
+#include "three_horizons_chapter14.h"
 #include "item_use.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -1567,10 +1568,27 @@ void ItemUseOutOfBattle_PokeFlute(u8 taskId)
     }
 }
 
+static const u8 *GetTownMapScript(void)
+{
+#if THREE_HORIZONS
+    extern const u8 TH_EventScript_KantoRegionMap[];
+    if (TH_IsProjectMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
+        return TH_EventScript_KantoRegionMap;
+#endif
+    return EventScript_RegionMap;
+}
+
+#if TESTING && THREE_HORIZONS
+const u8 *Test_TH_TownMapScript(void)
+{
+    return GetTownMapScript();
+}
+#endif
+
 static void ItemUseOnFieldCB_TownMap(u8 taskId)
 {
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(EventScript_RegionMap);
+    ScriptContext_SetupScript(GetTownMapScript());
     DestroyTask(taskId);
 }
 

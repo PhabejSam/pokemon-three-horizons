@@ -12,4 +12,14 @@
 
 bool32 TH_IsProjectMap(u8 mapGroup, u8 mapNum);
 
+enum TH14GiftResult
+{
+    TH14_GIFT_NO_ROOM = 0,
+    TH14_GIFT_GIVEN = 1,
+    TH14_GIFT_ALREADY_OWNED = 2,
+};
+
+u8 TH14_TryGiveUniqueItem(u16 itemId, u16 receiptFlag);
+void TH14_ScriptGiveUniqueItem(void);
+
 #endif

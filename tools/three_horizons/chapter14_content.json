@@ -1015,5 +1015,11 @@
   "shops": [],
   "prizes": [],
   "rematchEvolutions": [],
-  "unfinishedInteractions": []
+  "unfinishedInteractions": [],
+  "uniqueItems": [
+    {
+      "item": "ITEM_TOWN_MAP",
+      "receipt": "FLAG_TH14_TOWN_MAP"
+    }
+  ]
 }

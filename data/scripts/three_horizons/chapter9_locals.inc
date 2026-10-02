@@ -687,11 +687,45 @@ TH_Sign_CeruleanBikeShop_7_Text:
     .string "A freshly serviced bicycle.\nThe chain has just been oiled.$"
 
 TH_Local_RivalHouse_0::
-    msgbox TH_Local_RivalHouse_0_Text, MSGBOX_NPC
+    lock
+    faceplayer
+    goto_if_lt VAR_TH_STAGE, TH_STAGE_PARTNER, TH14_DaisyBeforePartner
+    call TH14_GiveTownMap
+    goto_if_eq VAR_RESULT, 0, TH14_DaisyMapNoRoom
+    goto_if_eq VAR_RESULT, 2, TH14_DaisyMapOwned
+    playfanfare MUS_OBTAIN_ITEM
+    msgbox TH14_DaisyMapGivenText
+    waitfanfare
+    release
+    end
+TH14_DaisyBeforePartner:
+    msgbox TH_Local_RivalHouse_0_Text
+    release
+    end
+TH14_DaisyMapNoRoom:
+    msgbox TH14_TownMapNoRoomText
+    release
+    end
+TH14_DaisyMapOwned:
+    msgbox TH14_DaisyMapOwnedText
+    release
     end
 
 TH_Local_RivalHouse_0_Text:
     .string "My brother is always rushing off!\nI hope you two look after each other.$"
+
+TH14_GiveTownMap:
+    setvar VAR_0x8004, ITEM_TOWN_MAP
+    setvar VAR_0x8005, FLAG_TH14_TOWN_MAP
+    special TH14_ScriptGiveUniqueItem
+    return
+
+TH14_DaisyMapGivenText:
+    .string "DAISY: You have a partner now!\nTake this TOWN MAP on your journey.\p{PLAYER} received a TOWN MAP!\pDAISY: Open it from your BAG\nwhenever you need your bearings.$"
+TH14_TownMapNoRoomText:
+    .string "Your KEY ITEMS pocket is full.\nMake room, then come back for the map.$"
+TH14_DaisyMapOwnedText:
+    .string "DAISY: Your TOWN MAP will help\nyou find your way around KANTO.\pTake care of yourself and\nyour POKéMON out there!$"
 
 TH_Local_RivalHouse_1::
     goto TH_EventScript_KantoRegionMap

@@ -13,11 +13,25 @@ TH_EventScript_Oak::
     setvar VAR_TEMP_6, 0
     lock
     faceplayer
-    goto_if_ge VAR_TH_STAGE, TH_STAGE_PARTNER, TH_OakSupplies
+    goto_if_ge VAR_TH_STAGE, TH_STAGE_PARTNER, TH14_OakCheckMap
     call TH_Lab_Explain
     msgbox TH_Text_ChooseDisplay
     release
     end
+TH14_OakCheckMap:
+    goto_if_ne VAR_TH_SUPPLY_MASK, TH_SUPPLIES_COMPLETE, TH_OakSupplies
+    call TH14_GiveTownMap
+    goto_if_eq VAR_RESULT, 0, TH14_OakMapNoRoom
+    goto_if_ne VAR_RESULT, 1, TH_OakSupplies
+    playfanfare MUS_OBTAIN_ITEM
+    msgbox TH14_OakMapGivenText
+    waitfanfare
+    goto TH_OakSupplies
+TH14_OakMapNoRoom:
+    msgbox TH14_TownMapNoRoomText
+    goto TH_OakSupplies
+TH14_OakMapGivenText:
+    .string "OAK: Still need a map? DAISY\nleft a spare here for our field work.\p{PLAYER} received a TOWN MAP!\pOAK: Open it from your BAG\nwhen you need to find your way.$"
 TH_Lab_Explain:
     goto_if_eq VAR_TEMP_2, 1, TH_Lab_Explained
     msgbox TH_Text_OakResearch
