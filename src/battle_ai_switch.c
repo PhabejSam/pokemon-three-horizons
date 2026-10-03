@@ -915,7 +915,7 @@ static bool32 IsOpponentPhysicalAttacker(enum BattlerId battler, enum BattlerId 
     enum Move incomingMove = GetIncomingMove(battler, opposingBattler, gAiLogicData);
     return incomingMove != MOVE_NONE
         && incomingMove != MOVE_UNAVAILABLE
-        && GetBattleMoveCategory(incomingMove) == DAMAGE_CATEGORY_PHYSICAL;
+        && AI_ResolveMoveCategory(opposingBattler, incomingMove, GetBattleMoveCategory(incomingMove)) == DAMAGE_CATEGORY_PHYSICAL;
 }
 
 static bool32 CanIntimidateLowerOpponentAtk(enum BattlerId battler, enum BattlerId opposingBattler)

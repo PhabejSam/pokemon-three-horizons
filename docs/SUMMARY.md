@@ -204,3 +204,6 @@
 - [Playtest 14 full beta walkthrough](three_horizons/PLAYTEST_14.md)
 - [Playtest 14 hardware QA](three_horizons/PLAYTEST_14_HARDWARE_QA.md)
 - [Playtest 14 encounter tables](three_horizons/PLAYTEST_14_ENCOUNTERS.md)
+
+- [Playtest 14.1 stabilization plan](superpowers/plans/2026-10-02-playtest14-1-stabilization.md)
+- [Playtest 14.1 Windows toolchain recovery](three_horizons/PLAYTEST_14_1_TOOLCHAIN.md)
