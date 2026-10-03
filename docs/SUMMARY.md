@@ -207,3 +207,4 @@
 
 - [Playtest 14.1 stabilization plan](superpowers/plans/2026-10-02-playtest14-1-stabilization.md)
 - [Playtest 14.1 Windows toolchain recovery](three_horizons/PLAYTEST_14_1_TOOLCHAIN.md)
+- [Playtest 14.1 battle rules](three_horizons/PLAYTEST_14_1_BATTLE_RULES.md)

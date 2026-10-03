@@ -1,12 +1,27 @@
-# Playtest 14 — RG40XX H acceptance
+# Playtest 14.1 — RG40XX H acceptance
 
-Feature and compiled/test revision: `abdec6f2508bbf2d4f1c104d863e5908281f6f6e`.
+Feature revision: `ccc6721be3f7b5bc9be5811f96da20eca03c8c69`. Compiled/test revision: `ccc6721be3f7b5bc9be5811f96da20eca03c8c69`.
 
-ROM: `pokemon-three-horizons-playtest-14-celadon-silph-scope.gba`
+ROM: `pokemon-three-horizons-playtest-14-1-celadon-silph-scope.gba`
 
-SHA-256: `7e9e18bcb30026a47c9e46e187f8a1ba906e431682eb704b48c2ed8fd67a77a7`.
+SHA-256: `21e803b7c3dc0e3cdcfe25efd226cececd3b6d760c931f2c5f075f5a36251925`.
 
-This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next acceptance remains **PENDING**; the intermittent full-party Ekans capture report is **HIGH / unresolved**. Use normal speed first.
+Automated and exact-ROM mGBA checks passed. Independent code review found no Critical or Important issues; later artifact gates were checked separately by the implementer. RG40XX H/VBA-Next acceptance remains **PENDING**. The intermittent full-party Ekans capture report remains **HIGH / unresolved**.
+
+## PT14.1 additions
+
+Hyper Beam uses the higher current Attack or Sp. Atk after stat stages; ties select Special. A knockout skips recharge for standard recharge attacks. A surviving target still forces one recharge turn. Charging moves remain unchanged. See [battle rules](PLAYTEST_14_1_BATTLE_RULES.md).
+
+The Lavender worker now directs you west via Route8 and the Underground Path to Celadon. Four Celadon street conversations respond to Giovanni's defeat; the scientist distinguishes victory from actually receiving the Scope. No new story receipts, regions, rewards or encounters are added.
+
+The full route and encounter tables still apply. Preserve your old ROM/battery, copy the battery to the new ROM's corresponding name, and boot normally with Continue. Do not import an old emulator state. A fresh new game is also valid with a separate blank save. On VBA-Next keep its battery naming convention, including `.gba.eps` where used.
+
+## Four natural Hyper Beam checks
+
+- [ ] Gyarados uses Physical Hyper Beam when its staged Attack is higher. The summary's base Special icon remains static; use the description and battle behavior.
+- [ ] A Hyper Beam knockout lets you act normally against the next Pokémon.
+- [ ] A target surviving Hyper Beam forces one recharge turn.
+- [ ] If convenient, another recharge move also skips recharge after a knockout.
 
 ## Short hardware acceptance run
 

@@ -1,4 +1,92 @@
-# Playtest 14 — verification and release record
+# Playtest 14.1 — verification and release record
+
+Feature revision: `ccc6721be3f7b5bc9be5811f96da20eca03c8c69`. Compiled/test revision: `ccc6721be3f7b5bc9be5811f96da20eca03c8c69`.
+
+ROM: `pokemon-three-horizons-playtest-14-1-celadon-silph-scope.gba`
+
+SHA-256: `21e803b7c3dc0e3cdcfe25efd226cececd3b6d760c931f2c5f075f5a36251925`.
+
+Automated and exact-ROM mGBA checks passed. Independent code review found no Critical or Important issues; later artifact gates were checked separately by the implementer. RG40XX H/VBA-Next acceptance remains **PENDING**. The intermittent full-party Ekans capture report remains **HIGH / unresolved**.
+
+## Required report — all 35 fields
+
+| # | Item | Result |
+|---|---|---|
+| 1 | Worktree / branch | C:/Users/phabe/Documents/Codex/2026-09-22/referenced-chatgpt-conversation-this-is-an/work/playtest14-1-stabilization; feature/playtest14-1-stabilization |
+| 2 | Baseline | Feature/build abdec6f2508bbf2d4f1c104d863e5908281f6f6e; initial documentation HEAD 6511feabc64023c88d66f4d46c559341c4964f95; reproduced SHA 7e9e18bcb30026a47c9e46e187f8a1ba906e431682eb704b48c2ed8fd67a77a7 |
+| 3 | New feature revision | ccc6721be3f7b5bc9be5811f96da20eca03c8c69 |
+| 4 | Compiled / test revision | ccc6721be3f7b5bc9be5811f96da20eca03c8c69 |
+| 5 | ROM filename | pokemon-three-horizons-playtest-14-1-celadon-silph-scope.gba |
+| 6 | ROM SHA-256 | 21e803b7c3dc0e3cdcfe25efd226cececd3b6d760c931f2c5f075f5a36251925 |
+| 7 | Hyper Beam move | Normal type; 150 power / 90 accuracy / 5 PP; EFFECT_HIT and self MOVE_EFFECT_RECHARGE; original target, animation, sound, contest data and availability retained; description updated |
+| 8 | Adaptive category | TH-only shared SetDynamicMoveCategory uses GetCategoryBasedOnStats. AI restores it after SetTypeBeforeUsingMove clears scratch state |
+| 9 | Tie rule | Sp. Atk >= Attack selects Special |
+| 10 | Stat stages | Current staged battle stats select category; later damage modifiers retain normal semantics. Native boosts/reductions/ties and defense-sensitive actual/AI damage PASS |
+| 11 | Recharge | TH-only B_SKIP_RECHARGE=GEN_1 uses existing HandleSetEffectRecharge KO gate. Upstream remains GEN_LATEST |
+| 12 | Hyper Beam KO | PASS native Physical/Special KO and exact-ROM controller KO/next action |
+| 13 | Hyper Beam survives | PASS native and exact-ROM controller: target survives, exactly one recharge turn |
+| 14 | Giga Impact | PASS native KO/survival and exact-ROM KO |
+| 15 | Blast Burn | PASS native KO/survival |
+| 16 | Hydro Cannon | PASS native KO/survival |
+| 17 | Frenzy Plant | PASS native KO/survival |
+| 18 | Charging | PASS Solar Beam/Fly/Dig/Skull Bash/Razor Wind/Sky Attack native controls and exact-ROM Solar Beam charge-first sequence |
+| 19 | AI | PASS actual/simulated damage, category reset and consumers, reflection, conservative KO scoring and Intimidate prediction fallback. TH/upstream production-predicate host controls and native Intimidate controls PASS |
+| 20 | Lavender worker | PASS host and native frames: west open via Route8/Underground to Celadon, south restricted |
+| 21 | Celadon reactions | PASS early/victory-before-Scope/Scope branches with no state mutation; exact-ROM presentation inspected |
+| 22 | Host total | PASS 286 unittest definitions; no skips |
+| 23 | Native total | PASS 384 unique definitions / 688 parameter cases. Raw 385 / 689 includes repeated layout; zero selected skips |
+| 24 | Save layout | PASS unchanged offsets; SaveBlock1/2/3/storage 15568/3884/4/34144 bytes |
+| 25 | Emerald | PASS fresh upstream build; d6b6abb9c1857539874fb142c689b1d880e769dd92cb0a4ee66ef20faff7d080 |
+| 26 | FireRed | PASS fresh upstream build; 6d29be9587bd2611bac117bca9e4040f650950b5d51b705b6327efc11ae87761 |
+| 27 | LeafGreen | PASS fresh upstream build; cb2fafa120944e72d54654213b0d8bd2fbe6792995f5804e4c9b4a9136a5d330 |
+| 28 | Owner Continue | PASS copied raw 128 KB PT13.1 .eps source SHA e94846ce281dc01c245f1fdeabf300b350433fda5a1368924767a3de41536ef2; fixture-free normal boot. Also copied earned PT14 ending checkpoint |
+| 29 | Cold Continue | PASS two native saves/full core closes/battery-only cold reloads for both sources; protected party/all boxes/attributes/Dex/items/money/permanent flags/progression retained |
+| 30 | Research Navigator | PASS Gear/log/old photo/all 3 professor contacts/return; archive receipts preserved |
+| 31 | Persistent capacity | 66/70 used, 4 free; this patch adds 0 bits, fields or variables |
+| 32 | Ekans hardware issue | HIGH / unresolved / intermittent on RG40XX H/VBA-Next; no speculative repair or handheld pass |
+| 33 | Limitations | Summary icon retains base Special; description explains adaptive rule. Controlled battle fixtures are labelled. No full natural new-game journey or hardware acceptance claimed. AI KO estimate is not a guarantee |
+| 34 | Hardware remaining | Existing hardware checklist plus four natural recharge checks; prioritize full-party Ekans first-catch/Dex/nickname/replacement, cold save and Gear |
+| 35 | Deferred minors | Both PT14 dialogue minors repaired. Static dynamic-move icon retained; plan EOF blank line deferred; inherited warnings below. No future chapter implemented |
+
+## Evidence and failure accounting
+
+Changes are limited to the shared category setter, TH recharge configuration, move description, existing AI consumers, Lavender worker and four Celadon actors. Species stats/types, map geometry, capture paths and save layout remain unchanged. Story Bible stays v1.2.
+
+Native RED ran 11 definitions: 6 expected failures and 5 passing controls. GREEN01 passed10/11 and exposed the AI type-setup category reset. After correction, all 11 definitions / 50 cases passed. A later production-predicate regression reproduced the Intimidate prediction omission; the bounded opposing-battler repair passed TH and upstream controls. The final full gate includes both new host definitions.
+
+Initial loader failures and the interrupted run are not passes. A diagnostic wrapper exited127 after being edited while Bash was running; that attempt is excluded. Stable wrappers completed normally. No assertions or selected-test skips were suppressed.
+
+An initial controller fixture changed species without matching growth experience and stalled EXP presentation; it is excluded. The corrected fixture sets coherent level/experience. An intended survival attempt missed and later KOed; the accepted low-offense case actually survived and recharged. The final wandering-NPC dialogue replay timed out after its fixed wait; that attempt is excluded. A native object-position snapshot and immediate interaction then reached the expected message. No assertion or game code was changed. Owner acceptance uses no fixtures. Controlled battle/map/receipt tests are separately labelled.
+
+Final native tests use normal audio and strict skip-is-fail. The full Three Horizons selection is supplemented by save/layout, ghost/Misty/starting-state, Photon Geyser, recharge/charging, reflection and Intimidate controls. This does not claim every unrelated upstream native test ran; upstream production builds are separate evidence.
+
+## Independent review and boundaries
+
+One fresh-context review of the complete code/test patch at ccc6721 found no Critical or Important findings. The reviewer did not certify the then-pending final compatibility matrix, exact production ROM, save replay or package; those require separate recorded gate results. One deferred minor is an extra blank line at the plan EOF. Hardware Ekans behavior remains HIGH/unresolved. The inherited Z-Move Ice Face guard is outside this bounded patch; future gimmick work must audit it. The base Special summary icon remains a documented display limitation. No complete natural new-game run or all-unrelated-upstream-native-test claim is made.
+
+## Runtime and warnings
+
+[Windows runtime diagnosis](PLAYTEST_14_1_TOOLCHAIN.md) records exact tools, installed MSYS2 provenance and real successful conversions. Per-command PATH/PYTHONUTF8 were set. No packages, arbitrary DLL copies or global PATH changes were needed; both host tools were rebuilt from current source.
+
+Inherited linker RWX, deprecated-party/unused-function and PNG bKGD diagnostics remain where present in logs. Baseline PNG conversions were byte-identical. Warnings were not silenced. The historical compiler startup “shorter than expected” diagnostic, when present, has no established source-code cause.
+
+## Private evidence
+
+`.superpowers/sdd/2026-10-02-playtest14-1-stabilization/` retains failed/passing attempts, immutable baseline/focused/final candidates, build matrices, controller inputs, native PNGs and save audits. Batteries, RAM inventories and emulator states must not enter the release ZIP. Only sanitized summaries and selected frames are packaged.
+
+## Separate package checks
+
+The explicit release allowlist contains 22 files: the ROM, checksum/manifest, guides and credits, a sanitized verification summary and five native PNGs. No battery saves, emulator states, RAM dumps or private inventories are included. Preflight ZIP CRC, every extracted member hash, cold battery-only Continue, protected payload, Research Gear and return-to-field checks passed. The sealed package repeats those same checks and records its exact documentation revision in RELEASE_MANIFEST.json. Hardware acceptance remains pending.
+
+The first extraction attempt exceeded Windows' path-length limit; it is retained as failed evidence. A shorter private extraction directory resolved the path issue without changing project/system settings or ROM bytes. A direct-file content-validator invocation failed its package import; the correct module invocation passed all 37 maps / 66 receipts / 655 reachable labels / 43 pickups / 7 unique gifts / 50 TMs / 2 wild tables. These invocation failures are not counted as passing tests.
+
+Protected-original audit passed: all 31 recorded artifact hashes and the branch/commit/working-tree state of three other worktrees remain unchanged. Story Bible v1.2, the original supplied battery and PT14 ROM/package remain preserved.
+
+## Preserved PT14 baseline record
+
+The following revisions, counts, ROMs and completion statements describe the earlier PT14 baseline, not PT14.1.
+
+### PT14 historical verification
 
 Feature and compiled/test revision: `abdec6f2508bbf2d4f1c104d863e5908281f6f6e`.
 
@@ -8,7 +96,7 @@ SHA-256: `7e9e18bcb30026a47c9e46e187f8a1ba906e431682eb704b48c2ed8fd67a77a7`.
 
 This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next acceptance remains **PENDING**; the intermittent full-party Ekans capture report is **HIGH / unresolved**. Use normal speed first.
 
-## Current status (supersedes intermediate statuses below)
+### PT14 historical status
 
 Tasks1–21 are complete for this private hardware candidate, with two disclosed
 dialogue minors deferred. Automated/build and exact-ROM mGBA gates passed.
@@ -61,7 +149,7 @@ fixtures, and fresh-game coverage is an opening smoke plus all nine choices.
 | 33 | Intermittent Ekans capture | HIGH / UNRESOLVED on reported RG40XX H/VBA-Next. Exact-owner fixture-free mGBA capture/name/full-party replacement/PC/native-save/cold PASS; not a hardware fix or hardware pass |
 | 34 | Celadon city | PASS:21 maps, linked interiors/doors/elevator/Center/Mansion; Gate B controller coverage and final owner route; later western routes restricted |
 | 35 | Erika | PASS: authored first party, victory badge/retryable TM; actual owner first and labelled reverse order; no boss rematch |
-| 36 | Department Store/TM | PASS: native staged catalogue and transactions; real purchase/cold plus all3 full-pocket drink retry branches.50 active TMs documented; Surf-side tutor access not newly supplied |
+| 36 | Department Store/TM | PASS: native staged catalogue and transactions; real purchase/cold plus all 3 full-pocket drink retry branches.50 active TMs documented; Surf-side tutor access not newly supplied |
 | 37 | Game Corner/Prize Corner | PASS: coins/menu/prize/cold; full420-box failure/retry, other419 preserved; optional prize species future-access obligations retained |
 | 38 | Rocket Hideout | PASS: natural spinner/key/lift/guards route; failure-safe Key and derived doors; source/native/labelled capacity evidence |
 | 39 | Celadon trio | PASS: actual doubles/190+191 wins; insufficient-party native/scene guard and loss retry; Meowth noncombatant |
@@ -69,7 +157,7 @@ fixtures, and fresh-game coverage is an opening smoke plus all nine choices.
 | 41 | Silph Scope | PASS: actual pickup and native Save/cold; full pocket/retry/repeat; identified normal wild ghosts remain catchable |
 | 42 | Tower post-Scope | PASS: exact-owner return, identified wild species and unlocked mother sequence; upper floor only after resolution |
 | 43 | Marowak reveal | PASS: Scope reveals female Lv30 Serious mother, old object IDs preserved; exact native frames |
-| 44 | Mother's Watch photo | PASS: required flash/photo before battle; natural owner and all7 outfit/all11 archive fixture visuals; missing Gear safe catch-up; no invented capture |
+| 44 | Mother's Watch photo | PASS: required flash/photo before battle; natural owner and all7 outfit/all 11 archive fixture visuals; missing Gear safe catch-up; no invented capture |
 | 45 | Marowak noncapture | PASS: exact-owner Ball dodge; native all28 Ball cases and ordinary Marowak control |
 | 46 | Emotional resolution | PASS: actual cry/pause/fade; victory-only receipt; labelled loss retains photo; won-pending cold resumes without battle; no immediate call |
 | 47 | Fuji | PASS:3 upper Rockets/rescue/home warp/automatic thanks; old1746110c failed this and is BLOCKED, repaired exact7e9e18bc rerun passes |
@@ -313,7 +401,7 @@ The new plan contains21 ordered tasks, Gate A for carry-forward/save safety, Gat
 - **The reported RG40XX H/VBA-Next corruption/black screen remains HIGH severity and unresolved.** No corresponding defect reproduced in these local mGBA runs; no speculative production capture change was made. Gate A and Final must repeat the candidate route, and passing mGBA results do not establish handheld acceptance.
 - Required natural attempt completed from an untouched private copy of the actual owner battery: 131072 bytes, SHA-256 `e94846ce281dc01c245f1fdeabf300b350433fda5a1368924767a3de41536ef2`. The original was rehashed unchanged. Reviewed Navigator ROM SHA-256 `537c3ca0185bc34c0e0bc36cdebcae784984cc173ba8ff2fead5f28720537837`; mGBA libretro DLL SHA-256 `674089194b419b02f0c2eeedb263170e116e2bab85e901323f3dc53bb660c3e7`. This is an identified local baseline, not proof of the exact ROM/core installed on the handheld.
 - Cold Continue in Tower6F, then ordinary travel down the Tower, back through Rock Tunnel, Route9, Cerulean, the Underground Path and Vermilion to Route11. Two previously undefeated Tower trainers were fought naturally; Golem reached level39. The owner's existing shiny Gyarados led with the follower enabled. No RAM fixture or imported emulator state altered this required journey. Input timing, all intermediate frames and natural battle/repel actions are retained in private execution `capture-natural-before/actions.jsonl`.
-- A naturally encountered male level12 Ekans was caught using an existing Great Ball. Ekans was already Seen but not Caught, so its first registration/page was displayed. The actual naming screen accepted the maximum12-character nickname `Aaaaaaaaaaaa`; Yes opened the native full-party selector, and choosing the first slot sent Gyarados to box1/slot12. Dex, nickname, caught sprite, party icons and restored field were visually inspected. Native Save and a newly created core's cold Continue preserved all600 party bytes, all34144 PC bytes, bag and money exactly against the post-save state.
+- A naturally encountered male level12 Ekans was caught using an existing Great Ball. Ekans was already Seen but not Caught, so its first registration/page was displayed. The actual naming screen accepted the maximum12-character nickname `Aaaaaaaaaaaa`; Yes opened the native full-party selector, and choosing the first slot sent Gyarados to box1/slot12. Dex, nickname, caught sprite, party icons and restored field were visually inspected. Native Save and a newly created core's cold Continue preserved all600 party bytes, all 34144 PC bytes, bag and money exactly against the post-save state.
 - All five retained boxed party records and every pre-existing PC record were unchanged by delivery. The sole retained-party cache change was Annihilape's Attack149→150: the capture raised Attack EV35→36, and the ordinary end-of-battle stat recalculation crossed a rounding threshold (level49, base115, IV31, Adamant). Its80-byte identity payload was identical. PP restoration on PC delivery and player-OT assignment to the caught Pokémon are intentional native behavior, not corruption.
 - Four separately labelled modified fixtures passed real encounter/first-Dex/nickname/native selector/save/cold-Continue checks: Drowzee replacing middle slot with follower off; Ekans replacing last slot with follower on; Spearow cancel-to-PC; and Ekans replacing first slot immediately after an actual Rare Candy-triggered Magikarp19→20→Gyarados evolution. Evolution itself, caught sprites, selector icons and cold field frames were inspected. Each retained all unaffected boxed records and all pre-existing PC records, then exact full party/storage bytes over cold reload. These fixtures added a Master Ball/cleared target Caught status and used explicit map/party preparation; they are not the natural owner-source reproduction.
 - Focused native result: **15 distinct test definitions PASS**, normal audio and strict skip-as-failure:2 PT14 capture definitions plus13 inherited capture/configuration/lifecycle/Dex/naming definitions. The PT14 selector definition exercises nine cases: first/middle/last replacement, B cancel, prompt No, Drowzee/control species, nonidentity party order and a separately labelled forced postcapture PC-full fault. Another definition tests natural full-party/full-PC throw rejection and the last-vacancy control. Existing first-Dex probes now include Ekans and Drowzee with rapid/slow inputs. Parameter cases and reruns are not counted as extra definitions.
@@ -330,8 +418,8 @@ The new plan contains21 ordered tasks, Gate A for carry-forward/save safety, Gat
 - Candidate Cut/forest: first connection entry is blocked by the uncut Route9 tree, normal Cut allows crossing, leaving/re-entering regrows it, and cold Continue still blocks. A stale previous-map TEMP12 does not hide it. Follower positions were checked before/after crossing and cold load; the fixture-free owner journey also crossed both Route9 ledges and the tree. Same-lighting old/candidate forest north/south/mouth frames and the affected Gear photo were visually inspected; collision footprint remains unchanged.
 - Candidate story: Flash introduction precedes HM delivery, repeat does not duplicate, full TM pocket leaves delivery retryable, then free-slot retry succeeds. First/repeat rival and observer text, all three unobscured Lavender speakers, and first/repeat post-ghost Scope/Giovanni/Celadon guidance were captured/inspected. The owner's completed cameo receipt stayed set and all three actors remained absent. First barrier fixture sets the existing endpoint receipt and restores follower/control after pushback.
 - Candidate Tower fog remains visible in the field. Its actual ghost battle had no automatic terrain/timer state. Explicit-terrain/outside-map behavioral controls remain the Task6 native results; no upstream runtime claim is substituted.
-- Research Gear labelled all-records fixture passed all11 log records,10 photo fronts/details/notes, three contacts, both list-wrap directions, home selection and field return. Menu use changed none of the protected payload, and native Save/new-core cold Continue retained it. All10 photo fronts and representative other pages were visually inspected. No new PT14 mother record exists yet; that belongs to Task14.
-- Exact owner source `e94846ce…36ef2` cold-loaded into Tower6F without a fixture. Before movement, all600 party bytes, all34144 PC bytes, decoded bag/money/coins, old permanent flags, Dex, inventory/registration, identities and unrelated story variables matched the identified old-ROM cold baseline. All66 new receipts and trainer157–194 defeat bits were clear. Native Save, core destruction, fresh-core boot and second Continue preserved protected data and marker `(version & 0xFFFE) == 0xA90E`.
+- Research Gear labelled all-records fixture passed all 11 log records,10 photo fronts/details/notes, three contacts, both list-wrap directions, home selection and field return. Menu use changed none of the protected payload, and native Save/new-core cold Continue retained it. All10 photo fronts and representative other pages were visually inspected. No new PT14 mother record exists yet; that belongs to Task14.
+- Exact owner source `e94846ce…36ef2` cold-loaded into Tower6F without a fixture. Before movement, all600 party bytes, all 34144 PC bytes, decoded bag/money/coins, old permanent flags, Dex, inventory/registration, identities and unrelated story variables matched the identified old-ROM cold baseline. All66 new receipts and trainer157–194 defeat bits were clear. Native Save, core destruction, fresh-core boot and second Continue preserved protected data and marker `(version & 0xFFFE) == 0xA90E`.
 - Normalized differences are documented narrowly: save encryption key changes, native time/playtime/warp materialization, and the daily lottery pair. The source is day4; both independent first Continues advance to day5. The unchanged lottery routine uses RTC-seeded RNG, so those first-load values differ. The pair stays exactly64612/21981 across PT14 Save→second Continue. Decoded coins are0 in all four snapshots. No general story-variable exclusion was used.
 - Required **candidate natural capture attempt PASS**: untouched owner-copy Continue→owned Escape Rope→Lavender→Rock Tunnel→Route9/Cerulean→Underground→Vermilion→Route11. Ordinary repel prompts were answered; no RAM fixture altered this journey. Male level12 Ekans was caught on the second existing Great Ball, first Caught registration displayed, maximum12-character `Aaaaaaaaaaaa` entered, first party slot chosen, Gyarados delivered to box1/slot12, and Ekans follower restored. All unaffected boxed party identities and pre-existing PC records remained exact. Native Save→fresh cold Continue preserved full party/PC/bag/money bytes. This run had the owner's Gyarados lead/follower on and no recent evolution.
 - **Hardware capture report remains HIGH/unresolved.** Four modified capture/evolution fixtures from Task7 are explicitly old-ROM controls, not claimed as candidate fixtures. Candidate native coverage and this ordinary owner-copy attempt passed; the exact Final candidate route and owner RG40XX H/VBA-Next acceptance are still required.
@@ -491,7 +579,7 @@ Feature checkpoint: 1926813246d52a689bdc91f6eae17f8f6bb25c53. The first full hos
 
 The full native build compiled the complete source set, then could not invoke the Windows linker because its object command exceeded the argument limit. No native tests ran from that attempt. A real-link regression reproduces the same failure with1800 input objects. The Windows test-link recipe now writes the entire ordered object list to a response file; its regression links all1800 objects and verifies their symbols, plus the unchanged direct-link path with a smaller list. No test sources are excluded.
 
-The new read-only final content validator checks all37 maps,66 receipt owners,43 pickup sources,7 unique gifts, the active50 TMs, both authored wild encounter tables, production shop/prize/coin/drink tables and accessible script references. It exposed a missing Coin Case entry in the unique-item ledger; the production gift already existed and is now documented. Route7/8 encounter coverage points to the existing production JSON rather than duplicating its slots. Negative-control mutations reject donor warps/flags, duplicate receipts/pickups, missing handlers, placeholders and unsupported TMs without editing build inputs.
+The new read-only final content validator checks all 37 maps,66 receipt owners,43 pickup sources,7 unique gifts, the active50 TMs, both authored wild encounter tables, production shop/prize/coin/drink tables and accessible script references. It exposed a missing Coin Case entry in the unique-item ledger; the production gift already existed and is now documented. Route7/8 encounter coverage points to the existing production JSON rather than duplicating its slots. Negative-control mutations reject donor warps/flags, duplicate receipts/pickups, missing handlers, placeholders and unsupported TMs without editing build inputs.
 
 Evidence: final-host-01, host-tools-red-02/green-01, host-graph-green-01, final-native-build-01, link-host-red-01/green-01, coverage-red-01 through05, coverage-green-02 and final-doc-index-02. Full host/native/upstream/production acceptance remains pending. The initial native build overlapped host map-generation checks that temporarily replace and restore generated inputs; it is not accepted as final compilation evidence. A serial generation/rebuild after host completion will invalidate those dependencies explicitly.
 
@@ -534,7 +622,7 @@ The replacement feature/compiled/test revision is `abdec6f2508bbf2d4f1c104d863e5
 - Refreshed integration: **280 host tests; 350 unique native definitions / 602 parameter cases PASS**, zero skips, normal audio, strict skip handling. The raw run has351 definitions/603 cases because the offset test also runs separately. Emerald, FireRed, LeafGreen compatibility and production builds all pass. Save sizes and offset expectations remain15568/3884/4/34144. Coverage checks report37 maps,66 receipts,645 reachable labels,43 pickup sources,7 unique gifts,50 active TMs and2 new encounter tables. The prior654 label count belongs to the superseded script graph.
 - The actual owner-source route used **no RAM fixtures**: initial cold migration, old Gear/repair revisits, Town Map catch-up, sleeping Snorlax, Route8/Underground/Celadon, purchases/prize, Erika, complete Hideout/trio/Giovanni/Scope, Tower/mother photo/ball rejection/victory/fade, upper Rockets, automatic Fuji/Flute, Snorlax victory and both short-road ends. Four earned checkpoints and initial migration use native Save, full core termination and battery-only cold Continue.
 - Runtime → battery → cold comparisons preserve party, all14 boxes, box names/wallpapers/fusions, inventory/PC items, money/coins, Dex, flags and story variables except explicitly documented clock bookkeeping. Source-to-ending changes are earned: trainer rewards, purchases, consumables, natural EXP/EV/PP/moves and chapter receipts. All11 original boxed Pokémon remain raw-identical; the sole added boxed Pokémon is the purchased Abra. No original permanent flag is cleared. Identity/IV/nature/ability/shiny/nickname/held-item attributes of all six original party Pokémon remain stable. No team downgrade or replacement was used to ease the route.
-- **27 focused branches PASS**: all archive records/photo pages and7 outfits; six full-pocket reward retries; all3 drink exchanges with failure/refund protection; full420-box Eevee/prize rejection and retry; missing Gear; mother loss/retry/photo retention and won-pending cold aftermath; Snorlax decline/escape/loss/catch; reverse Hideout-before-Erika order; fixture-free owner Ekans capture; fresh opening and eight alternate starter selections. Fixtures are explicitly labelled and do not stand in for the owner route. Additional Fuji branches cover full-pocket/cold retry and ordinary-door entry.
+- **27 focused branches PASS**: all archive records/photo pages and7 outfits; six full-pocket reward retries; all 3 drink exchanges with failure/refund protection; full420-box Eevee/prize rejection and retry; missing Gear; mother loss/retry/photo retention and won-pending cold aftermath; Snorlax decline/escape/loss/catch; reverse Hideout-before-Erika order; fixture-free owner Ekans capture; fresh opening and eight alternate starter selections. Fixtures are explicitly labelled and do not stand in for the owner route. Additional Fuji branches cover full-pocket/cold retry and ordinary-door entry.
 - Fresh opening used a blank game through clock, Leaf outfit, PC kit and Potion withdrawal, native options, shiny Hardy/Chlorophyll Bulbasaur with31 IVs,252/252/6 EVs and12-character name, first rival victory, Daisy's once-only Town Map, Mom interaction, Gear and native Save/cold Continue. The other eight choices use that fresh game's prechoice battery and native selection/defaults/Save/cold. Gender remains random; no new gender selector is claimed. This is a focused opening smoke, **not a full natural new-game journey**.
 - Actual-owner Ekans capture in mGBA completed nickname entry, full-party replacement, PC preservation, native Save and cold Continue. **The reported RG40XX H/VBA-Next corruption/black screen remains HIGH, intermittent and unresolved.** No handheld result is inferred from mGBA. Earlier controller timing, route interruptions and private assertion mistakes remain recorded as test-driver failures, not suppressed game failures or passing attempts.
 - The original owner `.eps`, five other protected artifacts and both protected source-worktree snapshots are unchanged. Evidence is private under the plan's `.superpowers` directory: `task19-final-summary.json`, replacement integration records, `final-owner02`, `final-owner-capture02`, `final-owner-newgame02` and each labelled branch. Do not ship battery/RAM inventories.

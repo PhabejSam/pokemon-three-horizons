@@ -1,4 +1,24 @@
-# Playtest 14 — development handoff
+# Playtest 14.1 — development handoff
+
+Feature revision: `ccc6721be3f7b5bc9be5811f96da20eca03c8c69`. Compiled/test revision: `ccc6721be3f7b5bc9be5811f96da20eca03c8c69`.
+
+ROM: `pokemon-three-horizons-playtest-14-1-celadon-silph-scope.gba`
+
+SHA-256: `21e803b7c3dc0e3cdcfe25efd226cececd3b6d760c931f2c5f075f5a36251925`.
+
+Automated and exact-ROM mGBA checks passed. Independent code review found no Critical or Important issues; later artifact gates were checked separately by the implementer. RG40XX H/VBA-Next acceptance remains **PENDING**. The intermittent full-party Ekans capture report remains **HIGH / unresolved**.
+
+## Resume point
+
+Battle and bounded dialogue repairs, full gates and exact-ROM checks passed. Independent code review found no material issue. Await package seal, then stop for owner hardware testing. Preserve PT14 outputs, original batteries, other worktrees and private evidence. No merge, push, publication or next chapter is authorized.
+
+Read this patch's plan and progress.md before resuming; do not redo completed tasks. Use the documented per-command MinGW64/UTF-8 runtime. The 9ccacc32 focused ROM predates the final Intimidate prediction repair; use the exact identity above. The old two dialogue minors are closed. The Ekans hardware report stays HIGH/unresolved; four persistent bits remain and this patch uses none.
+
+## Preserved PT14 development history
+
+The following handoff describes the earlier PT14 baseline only.
+
+### PT14 historical handoff
 
 Feature and compiled/test revision: `abdec6f2508bbf2d4f1c104d863e5908281f6f6e`.
 
@@ -8,7 +28,7 @@ SHA-256: `7e9e18bcb30026a47c9e46e187f8a1ba906e431682eb704b48c2ed8fd67a77a7`.
 
 This candidate passed the recorded automated and mGBA checks. RG40XX H/VBA-Next acceptance remains **PENDING**; the intermittent full-party Ekans capture report is **HIGH / unresolved**. Use normal speed first.
 
-## Resume point
+### PT14 historical resume point
 
 Tasks1–21 complete for the private hardware candidate. Keep branch
 `feature/playtest14-celadon-lavender` and all private evidence. The final ZIP is
@@ -74,7 +94,7 @@ finish PLAYTEST_14_HARDWARE_QA.md before declaring handheld acceptance.
 
 - Task8 RNG root cause: retained VBlankCB_Battle advances RNG at battle_main.c:1795 while the next WILD_BATTLE_TEST GIVEN has cleared RECORDED (test_runner_battle.c:535), before the callback is replaced. Main VBlank guard alone does not cover it. Diagnostic-format-only ELF showed exactly one extra draw between fixture restore and generator entry. Ruling: suspend/restore only the prior battle VBlank callback around the field-generation fixture, preserving production RNG and all 24 species/level/capture assertions; no gameplay RNG change. Temporary source traces removed. DLL repair independently committed e8b5eae905; original owner save rehashed unchanged.
 
-- Task9 in progress; official BASE0cfd3c13d410cdd3fd0c2d31429982728cef8ea4, documentation-only DLL confirmation61229ec3a4 followed before resume. Host7 missing-content RED captured; imported21 exact private donor footprints with owned scripts, no native progress flags, reciprocal Route7 connection/Cut clone, and visible western guard spanning all3 road lanes. Ruling: department elevator derives floor from saved dynamicWarp and transient8005/8006, avoiding native VAR_ELEVATOR_FLOOR collision; cost if wrong is elevator return, covered by native resolver/cancel and GateB cold checks. Deferred61 Task10-12 interactions explicitly listed and forbidden at Final. Eevee/native Center tests written before service implementations. GateB owns visual/controller evidence.
+- Task9 in progress; official BASE0cfd3c13d410cdd3fd0c2d31429982728cef8ea4, documentation-only DLL confirmation61229ec3a4 followed before resume. Host7 missing-content RED captured; imported21 exact private donor footprints with owned scripts, no native progress flags, reciprocal Route7 connection/Cut clone, and visible western guard spanning all 3 road lanes. Ruling: department elevator derives floor from saved dynamicWarp and transient8005/8006, avoiding native VAR_ELEVATOR_FLOOR collision; cost if wrong is elevator return, covered by native resolver/cancel and GateB cold checks. Deferred61 Task10-12 interactions explicitly listed and forbidden at Final. Eevee/native Center tests written before service implementations. GateB owns visual/controller evidence.
 
 - Task14 Ruling: old RC2 manifest assertion now expects11 with exact old ten-name prefix; generic note expectation special-cases new mother note, whose Fuji eligibility has dedicated coverage. An older host test incorrectly required PT13_1 in the already-committed PT14-only migration guard. It now requires exactly one PT14-only guard and exactly six historical guards containing both versions. No production migration change; cost if wrong is missed guard regression, mitigated by exact count/content and dedicated PT14 state tests.
 
@@ -192,4 +212,4 @@ Task17 checkpoint: appended map76/34 gate1F,35 gate2F,36 bounded24x22 Route12 la
 Native checks cover actual wild callback outcomes0-10, NINA identity/IVs at level1/100, all six selected slots with unchanged other identities, failed/pre-exchange signature and invalid slot bounds, Itemfinder29/30 including Treecko without Dex enable, full pocket/PC retry, all23 text blocks, and actual normal Snorlax capture. Host tests preserve the old Diglett warp and registry prefix while recognizing approved appended gate maps. Future obligation: provide an alternate Snorlax opportunity in a later approved chapter so defeating this one cannot permanently prevent collection; no second encounter is added in PT14. Six protected originals unchanged. NextTask18 full integration matrix; no production build/hardware acceptance claimed.
 
 
-Task18 integration complete:278 host;349 unique native/601 cases;0 skipped;all3 upstream builds and final production pass. Feature1926813,compiled/test b2c6962. Candidate ROM SHA256 1746110c9314a2850ccf340c8dcc472f28fd4b8f483f29a59f00f59ff63c2ae0. Protected originals/source worktrees unchanged. NextTask19 exact-ROM owner migration and route acceptance; hardware capture remains HIGH/unresolved. Full gate evidence and inherited warning classification are in PLAYTEST_14_VERIFICATION.md.
+Task18 integration complete:278 host;349 unique native/601 cases;0 skipped;all 3 upstream builds and final production pass. Feature1926813,compiled/test b2c6962. Candidate ROM SHA256 1746110c9314a2850ccf340c8dcc472f28fd4b8f483f29a59f00f59ff63c2ae0. Protected originals/source worktrees unchanged. NextTask19 exact-ROM owner migration and route acceptance; hardware capture remains HIGH/unresolved. Full gate evidence and inherited warning classification are in PLAYTEST_14_VERIFICATION.md.

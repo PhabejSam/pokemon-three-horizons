@@ -49,19 +49,19 @@
 
 ## Task 4: Focused smoke then full integration
 **Files:** existing test/build tools; private outputs. Consumes Tasks2–3 committed source.
-- [ ] Run a focused production build: copied owner cold Continue/Gear/archive/calls, native Save/full close/reload and targeted battle/menu/description/dialogue evidence. Clearly label adversarial fixtures, never alter original owner file.
-- [ ] Once focused gates pass, full TH host suite, full TH native test selection plus all new battle/recharge/charging controls, save-layout/offset checks and documentation validation. Count definitions and parameter cases separately; zero skipped selected tests.
-- [ ] Fresh Emerald/FireRed/LeafGreen compatibility builds and exact TH production build; verify expected upstream category/recharge config remains unchanged. Record warnings, revisions and hashes. No source exclusions or repeated unchanged builds.
+- [x] Run a focused production build: copied owner cold Continue/Gear/archive/calls, native Save/full close/reload and targeted battle/menu/description/dialogue evidence. Clearly label adversarial fixtures, never alter original owner file.
+- [x] Once focused gates pass, full TH host suite, full TH native test selection plus all new battle/recharge/charging controls, save-layout/offset checks and documentation validation. Count definitions and parameter cases separately; zero skipped selected tests.
+- [x] Fresh Emerald/FireRed/LeafGreen compatibility builds and exact TH production build; verify expected upstream category/recharge config remains unchanged. Record warnings, revisions and hashes. No source exclusions or repeated unchanged builds.
 
 ## Task 5: Exact new-ROM acceptance and final review
 **Files:** private exact-ROM evidence; verification/development records.
-- [ ] Freeze passing ROM/ELF/map identity; use that ROM for owner initial Continue, complete protected party/boxes/gear/photos/calls/progression audit, native Save, close and second Continue. Also continue a copied earned PT14 Celadon/Tower checkpoint to prove new progress retention.
-- [ ] Controller evidence: Physical/Special Hyper Beam, KO/no recharge, survival/recharge, Giga Impact KO, charging control, battle menu/animation/description, worker and city states; native tests own exhaustive edges. Verify no new persistent bits and unchanged canon/Gyarados.
-- [ ] One fresh independent whole-patch review; address material defects with RED/GREEN and affected gates, no repeated review loop. Report all limitations; hardware capture still unresolved.
+- [x] Freeze passing ROM/ELF/map identity; use that ROM for owner initial Continue, complete protected party/boxes/gear/photos/calls/progression audit, native Save, close and second Continue. Also continue a copied earned PT14 Celadon/Tower checkpoint to prove new progress retention.
+- [x] Controller evidence: Physical/Special Hyper Beam, KO/no recharge, survival/recharge, Giga Impact KO, charging control, battle menu/animation/description, worker and city states; native tests own exhaustive edges. Verify no new persistent bits and unchanged canon/Gyarados.
+- [x] One fresh independent whole-patch review; address material defects with RED/GREEN and affected gates, no repeated review loop. Report all limitations; hardware capture still unresolved.
 
 ## Task 6: Documentation, separate package, stop
 **Files:** PT14 walkthrough/hardware/verification/development docs with explicit14.1 addendum; battle rules document; new versioned output directory and ZIP only.
-- [ ] Document exact implementation, AI policy,35 requested report fields, test totals, save/capacity and current limitations. Add four natural Hyper Beam handheld checks without an exhaustive engine checklist.
+- [x] Document exact implementation, AI policy,35 requested report fields, test totals, save/capacity and current limitations. Add four natural Hyper Beam handheld checks without an exhaustive engine checklist.
 - [ ] Package `pokemon-three-horizons-playtest-14-1-celadon-silph-scope.gba`, SHA256, guides/migration instructions and sanitized evidence. Whitelist/hash archive; exclude saves/states/RAM/private inventories. Re-extract and cold Continue/Gear smoke.
 - [ ] Rehash all protected PT14 artifacts, canon and original battery; preserve other worktree state. Logical local documentation commit. Stop for owner RG40XX H/VBA-Next acceptance; no integration or PT15.
 
