@@ -10,9 +10,25 @@ Automated and exact-ROM mGBA checks passed. Independent code review found no Cri
 
 ## Resume point
 
-Battle and bounded dialogue repairs, full gates and exact-ROM checks passed. Independent code review found no material issue. Await package seal, then stop for owner hardware testing. Preserve PT14 outputs, original batteries, other worktrees and private evidence. No merge, push, publication or next chapter is authorized.
+Battle and bounded dialogue repairs, full gates and exact-ROM checks passed. Independent code review found no material issue. The separate package is sealed and its extracted ROM passed cold Continue/Gear/return. STOP for owner hardware testing. Preserve PT14 outputs, original batteries, other worktrees and private evidence. No merge, push, publication or next chapter is authorized.
 
 Read this patch's plan and progress.md before resuming; do not redo completed tasks. Use the documented per-command MinGW64/UTF-8 runtime. The 9ccacc32 focused ROM predates the final Intimidate prediction repair; use the exact identity above. The old two dialogue minors are closed. The Ekans hardware report stays HIGH/unresolved; four persistent bits remain and this patch uses none.
+
+## Sealed artifact handoff
+
+- Local branch: `feature/playtest14-1-stabilization`.
+- Feature/compiled/test revision: `ccc6721be3f7b5bc9be5811f96da20eca03c8c69`.
+- Packaged documentation revision: `01214ca53ec123bb01b18aa54f951b75be624753`; this later handoff/plan closure does not change compiled code or the package.
+- ZIP: `outputs/playtest-14-1-celadon-silph-scope-ccc6721.zip`.
+- ZIP SHA-256: `e63d70f922d9bde147d03c54ba1ceee420e90311285b60042c329eceacf52aa4`.
+- ROM SHA-256: `21e803b7c3dc0e3cdcfe25efd226cececd3b6d760c931f2c5f075f5a36251925`.
+- Sealed ZIP: 22 allowlisted members; CRC and every extracted file hash passed; no private batteries/states/RAM included.
+- Extracted final ROM: normal battery-only Continue, protected payload, Gear and return-to-field PASS. Original working battery unchanged.
+- Protected originals: 31 artifacts and three unrelated worktree states unchanged after sealing.
+
+The package includes START_HERE.md, full route/continuation guide, encounters, hardware checklist, 35-field verification, battle rules, runtime repair, credits and five sanitized native frames. Exact private proof is in `package-sealed-check.json`, `package-smoke-sealed/acceptance.json` and `release-final-protected.json` under this task's evidence folder.
+
+Owner RG40XX H/VBA-Next acceptance is the only next release step. The full-party Ekans issue remains HIGH/unresolved. Preserve this worktree and private evidence; do not rebuild unchanged code, merge/push, or start another chapter while awaiting hardware results.
 
 ## Preserved PT14 development history
 

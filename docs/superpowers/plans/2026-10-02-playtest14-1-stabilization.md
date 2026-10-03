@@ -62,8 +62,8 @@
 ## Task 6: Documentation, separate package, stop
 **Files:** PT14 walkthrough/hardware/verification/development docs with explicit14.1 addendum; battle rules document; new versioned output directory and ZIP only.
 - [x] Document exact implementation, AI policy,35 requested report fields, test totals, save/capacity and current limitations. Add four natural Hyper Beam handheld checks without an exhaustive engine checklist.
-- [ ] Package `pokemon-three-horizons-playtest-14-1-celadon-silph-scope.gba`, SHA256, guides/migration instructions and sanitized evidence. Whitelist/hash archive; exclude saves/states/RAM/private inventories. Re-extract and cold Continue/Gear smoke.
-- [ ] Rehash all protected PT14 artifacts, canon and original battery; preserve other worktree state. Logical local documentation commit. Stop for owner RG40XX H/VBA-Next acceptance; no integration or PT15.
+- [x] Package `pokemon-three-horizons-playtest-14-1-celadon-silph-scope.gba`, SHA256, guides/migration instructions and sanitized evidence. Whitelist/hash archive; exclude saves/states/RAM/private inventories. Re-extract and cold Continue/Gear smoke.
+- [x] Rehash all protected PT14 artifacts, canon and original battery; preserve other worktree state. Logical local documentation commit. Stop for owner RG40XX H/VBA-Next acceptance; no integration or PT15.
 
 **Plan self-review:** user sections1–13/22 covered by Task2;14–18 by Tasks3–5;19–21 by Tasks1/4/5;23–30 by Tasks4–6. Shared setter avoids animation/recharge effect replacement. Existing AI hit-count estimate may remain conservative; safety cannot be traded for optimistic prediction. All new behavior is compile-time scoped and saves unchanged. No demonstrated architecture conflict in inspection.
 
