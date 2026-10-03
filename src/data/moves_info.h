@@ -1701,7 +1701,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Hyper Beam"),
         .description = COMPOUND_STRING(
-        #if B_SKIP_RECHARGE != GEN_1
+        #if THREE_HORIZONS
+            "Uses higher Atk or Sp. Atk.\n"
+            "Must recharge unless it KOs."),
+        #elif B_SKIP_RECHARGE != GEN_1
             "Powerful, but leaves the\n"
             "user immobile the next turn."),
         #else

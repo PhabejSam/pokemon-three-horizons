@@ -28,6 +28,17 @@ static u32 GetAIEffectGroup(enum BattleMoveEffects effect);
 static u32 GetAIEffectGroupFromMove(enum BattlerId battler, enum Move move);
 
 // Functions
+// Heuristics run outside damage simulation, when its category scratch is reset.
+// Retain each caller's original static/dynamic fallback for every other move.
+enum DamageCategory AI_ResolveMoveCategory(enum BattlerId battler, enum Move move, enum DamageCategory fallback)
+{
+#if THREE_HORIZONS
+    if (move == MOVE_HYPER_BEAM)
+        return GetCategoryBasedOnStats(battler);
+#endif
+    return fallback;
+}
+
 enum Ability AI_GetMoldBreakerSanitizedAbility(enum BattlerId battlerAtk, enum Ability abilityAtk, enum Ability abilityDef, enum HoldEffect holdEffectDef, enum Move move)
 {
     if (MoveIgnoresTargetAbility(move))
@@ -932,6 +943,13 @@ struct SimulatedDamage AI_CalcDamage(struct AiCalcValues *aiCalc, enum BattlerId
     SetDynamicMoveCategory(battlerAtk, battlerDef, move);
     SetTypeBeforeUsingMove(move, battlerAtk, ctx.abilities[battlerAtk], ctx.holdEffects[battlerAtk]);
 
+#if THREE_HORIZONS
+    // Type setup clears category scratch. Restore adaptive Hyper Beam for the
+    // simulation without changing the existing order for other moves.
+    if (move == MOVE_HYPER_BEAM)
+        SetDynamicMoveCategory(battlerAtk, battlerDef, move);
+#endif
+
     ctx.moveType = GetBattleMoveType(move);
     ctx.isCrit = ShouldCalcCritDamage(&ctx);
     ctx.typeEffectivenessModifier = aiCalc->typeEffectiveness = CalcTypeEffectivenessMultiplier(&ctx);
@@ -1244,6 +1262,14 @@ static bool32 AI_IsMoveEffectInMinus(enum BattlerId battlerAtk, enum BattlerId b
                 }
                 break;
             case MOVE_EFFECT_RECHARGE:
+#if THREE_HORIZONS && B_SKIP_RECHARGE == GEN_1
+                // Use the existing KO estimate, but do not mistake breaking a
+                // Substitute or a known survival effect for knocking out the mon.
+                if (noOfHitsToKo == 1
+                    && !IsSubstituteProtected(battlerAtk, battlerDef, abilityAtk, move)
+                    && !CanEndureHit(battlerAtk, battlerDef, move))
+                    return FALSE;
+#endif
                 return additionalEffect->self;
             default:
                 break;
@@ -1468,7 +1494,8 @@ bool32 CanEndureHit(enum BattlerId battler, enum BattlerId battlerTarget, enum M
         if (IsMimikyuDisguised(battlerTarget))
             return TRUE;
         if (gAiLogicData->abilities[battlerTarget] == ABILITY_ICE_FACE
-            && gBattleMons[battlerTarget].species == SPECIES_EISCUE_ICE && GetMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL)
+            && gBattleMons[battlerTarget].species == SPECIES_EISCUE_ICE
+            && AI_ResolveMoveCategory(battler, move, GetMoveCategory(move)) == DAMAGE_CATEGORY_PHYSICAL)
             return TRUE;
     }
 
@@ -2690,7 +2717,7 @@ bool32 HasPhysicalBestMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         }
         else
         {
-            if (GetBattleMoveCategory(atkBestMoves[moveIndex]) == DAMAGE_CATEGORY_SPECIAL)
+            if (AI_ResolveMoveCategory(battlerAtk, atkBestMoves[moveIndex], GetBattleMoveCategory(atkBestMoves[moveIndex])) == DAMAGE_CATEGORY_SPECIAL)
             {
                 bestMoveIsPhysical = FALSE;
                 break;
@@ -2708,7 +2735,8 @@ bool32 HasOnlyMovesWithCategory(enum BattlerId battlerId, enum DamageCategory ca
     {
         if (onlyOffensive && IsBattleMoveStatus(moves[moveIndex]))
             continue;
-        if (moves[moveIndex] != MOVE_NONE && moves[moveIndex] != MOVE_UNAVAILABLE && GetBattleMoveCategory(moves[moveIndex]) != category)
+        if (moves[moveIndex] != MOVE_NONE && moves[moveIndex] != MOVE_UNAVAILABLE
+            && AI_ResolveMoveCategory(battlerId, moves[moveIndex], GetBattleMoveCategory(moves[moveIndex])) != category)
             return FALSE;
     }
 
@@ -2721,7 +2749,8 @@ bool32 HasMoveWithCategory(enum BattlerId battler, enum DamageCategory category)
 
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        if (moves[moveIndex] != MOVE_NONE && moves[moveIndex] != MOVE_UNAVAILABLE && GetBattleMoveCategory(moves[moveIndex]) == category)
+        if (moves[moveIndex] != MOVE_NONE && moves[moveIndex] != MOVE_UNAVAILABLE
+            && AI_ResolveMoveCategory(battler, moves[moveIndex], GetBattleMoveCategory(moves[moveIndex])) == category)
             return TRUE;
     }
     return FALSE;
@@ -4899,7 +4928,7 @@ void IncreaseBurnScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enu
                 if (defBestMoves[moveIndex] == MOVE_NONE)
                     break;
 
-                if (GetMoveCategory(defBestMoves[moveIndex]) == DAMAGE_CATEGORY_PHYSICAL)
+                if (AI_ResolveMoveCategory(battlerDef, defBestMoves[moveIndex], GetMoveCategory(defBestMoves[moveIndex])) == DAMAGE_CATEGORY_PHYSICAL)
                 {
                     hasPhysical = TRUE;
                     break;
@@ -5012,7 +5041,7 @@ void IncreaseFrostbiteScore(enum BattlerId battlerAtk, enum BattlerId battlerDef
                 if (defBestMoves[moveIndex] == MOVE_NONE)
                     break;
 
-                if (GetMoveCategory(defBestMoves[moveIndex]) == DAMAGE_CATEGORY_SPECIAL)
+                if (AI_ResolveMoveCategory(battlerDef, defBestMoves[moveIndex], GetMoveCategory(defBestMoves[moveIndex])) == DAMAGE_CATEGORY_SPECIAL)
                 {
                     hasSpecial = TRUE;
                     break;

@@ -5559,7 +5559,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_REFLECT_DAMAGE:
         if ((!IsBattlerIncapacitated(battlerDef, aiData->abilities[battlerDef]) && incomingMove != MOVE_NONE)
          && (GetNoOfHitsToKOBattler(battlerDef, battlerAtk, predictedMoveSlot, AI_DEFENDING, CONSIDER_ENDURE) >= 2)
-         && GetMoveReflectDamage_DamageCategories(move) & (1u << GetBattleMoveCategory(incomingMove))) // Can reflect back damage
+         && GetMoveReflectDamage_DamageCategories(move) & (1u << AI_ResolveMoveCategory(battlerDef, incomingMove, GetBattleMoveCategory(incomingMove)))) // Can reflect back damage
             ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_SHORE_UP:

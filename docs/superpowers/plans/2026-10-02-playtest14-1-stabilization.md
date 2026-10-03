@@ -33,12 +33,12 @@
 ## Task 2: Adaptive Hyper Beam and recharge rule
 **Files:** `test/three_horizons_playtest141_battle.c`, `src/battle_util.c`, `include/config/battle.h`, `src/data/moves_info.h`, bounded `src/battle_ai_util.c` if established hit-count scoring supports it.
 **Interfaces:** retain `void SetDynamicMoveCategory(enum BattlerId, enum BattlerId, enum Move)`, `enum DamageCategory GetCategoryBasedOnStats(enum BattlerId)` and existing `HandleSetEffectRecharge`.
-- [ ] Write native tests before code: stage matrix (100/100 tie Special;150/100 Physical;100/150 Special; boost/reduce either stat), real Gyarados/Alakazam, real Defense/Sp.Defense damage, properties/animation/recharge; shared-state reset and AI damage.
-- [ ] Write parameterized real battle tests for Hyper Beam/Giga Impact/Blast Burn/Hydro Cannon/Frenzy Plant and other standard recharge records: KO permits next attack/switch; survival requires exactly one recharge. Include miss, Protect, immunity, surviving Substitute, Substitute break, and charge-then-attack controls.
-- [ ] Build focused native ELF and run with normal audio/strict skip-is-fail. Expected RED: missing adaptive category and KO skip; controls already green are recorded as existing behavior.
-- [ ] Add the TH-only move-ID condition in the shared setter, retain move effect; scope B_SKIP_RECHARGE; fit a two-line description explaining adaptive offense and KO exception. No duplicated stat arithmetic.
-- [ ] Audit AI: common damage path already invokes setter. Test real simulated damage and category reset. If existing `noOfHitsToKo` safely represents predicted one-hit KO, remove only recharge drawback there for TH; otherwise retain conservative scoring and document. Do not invent a prediction engine.
-- [ ] Run focused green including Photon Geyser/recharge/charging controls and upstream conditional assertions. Commit `feat: add adaptive Hyper Beam and KO recharge rule for Three Horizons`.
+- [x] Write native tests before code: stage matrix (100/100 tie Special;150/100 Physical;100/150 Special; boost/reduce either stat), real Gyarados/Alakazam, real Defense/Sp.Defense damage, properties/animation/recharge; shared-state reset and AI damage.
+- [x] Write parameterized real battle tests for Hyper Beam/Giga Impact/Blast Burn/Hydro Cannon/Frenzy Plant and other standard recharge records: KO permits next attack/switch; survival requires exactly one recharge. Include miss, Protect, immunity, surviving Substitute, Substitute break, and charge-then-attack controls.
+- [x] Build focused native ELF and run with normal audio/strict skip-is-fail. Expected RED: missing adaptive category and KO skip; controls already green are recorded as existing behavior.
+- [x] Add the TH-only move-ID condition in the shared setter, retain move effect; scope B_SKIP_RECHARGE; fit a two-line description explaining adaptive offense and KO exception. No duplicated stat arithmetic.
+- [x] Audit AI: common damage path already invokes setter. Test real simulated damage and category reset. If existing `noOfHitsToKo` safely represents predicted one-hit KO, remove only recharge drawback there for TH; otherwise retain conservative scoring and document. Do not invent a prediction engine.
+- [x] Run focused green including Photon Geyser/recharge/charging controls and upstream conditional assertions. Commit `feat: add adaptive Hyper Beam and KO recharge rule for Three Horizons`.
 
 ## Task 3: Bounded Living City corrections
 **Files:** `chapter13_lavender.inc`, `chapter14_celadon.inc`, `tools/three_horizons/tests/test_playtest141_dialogue.py`; native dialogue/compiled checks if needed.

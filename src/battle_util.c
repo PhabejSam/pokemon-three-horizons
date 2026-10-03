@@ -9108,6 +9108,15 @@ void SetDynamicMoveCategory(enum BattlerId battlerAtk, enum BattlerId battlerDef
 {
     gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_NONE;
 
+#if THREE_HORIZONS
+    // Keep Hyper Beam's normal hit/recharge effect and compare current stages.
+    if (move == MOVE_HYPER_BEAM)
+    {
+        gBattleStruct->dynamicMoveCategory = GetCategoryBasedOnStats(battlerAtk);
+        return;
+    }
+#endif
+
     switch (GetMoveEffect(move))
     {
     case EFFECT_PHOTON_GEYSER:
