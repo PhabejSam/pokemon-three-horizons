@@ -43,9 +43,9 @@
 ## Task 3: Bounded Living City corrections
 **Files:** `chapter13_lavender.inc`, `chapter14_celadon.inc`, `tools/three_horizons/tests/test_playtest141_dialogue.py`; native dialogue/compiled checks if needed.
 **Interfaces:** only existing TRAINER_TH14_GIOVANNI defeat and FLAG_TH14_SILPH_SCOPE. No position changes or new receipt.
-- [ ] Exercise real script branches before/victory-before-pickup/Scope receipt; fail before adding reactions. Assert no state mutation, original early messages, bounded relevant actors only.
-- [ ] Worker says west Route8 and Underground Path lead to Celadon; south remains under maintenance. Update scientist (victory investigation vs owned Scope), street woman and two street Rockets with short natural aftermath lines. No future-story revelation.
-- [ ] Run focused host/native dialogue and state checks; commit `fix: update Lavender directions and Celadon Rocket reactions`.
+- [x] Exercise real script branches before/victory-before-pickup/Scope receipt; fail before adding reactions. Assert no state mutation, original early messages, bounded relevant actors only.
+- [x] Worker says west Route8 and Underground Path lead to Celadon; south remains under maintenance. Update scientist (victory investigation vs owned Scope), street woman and two street Rockets with short natural aftermath lines. No future-story revelation.
+- [x] Run focused host/native dialogue and state checks; commit `fix: update Lavender directions and Celadon Rocket reactions`.
 
 ## Task 4: Focused smoke then full integration
 **Files:** existing test/build tools; private outputs. Consumes Tasks2–3 committed source.

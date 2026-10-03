@@ -1,8 +1,16 @@
 @ Project-owned Celadon dialogue and services. Deferred bindings are explicit in the content ledger.
 
 TH14_CeladonCity_EventScript_RocketGrunt1::
+    goto_if_not_defeated TRAINER_TH14_GIOVANNI, TH14_CeladonCity_EventScript_RocketGrunt1_Before
+    msgbox TH14_CeladonCity_EventScript_RocketGrunt1_After_Text, MSGBOX_NPC
+    end
+
+TH14_CeladonCity_EventScript_RocketGrunt1_Before::
     msgbox TH14_CeladonCity_EventScript_RocketGrunt1_Text, MSGBOX_NPC
     end
+
+TH14_CeladonCity_EventScript_RocketGrunt1_After_Text::
+    .string "TEAM ROCKET? Never heard of them.\pI'm just taking a walk, all right?$"
 
 TH14_CeladonCity_EventScript_RocketGrunt1_Text::
     .string "Keep out of TEAM ROCKET's way!$"
@@ -34,8 +42,16 @@ TH14_CeladonCity_EventScript_LittleGirl_Text::
     .string "I got my KOFFING in CINNABAR.\pIt's usually nice, but it breathes\npoison when it's angry.$"
 
 TH14_CeladonCity_EventScript_Woman::
+    goto_if_not_defeated TRAINER_TH14_GIOVANNI, TH14_CeladonCity_EventScript_Woman_Before
+    msgbox TH14_CeladonCity_EventScript_Woman_After_Text, MSGBOX_NPC
+    end
+
+TH14_CeladonCity_EventScript_Woman_Before::
     msgbox TH14_CeladonCity_EventScript_Woman_Text, MSGBOX_NPC
     end
+
+TH14_CeladonCity_EventScript_Woman_After_Text::
+    .string "Things are quieter near the\nGAME CORNER now.\pI hope CELADON can feel like\nitself again.$"
 
 TH14_CeladonCity_EventScript_Woman_Text::
     .string "CELADON takes pride in its efforts\nto keep the city beautiful.\pThat's why the new GAME CORNER is\nbad for our city's image.$"
@@ -64,8 +80,16 @@ TH14_CeladonCity_EventScript_SoftboiledTutor_Text::
     .string "Would you like a lesson in\nSOFT-BOILED?\pMy lessons are free. Bring any\ncompatible partner, any time.$"
 
 TH14_CeladonCity_EventScript_RocketGrunt2::
+    goto_if_not_defeated TRAINER_TH14_GIOVANNI, TH14_CeladonCity_EventScript_RocketGrunt2_Before
+    msgbox TH14_CeladonCity_EventScript_RocketGrunt2_After_Text, MSGBOX_NPC
+    end
+
+TH14_CeladonCity_EventScript_RocketGrunt2_Before::
     msgbox TH14_CeladonCity_EventScript_RocketGrunt2_Text, MSGBOX_NPC
     end
+
+TH14_CeladonCity_EventScript_RocketGrunt2_After_Text::
+    .string "The boss left without a word…\pHuh? I said it's a nice day!$"
 
 TH14_CeladonCity_EventScript_RocketGrunt2_Text::
     .string "What are you staring at?\nGet lost, or I'll punch you.$"
@@ -85,8 +109,24 @@ TH14_CeladonCity_EventScript_Boy_Text::
     .string "The old woman in the MANSION\nlives with her POKéMON.\pThey always look so content!$"
 
 TH14_CeladonCity_EventScript_SilphCoScientist::
+    goto_if_set FLAG_TH14_SILPH_SCOPE, TH14_CeladonCity_EventScript_SilphCoScientist_Scope
+    goto_if_not_defeated TRAINER_TH14_GIOVANNI, TH14_CeladonCity_EventScript_SilphCoScientist_Before
+    msgbox TH14_CeladonCity_EventScript_SilphCoScientist_After_Text, MSGBOX_NPC
+    end
+
+TH14_CeladonCity_EventScript_SilphCoScientist_Before::
     msgbox TH14_CeladonCity_EventScript_SilphCoScientist_Text, MSGBOX_NPC
     end
+
+TH14_CeladonCity_EventScript_SilphCoScientist_After_Text::
+    .string "TEAM ROCKET has fled its hideout!\pI hope someone finds our stolen\nSILPH SCOPE down there.$"
+
+TH14_CeladonCity_EventScript_SilphCoScientist_Scope::
+    msgbox TH14_CeladonCity_EventScript_SilphCoScientist_Scope_Text, MSGBOX_NPC
+    end
+
+TH14_CeladonCity_EventScript_SilphCoScientist_Scope_Text::
+    .string "You recovered our SILPH SCOPE!\pIt can reveal the true forms of\nthings the eye can't identify.$"
 
 TH14_CeladonCity_EventScript_SilphCoScientist_Text::
     .string "Oh, what am I to do…\pSomeone stole our SILPH SCOPE.\pThe thief came running this way,\nI'm sure of it.\pBut I lost sight of him!\nWhere'd he go?$"

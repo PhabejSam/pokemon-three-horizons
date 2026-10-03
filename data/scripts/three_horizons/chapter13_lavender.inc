@@ -8,7 +8,7 @@ TH13_Lavender_Worker::
     msgbox TH13_Lavender_WorkerText, MSGBOX_NPC
     end
 TH13_Lavender_WorkerText:
-    .string "The roads west and south are closed\nwhile workers check them.\pThe northern road to ROCK TUNNEL\nis still open.$"
+    .string "Head west along ROUTE 8, then\ntake the UNDERGROUND PATH to CELADON.\pThe road south is still closed\nwhile repairs are underway.$"
 TH13_Lavender_Boy::
     goto_if_set FLAG_TH14_FUJI_RESCUED, TH14_Lavender_FujiHome
     msgbox TH13_Lavender_BoyText, MSGBOX_NPC
